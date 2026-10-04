@@ -25,6 +25,7 @@ export function restoreState(value) {
   }
   if(value.likes && typeof value.likes==='object') for(const [k,v] of Object.entries(value.likes).slice(-24)) if(v===1||v===-1) Object.defineProperty(s.likes,k.slice(0,30),{value:v,writable:true,enumerable:true,configurable:true});
   if(Array.isArray(value.history)) s.history=value.history.filter(x=>x && typeof x.text==='string' && ['user','enny'].includes(x.role)).slice(-40).map(x=>({role:x.role,text:x.text.slice(0,160)}));
+  if(value.performance&&typeof value.performance==='object')s.performance={...value.performance};
   return s;
 }
 export function respond(raw,state) {

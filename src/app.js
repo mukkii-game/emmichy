@@ -4,11 +4,14 @@ import {text,kana} from './font.js';
 import {shouldEnd,finishSession} from './session.js';
 import {createAudioDirector} from './audio.js';
 import {CHAT_API_URL} from './config.js';
+import {advancePerformance} from './performance.js';
+import {requestChat} from './chat.js';
 const $=id=>document.getElementById(id),canvas=$('screen'),ctx=canvas.getContext('2d',{willReadFrequently:true});
 ctx.imageSmoothingEnabled=false;
 const key='enny-memory-v1';
 const isLocal=['127.0.0.1','localhost','[::1]'].includes(location.hostname);
-let chatEndpoint=isLocal?'/api/chat':CHAT_API_URL;
+let chatEndpoint=CHAT_API_URL;
+const offline=['auto','seed','replay','nollm'].some(k=>new URLSearchParams(location.search).has(k));
 let state=freshState(),saveAvailable=true,busy=false,portrait=null,live='',mood='idle',modelEnabled=Boolean(chatEndpoint),modelProvider='';
 let session=null,ending=false;
 const audioDirector=createAudioDirector();
@@ -70,39 +73,35 @@ $('talk').addEventListener('submit',async e=>{
  const raw=$('entry').value.trim();if(!raw)return;
  const isRestart=state.ended&&/コンニチ[ハワ]|タダイマ|オハヨウ/.test(normalize(raw));
  if(!session||isRestart){session={startedAt:Date.now(),turns:0,finished:false};if(isRestart){lines=[];state.fan={worry:0,excitement:0,lastTopic:''};}saveSession();}
- if(shouldEnd(session)&&!state.ended){await endSession();return;}
- session.turns++;saveSession();
+  session.turns++;saveSession();
  busy=true;$('send').disabled=true;$('reset').disabled=true;$('entry').value='';audioDirector.se.send();
  add('user',raw);$('disk').textContent='● DISK ACCESS';
- const before=state;let result=chiikawaReply(normalize(raw),respond(raw,state),undefined,raw);
+ const before=advancePerformance(state,raw,session.turns);let result=chiikawaReply(normalize(raw),respond(raw,state),undefined,raw);
+ result.state.performance=before.performance;result.state.speechStyle=before.speechStyle;
  let usedModel=false;
- try{
-  const ruleOnly=['bye','asleep','arithmetic','news'].includes(result.kind);
-  if(modelEnabled && chatEndpoint && !ruleOnly){
-   $('status').textContent='Emmichyが考えています…';
-   const res=await fetch(chatEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({input:raw,state:before,session}),signal:AbortSignal.timeout(22000)});
-   if(res.ok){
-    const data=await res.json();
-    if(data.text){result.text=data.text;result.state.history.at(-1).text=data.text;usedModel=true;modelProvider=data.provider||modelProvider;}
-   }
-  }
- }catch{}
- state=result.state;mood=result.mood;
+ const ruleOnly=['bye','asleep','name','memory','arithmetic'].includes(result.kind);
+ if(modelEnabled && !ruleOnly){
+  $('status').textContent='Emmichyが考えています…';
+  const data=await requestChat(chatEndpoint,raw,before,session,{offline});
+  if(data){result.text=data.text;result.state.history.at(-1).text=data.text;usedModel=true;modelProvider=data.provider;}
+ }
+ state=result.state;mood=result.mood;session.lastMood=mood;saveSession();
  await wait(300+Math.min(raw.length*10,500));
  if(mood==='excited')audioDirector.se.excited();else if(mood==='worried')audioDirector.se.worried();else audioDirector.se.reply();
  for(const c of result.text){live+=c;draw();await wait(mood==='excited'?12:mood==='worried'&&c==='\n'?420:22);}
- add('enny',result.text);live='';save();busy=false;$('send').disabled=false;$('reset').disabled=false;
+ add('enny',result.text);live='';lastActivity=Date.now();save();busy=false;$('send').disabled=false;$('reset').disabled=false;
  $('status').textContent=usedModel?`AI会話${modelProvider?' / '+modelProvider:''} / ENTER で送信`:modelEnabled?'AI失敗→ルール会話 / ENTER で送信':'ルール会話 / ENTER で送信';
  const item=document.createElement('p');item.textContent=`あなた：${raw}。Emmichy：${result.text}`;$('transcript').append(item);if($('transcript').children.length>40)$('transcript').firstChild.remove();
  $('entry').focus();draw();
  if(state.ended){session.finished=true;saveSession();}
- else if(shouldEnd(session))await endSession();
+ else if(shouldEnd(session)&&!$('entry').value.trim()&&!composing)await endSession();
 });
 let composing=false;
 $('entry').addEventListener('compositionstart',()=>composing=true);
 $('entry').addEventListener('compositionend',()=>{composing=false;draw();});
 $('entry').addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.isComposing||e.keyCode===229))e.preventDefault();});
-$('entry').addEventListener('input',draw);
+let lastActivity=Date.now();
+$('entry').addEventListener('input',()=>{lastActivity=Date.now();draw();});
 canvas.addEventListener('click',()=>$('entry').focus());
 $('sound').onclick=async()=>{const on=await audioDirector.toggle();$('sound').textContent='BGM + SE '+(on?'ON':'OFF');$('sound').setAttribute('aria-pressed',String(on));if(on)audioDirector.se.reply();};
 $('help').onclick=()=>{$('instructions').hidden=!$('instructions').hidden;};
@@ -115,10 +114,7 @@ function setEngineNote(){
  $('engine-note').textContent=(modelEnabled?`AI会話を優先。接続失敗時はルール会話に戻ります${modelProvider?'（'+modelProvider+'）':''}。`:'無料・通信不要のルール会話。')+` 記憶はこのブラウザ内に保存します。時事ネタの確認日：${checkedAt}。`;
 }
 setEngineNote();
-if(isLocal){
- fetch('/api/config').then(r=>r.json()).then(c=>{modelEnabled=Boolean(c.localModel);chatEndpoint=modelEnabled?'/api/chat':'';modelProvider=modelEnabled?'local':'';setEngineNote();}).catch(()=>{modelEnabled=false;chatEndpoint='';setEngineNote();});
-}else if(chatEndpoint){
- const health=chatEndpoint.replace(/\/api\/chat\/?$/,'/health');
- fetch(health,{signal:AbortSignal.timeout(5000)}).then(r=>r.ok?r.json():null).then(c=>{if(c?.ok){modelEnabled=true;modelProvider=c.provider||'';}setEngineNote();}).catch(()=>setEngineNote());
+if(isLocal&&!offline){
+ fetch('/api/config').then(r=>r.json()).then(c=>{if(c.localModel){chatEndpoint='/api/chat';modelProvider='local';}setEngineNote();}).catch(()=>{});
 }
-setInterval(draw,160);setInterval(()=>{if(shouldEnd(session)&&!composing)endSession();},1000);draw();$('entry').focus();
+setInterval(draw,160);setInterval(()=>{if(shouldEnd(session)&&!composing&&!$('entry').value.trim()&&Date.now()-lastActivity>8000)endSession();},1000);draw();$('entry').focus();

@@ -22,6 +22,8 @@ footer { border-top: 1px solid #3c4339; margin-top: 24px; padding-top: 12px; fon
 section { margin-top: 20px; padding: 22px; border: 1px solid #525b4e; background: #111410; font-size: 14px; line-height: 1.9; }
 h1 { font-size: 19px; color: #edf4e8; font-weight: normal; margin-top: 0; }
 .small { color: #8d9787; font-size: 11px; }
+.readable-log { margin-top: 12px; font-size: 15px; line-height: 1.7; }
+.readable-log p { white-space: pre-wrap; overflow-wrap: anywhere; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
 .screen-wrap:fullscreen { display: grid; place-items: center; padding: 0; background: #000; }
 .screen-wrap:fullscreen::after { inset: 0; }

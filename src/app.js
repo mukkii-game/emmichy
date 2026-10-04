@@ -3,10 +3,13 @@ import {chiikawaReply,checkedAt} from './topics.js';
 import {text,kana} from './font.js';
 import {shouldEnd,finishSession} from './session.js';
 import {createAudioDirector} from './audio.js';
+import {CHAT_API_URL} from './config.js';
 const $=id=>document.getElementById(id),canvas=$('screen'),ctx=canvas.getContext('2d',{willReadFrequently:true});
 ctx.imageSmoothingEnabled=false;
 const key='enny-memory-v1';
-let state=freshState(),saveAvailable=true,busy=false,portrait=null,live='',mood='idle',modelEnabled=false;
+const isLocal=['127.0.0.1','localhost','[::1]'].includes(location.hostname);
+let chatEndpoint=isLocal?'/api/chat':CHAT_API_URL;
+let state=freshState(),saveAvailable=true,busy=false,portrait=null,live='',mood='idle',modelEnabled=Boolean(chatEndpoint),modelProvider='';
 let session=null,ending=false;
 const audioDirector=createAudioDirector();
 try{const stored=JSON.parse(sessionStorage.getItem('emmichy-session'));if(stored&&Number.isFinite(stored.startedAt)&&Number.isFinite(stored.turns))session=stored;}catch{}
@@ -74,18 +77,22 @@ $('talk').addEventListener('submit',async e=>{
  const before=state;let result=chiikawaReply(normalize(raw),respond(raw,state),undefined,raw);
  let usedModel=false;
  try{
-  if(modelEnabled && !['name','memory','contradiction','arithmetic','bye','asleep','news','repeat','shisa','movie','fan-comfort','fan-distraction','age'].includes(result.kind)){
+  const ruleOnly=['bye','asleep','arithmetic','news'].includes(result.kind);
+  if(modelEnabled && chatEndpoint && !ruleOnly){
    $('status').textContent='Emmichyが考えています…';
-   const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({input:raw,state:before}),signal:AbortSignal.timeout(22000)});
-   if(res.ok){const data=await res.json();if(data.text){result.text=data.text;result.state.history.at(-1).text=data.text;usedModel=true;}}
+   const res=await fetch(chatEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({input:raw,state:before,session}),signal:AbortSignal.timeout(22000)});
+   if(res.ok){
+    const data=await res.json();
+    if(data.text){result.text=data.text;result.state.history.at(-1).text=data.text;usedModel=true;modelProvider=data.provider||modelProvider;}
+   }
   }
  }catch{}
  state=result.state;mood=result.mood;
- await wait(350+Math.min(raw.length*14,650));
+ await wait(300+Math.min(raw.length*10,500));
  if(mood==='excited')audioDirector.se.excited();else if(mood==='worried')audioDirector.se.worried();else audioDirector.se.reply();
- for(const c of result.text){live+=c;draw();await wait(mood==='excited'?12:mood==='worried'&&c==='\n'?450:24);}
+ for(const c of result.text){live+=c;draw();await wait(mood==='excited'?12:mood==='worried'&&c==='\n'?420:22);}
  add('enny',result.text);live='';save();busy=false;$('send').disabled=false;$('reset').disabled=false;
- $('status').textContent=usedModel?'AI会話 / ENTER で送信':modelEnabled?'ルール会話 / ENTER で送信':'日本語入力OK / ENTER で送信';
+ $('status').textContent=usedModel?`AI会話${modelProvider?' / '+modelProvider:''} / ENTER で送信`:modelEnabled?'AI失敗→ルール会話 / ENTER で送信':'ルール会話 / ENTER で送信';
  const item=document.createElement('p');item.textContent=`あなた：${raw}。Emmichy：${result.text}`;$('transcript').append(item);if($('transcript').children.length>40)$('transcript').firstChild.remove();
  $('entry').focus();draw();
  if(state.ended){session.finished=true;saveSession();}
@@ -104,8 +111,14 @@ $('export').onclick=()=>{const body=state.history.map(h=>`${h.role==='user'?'YOU
 let resetArmed=false,resetTimer;
 $('reset').onclick=()=>{if(!resetArmed){resetArmed=true;$('reset-note').textContent=' もう一度押すと記憶が消えます。';resetTimer=setTimeout(()=>{resetArmed=false;$('reset-note').textContent='';},5000);return;}
  clearTimeout(resetTimer);resetArmed=false;$('reset-note').textContent=' 初期化しました。';state=freshState();session=null;saveSession();lines=[];live='';mood='idle';add('enny','ネエ Chiikawa ッテ シッテル?');$('transcript').replaceChildren();save();draw();};
-$('engine-note').textContent=`無料・通信不要のルール会話。記憶はこのブラウザ内に保存します。時事ネタの確認日：${checkedAt}。`;
-if(['127.0.0.1','localhost','[::1]'].includes(location.hostname)){
- fetch('/api/config').then(r=>r.json()).then(c=>{modelEnabled=c.localModel;$('engine-note').textContent=(c.localModel?'ローカルLLMを使用。接続失敗時はルール会話に戻ります。会話はこのPC内で処理します。':'無料・通信不要のルール会話。生成AI相当の自由な理解ではなく、記憶と話題転換を演出します。')+` 時事ネタの確認日：${checkedAt}。`;}).catch(()=>{});
+function setEngineNote(){
+ $('engine-note').textContent=(modelEnabled?`AI会話を優先。接続失敗時はルール会話に戻ります${modelProvider?'（'+modelProvider+'）':''}。`:'無料・通信不要のルール会話。')+` 記憶はこのブラウザ内に保存します。時事ネタの確認日：${checkedAt}。`;
+}
+setEngineNote();
+if(isLocal){
+ fetch('/api/config').then(r=>r.json()).then(c=>{modelEnabled=Boolean(c.localModel);chatEndpoint=modelEnabled?'/api/chat':'';modelProvider=modelEnabled?'local':'';setEngineNote();}).catch(()=>{modelEnabled=false;chatEndpoint='';setEngineNote();});
+}else if(chatEndpoint){
+ const health=chatEndpoint.replace(/\/api\/chat\/?$/,'/health');
+ fetch(health,{signal:AbortSignal.timeout(5000)}).then(r=>r.ok?r.json():null).then(c=>{if(c?.ok){modelEnabled=true;modelProvider=c.provider||'';}setEngineNote();}).catch(()=>setEngineNote());
 }
 setInterval(draw,160);setInterval(()=>{if(shouldEnd(session)&&!composing)endSession();},1000);draw();$('entry').focus();

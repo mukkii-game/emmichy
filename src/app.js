@@ -24,7 +24,7 @@ function wrap(s,width=46){return String(s).split('\n').flatMap(p=>{const t=displ
 function add(role,value){for(const line of wrap(value))lines.push({line,color:role==='user'?'#00ffff':role==='system'?'#ffff00':colors[(state.turn%3)+1]});lines=lines.slice(-15);}
 if(state.history.length) {for(const h of state.history)add(h.role,h.text);} else {
  add('system','EMMICHY / THE ALMOST CLEVER GAME');
- add('enny','ネエ Chiikawa ッテ シッテル?');
+ add('enny','ネエ Chiikawa ッテ シッテル？');
  add('system','ニホンゴ デ フツウニ ハナシテネ');
 }
 const img=new Image();img.src='assets/emmichy-portrait.png';

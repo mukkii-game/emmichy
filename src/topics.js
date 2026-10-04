@@ -16,12 +16,12 @@ export function chiikawaReply(input,result,day,raw=input) {
  if(['bye','asleep','empty','name','memory','arithmetic','contradiction','repeat'].includes(result.kind))return result;
  let t;
  const fan=/チイカワ|CHIIKAWA|ハチワレ|シーサー|モモンガ|ラッコ|クリマンジュウ/.test(n);
- if(s.turn===1&&!fan){
+ if(s.turn===1){
   t=/シラナイ|知らない|ナニソレ/.test(n)?'チイサイ コ タチ ノ オハナシ。アタシ ダイスキ！ アナタハ ナニ ガ スキ？':
    /キライ|苦手|イヤ/.test(n)?'ソッカ。ムリニ ススメナイヨ。アナタ ノ スキナ ハナシ シヨ。':
    /シッテル|知ってる|スキ/.test(n)?'シッテルノ！ アタシ ハ マンガモ アニメモ スキ。アナタ ノ オシハ？':undefined;
  }
- if(/チイカワ.*(?:イガイ|ヤメ|バカリ)|マタチイカワ/.test(n))t='ウン、ホカノ ハナシ シヨ。サイキン ナニ デ アソンデル？';
+ if(/(?:チイカワ|CHIIKAWA).*(?:イガイ|ヤメ|バカリ|キライ|苦手)|マタチイカワ/.test(n))t='ウン、ホカノ ハナシ シヨ。サイキン ナニ デ アソンデル？';
  else if(/シーサー/.test(n)){
   s.fan.worry=Math.min(5,s.fan.worry+2);s.fan.lastTopic='shisa';result.kind='shisa';result.mood='worried';
   t='シーサー ノ ツヅキ ガ シンパイ…。ミタイノニ ミルノ コワイ。アナタモ？';

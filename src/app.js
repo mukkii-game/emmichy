@@ -79,7 +79,8 @@ $('talk').addEventListener('submit',async e=>{
  const before=advancePerformance(state,raw,session.turns);let result=chiikawaReply(normalize(raw),respond(raw,state),undefined,raw);
  result.state.performance=before.performance;result.state.speechStyle=before.speechStyle;
  let usedModel=false;
- const ruleOnly=['bye','asleep','name','memory','arithmetic'].includes(result.kind);
+ if(isRestart){result.text='ネエ Chiikawa ッテ シッテル？';result.state.history.at(-1).text=result.text;}
+ const ruleOnly=isRestart||['bye','asleep','name','memory','arithmetic'].includes(result.kind);
  if(modelEnabled && !ruleOnly){
   $('status').textContent='Emmichyが考えています…';
   const data=await requestChat(chatEndpoint,raw,before,session,{offline});

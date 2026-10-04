@@ -7,3 +7,4 @@ assets/enny-longhair.png
 tmp/
 *.log
 *.url
+.artifacts/

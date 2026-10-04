@@ -5,6 +5,6 @@ export function shouldEnd(session,now=Date.now()){
 }
 export function finishSession(state,session){
  const mode=state.fan.excitement>state.fan.worry?'movie':'anime';
- const text=mode==='movie'?'ア ゴメン エイガ チイカワ\nモウ イッカイ ミル ジカン ナノ\nツヅキハ マタネ バイバイ':'ア ソロソロ チイカワ ノ\nアニメ ミナキャ ダカラ カエルネ\nアナタノ ハナシハ マタ コンド バイバイ';
+ const text=mode==='movie'?'アッ チイカワ\n10カイメ ミニイク ジカン ダ！\nマタネ イヤッハアアアッ！！':'アッ モウ コンナ ジカン\nチイカワ 10カイメ ミニイクノ\nマタネ！';
  return {state:{...state,ended:true,history:[...state.history,{role:'enny',text}].slice(-40)},session:{...session,finished:true},text,mode};
 }

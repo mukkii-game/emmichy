@@ -12,7 +12,7 @@ const key='enny-memory-v1';
 const isLocal=['127.0.0.1','localhost','[::1]'].includes(location.hostname);
 let chatEndpoint=CHAT_API_URL;
 const offline=['auto','seed','replay','nollm'].some(k=>new URLSearchParams(location.search).has(k));
-let state=freshState(),saveAvailable=true,busy=false,portrait=null,live='',mood='idle',modelEnabled=Boolean(chatEndpoint),modelProvider='';
+let state=freshState(),saveAvailable=true,busy=false,portrait=null,live='',mood='idle',modelEnabled=Boolean(chatEndpoint)&&!offline,modelProvider='';
 let session=null,ending=false;
 const audioDirector=createAudioDirector();
 try{const stored=JSON.parse(sessionStorage.getItem('emmichy-session'));if(stored&&Number.isFinite(stored.startedAt)&&Number.isFinite(stored.turns))session=stored;}catch{}
@@ -72,7 +72,7 @@ $('talk').addEventListener('submit',async e=>{
  e.preventDefault();if(busy||composing)return;
  const raw=$('entry').value.trim();if(!raw)return;
  const isRestart=state.ended&&/コンニチ[ハワ]|タダイマ|オハヨウ/.test(normalize(raw));
- if(!session||isRestart){session={startedAt:Date.now(),turns:0,finished:false};if(isRestart){lines=[];state.fan={worry:0,excitement:0,lastTopic:''};}saveSession();}
+ if(!session||isRestart){session={startedAt:Date.now(),turns:0,finished:false};if(isRestart){lines=[];state.performance={};state.fan={worry:0,excitement:0,lastTopic:''};}saveSession();}
   session.turns++;saveSession();
  busy=true;$('send').disabled=true;$('reset').disabled=true;$('entry').value='';audioDirector.se.send();
  add('user',raw);$('disk').textContent='● DISK ACCESS';
@@ -90,7 +90,7 @@ $('talk').addEventListener('submit',async e=>{
  if(mood==='excited')audioDirector.se.excited();else if(mood==='worried')audioDirector.se.worried();else audioDirector.se.reply();
  for(const c of result.text){live+=c;draw();await wait(mood==='excited'?12:mood==='worried'&&c==='\n'?420:22);}
  add('enny',result.text);live='';lastActivity=Date.now();save();busy=false;$('send').disabled=false;$('reset').disabled=false;
- $('status').textContent=usedModel?`AI会話${modelProvider?' / '+modelProvider:''} / ENTER で送信`:modelEnabled?'AI失敗→ルール会話 / ENTER で送信':'ルール会話 / ENTER で送信';
+ $('status').textContent=usedModel?`AI会話${modelProvider?' / '+modelProvider:''} / ENTER で送信`:modelEnabled&&!ruleOnly?'AI失敗→ルール会話 / ENTER で送信':'ルール会話 / ENTER で送信';
  const item=document.createElement('p');item.textContent=`あなた：${raw}。Emmichy：${result.text}`;$('transcript').append(item);if($('transcript').children.length>40)$('transcript').firstChild.remove();
  $('entry').focus();draw();
  if(state.ended){session.finished=true;saveSession();}

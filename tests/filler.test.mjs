@@ -1,6 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {chooseFiller,startFiller} from '../src/filler.js';
+import {chooseFiller,startFiller,retainAside} from '../src/filler.js';
+test('saved waiting dialogue retains the user and both asides before the final answer',()=>{
+ const initial=[{role:'user',text:'音楽を教えて'},{role:'enny',text:'pending'}];
+ let history=retainAside(initial,'エト…',{pendingReply:true});
+ history=retainAside(history,'もう少しだけ！',{pendingReply:true});
+ const saved=JSON.parse(JSON.stringify(history.slice(0,-1)));
+ assert.deepEqual(saved.map(x=>x.text),['音楽を教えて','エト…','もう少しだけ！']);
+ history.at(-1).text='音楽のお話だね！';
+ assert.deepEqual(history.map(x=>x.text),[...saved.map(x=>x.text),'音楽のお話だね！']);
+ assert.equal(initial.length,2);
+ const idle=retainAside(history,'もっといい話題しよっか');
+ assert.equal(idle.at(-1).text,'もっといい話題しよっか');
+});
 test('listening filler starts after one second and cancellation prevents stale gestures',()=>{
  let callback,delay,cancelled,shown=0;
  const clock={schedule:(fn,ms)=>{callback=fn;delay=ms;return 7;},cancel:id=>cancelled=id};

@@ -1,4 +1,9 @@
-// Ephemeral listening gestures, never saved as answers or sent to the AI.
+// Listening gestures are dialogue, retained alongside the eventual answer.
+export function retainAside(history,line,{pendingReply=false}={}){
+ const next=[...history];
+ next.splice(pendingReply?Math.max(0,next.length-1):next.length,0,{role:'enny',text:line});
+ return next.slice(-40);
+}
 export function chooseFiller(input, recent=[]){
  const serious=/つらい|苦しい|相談|病気|入院|死に|いじめ|怖い|こわい/.test(input);
  const pool=serious?['うん、聞いてるよ。','うん。ゆっくり話してね。','そっか…。']:['ウ、ウン…。','ヤハ…。','エト、エト…。','ンショ…。','フムッ…。','ウンッ…。'];

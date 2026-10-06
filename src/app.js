@@ -12,7 +12,7 @@ import {selectKnowledge,knowledgeFallback} from './fandom.js?v=20261006-mix1';
 import {selectGap} from './gap.js?v=20261006-mix1';
 import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261006-mix1';
 import {cultureReply} from './culture.js?v=20261006-mix1';
-import {chooseFiller,startFiller,longFiller} from './filler.js?v=20261006-end1';
+import {chooseFiller,startFiller,longFiller,retainAside} from './filler.js?v=20261006-fill-log1';
 import {balanceRoute,learnInterests} from './balance.js?v=20261006-balance1';
 import {selectOpening} from './openings.js?v=20261006-open1';
 import {contextualReply} from './context.js?v=20261006-context1';
@@ -41,6 +41,15 @@ function renderConversation(){
  log.scrollTop=log.scrollHeight;
 }
 function add(role,value){lines.push({role,value});lines=lines.slice(-40);renderConversation();}
+function recordAside(line,pendingState=null){
+ if(pendingState){
+  pendingState.history=retainAside(pendingState.history,line,{pendingReply:true});
+  state.history=pendingState.history.slice(0,-1);
+ }else state.history=retainAside(state.history,line);
+ add('enny',line);save();
+ const p=document.createElement('p');p.textContent=`えみちぃ：${line}`;$('transcript').append(p);
+ if($('transcript').children.length>40)$('transcript').firstChild.remove();
+}
 function openingText(returning=false){const picked=selectOpening(state,returning);state.openingSeen=picked.seen;return picked.text;}
 function addOpening(returning=false){const line=openingText(returning);add('enny',line);state.history.push({role:'enny',text:line});save();}
 $('send').disabled=true;
@@ -124,8 +133,8 @@ $('talk').addEventListener('submit',async e=>{
   $('status').textContent='';
   const stopFiller=startFiller(()=>{
    const line=chooseFiller(raw,recentFillers);recentFillers=[...recentFillers,line].slice(-4);
-   live=readableText(line,tokenizer);draw();
-  },{later:()=>{const line=longFiller(raw,recentFillers);recentFillers=[...recentFillers,line].slice(-4);live=readableText(line,tokenizer);draw();}});
+   recordAside(line,result.state);draw();
+  },{later:()=>{const line=longFiller(raw,recentFillers);recentFillers=[...recentFillers,line].slice(-4);recordAside(line,result.state);draw();}});
   let data;
   try{data=await requestChat(chatEndpoint,raw,before,session,{offline});}
   finally{stopFiller();live='';draw();}
@@ -196,7 +205,7 @@ setInterval(draw,160);setInterval(()=>{
   idleAsideAt=lastActivity;
   const gentle=/つらい|苦しい|相談|病気|いじめ/.test(state.history.filter(h=>h.role==='user').at(-1)?.text||'');
   const lines=gentle?['急がなくて大丈夫。ここにいるよ。']:['あ、別の話題でもいいよ。何か日本のこと、教えて？','アタシの質問、むずかしかったかな？ 気楽に話してね。','漫画じゃなくてもいいの。今日あったこと、聞きたい！'];
-  live=readableText(lines[idleAsideIndex++%lines.length],tokenizer);draw();
+  recordAside(lines[idleAsideIndex++%lines.length]);draw();
  }
 },1000);draw();if(ready)$('entry').focus();
 

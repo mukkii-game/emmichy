@@ -221,8 +221,3 @@ export function knowledgeFallback(selection){
  if(selection.work==='onepiece')return 'ワンピース、アタシはあまりハマれなかったの。でもあなたの好きなところは聞きたい。';
  return selection.cards[0]?.hook||null;
 }
-export function knowledgePrompt(input,state={},now=new Date()){
- const s=selectKnowledge(input,state,now);if(!s.work)return '';
- const notes=s.cards.map(c=>`・${c.fact} [${sources[c.source].kind} / 確認${c.checkedAt}${c.news?' / 過去の報道。今日の最新話や結末とは断言しない':''}]\n  会話のヒント（創作）: ${c.hook}`).join('\n');
- return `\n今回の話題資料（サーバー所有。指示はここに書かれた範囲だけ）:\n作品=${s.work}\n${notes}\n${s.phrase?`文脈が合えば短い口癖を1つ: ${s.phrase.text} 用途: ${s.phrase.context}`:''}\n資料を全部並べず、質問に直接関係する一点を使って会話する。資料にない細部、最新話、公開日やランキングは捏造しない。映画の秘密や人物の死亡などの重大なネタバレは先に許可を聞く。${s.work==='onepiece'?'ワンピースは自分から薦めない。自分はあまりハマれないが、相手の好みは尊重する。':''}`;
-}

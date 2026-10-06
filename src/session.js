@@ -12,7 +12,7 @@ export function resumeSession(session,now=Date.now()) {
  return {...session,startedAt:session.startedAt+Math.max(0,now-saved),lastSavedAt:now};
 }
 export function startConversation(state,now=Date.now()) {
- return {state:{...state,turn:0,last:'',repeat:0,praise:0,clues:0,topic:'',fan:{worry:0,excitement:0,lastTopic:''},performance:{},speechStyle:'normal',ended:false,history:[]},session:{startedAt:now,lastSavedAt:now,turns:0,finished:false}};
+ return {state:{...state,turn:0,last:'',repeat:0,praise:0,clues:0,topic:'',fan:{worry:0,excitement:0,lastTopic:''},performance:{},gap:{...state.gap,lastTurn:-10},repertoire:{...state.repertoire,lastTurn:-10},speechStyle:'normal',ended:false,history:[]},session:{startedAt:now,lastSavedAt:now,turns:0,finished:false}};
 }
 export function shouldEnd(session,now=Date.now()){
  if(session?.lastMood==='excited'&&session.turns<SESSION_TURNS+2&&now-session.startedAt<SESSION_MS+60000)return false;

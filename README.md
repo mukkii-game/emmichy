@@ -10,6 +10,12 @@ Node.js 22以降。起動は追加パッケージ不要、テスト前に `npm c
 
 ## 会話
 
+人工無能とAIの合わせ技: [会話台帳](docs/repertoire.md) / [全1,200候補](docs/dialogue-bank.json)。600件の書き下ろし反応＋事実を添えた600件の回答。ちいかわ320、ジョジョ200、ハンター200、ほか480。定義等の答えが確かな短い質問は用意した返答、考察・相談・教わった話はAI。AIにも関連する感想例を最大3件渡します。既出ID・同じオチの組み合わせ・近い文章を避け、会話を最初からにしても既出IDは残します。
+
+可愛い女の子が漫画の男っぽい台詞や「シンジュク、シンジュクゥッ！」等を無邪気に使うギャップは、普通の会話を挟んで時々。非ファンとも日本の暮らしや言葉を教わり、具体的な内容に喜んで反応します。AIの重複や語尾の付け足し等は必要な時だけローカルで整形します。
+
+返答データの正本は `src/fan-lines.js` / `src/repertoire.js` / `src/gap.js`。`node scripts/sync-dialogue.mjs` で隣のgame-llmの作品専用ファイルへ同期。system promptの組み立てとキャラ指示は `game-llm/games/emmichy.js` のみ。`node scripts/export-repertoire.mjs` で会話台帳を更新します。
+
 会話ネタの資料帳は [docs/fandom-sources.md](docs/fandom-sources.md)。2026-10-06確認の120件・27作品。ちいかわ32件、ジョジョ20件、HUNTER×HUNTER20件、ほか48件。ONE PIECEは自分から薦めない好み設定。AIにはサーバー所有の資料から最大5件だけ渡し、通信なしでも自作の感想文を使います。映画優先と連投防止、最近のカード回避、重大なネタバレの許可、期限付き報道を処理します。最新ニュースの自動巡回はしません。
 
 資料の正本は `src/fandom.js`。更新時は同じ内容を `game-llm/games/emmichy-fandom.js` にコピーし、双方のテスト後に公開してください。ブラウザから資料やsystem promptは送りません。送るknowledgeは既知のカードID・作品ID・映画連続数のみです。

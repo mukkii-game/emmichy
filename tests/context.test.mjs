@@ -1,6 +1,27 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {contextualReply,contextualNote} from '../src/context.js';
+import {conversationMove,MOVES} from '../src/moves.js';
+test('five moves ground novel inputs and protect questions, denial and serious failure',()=>{
+ const fixtures=[
+  ['写真は詳しくない。今日はもう疲れた',{history:[{role:'enny',text:'好きな写真家は？'}]},'SELF_CORRECT'],
+  ['うん',{history:[{role:'user',text:'オムライス食べた'}]},'NOTICE_WORDING'],
+  ['傘を忘れた',{},'LIGHT_TEASE'],
+  ['スプーンを忘れた',{conversation:{entries:[{id:'half-price-king'}]}},'SHARED_FRAME'],
+  ['「ひと息」って休むという意味の言葉',{},'SMALL_SELF_DISCLOSURE']
+ ];
+ for(const [input,state,move] of fixtures){
+  const r=conversationMove(input,state);assert.equal(r.move,move);assert.ok(MOVES.includes(r.move));
+  assert.doesNotMatch(r.text,/[?？]|教えて|どうだった/);
+  assert.notEqual(conversationMove(input,{...state,history:[...(state.history||[]),{role:'enny',text:r.text}]})?.text,r.text);
+ }
+ assert.equal(conversationMove('傘を忘れてないよ',{}),null);
+ assert.equal(conversationMove('傘を忘れた。どうしたらいい？',{}),null);
+ assert.equal(conversationMove('傘を忘れてつらい',{}),null);
+ assert.equal(conversationMove('スプーンを忘れた',{conversation:{entries:[{id:'half-price-king'}]},history:[{role:'enny',text:'王、即位初日に装備品を忘れてる。'}]}),null);
+ const noInventedApology=conversationMove('漫画は知らない。仕事でミスして疲れた',{});
+ assert.equal(noInventedApology.move,'NOTICE_WORDING');assert.doesNotMatch(noInventedApology.text,/引っ込める|王/);
+});
 test('a namesake gets a personal recognition rather than a generic character survey',()=>{
  const input='女の子の名前がえみちぃ Emmichyっていうんだ';
  const first=contextualReply(input,{});

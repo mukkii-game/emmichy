@@ -15,7 +15,7 @@ import {cultureReply} from './culture.js?v=20261006-mix1';
 import {chooseFiller,startFiller,longFiller,retainAside,idleAside} from './filler.js?v=20261006-idle1';
 import {balanceRoute,learnInterests} from './balance.js?v=20261006-balance1';
 import {selectOpening} from './openings.js?v=20261006-open1';
-import {contextualReply} from './context.js?v=20261006-context1';
+import {contextualReply} from './context.js?v=20261006-ownname1';
 let recentFillers=[];
 let idleAsideAt=0,idleAsideIndex=0;
 let tokenizer=null;

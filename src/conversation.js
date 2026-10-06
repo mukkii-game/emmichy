@@ -49,9 +49,12 @@ export function conversationNote(value,turn,input=''){
 export function endingCallback(value){
  const memory=cleanConversation(value);if(memory.endingUsed)return null;
  const has=id=>memory.entries.some(e=>e.id===id);
- let text='';
- if(has('half-price-strongman'))text='半額の強者、次も財布を守ってね。';
- else if(has('half-price-king'))text=has('forgot-spoon')?'半額王、次はスプーンも装備してね。':'半額王、またいいおやつの話、聞かせてね。';
- else if(has('forgot-spoon')&&has('pudding-chopsticks'))text='箸でプリンの作戦、アタシ忘れないよ。';
+ let choices=[];
+ if(has('half-price-strongman'))choices=['半額の強者、次も財布を守ってね。','強者の買い物、また聞かせて。','次の半額決戦も、健闘を祈る。'];
+ else if(has('half-price-king')&&has('forgot-spoon'))choices=['半額王、次はスプーンも装備してね。','王、次の遠征はスプーン確認ね。','スプーンを失った王のこと、忘れないよ。'];
+ else if(has('half-price-king'))choices=['半額王、またいい獲物を見つけてね。','王の次の戦果、ちょっと楽しみ。','半額王、よい買い物を。'];
+ else if(has('forgot-spoon')&&has('pudding-chopsticks'))choices=['箸でプリンの流派、アタシ忘れないよ。','次にプリンを見たら、箸を思い出しそう。','箸でプリン。今日いちばん強い話だった。'];
+ const seed=memory.entries.reduce((n,e)=>n+e.turn,0);
+ const text=choices.length?choices[seed%choices.length]:'';
  return text?{text,memory:{...memory,endingUsed:true}}:null;
 }

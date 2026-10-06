@@ -18,7 +18,9 @@ export function readableText(value, tokenizer) {
       const attach=token.pos==='助動詞'||token.pos_detail_1==='接尾'||token.pos_detail_1==='終助詞'||(token.pos_detail_1==='接続助詞'&&/^[テデ]$/.test(reading))||/^[テデ]ル$/.test(reading)||/^[。、!?]$/.test(reading);
       const prefix=previous?.pos==='接頭詞'&&token.pos!=='記号';
       const question=token.surface_form==='か'&&previous?.surface_form==='の'&&previous.pos_detail_1==='非自立';
-      if((attach||prefix||question)&&words.length)words[words.length-1]+=reading;else words.push(reading);
+      const contractedTe=token.pos==='動詞'&&token.pos_detail_1==='非自立'&&/^[テデ]$/.test(reading)&&previous?.pos==='動詞';
+      const progressive=token.pos==='動詞'&&token.pos_detail_1==='非自立'&&token.basic_form==='いる'&&/^[てで]$/.test(previous?.surface_form||'');
+      if((attach||prefix||question||contractedTe||progressive)&&words.length)words[words.length-1]+=reading;else words.push(reading);
       previous=token;
     }
     return words.join(' ');

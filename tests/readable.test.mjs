@@ -31,3 +31,11 @@ test('shop names, polite prefixes and question endings remain readable units',()
  assert.match(text,/オミセ/);assert.match(text,/ノカ/);assert.doesNotMatch(text,/オ ミセ|ノ カ/);
  assert.match(readableText('お茶とご飯',tokenizer),/オチャ ト ゴハン/);
 });
+test('contracted and progressive verbs stay together without swallowing the next clause',()=>{
+ assert.equal(readableText('ゲームを作ってた',tokenizer),'ゲーム ヲ ツクッテタ');
+ assert.equal(readableText('ゲームを作っていた',tokenizer),'ゲーム ヲ ツクッテイタ');
+ assert.equal(readableText('ご飯を食べてた',tokenizer),'ゴハン ヲ タベテタ');
+ assert.equal(readableText('映画を見ていた',tokenizer),'エイガ ヲ ミテイタ');
+ assert.equal(readableText('食べてから帰った',tokenizer),'タベテ カラ カエッタ');
+ assert.equal(readableText('歩いて行った',tokenizer),'アルイテ イッタ');
+});

@@ -5,7 +5,10 @@ export function checkpointSession(session,now=Date.now()) {
 }
 export function resumeSession(session,now=Date.now()) {
  if(!session||!Number.isFinite(session.startedAt)||!Number.isFinite(session.turns))return null;
- const saved=Number.isFinite(session.lastSavedAt)?session.lastSavedAt:now;
+ // Older versions only stored a wall-clock start. Its away time is unknown;
+ // give migrated conversations a fresh time window and retain turn count.
+ if(!Number.isFinite(session.lastSavedAt))return {...session,startedAt:now,lastSavedAt:now};
+ const saved=session.lastSavedAt;
  return {...session,startedAt:session.startedAt+Math.max(0,now-saved),lastSavedAt:now};
 }
 export function startConversation(state,now=Date.now()) {

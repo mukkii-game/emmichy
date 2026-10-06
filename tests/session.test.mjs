@@ -10,6 +10,7 @@ test('returning later preserves played time rather than ending while away',()=>{
  const saved=checkpointSession({startedAt:1000,turns:4,finished:false},61000);
  const resumed=resumeSession(JSON.parse(JSON.stringify(saved)),361000);
  assert.equal(361000-resumed.startedAt,60000);assert.equal(resumed.turns,4);assert.equal(shouldEnd(resumed,361000),false);
+ const migrated=resumeSession({startedAt:1,turns:4},999999);assert.equal(shouldEnd(migrated,999999),false);assert.equal(migrated.turns,4);
 });
 test('starting over clears dialogue and timer while retaining learned preferences',()=>{
  const old={...freshState(),name:'タロウ',likes:{ネコ:1},turn:18,ended:true,history:[{role:'enny',text:'バイバイ'}]};

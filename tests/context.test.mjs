@@ -18,3 +18,15 @@ test('Samon answers the preceding Giants question and a newer work replaces old 
  const text=contextualReply('サモン',state).text;
  assert.notEqual(contextualReply('サモン',{history:[...state.history,{role:'enny',text}]}).text,text);
 });
+
+test('thin prompts get concrete non-question replies that leave hooks',()=>{
+ const tired=contextualReply('漫画は詳しくない。仕事でミスして疲れた',{});
+ assert.doesNotMatch(tired.text,/[?？]|大変だったね|何が好き/);
+ assert.match(tired.text,/仕事|ミス|面接|再放送/);
+ const pudding=contextualReply('うん',{history:[{role:'user',text:'プリン食べた'}]});
+ assert.doesNotMatch(pudding.text,/[?？]/);assert.match(pudding.text,/プリン/);
+ const spoon=contextualReply('王はスプーンを忘れました',{conversation:{entries:[{id:'half-price-king',turn:3}]}});
+ assert.doesNotMatch(spoon.text,/[?？]|次は忘れ/);assert.match(spoon.text,/王|スプーン/);
+ const chopsticks=contextualReply('箸でプリンを食べるしかない',{});
+ assert.doesNotMatch(chopsticks.text,/[?？]/);assert.match(chopsticks.text,/箸|王|流派|修行/);
+});

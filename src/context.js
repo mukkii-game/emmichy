@@ -16,7 +16,28 @@ export function isGiantsContext(input,state={}){
  }
  return false;
 }
+function focusedReply(input,state={}){
+ const raw=String(input||'').normalize('NFKC').replace(/\s+/g,'');
+ const recent=Array.isArray(state.history)?state.history.slice(-8):[];
+ const lastUser=[...recent].reverse().find(h=>h.role==='user')?.text||'';
+ const prior=recent.filter(h=>h.role==='enny').map(h=>h.text);
+ const choose=lines=>lines.find(line=>!prior.includes(line))||lines[0];
+ if(/(?:漫画|マンガ).*(?:詳しくない|知らない).*(?:仕事|ミス).*(?:疲れた|つかれた)|(?:仕事|ミス).*(?:疲れた|つかれた).*(?:漫画|マンガ).*(?:詳しくない|知らない)/.test(raw)){
+  return {text:choose(['仕事のミスのあとに漫画の宿題まで出されたら、休憩にならないよね。今日は説明しなくていい側でいて。','疲れてる人に「好きな漫画は？」って、面接を増やすところだった。アタシ、今のは引っ込める。','ミスした場面って、帰ってから勝手に再放送されるよね。アタシなら脳内テレビの電源を抜きたい。']),topic:'focused-nonquestion'};
+ }
+ if(/^(?:うん|ウン|そう|ソウ)[。！!…]*$/.test(raw)&&/プリン/.test(String(lastUser))){
+  return {text:choose(['「うん」で終わるプリン、かなり満足度が高いやつだ。','その短い「うん」、プリンがちゃんと仕事した顔してる。','アタシもプリンのあとだけ、語彙が「うん」になる。']),topic:'focused-nonquestion'};
+ }
+ if(/スプーン.*(?:忘れ|わすれ)/.test(raw)&&state.conversation?.entries?.some(e=>e.id==='half-price-king')){
+  return {text:choose(['王、即位初日に装備品を忘れてる。','半額王の弱点、まさかのスプーン。急に親しみやすい王になった。','そこまで完璧だったのに、最後の一センチがスプーンだった。']),topic:'focused-running-joke'};
+ }
+ if(/(?:箸|はし).*(?:プリン|食べ)|プリン.*(?:箸|はし)/.test(raw)){
+  return {text:choose(['箸でプリン。失敗じゃなくて、新しい流派ってことにしよう。','急に王の食事が修行になった。プリンが逃げる側だね。','スプーン不在から箸を選ぶの、諦め方が前向きすぎて好き。']),topic:'focused-running-joke'};
+ }
+ return null;
+}
 export function contextualReply(input,state={}){
+ const focused=focusedReply(input,state);if(focused)return focused;
  if(sharesOwnName(input)){
   const lines=['エッ、アタシと同じ名前！ その子の話なのに、ちょっと照れちゃった。なんか他人の気がしないの。','アタシと同じ名前なのね！ もう勝手に親近感。名前だけで仲間にするの、ちょっと早かった？','エミチィ！ ア、呼ばれたかと思った。その女の子のことだったのね。アタシ、名前に反応よすぎ。'];
   const prior=state.history?.filter(h=>h.role==='enny').map(h=>h.text)||[];

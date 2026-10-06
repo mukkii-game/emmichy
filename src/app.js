@@ -18,6 +18,7 @@ import {selectOpening} from './openings.js?v=20261006-open1';
 let recentFillers=[];
 let idleAsideAt=0,idleAsideIndex=0;
 let tokenizer=null;
+let readingsSettled=false;
 const $=id=>document.getElementById(id),canvas=$('screen'),ctx=canvas.getContext('2d',{willReadFrequently:true});
 ctx.imageSmoothingEnabled=false;
 const key='enny-memory-v1';
@@ -34,13 +35,15 @@ const hadSavedDialogue=state.history.length>0;
 let lines=[];
 function renderConversation(){
  const log=$('conversation');log.replaceChildren();
+ if(!tokenizer){const p=document.createElement('p');p.className='message system';p.textContent=readingsSettled?'コトバ ノ ヨミコミ ニ シッパイ。サイヨミコミ シテネ。':'コトバ ヲ ジュンビ シテイマス…';log.append(p);return;}
  for(const item of lines){const p=document.createElement('p');p.className='message '+item.role;const label=document.createElement('span');label.className='speaker';label.textContent=item.role==='user'?'YOU >':item.role==='system'?'SYSTEM >':'EMMICHY >';const body=document.createElement('span');body.textContent=readableText(item.value,tokenizer);p.append(label,body);log.append(p);}
  log.scrollTop=log.scrollHeight;
 }
 function add(role,value){lines.push({role,value});lines=lines.slice(-40);renderConversation();}
 function openingText(returning=false){const picked=selectOpening(state,returning);state.openingSeen=picked.seen;return picked.text;}
 function addOpening(returning=false){const line=openingText(returning);add('enny',line);state.history.push({role:'enny',text:line});save();}
-const readingsReady=loadReadings().then(value=>{tokenizer=value;renderConversation();return value;});
+$('send').disabled=true;
+const readingsReady=loadReadings().then(value=>{tokenizer=value;readingsSettled=true;renderConversation();if(ready&&!busy)$('send').disabled=!value;return value;});
 if(state.history.length) {for(const h of state.history)add(h.role,h.text);} else {
  add('system','EMMICHY / THE ALMOST CLEVER GAME');
  addOpening();
@@ -58,7 +61,7 @@ img.onerror=()=>{$('status').textContent='人物画像を読み込めません�
 function draw(){
  ctx.fillStyle='#000';ctx.fillRect(0,0,496,672);
  if(portrait)ctx.drawImage(portrait,0,0,496,672);
- $('live-reply').textContent=live;
+ $('live-reply').textContent=tokenizer?live:'';
  $('terminal-note').textContent=session?.finished?'— END —　コンニチハ デ サイカイ':busy?'':'アタシ エミチィ　ナンデモ ハナシテネ';
  ctx.save();ctx.scale(2,4);
  if(mood==='knowing' && Math.floor(Date.now()/700)%2)text(ctx,'*',230,10,'#00ffff');
@@ -83,7 +86,7 @@ async function endSession(){
  $('status').textContent='おしまい。「コンニチハ」で、もう一度。';draw();
 }
 $('talk').addEventListener('submit',async e=>{
- e.preventDefault();if(!ready||busy||composing)return;
+ e.preventDefault();if(!ready||busy||composing||!tokenizer)return;
  const raw=$('entry').value.trim();if(!raw)return;
  const isRestart=state.ended&&/コンニチ[ハワ]|タダイマ|オハヨウ/.test(normalize(raw));
  if(!session||isRestart){session={startedAt:Date.now(),turns:0,finished:false};if(isRestart){lines=[];state.performance={};state.fan={worry:0,excitement:0,lastTopic:''};}saveSession();}
@@ -170,7 +173,7 @@ function showStartChoice(){
  $('continue').disabled=!state.history.length;
  $('status').textContent='続きから／最初から を選んでください';
 }
-function enterConversation(){ready=true;$('start-choice').hidden=true;$('send').disabled=false;$('entry').disabled=false;lastActivity=Date.now();$('entry').focus();}
+function enterConversation(){ready=true;$('start-choice').hidden=true;$('send').disabled=!tokenizer;$('entry').disabled=false;lastActivity=Date.now();$('entry').focus();}
 $('continue').onclick=()=>{session=resumeSession(session);enterConversation();saveSession();$('status').textContent=state.ended?'おしまい。「最初から」で、もう一度。':'会話を再開しました / ENTER で送信';};
 $('new-chat').onclick=()=>{const next=startConversation(state);state=next.state;session=next.session;lines=[];live='';mood='idle';$('transcript').replaceChildren();addOpening(true);enterConversation();save();saveSession();$('status').textContent='新しい会話 / 漢字・ひらがな OK';draw();};
 $('restart-chat').onclick=showStartChoice;

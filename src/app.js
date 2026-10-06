@@ -62,7 +62,8 @@ img.onerror=()=>{$('status').textContent='人物画像を読み込めません�
 function draw(){
  ctx.fillStyle='#000';ctx.fillRect(0,0,496,672);
  if(portrait)ctx.drawImage(portrait,0,0,496,672);
- $('live-reply').textContent=tokenizer?live:'';
+ const nextLive=tokenizer?live:'';
+ if($('live-reply').textContent!==nextLive){$('live-reply').textContent=nextLive;const log=$('conversation');log.scrollTop=log.scrollHeight;}
  $('terminal-note').textContent=session?.finished?'— END —　コンニチハ デ サイカイ':busy?'':'アタシ エミチィ　ナンデモ ハナシテネ';
  ctx.save();ctx.scale(2,4);
  if(mood==='knowing' && Math.floor(Date.now()/700)%2)text(ctx,'*',230,10,'#00ffff');

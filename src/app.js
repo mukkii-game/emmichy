@@ -12,7 +12,7 @@ import {selectKnowledge,knowledgeFallback} from './fandom.js?v=20261006-mix1';
 import {selectGap} from './gap.js?v=20261006-mix1';
 import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261006-loop1';
 import {cultureReply} from './culture.js?v=20261006-mix1';
-import {chooseFiller,startFiller,longFiller,retainAside} from './filler.js?v=20261006-loop1';
+import {chooseFiller,startFiller,longFiller,retainAside,idleAside} from './filler.js?v=20261006-idle1';
 import {balanceRoute,learnInterests} from './balance.js?v=20261006-balance1';
 import {selectOpening} from './openings.js?v=20261006-open1';
 import {contextualReply} from './context.js?v=20261006-context1';
@@ -203,9 +203,7 @@ setInterval(draw,160);setInterval(()=>{
  if(ready&&!document.hidden&&shouldEnd(session)&&!composing&&!$('entry').value.trim()&&Date.now()-lastActivity>8000)endSession();
  if(ready&&!document.hidden&&!busy&&session&&!session.finished&&!state.ended&&!composing&&!$('entry').value.trim()&&Date.now()-lastActivity>=10000&&idleAsideAt!==lastActivity){
   idleAsideAt=lastActivity;
-  const gentle=/つらい|苦しい|相談|病気|いじめ/.test(state.history.filter(h=>h.role==='user').at(-1)?.text||'');
-  const lines=gentle?['急がなくて大丈夫。ここにいるよ。']:['あ、別の話題でもいいよ。何か日本のこと、教えて？','アタシの質問、むずかしかったかな？ 気楽に話してね。','漫画じゃなくてもいいの。今日あったこと、聞きたい！'];
-  recordAside(lines[idleAsideIndex++%lines.length]);draw();
+  recordAside(idleAside(state.history,idleAsideIndex++));draw();
  }
 },1000);draw();if(ready)$('entry').focus();
 

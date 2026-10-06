@@ -1,13 +1,14 @@
-import {freshState,restoreState,respond,normalize} from './engine.js?v=20261006-hybrid4';
-import {chiikawaReply,checkedAt} from './topics.js?v=20261006-hybrid4';
-import {text,kana} from './font.js?v=20261006-hybrid4';
-import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261006-hybrid4';
-import {createAudioDirector} from './audio.js?v=20261006-hybrid4';
-import {CHAT_API_URL} from './config.js?v=20261006-hybrid4';
-import {advancePerformance} from './performance.js?v=20261006-hybrid4';
-import {requestChat} from './chat.js?v=20261006-hybrid4';
-import {readableText,loadReadings} from './readable.js?v=20261006-hybrid4';
-import {curatedReply} from './curated.js?v=20261006-hybrid4';
+import {freshState,restoreState,respond,normalize} from './engine.js?v=20261006-fandom1';
+import {chiikawaReply,checkedAt} from './topics.js?v=20261006-fandom1';
+import {text,kana} from './font.js?v=20261006-fandom1';
+import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261006-fandom1';
+import {createAudioDirector} from './audio.js?v=20261006-fandom1';
+import {CHAT_API_URL} from './config.js?v=20261006-fandom1';
+import {advancePerformance} from './performance.js?v=20261006-fandom1';
+import {requestChat} from './chat.js?v=20261006-fandom1';
+import {readableText,loadReadings} from './readable.js?v=20261006-fandom1';
+import {curatedReply} from './curated.js?v=20261006-fandom1';
+import {selectKnowledge,knowledgeFallback} from './fandom.js?v=20261006-fandom1';
 let tokenizer=null;
 const $=id=>document.getElementById(id),canvas=$('screen'),ctx=canvas.getContext('2d',{willReadFrequently:true});
 ctx.imageSmoothingEnabled=false;
@@ -80,9 +81,17 @@ $('talk').addEventListener('submit',async e=>{
  add('user',raw);$('disk').textContent='● DISK ACCESS';
  const before=advancePerformance(state,raw,session.turns);let result=chiikawaReply(normalize(raw),respond(raw,state),undefined,raw);
  result.state.performance=before.performance;result.state.speechStyle=before.speechStyle;
+ const knowledge=selectKnowledge(raw,before);
+ const fandomReply=knowledgeFallback(knowledge);
+ if(!isRestart&&!state.ended){
+  result.state.knowledge=knowledge.memory;
+  if(fandomReply&&!/嫌い|キライ|苦手|やめ|ヤメ|以外|イガイ|ばかり|バカリ/.test(raw)&&!['bye','asleep','name','memory','arithmetic','comfort','contradiction','repeat'].includes(result.kind)){
+   result.text=fandomReply;result.state.history.at(-1).text=result.text;
+  }
+ }
  let usedModel=false;
  const prepared=!isRestart&&!state.ended&&curatedReply(raw,state);
- if(prepared){result.text=prepared.text;result.kind='curated';result.state.history.at(-1).text=result.text;}
+ if(prepared){result.text=fandomReply||prepared.text;result.kind='curated';result.state.history.at(-1).text=result.text;}
  if(isRestart){result.text='ネエ Chiikawa ッテ シッテル？';result.state.history.at(-1).text=result.text;}
  const ruleOnly=isRestart||['curated','bye','asleep','name','memory','arithmetic'].includes(result.kind);
  if(modelEnabled && !ruleOnly){

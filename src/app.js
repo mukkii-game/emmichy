@@ -1,4 +1,4 @@
-import {freshState,restoreState,respond,normalize} from './engine.js?v=20261006-end1';
+import {freshState,restoreState,respond,normalize} from './engine.js?v=20261006-open1';
 import {chiikawaReply,checkedAt} from './topics.js?v=20261006-mix1';
 import {text,kana} from './font.js?v=20261006-mix1';
 import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261006-end1';
@@ -14,6 +14,7 @@ import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=2026
 import {cultureReply} from './culture.js?v=20261006-mix1';
 import {chooseFiller,startFiller,longFiller} from './filler.js?v=20261006-end1';
 import {balanceRoute,learnInterests} from './balance.js?v=20261006-balance1';
+import {selectOpening} from './openings.js?v=20261006-open1';
 let recentFillers=[];
 let idleAsideAt=0,idleAsideIndex=0;
 let tokenizer=null;
@@ -29,6 +30,7 @@ const audioDirector=createAudioDirector();
 try{const stored=JSON.parse(localStorage.getItem('emmichy-session')||sessionStorage.getItem('emmichy-session'));if(stored&&Number.isFinite(stored.startedAt)&&Number.isFinite(stored.turns))session=stored;}catch{}
 function saveSession(){if(ready)session=checkpointSession(session);try{localStorage.setItem('emmichy-session',JSON.stringify(session));sessionStorage.setItem('emmichy-session',JSON.stringify(session));}catch{}}
 try {state=restoreState(JSON.parse(localStorage.getItem(key)));}catch{saveAvailable=false;}
+const hadSavedDialogue=state.history.length>0;
 let lines=[];
 function renderConversation(){
  const log=$('conversation');log.replaceChildren();
@@ -36,10 +38,12 @@ function renderConversation(){
  log.scrollTop=log.scrollHeight;
 }
 function add(role,value){lines.push({role,value});lines=lines.slice(-40);renderConversation();}
+function openingText(returning=false){const picked=selectOpening(state,returning);state.openingSeen=picked.seen;return picked.text;}
+function addOpening(returning=false){const line=openingText(returning);add('enny',line);state.history.push({role:'enny',text:line});save();}
 const readingsReady=loadReadings().then(value=>{tokenizer=value;renderConversation();return value;});
 if(state.history.length) {for(const h of state.history)add(h.role,h.text);} else {
  add('system','EMMICHY / THE ALMOST CLEVER GAME');
- add('enny','ネエ Chiikawa ッテ シッテル？');
+ addOpening();
  add('system','ニホンゴ デ フツウニ ハナシテネ');
 }
 const img=new Image();img.src='assets/emmichy-portrait.png';
@@ -106,9 +110,10 @@ $('talk').addEventListener('submit',async e=>{
  let prepared=isRestart||state.ended?null:gap?{text:gap.text,topic:'gap'}:culture?.kind==='curiosity'?{text:culture.text,topic:'culture'}:repertoire.scripted?{text:repertoire.candidate.text,topic:'repertoire'}:
   legacy&&(!repertoire.candidate||legacy.topic==='greeting')?legacy:null;
  if(!isRestart&&!state.ended)prepared=balanceRoute(prepared,repertoire,session,modelEnabled);
+ if(prepared?.topic==='greeting'){prepared.text=openingText(true);result.state.openingSeen=state.openingSeen;}
  if(gap)result.state.gap=gap.memory;
- if(prepared){result.text=['island-water','gap','repertoire','culture'].includes(prepared.topic)?prepared.text:fandomReply||prepared.text;result.kind='curated';result.state.history.at(-1).text=result.text;if(/[！!]/.test(result.text))result.mood='excited';}
- if(isRestart){result.text='ネエ Chiikawa ッテ シッテル？';result.state.history.at(-1).text=result.text;}
+ if(prepared){result.text=['greeting','island-water','gap','repertoire','culture'].includes(prepared.topic)?prepared.text:fandomReply||prepared.text;result.kind='curated';result.state.history.at(-1).text=result.text;if(/[！!]/.test(result.text))result.mood='excited';}
+ if(isRestart){result.text=openingText(true);result.state.openingSeen=state.openingSeen;result.state.history.at(-1).text=result.text;}
  const ruleOnly=isRestart||['curated','bye','asleep','name','memory','arithmetic'].includes(result.kind);
  if(modelEnabled && !ruleOnly){
   $('status').textContent='';
@@ -157,7 +162,7 @@ $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await docume
 $('export').onclick=()=>{const body=state.history.map(h=>`${h.role==='user'?'YOU':'EMMICHY'}: ${h.text}`).join('\r\n\r\n');const url=URL.createObjectURL(new Blob(['\ufeff'+body],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='enny-conversation.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
 let resetArmed=false,resetTimer;
 $('reset').onclick=()=>{if(!resetArmed){resetArmed=true;$('reset-note').textContent=' もう一度押すと記憶が消えます。';resetTimer=setTimeout(()=>{resetArmed=false;$('reset-note').textContent='';},5000);return;}
- clearTimeout(resetTimer);resetArmed=false;$('reset-note').textContent=' 初期化しました。';state=freshState();session=null;saveSession();lines=[];live='';mood='idle';add('enny','ネエ Chiikawa ッテ シッテル?');$('transcript').replaceChildren();save();draw();};
+ clearTimeout(resetTimer);resetArmed=false;$('reset-note').textContent=' 初期化しました。';state=freshState();session=null;saveSession();lines=[];live='';mood='idle';addOpening();$('transcript').replaceChildren();save();draw();};
 function showStartChoice(){
  if(busy)return;
  if(ready)saveSession();
@@ -167,9 +172,9 @@ function showStartChoice(){
 }
 function enterConversation(){ready=true;$('start-choice').hidden=true;$('send').disabled=false;$('entry').disabled=false;lastActivity=Date.now();$('entry').focus();}
 $('continue').onclick=()=>{session=resumeSession(session);enterConversation();saveSession();$('status').textContent=state.ended?'おしまい。「最初から」で、もう一度。':'会話を再開しました / ENTER で送信';};
-$('new-chat').onclick=()=>{const next=startConversation(state);state=next.state;session=next.session;lines=[];live='';mood='idle';$('transcript').replaceChildren();add('enny','ネエ Chiikawa ッテ シッテル？');enterConversation();save();saveSession();$('status').textContent='新しい会話 / 漢字・ひらがな OK';draw();};
+$('new-chat').onclick=()=>{const next=startConversation(state);state=next.state;session=next.session;lines=[];live='';mood='idle';$('transcript').replaceChildren();addOpening(true);enterConversation();save();saveSession();$('status').textContent='新しい会話 / 漢字・ひらがな OK';draw();};
 $('restart-chat').onclick=showStartChoice;
-if(state.history.length){ready=false;showStartChoice();}
+if(hadSavedDialogue){ready=false;showStartChoice();}
 document.addEventListener('visibilitychange',()=>{if(!session||!ready)return;if(document.hidden)saveSession();else{session=resumeSession(session);saveSession();}});
 setInterval(()=>{if(ready&&!document.hidden)saveSession();},5000);
 window.addEventListener('pagehide',saveSession);
@@ -189,6 +194,7 @@ setInterval(draw,160);setInterval(()=>{
   live=readableText(lines[idleAsideIndex++%lines.length],tokenizer);draw();
  }
 },1000);draw();if(ready)$('entry').focus();
+
 
 
 

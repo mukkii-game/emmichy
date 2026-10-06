@@ -35,6 +35,7 @@ export function restoreState(value) {
   s.repertoire=cleanRepertoire(value.repertoire);
   s.interests=cleanInterests(value.interests);
   s.endingSeen=Array.isArray(value.endingSeen)?[...new Set(value.endingSeen.filter(n=>Number.isInteger(n)&&n>=0&&n<100))].slice(-99):[];
+  s.openingSeen=Array.isArray(value.openingSeen)?[...new Set(value.openingSeen.filter(n=>Number.isInteger(n)&&n>=0&&n<40))].slice(-39):[];
   return s;
 }
 export function respond(raw,state) {

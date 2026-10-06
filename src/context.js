@@ -19,7 +19,7 @@ export function isGiantsContext(input,state={}){
 }
 export function contextualReply(input,state={}){
  const move=conversationMove(input,state);if(move)return move;
- if(/(?:箸|はし).*(?:プリン|食べ)|プリン.*(?:箸|はし)/.test(input)&&!/[?？]|違う|じゃない|忘れてない|つら|疲れ/.test(input)){
+ if(/(?:箸|はし).*(?:プリン|食べ)|プリン.*(?:箸|はし)/.test(input)&&(/プリン/.test(input)||state.conversation?.entries?.some(e=>e.id==='half-price-pudding'))&&!/[?？]|違う|じゃない|忘れてない|つら|疲れ/.test(input)){
   const text='箸でプリン。失敗じゃなくて、新しい流派ってことにしよう。';
   if(!(state.history||[]).some(h=>h.role==='enny'&&h.text===text))return {text,topic:'conversation-move',move:'SHARED_FRAME'};
  }

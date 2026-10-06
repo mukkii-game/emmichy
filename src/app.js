@@ -6,7 +6,7 @@ import {createAudioDirector} from './audio.js?v=20261006-mix1';
 import {CHAT_API_URL} from './config.js?v=20261006-mix1';
 import {advancePerformance} from './performance.js?v=20261006-mix1';
 import {requestChat} from './chat.js?v=20261006-mix1';
-import {readableText,loadReadings} from './readable.js?v=20261006-context2';
+import {readableText,loadReadings} from './readable.js?v=20261006-words1';
 import {curatedReply} from './curated.js?v=20261006-mix1';
 import {selectKnowledge,knowledgeFallback} from './fandom.js?v=20261006-mix1';
 import {selectGap} from './gap.js?v=20261006-mix1';
@@ -198,6 +198,7 @@ setInterval(draw,160);setInterval(()=>{
   live=readableText(lines[idleAsideIndex++%lines.length],tokenizer);draw();
  }
 },1000);draw();if(ready)$('entry').focus();
+
 
 
 

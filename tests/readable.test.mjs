@@ -25,3 +25,9 @@ test('original Japanese survives memory and the AI request without reading conve
 test('missing display dictionary never replaces unknown kanji with question marks',()=>{
  assert.equal(readableText('ほげ 薔薇'), 'ホゲ 薔薇');
 });
+test('shop names, polite prefixes and question endings remain readable units',()=>{
+ for(const spelling of ['箱根そば','はこねそば','ハコネソバ'])assert.equal(readableText(spelling+'がうまいよ',tokenizer),'ハコネソバ ガ ウマイヨ');
+ const text=readableText('どこのお店で食べたのか教えてくれる？',tokenizer);
+ assert.match(text,/オミセ/);assert.match(text,/ノカ/);assert.doesNotMatch(text,/オ ミセ|ノ カ/);
+ assert.match(readableText('お茶とご飯',tokenizer),/オチャ ト ゴハン/);
+});

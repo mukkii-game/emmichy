@@ -103,8 +103,8 @@
   - 創作の感想：短い話なのに、あとから思い出して不安になるのがすごい。
 - chiikawa-22：短編テレビアニメにもなっている。 [chiikawa](https://en.wikipedia.org/wiki/Chiikawa)
   - 創作の感想：短いアニメなら一話だけ…のつもりで何話も見ちゃう。
-- chiikawa-23：島二郎は手を回して水流を起こす。しまじろうという虎とは別人。 [island](https://www.animatetimes.com/news/details.php?id=1764903101)
-  - 創作の感想：島二郎の水流、な！ あのお腹からあの強さ、マジでジャンプのアニメみたいに熱い！
+- chiikawa-23：島二郎は手を回して水流を起こす。腹や口から水を噴く技ではない。虎のしまじろうとは別人。 [island](https://www.animatetimes.com/news/details.php?id=1764903101)
+  - 創作の感想：島二郎の水流、な！ 手を回してあの強さ、マジでジャンプのアニメみたいに熱い！
 - chiikawa-24：島二郎は深く潜れる大柄な店主。 [island](https://www.animatetimes.com/news/details.php?id=1764903101)
   - 創作の感想：島二郎、な！ ただの頼れそうなお店の人かと思ったら、海の中でも強いのずるい！
 - chiikawa-25：島二郎の店はカレーや貝汁を出す。 [island](https://www.animatetimes.com/news/details.php?id=1764903101)
@@ -133,7 +133,7 @@
 - jojo-3：能力には個別の性質や例外がある。 [stand](https://jojowiki.com/Stand)
   - 創作の感想：ルールの穴を見つける戦い、いいね。強いだけで勝てないところが好き。
 - jojo-4：ミスタは4を不吉だと嫌う。 [mista](https://jojowiki.com/Guido_Mista)
-  - 創作の感想：ミスタとお菓子を分けるなら、四つは避けるよ。残り一つはアタシに。
+  - 創作の感想：ミスタにケーキを四つ出しちゃったら、アタシが一つ食べて三つにするね。
 - jojo-5：セックス・ピストルズは小さな群体スタンド。 [mista](https://jojowiki.com/Guido_Mista)
   - 創作の感想：ピストルズにお弁当を用意したら、アタシの分まで食べられそう。
 - jojo-6：ピストルズの番号に4はない。 [mista](https://jojowiki.com/Guido_Mista)

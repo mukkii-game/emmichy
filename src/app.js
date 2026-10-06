@@ -1,14 +1,14 @@
-import {freshState,restoreState,respond,normalize} from './engine.js?v=20261006-fandom1';
-import {chiikawaReply,checkedAt} from './topics.js?v=20261006-fandom1';
-import {text,kana} from './font.js?v=20261006-fandom1';
-import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261006-fandom1';
-import {createAudioDirector} from './audio.js?v=20261006-fandom1';
-import {CHAT_API_URL} from './config.js?v=20261006-fandom1';
-import {advancePerformance} from './performance.js?v=20261006-fandom1';
-import {requestChat} from './chat.js?v=20261006-fandom1';
-import {readableText,loadReadings} from './readable.js?v=20261006-fandom1';
-import {curatedReply} from './curated.js?v=20261006-fandom1';
-import {selectKnowledge,knowledgeFallback} from './fandom.js?v=20261006-fandom1';
+import {freshState,restoreState,respond,normalize} from './engine.js?v=20261006-fandom2';
+import {chiikawaReply,checkedAt} from './topics.js?v=20261006-fandom2';
+import {text,kana} from './font.js?v=20261006-fandom2';
+import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261006-fandom2';
+import {createAudioDirector} from './audio.js?v=20261006-fandom2';
+import {CHAT_API_URL} from './config.js?v=20261006-fandom2';
+import {advancePerformance} from './performance.js?v=20261006-fandom2';
+import {requestChat} from './chat.js?v=20261006-fandom2';
+import {readableText,loadReadings} from './readable.js?v=20261006-fandom2';
+import {curatedReply} from './curated.js?v=20261006-fandom2';
+import {selectKnowledge,knowledgeFallback} from './fandom.js?v=20261006-fandom2';
 let tokenizer=null;
 const $=id=>document.getElementById(id),canvas=$('screen'),ctx=canvas.getContext('2d',{willReadFrequently:true});
 ctx.imageSmoothingEnabled=false;
@@ -91,7 +91,7 @@ $('talk').addEventListener('submit',async e=>{
  }
  let usedModel=false;
  const prepared=!isRestart&&!state.ended&&curatedReply(raw,state);
- if(prepared){result.text=fandomReply||prepared.text;result.kind='curated';result.state.history.at(-1).text=result.text;}
+ if(prepared){result.text=prepared.topic==='island-water'?prepared.text:fandomReply||prepared.text;result.kind='curated';result.state.history.at(-1).text=result.text;}
  if(isRestart){result.text='ネエ Chiikawa ッテ シッテル？';result.state.history.at(-1).text=result.text;}
  const ruleOnly=isRestart||['curated','bye','asleep','name','memory','arithmetic'].includes(result.kind);
  if(modelEnabled && !ruleOnly){

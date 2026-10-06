@@ -7,6 +7,11 @@ const pools = [
 ];
 export function curatedReply(raw,state) {
  const input=String(raw).normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).toUpperCase().replace(/[\s。！？!?、,]/g,'');
+ if(/島二郎/.test(input)&&/水流/.test(input)&&/熱|アツ|好キ|スキ/.test(input)&&!/[?？]|ナゼ|ドウシテ|どうして|何|ドコ|ドンナ|教エ/.test(String(raw))){
+  const lines=['島二郎の水流、な！ 手を回してあの強さ！ マジでジャンプのアニメみたいに熱いよ。','あのお店の人が、水の中であんなに頼れるのずるい！ 島二郎、ただ者じゃない、な！','島二郎、あの水流で守ってくれるのが好き！ アタシ、あそこは毎回力が入っちゃう。'];
+  const last=state.history?.filter(h=>h.role==='enny').at(-1)?.text,choices=lines.filter(t=>t!==last);
+  return {text:choices[(state.turn||0)%choices.length],topic:'island-water'};
+ }
  const pool=pools.find(p=>p.match.test(input));if(!pool)return null;
  const previous=state.history?.filter(h=>h.role==='enny').at(-1)?.text;
  const choices=pool.lines.filter(line=>line!==previous);

@@ -11,3 +11,9 @@ test('short fan topics get readable authored lines without repeated replies',()=
 test('follow-ups, corrections and concrete questions are left to AI',()=>{
  for(const input of ['どうして？','シーサーが心配。何が起きたの？','ちいかわのストーリーのどこが好き？','映画ちいかわの公開日は？','仕事で疲れた。上司に何て言えばいい？'])assert.equal(curatedReply(input,{}),null);
 });
+test('island water enthusiasm uses reviewed scene details, but questions stay with AI',()=>{
+ const reply=curatedReply('島二郎の水流が熱いよね！',{turn:0});
+ assert.equal(reply.topic,'island-water');assert.match(reply.text,/手を回して/);
+ assert.notEqual(curatedReply('島二郎の水流が好き',{turn:0,history:[{role:'enny',text:reply.text}]}).text,reply.text);
+ assert.equal(curatedReply('島二郎の水流が熱いけどどうやって起こすの？',{turn:0}),null);
+});

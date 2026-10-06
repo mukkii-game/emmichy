@@ -12,7 +12,7 @@ import {selectKnowledge,knowledgeFallback} from './fandom.js?v=20261006-mix1';
 import {selectGap} from './gap.js?v=20261006-mix1';
 import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261006-mix1';
 import {cultureReply} from './culture.js?v=20261006-mix1';
-import {chooseFiller,startFiller} from './filler.js?v=20261006-filler1';
+import {chooseFiller,startFiller} from './filler.js?v=20261006-filler2';
 import {balanceRoute,learnInterests} from './balance.js?v=20261006-balance1';
 let recentFillers=[];
 let tokenizer=null;
@@ -178,4 +178,5 @@ if(isLocal&&!offline){
  fetch('/api/config').then(r=>r.json()).then(c=>{if(c.localModel){chatEndpoint='/api/chat';modelProvider='local';}setEngineNote();}).catch(()=>{});
 }
 setInterval(draw,160);setInterval(()=>{if(ready&&!document.hidden&&shouldEnd(session)&&!composing&&!$('entry').value.trim()&&Date.now()-lastActivity>8000)endSession();},1000);draw();if(ready)$('entry').focus();
+
 

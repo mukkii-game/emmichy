@@ -1,11 +1,13 @@
-import {freshState,restoreState,respond,normalize,displayText} from './engine.js?v=20261004-relay5';
-import {chiikawaReply,checkedAt} from './topics.js?v=20261004-relay5';
-import {text,kana} from './font.js?v=20261004-relay5';
-import {shouldEnd,finishSession} from './session.js?v=20261004-relay5';
-import {createAudioDirector} from './audio.js?v=20261004-relay5';
-import {CHAT_API_URL} from './config.js?v=20261004-relay5';
-import {advancePerformance} from './performance.js?v=20261004-relay5';
-import {requestChat} from './chat.js?v=20261004-relay5';
+import {freshState,restoreState,respond,normalize,displayText} from './engine.js?v=20261006-readable1';
+import {chiikawaReply,checkedAt} from './topics.js?v=20261006-readable1';
+import {text,kana} from './font.js?v=20261006-readable1';
+import {shouldEnd,finishSession} from './session.js?v=20261006-readable1';
+import {createAudioDirector} from './audio.js?v=20261006-readable1';
+import {CHAT_API_URL} from './config.js?v=20261006-readable1';
+import {advancePerformance} from './performance.js?v=20261006-readable1';
+import {requestChat} from './chat.js?v=20261006-readable1';
+import {readableText,loadReadings} from './readable.js?v=20261006-readable1';
+let tokenizer=null;
 const $=id=>document.getElementById(id),canvas=$('screen'),ctx=canvas.getContext('2d',{willReadFrequently:true});
 ctx.imageSmoothingEnabled=false;
 const key='enny-memory-v1';
@@ -19,9 +21,13 @@ try{const stored=JSON.parse(sessionStorage.getItem('emmichy-session'));if(stored
 function saveSession(){try{sessionStorage.setItem('emmichy-session',JSON.stringify(session));}catch{}}
 try {state=restoreState(JSON.parse(localStorage.getItem(key)));}catch{saveAvailable=false;}
 let lines=[];
-const colors=['#ffffff','#00ffff','#ffff00','#00ff00'];
-function wrap(s,width=46){return String(s).split('\n').flatMap(p=>{const t=displayText(p);return t.match(new RegExp(`.{1,${width}}`,'g'))??[''];});}
-function add(role,value){for(const line of wrap(value))lines.push({line,color:role==='user'?'#00ffff':role==='system'?'#ffff00':colors[(state.turn%3)+1]});lines=lines.slice(-15);}
+function renderConversation(){
+ const log=$('conversation');log.replaceChildren();
+ for(const item of lines){const p=document.createElement('p');p.className='message '+item.role;const label=document.createElement('span');label.className='speaker';label.textContent=item.role==='user'?'YOU >':item.role==='system'?'SYSTEM >':'EMMICHY >';const body=document.createElement('span');body.textContent=readableText(item.value,tokenizer);p.append(label,body);log.append(p);}
+ log.scrollTop=log.scrollHeight;
+}
+function add(role,value){lines.push({role,value});lines=lines.slice(-40);renderConversation();}
+loadReadings().then(value=>{tokenizer=value;renderConversation();});
 if(state.history.length) {for(const h of state.history)add(h.role,h.text);} else {
  add('system','EMMICHY / THE ALMOST CLEVER GAME');
  add('enny','ネエ Chiikawa ッテ シッテル？');
@@ -37,18 +43,10 @@ img.onload=()=>{
 };
 img.onerror=()=>{$('status').textContent='人物画像を読み込めません。再読み込みしてください。';};
 function draw(){
- ctx.fillStyle='#000';ctx.fillRect(0,0,640,200);
+ ctx.fillStyle='#000';ctx.fillRect(0,0,248,168);
  if(portrait)ctx.drawImage(portrait,0,0,248,168);
- const visible=[...lines];if(live)for(const line of wrap(live))visible.push({line,color:'#ffff00'});
- visible.slice(-15).forEach((l,i)=>text(ctx,l.line,264,i*9,l.color));
- text(ctx,'EMMICHY',454,147,'#ff0000',3);
- text(ctx,'THE ALMOST CLEVER GAME',454,177,'#00ff00');
- text(ctx,'PILOT',592,135,'#ffff00');
- if(session?.finished){text(ctx,'- END -',280,153,'#ffff00');kana(ctx,'コンニチハ デ サイカイ',264,166,'#ffffff');}
- kana(ctx,state.ended?'マタネ エミチィ':'アタシ エミチィ ナンデモ ハナシテネ',0,179,'#00ffff');
- const preview=displayText($('entry').value).slice(-73);
- text(ctx,'> '+preview+(busy?'':Math.floor(Date.now()/500)%2?'_':' '),0,190,'#00ffff');
- if(busy)text(ctx,'. . .',264,153,'#ffffff');
+ $('live-reply').textContent=live;
+ $('terminal-note').textContent=session?.finished?'— END —　コンニチハ デ サイカイ':busy?'● THINKING / RECEIVING…':'アタシ エミチィ　ナンデモ ハナシテネ';
  if(mood==='knowing' && Math.floor(Date.now()/700)%2)text(ctx,'*',230,10,'#00ffff');
  if(mood==='worried'){
    ctx.fillStyle='#00ffff';ctx.fillRect(229,42,2,2);ctx.fillRect(228,44,4,3);ctx.fillRect(229,47,2,1);
@@ -63,7 +61,8 @@ async function endSession(){
  ending=true;busy=true;$('send').disabled=true;$('reset').disabled=true;
  const end=finishSession(state,session);state=end.state;session=end.session;mood='soft';saveSession();
  audioDirector.se.ending();
- for(const c of end.text){live+=c;draw();await wait(32);}
+ const endingDisplay=readableText(end.text,tokenizer);
+ for(const c of endingDisplay){live+=c;draw();await wait(32);}
  add('enny',end.text);live='';save();busy=false;ending=false;$('send').disabled=false;$('reset').disabled=false;
  const p=document.createElement('p');p.textContent=`えみちぃ：${end.text}。おしまい。`;$('transcript').append(p);
  $('status').textContent='おしまい。「コンニチハ」で、もう一度。';draw();
@@ -89,9 +88,10 @@ $('talk').addEventListener('submit',async e=>{
  state=result.state;mood=result.mood;session.lastMood=mood;saveSession();
  await wait(300+Math.min(raw.length*10,500));
  if(mood==='excited')audioDirector.se.excited();else if(mood==='worried')audioDirector.se.worried();else audioDirector.se.reply();
- for(const c of result.text){live+=c;draw();await wait(mood==='excited'?12:mood==='worried'&&c==='\n'?420:22);}
+ const replyDisplay=readableText(result.text,tokenizer);
+ for(const c of replyDisplay){live+=c;draw();await wait(mood==='excited'?12:mood==='worried'&&c==='\n'?420:22);}
  add('enny',result.text);live='';lastActivity=Date.now();save();busy=false;$('send').disabled=false;$('reset').disabled=false;
- $('status').textContent=usedModel?`AI会話${modelProvider?' / '+modelProvider:''} / ENTER で送信`:modelEnabled&&!ruleOnly?'AI失敗→ルール会話 / ENTER で送信':'ルール会話 / ENTER で送信';
+ $('status').textContent=usedModel?`AI会話${modelProvider?' / '+({groq:'Groq',gemini:'Google Gemini','workers-ai':'Cloudflare Workers AI',local:'ローカルAI'}[modelProvider]||modelProvider):''} / ENTER で送信`:modelEnabled&&!ruleOnly?'AI失敗→ルール会話 / ENTER で送信':'ルール会話 / ENTER で送信';
  const item=document.createElement('p');item.textContent=`あなた：${raw}。Emmichy：${result.text}`;$('transcript').append(item);if($('transcript').children.length>40)$('transcript').firstChild.remove();
  $('entry').focus();draw();
  if(state.ended){session.finished=true;saveSession();}

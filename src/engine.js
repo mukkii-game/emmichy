@@ -78,6 +78,6 @@ export function respond(raw,state) {
     const topic=input.split(' ').filter(w=>w.length>1)[0]?.slice(0,14);
     say(pick([`${topic || 'ソレ'} ...\nソコダケ キコエタワ`,'フーン\nツヅキ ハ アルノ?','ナンダカ ワカッタ キブン\nキブン ダケネ','ソウナノ\nソレデ アナタハ ドウシタイノ?']),'fallback');
   }
-  s.history.push({role:'user',text:input},{role:'enny',text});s.history=s.history.slice(-40);
+  s.history.push({role:'user',text:String(raw).trim().slice(0,120)},{role:'enny',text});s.history=s.history.slice(-40);
   return {state:s,text,kind,mood};
 }

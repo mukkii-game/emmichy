@@ -4,16 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Emmichy — THE ALMOST CLEVER GAME</title>
-  <link rel="stylesheet" href="style.css?v=20261004-relay5">
+  <link rel="stylesheet" href="style.css?v=20261006-readable1">
 </head>
 <body>
   <main>
     <header><span class="brand">EMMICHY / PERSONAL COMPUTER SOFTWARE</span><span id="disk">● DISK READY</span></header>
     <div class="screen-wrap">
-      <canvas id="screen" width="640" height="200" tabindex="0" aria-label="Emmichyの会話画面。下の入力欄で話しかけてください。"></canvas>
+      <div class="portrait-panel"><canvas id="screen" width="248" height="168" tabindex="0" aria-label="えみちぃのポートレート"></canvas><div class="game-logo">EMMICHY</div><div class="game-tagline">THE ALMOST CLEVER GAME</div></div>
+      <div class="conversation-panel"><div class="terminal-heading">EMMICHY / CONVERSATION</div><div id="conversation" role="log" aria-label="カタカナの会話履歴"></div><div id="live-reply" aria-live="off"></div><div id="terminal-note">アタシ エミチィ　ナンデモ ハナシテネ</div></div>
     </div>
     <form id="talk" autocomplete="off">
-      <label for="entry">ハナシカケテネ <span>›</span></label>
+      <label for="entry">漢字・ひらがな OK <span>›</span></label>
       <input id="entry" maxlength="120" placeholder="ねえ、Chiikawaってしってる？" aria-label="Emmichyに話しかける" spellcheck="false">
       <button id="send" type="submit">RETURN ↵</button>
     </form>
@@ -34,6 +35,7 @@
     <details class="readable-log"><summary>会話を読みやすく表示</summary><div id="transcript" role="log" aria-live="polite"></div></details>
     <footer><span>THE ALMOST CLEVER GAME</span><span>EMMICHY / PILOT</span></footer>
   </main>
-  <script type="module" src="src/app.js?v=20261004-relay5"></script>
+  <script src="assets/vendor/kuromoji.js"></script>
+  <script type="module" src="src/app.js?v=20261006-readable1"></script>
 </body>
 </html>

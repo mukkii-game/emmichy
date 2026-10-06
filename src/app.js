@@ -15,7 +15,7 @@ import {cultureReply} from './culture.js?v=20261006-mix1';
 import {chooseFiller,startFiller,longFiller,retainAside,idleAside} from './filler.js?v=20261006-idle1';
 import {balanceRoute,learnInterests} from './balance.js?v=20261006-balance1';
 import {selectOpening} from './openings.js?v=20261006-open1';
-import {contextualReply} from './context.js?v=20261006-loop4';
+import {contextualReply} from './context.js?v=20261006-loop5';
 import {cleanConversation,noteConversationReply} from './conversation.js?v=20261006-loop2';
 let recentFillers=[];
 let idleAsideAt=0,idleAsideIndex=0;
@@ -210,7 +210,6 @@ setInterval(draw,160);setInterval(()=>{
   recordAside(idleAside(state.history,idleAsideIndex++));draw();
  }
 },1000);draw();if(ready)$('entry').focus();
-
 
 
 

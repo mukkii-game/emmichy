@@ -15,6 +15,7 @@ import {cultureReply} from './culture.js?v=20261006-mix1';
 import {chooseFiller,startFiller,longFiller} from './filler.js?v=20261006-end1';
 import {balanceRoute,learnInterests} from './balance.js?v=20261006-balance1';
 let recentFillers=[];
+let idleAsideAt=0,idleAsideIndex=0;
 let tokenizer=null;
 const $=id=>document.getElementById(id),canvas=$('screen'),ctx=canvas.getContext('2d',{willReadFrequently:true});
 ctx.imageSmoothingEnabled=false;
@@ -145,6 +146,7 @@ $('talk').addEventListener('submit',async e=>{
 let composing=false;
 $('entry').addEventListener('compositionstart',()=>composing=true);
 $('entry').addEventListener('compositionend',()=>{composing=false;draw();});
+$('entry').addEventListener('input',()=>{lastActivity=Date.now();if(!busy){live='';draw();}});
 $('entry').addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.isComposing||e.keyCode===229))e.preventDefault();});
 let lastActivity=Date.now();
 $('entry').addEventListener('input',()=>{lastActivity=Date.now();draw();});
@@ -178,7 +180,15 @@ setEngineNote();
 if(isLocal&&!offline){
  fetch('/api/config').then(r=>r.json()).then(c=>{if(c.localModel){chatEndpoint='/api/chat';modelProvider='local';}setEngineNote();}).catch(()=>{});
 }
-setInterval(draw,160);setInterval(()=>{if(ready&&!document.hidden&&shouldEnd(session)&&!composing&&!$('entry').value.trim()&&Date.now()-lastActivity>8000)endSession();},1000);draw();if(ready)$('entry').focus();
+setInterval(draw,160);setInterval(()=>{
+ if(ready&&!document.hidden&&shouldEnd(session)&&!composing&&!$('entry').value.trim()&&Date.now()-lastActivity>8000)endSession();
+ if(ready&&!document.hidden&&!busy&&session&&!session.finished&&!state.ended&&!composing&&!$('entry').value.trim()&&Date.now()-lastActivity>=10000&&idleAsideAt!==lastActivity){
+  idleAsideAt=lastActivity;
+  const gentle=/つらい|苦しい|相談|病気|いじめ/.test(state.history.filter(h=>h.role==='user').at(-1)?.text||'');
+  const lines=gentle?['急がなくて大丈夫。ここにいるよ。']:['あ、別の話題でもいいよ。何か日本のこと、教えて？','アタシの質問、むずかしかったかな？ 気楽に話してね。','漫画じゃなくてもいいの。今日あったこと、聞きたい！'];
+  live=readableText(lines[idleAsideIndex++%lines.length],tokenizer);draw();
+ }
+},1000);draw();if(ready)$('entry').focus();
 
 
 

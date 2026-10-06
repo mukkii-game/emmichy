@@ -13,3 +13,6 @@ Generate only the LEFT portrait of an original character called Emmichy, using t
 ## 不採用案
 
 `assets/enny-source.png` は最初のショートヘアー案、`assets/enny-longhair.png` はアニメ調になった案。どちらもゲームは読み込まない。
+
+
+2026-10-06 最新指示：同じ採用原稿を496×672／8色で描画し、低解像度248×168から復元。元絵の再生成はなし。会話は24pxのDotGothic16（SIL OFLを同梱）で、可読性を保ちながらドット感を出す。

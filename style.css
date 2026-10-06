@@ -61,3 +61,12 @@ canvas { width:100%; aspect-ratio:248/336; }
  .screen-wrap:fullscreen { grid-template-columns:1fr; padding:14px; }
  .screen-wrap:fullscreen .conversation-panel { height:65vh; }
 }
+@font-face { font-family:'Emmichy Dot'; src:url('assets/fonts/DotGothic16-Regular.ttf') format('truetype'); font-display:swap; }
+.message,#live-reply { font-family:'Emmichy Dot','MS Gothic',monospace; font-weight:400; }
+#terminal-note { font-family:'Emmichy Dot','MS Gothic',monospace; font-size:16px; }
+#start-choice { margin:0 0 16px; padding:16px 20px; border-color:#85a779; }
+#start-choice[hidden] { display:none; }
+#start-choice p { margin:0 0 10px; }
+#start-choice .small { margin:10px 0 0; }
+#start-choice button { font-size:16px; margin-right:10px; padding:10px 18px; }
+@media(max-width:680px){ .message,#live-reply { font-size:24px; line-height:1.7; } .toolbar>div { display:flex; flex-wrap:wrap; } }

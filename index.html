@@ -4,13 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Emmichy — THE ALMOST CLEVER GAME</title>
-  <link rel="stylesheet" href="style.css?v=20261006-readable3">
+  <link rel="stylesheet" href="style.css?v=20261006-hybrid1">
 </head>
 <body>
   <main>
     <header><span class="brand">EMMICHY / PERSONAL COMPUTER SOFTWARE</span><span id="disk">● DISK READY</span></header>
+    <section id="start-choice" aria-label="会話の始め方" hidden><p>おかえり。会話をどう始める？</p><div><button id="continue">続きから</button><button id="new-chat">最初から</button></div><p class="small">最初から：今回の会話をやり直します。覚えた名前・好みは残ります。</p></section>
     <div class="screen-wrap">
-      <div class="portrait-panel"><canvas id="screen" width="248" height="168" tabindex="0" aria-label="えみちぃのポートレート"></canvas><div class="game-logo">EMMICHY</div><div class="game-tagline">THE ALMOST CLEVER GAME</div></div>
+      <div class="portrait-panel"><canvas id="screen" width="496" height="672" tabindex="0" aria-label="えみちぃのポートレート"></canvas><div class="game-logo">EMMICHY</div><div class="game-tagline">THE ALMOST CLEVER GAME</div></div>
       <div class="conversation-panel"><div class="terminal-heading">EMMICHY / CONVERSATION</div><div id="conversation" role="log" aria-label="カタカナの会話履歴"></div><div id="live-reply" aria-live="off"></div><div id="terminal-note">アタシ エミチィ　ナンデモ ハナシテネ</div></div>
     </div>
     <form id="talk" autocomplete="off">
@@ -20,7 +21,7 @@
     </form>
     <div class="toolbar">
       <span id="status">日本語入力OK / ENTER で送信</span>
-      <div><button id="sound" aria-pressed="false">BGM + SE OFF</button><button id="fullscreen">全画面</button><button id="help">アソビカタ</button></div>
+      <div><button id="restart-chat">最初から</button><button id="sound" aria-pressed="false">BGM + SE OFF</button><button id="fullscreen">全画面</button><button id="help">アソビカタ</button></div>
     </div>
     <section id="instructions" hidden>
       <h1>Emmichy — ちょっと、わかってないフリ。</h1>
@@ -36,6 +37,6 @@
     <footer><span>THE ALMOST CLEVER GAME</span><span>EMMICHY / PILOT</span></footer>
   </main>
   <script src="assets/vendor/kuromoji.js"></script>
-  <script type="module" src="src/app.js?v=20261006-readable3"></script>
+  <script type="module" src="src/app.js?v=20261006-hybrid1"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@ import {normalize,restoreState} from './src/engine.js';
 import {activeNews} from './src/topics.js';
 const root=path.dirname(fileURLToPath(import.meta.url));
 const port=Number(process.env.PORT||1984),model=process.env.EMMICHY_MODEL||'';
-const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.png':'image/png'};
+const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.png':'image/png','.ttf':'font/ttf'};
 const json=(res,status,obj)=>{res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});res.end(JSON.stringify(obj));};
 export function validModelText(value){
  if(typeof value!=='string'||/[一-龠ぁ-ゖ]/.test(value))return null;
@@ -35,7 +35,7 @@ const server=http.createServer(async(req,res)=>{
   }
   if(req.method!=='GET'&&req.method!=='HEAD')return json(res,405,{error:'Method not allowed'});
   const p=decodeURIComponent(url.pathname),rel=p==='/'?'index.html':p.slice(1);
-  if(!/^(index\.html|style\.css|src\/[\w-]+\.js|assets\/[\w.-]+\.png|assets\/vendor\/kuromoji\.js|assets\/dict\/[\w.-]+\.gz)$/.test(rel))return json(res,404,{error:'Not found'});
+  if(!/^(index\.html|style\.css|src\/[\w-]+\.js|assets\/[\w.-]+\.png|assets\/vendor\/kuromoji\.js|assets\/dict\/[\w.-]+\.gz|assets\/fonts\/[\w.-]+\.ttf)$/.test(rel))return json(res,404,{error:'Not found'});
   const data=await readFile(path.join(root,rel));res.writeHead(200,{'Content-Type':types[path.extname(rel)]||'application/octet-stream','X-Content-Type-Options':'nosniff','Cache-Control':'no-cache'});res.end(req.method==='HEAD'?undefined:data);
  }catch(e){json(res,e.code==='ENOENT'?404:502,{error:e.code==='ENOENT'?'Not found':'Local request failed'});}
 });

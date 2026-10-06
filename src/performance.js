@@ -7,7 +7,7 @@ export function advancePerformance(state, raw, turn) {
  const p={trust:bound((old.trust||0)+.25),curiosity:bound((old.curiosity||0)+(teaching?.8:.2)),
   chiikawaPressure:bound((old.chiikawaPressure||0)+(fan?1:-.3)),
   hype:bound((old.hype||0)+(teaching?1.5:excited?1:-.5)),speechLeak:bound(turn/4),shisaWorry:bound(state.fan?.worry)};
- const late=turn>=11, mid=turn>=5;
+ const late=turn>=7, mid=turn>=2;
  p.speechStyle=late&&p.hype>=4&&turn%12===10?'hype':late&&turn%6===1?'filler':
   mid&&turn%12===8?'quoted_noun':mid&&turn%12===3?'inversion':late&&turn%12===6?'tte_koto':'normal';
  return {...state,performance:p,speechStyle:p.speechStyle};

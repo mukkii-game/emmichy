@@ -6,7 +6,7 @@ export function retainAside(history,line,{pendingReply=false}={}){
 }
 export function chooseFiller(input, recent=[]){
  const serious=/つらい|苦しい|相談|病気|入院|死に|いじめ|怖い|こわい/.test(input);
- const pool=serious?['うん、聞いてるよ。','うん。ゆっくり話してね。','そっか…。']:['ウ、ウン…。','ヤハ…。','エト、エト…。','ンショ…。','フムッ…。','ウンッ…。'];
+ const pool=serious?['うん、聞いてるよ。','うん。ゆっくり話してね。','そっか…。']:['ウンウン…。','エト、エト…。','アッ…。','フフ…。','ウン！','ンー…。'];
  return pool.find(line=>!recent.includes(line))||pool.find(line=>line!==recent.at(-1))||pool[0];
 }
 export function longFiller(input,recent=[]){

@@ -4,6 +4,15 @@ import {replies,chooseRepertoire,cleanRepertoire,rememberReply,polishReply} from
 import {freshState,restoreState} from '../src/engine.js';
 import {startConversation} from '../src/session.js';
 import {cultureReply} from '../src/culture.js';
+test('stray speaker labels are stripped but a spoken name remains',()=>{
+ assert.equal(polishReply('Emmy: スプーンで倒したんだ! エミ','',{}).text,'スプーンで倒したんだ!');
+ assert.equal(polishReply('エミって呼んでもいいよ。','',{}).text,'エミって呼んでもいいよ。');
+});
+test('a third closing question yields to a complete reaction, never an empty reply',()=>{
+ const state={history:[{role:'enny',text:'何が好き？'},{role:'user',text:'プリン'},{role:'enny',text:'どこで買った？'},{role:'enny',text:'エト、エト…。'}]};
+ assert.equal(polishReply('半額プリンを見つけたんだね！ どんな味だった？','プリン',state).text,'半額プリンを見つけたんだね!');
+ assert.equal(polishReply('どんな味だった？','プリン',state).text,'どんな味だった?');
+});
 test('expanded bank is genuinely distinct and all three favourite fandoms reach tenfold reply counts',()=>{
  assert.equal(replies.length,1200);assert.equal(new Set(replies.map(r=>r.text)).size,1200);
  for(const [w,n] of [['chiikawa',320],['jojo',200],['hunter',200]])assert.equal(replies.filter(r=>r.work===w).length,n);

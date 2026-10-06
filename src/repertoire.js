@@ -73,7 +73,15 @@ export function chooseRepertoire(raw,state={},now=new Date()){
 }
 export function polishReply(text,raw,state={},choice=null){
  let out=String(text).normalize('NFKC').trim().replace(/[\r\n]+/g,' ').replace(/\s{2,}/g,' ');
+ out=out.replace(/^(?:EMMICHY|EMMY|エミチ[ィイ]|エミ)\s*[:：>]\s*/i,'');
+ out=out.replace(/([。！!？?])\s*(?:エミ(?:チ[ィイ]|ちぃ)?|Emmichy)\s*$/i,'$1');
  out=out.replace(/([よね])[。！!]\s*(?:ね|よ)[。！!]$/,'$1。').replace(/([!?！？])\1{2,}/g,'$1$1');
+ const previous=Array.isArray(state.history)?state.history.filter(h=>h.role==='enny'&&!/^(?:ウ、ウン…。|ヤハ…。|エト、エト…。|ンショ…。|フムッ…。|ウンッ…。|ウンウン…。|アッ…。|フフ…。|ウン！|ンー…。)$/.test(h.text)).slice(-2):[];
+ if(previous.length===2&&previous.every(h=>/[?？]|教えて(?:くれる|ほしい|ね)|聞かせて/.test(h.text))){
+  // Keep a complete substantive reaction; never delete the only sentence.
+  const split=out.match(/^([\s\S]+[。！!])\s*[^。！!]*[?？]$/);
+  if(split&&split[1].trim().length>=12)out=split[1].trim();
+ }
  if(/島二郎|シマ\s*ジロウ/.test(raw)&&state.knowledge?.work==='chiikawa')out=out.replace(/しまじろう/g,'島二郎');
  const mem=cleanRepertoire(state.repertoire),recent=Array.isArray(state.history)?state.history.filter(h=>h.role==='enny').slice(-3).map(h=>h.text):[];
  const repeated=mem.prints.includes(fingerprint(out))||recent.some(t=>similarity(t,out)>.94);

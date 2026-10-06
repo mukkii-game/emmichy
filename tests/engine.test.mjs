@@ -18,3 +18,7 @@ test('Shisa anxiety survives a topic change and reassurance reduces it',()=>{let
 test('film enthusiasm has its own state and preserves title',()=>{const a=turn('映画ちいかわ');assert.equal(a.kind,'movie');assert.equal(a.state.fan.excitement,2);assert.equal(a.mood,'excited');assert.match(a.text,/ニンギョノ シマノ ヒミツ/);assert.equal(restoreState(JSON.parse(JSON.stringify(a.state))).fan.lastTopic,'movie');});
 test('uses concept bridges and remembers the topic for why/continue',()=>{let a=turn('資格の試験が不安');assert.equal(a.state.topic,'study');assert.doesNotMatch(a.text,/シーサー/);a=turn('どうして？',a.state);assert.equal(a.state.topic,'study');assert.doesNotMatch(a.text,/シーサー/);});
 test('raw kanji carries travel associations through limited kana input',()=>{const a=turn('旅行したい');assert.equal(a.state.topic,'travel');assert.match(a.text,/ドコニ イキタイ/);});
+test('explicit farewell phrases end immediately without treating a quoted farewell as an exit',()=>{
+ for(const word of ['さようなら','バイバイ','じゃあバイバイ！','またね','今日はここまで'])assert.equal(respond(word,freshState()).kind,'bye');
+ assert.notEqual(respond('バイバイってどういう意味？',freshState()).kind,'bye');
+});

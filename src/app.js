@@ -1,7 +1,7 @@
-import {freshState,restoreState,respond,normalize} from './engine.js?v=20261006-balance1';
+import {freshState,restoreState,respond,normalize} from './engine.js?v=20261006-end1';
 import {chiikawaReply,checkedAt} from './topics.js?v=20261006-mix1';
 import {text,kana} from './font.js?v=20261006-mix1';
-import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261006-mix1';
+import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261006-end1';
 import {createAudioDirector} from './audio.js?v=20261006-mix1';
 import {CHAT_API_URL} from './config.js?v=20261006-mix1';
 import {advancePerformance} from './performance.js?v=20261006-mix1';
@@ -12,7 +12,7 @@ import {selectKnowledge,knowledgeFallback} from './fandom.js?v=20261006-mix1';
 import {selectGap} from './gap.js?v=20261006-mix1';
 import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261006-mix1';
 import {cultureReply} from './culture.js?v=20261006-mix1';
-import {chooseFiller,startFiller} from './filler.js?v=20261006-filler2';
+import {chooseFiller,startFiller,longFiller} from './filler.js?v=20261006-end1';
 import {balanceRoute,learnInterests} from './balance.js?v=20261006-balance1';
 let recentFillers=[];
 let tokenizer=null;
@@ -86,6 +86,7 @@ $('talk').addEventListener('submit',async e=>{
  busy=true;$('send').disabled=true;$('reset').disabled=true;$('entry').value='';audioDirector.se.send();
  add('user',raw);$('disk').textContent='● DISK ACCESS';
  const before=advancePerformance(state,raw,session.turns);let result=chiikawaReply(normalize(raw),respond(raw,state),undefined,raw);
+ if(result.kind==='bye'){const end=finishSession({...result.state,history:result.state.history.slice(0,-1)},session);result.text=end.text;result.state=end.state;session=end.session;}
  before.interests=learnInterests(raw,state.interests);result.state.interests=before.interests;
  result.state.performance=before.performance;result.state.speechStyle=before.speechStyle;
  const knowledge=selectKnowledge(raw,before);
@@ -113,7 +114,7 @@ $('talk').addEventListener('submit',async e=>{
   const stopFiller=startFiller(()=>{
    const line=chooseFiller(raw,recentFillers);recentFillers=[...recentFillers,line].slice(-4);
    live=readableText(line,tokenizer);draw();
-  });
+  },{later:()=>{const line=longFiller(raw,recentFillers);recentFillers=[...recentFillers,line].slice(-4);live=readableText(line,tokenizer);draw();}});
   let data;
   try{data=await requestChat(chatEndpoint,raw,before,session,{offline});}
   finally{stopFiller();live='';draw();}
@@ -178,5 +179,6 @@ if(isLocal&&!offline){
  fetch('/api/config').then(r=>r.json()).then(c=>{if(c.localModel){chatEndpoint='/api/chat';modelProvider='local';}setEngineNote();}).catch(()=>{});
 }
 setInterval(draw,160);setInterval(()=>{if(ready&&!document.hidden&&shouldEnd(session)&&!composing&&!$('entry').value.trim()&&Date.now()-lastActivity>8000)endSession();},1000);draw();if(ready)$('entry').focus();
+
 
 

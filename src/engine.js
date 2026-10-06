@@ -34,6 +34,7 @@ export function restoreState(value) {
   s.gap=cleanGap(value.gap);
   s.repertoire=cleanRepertoire(value.repertoire);
   s.interests=cleanInterests(value.interests);
+  s.endingSeen=Array.isArray(value.endingSeen)?[...new Set(value.endingSeen.filter(n=>Number.isInteger(n)&&n>=0&&n<100))].slice(-99):[];
   return s;
 }
 export function respond(raw,state) {
@@ -46,7 +47,7 @@ export function respond(raw,state) {
   const fact=compact.match(/^(?:(?:ボク|ワタシ|オレ)ハ)?(.{1,24}?)(?:ガ|ハ)(スキ|キライ)(?:ダヨ|ダ|デス|ナノ)?\??$/);
   const name=compact.match(/^(?:ボク|ワタシ|オレ)ノナマエ(?:ハ|=)(.{1,16}?)(?:ダヨ|デス|ダ)?$/);
   const arithmetic=compact.match(/^(-?\d{1,7})([+*×/÷-])(-?\d{1,7})(?:=|\?)?$/);
-  if(/^(バイバイ|サヨウナラ|BYE)$/.test(compact)) {s.ended=true;say(s.name?`${s.name} ハ オボエタワ\nホカハ ワスレタ フリ シトク`:'バイバイ\nディスク ハ ヌカナイデネ','bye','soft');}
+  if(/^(?:(?:ジャア|ソレジャ|ソレデハ|デハ|マタ)[:：、,]*)?(?:バイバイ|サヨウナラ|サヨナラ|BYE|マタネ|今日ハココマデ|キョウハココマデ)(?:ネ|デス)?[?？]*$/.test(compact)) {s.ended=true;say(s.name?`${s.name} ハ オボエタワ\nホカハ ワスレタ フリ シトク`:'バイバイ\nディスク ハ ヌカナイデネ','bye','soft');}
   else if(s.ended && !/コンニチ[ハワ]|タダイマ|オハヨウ/.test(compact)) say('モウ イチド コンニチハ ッテ\nイッテクレタラ オキルワ','asleep','soft');
   else if(name && !compact.includes('?')) {const old=s.name;s.name=name[1];say(old && old!==s.name?`${old} ジャ ナカッタ?\nマ イイワ ${s.name} ネ`:`${s.name} ネ\nワスレル レンシュウ シテオクワ`,'name','soft');}
   else if(/(?:ボク|ワタシ|オレ)ノナマエ.*\?|ナマエ.*オボエ/.test(compact)) { say(s.name?`${s.name} デショ\nイマ ディスク ニ キイタノ`:'マダ キイテナイワ\nアテタラ コワイ デショ','memory','knowing');if(s.name)s.clues++; }
@@ -89,3 +90,4 @@ export function respond(raw,state) {
   s.history.push({role:'user',text:String(raw).trim().slice(0,120)},{role:'enny',text});s.history=s.history.slice(-40);
   return {state:s,text,kind,mood};
 }
+

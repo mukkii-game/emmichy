@@ -1,4 +1,4 @@
-import {freshState,restoreState,respond,normalize} from './engine.js?v=20261006-mix1';
+import {freshState,restoreState,respond,normalize} from './engine.js?v=20261006-balance1';
 import {chiikawaReply,checkedAt} from './topics.js?v=20261006-mix1';
 import {text,kana} from './font.js?v=20261006-mix1';
 import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261006-mix1';
@@ -13,6 +13,7 @@ import {selectGap} from './gap.js?v=20261006-mix1';
 import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261006-mix1';
 import {cultureReply} from './culture.js?v=20261006-mix1';
 import {chooseFiller,startFiller} from './filler.js?v=20261006-filler1';
+import {balanceRoute,learnInterests} from './balance.js?v=20261006-balance1';
 let recentFillers=[];
 let tokenizer=null;
 const $=id=>document.getElementById(id),canvas=$('screen'),ctx=canvas.getContext('2d',{willReadFrequently:true});
@@ -85,6 +86,7 @@ $('talk').addEventListener('submit',async e=>{
  busy=true;$('send').disabled=true;$('reset').disabled=true;$('entry').value='';audioDirector.se.send();
  add('user',raw);$('disk').textContent='● DISK ACCESS';
  const before=advancePerformance(state,raw,session.turns);let result=chiikawaReply(normalize(raw),respond(raw,state),undefined,raw);
+ before.interests=learnInterests(raw,state.interests);result.state.interests=before.interests;
  result.state.performance=before.performance;result.state.speechStyle=before.speechStyle;
  const knowledge=selectKnowledge(raw,before);
  const repertoire=chooseRepertoire(raw,before);
@@ -99,8 +101,9 @@ $('talk').addEventListener('submit',async e=>{
  let usedModel=false,locallyReplaced=false;
  const gap=!isRestart&&!state.ended&&selectGap(raw,state);
  const legacy=!isRestart&&!state.ended&&curatedReply(raw,state);
- const prepared=isRestart||state.ended?null:gap?{text:gap.text,topic:'gap'}:culture?.kind==='curiosity'?{text:culture.text,topic:'culture'}:repertoire.scripted?{text:repertoire.candidate.text,topic:'repertoire'}:
+ let prepared=isRestart||state.ended?null:gap?{text:gap.text,topic:'gap'}:culture?.kind==='curiosity'?{text:culture.text,topic:'culture'}:repertoire.scripted?{text:repertoire.candidate.text,topic:'repertoire'}:
   legacy&&(!repertoire.candidate||legacy.topic==='greeting')?legacy:null;
+ if(!isRestart&&!state.ended)prepared=balanceRoute(prepared,repertoire,session,modelEnabled);
  if(gap)result.state.gap=gap.memory;
  if(prepared){result.text=['island-water','gap','repertoire','culture'].includes(prepared.topic)?prepared.text:fandomReply||prepared.text;result.kind='curated';result.state.history.at(-1).text=result.text;if(/[！!]/.test(result.text))result.mood='excited';}
  if(isRestart){result.text='ネエ Chiikawa ッテ シッテル？';result.state.history.at(-1).text=result.text;}
@@ -125,6 +128,7 @@ $('talk').addEventListener('submit',async e=>{
   if(polished.replaced){usedModel=false;locallyReplaced=true;}
  }
  if(/[一-龠ぁ-ゖ]/.test(result.text)&&!tokenizer){$('status').textContent='読みやすい文字を準備しています…';if(!await readingsReady){result.text='ゴメン、コトバ ノ ヨミコミ ガ ウマク イカナイ。モウ イチド ハナシテネ。';result.state.history.at(-1).text=result.text;usedModel=false;}}
+ session.dialogueUse={ai:(session.dialogueUse?.ai||0)+(usedModel?1:0),bank:(session.dialogueUse?.bank||0)+(!usedModel&&(prepared||locallyReplaced)?1:0)};
  state=result.state;mood=result.mood;session.lastMood=mood;saveSession();
  await wait(300+Math.min(raw.length*10,500));
  if(mood==='excited')audioDirector.se.excited();else if(mood==='worried')audioDirector.se.worried();else audioDirector.se.reply();
@@ -174,3 +178,4 @@ if(isLocal&&!offline){
  fetch('/api/config').then(r=>r.json()).then(c=>{if(c.localModel){chatEndpoint='/api/chat';modelProvider='local';}setEngineNote();}).catch(()=>{});
 }
 setInterval(draw,160);setInterval(()=>{if(ready&&!document.hidden&&shouldEnd(session)&&!composing&&!$('entry').value.trim()&&Date.now()-lastActivity>8000)endSession();},1000);draw();if(ready)$('entry').focus();
+

@@ -2,6 +2,7 @@
 import {cleanKnowledge} from './fandom.js?v=20261006-mix1';
 import {cleanGap} from './gap.js?v=20261006-mix1';
 import {cleanRepertoire} from './repertoire.js?v=20261006-mix1';
+import {cleanInterests} from './balance.js?v=20261006-balance1';
 const readings = { '知らない':'シラナイ','知ってる':'シッテル','以外':'イガイ','晴れ':'ハレ', '本当':'ホントウ','賢い':'カシコイ','頭':'アタマ','名前':'ナマエ','覚えて':'オボエテ','忘れて':'ワスレテ','好き':'スキ','嫌い':'キライ','可愛い':'カワイイ','綺麗':'キレイ','天気':'テンキ','今日':'キョウ','明日':'アシタ','疲れた':'ツカレタ','寂しい':'サミシイ','仕事':'シゴト','猫':'ネコ','犬':'イヌ','私':'ワタシ','僕':'ボク','君':'キミ','嘘':'ウソ','人間':'ニンゲン','機械':'キカイ','元気':'ゲンキ','趣味':'シュミ','秘密':'ヒミツ','未来':'ミライ','世界':'セカイ','宇宙':'ウチュウ','何':'ナニ','教えて':'オシエテ','眠い':'ネムイ','馬鹿':'バカ','無能':'ムノウ','一人':'ヒトリ','歳':'サイ','年齢':'ネンレイ','愛':'アイ' };
 export function normalize(raw) {
   let s = String(raw).normalize('NFKC');
@@ -32,6 +33,7 @@ export function restoreState(value) {
   s.knowledge=cleanKnowledge(value.knowledge);
   s.gap=cleanGap(value.gap);
   s.repertoire=cleanRepertoire(value.repertoire);
+  s.interests=cleanInterests(value.interests);
   return s;
 }
 export function respond(raw,state) {

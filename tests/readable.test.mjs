@@ -12,6 +12,7 @@ test('kanji and hiragana render as spaced full-width kana with voiced marks',()=
  assert.match(readableText('映画を観たい',tokenizer),/エイガ ヲ/);
  assert.match(readableText('ちいかわの話を知りたかった',tokenizer),/チイカワ ノ ハナシ ヲ シリタカッタ/);
  assert.match(readableText('えみちぃだよ',tokenizer),/エミチィ/);
+ assert.match(readableText('仕組みを知ってる？',tokenizer),/シッテル/);
  assert.match(readableText('ねえ Chiikawa って知ってる？',tokenizer),/Chiikawa/);
  assert.equal(readableText('ドンナ エイガ ヲ ミタイ ノ？',tokenizer),'ドンナ エイガ ヲ ミタイ ノ?');
 });

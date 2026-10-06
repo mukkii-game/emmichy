@@ -10,7 +10,7 @@ export function readableText(value, tokenizer) {
     for(const token of tokenizer.tokenize(part)){
       const reading=katakana(token.reading||token.surface_form);
       // Keep inflections and sentence endings together: シリタカッタ, ナルヨネ.
-      const attach=token.pos==='助動詞'||token.pos_detail_1==='接尾'||token.pos_detail_1==='終助詞'||/^[。、!?]$/.test(reading);
+      const attach=token.pos==='助動詞'||token.pos_detail_1==='接尾'||token.pos_detail_1==='終助詞'||(token.pos_detail_1==='接続助詞'&&/^[テデ]$/.test(reading))||/^[テデ]ル$/.test(reading)||/^[。、!?]$/.test(reading);
       if(attach&&words.length)words[words.length-1]+=reading;else words.push(reading);
     }
     return words.join(' ');

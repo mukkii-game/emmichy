@@ -2,7 +2,9 @@
 const katakana = value => String(value).normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96));
 export function readableText(value, tokenizer) {
   return String(value).split('\n').map(line => line.trim().split(/\s+/).filter(Boolean).map(part => {
-    if (!tokenizer) return katakana(part);
+    // AI/rule replies already contain word boundaries. Retokenizing kana
+    // would split words incorrectly (e.g. エイガ -> エイ ガ).
+    if (!tokenizer || !/[一-龠々ぁ-ゖ]/.test(part)) return katakana(part);
     return tokenizer.tokenize(part).map(token=>katakana(token.reading || token.surface_form)).join(' ');
   }).join(' ')).join('\n');
 }

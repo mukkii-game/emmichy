@@ -11,6 +11,7 @@ test('kanji and hiragana render as spaced full-width kana with voiced marks',()=
  assert.doesNotMatch(text,/[一-龠ぁ-ゖ?]/);
  assert.match(readableText('映画を観たい',tokenizer),/エイガ ヲ/);
  assert.match(readableText('ねえ Chiikawa って知ってる？',tokenizer),/Chiikawa/);
+ assert.equal(readableText('ドンナ エイガ ヲ ミタイ ノ？',tokenizer),'ドンナ エイガ ヲ ミタイ ノ?');
 });
 test('original Japanese survives memory and the AI request without reading conversion',async()=>{
  const input='明日は仕事が忙しい';

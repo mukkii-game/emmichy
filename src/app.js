@@ -1,13 +1,13 @@
-import {freshState,restoreState,respond,normalize} from './engine.js?v=20261006-hybrid1';
-import {chiikawaReply,checkedAt} from './topics.js?v=20261006-hybrid1';
-import {text,kana} from './font.js?v=20261006-hybrid1';
-import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261006-hybrid1';
-import {createAudioDirector} from './audio.js?v=20261006-hybrid1';
-import {CHAT_API_URL} from './config.js?v=20261006-hybrid1';
-import {advancePerformance} from './performance.js?v=20261006-hybrid1';
-import {requestChat} from './chat.js?v=20261006-hybrid1';
-import {readableText,loadReadings} from './readable.js?v=20261006-hybrid1';
-import {curatedReply} from './curated.js?v=20261006-hybrid1';
+import {freshState,restoreState,respond,normalize} from './engine.js?v=20261006-hybrid2';
+import {chiikawaReply,checkedAt} from './topics.js?v=20261006-hybrid2';
+import {text,kana} from './font.js?v=20261006-hybrid2';
+import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261006-hybrid2';
+import {createAudioDirector} from './audio.js?v=20261006-hybrid2';
+import {CHAT_API_URL} from './config.js?v=20261006-hybrid2';
+import {advancePerformance} from './performance.js?v=20261006-hybrid2';
+import {requestChat} from './chat.js?v=20261006-hybrid2';
+import {readableText,loadReadings} from './readable.js?v=20261006-hybrid2';
+import {curatedReply} from './curated.js?v=20261006-hybrid2';
 let tokenizer=null;
 const $=id=>document.getElementById(id),canvas=$('screen'),ctx=canvas.getContext('2d',{willReadFrequently:true});
 ctx.imageSmoothingEnabled=false;
@@ -55,6 +55,7 @@ function draw(){
    if(Math.floor(Date.now()/900)%2)kana(ctx,'シーサー...',16,161,'#00ffff');
  }
  if(mood==='excited'){text(ctx,'*',225,20,'#ffff00');text(ctx,'*',16,90,'#00ffff');}
+ ctx.restore();
 }
 function save(){try{localStorage.setItem(key,JSON.stringify(state));saveAvailable=true;}catch{saveAvailable=false;}$('disk').textContent=saveAvailable?'● DISK SAVED':'● MEMORY ONLY';}
 const wait=ms=>new Promise(r=>setTimeout(r,ms));

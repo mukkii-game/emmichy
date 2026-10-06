@@ -1,10 +1,10 @@
-import {freshState,restoreState,respond,normalize} from './engine.js?v=20261006-loop1';
+import {freshState,restoreState,respond,normalize} from './engine.js?v=20261006-loop2';
 import {chiikawaReply,checkedAt} from './topics.js?v=20261006-mix1';
 import {text,kana} from './font.js?v=20261006-mix1';
-import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261006-end1';
+import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261006-loop2';
 import {createAudioDirector} from './audio.js?v=20261006-mix1';
 import {CHAT_API_URL} from './config.js?v=20261006-mix1';
-import {advancePerformance} from './performance.js?v=20261006-loop1';
+import {advancePerformance} from './performance.js?v=20261006-loop2';
 import {requestChat} from './chat.js?v=20261006-mix1';
 import {readableText,loadReadings} from './readable.js?v=20261006-verbs1';
 import {curatedReply} from './curated.js?v=20261006-mix1';
@@ -16,6 +16,7 @@ import {chooseFiller,startFiller,longFiller,retainAside,idleAside} from './fille
 import {balanceRoute,learnInterests} from './balance.js?v=20261006-balance1';
 import {selectOpening} from './openings.js?v=20261006-open1';
 import {contextualReply} from './context.js?v=20261006-ownname1';
+import {cleanConversation,noteConversationReply} from './conversation.js?v=20261006-loop2';
 let recentFillers=[];
 let idleAsideAt=0,idleAsideIndex=0;
 let tokenizer=null;
@@ -45,6 +46,7 @@ function recordAside(line,pendingState=null){
  if(pendingState){
   pendingState.history=retainAside(pendingState.history,line,{pendingReply:true});
   state.history=pendingState.history.slice(0,-1);
+  state.conversation=cleanConversation(pendingState.conversation);
  }else state.history=retainAside(state.history,line);
  add('enny',line);save();
  const p=document.createElement('p');p.textContent=`えみちぃ：${line}`;$('transcript').append(p);
@@ -100,7 +102,7 @@ $('talk').addEventListener('submit',async e=>{
  e.preventDefault();if(!ready||busy||composing||!tokenizer)return;
  const raw=$('entry').value.trim();if(!raw)return;
  const isRestart=state.ended&&/コンニチ[ハワ]|タダイマ|オハヨウ/.test(normalize(raw));
- if(!session||isRestart){session={startedAt:Date.now(),turns:0,finished:false};if(isRestart){lines=[];state.performance={};state.fan={worry:0,excitement:0,lastTopic:''};}saveSession();}
+ if(!session||isRestart){session={startedAt:Date.now(),turns:0,finished:false};if(isRestart){lines=[];state.performance={};state.conversation=cleanConversation(null);state.fan={worry:0,excitement:0,lastTopic:''};}saveSession();}
   session.turns++;saveSession();
  busy=true;live='';$('send').disabled=true;$('reset').disabled=true;$('entry').value='';audioDirector.se.send();
  add('user',raw);$('disk').textContent='● DISK ACCESS';
@@ -108,6 +110,7 @@ $('talk').addEventListener('submit',async e=>{
  if(result.kind==='bye'){const end=finishSession({...result.state,history:result.state.history.slice(0,-1)},session);result.text=end.text;result.state=end.state;session=end.session;}
  before.interests=learnInterests(raw,state.interests);result.state.interests=before.interests;
  result.state.performance=before.performance;result.state.speechStyle=before.speechStyle;
+ if(result.kind!=='bye')result.state.conversation=before.conversation;
  const knowledge=selectKnowledge(raw,before);
  const repertoire=chooseRepertoire(raw,before);
  const culture=cultureReply(raw,before,repertoire.intent);
@@ -150,6 +153,7 @@ $('talk').addEventListener('submit',async e=>{
  }
  if(/[一-龠ぁ-ゖ]/.test(result.text)&&!tokenizer){$('status').textContent='読みやすい文字を準備しています…';if(!await readingsReady){result.text='ゴメン、コトバ ノ ヨミコミ ガ ウマク イカナイ。モウ イチド ハナシテネ。';result.state.history.at(-1).text=result.text;usedModel=false;}}
  session.dialogueUse={ai:(session.dialogueUse?.ai||0)+(usedModel?1:0),bank:(session.dialogueUse?.bank||0)+(!usedModel&&(prepared||locallyReplaced)?1:0)};
+ if(result.kind!=='bye')result.state.conversation=noteConversationReply(result.state.conversation,result.text,raw,session.turns);
  state=result.state;mood=result.mood;session.lastMood=mood;saveSession();
  await wait(300+Math.min(raw.length*10,500));
  if(mood==='excited')audioDirector.se.excited();else if(mood==='worried')audioDirector.se.worried();else audioDirector.se.reply();

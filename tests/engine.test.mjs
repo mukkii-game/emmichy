@@ -13,6 +13,13 @@ test('resistance is respected',()=>assert.match(turn('チイカワ イガイ ノ
 test('kana conversion preserves voiced marks and ASCII digits',()=>{assert.equal(displayText('がっこう 17'),'ｶﾞｯｺｳ 17');assert.equal(normalize('ﾈｺ　が　好き'),'ネコ ガ スキ');});
 test('news expires; future release is explicitly a plan',()=>{assert.equal(activeNews('2030-01-01').length,0);assert.equal(activeNews('2026-08-01').length,0);assert.match(activeNews('2026-10-04').find(n=>n.id==='phone').line,/ヨテイ/);assert.equal(activeNews('2026-10-31').some(n=>n.id==='phone'),false);});
 test('state remains bounded and ignores corrupt saves',()=>{let s=freshState();for(let i=0;i<40;i++)s=turn(`モノ${i} ガ スキ`,s).state;assert.equal(Object.keys(s.likes).length,24);assert.equal(s.history.length,40);assert.deepEqual(restoreState({version:8}),freshState());});
+test('player recovery and lack of energy are not mistaken for Emmichy\'s own condition',()=>{
+ for(const input of ['ちょっと元気出た','元気が出てきた','スコシ ゲンキ デタ']){
+  const r=respond(input,freshState());assert.equal(r.kind,'comfort');assert.match(r.text,/元気出たのね/);assert.doesNotMatch(r.text,/ツウデン/);
+ }
+ assert.match(respond('元気が出ない',freshState()).text,/まだ元気が出ない/);
+ for(const input of ['元気出た？','友達が元気出た','元気なの？'])assert.notEqual(respond(input,freshState()).text,'少し元気出たのね。アタシも、ちょっとうれしい。');
+});
 test('model output must obey kana, length, and obsession constraints',()=>{assert.equal(validModelText('今日はニュースです'),null);assert.equal(validModelText('ソウネ'),'ソウネ');assert.ok(validModelText('ソウネ チイカワ ナラ ワカルワ'));});
 test('Shisa anxiety survives a topic change and reassurance reduces it',()=>{let a=turn('シーサー ガ シンパイ');assert.equal(a.state.fan.worry,2);assert.equal(a.mood,'worried');a=turn('コンニチハ',a.state);a=turn('天気',a.state);assert.doesNotMatch(a.text,/シーサー/);a=turn('ダイジョウブ',a.state);assert.equal(a.state.fan.worry,0);assert.equal(a.mood,'soft');});
 test('film enthusiasm has its own state and preserves title',()=>{const a=turn('映画ちいかわ');assert.equal(a.kind,'movie');assert.equal(a.state.fan.excitement,2);assert.equal(a.mood,'excited');assert.match(a.text,/ニンギョノ シマノ ヒミツ/);assert.equal(restoreState(JSON.parse(JSON.stringify(a.state))).fan.lastTopic,'movie');});

@@ -1,4 +1,5 @@
 // Private performance state: values become server-owned directions, never prompts.
+import {rememberConversation} from './conversation.js?v=20261006-loop2';
 export function advancePerformance(state, raw, turn) {
  const old=state.performance||{}, bound=n=>Math.max(0,Math.min(5,Number(n)||0));
  const fan=/ちいかわ|チイカワ|chiikawa|シーサー|ハチワレ|うさぎ/i.test(raw);
@@ -10,5 +11,5 @@ export function advancePerformance(state, raw, turn) {
  const late=turn>=7, mid=turn>=2;
  p.speechStyle=late&&p.hype>=4&&turn%12===10?'hype':late&&turn%6===1?'filler':
   mid&&turn%12===8?'quoted_noun':mid&&turn%12===3?'inversion':late&&turn%12===6?'tte_koto':'normal';
- return {...state,performance:p,speechStyle:p.speechStyle};
+ return {...state,performance:p,speechStyle:p.speechStyle,conversation:rememberConversation(state.conversation,raw,turn)};
 }

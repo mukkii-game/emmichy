@@ -2,6 +2,7 @@
 const katakana = value => String(value).normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96));
 const names=new Map([['ちいかわ','チイカワ'],['chiikawa','Chiikawa'],['えみちぃ','エミチィ'],['エミチィ','エミチィ'],['ハチワレ','ハチワレ'],['ドラクエ','ドラクエ']]);
 for(const [name,reading] of [['島二郎','シマジロウ'],['仗助','ジョウスケ'],['承太郎','ジョウタロウ'],['徐倫','ジョリーン'],['露伴','ロハン'],['億泰','オクヤス'],['康一','コウイチ'],['千空','センクウ'],['禰豆子','ネズコ'],['尸魂界','ソウルソサエティ']])names.set(name,reading);
+for(const [name,reading] of [['左門豊作','サモンホウサク'],['左門','サモン'],['星飛雄馬','ホシヒュウマ'],['飛雄馬','ヒュウマ']])names.set(name,reading);
 const namePattern=new RegExp([...names.keys()].sort((a,b)=>b.length-a.length).join('|'),'gi');
 export function readableText(value, tokenizer) {
   return String(value).split('\n').map(line => line.replace(namePattern,name=>` ${names.get(name.toLowerCase())||name} `).trim().split(/\s+/).filter(Boolean).map(part => {

@@ -15,7 +15,7 @@ import {cultureReply} from './culture.js?v=20261006-mix1';
 import {chooseFiller,startFiller,longFiller,retainAside,idleAside} from './filler.js?v=20261006-idle1';
 import {balanceRoute,learnInterests} from './balance.js?v=20261006-balance1';
 import {selectOpening} from './openings.js?v=20261006-open1';
-import {contextualReply} from './context.js?v=20261006-ownname1';
+import {contextualReply} from './context.js?v=20261006-loop4';
 import {cleanConversation,noteConversationReply} from './conversation.js?v=20261006-loop2';
 let recentFillers=[];
 let idleAsideAt=0,idleAsideIndex=0;
@@ -125,11 +125,11 @@ $('talk').addEventListener('submit',async e=>{
  const gap=!isRestart&&!state.ended&&selectGap(raw,state);
  const legacy=!isRestart&&!state.ended&&(contextualReply(raw,state)||curatedReply(raw,state));
  let prepared=isRestart||state.ended?null:gap?{text:gap.text,topic:'gap'}:culture?.kind==='curiosity'?{text:culture.text,topic:'culture'}:repertoire.scripted?{text:repertoire.candidate.text,topic:'repertoire'}:
-  legacy&&(!repertoire.candidate||legacy.topic==='greeting')?legacy:null;
+  legacy&&(!repertoire.candidate||legacy.topic==='greeting'||legacy.topic==='conversation-move')?legacy:null;
  if(!isRestart&&!state.ended)prepared=balanceRoute(prepared,repertoire,session,modelEnabled);
  if(prepared?.topic==='greeting'){prepared.text=openingText(true);result.state.openingSeen=state.openingSeen;}
  if(gap)result.state.gap=gap.memory;
- if(prepared){result.text=['context-name','greeting','island-water','gap','repertoire','culture'].includes(prepared.topic)?prepared.text:fandomReply||prepared.text;result.kind='curated';result.state.history.at(-1).text=result.text;if(/[！!]/.test(result.text))result.mood='excited';}
+ if(prepared){result.text=['conversation-move','context-name','greeting','island-water','gap','repertoire','culture'].includes(prepared.topic)?prepared.text:fandomReply||prepared.text;result.kind='curated';result.state.history.at(-1).text=result.text;if(/[！!]/.test(result.text))result.mood='excited';}
  if(isRestart){result.text=openingText(true);result.state.openingSeen=state.openingSeen;result.state.history.at(-1).text=result.text;}
  const ruleOnly=isRestart||['curated','bye','asleep','name','memory','arithmetic'].includes(result.kind);
  if(modelEnabled && !ruleOnly){

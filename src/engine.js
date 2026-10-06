@@ -1,5 +1,5 @@
 // Original Emmichy dialogue logic. No original Emmy code or dialogue tables used.
-const readings = { '本当':'ホントウ','賢い':'カシコイ','頭':'アタマ','名前':'ナマエ','覚えて':'オボエテ','忘れて':'ワスレテ','好き':'スキ','嫌い':'キライ','可愛い':'カワイイ','綺麗':'キレイ','天気':'テンキ','今日':'キョウ','明日':'アシタ','疲れた':'ツカレタ','寂しい':'サミシイ','仕事':'シゴト','猫':'ネコ','犬':'イヌ','私':'ワタシ','僕':'ボク','君':'キミ','嘘':'ウソ','人間':'ニンゲン','機械':'キカイ','元気':'ゲンキ','趣味':'シュミ','秘密':'ヒミツ','未来':'ミライ','世界':'セカイ','宇宙':'ウチュウ','何':'ナニ','教えて':'オシエテ','眠い':'ネムイ','馬鹿':'バカ','無能':'ムノウ','一人':'ヒトリ','歳':'サイ','年齢':'ネンレイ','愛':'アイ' };
+const readings = { '知らない':'シラナイ','知ってる':'シッテル','以外':'イガイ','晴れ':'ハレ', '本当':'ホントウ','賢い':'カシコイ','頭':'アタマ','名前':'ナマエ','覚えて':'オボエテ','忘れて':'ワスレテ','好き':'スキ','嫌い':'キライ','可愛い':'カワイイ','綺麗':'キレイ','天気':'テンキ','今日':'キョウ','明日':'アシタ','疲れた':'ツカレタ','寂しい':'サミシイ','仕事':'シゴト','猫':'ネコ','犬':'イヌ','私':'ワタシ','僕':'ボク','君':'キミ','嘘':'ウソ','人間':'ニンゲン','機械':'キカイ','元気':'ゲンキ','趣味':'シュミ','秘密':'ヒミツ','未来':'ミライ','世界':'セカイ','宇宙':'ウチュウ','何':'ナニ','教えて':'オシエテ','眠い':'ネムイ','馬鹿':'バカ','無能':'ムノウ','一人':'ヒトリ','歳':'サイ','年齢':'ネンレイ','愛':'アイ' };
 export function normalize(raw) {
   let s = String(raw).normalize('NFKC');
   for (const [a,b] of Object.entries(readings)) s = s.replaceAll(a,b);
@@ -25,6 +25,7 @@ export function restoreState(value) {
   }
   if(value.likes && typeof value.likes==='object') for(const [k,v] of Object.entries(value.likes).slice(-24)) if(v===1||v===-1) Object.defineProperty(s.likes,k.slice(0,30),{value:v,writable:true,enumerable:true,configurable:true});
   if(Array.isArray(value.history)) s.history=value.history.filter(x=>x && typeof x.text==='string' && ['user','enny'].includes(x.role)).slice(-40).map(x=>({role:x.role,text:x.text.slice(0,160)}));
+  if(value.performance&&typeof value.performance==='object')s.performance={...value.performance};
   return s;
 }
 export function respond(raw,state) {
@@ -77,6 +78,6 @@ export function respond(raw,state) {
     const topic=input.split(' ').filter(w=>w.length>1)[0]?.slice(0,14);
     say(pick([`${topic || 'ソレ'} ...\nソコダケ キコエタワ`,'フーン\nツヅキ ハ アルノ?','ナンダカ ワカッタ キブン\nキブン ダケネ','ソウナノ\nソレデ アナタハ ドウシタイノ?']),'fallback');
   }
-  s.history.push({role:'user',text:input},{role:'enny',text});s.history=s.history.slice(-40);
+  s.history.push({role:'user',text:String(raw).trim().slice(0,120)},{role:'enny',text});s.history=s.history.slice(-40);
   return {state:s,text,kind,mood};
 }

@@ -4,37 +4,55 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Emmichy — THE ALMOST CLEVER GAME</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="えみちぃと約5分のおしゃべり。ちいかわと日本のオタク文化が大好きな、ちょっと賢いレトロ会話ゲーム。ブラウザですぐ遊べます。">
+  <link rel="canonical" href="https://mukkii-game.github.io/emmichy/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mukkii-game.github.io/emmichy/">
+  <meta property="og:title" content="えみちぃ / Emmichy — レトロ会話ゲーム">
+  <meta property="og:description" content="ちいかわと日本のオタク文化が大好きなえみちぃと、約5分のおしゃべり。ブラウザですぐ遊べます。">
+  <meta property="og:image" content="https://mukkii-game.github.io/emmichy/assets/emmichy-portrait.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1086">
+  <meta property="og:image:height" content="1448">
+  <meta property="og:image:alt" content="ロングヘアーで赤いセーターを着たえみちぃのレトロな人物画">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="えみちぃ / Emmichy — レトロ会話ゲーム">
+  <meta name="twitter:description" content="ちいかわと日本のオタク文化が大好きなえみちぃと、約5分のおしゃべり。">
+  <meta name="twitter:image" content="https://mukkii-game.github.io/emmichy/assets/emmichy-portrait.png">
+  <link rel="stylesheet" href="style.css?v=20261006-hybrid4">
 </head>
 <body>
   <main>
     <header><span class="brand">EMMICHY / PERSONAL COMPUTER SOFTWARE</span><span id="disk">● DISK READY</span></header>
+    <section id="start-choice" aria-label="会話の始め方" hidden><p>おかえり。会話をどう始める？</p><div><button id="continue">続きから</button><button id="new-chat">最初から</button></div><p class="small">最初から：今回の会話をやり直します。覚えた名前・好みは残ります。</p></section>
     <div class="screen-wrap">
-      <canvas id="screen" width="640" height="200" tabindex="0" aria-label="Emmichyの会話画面。下の入力欄で話しかけてください。"></canvas>
+      <div class="portrait-panel"><canvas id="screen" width="496" height="672" tabindex="0" aria-label="えみちぃのポートレート"></canvas><div class="game-logo">EMMICHY</div><div class="game-tagline">THE ALMOST CLEVER GAME</div></div>
+      <div class="conversation-panel"><div class="terminal-heading">EMMICHY / CONVERSATION</div><div id="conversation" role="log" aria-label="カタカナの会話履歴"></div><div id="live-reply" aria-live="off"></div><div id="terminal-note">アタシ エミチィ　ナンデモ ハナシテネ</div></div>
     </div>
     <form id="talk" autocomplete="off">
-      <label for="entry">ハナシカケテネ <span>›</span></label>
-      <input id="entry" maxlength="120" placeholder="キミ ハ ホントウ ハ カシコイ？" aria-label="Emmichyに話しかける" spellcheck="false">
+      <label for="entry">漢字・ひらがな OK <span>›</span></label>
+      <input id="entry" maxlength="120" placeholder="ねえ、Chiikawaってしってる？" aria-label="Emmichyに話しかける" spellcheck="false">
       <button id="send" type="submit">RETURN ↵</button>
     </form>
     <div class="toolbar">
-      <span id="status">カナ・ひらがな入力 / ENTER で送信</span>
-      <div><button id="sound" aria-pressed="false">BEEP OFF</button><button id="fullscreen">全画面</button><button id="help">アソビカタ</button></div>
+      <span id="status">日本語入力OK / ENTER で送信</span>
+      <div><button id="restart-chat">最初から</button><button id="sound" aria-pressed="false">BGM + SE OFF</button><button id="fullscreen">全画面</button><button id="help">アソビカタ</button></div>
     </div>
     <section id="instructions" hidden>
       <h1>Emmichy — ちょっと、わかってないフリ。</h1>
-      <p>えみちぃは、海外製ソフトからやってきたような、少しぽっちゃりしたロングヘアーの欧米人ティーン。ちいかわのファンすぎて、どんな話もちいかわに戻します。シーサーが心配で上の空、映画の話になると急に早口。でも、あなたの話を意外なほど覚えています。</p>
-      <p>1回のおしゃべりは約5分、または18往復。アニメや映画を観る時間になると、彼女の都合でおしまい。「コンニチハ」で、また会えます。</p>
-      <p>例：「シーサー ガ シンパイ」「映画ちいかわ」「ダイジョウブ」「ボク ノ ナマエ ハ タロウ」「ネコ ガ スキ」「ネコ ガ キライ」「17 * 23」</p>
-      <p>映画は『人魚の島のひみつ』の話題に反応。連載への不安は2026年10月4日時点のファン設定です。結末を知っているふりはしません。</p>
-      <p>表示は半角カタカナ。ひらがなは自動変換します。漢字は一部の語のみ対応。語の間に空白を入れると当時の気分で遊べます。「バイバイ」で会話を終え、「コンニチハ」で再開します。</p>
+      <p>えみちぃは、日本文化が大好きな欧米人ティーン。日本語はかなり話せるけれど、ときどき語順や言い回しがちょっと変。アニメ・マンガ・ゲームに意外なほど詳しく、とくにChiikawaの話になると熱量がおかしくなります。</p>
+      <p>1回のおしゃべりはだいたい5分。話が盛り上がれば少し長く、区切りがよければ少し早く終わります。最後は彼女の都合で帰ります。</p>
+      <p>PC-88/98時代を思わせる見た目ですが、入力欄や案内は読みやすさ優先です。漢字・ひらがなで普通に話しかけてかまいません。</p>
       <p id="engine-note">標準は無料・オフラインの演出付きルール会話です。記憶はこのブラウザに保存します。</p>
       <button id="export">会話を保存</button> <button id="reset">記憶を初期化</button><span id="reset-note"></span>
-      <p class="small">640 × 200 / DIGITAL 8 COLORS / 非公式パロディ試作。原作コード・原作画像は不使用。</p>
+      <p class="small">RETRO PERSONAL COMPUTER STYLE / 非公式パロディ試作。原作コード・原作画像・原作音源は不使用。</p>
     </section>
-    <div id="transcript" class="sr-only" role="log" aria-live="polite"></div>
-    <footer><span>THE ALMOST CLEVER GAME</span><span>EMMICHY / 0.1</span></footer>
+    <p class="small">会話は AI サービス(Groq / Google / Cloudflare)に送られます。個人情報は入力しないでください。</p>
+    <details class="readable-log"><summary>会話を読みやすく表示</summary><div id="transcript" role="log" aria-live="polite"></div></details>
+    <footer><span>THE ALMOST CLEVER GAME</span><span>EMMICHY / PILOT</span></footer>
   </main>
-  <script type="module" src="src/app.js"></script>
+  <script src="assets/vendor/kuromoji.js"></script>
+  <script type="module" src="src/app.js?v=20261006-hybrid4"></script>
 </body>
 </html>

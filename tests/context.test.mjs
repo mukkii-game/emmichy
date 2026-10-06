@@ -15,6 +15,7 @@ test('five moves ground novel inputs and protect questions, denial and serious f
   assert.doesNotMatch(r.text,/[?？]|教えて|どうだった/);
   assert.notEqual(conversationMove(input,{...state,history:[...(state.history||[]),{role:'enny',text:r.text}]})?.text,r.text);
  }
+ assert.equal(contextualReply('箸でうどんを食べる',{}),null);
  assert.equal(conversationMove('傘を忘れてないよ',{}),null);
  assert.equal(conversationMove('傘を忘れた。どうしたらいい？',{}),null);
  assert.equal(conversationMove('傘を忘れてつらい',{}),null);

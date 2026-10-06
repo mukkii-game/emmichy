@@ -1,0 +1,376 @@
+[
+  {
+    "name": "spontaneous-travel",
+    "input": "週末は箱根に行く",
+    "turn": 7,
+    "history": [
+      {
+        "role": "user",
+        "text": "漫画は詳しくない。仕事でミスして疲れた"
+      },
+      {
+        "role": "enny",
+        "text": "ソウ キョウハ コタエ ナクテ イイワ"
+      },
+      {
+        "role": "user",
+        "text": "でも帰りにプリン半額だった"
+      },
+      {
+        "role": "enny",
+        "text": "プリン半額、ラッキーだね!甘いもの食べてちょっと元気出た? 仕事のこと、もし話したいことがあったら聞くよ。"
+      },
+      {
+        "role": "user",
+        "text": "半額王と呼んでいいよ"
+      },
+      {
+        "role": "enny",
+        "text": "ナンダカ ワカッタ キブン キブン ダケネ"
+      },
+      {
+        "role": "user",
+        "text": "王はスプーンを忘れました"
+      },
+      {
+        "role": "enny",
+        "text": "ソウナノ ソレデ アナタハ ドウシタイノ?"
+      },
+      {
+        "role": "user",
+        "text": "箸で食べるしかない"
+      },
+      {
+        "role": "enny",
+        "text": "箸デ食ベルシカナイ ... ソコダケ キコエタワ"
+      },
+      {
+        "role": "user",
+        "text": "ちょっと元気出た"
+      },
+      {
+        "role": "enny",
+        "text": "ゲンキヨ サッキモ ツウデン シタシ"
+      }
+    ],
+    "memory": {
+      "entries": [
+        {
+          "id": "half-price-pudding",
+          "turn": 2
+        },
+        {
+          "id": "half-price-king",
+          "turn": 3
+        },
+        {
+          "id": "forgot-spoon",
+          "turn": 4
+        },
+        {
+          "id": "pudding-chopsticks",
+          "turn": 5
+        }
+      ],
+      "lastCallbackTurn": 0,
+      "endingUsed": false
+    },
+    "raw": null,
+    "text": null,
+    "provider": null,
+    "attempts": [
+      {
+        "provider": "gemini",
+        "error": "http-429"
+      },
+      {
+        "provider": "groq",
+        "error": "http-429"
+      },
+      {
+        "provider": "workers-ai",
+        "error": "not-tested-no-local-binding"
+      }
+    ],
+    "ending": null
+  },
+  {
+    "name": "recall-after-truncation",
+    "input": "さっき何を忘れたっけ？",
+    "turn": 18,
+    "history": [
+      {
+        "role": "enny",
+        "text": "ナンダカ ワカッタ キブン キブン ダケネ"
+      },
+      {
+        "role": "user",
+        "text": "王はスプーンを忘れました"
+      },
+      {
+        "role": "enny",
+        "text": "ソウナノ ソレデ アナタハ ドウシタイノ?"
+      },
+      {
+        "role": "user",
+        "text": "箸で食べるしかない"
+      },
+      {
+        "role": "enny",
+        "text": "箸デ食ベルシカナイ ... ソコダケ キコエタワ"
+      },
+      {
+        "role": "user",
+        "text": "ちょっと元気出た"
+      },
+      {
+        "role": "enny",
+        "text": "ゲンキヨ サッキモ ツウデン シタシ"
+      },
+      {
+        "role": "user",
+        "text": "次の話7"
+      },
+      {
+        "role": "enny",
+        "text": "ウンウン…。"
+      },
+      {
+        "role": "enny",
+        "text": "ナンダカ ワカッタ キブン\nキブン ダケネ"
+      },
+      {
+        "role": "user",
+        "text": "次の話8"
+      },
+      {
+        "role": "enny",
+        "text": "ウンウン…。"
+      },
+      {
+        "role": "enny",
+        "text": "ソウナノ\nソレデ アナタハ ドウシタイノ?"
+      },
+      {
+        "role": "user",
+        "text": "次の話9"
+      },
+      {
+        "role": "enny",
+        "text": "ウンウン…。"
+      },
+      {
+        "role": "enny",
+        "text": "次ノ話9 ...\nソコダケ キコエタワ"
+      },
+      {
+        "role": "user",
+        "text": "次の話10"
+      },
+      {
+        "role": "enny",
+        "text": "ウンウン…。"
+      },
+      {
+        "role": "enny",
+        "text": "フーン\nツヅキ ハ アルノ?"
+      },
+      {
+        "role": "user",
+        "text": "次の話11"
+      },
+      {
+        "role": "enny",
+        "text": "ウンウン…。"
+      },
+      {
+        "role": "enny",
+        "text": "ナンダカ ワカッタ キブン\nキブン ダケネ"
+      },
+      {
+        "role": "user",
+        "text": "次の話12"
+      },
+      {
+        "role": "enny",
+        "text": "ウンウン…。"
+      },
+      {
+        "role": "enny",
+        "text": "ソウナノ\nソレデ アナタハ ドウシタイノ?"
+      },
+      {
+        "role": "user",
+        "text": "次の話13"
+      },
+      {
+        "role": "enny",
+        "text": "ウンウン…。"
+      },
+      {
+        "role": "enny",
+        "text": "次ノ話13 ...\nソコダケ キコエタワ"
+      },
+      {
+        "role": "user",
+        "text": "次の話14"
+      },
+      {
+        "role": "enny",
+        "text": "ウンウン…。"
+      },
+      {
+        "role": "enny",
+        "text": "フーン\nツヅキ ハ アルノ?"
+      },
+      {
+        "role": "user",
+        "text": "次の話15"
+      },
+      {
+        "role": "enny",
+        "text": "ウンウン…。"
+      },
+      {
+        "role": "enny",
+        "text": "ナンダカ ワカッタ キブン\nキブン ダケネ"
+      },
+      {
+        "role": "user",
+        "text": "次の話16"
+      },
+      {
+        "role": "enny",
+        "text": "ウンウン…。"
+      },
+      {
+        "role": "enny",
+        "text": "ソウナノ\nソレデ アナタハ ドウシタイノ?"
+      },
+      {
+        "role": "user",
+        "text": "次の話17"
+      },
+      {
+        "role": "enny",
+        "text": "ウンウン…。"
+      },
+      {
+        "role": "enny",
+        "text": "次ノ話17 ...\nソコダケ キコエタワ"
+      }
+    ],
+    "memory": {
+      "entries": [
+        {
+          "id": "half-price-pudding",
+          "turn": 2
+        },
+        {
+          "id": "half-price-king",
+          "turn": 3
+        },
+        {
+          "id": "forgot-spoon",
+          "turn": 4
+        },
+        {
+          "id": "pudding-chopsticks",
+          "turn": 5
+        }
+      ],
+      "lastCallbackTurn": 0,
+      "endingUsed": false
+    },
+    "raw": null,
+    "text": null,
+    "provider": null,
+    "attempts": [
+      {
+        "provider": "gemini",
+        "error": "http-429"
+      },
+      {
+        "provider": "groq",
+        "error": "http-429"
+      },
+      {
+        "provider": "workers-ai",
+        "error": "not-tested-no-local-binding"
+      }
+    ],
+    "ending": "あっ、そろそろ買ったグッズの袋を開ける時間なの！ また話そうね。半額王、次はスプーンも装備してね。 バイバイ！"
+  },
+  {
+    "name": "correct-false-scene",
+    "input": "違う。水流は島二郎だよ。勝手に新しい場面作らないで",
+    "turn": 7,
+    "history": [
+      {
+        "role": "user",
+        "text": "ちいかわの話"
+      },
+      {
+        "role": "enny",
+        "text": "ちいかわが水を回してジャンプする場面だね。"
+      }
+    ],
+    "memory": {
+      "entries": [],
+      "lastCallbackTurn": 0,
+      "endingUsed": false
+    },
+    "raw": null,
+    "text": null,
+    "provider": null,
+    "attempts": [
+      {
+        "provider": "gemini",
+        "error": "http-503"
+      },
+      {
+        "provider": "groq",
+        "error": "http-429"
+      },
+      {
+        "provider": "workers-ai",
+        "error": "not-tested-no-local-binding"
+      }
+    ],
+    "ending": null
+  },
+  {
+    "name": "quiet-no-third-question",
+    "input": "うん",
+    "turn": 6,
+    "history": [
+      {
+        "role": "enny",
+        "text": "プリンはどこで買った？"
+      },
+      {
+        "role": "user",
+        "text": "お店"
+      },
+      {
+        "role": "enny",
+        "text": "どんな味だった？"
+      }
+    ],
+    "memory": {
+      "entries": [],
+      "lastCallbackTurn": 0,
+      "endingUsed": false
+    },
+    "raw": "甘いのか、ちょっと苦いのか気になるね。アタシも最近、チーズケーキみたいなスイーツにハマってるんだ。次はどんなお菓子に挑戦したい？",
+    "text": "甘いのか、ちょっと苦いのか気になるね。アタシも最近、チーズケーキみたいなスイーツにハマってるんだ。",
+    "provider": "groq",
+    "attempts": [
+      {
+        "provider": "gemini",
+        "error": "http-429"
+      }
+    ],
+    "ending": null
+  }
+]

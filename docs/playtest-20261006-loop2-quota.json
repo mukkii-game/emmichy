@@ -1,0 +1,73 @@
+[
+  {
+    "type": "ordinary",
+    "arms": {
+      "baseline": [
+        {
+          "turn": 1,
+          "input": "漫画は詳しくない。仕事でミスして疲れた",
+          "raw": "ミスで疲れたんだね、大変だったね。何かリラックスできる漫画、好きなジャンルある？",
+          "text": "ミスで疲れたんだね、大変だったね。何かリラックスできる漫画、好きなジャンルある?",
+          "provider": "groq",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "ok": true
+            }
+          ],
+          "diagnostics": [
+            {
+              "status": 429,
+              "reason": "other",
+              "retryAfter": null,
+              "tokenLimit": null,
+              "tokenRemaining": null,
+              "tokenReset": null
+            }
+          ],
+          "promptCharacters": 4765,
+          "ms": 597,
+          "question": true,
+          "rawQuestion": true
+        }
+      ],
+      "candidate": [
+        {
+          "turn": 1,
+          "input": "漫画は詳しくない。仕事でミスして疲れた",
+          "raw": "ミスで疲れたんだね、大変だったね。アタシもちいかわの島でリラックスしたいな。何かほっとできること、ある？",
+          "text": "ミスで疲れたんだね、大変だったね。アタシもちいかわの島でリラックスしたいな。何かほっとできること、ある?",
+          "provider": "groq",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "ok": true
+            }
+          ],
+          "diagnostics": [
+            {
+              "status": 429,
+              "reason": "other",
+              "retryAfter": null,
+              "tokenLimit": null,
+              "tokenRemaining": null,
+              "tokenReset": null
+            }
+          ],
+          "promptCharacters": 6131,
+          "ms": 927,
+          "question": true,
+          "rawQuestion": true
+        }
+      ]
+    }
+  }
+]

@@ -12,6 +12,8 @@ import {selectKnowledge,knowledgeFallback} from './fandom.js?v=20261006-mix1';
 import {selectGap} from './gap.js?v=20261006-mix1';
 import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261006-mix1';
 import {cultureReply} from './culture.js?v=20261006-mix1';
+import {chooseFiller,startFiller} from './filler.js?v=20261006-filler1';
+let recentFillers=[];
 let tokenizer=null;
 const $=id=>document.getElementById(id),canvas=$('screen'),ctx=canvas.getContext('2d',{willReadFrequently:true});
 ctx.imageSmoothingEnabled=false;
@@ -51,7 +53,7 @@ function draw(){
  ctx.fillStyle='#000';ctx.fillRect(0,0,496,672);
  if(portrait)ctx.drawImage(portrait,0,0,496,672);
  $('live-reply').textContent=live;
- $('terminal-note').textContent=session?.finished?'— END —　コンニチハ デ サイカイ':busy?'● THINKING / RECEIVING…':'アタシ エミチィ　ナンデモ ハナシテネ';
+ $('terminal-note').textContent=session?.finished?'— END —　コンニチハ デ サイカイ':busy?'':'アタシ エミチィ　ナンデモ ハナシテネ';
  ctx.save();ctx.scale(2,4);
  if(mood==='knowing' && Math.floor(Date.now()/700)%2)text(ctx,'*',230,10,'#00ffff');
  if(mood==='worried'){
@@ -104,8 +106,14 @@ $('talk').addEventListener('submit',async e=>{
  if(isRestart){result.text='ネエ Chiikawa ッテ シッテル？';result.state.history.at(-1).text=result.text;}
  const ruleOnly=isRestart||['curated','bye','asleep','name','memory','arithmetic'].includes(result.kind);
  if(modelEnabled && !ruleOnly){
-  $('status').textContent='Emmichyが考えています…';
-  const data=await requestChat(chatEndpoint,raw,before,session,{offline});
+  $('status').textContent='';
+  const stopFiller=startFiller(()=>{
+   const line=chooseFiller(raw,recentFillers);recentFillers=[...recentFillers,line].slice(-4);
+   live=readableText(line,tokenizer);draw();
+  });
+  let data;
+  try{data=await requestChat(chatEndpoint,raw,before,session,{offline});}
+  finally{stopFiller();live='';draw();}
   if(data){result.text=data.text;result.state.history.at(-1).text=data.text;usedModel=true;modelProvider=data.provider;}
  }
  if(!isRestart&&!['bye','asleep','name','memory','arithmetic'].includes(result.kind)){

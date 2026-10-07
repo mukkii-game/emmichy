@@ -279,3 +279,13 @@ loop5原則をsystemへ追加した非公開テストbranch `game-llm/codex/emmi
 - Found and fixed: previous authored text 「失敗じゃなくて」 caused a normal short reply to act like a serious failure; only the substantive player's message supplies that signal now. The earlier 「まあ」 draft invented disappointment; now it reacts from Emmichy's own appetite. Explicit question fatigue gets a reply even when the last line was not a question.
 - Remaining failure: offline open inputs sometimes retain the old generic rule replies, e.g. パソコン買った→フーン ツヅキ ハ アルノ?; the following short reply is grounded. Live AI could change that first response, but this was not tested and is not claimed improved.
 - Full suite 74/74. No real AI call or workflow run. Browser download returned invalid archives; no visual test completed. Not a finished/public candidate yet.
+
+
+## 2026-10-07 Completion candidate repertoire
+
+- Added 80 original everyday beats, 10 two-beat arcs in each of computer, meal, book and music. The second beat requires that the first was actually spoken. Used IDs survive serialized save and restart. Factual/technical questions, denial, distress and teaching are not replaced with these beats.
+- Replay test: 10 distinct two-beat chains in each of the four topics. Scope is those topics only; no claim about 10 distinct whole-game experiences.
+- Everyday farewell uses an actual session topic with a spoken associated line. Shared-joke callbacks retain priority. Quiet-player computer buying no longer yields 「フーン ツヅキ ハ アルノ?」 in the checked scenario.
+- Full suite 78/78. Offline music/normal/quiet/corrective 12-exchange scenarios all end; the automatic scenario ends after 18 exchanges. Raw records in docs/playtest-20261007-offline.json.
+- One real request: HTTP200/Groq, but nonfan music preference was redirected to chiikawa with generic questions (FAILED quality). Recorded without alteration in docs/playtest-20261007-live-probe.json. Candidate recognized music entrance uses authored material; provider configuration unchanged.
+- UI attempt: cloud browser cannot reach the local server; local browser download invalid. No candidate visual/mobile IME/audio result yet. Ready as a code candidate for through-play, not certified as a finished hybrid public game.

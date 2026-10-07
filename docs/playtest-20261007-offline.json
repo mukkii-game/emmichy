@@ -2,6 +2,232 @@
   "mode": "offline simulation; not browser UI or live AI",
   "results": [
     {
+      "type": "music",
+      "rows": [
+        {
+          "turn": 1,
+          "input": "漫画は詳しくないけど、音楽の話は好きだよ",
+          "text": "音楽の話、いいね。アタシ、曲の言葉が全部わからなくても鼻歌は先に覚える。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 2,
+          "input": "うん",
+          "text": "歌う時だけ、日本語がすらすら出た気になるの。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 3,
+          "input": "パソコン買った",
+          "text": "新しいパソコン、アタシなら最初に壁紙を選んじゃう。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 4,
+          "input": "そう",
+          "text": "大事な設定より、まず毎日見る顔を決めたいの。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 5,
+          "input": "本を買った",
+          "text": "本を買ったのね。アタシ、帰るまで待てずに表紙を何度も見る。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 6,
+          "input": "うん",
+          "text": "まだ読んでないのに、もう少し仲良くなった気がする。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 7,
+          "input": "オムライス食べた",
+          "text": "オムライス食べたのね。アタシ、聞いただけでお腹すいてきた。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 8,
+          "input": "そう",
+          "text": "話だけでお腹がすくの、食べた人より損してる。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 9,
+          "input": "上履きは学校の靴だよ",
+          "text": "上履き、教室専用なんだ。アタシなら初日にそのまま外へ出そう。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 10,
+          "input": "うん",
+          "text": "上履き。アタシ、靴箱で一回止まりそう。履き替える方、こっちね。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 11,
+          "input": "音楽が好き",
+          "text": "音楽、アタシは同じ曲を何度も聴いちゃう。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 12,
+          "input": "バイバイ",
+          "text": "あっ、そろそろ買ったグッズの袋を開ける時間なの！ また話そうね。次に曲を聴いたら、今の音楽の話を思い出しそう。 バイバイ！",
+          "source": "rule",
+          "question": false
+        }
+      ],
+      "ended": true
+    },
+    {
+      "type": "automatic",
+      "rows": [
+        {
+          "turn": 1,
+          "input": "本を買った",
+          "text": "本を買ったのね。アタシ、帰るまで待てずに表紙を何度も見る。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 2,
+          "input": "うん",
+          "text": "まだ読んでないのに、もう少し仲良くなった気がする。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 3,
+          "input": "パソコン買った",
+          "text": "新しいパソコン、アタシなら最初に壁紙を選んじゃう。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 4,
+          "input": "そう",
+          "text": "大事な設定より、まず毎日見る顔を決めたいの。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 5,
+          "input": "オムライス食べた",
+          "text": "オムライス食べたのね。アタシ、聞いただけでお腹すいてきた。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 6,
+          "input": "うん",
+          "text": "話だけでお腹がすくの、食べた人より損してる。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 7,
+          "input": "音楽が好き",
+          "text": "音楽の話、いいね。アタシ、曲の言葉が全部わからなくても鼻歌は先に覚える。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 8,
+          "input": "そう",
+          "text": "歌う時だけ、日本語がすらすら出た気になるの。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 9,
+          "input": "上履きは学校の靴だよ",
+          "text": "上履き、教室専用なんだ。アタシなら初日にそのまま外へ出そう。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 10,
+          "input": "うん",
+          "text": "上履き。アタシ、靴箱で一回止まりそう。履き替える方、こっちね。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 11,
+          "input": "プリン半額だった",
+          "text": "半額のプリン。アタシなら一個の予定が二個になりそう。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 12,
+          "input": "半額王と呼んでいいよ",
+          "text": "半額王。じゃあアタシは、プリン売り場で王に道を譲る。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 13,
+          "input": "王はスプーンを忘れました",
+          "text": "王、即位初日に装備品を忘れてる。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 14,
+          "input": "箸でプリンを食べるしかない",
+          "text": "箸でプリン。失敗じゃなくて、新しい流派ってことにしよう。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 15,
+          "input": "そう",
+          "text": "「うん」で終わるプリン、かなり満足度が高いやつだ。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 16,
+          "input": "質問ばっかりだね",
+          "text": "ウン。質問を続けないね。アタシからも話す。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 17,
+          "input": "うん",
+          "text": "ウン。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "turn": 18,
+          "input": "まあ",
+          "text": "そっか。アタシは、もう少しここにいる。",
+          "source": "authored",
+          "question": false
+        },
+        {
+          "input": "[auto-end]",
+          "text": "あっ、そろそろ教わった言葉で短い紹介文を書く時間なの！ また話そうね。半額王、またね。スプーンも一緒に。 バイバイ！"
+        }
+      ],
+      "ended": true
+    },
+    {
       "type": "normal",
       "rows": [
         {
@@ -84,7 +310,7 @@
         {
           "turn": 12,
           "input": "バイバイ",
-          "text": "あっ、そろそろハンターの能力を復習する時間なの！ また話そうね。半額王、またね。スプーンも一緒に。 バイバイ！",
+          "text": "あっ、そろそろチェンソーマンを一巻ゆっくり読む時間なの！ また話そうね。半額王、またね。スプーンも一緒に。 バイバイ！",
           "source": "rule",
           "question": false
         }
@@ -97,21 +323,21 @@
         {
           "turn": 1,
           "input": "オムライス食べた",
-          "text": "オムライス食ベタ ... ソコダケ キコエタワ",
-          "source": "rule",
+          "text": "オムライス食べたのね。アタシ、聞いただけでお腹すいてきた。",
+          "source": "authored",
           "question": false
         },
         {
           "turn": 2,
           "input": "うん",
-          "text": "オムライスの話、アタシまでお腹すいてきた。",
+          "text": "話だけでお腹がすくの、食べた人より損してる。",
           "source": "authored",
           "question": false
         },
         {
           "turn": 3,
           "input": "そう",
-          "text": "オムライス、話だけ聞いて食べたくなるの、ちょっと悔しい。",
+          "text": "オムライスの話、アタシまでお腹すいてきた。",
           "source": "authored",
           "question": false
         },
@@ -125,21 +351,21 @@
         {
           "turn": 5,
           "input": "うん",
-          "text": "ウン。",
+          "text": "オムライス、話だけ聞いて食べたくなるの、ちょっと悔しい。",
           "source": "authored",
           "question": false
         },
         {
           "turn": 6,
           "input": "パソコン買った",
-          "text": "フーン ツヅキ ハ アルノ?",
-          "source": "rule",
-          "question": true
+          "text": "新しいパソコン、アタシなら最初に壁紙を選んじゃう。",
+          "source": "authored",
+          "question": false
         },
         {
           "turn": 7,
           "input": "そう",
-          "text": "新しいパソコン、アタシなら最初に壁紙を選んじゃう。",
+          "text": "大事な設定より、まず毎日見る顔を決めたいの。",
           "source": "authored",
           "question": false
         },
@@ -174,7 +400,7 @@
         {
           "turn": 12,
           "input": "バイバイ",
-          "text": "あっ、そろそろ借りた漫画にお礼のメモを添える時間なの！ また話そうね。バイバイ！",
+          "text": "あっ、そろそろ今日教わったことをノートに書く時間なの！ また話そうね。新しいパソコンの話、また聞かせて。 バイバイ！",
           "source": "rule",
           "question": false
         }
@@ -264,7 +490,7 @@
         {
           "turn": 12,
           "input": "バイバイ",
-          "text": "あっ、そろそろ漫画交換に持っていく本を選ぶ時間なの！ また話そうね。箸でプリン。今日いちばん強い話だった。 バイバイ！",
+          "text": "あっ、そろそろ買ったグッズの袋を開ける時間なの！ また話そうね。箸でプリン。今日いちばん強い話だった。 バイバイ！",
           "source": "rule",
           "question": false
         }

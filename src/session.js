@@ -1,3 +1,4 @@
+import {everydayEnding} from './everyday.js?v=20261007-candidate1';
 import {selectEnding} from './endings.js?v=20261006-end1';
 import {cleanConversation,endingCallback} from './conversation.js?v=20261007-loop7';
 export const SESSION_MS=5*60*1000;
@@ -23,6 +24,6 @@ export function shouldEnd(session,now=Date.now()){
  return Boolean(session && Number.isFinite(session.startedAt) && Number.isFinite(session.turns) && !session.finished && (session.turns>=SESSION_TURNS || now-session.startedAt>=SESSION_MS));
 }
 export function finishSession(state,session){
- const mode='fandom',ending=selectEnding(state),callback=endingCallback(state.conversation),text=callback?ending.text.replace(/バイバイ[！!]$/,callback.text+' バイバイ！'):ending.text;
+ const mode='fandom',ending=selectEnding(state),callback=endingCallback(state.conversation),daily=callback?'':everydayEnding(state),text=callback||daily?ending.text.replace(/バイバイ[！!]$/,(callback?.text||daily)+' バイバイ！'):ending.text;
  return {state:{...state,conversation:callback?.memory||cleanConversation(state.conversation),endingSeen:ending.seen,ended:true,history:[...state.history,{role:'enny',text}].slice(-40)},session:{...session,finished:true},text,mode};
 }

@@ -1,3 +1,19 @@
+# Latest checkpoint — completion candidate, 2026-10-07
+
+Candidate work completed locally and prepared for PR #3 storage:
+- 80 original everyday beats: 4 topics (computer, meal, book, music), 10 two-beat arcs each. User statements receive a specific authored reaction; short acknowledgements continue only a premise that was actually spoken. Questions, denial, distress and teaching remain outside these arcs.
+- Usage IDs are preserved via existing bounded repertoire state through save/restart. Tests verified 10 distinct two-beat arcs per topic after serialization/restart; this is limited-topic evidence, not a guarantee of 10 wholly different full games.
+- A genuine everyday topic can appear at farewell only when an associated authored line was actually spoken. Existing shared-joke callbacks take precedence.
+- All changed module cache identifiers updated to avoid mixing old/new state cleaners.
+
+Evidence: full tests 78/78; 5 offline scenarios end successfully (four 12-exchange sessions and one 18-exchange automatic ending). Actual raw results in docs/playtest-20261007-offline.json. One live provider request succeeded technically but FAILED quality by returning to chiikawa after a nonfan music preference. Full probe recorded in docs/playtest-20261007-live-probe.json. The candidate handles that recognized music entrance locally without invoking the model. General model quality is still not verified.
+
+Concrete environment blocker: CUA browser cannot reach the local server (connection refused), and local Playwright has no browser binary; download returns invalid archives. Mobile IME/audio and candidate visual/hybrid through-play cannot be certified here yet. Do not call the game fully finished or the live-AI failure fixed at its provider.
+
+Development remains single-session, automated Relay paused, no Director wait. Main/public unchanged. Next verification must inspect the exact candidate via a reachable preview if available, and keep physical-device checks explicit.
+
+---
+
 # Latest checkpoint — 2026-10-07 autonomous development
 
 Loop6 recovery saved to PR #3 at 6e26db6. Git CLI has no GitHub credential in this environment; the authorized GitHub connector can save commits safely using an expected-head check.

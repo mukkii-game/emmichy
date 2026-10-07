@@ -1,3 +1,4 @@
+import {everydayReplies} from './everyday.js?v=20261007-candidate1';
 import {cards,selectKnowledge,works} from './fandom.js?v=20261006-mix1';
 import {fanLines} from './fan-lines.js?v=20261006-mix1';
 // 600 individually authored reactions + 600 factual-answer combinations.
@@ -9,7 +10,7 @@ export const replies=Object.freeze(cards.flatMap(card=>{
   {id:`${card.id}:fact:${angle}`,cardId:card.id,work:card.work,angle,mode:'fact',text:`${card.fact} ${line}`,family:`${card.id}:${angle}`}
  ]).map(Object.freeze);
 }));
-const byId=new Map(replies.map(r=>[r.id,r]));
+const byId=new Map([...replies,...everydayReplies].map(r=>[r.id,r]));
 const fold=s=>String(s??'').normalize('NFKC').toLowerCase().replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/[\s。、!?！？「」…・]/g,'');
 const fingerprint=t=>{let n=2166136261;for(const ch of fold(t)){n^=ch.codePointAt(0);n=Math.imul(n,16777619);}return (n>>>0).toString(36);};
 export function cleanRepertoire(value){

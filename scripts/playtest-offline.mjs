@@ -12,6 +12,8 @@ import {learnInterests} from '../src/balance.js';
 import {noteConversationReply} from '../src/conversation.js';
 import {finishSession,shouldEnd} from '../src/session.js';
 const cases={
+ music:['漫画は詳しくないけど、音楽の話は好きだよ','うん','パソコン買った','そう','本を買った','うん','オムライス食べた','そう','上履きは学校の靴だよ','うん','音楽が好き','バイバイ'],
+ automatic:['本を買った','うん','パソコン買った','そう','オムライス食べた','うん','音楽が好き','そう','上履きは学校の靴だよ','うん','プリン半額だった','半額王と呼んでいいよ','王はスプーンを忘れました','箸でプリンを食べるしかない','そう','質問ばっかりだね','うん','まあ'],
  normal:['仕事でミスして疲れた','帰りにプリン半額だった','半額王と呼んでいいよ','王はスプーンを忘れました','箸でプリンを食べるしかない','うん','そう','まあ','ちょっと元気出た','上履きは学校で履き替える靴だよ','そう','バイバイ'],
  quiet:['オムライス食べた','うん','そう','まあ','うん','パソコン買った','そう','上履きは学校の靴だよ','うん','ジョジョの好きな場面の話','そう','バイバイ'],
  corrective:['ジョジョが好き','プリン半額だった','半額王と呼んでいいよ','王はスプーンを忘れました','箸でプリンを食べるしかない','王じゃなくて強者ね','質問ばっかりだね','うん','上履きは学校で履き替える靴だよ','そう','その呼び方はやめて','バイバイ']
@@ -38,11 +40,11 @@ for(const [type,inputs] of Object.entries(cases)){
   const gap=selectGap(raw,state);
   const prepared=preparedReply(raw,state,session,{gap,culture,repertoire,modelEnabled:false});
   if(gap)result.state.gap=gap.memory;
-  if(prepared){result.text=['conversation-move','context-name','greeting','island-water','gap','repertoire','culture'].includes(prepared.topic)?prepared.text:fandom||prepared.text;result.kind='curated';}
+  if(prepared){result.text=['everyday','conversation-move','context-name','greeting','island-water','gap','repertoire','culture'].includes(prepared.topic)?prepared.text:fandom||prepared.text;result.kind='curated';}
   if(!['bye','asleep','name','memory','arithmetic'].includes(result.kind)){
    if(!prepared&&repertoire.intent==='question'&&!repertoire.candidate&&knowledge.work)result.text='そこはまだ詳しくわからないの。知っていたら教えて？';
    const polished=polishReply(result.text,raw,before,repertoire);result.text=polished.text;
-   const replyId=polished.id||(prepared?.topic==='repertoire'||(repertoire.candidate&&result.text===repertoire.candidate.text)?repertoire.candidate?.id:null);
+   const replyId=polished.id||prepared?.id||(prepared?.topic==='repertoire'||(repertoire.candidate&&result.text===repertoire.candidate.text)?repertoire.candidate?.id:null);
    result.state.repertoire=rememberReply(before,result.text,replyId,Boolean(prepared||polished.replaced));
   }
   result.state.history.at(-1).text=result.text;

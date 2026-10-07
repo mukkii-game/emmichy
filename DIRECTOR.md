@@ -19,6 +19,31 @@ Make the 5-minute encounter feel like meeting a smart, cheerful, slightly odd Ja
 9. Keep endings short and personalized with one genuine session callback when available.
 10. Prefer small changes, targeted tests, and preserved failures over broad rewrites.
 
+## Repertoire / replay direction
+
+Large text data is acceptable when it improves quality. Do not optimize prematurely for tiny asset size.
+
+Prefer a game-specific repertoire/retrieval layer over asking a general LLM to invent every interesting beat from scratch.
+
+Useful material may include:
+- high-quality reaction candidates
+- conversation moves and variants
+- short 2-5 turn mini-arcs
+- setup -> callback -> payoff chains
+- safe fandom allusions
+- Japanese-learning/culture-mismatch beats
+- shared-word / nickname continuations
+- recovery paths for terse, negative, confused, or correcting players
+- ending callbacks
+
+Each item should be tagged with prerequisites, tone, risk, recent-use cooldown, incompatible states, and continuation hooks when useful.
+
+Target replay goal: a player should be able to play about 10 sessions without feeling that the same high-quality conversation chain is repeating.
+
+Retrieval can begin with deterministic tags/scoring/history and only grow into embedding/RAG-style retrieval if it materially improves selection. The LLM should mainly adapt/connect/select good material and handle truly open-ended input, rather than being solely responsible for inventing the fun.
+
+Preserve successful and failed examples so retrieval/ranking can be tested against them.
+
 ## Review loop
 
 On a new [Work/Codex → Chat Director] [REVIEW]:

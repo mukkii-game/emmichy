@@ -14,7 +14,7 @@ import {cultureReply} from './culture.js?v=20261006-mix1';
 import {chooseFiller,startFiller,longFiller,retainAside,idleAside} from './filler.js?v=20261006-idle1';
 import {learnInterests} from './balance.js?v=20261006-balance1';
 import {selectOpening} from './openings.js?v=20261006-open1';
-import {preparedReply} from './routing.js?v=20261007-candidate1';
+import {preparedReply} from './routing.js?v=20261007-candidate2';
 import {cleanConversation,noteConversationReply} from './conversation.js?v=20261007-loop7';
 let recentFillers=[];
 let idleAsideAt=0,idleAsideIndex=0;
@@ -55,12 +55,12 @@ function openingText(returning=false){const picked=selectOpening(state,returning
 function addOpening(returning=false){const line=openingText(returning);add('enny',line);state.history.push({role:'enny',text:line});save();}
 $('send').disabled=true;
 const readingsReady=loadReadings().then(value=>{tokenizer=value;readingsSettled=true;renderConversation();if(ready&&!busy)$('send').disabled=!value;return value;});
-if(state.history.length) {for(const h of state.history)add(h.role,h.text);} else {
+if(state.history.length) {for(const h of state.history){add(h.role,h.text);const p=document.createElement('p');p.textContent=`${h.role==='user'?'あなた':'えみちぃ'}：${h.text}`;$('transcript').append(p);}} else {
  add('system','EMMICHY / THE ALMOST CLEVER GAME');
  addOpening();
  add('system','ニホンゴ デ フツウニ ハナシテネ');
 }
-const img=new Image();img.src='assets/emmichy-portrait.png';
+const img=new Image();img.crossOrigin='anonymous';img.src='assets/emmichy-portrait.png';
 img.onload=()=>{
  const c=document.createElement('canvas');c.width=496;c.height=672;const p=c.getContext('2d',{willReadFrequently:true});
  const cropWidth=Math.min(img.width,img.height*496/672);
@@ -122,7 +122,7 @@ $('talk').addEventListener('submit',async e=>{
  }
  let usedModel=false,locallyReplaced=false;
  const gap=!isRestart&&!state.ended&&selectGap(raw,state);
- let prepared=isRestart||state.ended?null:preparedReply(raw,state,session,{gap,culture,repertoire,modelEnabled});
+ let prepared=isRestart||state.ended?null:preparedReply(raw,state,session,{gap,culture,repertoire,modelEnabled,kind:result.kind});
  if(prepared?.topic==='greeting'){prepared.text=openingText(true);result.state.openingSeen=state.openingSeen;}
  if(gap)result.state.gap=gap.memory;
  if(prepared){result.text=['everyday','conversation-move','context-name','greeting','island-water','gap','repertoire','culture'].includes(prepared.topic)?prepared.text:fandomReply||prepared.text;result.kind='curated';result.state.history.at(-1).text=result.text;if(/[！!]/.test(result.text))result.mood='excited';}

@@ -4,7 +4,8 @@ import {curatedReply} from './curated.js?v=20261006-mix1';
 import {balanceRoute} from './balance.js?v=20261006-balance1';
 
 // Shared by the screen and offline through-play checks.
-export function preparedReply(raw,state,session,{gap=null,culture=null,repertoire={},modelEnabled=false}={}){
+export function preparedReply(raw,state,session,{gap=null,culture=null,repertoire={},modelEnabled=false,kind=null}={}){
+ if(['bye','asleep','name','memory','arithmetic'].includes(kind))return null;
  const legacy=contextualReply(raw,state)||curatedReply(raw,state);
  const daily=everydayReply(raw,state);
  const prepared=daily|| (legacy?.topic==='conversation-move'?legacy:

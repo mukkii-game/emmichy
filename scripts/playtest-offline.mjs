@@ -38,7 +38,7 @@ for(const [type,inputs] of Object.entries(cases)){
   result.state.knowledge=knowledge.memory;
   if(fandom&&!/嫌い|キライ|苦手|やめ|ヤメ|以外|イガイ|ばかり|バカリ/.test(raw)&&!['bye','asleep','name','memory','arithmetic','comfort','contradiction','repeat'].includes(result.kind))result.text=fandom;
   const gap=selectGap(raw,state);
-  const prepared=preparedReply(raw,state,session,{gap,culture,repertoire,modelEnabled:false});
+  const prepared=preparedReply(raw,state,session,{gap,culture,repertoire,modelEnabled:false,kind:result.kind});
   if(gap)result.state.gap=gap.memory;
   if(prepared){result.text=['everyday','conversation-move','context-name','greeting','island-water','gap','repertoire','culture'].includes(prepared.topic)?prepared.text:fandom||prepared.text;result.kind='curated';}
   if(!['bye','asleep','name','memory','arithmetic'].includes(result.kind)){

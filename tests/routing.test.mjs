@@ -24,3 +24,9 @@ test('open-ended questions retain the AI path and ordinary bank balancing surviv
  assert.equal(preparedReply(raw,{turn:4},{turns:4},{repertoire,modelEnabled:true}),null);
  assert.equal(balanceRoute({topic:'repertoire',text:'bank'},{},{turns:3},true),null);
 });
+
+
+test('authored ordinary chat cannot overwrite authoritative name, memory, math or farewell',()=>{
+ for(const kind of ['bye','asleep','name','memory','arithmetic'])
+  assert.equal(preparedReply('パソコン買った',{}, {turns:1},{kind}),null);
+});

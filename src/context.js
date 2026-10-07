@@ -1,5 +1,5 @@
 // Verified supplemental names and short-reply context. Facts checked 2026-10-06.
-import {conversationMove} from './moves.js?v=20261007-loop6';
+import {conversationMove} from './moves.js?v=20261007-loop7';
 import {works} from './fandom.js?v=20261006-mix1';
 export const samonSource='https://www.tms-e.co.jp/alltitles/1960s/005101.html';
 const fold=s=>String(s||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/[\s・]/g,'').toLowerCase();

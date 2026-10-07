@@ -269,3 +269,13 @@ loop5原則をsystemへ追加した非公開テストbranch `game-llm/codex/emmi
 - Existing SELF_CORRECT and half-price-king tests passed. Targeted 11/11, full game suite 67/67. Real AI calls 0.
 - Actual mobile-width UI trial was attempted but blocked before launch: no Chromium executable installed for Playwright. No UI behavior or visual result was fabricated. Live hybrid quality / physical mobile IME and sound remain unverified.
 - HUMAN PLAYTEST READY? NOT YET for a verified completion candidate. Next: actual UI through-play with normal, quiet and corrective players, then repertoire continuation/ending review.
+
+
+## 2026-10-07 Follow-up through-play and routing
+
+- Screen selection is now shared with offline checks in src/routing.js. Regression: a scripted unrelated candidate and AI-first balancing cannot replace grounded short replies or SELF_CORRECT.
+- Offline simulation (no browser/provider calls): normal, quiet and corrective players, 12 exchanges each, all reached farewell. Raw input/output/source records: docs/playtest-20261007-offline.json.
+- Normal: half-price pudding → permitted half-price-king → spoon forgotten → chopstick joke → short replies → nickname/spoon farewell callback. Corrective: king→strongman acknowledged; 「その呼び方はやめて」 acknowledged and nickname removed before ending.
+- Found and fixed: previous authored text 「失敗じゃなくて」 caused a normal short reply to act like a serious failure; only the substantive player's message supplies that signal now. The earlier 「まあ」 draft invented disappointment; now it reacts from Emmichy's own appetite. Explicit question fatigue gets a reply even when the last line was not a question.
+- Remaining failure: offline open inputs sometimes retain the old generic rule replies, e.g. パソコン買った→フーン ツヅキ ハ アルノ?; the following short reply is grounded. Live AI could change that first response, but this was not tested and is not claimed improved.
+- Full suite 74/74. No real AI call or workflow run. Browser download returned invalid archives; no visual test completed. Not a finished/public candidate yet.

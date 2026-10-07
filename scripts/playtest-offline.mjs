@@ -1,0 +1,59 @@
+// No provider calls. Screen selection logic is shared via preparedReply.
+import fs from 'node:fs/promises';
+import {freshState,respond,normalize} from '../src/engine.js';
+import {chiikawaReply} from '../src/topics.js';
+import {advancePerformance} from '../src/performance.js';
+import {selectKnowledge,knowledgeFallback} from '../src/fandom.js';
+import {chooseRepertoire,polishReply,rememberReply} from '../src/repertoire.js';
+import {cultureReply} from '../src/culture.js';
+import {selectGap} from '../src/gap.js';
+import {preparedReply} from '../src/routing.js';
+import {learnInterests} from '../src/balance.js';
+import {noteConversationReply} from '../src/conversation.js';
+import {finishSession,shouldEnd} from '../src/session.js';
+const cases={
+ normal:['仕事でミスして疲れた','帰りにプリン半額だった','半額王と呼んでいいよ','王はスプーンを忘れました','箸でプリンを食べるしかない','うん','そう','まあ','ちょっと元気出た','上履きは学校で履き替える靴だよ','そう','バイバイ'],
+ quiet:['オムライス食べた','うん','そう','まあ','うん','パソコン買った','そう','上履きは学校の靴だよ','うん','ジョジョの好きな場面の話','そう','バイバイ'],
+ corrective:['ジョジョが好き','プリン半額だった','半額王と呼んでいいよ','王はスプーンを忘れました','箸でプリンを食べるしかない','王じゃなくて強者ね','質問ばっかりだね','うん','上履きは学校で履き替える靴だよ','そう','その呼び方はやめて','バイバイ']
+};
+const results=[];
+for(const [type,inputs] of Object.entries(cases)){
+ let state=freshState(),session={startedAt:Date.now(),turns:0,finished:false,dialogueUse:{ai:0,bank:0}};
+ const rows=[];
+ for(const raw of inputs){
+  session.turns++;
+  const before=advancePerformance(state,raw,session.turns);
+  let result=chiikawaReply(normalize(raw),respond(raw,state),undefined,raw);
+  if(result.kind==='bye'){
+   const end=finishSession({...result.state,history:result.state.history.slice(0,-1)},session);
+   result.text=end.text;result.state=end.state;session=end.session;
+  }
+  result.state.interests=learnInterests(raw,state.interests);
+  result.state.performance=before.performance;result.state.speechStyle=before.speechStyle;
+  if(result.kind!=='bye')result.state.conversation=before.conversation;
+  const knowledge=selectKnowledge(raw,before),repertoire=chooseRepertoire(raw,before),culture=cultureReply(raw,before,repertoire.intent);
+  const fandom=culture?.text||repertoire.candidate?.text||knowledgeFallback(knowledge);
+  result.state.knowledge=knowledge.memory;
+  if(fandom&&!/嫌い|キライ|苦手|やめ|ヤメ|以外|イガイ|ばかり|バカリ/.test(raw)&&!['bye','asleep','name','memory','arithmetic','comfort','contradiction','repeat'].includes(result.kind))result.text=fandom;
+  const gap=selectGap(raw,state);
+  const prepared=preparedReply(raw,state,session,{gap,culture,repertoire,modelEnabled:false});
+  if(gap)result.state.gap=gap.memory;
+  if(prepared){result.text=['conversation-move','context-name','greeting','island-water','gap','repertoire','culture'].includes(prepared.topic)?prepared.text:fandom||prepared.text;result.kind='curated';}
+  if(!['bye','asleep','name','memory','arithmetic'].includes(result.kind)){
+   if(!prepared&&repertoire.intent==='question'&&!repertoire.candidate&&knowledge.work)result.text='そこはまだ詳しくわからないの。知っていたら教えて？';
+   const polished=polishReply(result.text,raw,before,repertoire);result.text=polished.text;
+   const replyId=polished.id||(prepared?.topic==='repertoire'||(repertoire.candidate&&result.text===repertoire.candidate.text)?repertoire.candidate?.id:null);
+   result.state.repertoire=rememberReply(before,result.text,replyId,Boolean(prepared||polished.replaced));
+  }
+  result.state.history.at(-1).text=result.text;
+  if(result.kind!=='bye')result.state.conversation=noteConversationReply(result.state.conversation,result.text,raw,session.turns);
+  state=result.state;
+  rows.push({turn:session.turns,input:raw,text:result.text,source:prepared?'authored':'rule',question:/[?？]/.test(result.text)});
+  if(state.ended)break;
+  if(shouldEnd(session)){const end=finishSession(state,session);state=end.state;session=end.session;rows.push({input:'[auto-end]',text:end.text});break;}
+ }
+ results.push({type,rows,ended:state.ended});
+}
+const path=process.argv[2]||'docs/playtest-20261007-offline.json';
+await fs.writeFile(path,JSON.stringify({mode:'offline simulation; not browser UI or live AI',results},null,2)+'\n');
+for(const result of results){console.log(result.type);for(const row of result.rows)console.log(`${row.input} → ${row.text}`);console.log(`ended=${result.ended}`);}

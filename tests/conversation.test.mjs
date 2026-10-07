@@ -39,3 +39,13 @@ test('a callback has a cooldown and is not forced into a distressing conversatio
  assert.match(conversationNote(memory,8,'天気'),/無理に回収せず/);
  assert.match(conversationNote(memory,12,'病気でつらい'),/無理に回収せず/);
 });
+
+
+test('deictic nickname refusal clears consent and prevents nickname ending callbacks',()=>{
+ const named=rememberConversation(null,'半額王と呼んでいいよ',2);
+ const corrected=rememberConversation(named,'王じゃなくて強者ね',3);
+ assert.ok(corrected.entries.some(e=>e.id==='half-price-strongman'));
+ const stopped=rememberConversation(corrected,'その呼び方はやめて',4);
+ assert.equal(endingCallback(stopped),null);
+ assert.ok(!stopped.entries.some(e=>['half-price-king','half-price-strongman'].includes(e.id)));
+});

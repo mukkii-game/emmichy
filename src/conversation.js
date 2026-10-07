@@ -18,7 +18,7 @@ export function rememberConversation(value,input,turn){
  const has=id=>memory.entries.some(e=>e.id===id);
  const drop=id=>memory.entries=memory.entries.filter(e=>e.id!==id);
  const add=id=>{if(!has(id))memory.entries.push({id,turn:at});};
- if(/(?:半額|ハンガク|王|強者|アダ名|アダナ|呼).*(?:ヤメ|嫌|イヤ|呼バナイ)/.test(text)){
+ if(/(?:半額|ハンガク|王|強者|アダ名|アダナ|呼).*(?:ヤメ|嫌|イヤ|呼バナイ)/.test(text)||/^(?:ソノ呼ビ方|ソノアダ名)(?:ハ)?(?:ヤメテ|ヤメヨウ)[。！!]*$/.test(text)){
   drop('half-price-king');drop('half-price-strongman');
   return memory;
  }

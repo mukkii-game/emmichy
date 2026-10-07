@@ -1,3 +1,21 @@
+# Latest checkpoint — 2026-10-07 autonomous development
+
+Loop6 recovery saved to PR #3 at 6e26db6. Git CLI has no GitHub credential in this environment; the authorized GitHub connector can save commits safely using an expected-head check.
+
+Follow-up quality work:
+- The screen and offline simulations now share preparedReply in src/routing.js. Grounded conversation moves win over unrelated bank/gap candidates and AI-use balancing.
+- Shared-name consent/correction/refusal are explicit beats. 「その呼び方はやめて」 removes nickname consent so the ending cannot use the rejected name.
+- Short replies inspect player distress rather than treating Emmichy's 「失敗じゃなくて」 as distress. 「まあ」 does not invent player disappointment.
+- Explicit question fatigue is acknowledged even when the immediately preceding reply was not a question.
+
+Validation: full suite 74/74; offline simulation normal / quiet / corrective players, 12 exchanges each, all reached farewell. Successful ending callback in normal, corrected nickname refusal in corrective. Full raw results: docs/playtest-20261007-offline.json; rerun with node scripts/playtest-offline.mjs. These are offline simulations sharing the screen selection function, not browser UI or live AI.
+
+Remaining: quiet scenario still exposes generic rule replies on open inputs such as パソコン買った before the short answer. True hybrid quality, visual/mobile IME/audio and replay variety remain unverified. Chromium installation was attempted but download returned invalid archives; no repeat attempts needed unless environment access changes.
+
+Next: improve ordinary open-input fallback/repertoire using these failures, then verify a browser-capable candidate. Do not restart Relay or require another Chat Director.
+
+---
+
 # Current development state — 2026-10-07
 
 The user designated one session for Director, implementation and tests. All three existing Relay/watch automations were confirmed paused. No new autonomous Relay sessions are needed.

@@ -1,22 +1,21 @@
 import {freshState,restoreState,respond,normalize} from './engine.js?v=20261006-loop2';
 import {chiikawaReply,checkedAt} from './topics.js?v=20261006-mix1';
 import {text,kana} from './font.js?v=20261006-mix1';
-import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261006-loop2';
+import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261007-loop7';
 import {createAudioDirector} from './audio.js?v=20261006-mix1';
 import {CHAT_API_URL} from './config.js?v=20261006-mix1';
-import {advancePerformance} from './performance.js?v=20261006-loop2';
+import {advancePerformance} from './performance.js?v=20261007-loop7';
 import {requestChat} from './chat.js?v=20261006-mix1';
 import {readableText,loadReadings} from './readable.js?v=20261006-verbs1';
-import {curatedReply} from './curated.js?v=20261006-mix1';
 import {selectKnowledge,knowledgeFallback} from './fandom.js?v=20261006-mix1';
 import {selectGap} from './gap.js?v=20261006-mix1';
 import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261006-loop1';
 import {cultureReply} from './culture.js?v=20261006-mix1';
 import {chooseFiller,startFiller,longFiller,retainAside,idleAside} from './filler.js?v=20261006-idle1';
-import {balanceRoute,learnInterests} from './balance.js?v=20261006-balance1';
+import {learnInterests} from './balance.js?v=20261006-balance1';
 import {selectOpening} from './openings.js?v=20261006-open1';
-import {contextualReply} from './context.js?v=20261007-loop6';
-import {cleanConversation,noteConversationReply} from './conversation.js?v=20261006-loop2';
+import {preparedReply} from './routing.js?v=20261007-routing2';
+import {cleanConversation,noteConversationReply} from './conversation.js?v=20261007-loop7';
 let recentFillers=[];
 let idleAsideAt=0,idleAsideIndex=0;
 let tokenizer=null;
@@ -123,10 +122,7 @@ $('talk').addEventListener('submit',async e=>{
  }
  let usedModel=false,locallyReplaced=false;
  const gap=!isRestart&&!state.ended&&selectGap(raw,state);
- const legacy=!isRestart&&!state.ended&&(contextualReply(raw,state)||curatedReply(raw,state));
- let prepared=isRestart||state.ended?null:gap?{text:gap.text,topic:'gap'}:culture?.kind==='curiosity'?{text:culture.text,topic:'culture'}:repertoire.scripted?{text:repertoire.candidate.text,topic:'repertoire'}:
-  legacy&&(!repertoire.candidate||legacy.topic==='greeting'||legacy.topic==='conversation-move')?legacy:null;
- if(!isRestart&&!state.ended)prepared=balanceRoute(prepared,repertoire,session,modelEnabled);
+ let prepared=isRestart||state.ended?null:preparedReply(raw,state,session,{gap,culture,repertoire,modelEnabled});
  if(prepared?.topic==='greeting'){prepared.text=openingText(true);result.state.openingSeen=state.openingSeen;}
  if(gap)result.state.gap=gap.memory;
  if(prepared){result.text=['conversation-move','context-name','greeting','island-water','gap','repertoire','culture'].includes(prepared.topic)?prepared.text:fandomReply||prepared.text;result.kind='curated';result.state.history.at(-1).text=result.text;if(/[！!]/.test(result.text))result.mood='excited';}

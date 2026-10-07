@@ -1,5 +1,5 @@
 import {selectEnding} from './endings.js?v=20261006-end1';
-import {cleanConversation,endingCallback} from './conversation.js?v=20261006-loop2';
+import {cleanConversation,endingCallback} from './conversation.js?v=20261007-loop7';
 export const SESSION_MS=5*60*1000;
 export const MIN_SESSION_TURNS=10;
 export const SESSION_TURNS=18;

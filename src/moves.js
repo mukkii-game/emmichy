@@ -9,11 +9,22 @@ export function conversationMove(input,state={}){
  const answer=(move,text)=>prior.includes(text)?null:{move,text,topic:'conversation-move'};
  if(/[?？]|教えて|聞かせて/.test(lastReply)&&/知らない|詳しくない|わからない|質問ばかり|質問ばっかり|聞かないで/.test(raw))
   return answer('SELF_CORRECT','ア、今の聞き方、答えることを増やしちゃったね。引っ込める。');
+ if(/質問ばかり|質問ばっかり|聞かないで/.test(raw))
+  return answer('SELF_CORRECT','ウン。質問を続けないね。アタシからも話す。');
  if(serious){
   if(/[?？]|なぜ|どうして|教えて/.test(raw))return null;
   const word=raw.match(/「([^「」\n]{1,16})」/)?.[1]||raw.match(/仕事|ミス|失敗|疲れ|病気|相談/)?.[0];
   return word?answer('NOTICE_WORDING',`「${word}」のところ、軽く流したくないな。`):null;
  }
+ const shared=state.conversation?.entries||[];
+ if(/^(?:その呼び方|そのあだ名)(?:は)?(?:やめて|やめよう)[。！!]*$/.test(raw)&&shared.some(e=>['half-price-king','half-price-strongman'].includes(e.id)))
+  return answer('SELF_CORRECT','ウン。その呼び方、やめるね。');
+ if(/^(?:半額王)(?:と|って)?呼んで(?:も)?いい(?:よ)?[。！!]*$/.test(raw))
+  return answer('SHARED_FRAME','半額王。じゃあアタシは、プリン売り場で王に道を譲る。');
+ if(/王.*じゃなくて.*強者/.test(raw)&&shared.some(e=>e.id==='half-price-king'))
+  return answer('SELF_CORRECT','強者ね。王は引っ込める。プリン売り場、急に修行場になった。');
+ if(/プリン.*半額|半額.*プリン/.test(raw)&&!/[?？]|じゃない|ではない/.test(raw))
+  return answer('NOTICE_WORDING','半額のプリン。アタシなら一個の予定が二個になりそう。');
  // Questions, denials and corrections need their own answer, not a joke.
  if(/[?？]|なぜ|どうして|教えて|違う|じゃない|やめて|忘れてない|忘れなかった/.test(raw))return null;
  if(/^(うん|そう|まあ|まあね|へえ)[。！!…]*$/.test(raw)){
@@ -25,11 +36,11 @@ export function conversationMove(input,state={}){
    const text=lines.find(t=>!prior.includes(t));
    return {move,text:text||'ウン。',topic:'conversation-move'};
   };
-  if(/疲れ|つかれ|つら|困|ミス|失敗|病気|悲し/.test(context))
+  if(/疲れ|つかれ|つら|困|ミス|失敗|病気|悲し/.test(topicUser))
    return choose('SMALL_SELF_DISCLOSURE',['ウン。アタシも、少しゆっくり話すね。','今は、短い返事のままでいいよ。']);
   const food=topicUser.match(/([\p{Script=Katakana}ー]{2,12})(?:を|は|が|、)?(?:食べ|飲ん)/u)?.[1];
   if(food)return choose('NOTICE_WORDING',subdued?
-   [`${food}、大当たりってほどではなかったのね。`,`${food}の話で、アタシだけお腹すいてる。`]:
+   [`${food}、話してたらアタシも食べたくなった。`,`${food}の話で、アタシだけお腹すいてる。`]:
    food==='プリン'?[ '「うん」で終わるプリン、かなり満足度が高いやつだ。','プリンの話、アタシまでスプーン持ちたくなった。']:
    [`${food}の話、アタシまでお腹すいてきた。`,`${food}、話だけ聞いて食べたくなるの、ちょっと悔しい。`]);
   if(/上履き|うわばき/.test(context))return choose('SMALL_SELF_DISCLOSURE',[

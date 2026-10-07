@@ -85,3 +85,22 @@ test('thin prompts get concrete non-question replies that leave hooks',()=>{
  const chopsticks=contextualReply('箸でプリンを食べるしかない',{});
  assert.doesNotMatch(chopsticks.text,/[?？]/);assert.match(chopsticks.text,/箸|王|流派|修行/);
 });
+
+
+test('light negated failure does not turn a food acknowledgement into distress',()=>{
+ const r=conversationMove('うん',{history:[{role:'user',text:'箸でプリンを食べるしかない'},{role:'enny',text:'失敗じゃなくて、新しい流派ってことにしよう。'}]});
+ assert.match(r.text,/プリン/);assert.doesNotMatch(r.text,/ゆっくり|短い返事/);
+});
+test('shared-name consent, correction and refusal have immediate grounded reactions',()=>{
+ const state={conversation:{entries:[{id:'half-price-king'}]}};
+ assert.match(conversationMove('半額王と呼んでいいよ',{}).text,/半額王/);
+ assert.match(conversationMove('王じゃなくて強者ね',state).text,/強者.*王は引っ込める/);
+ assert.match(conversationMove('その呼び方はやめて',state).text,/やめる/);
+ assert.equal(conversationMove('その呼び方はやめて',{}),null);
+ assert.equal(conversationMove('プリンは半額じゃない',{}),null);
+});
+
+test('explicit question fatigue is respected even when the last reply was not a question',()=>{
+ const r=conversationMove('質問ばっかりだね',{history:[{role:'enny',text:'プリン売り場、急に修行場になった。'}]});
+ assert.equal(r.move,'SELF_CORRECT');assert.doesNotMatch(r.text,/[?？]|引っ込める/);
+});

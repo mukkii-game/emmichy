@@ -3,7 +3,6 @@ export const MOVES=Object.freeze(['SELF_CORRECT','NOTICE_WORDING','LIGHT_TEASE',
 export function conversationMove(input,state={}){
  const raw=String(input||'').normalize('NFKC').trim();
  const history=Array.isArray(state.history)?state.history:[];
- const lastUser=history.filter(h=>h.role==='user').at(-1)?.text||'';
  const lastReply=history.filter(h=>h.role==='enny').at(-1)?.text||'';
  const prior=history.filter(h=>h.role==='enny').map(h=>h.text);
  const serious=/疲れ|つかれ|ミス|失敗|つら|苦し|病気|相談|怖|いじめ|悲し/.test(raw);
@@ -17,9 +16,33 @@ export function conversationMove(input,state={}){
  }
  // Questions, denials and corrections need their own answer, not a joke.
  if(/[?？]|なぜ|どうして|教えて|違う|じゃない|やめて|忘れてない|忘れなかった/.test(raw))return null;
- if(/^(うん|そう|へえ)[。！!…]*$/.test(raw)){
-  const word=lastUser.match(/([\p{Script=Katakana}ー]{2,12})/u)?.[1];
-  return word&&/食べ|飲ん/.test(lastUser)?answer('NOTICE_WORDING',word==='プリン'&&/食べた/.test(lastUser)?'「うん」で終わるプリン、かなり満足度が高いやつだ。':`「${raw.replace(/[。！!…]/g,'')}」。アタシ、まだ${word}を見てないのに、口だけ食べる準備した。`):null;
+ if(/^(うん|そう|まあ|まあね|へえ)[。！!…]*$/.test(raw)){
+  // A short acknowledgement continues the nearest concrete topic, not a new interview.
+  const topicUser=history.filter(h=>h.role==='user'&&!/^(うん|そう|まあ|まあね|へえ)[。！!…]*$/.test(String(h.text).trim())).at(-1)?.text||'';
+  const context=[topicUser,lastReply].join(' ');
+  const subdued=/^(まあ|まあね)/.test(raw);
+  const choose=(move,lines)=>{
+   const text=lines.find(t=>!prior.includes(t));
+   return {move,text:text||'ウン。',topic:'conversation-move'};
+  };
+  if(/疲れ|つかれ|つら|困|ミス|失敗|病気|悲し/.test(context))
+   return choose('SMALL_SELF_DISCLOSURE',['ウン。アタシも、少しゆっくり話すね。','今は、短い返事のままでいいよ。']);
+  const food=topicUser.match(/([\p{Script=Katakana}ー]{2,12})(?:を|は|が|、)?(?:食べ|飲ん)/u)?.[1];
+  if(food)return choose('NOTICE_WORDING',subdued?
+   [`${food}、大当たりってほどではなかったのね。`,`${food}の話で、アタシだけお腹すいてる。`]:
+   food==='プリン'?[ '「うん」で終わるプリン、かなり満足度が高いやつだ。','プリンの話、アタシまでスプーン持ちたくなった。']:
+   [`${food}の話、アタシまでお腹すいてきた。`,`${food}、話だけ聞いて食べたくなるの、ちょっと悔しい。`]);
+  if(/上履き|うわばき/.test(context))return choose('SMALL_SELF_DISCLOSURE',[
+   '上履き。アタシ、靴箱で一回止まりそう。履き替える方、こっちね。',
+   '上履きと外の靴。初日は靴箱にメモ貼りたい。']);
+  const work=topicUser.match(/ジョジョ|刃牙|ちいかわ|アニメ|漫画/)?.[0];
+  if(work)return choose('SMALL_SELF_DISCLOSURE',[
+   `${work}の話、アタシは好きな場面になると手まで動いちゃう。`,
+   `${work}の話だと、アタシ、声がちょっと大きくなる。`]);
+  if(/パソコン.*買/.test(topicUser))return choose('NOTICE_WORDING',[
+   '新しいパソコン、アタシなら最初に壁紙を選んじゃう。',
+   'パソコンの箱を開けるところ、アタシも見たかった。']);
+  return choose('NOTICE_WORDING',['ウン。','そっか。アタシは、もう少しここにいる。']);
  }
  const forgotten=raw.match(/(スプーン|傘|かさ|鍵|財布|チケット|弁当)(?:を|ヲ)?.*(?:忘れ|わすれ)/)?.[1];
  if(forgotten){

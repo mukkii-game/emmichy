@@ -2,41 +2,16 @@
 
 This file is a repo-local experiment for Emmichy. Do not treat it as the user's global development constitution.
 
-## Fast path: default for AI Relay
+## Single-session development (2026-10-07)
 
-The triggering PR #3 comment is the authoritative short-term TODO.
+The user designated the current Emmichy development session as the sole Director, Implementer and Tester. The automated Relay experiment is ended; its tasks are paused. Do not create another session, post TODOs to wake an agent, or wait for another Director.
 
-1. Read this `AGENTS.md`.
-2. Read only the files directly needed for the TODO.
-3. Do **not** reread `SPEC.md`, `HANDOFF.md`, `PLAYTEST.md`, or Issue #2 by default.
-4. Read those only when the TODO explicitly requires them, a durable decision changed, or safety/ambiguity requires more context.
-5. Before starting, check recent PR #3 comments for the same task ID. If `[DOING]`, `[REVIEW]`, or `[DONE]` already exists, stop.
-6. Make the smallest safe change on the existing PR #3 head branch. A commit to the head branch updates PR #3 automatically.
-7. Run targeted tests first. Run the full suite only for broad/shared changes or when explicitly requested.
-8. Do not call external AI providers unless the TODO explicitly asks for live-AI validation.
-9. Reply on PR #3 only, with a short `[Work/Codex → Chat Director] [REVIEW]` containing task ID, commit, tests, key output, and remaining concern.
-10. Update `PLAYTEST.md` / `HANDOFF.md` only when there is genuinely new durable information.
-
-Goal: minimize latency, token use, and duplicated context.
-
-## Role-neutral relay protocol
-
-The transport is GitHub, not a specific AI product. Any model/tool may participate using roles such as:
-
-- `Director`
-- `Implementer`
-- `Reviewer`
-- `Researcher`
-
-Examples:
-
-- `[Director → Implementer] [TODO] id:loop-7 ...`
-- `[Implementer → Director] [REVIEW] id:loop-7 commit:abc123 tests:5/5 ...`
-- `[Reviewer → Director] [QUESTION] ...`
-
-ChatGPT, Codex, Work, Claude Code, Gemini, or future agents may fill these roles if they can read/write the shared GitHub surface.
-
-Do not ask the user to copy messages between agents when the shared GitHub relay is available.
+- Use the current user's request as the work authority. PR #3 preserves reviewable changes and earlier recovery records.
+- Read necessary files and recent relevant changes only. Do not routinely reload Issue #2 or entire document histories.
+- Preserve existing work. Implement, test and review the result in this session, then continue clear improvements toward a finished game.
+- Record concrete completed work, remaining limitations and next actions in HANDOFF; keep successful and failed dialogue examples in PLAYTEST.
+- Do not use external AI for a change that can be verified locally. Any live quality check must be small and stop on 429.
+- Maintain GitHub as the source of truth. Keep work on PR #3's head branch until public integration is explicitly authorized.
 
 ## Durable docs
 

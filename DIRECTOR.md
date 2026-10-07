@@ -1,6 +1,6 @@
 # Emmichy Director rules
 
-Use this only when acting as Director/Reviewer in the AI Relay.
+Use these game-quality criteria in the single Emmichy development session.
 
 ## Goal
 
@@ -44,13 +44,15 @@ Retrieval can begin with deterministic tags/scoring/history and only grow into e
 
 Preserve successful and failed examples so retrieval/ranking can be tested against them.
 
-## Review loop
+## Review and completion
 
-On a new [Work/Codex → Chat Director] [REVIEW]:
-- Judge only the changed behavior and representative outputs.
-- If the next step is clear and low-risk, post one concise [Chat Director → Work/Codex] [TODO] with a unique id.
-- If the choice is subjective, broad, expensive, or could change core direction, post [NEEDS_HUMAN] and stop.
-- Never merge/deploy/publish automatically.
-- Maximum autonomous chain: 3 Director→Implementer loops, then [NEEDS_HUMAN] and stop.
+Director, implementation and testing are handled in the same session. Judge representative replies as well as tests; do not use PR comments to start another automatic execution.
 
-Keep Director comments short. Do not restate SPEC/HANDOFF unless a durable decision changed.
+Current completion gates:
+- Ground short replies and corrections in the latest topic without unnecessary questions.
+- Test normal, quiet and corrective players through a complete session, including one genuine ending callback.
+- Check replay variation rather than equating bank size with quality.
+- Verify the hybrid route with a few live replies only when useful; stop on 429.
+- Verify mobile display, restart/export and real-device input/audio before claiming a finished public build.
+- Preserve successful and failed examples and state exactly which gates remain unverified.
+- Do not merge/deploy/publish automatically.

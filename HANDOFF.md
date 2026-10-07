@@ -1,3 +1,28 @@
+# Current development state — 2026-10-07
+
+The user designated one session for Director, implementation and tests. All three existing Relay/watch automations were confirmed paused. No new autonomous Relay sessions are needed.
+
+## Loop6 recovery completed
+
+PR #3 head was bf23a02; it had DOING 6027119860 but no loop6 implementation commit or REVIEW. The local checkout contained uncommitted loop6 work on an older, divergent loop5 commit. That work was preserved in /tmp/emmichy-loop6.patch and recovered on the current PR head rather than discarding or replaying the stale local commit.
+
+Short acknowledgements (うん/そう/まあ/まあね/へえ) now prefer authored non-question reactions to the nearest substantive user topic. Consecutive short answers retain that topic. Food requires an explicit eating/drinking context; school, fandom and computer-purchase replies have separate conditions. Distress does not get food/fandom jokes. Used variants are skipped; exhausted short-answer variants remain a short acknowledgement instead of handing control back to an AI interview. Existing SELF_CORRECT / half-price-king callbacks preserved.
+
+Browser module version identifiers updated in the candidate only. main/public unchanged. No live AI calls, paid API or workflow runs.
+
+Validation: targeted 11/11; full game suite 67/67; diff/syntax checks. Headless mobile UI attempt could not run because the installed Playwright package has no Chromium binary. No visual, real-device, audio or live-AI quality claim is made.
+
+## Next completion work
+
+1. Run the actual candidate UI through normal / quiet / corrective 12–18-turn sessions and examine ending callbacks and selection priority.
+2. Improve multi-turn repertoire variation based on those logs; the 1,200-candidate bank alone does not prove ten-session variety.
+3. Small hybrid-AI check only when it adds evidence, stop at 429; then verify mobile IME/audio.
+4. Prepare a reviewable completion candidate; public integration remains separate from development.
+
+HUMAN PLAYTEST READY: NOT YET for a verified hybrid completion candidate; local short-reply recovery is tested.
+
+---
+
 # 2026-10-04 共通AI中継への移行
 
 - 本体: pilot-audio-readable-retro / Draft PR #1。main未統合。Pagesの配信元をこの試作ブランチへ変更し、公開試遊できるようにした。

@@ -2,6 +2,31 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {contextualReply,contextualNote} from '../src/context.js';
 import {conversationMove,MOVES} from '../src/moves.js';
+test('short answers stay grounded without a new interview or invented meal',()=>{
+ for(const input of ['うん','そう','まあ']){
+  const r=conversationMove(input,{history:[{role:'user',text:'オムライス食べた'}]});
+  assert.match(r.text,/オムライス/);assert.doesNotMatch(r.text,/[?？]|ちいかわ|教えて/);
+ }
+ const nonfood=conversationMove('そう',{history:[{role:'user',text:'パソコン買った'}]});
+ assert.doesNotMatch(nonfood.text,/お腹|食べ|[?？]/);
+ const tired=conversationMove('まあ',{history:[{role:'user',text:'仕事で疲れた'}]});
+ assert.doesNotMatch(tired.text,/歓声|お腹|[?？]/);
+ const culture=conversationMove('うん',{history:[{role:'user',text:'上履きは学校の靴だよ'}]});
+ assert.match(culture.text,/靴箱|履き替/);
+ const fan=conversationMove('そう',{history:[{role:'user',text:'ジョジョの好きな場面の話'}]});
+ assert.match(fan.text,/手/);assert.doesNotMatch(fan.text,/[?？]/);
+});
+test('repeated short replies keep their topic and do not fall back to an AI interview',()=>{
+ const history=[{role:'user',text:'オムライス食べた'}];
+ for(const input of ['うん','そう','まあ','うん','そう']){
+  const r=conversationMove(input,{history});
+  assert.ok(r);assert.doesNotMatch(r.text,/[?？]|ちいかわ|喋りすぎ/);
+  history.push({role:'user',text:input},{role:'enny',text:r.text});
+ }
+ assert.equal(conversationMove('うん？',{history}),null);
+ const noFood=conversationMove('そう',{history:[{role:'user',text:'アニメ見ながらオムライス食べた'}]});
+ assert.match(noFood.text,/オムライス/);assert.doesNotMatch(noFood.text,/アニメの話/);
+});
 test('five moves ground novel inputs and protect questions, denial and serious failure',()=>{
  const fixtures=[
   ['写真は詳しくない。今日はもう疲れた',{history:[{role:'enny',text:'好きな写真家は？'}]},'SELF_CORRECT'],

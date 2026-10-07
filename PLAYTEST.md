@@ -258,3 +258,14 @@ loop5原則をsystemへ追加した非公開テストbranch `game-llm/codex/emmi
 5 moveの判断：SELF_CORRECT、SHARED_FRAME、SMALL_SELF_DISCLOSUREは残す。NOTICE_WORDINGも具体反応へ限定して残す。LIGHT_TEASEは削除せず安全条件付きに狭めたが、ルールで安全を判断できない場合は通常経路へ返す。統合はまだ行わない。
 
 検証：ゲーム `npm test` 65件成功、`node --check src/app.js`、`git diff --check`成功。中継23件成功。公開UI、実端末、実AIの忘れ物・文化ケースは未検証。正確なWorkトークン、料金、残枠は取得できない。
+
+
+## 2026-10-07 Loop6 recovery, single-session development
+
+- Recovered uncommitted local work onto PR head bf23a02. No duplicated AI trial or workflow execution.
+- Short-reply and repetition tests: うん / そう / まあ after オムライス食べた stay non-question and food-specific. Success examples: 「オムライスの話、アタシまでお腹すいてきた。」; repeated short answer gets another unused line, then a quiet acknowledgement. パソコン買った→そう: 「新しいパソコン、アタシなら最初に壁紙を選んじゃう。」
+- School example: 上履きは学校の靴だよ→うん: 「上履き。アタシ、靴箱で一回止まりそう。履き替える方、こっちね。」
+- Preserved failures/limits: the abandoned local draft answered unrelated short replies with 「ちょっと喋りすぎたね」 regardless of evidence, and returned null after all variants were used. Removed that invented self-criticism and prevented exhausted short replies from becoming an AI interview. Unknown topics still have only minimal acknowledgements; this is a remaining repertoire limit.
+- Existing SELF_CORRECT and half-price-king tests passed. Targeted 11/11, full game suite 67/67. Real AI calls 0.
+- Actual mobile-width UI trial was attempted but blocked before launch: no Chromium executable installed for Playwright. No UI behavior or visual result was fabricated. Live hybrid quality / physical mobile IME and sound remain unverified.
+- HUMAN PLAYTEST READY? NOT YET for a verified completion candidate. Next: actual UI through-play with normal, quiet and corrective players, then repertoire continuation/ending review.

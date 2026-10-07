@@ -289,3 +289,12 @@ loop5原則をsystemへ追加した非公開テストbranch `game-llm/codex/emmi
 - Full suite 78/78. Offline music/normal/quiet/corrective 12-exchange scenarios all end; the automatic scenario ends after 18 exchanges. Raw records in docs/playtest-20261007-offline.json.
 - One real request: HTTP200/Groq, but nonfan music preference was redirected to chiikawa with generic questions (FAILED quality). Recorded without alteration in docs/playtest-20261007-live-probe.json. Candidate recognized music entrance uses authored material; provider configuration unchanged.
 - UI attempt: cloud browser cannot reach the local server; local browser download invalid. No candidate visual/mobile IME/audio result yet. Ready as a code candidate for through-play, not certified as a finished hybrid public game.
+
+
+## 2026-10-07 Actual browser verification
+
+- Reachable commit-pinned source preview resolved local-browser access limitation. Browser evidence refers to f57c46e, offline nollm mode, desktop cloud browser.
+- Actual screen: 12 exchanges, nonfan music kept on-topic, music farewell callback, saved history/ended state after reload and continue, readable original transcript restored, text export contents checked. Restart cleared the conversation and selected a different computer two-beat arc; repertoire usage survived.
+- Visual defect discovered: preview image redirect tainted canvas and left portrait blank. Anonymous CORS image loading fixed it; portrait verified on screenshot. Also restored original transcript on page load.
+- Evidence: docs/playtest-20261007-browser.json, docs/playtest-20261007-browser-export.txt, docs/candidate-ui-20261007.jpg.
+- Full tests 79/79. Physical mobile IME/audio, general live hybrid quality and ten whole-game replay chains remain unverified. Ready for human through-play as a candidate; no main/public deployment.

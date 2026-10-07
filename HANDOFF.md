@@ -1,3 +1,15 @@
+# Current checkpoint — playable completion candidate, 2026-10-07
+
+Candidate f57c46e is saved on PR #3's head branch. Actual desktop browser through-play is now verified via the commit-pinned raw.githack preview (not main/production). The earlier local-browser access blocker was resolved by using this reachable public source preview.
+
+Verified in the actual screen: dictionary readiness, kanji/hiragana entry, 12 exchanges, nonfan music kept on-topic, music farewell callback, reload/continue preserving ended history, readable original-log restoration, export, restart and a different second computer arc. A proxy-image canvas taint was detected and fixed with anonymous CORS loading. Saved evidence: docs/playtest-20261007-browser.json, browser-export.txt, candidate-ui-20261007.jpg.
+
+All 79 tests passed; five offline through-play scenarios and ten distinct two-beat arcs per everyday topic passed. No provider/deploy configuration changed. One direct AI probe was a quality failure; candidate recognized music entrance uses authored material instead. Human through-play candidate READY, but full hybrid quality, physical mobile IME/audio and ten fully distinct whole-game chains remain unverified. Do not claim a final public release or provider-wide quality fix.
+
+Single-session development, Relay paused. Main/public unchanged. This is the concrete candidate to assess/play; the remaining work is quality verification of open-ended AI and physical devices, not another Director handoff.
+
+---
+
 # Latest checkpoint — completion candidate, 2026-10-07
 
 Candidate work completed locally and prepared for PR #3 storage:

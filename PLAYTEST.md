@@ -342,3 +342,10 @@ Browser attempt on commit 48c29ed: HTML/CSS rendered but dialogue submit did not
 game-llm Draft PR #1, code d08bdaa, passes 25 tests. Full local client→worker calls with mocked providers verified normal success; unsolicited nonfan redirect rejected then accepted next reply; HTTP429 skips the next client request; total failure returns502 and skips another request during the 60s cooldown. Four structured results: docs/playtest-20261008-relay-contract.json. Live API calls0, workflows0. The 5s per-provider deadline fits nominally below the client's22s wait; underlying Workers AI binding execution cannot be cancelled by this timer.
 
 Read-only live /health probe timed out after5s. No live endpoint health/quality claim. Origin restriction is preserved, including rejecting absent Origin and unregistered raw.githack preview Origin. Existing provider accounts' billing status is not verified. Main and live Worker untouched.
+
+
+## 2026-10-08 Authorized relay release and blocked live check
+
+User authorized proceeding with the prior concrete relay merge/deploy proposal. PR game-llm#1 merged as6ddf822. Deploy run37741421196 succeeded, including25 tests and Wrangler publish; Worker version01c35ad6-6eeb-41d0-91ed-bcd8f417eaff. No billing/provider/CORS/security changes. Game PR#3/public unchanged.
+
+Single bounded smoke from GitHub Actions37741701113 stopped at healthHTTP403, no AI calls. One diagnostic37741811205 captured response `error code: 1010`, also chatRequests0. Actual results docs/playtest-20261008-deployed-relay.json. Direct cloud-browser health navigation was ERR_BLOCKED_BY_CLIENT. Live quality is not tested or passed; access protections were not altered. Await ordinary user's browser health observation; do not re-run blocked clients.

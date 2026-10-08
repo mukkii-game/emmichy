@@ -1,10 +1,12 @@
 # Current checkpoint — bounded completion goal, 2026-10-08
 
-Relay follow-up authorized and saved separately: https://github.com/mukkii-game/game-llm/pull/1 (draft), code d08bdaa. Per-provider 5s Emmichy waits, bounded Workers AI wait and message-context validation of unsolicited fandom redirects. Shared defaults/models/keys/CORS/deploy workflow preserved. 25 relay tests pass.
+Relay follow-up authorized and saved separately: https://github.com/mukkii-game/game-llm/pull/1, code d08bdaa. PR merged and deployed on 2026-10-08 with user authorization, merge 6ddf822. Per-provider 5s Emmichy waits, bounded Workers AI wait and message-context validation of unsolicited fandom redirects. Shared defaults/models/keys/CORS/deploy workflow preserved. 25 relay tests pass.
 
 Local client→worker contract verification passed valid answer, rejected redirect→next valid provider, client-side 429 stop and 502 cooldown. Mocked providers, zero live requests; docs/playtest-20261008-relay-contract.json. Container health probe still times out. A direct POST without Origin or raw.githack Origin would be rejected if it reaches the current allow-list; this does not prove production endpoint failure.
 
-Both candidates are saved; live relay is unchanged. Next concrete decision is whether to integrate/deploy the relay candidate, which requires a separate authorization because the current goal excludes main/public actions. Smartphone checks remain deferred.
+Relay deployed successfully by run 37741421196, Worker version 01c35ad6-6eeb-41d0-91ed-bcd8f417eaff. Game candidate remains on PR #3; its public version is unchanged. User authorized relay integration/deployment in the latest instruction; do not ask again. Smartphone checks remain deferred.
+
+Bounded live smoke run 37741701113 stopped on non-JSON HTTP403 health. One diagnostic run 37741811205 captured `error code: 1010`. Both stopped before any AI call (chatRequests0). Browser direct health navigation was also blocked by client; container HTTP health returned403. No conclusion about live AI answer quality. No security-setting changes or fingerprint/route workaround. Next needed evidence: ordinary user browser /health result to distinguish user accessibility from test-client rejection. Do not repeat blocked probes. Evidence docs/playtest-20261008-deployed-relay.json.
 
 User supplied /goal to finish the candidate, verify dialogue/hybrid/save-resume, preserve PR #3 and defer mobile verification. This tool session cannot inspect or activate the platform Goal lifecycle; no persistent background run is claimed.
 

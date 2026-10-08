@@ -1,0 +1,21 @@
+{
+  "deployment": {
+    "merge": "6ddf822335487f28f4d289c26bc0751b5e3a6963",
+    "run": 37741421196,
+    "conclusion": "success",
+    "version": "01c35ad6-6eeb-41d0-91ed-bcd8f417eaff"
+  },
+  "diagnosticRun": 37741811205,
+  "mode": "live deployed relay; synthetic inputs; at most two chat requests",
+  "results": [],
+  "health": {
+    "status": 403,
+    "body": {
+      "error": "non-json-response",
+      "responseSnippet": "error code: 1010\n"
+    },
+    "seconds": 0.11
+  },
+  "stopReason": "health unavailable; chat not attempted",
+  "chatRequests": 0
+}

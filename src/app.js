@@ -35,13 +35,21 @@ function saveSession(){if(ready)session=checkpointSession(session);try{localStor
 try {state=restoreState(JSON.parse(localStorage.getItem(key)));}catch{saveAvailable=false;}
 const hadSavedDialogue=state.history.length>0;
 let lines=[];
+const messageNodes=new WeakMap();
 function renderConversation(){
- const log=$('conversation');log.replaceChildren();
+ const log=$('conversation'),pending=$('live-reply');
  if(!readingsSettled)return;
- for(const item of lines){const p=document.createElement('p');p.className='message '+item.role;const label=document.createElement('span');label.className='speaker';label.textContent=item.role==='user'?'YOU >':item.role==='system'?'SYSTEM >':'EMMICHY >';const body=document.createElement('span');body.textContent=readableText(item.value,tokenizer);p.append(label,body);log.append(p);}
+ const nodes=lines.map(item=>{
+  if(messageNodes.has(item))return messageNodes.get(item);
+  const p=document.createElement('p');p.className='message '+item.role;const label=document.createElement('span');label.className='speaker';label.textContent=item.role==='user'?'YOU >':item.role==='system'?'SYSTEM >':'EMMICHY >';const body=document.createElement('span');body.textContent=readableText(item.value,tokenizer);p.append(label,body);messageNodes.set(item,p);return p;
+ });
+ log.replaceChildren(...nodes,pending);
  log.scrollTop=log.scrollHeight;
 }
-function add(role,value){lines.push({role,value});lines=lines.slice(-40);renderConversation();}
+function add(role,value){
+ live='';$('live-body').textContent='';$('live-reply').hidden=true;
+ lines.push({role,value});lines=lines.slice(-40);renderConversation();
+}
 function recordAside(line,pendingState=null){
  if(pendingState){
   pendingState.history=retainAside(pendingState.history,line,{pendingReply:true});
@@ -74,8 +82,9 @@ function draw(){
  ctx.fillStyle='#000';ctx.fillRect(0,0,496,672);
  if(portrait)ctx.drawImage(portrait,0,0,496,672);
  const nextLive=readingsSettled?live:'';
- if($('live-reply').textContent!==nextLive){$('live-reply').textContent=nextLive;const log=$('conversation');log.scrollTop=log.scrollHeight;}
- $('terminal-note').textContent=session?.finished?'— END —　コンニチハ デ サイカイ':busy?'':'アタシ エミチィ　ナンデモ ハナシテネ';
+ if($('live-body').textContent!==nextLive){$('live-body').textContent=nextLive;$('live-reply').hidden=!nextLive;const log=$('conversation');log.scrollTop=log.scrollHeight;}
+ $('terminal-note').textContent=session?.finished?'— END —　コンニチハ デ サイカイ':'アタシ エミチィ　ナンデモ ハナシテネ';
+ $('terminal-note').setAttribute('aria-hidden',String(busy));
  ctx.save();ctx.scale(2,4);
  if(mood==='knowing' && Math.floor(Date.now()/700)%2)text(ctx,'*',230,10,'#00ffff');
  if(mood==='worried'){

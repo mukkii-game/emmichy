@@ -43,10 +43,10 @@ canvas { width:100%; aspect-ratio:248/336; }
 .message.user { color:#83ffff; }
 .message.system { color:#b5c5b5; font-size:18px; }
 .speaker { display:block; color:#a1aca1; font:12px/1.8 monospace; letter-spacing:1px; margin-bottom:3px; }
-#live-reply { color:#fff59c; font:500 24px/1.8 'BIZ UDGothic','MS Gothic',monospace; white-space:pre-wrap; overflow-wrap:anywhere; max-height:230px; overflow-y:auto; }
-#live-reply:not(:empty) { flex-shrink:0; max-height:40%; margin-top:18px; padding-top:4px; }
+#live-reply[hidden] { display:none; }
 #conversation { padding-bottom:6px; }
 #terminal-note { color:#a0dda0; font:14px/1.8 'MS Gothic',monospace; border-top:1px solid #334133; padding-top:10px; margin-top:12px; }
+#terminal-note[aria-hidden="true"] { visibility:hidden; }
 .screen-wrap:fullscreen { grid-template-columns:36% minmax(0,1fr); gap:32px; padding:4vw; align-content:center; }
 .screen-wrap:fullscreen canvas { width:100%; }
 .screen-wrap:fullscreen .conversation-panel { height:80vh; }

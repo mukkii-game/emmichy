@@ -372,3 +372,11 @@ Fake scheduler shows short1s, short4s, long7s; no further scheduled gestures, di
 97/97 tests pass. Short waiting starts2s after submission, next5s, one medium authored bridge8s, then no additional scheduled filler. Cancellation and minimum300ms after last shown text remain covered. Neutral school anecdote rotates ウンウン／ソウネー／フムフム then ニホンゴデ、ナンテイウンダッケ. The ordinary long bridge describes a word hiding and searching with gestures.
 
 Clear 合格した／プリンがおいしい／楽しかった uses positive pool ワオ／エヘヘ／フフッ. ミスした／楽しくない／成功しなかった／嬉しくなかった and mixed嬉しいけど失敗した do not laugh. 学校へ行った／できたかどうかわからない／腫瘍ができた／最高って言葉の意味は stay neutral; accident/injury uses gentle listening. Classification is conservative local lexical matching, not reliable general comprehension or Jev. No AI calls. Actual pleasantness/latency and physical phone checks are unverified.
+
+## 2026-10-08 — continuous reply layout after listening gestures
+
+Player failure: ウンウン was followed by an eventual reply far below, which moved upward on completion. Cause: separate growing live-reply flex region, followed by history insertion; busy terminal note also changed the history height.
+
+Fix: animated reply stays inside the scrollable history and uses normal message spacing and its speaker label throughout. It is hidden before final insertion, avoiding one frame with two copies; prior message nodes are retained. The busy terminal note reserves its normal height.
+
+97 tests pass. Local desktop browser with synthetic provider only:3s success after ウンウン, and9s failure after two short gestures plus the authored waiting line, followed by the uncertainty fallback. Measured adjacent gaps22px; history height465px while busy and after completion. Evidence docs/playtest-20261008-layout.json and docs/playtest-20261008-layout.png. Synthetic server uses a separate local origin; no live AI calls or edits to the player's saved public conversation. Real provider quality, subjective timing and physical-phone verification remain unclaimed.

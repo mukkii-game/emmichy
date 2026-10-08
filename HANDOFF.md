@@ -1,4 +1,12 @@
-# Current checkpoint — Nordic bust / verified eight-color tile, 2026-10-08
+# Current checkpoint — softer illustrated face, 2026-10-08
+
+User likes the Nordic portrait but asks for less realistic nose, eyes and facial outline. Built-in imagegen edit simplifies nasal modelling and eye detail and softens cheek/jaw while retaining pose, braids, costume and old-PC texture. New source/final assets use nordic-soft filenames; earlier assets remain for recovery. Same248×336 indexed8-color build and native2× nearest-neighbor renderer. Only asset references, release ID and build/test defaults change.
+
+Targeted shipped-PNG test passes; local actual-screen portrait crop docs/portrait-soft-20261008-local.png confirms the result. Prompt/provenance docs/portrait-soft-20261008.md. No new dialogue or live-provider verification claimed. Public follow-up targets authorized pilot-audio-readable-retro; release status pending.
+
+---
+
+# Earlier checkpoint — Nordic bust / verified eight-color tile, 2026-10-08
 
 User supplied the braided Nordic woman and explicitly preferred the older naturalistic portrait over modern manga proportions. Three built-in imagegen drawing iterations; first and second drafts retained anime tendencies, second measured352,470 colors and cannot be called an8-color asset. Selected third drawing uses the approved earlier close portrait as the main style input. Preserve the old red-sweater asset.
 

@@ -2,8 +2,8 @@
 // 640x400 / digital 8-color mode; this is not a complete PC emulator.
 import fs from 'node:fs/promises';
 import {decodeRgb,encodeIndexed,digitalPalette} from './portrait-png.mjs';
-const source=process.argv[2]||'assets/emmichy-nordic-source-20261008.png';
-const target=process.argv[3]||'assets/emmichy-nordic-bust-20261008.png';
+const source=process.argv[2]||'assets/emmichy-nordic-soft-source-20261008.png';
+const target=process.argv[3]||'assets/emmichy-nordic-soft-bust-20261008.png';
 const image=decodeRgb(await fs.readFile(source)),width=248,height=336;
 const cropHeight=Math.floor(image.height*.82),cropWidth=Math.min(image.width,cropHeight*width/height),left=(image.width-cropWidth)/2;
 const indices=new Uint8Array(width*height),bayer=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5];

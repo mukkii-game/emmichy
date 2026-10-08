@@ -1,7 +1,7 @@
 import {freshState,restoreState,respond,normalize} from './engine.js?v=20261007-candidate1';
 import {chiikawaReply,checkedAt} from './topics.js?v=20261006-mix1';
 import {text,kana} from './font.js?v=20261006-mix1';
-import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261008-hybrid1';
+import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261008-pacing1';
 import {createAudioDirector} from './audio.js?v=20261008-ready1';
 import {CHAT_API_URL} from './config.js?v=20261006-mix1';
 import {advancePerformance} from './performance.js?v=20261007-loop7';
@@ -11,14 +11,14 @@ import {selectKnowledge} from './fandom.js?v=20261006-mix1';
 import {selectGap} from './gap.js?v=20261006-mix1';
 import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261008-route2';
 import {cultureReply} from './culture.js?v=20261006-mix1';
-import {chooseFiller,startFiller,longFiller,retainAside,idleAside} from './filler.js?v=20261006-idle1';
+import {chooseFiller,startFiller,retainAside,idleAside,createIdleSequence} from './filler.js?v=20261008-pacing1';
 import {learnInterests} from './balance.js?v=20261008-route2';
 import {selectOpening} from './openings.js?v=20261006-open1';
 import {preparedReply} from './routing.js?v=20261008-route2';
 import {cleanConversation,noteConversationReply} from './conversation.js?v=20261007-loop7';
 import {offlineFallback} from './fallback.js?v=20261008-finish1';
 let recentFillers=[];
-let idleAsideAt=0,idleAsideIndex=0;
+const idleSequence=createIdleSequence();
 let tokenizer=null;
 let readingsSettled=false;
 const $=id=>document.getElementById(id),canvas=$('screen'),ctx=canvas.getContext('2d',{willReadFrequently:true});
@@ -87,10 +87,11 @@ function draw(){
 }
 function save(){try{localStorage.setItem(key,JSON.stringify(state));saveAvailable=true;}catch{saveAvailable=false;}$('disk').textContent=saveAvailable?'● DISK SAVED':'● MEMORY ONLY';}
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
-async function endSession(){
- if(!ready||ending||busy||!session||session.finished||state.ended)return;
+async function endSession(reason='time'){
+ if(!ready||ending||busy||session?.finished||state.ended||(!session&&reason!=='idle'))return;
+ if(!session)session={startedAt:Date.now(),turns:0,finished:false};
  ending=true;busy=true;$('send').disabled=true;$('reset').disabled=true;$('restart-chat').disabled=true;
- const end=finishSession(state,session);state=end.state;session=end.session;mood='soft';saveSession();
+ const end=finishSession(state,session,{reason});state=end.state;session=end.session;mood='soft';saveSession();save();
  audioDirector.se.ending();
  const endingDisplay=readableText(end.text,tokenizer);
  for(const c of endingDisplay){live+=c;draw();await wait(32);}
@@ -121,7 +122,7 @@ $('talk').addEventListener('submit',async e=>{
    result.text=fandomReply;result.state.history.at(-1).text=result.text;
   }
  }
- let usedModel=false,locallyReplaced=false;
+ let usedModel=false,locallyReplaced=false,fillerGap=0;
  const gap=!isRestart&&!state.ended&&selectGap(raw,state);
  let prepared=isRestart||state.ended?null:preparedReply(raw,state,session,{gap,culture,repertoire,modelEnabled,kind:result.kind});
  if(prepared?.topic==='greeting'){prepared.text=openingText(true);result.state.openingSeen=state.openingSeen;}
@@ -132,12 +133,12 @@ $('talk').addEventListener('submit',async e=>{
  if(modelEnabled && !ruleOnly && chatAvailable(session)){
   $('status').textContent='';
   const stopFiller=startFiller(()=>{
-   const line=chooseFiller(raw,recentFillers);recentFillers=[...recentFillers,line].slice(-4);
+   const line=chooseFiller(raw,recentFillers);recentFillers=[...recentFillers,line].slice(-6);
    recordAside(line,result.state);draw();
-  },{later:()=>{const line=longFiller(raw,recentFillers);recentFillers=[...recentFillers,line].slice(-4);recordAside(line,result.state);draw();}});
+  });
   let data;
   try{data=await requestChat(chatEndpoint,raw,before,session,{offline});}
-  finally{stopFiller();live='';draw();}
+  finally{fillerGap=stopFiller();live='';draw();}
   if(data){result.text=data.text;result.state.history.at(-1).text=data.text;usedModel=true;modelProvider=data.provider;}
  }
  if(!isRestart&&!['bye','asleep','name','memory','arithmetic'].includes(result.kind)){
@@ -152,11 +153,11 @@ $('talk').addEventListener('submit',async e=>{
  session.dialogueUse={ai:(session.dialogueUse?.ai||0)+(usedModel?1:0),bank:(session.dialogueUse?.bank||0)+(!usedModel&&(prepared||locallyReplaced)?1:0)};
  if(result.kind!=='bye')result.state.conversation=noteConversationReply(result.state.conversation,result.text,raw,session.turns);
  state=result.state;mood=result.mood;session.lastMood=mood;saveSession();save();
- await wait(300+Math.min(raw.length*10,500));
+ await wait(Math.max(fillerGap,300+Math.min(raw.length*10,500)));
  if(mood==='excited')audioDirector.se.excited();else if(mood==='worried')audioDirector.se.worried();else audioDirector.se.reply();
  const replyDisplay=readableText(result.text,tokenizer);
  for(const c of replyDisplay){live+=c;draw();await wait(mood==='excited'?12:mood==='worried'&&c==='\n'?420:22);}
- add('enny',result.text);live='';lastActivity=Date.now();save();busy=false;$('send').disabled=false;$('reset').disabled=false;
+ add('enny',result.text);live='';noteActivity();save();busy=false;$('send').disabled=false;$('reset').disabled=false;
  $('status').textContent=usedModel?`AI会話${modelProvider?' / '+({groq:'Groq',gemini:'Google Gemini','workers-ai':'Cloudflare Workers AI',local:'ローカルAI'}[modelProvider]||modelProvider):''} / ENTER で送信`:locallyReplaced?'用意した会話で調整 / ENTER で送信':prepared?'用意した会話 / ENTER で送信':modelEnabled&&!ruleOnly?'AI失敗→ルール会話 / ENTER で送信':'ルール会話 / ENTER で送信';
  const item=document.createElement('p');item.textContent=`あなた：${raw}。Emmichy：${result.text}`;$('transcript').append(item);if($('transcript').children.length>40)$('transcript').firstChild.remove();
  $('entry').focus();draw();
@@ -164,12 +165,14 @@ $('talk').addEventListener('submit',async e=>{
  else if(shouldEnd(session)&&!$('entry').value.trim()&&!composing)await endSession();
 });
 let composing=false;
-$('entry').addEventListener('compositionstart',()=>composing=true);
-$('entry').addEventListener('compositionend',()=>{composing=false;draw();});
-$('entry').addEventListener('input',()=>{lastActivity=Date.now();if(!busy){live='';draw();}});
+function noteActivity(){lastActivity=Date.now();idleSequence.touch(lastActivity);}
+$('entry').addEventListener('compositionstart',()=>{composing=true;noteActivity();});
+$('entry').addEventListener('compositionend',()=>{composing=false;noteActivity();draw();});
+$('entry').addEventListener('input',()=>{noteActivity();if(!busy){live='';draw();}});
 $('entry').addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.isComposing||e.keyCode===229))e.preventDefault();});
 let lastActivity=Date.now();
-$('entry').addEventListener('input',()=>{lastActivity=Date.now();draw();});
+$('entry').addEventListener('keydown',noteActivity);
+document.addEventListener('pointerdown',noteActivity);
 canvas.addEventListener('click',()=>$('entry').focus());
 $('sound').onclick=async()=>{let on;try{on=await audioDirector.toggle();}catch{$('status').textContent='音を開始できません。もう一度音ボタンを押してください。';return;}$('sound').textContent='BGM + SE '+(on?'ON':'OFF');$('sound').setAttribute('aria-pressed',String(on));if(on)audioDirector.se.reply();};
 $('help').onclick=()=>{$('instructions').hidden=!$('instructions').hidden;};
@@ -181,16 +184,17 @@ $('reset').onclick=()=>{if(!resetArmed){resetArmed=true;$('reset-note').textCont
 function showStartChoice(){
  if(busy)return;
  if(ready)saveSession();
- ready=false;$('start-choice').hidden=false;$('send').disabled=true;$('entry').disabled=true;
+ ready=false;$('start-choice').hidden=false;$('talk').hidden=true;$('send').disabled=true;$('entry').disabled=true;
  $('continue').disabled=!state.history.length;
  $('status').textContent='続きから／最初から を選んでください';
+ $('continue').focus();
 }
-function enterConversation(){ready=true;$('start-choice').hidden=true;$('send').disabled=!readingsSettled;$('entry').disabled=false;lastActivity=Date.now();$('entry').focus();}
+function enterConversation(){ready=true;$('start-choice').hidden=true;$('talk').hidden=false;$('send').disabled=!readingsSettled;$('entry').disabled=false;noteActivity();$('entry').focus();}
 $('continue').onclick=()=>{session=resumeSession(session);enterConversation();saveSession();$('status').textContent=state.ended?'おしまい。「最初から」で、もう一度。':'会話を再開しました / ENTER で送信';};
 $('new-chat').onclick=()=>{const next=startConversation(state);state=next.state;session=next.session;lines=[];live='';mood='idle';$('transcript').replaceChildren();addOpening(true);enterConversation();save();saveSession();$('status').textContent='新しい会話 / 漢字・ひらがな OK';draw();};
 $('restart-chat').onclick=showStartChoice;
 if(hadSavedDialogue){ready=false;showStartChoice();}
-document.addEventListener('visibilitychange',()=>{if(!session||!ready)return;if(document.hidden)saveSession();else{session=resumeSession(session);saveSession();}});
+document.addEventListener('visibilitychange',()=>{if(!ready)return;if(document.hidden)saveSession();else{session=resumeSession(session);noteActivity();saveSession();}});
 setInterval(()=>{if(ready&&!document.hidden)saveSession();},5000);
 window.addEventListener('pagehide',saveSession);
 function setEngineNote(){
@@ -200,11 +204,11 @@ setEngineNote();
 if(isLocal&&!offline){
  fetch('/api/config').then(r=>r.json()).then(c=>{if(c.localModel){chatEndpoint='/api/chat';modelProvider='local';}setEngineNote();}).catch(()=>{});
 }
-setInterval(draw,160);setInterval(()=>{
- if(ready&&!document.hidden&&shouldEnd(session)&&!composing&&!$('entry').value.trim()&&Date.now()-lastActivity>8000)endSession();
- if(ready&&!document.hidden&&!busy&&session&&!session.finished&&!state.ended&&!composing&&!$('entry').value.trim()&&Date.now()-lastActivity>=10000&&idleAsideAt!==lastActivity){
-  idleAsideAt=lastActivity;
-  recordAside(idleAside(state.history,idleAsideIndex++));draw();
+setInterval(draw,160);setInterval(async()=>{
+ if(ready&&readingsSettled&&!document.hidden&&!busy&&!session?.finished&&!state.ended&&!composing){
+  const stage=idleSequence.poll();
+  if(stage===3)await endSession('idle');
+  else if(stage){recordAside(idleAside(state.history,stage-1));draw();}
  }
 },1000);draw();if(ready)$('entry').focus();
 

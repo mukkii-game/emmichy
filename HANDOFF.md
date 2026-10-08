@@ -1,4 +1,14 @@
-# Current checkpoint — authorized public candidate, 2026-10-08
+# Current checkpoint — waiting and inactivity pacing, 2026-10-08
+
+User playtest requested repeated waiting gestures and a resume chooser at the input location. AI waiting: first filler after 1s, then a different short filler every 2s while unresolved; cancel queued fillers before the answer and reserve at least 300ms after the last shown filler. Existing 300–800ms reply pause also satisfies that spacing. No extra AI calls.
+
+Inactivity: first aside 10s after last input/action or completed reply, another distinct aside after another 10s, then 「そろそろ帰るね。バイバイ！」 after a third 10s. Input, keydown, IME start/end and pointer actions reset the sequence. While composing, busy, hidden or choosing resume, it cannot advance. A stopped nonempty draft also counts down; idle farewell does not erase it. Returning to the visible page restarts the countdown. Old 8s time-end polling was removed; normal ending still follows completed turns. This requested idle farewell can occur before ten turns. Finish state saves before typing animation.
+
+Continue/restart chooser occupies the usual input slot beneath conversation. Input form is hidden until a choice, focus goes to Continue then back to Entry. 93 tests pass, including fake-clock filler repetition/cancellation/spacing and DOM-level IME pause, draft inactivity, three stages, saved farewell and chooser visibility. Browser/live-provider timing and physical-phone verification remain to be checked. Follow-up public reflection is within the authorized candidate scope.
+
+---
+
+# Earlier checkpoint — authorized public candidate, 2026-10-08
 
 User explicitly approved reflecting this completion candidate into the public game after being told the former public version lacked these changes. PR #3 merged into the existing Pages source branch pilot-audio-readable-retro, merge 4a2dcf87360b213f5f1c1e3ea6cf5af3a71c8120. Main need not change: Pages already publishes this branch. Pages build/deploy run 37745240905 succeeded. Game tests rerun before release: 92/92 pass.
 

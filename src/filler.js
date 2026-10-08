@@ -6,7 +6,7 @@ export function retainAside(history,line,{pendingReply=false}={}){
 }
 export function chooseFiller(input, recent=[]){
  const serious=/つらい|苦しい|相談|病気|入院|死に|いじめ|怖い|こわい/.test(input);
- const pool=serious?['うん、聞いてるよ。','うん。ゆっくり話してね。','そっか…。']:['ウンウン…。','エト、エト…。','アッ…。','フフ…。','ウン！','ンー…。'];
+ const pool=serious?['うん、聞いてるよ。','うん…。','そっか…。']:['ウンウン…。','エト…。','アノネ…。','ンー…。','アッ…。','ウン…。'];
  return pool.find(line=>!recent.includes(line))||pool.find(line=>line!==recent.at(-1))||pool[0];
 }
 export function longFiller(input,recent=[]){
@@ -15,14 +15,25 @@ export function longFiller(input,recent=[]){
 }
 export function idleAside(history=[],index=0){
  const lastUser=history.filter(h=>h.role==='user').at(-1)?.text||'';
- if(/つらい|苦しい|相談|病気|いじめ/.test(lastUser))return '急がなくて大丈夫。ここにいるよ。';
+ if(/つらい|苦しい|相談|病気|いじめ/.test(lastUser))return ['急がなくて大丈夫。ここにいるよ。','アタシ、少しここで待ってるね。'][index%2];
  const food=/ご飯|ごはん|ゴハン|牛丼|ギュウドン|丼|ドンブリ|吉野家|ヨシノヤ|チーズ|プリン|そば|ソバ|食べ|タベ/.test(lastUser);
- const pool=food?['さっきのご飯の話、思い出したらお腹すいてきちゃった。','アタシ、食べ物の話になると急に元気なの。フフ。','おいしい物の話、まだ聞いていたいな。']:['ア、ちょっとボーッとしてた。ちゃんと聞いてるよ。','フフ。こうしてゆっくり話すの、いいね。','急がなくていいよ。アタシ、ここにいるから。'];
+ const pool=food?['さっきのご飯の話、思い出したらお腹すいてきちゃった。','アタシ、食べ物の話になると急に元気なの。フフ。','おいしい物の話、まだ聞いていたいな。']:['別の話でもいいよ。ゆっくりで大丈夫。','アタシ、覚えた日本語を小さいノートに書いてるの。字はまだ、ちょっとへた。','急がなくていいよ。アタシ、ここにいるから。'];
  return pool[index%pool.length];
 }
-export function startFiller(show,{schedule=setTimeout,cancel=clearTimeout,later}={}){
- let active=true;
- const timer=schedule(()=>{if(active)show();},1000);
- const longTimer=later?schedule(()=>{if(active)later();},10000):null;
- return ()=>{active=false;cancel(timer);if(longTimer!==null)cancel(longTimer);};
+export function startFiller(show,{schedule=setTimeout,cancel=clearTimeout,now=Date.now}={}){
+ let active=true,timer,lastShown=null;
+ const speak=()=>{if(!active)return;lastShown=now();show();if(active)timer=schedule(speak,2000);};
+ timer=schedule(speak,1000);
+ // Stop before displaying the answer; reserve breathing room after the last gesture.
+ return ()=>{active=false;cancel(timer);return lastShown===null?0:Math.max(0,300-(now()-lastShown));};
+}
+export function createIdleSequence(now=Date.now()){
+ let activityAt=now,stage=0;
+ return {
+  touch(time=Date.now()){activityAt=time;stage=0;},
+  poll(time=Date.now()){
+   if(stage>=3||time-activityAt<10000)return null;
+   activityAt=time;return ++stage;
+  }
+ };
 }

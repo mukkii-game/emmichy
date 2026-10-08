@@ -356,3 +356,7 @@ Single bounded smoke from GitHub Actions37741701113 stopped at healthHTTP403, no
 Cloudflare API run 37743437929 confirmed a deployment defect: RL was absent and deployment logs warned old Wrangler ignored ratelimits. Relay PR #2 pins Wrangler 4.36.0, with 25 tests and dry-run listing RL at 20 requests/60s. Deployment 37743729349 succeeded; independent read-only run 37743902011 confirms RL/AI/provider secrets configured and new version active at 100%. Evidence docs/playtest-20261008-control-plane.json. No public AI calls.
 
 1010 access rejection remains unresolved; management sign-in verification fails after one reload, so account security events could not be examined. These checks prove deployed configuration, not live response quality or ordinary-player access. No security protections modified. Latest game visual/live-AI verification remains incomplete; smartphone checks deferred.
+
+## 2026-10-08 — player feedback: waiting and inactivity pacing
+
+93 tests pass. Fake clock verifies first waiting gesture at 1s, subsequent gestures 2s apart with different text, cancellation and remaining 300ms breathing room. DOM test verifies no inactivity line at 9.999s, first at 10s even with stopped draft, no line during ongoing IME composition, composition-end resets countdown, distinct second line after another 10s and saved idle farewell after another 10s. Continue/restart visibility is checked in the usual input slot. Live provider latency and physical-phone interaction are not certified by these tests.

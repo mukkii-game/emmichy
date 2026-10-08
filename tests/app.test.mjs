@@ -14,13 +14,15 @@ test('screen remains playable after dictionary failure and IME composition does 
   setAttribute(){} focus(){}
   getContext(){return {fillRect(){},save(){},scale(){},restore(){},drawImage(){}};}
  }
- const elements=new Map(),storage=new Map();
+ const elements=new Map(),storage=new Map(),intervals=[];
+ const originalNow=Date.now;let time=originalNow();
  const store={getItem:k=>storage.get(k)||null,setItem:(k,v)=>storage.set(k,v)};
  try{
   globalThis.document={getElementById:id=>{if(!elements.has(id))elements.set(id,new Element());return elements.get(id);},createElement:()=>new Element(),addEventListener(){},hidden:false};
   globalThis.window={addEventListener(){}};globalThis.location={hostname:'preview.invalid',search:'?nollm=1'};
   globalThis.localStorage=store;globalThis.sessionStorage=store;globalThis.Image=class{};
-  globalThis.setInterval=()=>0;
+  Date.now=()=>time;
+  globalThis.setInterval=(fn,ms)=>{intervals.push({fn,ms});return 0;};
   // Advance only the app's typing delays, without waiting seconds per reply.
   let expectPersisted=null,persistedBeforeAnimation=false;
   globalThis.setTimeout=fn=>{if(expectPersisted){const memory=JSON.parse(storage.get('enny-memory-v1')||'null');if(memory?.history?.at(-1)?.text.includes(expectPersisted))persistedBeforeAnimation=true;}queueMicrotask(fn);return 0;};globalThis.clearTimeout=()=>{};
@@ -44,5 +46,21 @@ test('screen remains playable after dictionary failure and IME composition does 
   assert.equal(persistedBeforeAnimation,true);
   const rainy=JSON.parse(storage.get('enny-memory-v1'));
   assert.match(rainy.history.at(-1).text,/雨/);assert.doesNotMatch(rainy.history.at(-1).text,/クロイ ソラ|電気/);
- }finally{for(const [key,value] of Object.entries(saved)){if(value===undefined)delete globalThis[key];else globalThis[key]=value;}}
+  const idleTick=intervals.find(x=>x.ms===1000).fn;
+  let count=JSON.parse(storage.get('enny-memory-v1')).history.length;
+  entry.value='途中の下書き';await entry.emit('input');time+=9999;await idleTick();
+  assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,count);
+  time++;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,count+1);
+  await entry.emit('compositionstart');time+=20000;await idleTick();
+  assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,count+1);
+  await entry.emit('compositionend');time+=10000;await idleTick();
+  const firstIdle=JSON.parse(storage.get('enny-memory-v1')).history.at(-1).text;
+  time+=10000;await idleTick();assert.notEqual(JSON.parse(storage.get('enny-memory-v1')).history.at(-1).text,firstIdle);
+  time+=10000;await idleTick();const ended=JSON.parse(storage.get('enny-memory-v1'));
+  assert.equal(ended.ended,true);assert.match(ended.history.at(-1).text,/そろそろ帰るね.*バイバイ/);
+  assert.equal(entry.value,'途中の下書き');
+  elements.get('restart-chat').onclick();assert.equal(talk.hidden,true);assert.equal(elements.get('start-choice').hidden,false);
+  elements.get('new-chat').onclick();assert.equal(talk.hidden,false);assert.equal(elements.get('start-choice').hidden,true);
+  assert.equal(JSON.parse(storage.get('enny-memory-v1')).ended,false);
+ }finally{Date.now=originalNow;for(const [key,value] of Object.entries(saved)){if(value===undefined)delete globalThis[key];else globalThis[key]=value;}}
 });

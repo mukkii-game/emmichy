@@ -20,21 +20,23 @@
   <meta name="twitter:title" content="えみちぃ / Emmichy — レトロ会話ゲーム">
   <meta name="twitter:description" content="ちいかわと日本のオタク文化が大好きなえみちぃと、約5分のおしゃべり。">
   <meta name="twitter:image" content="https://mukkii-game.github.io/emmichy/assets/emmichy-portrait.png">
-  <link rel="stylesheet" href="style.css?v=20261006-spacing1">
+  <link rel="stylesheet" href="style.css?v=20261008-pacing1">
 </head>
 <body>
   <main>
     <header><span class="brand">EMMICHY / PERSONAL COMPUTER SOFTWARE</span><span id="disk">● DISK READY</span></header>
-    <section id="start-choice" aria-label="会話の始め方" hidden><p>おかえり。会話をどう始める？</p><div><button id="continue">続きから</button><button id="new-chat">最初から</button></div><p class="small">最初から：今回の会話をやり直します。覚えた名前・好みは残ります。</p></section>
     <div class="screen-wrap">
       <div class="portrait-panel"><canvas id="screen" width="496" height="672" tabindex="0" aria-label="えみちぃのポートレート"></canvas><div class="game-logo">EMMICHY</div><div class="game-tagline">THE ALMOST CLEVER GAME</div></div>
       <div class="conversation-panel"><div class="terminal-heading">EMMICHY / CONVERSATION</div><div id="conversation" role="log" aria-label="カタカナの会話履歴"></div><div id="live-reply" aria-live="off"></div><div id="terminal-note">アタシ エミチィ　ナンデモ ハナシテネ</div></div>
     </div>
+    <div class="input-slot">
+    <section id="start-choice" aria-label="会話の始め方" hidden><p>おかえり。会話をどう始める？</p><div><button id="continue" type="button">続きから</button><button id="new-chat" type="button">最初から</button></div><p class="small">最初から：今回の会話をやり直します。覚えた名前・好みは残ります。</p></section>
     <form id="talk" autocomplete="off">
       <label for="entry">漢字・ひらがな OK <span>›</span></label>
       <input id="entry" maxlength="120" placeholder="ねえ、Chiikawaってしってる？" aria-label="Emmichyに話しかける" spellcheck="false">
       <button id="send" type="submit">RETURN ↵</button>
     </form>
+    </div>
     <div class="toolbar">
       <span id="status">日本語入力OK / ENTER で送信</span>
       <div><button id="restart-chat">最初から</button><button id="sound" aria-pressed="false">BGM + SE OFF</button><button id="fullscreen">全画面</button><button id="help">アソビカタ</button></div>
@@ -54,7 +56,7 @@
     <footer><span>THE ALMOST CLEVER GAME</span><span>EMMICHY / PILOT</span></footer>
   </main>
   <script src="assets/vendor/kuromoji.js"></script>
-  <script type="module" src="src/app.js?v=20261008-ready1"></script>
+  <script type="module" src="src/app.js?v=20261008-pacing1"></script>
 </body>
 </html>
 

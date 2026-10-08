@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {chooseFiller,startFiller,retainAside,idleAside} from '../src/filler.js';
+import {chooseFiller,startFiller,retainAside,idleAside,createIdleSequence} from '../src/filler.js';
 test('idle asides follow the current food topic rather than an old manga topic',()=>{
  const history=[{role:'user',text:'ジョジョが好き'},{role:'user',text:'吉野家のチーズ牛丼が好き'}];
  for(let i=0;i<3;i++){assert.doesNotMatch(idleAside(history,i),/漫画|マンガ|質問/);}
@@ -33,8 +33,19 @@ test('fillers avoid recent repetition and keep difficult conversations gentle',(
  for(let i=0;i<5;i++){const line=chooseFiller('ジョジョが好き',recent);assert.ok(!recent.includes(line));recent.push(line);}
  assert.equal(chooseFiller('つらいから相談したい'),'うん、聞いてるよ。');
 });
-test('long wait speaks once at ten seconds and cancellation silences both timers',()=>{
- const tasks=[];let short=0,long=0;
- const stop=startFiller(()=>short++,{schedule:(fn,ms)=>{tasks.push({fn,ms});return tasks.length;},cancel:()=>{},later:()=>long++});
- assert.deepEqual(tasks.map(x=>x.ms),[1000,10000]);tasks[0].fn();tasks[1].fn();assert.equal(short,1);assert.equal(long,1);stop();tasks[1].fn();assert.equal(long,1);
+test('waiting gestures repeat every two seconds, differ and leave 300ms before the answer',()=>{
+ const tasks=[];let time=0,recent=[],shown=[];
+ const stop=startFiller(()=>{const line=chooseFiller('音楽',recent);recent.push(line);shown.push(line);},{schedule:(fn,ms)=>{tasks.push({fn,ms});return tasks.length;},cancel:()=>{},now:()=>time});
+ assert.equal(tasks[0].ms,1000);time=1000;tasks[0].fn();assert.equal(tasks[1].ms,2000);
+ time=3000;tasks[1].fn();assert.notEqual(shown[0],shown[1]);time=3050;assert.equal(stop(),250);
+ tasks[2].fn();assert.equal(shown.length,2);
+ const fast=startFiller(()=>assert.fail('fast answer must not show filler'),{schedule:(fn,ms)=>1,cancel:()=>{},now:()=>time});assert.equal(fast(),0);
+});
+test('inactivity uses three separate ten-second windows and typing resets the sequence',()=>{
+ const idle=createIdleSequence(0);
+ assert.equal(idle.poll(9999),null);assert.equal(idle.poll(10000),1);
+ assert.equal(idle.poll(19999),null);assert.equal(idle.poll(20000),2);
+ idle.touch(25000);assert.equal(idle.poll(34999),null);assert.equal(idle.poll(35000),1);
+ assert.equal(idle.poll(45000),2);assert.equal(idle.poll(55000),3);assert.equal(idle.poll(65000),null);
+ idle.touch(70000);assert.equal(idle.poll(80000),1);
 });

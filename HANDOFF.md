@@ -1,4 +1,14 @@
-# Current checkpoint — five-minute minimum and bounded fillers, 2026-10-08
+# Current checkpoint — Japanese-learning listening gestures, 2026-10-08
+
+Supersedes first1s/second4s/long7s below: first2s, second5s, authored long line8s. Keep at most two short gestures plus one long line, cancellation, and300ms final-reply breath. Neutral first reactions are affirmative ウンウン／ソウネー／フムフム, with ニホンゴデ、ナンテイウンダッケ and short word-search hesitation in the pool. The ordinary longer database line also uses the Japanese-learning persona.
+
+Local conservative lexical tone hints require clear joy for ワオ／エヘヘ／フフッ; setbacks can use エエッ, distress uses gentle listening. Uncertain/quoted/negated positive words do not imply joy, negative signals win mixed input. Topic and player-sound echoes remain available. No Jev dependency, AI classification call, or paid API. This is approximate tone detection, not general sentiment understanding.
+
+97 tests pass, including2s/5s/8s timing, cap/cancellation/breath, neutral affirmative variation, Japanese hesitation, joy/setback/distress, mixed/quoted/negated/ambiguous language. Five-minute minimum and save/resume behavior remain covered. Live tone/latency naturalness, error1010 provider access, and physical-phone verification remain open. Authorized public follow-up targets pilot-audio-readable-retro; main stays unchanged.
+
+---
+
+# Earlier checkpoint — five-minute minimum and bounded fillers, 2026-10-08
 
 Published follow-up PR #5 merged as 55148eb06c7da185886fe1f5a7ba4590a62f9bf9 into pilot-audio-readable-retro. Pages run37760470598 completed successfully (build/deploy/report all success). No new live-browser or provider naturalness claim.
 

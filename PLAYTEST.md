@@ -366,3 +366,9 @@ Cloudflare API run 37743437929 confirmed a deployment defect: RL was absent and 
 95/95 tests pass. App test verifies no preparation message ever assigned to visible text, a fresh session clock starts before submission, no idle farewell at30s or4:59.999, and saved farewell at5:00 when inactivity qualifies. A stopped draft remains intact; IME resets the count. Normal18-turn termination also cannot occur before5min; explicit goodbye tests still pass.
 
 Fake scheduler shows short1s, short4s, long7s; no further scheduled gestures, different short text, one substantial music line and250ms remaining breath after stopping50ms later. Player ドッギャーン！ yields えっ、ドッギャーン！？, then ！？ if the first was recent; serious input does not use surprise jokes. Authored music waiting variants avoid recent repetition. No external AI calls. These are deterministic tests, not certified subjective naturalness or live latency. Phone verification deferred.
+
+## 2026-10-08 — Japanese-learning persona and first-reaction delay
+
+97/97 tests pass. Short waiting starts2s after submission, next5s, one medium authored bridge8s, then no additional scheduled filler. Cancellation and minimum300ms after last shown text remain covered. Neutral school anecdote rotates ウンウン／ソウネー／フムフム then ニホンゴデ、ナンテイウンダッケ. The ordinary long bridge describes a word hiding and searching with gestures.
+
+Clear 合格した／プリンがおいしい／楽しかった uses positive pool ワオ／エヘヘ／フフッ. ミスした／楽しくない／成功しなかった／嬉しくなかった and mixed嬉しいけど失敗した do not laugh. 学校へ行った／できたかどうかわからない／腫瘍ができた／最高って言葉の意味は stay neutral; accident/injury uses gentle listening. Classification is conservative local lexical matching, not reliable general comprehension or Jev. No AI calls. Actual pleasantness/latency and physical phone checks are unverified.

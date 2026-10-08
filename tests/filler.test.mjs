@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {chooseFiller,longFiller,startFiller,retainAside,idleAside,createIdleSequence} from '../src/filler.js';
+import {chooseFiller,waitingTone,longFiller,startFiller,retainAside,idleAside,createIdleSequence} from '../src/filler.js';
 test('idle asides follow the current food topic rather than an old manga topic',()=>{
  const history=[{role:'user',text:'ジョジョが好き'},{role:'user',text:'吉野家のチーズ牛丼が好き'}];
  for(let i=0;i<3;i++){assert.doesNotMatch(idleAside(history,i),/漫画|マンガ|質問/);}
@@ -20,11 +20,11 @@ test('saved waiting dialogue retains the user and both asides before the final a
  const idle=retainAside(history,'もっといい話題しよっか');
  assert.equal(idle.at(-1).text,'もっといい話題しよっか');
 });
-test('listening filler starts after one second and cancellation prevents stale gestures',()=>{
+test('listening filler starts after two seconds and cancellation prevents stale gestures',()=>{
  let callback,delay,cancelled,shown=0;
  const clock={schedule:(fn,ms)=>{callback=fn;delay=ms;return 7;},cancel:id=>cancelled=id};
  const stop=startFiller(()=>shown++,clock);
- assert.equal(delay,1000);assert.equal(shown,0);stop();callback();
+ assert.equal(delay,2000);assert.equal(shown,0);stop();callback();
  assert.equal(cancelled,7);assert.equal(shown,0);
  startFiller(()=>shown++,clock);callback();assert.equal(shown,1);
 });
@@ -36,10 +36,10 @@ test('fillers avoid recent repetition and keep difficult conversations gentle',(
 test('two short gestures are three seconds apart, then one longer line leaves breathing room',()=>{
  const tasks=[];let time=0,recent=[],shown=[],long=[];
  const stop=startFiller(()=>{const line=chooseFiller('音楽',recent);recent.push(line);shown.push(line);},{schedule:(fn,ms)=>{tasks.push({fn,ms});return tasks.length;},cancel:()=>{},now:()=>time,later:()=>long.push(longFiller("音楽",long))});
- assert.equal(tasks[0].ms,1000);time=1000;tasks[0].fn();assert.equal(tasks[1].ms,3000);
- time=4000;tasks[1].fn();assert.notEqual(shown[0],shown[1]);assert.equal(tasks[2].ms,3000);
- time=7000;tasks[2].fn();assert.equal(shown.length,2);assert.equal(long.length,1);assert.ok(long[0].length>40);assert.equal(tasks.length,3);
- time=7050;assert.equal(stop(),250);
+ assert.equal(tasks[0].ms,2000);time=2000;tasks[0].fn();assert.equal(tasks[1].ms,3000);
+ time=5000;tasks[1].fn();assert.notEqual(shown[0],shown[1]);assert.equal(tasks[2].ms,3000);
+ time=8000;tasks[2].fn();assert.equal(shown.length,2);assert.equal(long.length,1);assert.ok(long[0].length>40);assert.equal(tasks.length,3);
+ time=8050;assert.equal(stop(),250);
  const fast=startFiller(()=>assert.fail('fast answer must not show filler'),{schedule:(fn,ms)=>1,cancel:()=>{},now:()=>time});assert.equal(fast(),0);
 });
 test('inactivity uses three separate ten-second windows and typing resets the sequence',()=>{
@@ -66,4 +66,27 @@ test('expressive waiting reacts to player sounds without joking over distress',(
  const first=longFiller('ピアノの音楽が好き');assert.match(first,/曲|歌|音/);
  assert.notEqual(longFiller('ピアノの音楽が好き',[first]),first);
  assert.doesNotMatch(longFiller('つらい、相談したい'),/フフ|ドッギャーン/);
+});
+
+test('neutral listening is affirmative and can hesitate over Japanese words',()=>{
+ const recent=[];
+ for(let i=0;i<5;i++)recent.push(chooseFiller('今日は学校へ行った',recent));
+ assert.deepEqual(recent.slice(0,3),['ウンウン…。','ソウネー…。','フムフム…。']);
+ assert.match(recent[3],/ニホンゴデ、ナンテイウンダッケ/);
+ assert.doesNotMatch(recent.join(''),/ワオ|エエッ|エヘヘ|フフッ/);
+ assert.match(longFiller('今日は学校へ行った'),/ニホンゴデ、ナンテイウンダッケ/);
+});
+test('local tone hints distinguish clear joy and setbacks without guessing ambiguous intent',()=>{
+ for(const line of ['合格した！','プリンがおいしい','今日は楽しかった']){
+  assert.equal(waitingTone(line),'positive');assert.equal(chooseFiller(line),'ワオ！');
+ }
+ const recent=[];for(let i=0;i<3;i++)recent.push(chooseFiller('合格した！',recent));
+ assert.deepEqual(recent,['ワオ！','エヘヘ…。','フフッ。']);
+ for(const line of ['ミスした','楽しくない','成功しなかった','嬉しくなかった','嬉しいけど失敗した']){
+  assert.equal(waitingTone(line),'negative');assert.doesNotMatch(chooseFiller(line),/ワオ|エヘヘ|フフッ/);
+ }
+ for(const line of ['学校へ行った','できたかどうかわからない','腫瘍ができた','最高って言葉の意味は？']){
+  assert.equal(waitingTone(line),'neutral');assert.equal(chooseFiller(line),'ウンウン…。');
+ }
+ assert.equal(chooseFiller('事故で怪我をした！'),'うん、聞いてるよ。');
 });

@@ -2,7 +2,7 @@
 
 User likes the Nordic portrait but asks for less realistic nose, eyes and facial outline. Built-in imagegen edit simplifies nasal modelling and eye detail and softens cheek/jaw while retaining pose, braids, costume and old-PC texture. New source/final assets use nordic-soft filenames; earlier assets remain for recovery. Same248×336 indexed8-color build and native2× nearest-neighbor renderer. Only asset references, release ID and build/test defaults change.
 
-Targeted shipped-PNG test passes; local actual-screen portrait crop docs/portrait-soft-20261008-local.png confirms the result. Prompt/provenance docs/portrait-soft-20261008.md. No new dialogue or live-provider verification claimed. Public follow-up targets authorized pilot-audio-readable-retro; release status pending.
+Targeted shipped-PNG test passes; local actual-screen portrait crop docs/portrait-soft-20261008-local.png confirms the result. Prompt/provenance docs/portrait-soft-20261008.md. No new dialogue or live-provider verification claimed. Published: PR #11 merged ase7a920d6d7caa32cc63397ed701346e55a2a4f53 into authorized pilot-audio-readable-retro; Pages37788956889 success. Actual public browser loaded portrait2 and displayed the softened face; docs/portrait-soft-20261008-public.png. Public PNG bytes exactly match the checked local8-color file. Initial pre-deploy visit showed portrait1; reload after completion showed portrait2. Main unchanged. This post-release report commit updates evidence only.
 
 ---
 

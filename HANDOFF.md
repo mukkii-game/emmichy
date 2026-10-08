@@ -1,5 +1,7 @@
 # Current checkpoint — waiting and inactivity pacing, 2026-10-08
 
+Follow-up PR #4 merged into the already-authorized Pages branch, merge 6eddcf8ee275a10234c8dc0f8fe220fe2ae25849. Pages run 37746456285 succeeded. Subsequent live browser reload verification could not complete: computer-use transport disconnected and recovery timed out. Do not claim visual confirmation for this change; deterministic timing and DOM behavior have the test evidence below. Public instructions now mention the 30s inactive farewell exception to the usual session length.
+
 User playtest requested repeated waiting gestures and a resume chooser at the input location. AI waiting: first filler after 1s, then a different short filler every 2s while unresolved; cancel queued fillers before the answer and reserve at least 300ms after the last shown filler. Existing 300–800ms reply pause also satisfies that spacing. No extra AI calls.
 
 Inactivity: first aside 10s after last input/action or completed reply, another distinct aside after another 10s, then 「そろそろ帰るね。バイバイ！」 after a third 10s. Input, keydown, IME start/end and pointer actions reset the sequence. While composing, busy, hidden or choosing resume, it cannot advance. A stopped nonempty draft also counts down; idle farewell does not erase it. Returning to the visible page restarts the countdown. Old 8s time-end polling was removed; normal ending still follows completed turns. This requested idle farewell can occur before ten turns. Finish state saves before typing animation.

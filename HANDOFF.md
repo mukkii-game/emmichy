@@ -1,5 +1,7 @@
 # Current checkpoint — five-minute minimum and bounded fillers, 2026-10-08
 
+Published follow-up PR #5 merged as 55148eb06c7da185886fe1f5a7ba4590a62f9bf9 into pilot-audio-readable-retro. Pages run37760470598 completed successfully (build/deploy/report all success). No new live-browser or provider naturalness claim.
+
 Supersedes the 30s idle farewell and repeating 2s fillers below. Automatic endings cannot occur before five minutes of visible played time, including the former 18-turn cutoff. Explicit player goodbye remains immediate. Idle asides occur at 10s and 20s; the third stage waits silently until both five minutes have elapsed and the final 10s idle window has elapsed. New input/IME/activity resets the sequence, hidden/choosing/busy pauses it. The timer starts when initial input becomes available, not only after first submission; saved/resumed time excludes absence.
 
 Hidden dictionary preparation text. Waiting uses a first short gesture at 1s, a different second at 4s, one authored medium line at 7s if still unresolved, then waits for the original bounded request. No additional requests. The final answer remains at least 300ms after the last gesture. New local waiting database has 14 lines across seven topic groups, with serious/negative handling and recent-line avoidance. Short gestures can echo a recognized topic or a player sound (ドッギャーン！ → えっ、ドッギャーン！？), or react with ！？ to surprise; distress stays gentle.

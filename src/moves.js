@@ -1,7 +1,9 @@
 // One grounded move per authored reply. No new persistent memory.
+import {rejectedJoke} from './humor.js?v=20261008-humor1';
 export const MOVES=Object.freeze(['SELF_CORRECT','NOTICE_WORDING','LIGHT_TEASE','SHARED_FRAME','SMALL_SELF_DISCLOSURE']);
 export function conversationMove(input,state={}){
  const raw=String(input||'').normalize('NFKC').trim();
+ if(rejectedJoke(raw))return {move:'SELF_CORRECT',text:'ウン。その呼び方は使わないね。',topic:'conversation-move'};
  const history=Array.isArray(state.history)?state.history:[];
  const lastReply=history.filter(h=>h.role==='enny').at(-1)?.text||'';
  const prior=history.filter(h=>h.role==='enny').map(h=>h.text);
@@ -16,13 +18,8 @@ export function conversationMove(input,state={}){
   const word=raw.match(/「([^「」\n]{1,16})」/)?.[1]||raw.match(/仕事|ミス|失敗|疲れ|病気|相談/)?.[0];
   return word?answer('NOTICE_WORDING',`「${word}」のところ、軽く流したくないな。`):null;
  }
- const shared=state.conversation?.entries||[];
- if(/^(?:その呼び方|そのあだ名)(?:は)?(?:やめて|やめよう)[。！!]*$/.test(raw)&&shared.some(e=>['half-price-king','half-price-strongman'].includes(e.id)))
+ if(/^(?:その呼び方|そのあだ名)(?:は)?(?:やめて|やめよう)[。！!]*$/.test(raw))
   return answer('SELF_CORRECT','ウン。その呼び方、やめるね。');
- if(/^(?:半額王)(?:と|って)?呼んで(?:も)?いい(?:よ)?[。！!]*$/.test(raw))
-  return answer('SHARED_FRAME','半額王。じゃあアタシは、プリン売り場で王に道を譲る。');
- if(/王.*じゃなくて.*強者/.test(raw)&&shared.some(e=>e.id==='half-price-king'))
-  return answer('SELF_CORRECT','強者ね。王は引っ込める。プリン売り場、急に修行場になった。');
  if(/プリン.*半額|半額.*プリン/.test(raw)&&!/[?？]|じゃない|ではない/.test(raw))
   return answer('NOTICE_WORDING','半額のプリン。アタシなら一個の予定が二個になりそう。');
  // Questions, denials and corrections need their own answer, not a joke.
@@ -58,8 +55,7 @@ export function conversationMove(input,state={}){
  const forgotten=raw.match(/(スプーン|傘|かさ|鍵|財布|チケット|弁当)(?:を|ヲ)?.*(?:忘れ|わすれ)/)?.[1];
  if(forgotten){
   if(/お留守番|即位初日|流派/.test(lastReply))return null;
-  const king=state.conversation?.entries?.some(e=>e.id==='half-price-king');
-  if(king&&forgotten==='スプーン')return answer('SHARED_FRAME','王、即位初日に装備品を忘れてる。');
+  if(forgotten==='スプーン'&&state.conversation?.entries?.some(e=>e.id==='half-price-pudding'))return answer('SHARED_FRAME','プリンはあるのに、スプーンがないのね。');
   const safeTease=/(?:笑|ｗ|w|平気|予備がある|借りた|借りられ|代わりがある)/i.test(raw);
   if(!safeTease)return null;
   return answer('LIGHT_TEASE',`${forgotten}だけ、お留守番になっちゃった。`);

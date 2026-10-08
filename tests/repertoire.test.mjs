@@ -1,5 +1,10 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
+
+test('final polishing blocks old nickname echoes from rule or bank output',()=>{
+ for(const text of ['半額王、スプーンも装備してね。','ハンガク オウ！'])assert.doesNotMatch(polishReply(text,'プリン',{}).text,/半額王|ハンガク.*オウ/);
+ assert.equal(polishReply('王道のプリンだね。','プリン',{}).text,'王道のプリンだね。');
+});
 import {replies,chooseRepertoire,cleanRepertoire,rememberReply,polishReply} from '../src/repertoire.js';
 import {freshState,restoreState} from '../src/engine.js';
 import {startConversation} from '../src/session.js';

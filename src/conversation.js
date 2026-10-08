@@ -1,10 +1,8 @@
 // Small pilot vocabulary, not a general personal-memory database.
 const labels=Object.freeze({
  'half-price-pudding':'半額のプリンの話が出た。',
- 'half-price-king':'プレイヤーが「半額王」と呼んでよいと言った。',
  'forgot-spoon':'その会話でスプーンを忘れた話が出た。',
- 'pudding-chopsticks':'プリンを箸で食べる案が出た。実際に食べたとは断定しない。',
- 'half-price-strongman':'半額を「強者の証」と呼ぶ遊びが生まれた。'
+ 'pudding-chopsticks':'プリンを箸で食べる案が出た。実際に食べたとは断定しない。'
 });
 const fold=s=>String(s||'').normalize('NFKC').replace(/\s+/g,'').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96));
 const bounded=n=>Number.isSafeInteger(n)&&n>=0?Math.min(n,100000):0;
@@ -18,17 +16,8 @@ export function rememberConversation(value,input,turn){
  const has=id=>memory.entries.some(e=>e.id===id);
  const drop=id=>memory.entries=memory.entries.filter(e=>e.id!==id);
  const add=id=>{if(!has(id))memory.entries.push({id,turn:at});};
- if(/(?:半額|ハンガク|王|強者|アダ名|アダナ|呼).*(?:ヤメ|嫌|イヤ|呼バナイ)/.test(text)||/^(?:ソノ呼ビ方|ソノアダ名)(?:ハ)?(?:ヤメテ|ヤメヨウ)[。！!]*$/.test(text)){
-  drop('half-price-king');drop('half-price-strongman');
-  return memory;
- }
  if(/プリン/.test(text)&&/半額|ハンガク/.test(text)&&! /ジャナ|デハナ/.test(text))add('half-price-pudding');
- if(/(?:半額|ハンガク)(?:王|オウ)/.test(text)&&/(?:呼ンデ|ヨンデ).*(?:イイ|いい)/.test(text)&&! /[?？]|君|キミ|アナタ|エミチ|EMMICHY/i.test(text))add('half-price-king');
- if(/(?:半額|ハンガク).*強者/.test(text)||(has('half-price-king')&&/王.*ジャナクテ.*強者/.test(text))){
-  if(/王.*ジャナクテ/.test(text))drop('half-price-king');
-  add('half-price-strongman');
- }
- if((has('half-price-pudding')||has('half-price-king'))&&/スプーン/.test(text)&&! /友達|家族|彼女|エミチ|EMMICHY/i.test(text)){
+ if(has('half-price-pudding')&&/スプーン/.test(text)&&! /友達|家族|彼女|エミチ|EMMICHY/i.test(text)){
   if(/(?:忘|ワスレ).*(?:ナイ|ナカッタ|ジャナ|デハナ)/.test(text))drop('forgot-spoon');
   else if(/忘|ワスレ/.test(text))add('forgot-spoon');
  }
@@ -37,7 +26,7 @@ export function rememberConversation(value,input,turn){
 }
 export function noteConversationReply(value,reply,input,turn){
  const memory=cleanConversation(value),out=fold(reply),raw=fold(input);
- const markers={'half-price-king':/半額王|ハンガクオウ/,'half-price-strongman':/半額.*強者|ハンガク.*強者/,'forgot-spoon':/スプーン/,'pudding-chopsticks':/箸|ハシ/};
+ const markers={'forgot-spoon':/スプーン/,'pudding-chopsticks':/箸|ハシ/};
  if(memory.entries.some(e=>markers[e.id]?.test(out)&&!markers[e.id].test(raw)))memory.lastCallbackTurn=bounded(turn);
  return memory;
 }
@@ -50,10 +39,7 @@ export function endingCallback(value){
  const memory=cleanConversation(value);if(memory.endingUsed)return null;
  const has=id=>memory.entries.some(e=>e.id===id);
  let choices=[];
- if(has('half-price-strongman'))choices=['半額の強者、次も財布を守ってね。','強者の買い物、また聞かせて。','次の半額決戦も、健闘を祈る。'];
- else if(has('half-price-king')&&has('forgot-spoon'))choices=['半額王、次はスプーンも装備してね。','王、次の遠征はスプーン確認ね。','半額王、またね。スプーンも一緒に。'];
- else if(has('half-price-king'))choices=['半額王、またいい獲物を見つけてね。','王の次の戦果、ちょっと楽しみ。','半額王、よい買い物を。'];
- else if(has('forgot-spoon')&&has('pudding-chopsticks'))choices=['箸でプリンの流派、今日は見届けたよ。','次にプリンを見たら、箸を思い出しそう。','箸でプリン。今日いちばん強い話だった。'];
+ if(has('forgot-spoon')&&has('pudding-chopsticks'))choices=['次はスプーンも忘れずにね。','次にプリンを見たら、箸を思い出しそう。','またプリンの話、聞かせてね。'];
  const seed=memory.entries.reduce((n,e)=>n+e.turn,0);
  const text=choices.length?choices[seed%choices.length]:'';
  return text?{text,memory:{...memory,endingUsed:true}}:null;

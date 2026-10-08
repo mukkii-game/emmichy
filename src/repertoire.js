@@ -1,4 +1,5 @@
-import {unwantedFanRedirect} from './chat.js?v=20261008-hybrid1';
+import {unwantedFanRedirect} from './chat.js?v=20261008-humor1';
+import {rejectedJoke} from './humor.js?v=20261008-humor1';
 import {everydayReplies} from './everyday.js?v=20261008-hybrid1';
 import {cards,selectKnowledge,works} from './fandom.js?v=20261006-mix1';
 import {fanLines} from './fan-lines.js?v=20261006-mix1';
@@ -76,6 +77,7 @@ export function chooseRepertoire(raw,state={},now=new Date()){
  return {intent,selection,candidate,scripted};
 }
 export function polishReply(text,raw,state={},choice=null){
+ if(rejectedJoke(text))return {text:'ウン。その呼び方は使わないね。',id:null,replaced:true};
  let out=String(text).normalize('NFKC').trim().replace(/[\r\n]+/g,' ').replace(/\s{2,}/g,' ');
  out=out.replace(/^(?:EMMICHY|EMMY|エミチ[ィイ]|エミ)\s*[:：>]\s*/i,'');
  out=out.replace(/([。！!？?])\s*(?:エミ(?:チ[ィイ]|ちぃ)?|Emmichy)\s*$/i,'$1');

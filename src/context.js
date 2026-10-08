@@ -1,5 +1,5 @@
 // Verified supplemental names and short-reply context. Facts checked 2026-10-06.
-import {conversationMove} from './moves.js?v=20261007-loop7';
+import {conversationMove} from './moves.js?v=20261008-humor1';
 import {works} from './fandom.js?v=20261006-mix1';
 export const samonSource='https://www.tms-e.co.jp/alltitles/1960s/005101.html';
 const fold=s=>String(s||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/[\s・]/g,'').toLowerCase();
@@ -20,7 +20,7 @@ export function isGiantsContext(input,state={}){
 export function contextualReply(input,state={}){
  const move=conversationMove(input,state);if(move)return move;
  if(/(?:箸|はし).*(?:プリン|食べ)|プリン.*(?:箸|はし)/.test(input)&&(/プリン/.test(input)||state.conversation?.entries?.some(e=>e.id==='half-price-pudding'))&&!/[?？]|違う|じゃない|忘れてない|つら|疲れ/.test(input)){
-  const text='箸でプリン。失敗じゃなくて、新しい流派ってことにしよう。';
+  const text='箸でプリン。アタシなら、つかむ前に崩しちゃいそう。';
   if(!(state.history||[]).some(h=>h.role==='enny'&&h.text===text))return {text,topic:'conversation-move',move:'SHARED_FRAME'};
  }
  if(sharesOwnName(input)){

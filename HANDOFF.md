@@ -1,4 +1,14 @@
-# Current checkpoint — departure reasons in idle farewells, 2026-10-08
+# Current checkpoint — user humor feedback, 2026-10-08
+
+User explicitly rejected「半額王」as unfunny: NG, including future canned callbacks. This was an invented pilot nickname, not an established popular phrase. Removed its authored moves, both king/strongman memory IDs (including restored saves), and related royal endings. Also stopped the invented strongman/決戦 and pudding流派 series as fixed highlights. Ordinary pudding/spoon/chopstick context remains. The player-requested humor rule is durable in SPEC: established expressions/verified short fandom patterns first; spontaneous LLM or arrangement oddities allowed; do not promote an invention merely because recall works.
+
+Client rejects provider outputs containing the banned nickname across kana/width/spacing variants without retrying. Local and public relay directions use this policy; stale assistant nickname lines are excluded from model history, user feedback retained. Prior on-screen saved history is preserved.102 tests and16 offline through-plays pass. Live provider fun is not verified. Review candidates and provenance caveats: docs/humor-review-20261008.md. Portrait task still needs the previously made Nordic-woman reference attached; no replacement generated.
+
+Publication status to be updated after deployment.
+
+---
+
+# Earlier checkpoint — departure reasons in idle farewells, 2026-10-08
 
 Player found the fixed idle goodbye boring and reasonless. Idle farewell bypassed the existing100 reasons and grounded callback while still consuming their state. Removed that override: timed, idle and player-requested departures now use the same100 authored fictional reasons, five departure/farewell voices and at most one existing shared-joke or actually spoken daily callback. Nickname refusal is respected. No extra LLM request or new character biography. Existing five-minute/IME/visibility/save guards remain intact; release IDs updated through the app/session/endings imports.
 

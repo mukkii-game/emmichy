@@ -2,10 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 
 test('screen remains playable after dictionary failure and IME composition does not send',async()=>{
- const saved={};
+ const saved={},displayed=[];
  for(const key of ['document','window','location','localStorage','sessionStorage','Image','setInterval','setTimeout','clearTimeout'])saved[key]=globalThis[key];
  class Element{
   constructor(){this.children=[];this.listeners={};this.value='';this.textContent='';this.disabled=false;this.hidden=false;this.scrollHeight=0;}
+  set textContent(value){this.text=value;displayed.push(value);} get textContent(){return this.text;}
   append(...items){this.children.push(...items);}
   replaceChildren(...items){this.children=items;}
   get firstChild(){return this.children[0];}
@@ -27,6 +28,8 @@ test('screen remains playable after dictionary failure and IME composition does 
   let expectPersisted=null,persistedBeforeAnimation=false;
   globalThis.setTimeout=fn=>{if(expectPersisted){const memory=JSON.parse(storage.get('enny-memory-v1')||'null');if(memory?.history?.at(-1)?.text.includes(expectPersisted))persistedBeforeAnimation=true;}queueMicrotask(fn);return 0;};globalThis.clearTimeout=()=>{};
   await import('../src/app.js');await Promise.resolve();
+  assert.ok(displayed.every(text=>!String(text).includes('ジュンビ')));
+  const startedAt=JSON.parse(storage.get('emmichy-session')).startedAt;
   const entry=elements.get('entry'),send=elements.get('send'),talk=elements.get('talk');
   assert.equal(send.disabled,false);assert.match(elements.get('status').textContent,/辞書/);
   entry.value='本を買った';await entry.emit('compositionstart');await talk.emit('submit');
@@ -56,7 +59,10 @@ test('screen remains playable after dictionary failure and IME composition does 
   await entry.emit('compositionend');time+=10000;await idleTick();
   const firstIdle=JSON.parse(storage.get('enny-memory-v1')).history.at(-1).text;
   time+=10000;await idleTick();assert.notEqual(JSON.parse(storage.get('enny-memory-v1')).history.at(-1).text,firstIdle);
-  time+=10000;await idleTick();const ended=JSON.parse(storage.get('enny-memory-v1'));
+  time+=10000;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).ended,false);
+  const waitingCount=JSON.parse(storage.get('enny-memory-v1')).history.length;
+  time=startedAt+299999;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,waitingCount);
+  time++;await idleTick();const ended=JSON.parse(storage.get('enny-memory-v1'));
   assert.equal(ended.ended,true);assert.match(ended.history.at(-1).text,/そろそろ帰るね.*バイバイ/);
   assert.equal(entry.value,'途中の下書き');
   elements.get('restart-chat').onclick();assert.equal(talk.hidden,true);assert.equal(elements.get('start-choice').hidden,false);

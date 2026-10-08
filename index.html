@@ -41,11 +41,11 @@
       <span id="status">日本語入力OK / ENTER で送信</span>
       <div><button id="restart-chat">最初から</button><button id="sound" aria-pressed="false">BGM + SE OFF</button><button id="fullscreen">全画面</button><button id="help">アソビカタ</button></div>
     </div>
-    <p class="small">終わるときは「さようなら」「バイバイ」。目安5分。入力せず約30秒過ごすと、お別れします。</p>
+    <p class="small">終わるときは「さようなら」「バイバイ」。目安5分。自動のお別れは5分経ってから。</p>
     <section id="instructions" hidden>
       <h1>Emmichy — ちょっと、わかってないフリ。</h1>
       <p>えみちぃは、日本文化が大好きな欧米人ティーン。日本語はかなり話せるけれど、ときどき語順や言い回しがちょっと変。アニメ・マンガ・ゲームに意外なほど詳しく、とくにChiikawaの話になると熱量がおかしくなります。</p>
-      <p>目安は約5分。会話中は最低10往復、盛り上がると少し延長。入力が止まると10秒ごとに声をかけ、そのまま約30秒経つとお別れします。早めに終わる時は「さようなら」「バイバイ」と話しかけてください。</p>
+      <p>目安は約5分。会話中は最低10往復、盛り上がると少し延長。入力が止まると10秒ごとに2回声をかけて待ちます。会話開始から5分以上経ち、最後の入力から30秒以上静かなときにお別れします。早めに終わる時は「さようなら」「バイバイ」と話しかけてください。</p>
       <p>PC-88/98時代を思わせる見た目ですが、入力欄や案内は読みやすさ優先です。漢字・ひらがなで普通に話しかけてかまいません。</p>
       <p id="engine-note">標準は無料・オフラインの演出付きルール会話です。記憶はこのブラウザに保存します。</p>
       <button id="export">会話を保存</button> <button id="reset">記憶を初期化</button><span id="reset-note"></span>
@@ -56,7 +56,7 @@
     <footer><span>THE ALMOST CLEVER GAME</span><span>EMMICHY / PILOT</span></footer>
   </main>
   <script src="assets/vendor/kuromoji.js"></script>
-  <script type="module" src="src/app.js?v=20261008-pacing1"></script>
+  <script type="module" src="src/app.js?v=20261008-wait2"></script>
 </body>
 </html>
 

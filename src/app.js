@@ -1,7 +1,7 @@
 import {freshState,restoreState,respond,normalize} from './engine.js?v=20261007-candidate1';
 import {chiikawaReply,checkedAt} from './topics.js?v=20261006-mix1';
 import {text,kana} from './font.js?v=20261006-mix1';
-import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261008-pacing1';
+import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261008-wait2';
 import {createAudioDirector} from './audio.js?v=20261008-ready1';
 import {CHAT_API_URL} from './config.js?v=20261006-mix1';
 import {advancePerformance} from './performance.js?v=20261007-loop7';
@@ -11,7 +11,7 @@ import {selectKnowledge} from './fandom.js?v=20261006-mix1';
 import {selectGap} from './gap.js?v=20261006-mix1';
 import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261008-route2';
 import {cultureReply} from './culture.js?v=20261006-mix1';
-import {chooseFiller,startFiller,retainAside,idleAside,createIdleSequence} from './filler.js?v=20261008-pacing1';
+import {chooseFiller,startFiller,longFiller,retainAside,idleAside,createIdleSequence} from './filler.js?v=20261008-wait2';
 import {learnInterests} from './balance.js?v=20261008-route2';
 import {selectOpening} from './openings.js?v=20261006-open1';
 import {preparedReply} from './routing.js?v=20261008-route2';
@@ -37,7 +37,7 @@ const hadSavedDialogue=state.history.length>0;
 let lines=[];
 function renderConversation(){
  const log=$('conversation');log.replaceChildren();
- if(!readingsSettled){const p=document.createElement('p');p.className='message system';p.textContent='コトバ ヲ ジュンビ シテイマス…';log.append(p);return;}
+ if(!readingsSettled)return;
  for(const item of lines){const p=document.createElement('p');p.className='message '+item.role;const label=document.createElement('span');label.className='speaker';label.textContent=item.role==='user'?'YOU >':item.role==='system'?'SYSTEM >':'EMMICHY >';const body=document.createElement('span');body.textContent=readableText(item.value,tokenizer);p.append(label,body);log.append(p);}
  log.scrollTop=log.scrollHeight;
 }
@@ -55,7 +55,7 @@ function recordAside(line,pendingState=null){
 function openingText(returning=false){const picked=selectOpening(state,returning);state.openingSeen=picked.seen;return picked.text;}
 function addOpening(returning=false){const line=openingText(returning);add('enny',line);state.history.push({role:'enny',text:line});save();}
 $('send').disabled=true;
-loadReadings().then(value=>{tokenizer=value;readingsSettled=true;renderConversation();if(ready&&!busy)$('send').disabled=false;if(!value)$('status').textContent='読みの辞書を使えないため、原文を交えて表示します。会話は続けられます。';return value;});
+loadReadings().then(value=>{tokenizer=value;readingsSettled=true;if(ready&&!session)session={startedAt:Date.now(),turns:0,finished:false};saveSession();renderConversation();if(ready&&!busy)$('send').disabled=false;if(!value)$('status').textContent='読みの辞書を使えないため、原文を交えて表示します。会話は続けられます。';return value;});
 if(state.history.length) {for(const h of state.history){add(h.role,h.text);const p=document.createElement('p');p.textContent=`${h.role==='user'?'あなた':'えみちぃ'}：${h.text}`;$('transcript').append(p);}} else {
  add('system','EMMICHY / THE ALMOST CLEVER GAME');
  addOpening();
@@ -135,7 +135,10 @@ $('talk').addEventListener('submit',async e=>{
   const stopFiller=startFiller(()=>{
    const line=chooseFiller(raw,recentFillers);recentFillers=[...recentFillers,line].slice(-6);
    recordAside(line,result.state);draw();
-  });
+  },{later:()=>{
+   const recent=result.state.history.filter(h=>h.role==='enny').slice(-20).map(h=>h.text);
+   recordAside(longFiller(raw,recent),result.state);draw();
+  }});
   let data;
   try{data=await requestChat(chatEndpoint,raw,before,session,{offline});}
   finally{fillerGap=stopFiller();live='';draw();}
@@ -189,7 +192,7 @@ function showStartChoice(){
  $('status').textContent='続きから／最初から を選んでください';
  $('continue').focus();
 }
-function enterConversation(){ready=true;$('start-choice').hidden=true;$('talk').hidden=false;$('send').disabled=!readingsSettled;$('entry').disabled=false;noteActivity();$('entry').focus();}
+function enterConversation(){ready=true;if(!session)session={startedAt:Date.now(),turns:0,finished:false};$('start-choice').hidden=true;$('talk').hidden=false;$('send').disabled=!readingsSettled;$('entry').disabled=false;noteActivity();$('entry').focus();}
 $('continue').onclick=()=>{session=resumeSession(session);enterConversation();saveSession();$('status').textContent=state.ended?'おしまい。「最初から」で、もう一度。':'会話を再開しました / ENTER で送信';};
 $('new-chat').onclick=()=>{const next=startConversation(state);state=next.state;session=next.session;lines=[];live='';mood='idle';$('transcript').replaceChildren();addOpening(true);enterConversation();save();saveSession();$('status').textContent='新しい会話 / 漢字・ひらがな OK';draw();};
 $('restart-chat').onclick=showStartChoice;
@@ -206,7 +209,7 @@ if(isLocal&&!offline){
 }
 setInterval(draw,160);setInterval(async()=>{
  if(ready&&readingsSettled&&!document.hidden&&!busy&&!session?.finished&&!state.ended&&!composing){
-  const stage=idleSequence.poll();
+  const stage=idleSequence.poll(Date.now(),{allowFinish:Boolean(session)&&Date.now()-session.startedAt>=5*60*1000});
   if(stage===3)await endSession('idle');
   else if(stage){recordAside(idleAside(state.history,stage-1));draw();}
  }

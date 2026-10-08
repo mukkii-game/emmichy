@@ -360,3 +360,9 @@ Cloudflare API run 37743437929 confirmed a deployment defect: RL was absent and 
 ## 2026-10-08 — player feedback: waiting and inactivity pacing
 
 93 tests pass. Fake clock verifies first waiting gesture at 1s, subsequent gestures 2s apart with different text, cancellation and remaining 300ms breathing room. DOM test verifies no inactivity line at 9.999s, first at 10s even with stopped draft, no line during ongoing IME composition, composition-end resets countdown, distinct second line after another 10s and saved idle farewell after another 10s. Continue/restart visibility is checked in the usual input slot. Live provider latency and physical-phone interaction are not certified by these tests.
+
+## 2026-10-08 — five-minute floor and bounded waiting
+
+95/95 tests pass. App test verifies no preparation message ever assigned to visible text, a fresh session clock starts before submission, no idle farewell at30s or4:59.999, and saved farewell at5:00 when inactivity qualifies. A stopped draft remains intact; IME resets the count. Normal18-turn termination also cannot occur before5min; explicit goodbye tests still pass.
+
+Fake scheduler shows short1s, short4s, long7s; no further scheduled gestures, different short text, one substantial music line and250ms remaining breath after stopping50ms later. Player ドッギャーン！ yields えっ、ドッギャーン！？, then ！？ if the first was recent; serious input does not use surprise jokes. Authored music waiting variants avoid recent repetition. No external AI calls. These are deterministic tests, not certified subjective naturalness or live latency. Phone verification deferred.

@@ -1,4 +1,14 @@
-# Current checkpoint — waiting and inactivity pacing, 2026-10-08
+# Current checkpoint — five-minute minimum and bounded fillers, 2026-10-08
+
+Supersedes the 30s idle farewell and repeating 2s fillers below. Automatic endings cannot occur before five minutes of visible played time, including the former 18-turn cutoff. Explicit player goodbye remains immediate. Idle asides occur at 10s and 20s; the third stage waits silently until both five minutes have elapsed and the final 10s idle window has elapsed. New input/IME/activity resets the sequence, hidden/choosing/busy pauses it. The timer starts when initial input becomes available, not only after first submission; saved/resumed time excludes absence.
+
+Hidden dictionary preparation text. Waiting uses a first short gesture at 1s, a different second at 4s, one authored medium line at 7s if still unresolved, then waits for the original bounded request. No additional requests. The final answer remains at least 300ms after the last gesture. New local waiting database has 14 lines across seven topic groups, with serious/negative handling and recent-line avoidance. Short gestures can echo a recognized topic or a player sound (ドッギャーン！ → えっ、ドッギャーン！？), or react with ！？ to surprise; distress stays gentle.
+
+95 tests pass: five-minute boundary through app DOM/fake time, typing reset, hidden preparation, normal 18-turn minimum, two short gestures and one longer line, topic/repetition/surprise/distress. Public follow-up is within prior explicit publication authorization and targets pilot-audio-readable-retro, not main. Live latency/naturalness, provider access error1010 and physical phone checks remain unverified. No paid APIs.
+
+---
+
+# Earlier checkpoint — waiting and inactivity pacing, 2026-10-08
 
 Follow-up PR #4 merged into the already-authorized Pages branch, merge 6eddcf8ee275a10234c8dc0f8fe220fe2ae25849. Pages run 37746456285 succeeded. Subsequent live browser reload verification could not complete: computer-use transport disconnected and recovery timed out. Do not claim visual confirmation for this change; deterministic timing and DOM behavior have the test evidence below. Public instructions now mention the 30s inactive farewell exception to the usual session length.
 

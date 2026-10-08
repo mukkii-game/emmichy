@@ -16,6 +16,7 @@ import {learnInterests} from './balance.js?v=20261008-route2';
 import {selectOpening} from './openings.js?v=20261006-open1';
 import {preparedReply} from './routing.js?v=20261008-route2';
 import {cleanConversation,noteConversationReply} from './conversation.js?v=20261007-loop7';
+import {offlineFallback} from './fallback.js?v=20261008-finish1';
 let recentFillers=[];
 let idleAsideAt=0,idleAsideIndex=0;
 let tokenizer=null;
@@ -140,7 +141,8 @@ $('talk').addEventListener('submit',async e=>{
   if(data){result.text=data.text;result.state.history.at(-1).text=data.text;usedModel=true;modelProvider=data.provider;}
  }
  if(!isRestart&&!['bye','asleep','name','memory','arithmetic'].includes(result.kind)){
-  if(!usedModel&&!prepared&&repertoire.intent==='question'&&!repertoire.candidate&&knowledge.work){result.text='そこはまだ詳しくわからないの。知っていたら教えて？';}
+  const fallback=!usedModel&&!prepared&&!fandomReply?offlineFallback(raw,before,result.kind):null;
+  if(fallback){result.text=fallback.text;locallyReplaced=true;}
   const polished=polishReply(result.text,raw,before,repertoire);result.text=polished.text;
   result.state.history.at(-1).text=result.text;
   const replyId=polished.id||prepared?.id||(prepared?.topic==='repertoire'||(!usedModel&&repertoire.candidate&&result.text===repertoire.candidate.text)?repertoire.candidate?.id:null);
@@ -149,7 +151,7 @@ $('talk').addEventListener('submit',async e=>{
  }
  session.dialogueUse={ai:(session.dialogueUse?.ai||0)+(usedModel?1:0),bank:(session.dialogueUse?.bank||0)+(!usedModel&&(prepared||locallyReplaced)?1:0)};
  if(result.kind!=='bye')result.state.conversation=noteConversationReply(result.state.conversation,result.text,raw,session.turns);
- state=result.state;mood=result.mood;session.lastMood=mood;saveSession();
+ state=result.state;mood=result.mood;session.lastMood=mood;saveSession();save();
  await wait(300+Math.min(raw.length*10,500));
  if(mood==='excited')audioDirector.se.excited();else if(mood==='worried')audioDirector.se.worried();else audioDirector.se.reply();
  const replyDisplay=readableText(result.text,tokenizer);

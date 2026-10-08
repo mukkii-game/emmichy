@@ -326,3 +326,11 @@ One live attempt: 「雨の匂いって、なんだか昔の帰り道を思い�
 Removed the forced first-AI turn and first-bank turn. Bank counters no longer override a suitable reply or promote a non-scripted candidate. Repeating 「ヒソカのバンジーガムって何？」 twenty times preserves the coveredゴムとガム property; 「弱点は？」 still has no invented fact.
 
 Unrelated input no longer gets unconditional knowledgeFallback from the previous fandom. Checked six negatives/open/technical inputs and a screen submit for 「漫画じゃなくて散歩の話にしよう」. Tests 88/88, fifteen complete offline sessions, nonfan guard on each ordinary reply. docs/playtest-20261008-routing-offline.json records actual text. No live provider requests this step. Smartphone verification is explicitly deferred by the user, not a development stop condition.
+
+## 2026-10-08 Completion goal: offline fallback and resolved-reply durability
+
+Rain/walk/drawing inputs receive bounded authored reactions only when no AI/authored/fandom answer is available. Examples: 「今日は雨の匂いがした」→「雨の匂い、わかる。アタシ、傘を閉じた後も少し外にいたくなる。」; 「FM音源の仕組みを説明して」→「そこはまだよく知らないの。わかったふりで答えたくないな。」; 「わかった」→「うん。わからないところは、そのままにしておくね。」
+
+Each of three daily topics has three recent-history-aware variants. Protected/emotional/negative inputs remain outside this fallback. General unsupported inputs still retain legacy replies, so this is limited coverage rather than a general AI replacement.
+
+92 tests pass. Sixteen offline sessions finish, including disconnected daily/open-question scenario; ten replay sequences remain distinct. Resolved rain reply is persisted before animation delays in DOM test. Session JSON resume keeps rate limit and counts; new play resets them. Evidence docs/playtest-20261008-finish-offline.json. No live AI requests this step; physical smartphone checks deferred.

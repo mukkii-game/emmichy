@@ -22,7 +22,8 @@ test('screen remains playable after dictionary failure and IME composition does 
   globalThis.localStorage=store;globalThis.sessionStorage=store;globalThis.Image=class{};
   globalThis.setInterval=()=>0;
   // Advance only the app's typing delays, without waiting seconds per reply.
-  globalThis.setTimeout=fn=>{queueMicrotask(fn);return 0;};globalThis.clearTimeout=()=>{};
+  let expectPersisted=null,persistedBeforeAnimation=false;
+  globalThis.setTimeout=fn=>{if(expectPersisted){const memory=JSON.parse(storage.get('enny-memory-v1')||'null');if(memory?.history?.at(-1)?.text.includes(expectPersisted))persistedBeforeAnimation=true;}queueMicrotask(fn);return 0;};globalThis.clearTimeout=()=>{};
   await import('../src/app.js');await Promise.resolve();
   const entry=elements.get('entry'),send=elements.get('send'),talk=elements.get('talk');
   assert.equal(send.disabled,false);assert.match(elements.get('status').textContent,/辞書/);
@@ -39,5 +40,9 @@ test('screen remains playable after dictionary failure and IME composition does 
   const switched=JSON.parse(storage.get('enny-memory-v1'));
   assert.doesNotMatch(switched.history.at(-1).text,/ちいかわ|チイカワ|島二郎|ジョジョ|ハチワレ|バキ/);
   assert.equal(switched.history.filter(h=>h.role==='user').length,2);
+  expectPersisted='雨';entry.value='今日は雨の匂いがした';await talk.emit('submit');
+  assert.equal(persistedBeforeAnimation,true);
+  const rainy=JSON.parse(storage.get('enny-memory-v1'));
+  assert.match(rainy.history.at(-1).text,/雨/);assert.doesNotMatch(rainy.history.at(-1).text,/クロイ ソラ|電気/);
  }finally{for(const [key,value] of Object.entries(saved)){if(value===undefined)delete globalThis[key];else globalThis[key]=value;}}
 });

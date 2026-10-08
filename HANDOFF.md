@@ -1,3 +1,16 @@
+# Current checkpoint — bounded completion goal, 2026-10-08
+
+User supplied /goal to finish the candidate, verify dialogue/hybrid/save-resume, preserve PR #3 and defer mobile verification. This tool session cannot inspect or activate the platform Goal lifecycle; no persistent background run is claimed.
+
+- AI-unavailable fallback recognizes rain, walks and drawing with nine authored reactions and recent-history avoidance. It runs after, not before, the live-AI opportunity. Unsupported questions admit uncertainty without a new question; acknowledgement of that boundary does not trigger a generic follow-up.
+- Protected authored/personal/emotional/math/ending replies remain untouched. Negative/unsafe topic statements are excluded. Truly unmatched inputs still use legacy fallback; these nine lines are not general language understanding.
+- Final resolved state now saves before typing animation, closing a reload window where turns were saved but the reply was not. DOM test checks persisted rain reply during animation scheduling. Save/resume preserves chatHealth and dialogueUse; new play clears those session counters.
+- Verification: 92/92 tests, sixteen offline complete sessions including disconnected daily/open-question flow, no live AI calls this step. Evidence docs/playtest-20261008-finish-offline.json. Syntax/whitespace checks pass. Physical smartphone verification is deferred.
+
+Next accessible check: candidate preview through-play if reachable. Live provider quality remains unverified since the last network attempt failed; no paid services or deployment changes.
+
+---
+
 # Current checkpoint — suitability-first routing, 2026-10-08
 
 User explicitly deferred smartphone real-device verification; it is a remaining issue, not a reason to suspend accessible development.

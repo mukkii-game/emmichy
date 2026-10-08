@@ -2,6 +2,7 @@
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import {unwantedFanRedirect} from '../src/chat.js';
+import {offlineFallback} from '../src/fallback.js';
 import {freshState,restoreState,respond,normalize} from '../src/engine.js';
 import {chiikawaReply} from '../src/topics.js';
 import {advancePerformance} from '../src/performance.js';
@@ -14,6 +15,7 @@ import {learnInterests} from '../src/balance.js';
 import {noteConversationReply} from '../src/conversation.js';
 import {finishSession,shouldEnd,startConversation} from '../src/session.js';
 const cases={
+ disconnected:['今日は雨の匂いがした','うん','散歩した','そう','絵を描いた','うん','FM音源の仕組みを説明して','わかった','今日は雨上がりだった','散歩してきた','絵を描いた','バイバイ'],
  music:['漫画は詳しくないけど、音楽の話は好きだよ','うん','パソコン買った','そう','本を買った','うん','オムライス食べた','そう','上履きは学校の靴だよ','うん','音楽が好き','バイバイ'],
  automatic:['本を買った','うん','パソコン買った','そう','オムライス食べた','うん','音楽が好き','そう','上履きは学校の靴だよ','うん','プリン半額だった','半額王と呼んでいいよ','王はスプーンを忘れました','箸でプリンを食べるしかない','そう','質問ばっかりだね','うん','まあ'],
  normal:['仕事でミスして疲れた','帰りにプリン半額だった','半額王と呼んでいいよ','王はスプーンを忘れました','箸でプリンを食べるしかない','うん','そう','まあ','ちょっと元気出た','上履きは学校で履き替える靴だよ','そう','バイバイ'],
@@ -47,7 +49,8 @@ for(const [type,inputs] of entries){
   if(gap)result.state.gap=gap.memory;
   if(prepared){result.text=['everyday','conversation-move','context-name','greeting','island-water','gap','repertoire','culture'].includes(prepared.topic)?prepared.text:fandom||prepared.text;result.kind='curated';}
   if(!['bye','asleep','name','memory','arithmetic'].includes(result.kind)){
-   if(!prepared&&repertoire.intent==='question'&&!repertoire.candidate&&knowledge.work)result.text='そこはまだ詳しくわからないの。知っていたら教えて？';
+   const fallback=!prepared&&!fandom?offlineFallback(raw,before,result.kind):null;
+   if(fallback)result.text=fallback.text;
    const polished=polishReply(result.text,raw,before,repertoire);result.text=polished.text;
    const replyId=polished.id||prepared?.id||(prepared?.topic==='repertoire'||(repertoire.candidate&&result.text===repertoire.candidate.text)?repertoire.candidate?.id:null);
    result.state.repertoire=rememberReply(before,result.text,replyId,Boolean(prepared||polished.replaced));

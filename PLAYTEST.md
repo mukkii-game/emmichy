@@ -309,3 +309,14 @@ Captured failure regression: player “漫画は詳しくないけど、音楽�
 15 offline through-plays end successfully, including 10 saved/restarted repeats of the same four-topic 12-input music fixture, all with different full reply sequences. Raw evidence: docs/playtest-20261008-offline.json. The evidence covers that fixture, not ten entirely different player trajectories.
 
 No real AI calls or workflows. raw.githack candidate preview HTTP429 and local cloud-browser ERR_CONNECTION_REFUSED prevent new visual verification. Remaining: real smartphone IME/layout/audio and small live AI quality check. main/public unchanged.
+
+
+## 2026-10-08 Hybrid audit and real replay failure recovery
+
+Observed before fix: later music replays returned 島二郎 / 船を漕ぐ after 「漫画は詳しくないけど、音楽の話は好きだよ」. Existing ten-distinct-sequence checks did not establish topic correctness. This was a local repertoire/polish issue, separate from the known provider failure.
+
+After fix: all 15 offline sessions terminate; all non-ending replies are checked against unwantedFanRedirect. Exhaustion stays on the matched topic, accepting repeated authored lines rather than forced novelty. Ten fixture sequences remain distinct. Evidence in docs/playtest-20261008-hybrid-offline.json.
+
+Communication checks: 429 makes exactly one mocked request across save/reload; a new play can request again. Transport errors pause for 60 seconds and recover. Quality rejection increments attempted/rejected, while offline replies do not count. Accepted then locally replaced replies retain communication evidence separately from displayed AI count. Full suite 86 tests passes.
+
+One live attempt: 「雨の匂いって、なんだか昔の帰り道を思い出さない？」 returned null due to transport/timeout failure; no retry. Raw health/result saved in docs/playtest-20261008-hybrid-live.json. Live quality is unverified, not passed. Physical mobile input/audio remain unverified.

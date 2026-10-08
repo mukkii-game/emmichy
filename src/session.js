@@ -1,4 +1,4 @@
-import {everydayEnding} from './everyday.js?v=20261007-candidate1';
+import {everydayEnding} from './everyday.js?v=20261008-hybrid1';
 import {selectEnding} from './endings.js?v=20261006-end1';
 import {cleanConversation,endingCallback} from './conversation.js?v=20261007-loop7';
 export const SESSION_MS=5*60*1000;

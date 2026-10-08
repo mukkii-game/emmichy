@@ -20,7 +20,7 @@ test('ten replayed two-beat daily arcs remain distinct after serialization and r
    chains.add(first.text+'\n'+next.text);
   }
   assert.equal(chains.size,10);
-  assert.equal(everydayReply(input,startConversation(state).state),null);
+  assert.equal(everydayReply(input,startConversation(state).state).topic,'everyday');
  }
 });
 test('unknown, distressing, denied and factual questions do not get invented daily beats',()=>{

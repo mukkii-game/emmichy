@@ -1,4 +1,5 @@
-import {everydayReplies} from './everyday.js?v=20261007-candidate1';
+import {unwantedFanRedirect} from './chat.js?v=20261008-hybrid1';
+import {everydayReplies} from './everyday.js?v=20261008-hybrid1';
 import {cards,selectKnowledge,works} from './fandom.js?v=20261006-mix1';
 import {fanLines} from './fan-lines.js?v=20261006-mix1';
 // 600 individually authored reactions + 600 factual-answer combinations.
@@ -85,6 +86,7 @@ export function polishReply(text,raw,state={},choice=null){
  }
  if(/島二郎|シマ\s*ジロウ/.test(raw)&&state.knowledge?.work==='chiikawa')out=out.replace(/しまじろう/g,'島二郎');
  const mem=cleanRepertoire(state.repertoire),recent=Array.isArray(state.history)?state.history.filter(h=>h.role==='enny').slice(-3).map(h=>h.text):[];
+ if(choice?.candidate&&unwantedFanRedirect(choice.candidate.text,raw,state))choice=null;
  const repeated=mem.prints.includes(fingerprint(out))||recent.some(t=>similarity(t,out)>.94);
  const islandError=/島二郎/.test(raw)&&/(?:トラ|虎|幼児|子供たちのヒーロー|お腹から|腹から|口から)/.test(out);
  // Substitute only if our candidate actually answers a covered question or is a direct reaction.

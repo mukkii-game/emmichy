@@ -1,20 +1,20 @@
 import {freshState,restoreState,respond,normalize} from './engine.js?v=20261007-candidate1';
 import {chiikawaReply,checkedAt} from './topics.js?v=20261006-mix1';
 import {text,kana} from './font.js?v=20261006-mix1';
-import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261007-candidate1';
+import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261008-hybrid1';
 import {createAudioDirector} from './audio.js?v=20261008-ready1';
 import {CHAT_API_URL} from './config.js?v=20261006-mix1';
 import {advancePerformance} from './performance.js?v=20261007-loop7';
-import {requestChat} from './chat.js?v=20261008-ready1';
+import {requestChat,chatAvailable} from './chat.js?v=20261008-hybrid1';
 import {readableText,loadReadings} from './readable.js?v=20261008-ready1';
 import {selectKnowledge,knowledgeFallback} from './fandom.js?v=20261006-mix1';
 import {selectGap} from './gap.js?v=20261006-mix1';
-import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261007-candidate1';
+import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261008-hybrid1';
 import {cultureReply} from './culture.js?v=20261006-mix1';
 import {chooseFiller,startFiller,longFiller,retainAside,idleAside} from './filler.js?v=20261006-idle1';
 import {learnInterests} from './balance.js?v=20261006-balance1';
 import {selectOpening} from './openings.js?v=20261006-open1';
-import {preparedReply} from './routing.js?v=20261007-candidate2';
+import {preparedReply} from './routing.js?v=20261008-hybrid1';
 import {cleanConversation,noteConversationReply} from './conversation.js?v=20261007-loop7';
 let recentFillers=[];
 let idleAsideAt=0,idleAsideIndex=0;
@@ -128,7 +128,7 @@ $('talk').addEventListener('submit',async e=>{
  if(prepared){result.text=['everyday','conversation-move','context-name','greeting','island-water','gap','repertoire','culture'].includes(prepared.topic)?prepared.text:fandomReply||prepared.text;result.kind='curated';result.state.history.at(-1).text=result.text;if(/[！!]/.test(result.text))result.mood='excited';}
  if(isRestart){result.text=openingText(true);result.state.openingSeen=state.openingSeen;result.state.history.at(-1).text=result.text;}
  const ruleOnly=isRestart||['curated','bye','asleep','name','memory','arithmetic'].includes(result.kind);
- if(modelEnabled && !ruleOnly){
+ if(modelEnabled && !ruleOnly && chatAvailable(session)){
   $('status').textContent='';
   const stopFiller=startFiller(()=>{
    const line=chooseFiller(raw,recentFillers);recentFillers=[...recentFillers,line].slice(-4);
@@ -145,7 +145,7 @@ $('talk').addEventListener('submit',async e=>{
   result.state.history.at(-1).text=result.text;
   const replyId=polished.id||prepared?.id||(prepared?.topic==='repertoire'||(!usedModel&&repertoire.candidate&&result.text===repertoire.candidate.text)?repertoire.candidate?.id:null);
   result.state.repertoire=rememberReply(before,result.text,replyId,Boolean(prepared||polished.replaced));
-  if(polished.replaced){usedModel=false;locallyReplaced=true;}
+  if(polished.replaced){if(usedModel)session.chatHealth={...session.chatHealth,replaced:(session.chatHealth?.replaced||0)+1};usedModel=false;locallyReplaced=true;}
  }
  session.dialogueUse={ai:(session.dialogueUse?.ai||0)+(usedModel?1:0),bank:(session.dialogueUse?.bank||0)+(!usedModel&&(prepared||locallyReplaced)?1:0)};
  if(result.kind!=='bye')result.state.conversation=noteConversationReply(result.state.conversation,result.text,raw,session.turns);

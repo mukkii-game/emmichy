@@ -1,3 +1,16 @@
+# Current checkpoint — hybrid routing audit, 2026-10-08
+
+Actual implementation resumed in the single authorized development session.
+- Separate session.chatHealth counters track network attempts, accepted responses, quality rejection, failures and AI-to-authored replacement. dialogueUse.ai remains displayed AI replies, not communication count.
+- HTTP429 disables further requests for the current play, including reload/continue; a genuinely new play resets it. Other transport failures pause requests for 60 seconds. Authored/rule play remains available, with no provider retry.
+- Through-play exposed a LOCAL fandom redirection after music repertoire exhaustion, despite earlier variation claims. Exhausted everyday topics now reuse on-topic material rather than falling through to unrelated bank content; polishing cannot substitute unwanted fan candidates after an explicit topic switch.
+- Full tests 86/86; 15 offline through-plays end, ten reply sequences differ, and every non-ending reply passes the explicit nonfan redirect assertion. Variation is fixture-limited; after exhaustion some authored lines repeat deliberately.
+- One live open-input attempt returned no response (transport/timeout failure). No successful live quality evidence or free-account billing verification. Raw evidence: docs/playtest-20261008-hybrid-live.json and docs/playtest-20261008-hybrid-offline.json.
+
+Remaining completion blockers: reachable live AI quality verification; physical mobile IME/keyboard/audio. Neither is certified by mocks. Public/main untouched; work remains on PR #3. No background execution or Director wait is implied by this checkpoint.
+
+---
+
 # Current checkpoint — release candidate hardening, 2026-10-08
 
 Continue in the single Web Work session; do not resume Director Relay. PR #3 remains the review branch; main/public integration is not authorized.

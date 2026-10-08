@@ -76,7 +76,10 @@ export function everydayReply(raw,state={}){
   const next=everydayReplies.find(r=>r.topic===target.topic&&r.arc===premise.arc&&r.beat===1&&!ids.has(r.id));
   return next?{...next,text:render(next),topic:'everyday'}:null;
  }
- const candidate=everydayReplies.find(r=>r.topic===target.topic&&r.beat===0&&!ids.has(r.id)&&!history.some(h=>h.role==='enny'&&h.text===render(r)));
+ // Exhausting novelty must not hand an explicit topic to unrelated fandom.
+ const candidate=everydayReplies.find(r=>r.topic===target.topic&&r.beat===0&&!ids.has(r.id)&&!history.some(h=>h.role==='enny'&&h.text===render(r)))
+  ||everydayReplies.find(r=>r.topic===target.topic&&r.beat===0&&!history.slice(-8).some(h=>h.role==='enny'&&h.text===render(r)))
+  ||everydayReplies.find(r=>r.topic===target.topic&&r.beat===0);
  return candidate?{...candidate,text:render(candidate),topic:'everyday'}:null;
 }
 

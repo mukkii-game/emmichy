@@ -74,7 +74,8 @@ test('screen remains playable after dictionary failure and IME composition does 
   const waitingCount=JSON.parse(storage.get('enny-memory-v1')).history.length;
   time=startedAt+299999;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,waitingCount);
   time++;await idleTick();const ended=JSON.parse(storage.get('enny-memory-v1'));
-  assert.equal(ended.ended,true);assert.match(ended.history.at(-1).text,/そろそろ帰るね.*バイバイ/);
+  assert.equal(ended.ended,true);assert.match(ended.history.at(-1).text,/バイバイ/);
+  assert.notEqual(ended.history.at(-1).text,'ア、そろそろ帰るね。バイバイ！');
   assert.equal(entry.value,'途中の下書き');
   elements.get('restart-chat').onclick();assert.equal(talk.hidden,true);assert.equal(elements.get('start-choice').hidden,false);
   elements.get('new-chat').onclick();assert.equal(talk.hidden,false);assert.equal(elements.get('start-choice').hidden,true);

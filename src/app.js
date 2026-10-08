@@ -69,7 +69,7 @@ if(state.history.length) {for(const h of state.history){add(h.role,h.text);const
  addOpening();
  add('system','ニホンゴ デ フツウニ ハナシテネ');
 }
-const img=new Image();img.crossOrigin='anonymous';img.src='assets/emmichy-nordic-bust-20261008.png';
+const img=new Image();img.crossOrigin='anonymous';img.src='assets/emmichy-nordic-soft-bust-20261008.png';
 img.onload=()=>{
  // Native 248x336 indexed eight-color tile, expanded exactly 2x without smoothing.
  portrait=img;draw();

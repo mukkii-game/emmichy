@@ -5,7 +5,7 @@ import {inflateSync} from 'node:zlib';
 import {pngChunks,digitalPalette} from '../scripts/portrait-png.mjs';
 
 test('shipped portrait really is an opaque 248x336 indexed image using exactly the eight digital RGB colors',async()=>{
- const chunks=pngChunks(await fs.readFile(new URL('../assets/emmichy-nordic-bust-20261008.png',import.meta.url)));
+ const chunks=pngChunks(await fs.readFile(new URL('../assets/emmichy-nordic-soft-bust-20261008.png',import.meta.url)));
  const head=chunks.find(c=>c.type==='IHDR').data,palette=chunks.find(c=>c.type==='PLTE').data;
  assert.equal(head.readUInt32BE(0),248);assert.equal(head.readUInt32BE(4),336);
  assert.equal(head[8],8);assert.equal(head[9],3);assert.deepEqual([...palette],digitalPalette.flat());

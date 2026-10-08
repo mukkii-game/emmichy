@@ -1,10 +1,18 @@
-# Current checkpoint — Nordic bust / verified eight-color tile, 2026-10-08
+# Current checkpoint — softer illustrated face, 2026-10-08
+
+User likes the Nordic portrait but asks for less realistic nose, eyes and facial outline. Built-in imagegen edit simplifies nasal modelling and eye detail and softens cheek/jaw while retaining pose, braids, costume and old-PC texture. New source/final assets use nordic-soft filenames; earlier assets remain for recovery. Same248×336 indexed8-color build and native2× nearest-neighbor renderer. Only asset references, release ID and build/test defaults change.
+
+Targeted shipped-PNG test passes; local actual-screen portrait crop docs/portrait-soft-20261008-local.png confirms the result. Prompt/provenance docs/portrait-soft-20261008.md. No new dialogue or live-provider verification claimed. Public follow-up targets authorized pilot-audio-readable-retro; release status pending.
+
+---
+
+# Earlier checkpoint — Nordic bust / verified eight-color tile, 2026-10-08
 
 User supplied the braided Nordic woman and explicitly preferred the older naturalistic portrait over modern manga proportions. Three built-in imagegen drawing iterations; first and second drafts retained anime tendencies, second measured352,470 colors and cannot be called an8-color asset. Selected third drawing uses the approved earlier close portrait as the main style input. Preserve the old red-sweater asset.
 
 Final build is a real indexed PNG,248×336 native pixels, exactly8 digital RGB colors, opaque. Dependency-free scripts/build-portrait.mjs area-averages the bust crop then applies ordered dithering; no generated intermediate colors survive. This tile fits the initial PC-9801's640×400/8-color limit confirmed by NEC. The HTML interface and CRT signal/pixel aspect are not a full hardware emulation. App renders the already-constrained tile at2× without smoothing or double dithering. Social metadata points at this same final PNG.
 
-103 tests pass, including shipped-image palette/dimensions/index data/CRC; independent Pillow read confirms mode P and8 colors. Local desktop screenshot docs/portrait-20261008-local.png confirms head, bust and costume. Final source and full prompt/provenance/limitations are in docs/portrait-20261008.md. No live AI test or subjective-quality guarantee. Public follow-up targets the authorized Pages branch; status to be updated after deployment.
+103 tests pass, including shipped-image palette/dimensions/index data/CRC; independent Pillow read confirms mode P and8 colors. Local desktop screenshot docs/portrait-20261008-local.png confirms head, bust and costume. Final source and full prompt/provenance/limitations are in docs/portrait-20261008.md. No live AI test or subjective-quality guarantee. Published: PR #10 merged asbbb61c1234348293ee3745d1930e1a999fbc6074 into pilot-audio-readable-retro. Pages run37787996559 success. Actual public browser loaded app.js?v=20261008-portrait1 and displayed the Nordic portrait; docs/portrait-20261008-public.png (portrait crop to preserve player-history privacy). Public PNG bytes equal the checked local indexed PNG, SHA2560acb00f942a5f01c398f0569fad28d00da0fc4284576727fe2380c97dfadccdb. Main unchanged. This post-release report commit updates evidence only, not runtime.
 
 ---
 

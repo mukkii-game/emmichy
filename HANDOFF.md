@@ -426,3 +426,12 @@ src/context.jsに公式TMS確認の左門豊作補助資料を追加し、巨人
 - 詳細・更新手順は docs/dialogue-20261009.md。名前のみの中継同期は scripts/sync-dialogue.mjs ../game-llm --names-only。サーバー側は所有辞書の一致一項目を補助指示へ。
 - この時点では新PR／公開反映の確認が残る。前の彩度PR #12は公開ブランチへ統合済みだがPages run 37790615652がqueued・jobs空のまま。新しい公開更新で動くか確認する。本体mainは統合しない。
 - 未検証: 新指示の実LLM会話品質、近似のしつこさ、全名前と読みの網羅性。人間試遊で未登録・誤認・つまらない例を受けて小さく追加／修正する。
+
+
+## 2026-10-09 この変更の公開確認
+
+- コード候補 ef7053c235454011d13aed9b427e39adfb2f006c。PR #13をpilot-audio-readable-retroへ統合、公開commit 92d8bdd270767a564dcc00fc809c510928a94302。本体mainは未統合。
+- Pages run 37800302162がsuccess。公開HTMLのrelease 20261009-dialogue1、入力案内を確認。app.jsは改行形式を正規化して同じ内容、continuation/names/name-data/game-namesは公開ファイルとローカルが一致。前回待機中だった彩度素材も公開とローカルが完全一致、今回の公開に含まれた。古いrun 37790615652の待機は現在の公開版を妨げない。
+- AI側PR #4をmainへ統合、commit b33ab18279a61d62d7cf301c7756fe6a01ec5e48。deploy run 37800294235 success、Worker version ec013283-a276-4a02-8acd-98189c809388。
+- 公開URL https://mukkii-game.github.io/emmichy/ 。公開画面を読み取りのみで確認し、保存済み会話の開始／続行操作はしていない。案内の証跡 docs/playtest-20261009-input-public.png。ブラウザエラーなし。
+- 実LLM品質比較、近似のしつこさ、未登録名と読みの補充は引き続き人間試遊で確認する。新しい作業はこのWorkへ。公開済み機能を古いloopから再実装しない。

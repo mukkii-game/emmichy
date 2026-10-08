@@ -1,0 +1,117 @@
+{
+  "count": 562,
+  "works": {
+    "chiikawa": 50,
+    "hunter": 198,
+    "jojo": 150,
+    "games": 95,
+    "dragonball": 2,
+    "yuyu": 2,
+    "deathnote": 2,
+    "gintama": 3,
+    "bleach": 3,
+    "naruto": 3,
+    "haikyu": 3,
+    "slamdunk": 3,
+    "worldtrigger": 4,
+    "jujutsu": 2,
+    "heroaca": 4,
+    "kimetsu": 4,
+    "chainsaw": 3,
+    "spyfamily": 3,
+    "dandadan": 4,
+    "sakamoto": 2,
+    "kagurabachi": 3,
+    "neverland": 3,
+    "assassination": 2,
+    "frieren": 2,
+    "dungeon": 3,
+    "bocchi": 5,
+    "mob": 2,
+    "drstone": 1,
+    "onepiece": 1
+  },
+  "sources": [
+    {
+      "url": "https://www.ntv.co.jp/hunterhunter/character/index.html",
+      "status": 200,
+      "names": 0
+    },
+    {
+      "url": "https://www.ntv.co.jp/hunterhunter/character/kimera.html",
+      "status": 200,
+      "names": 30
+    },
+    {
+      "url": "https://www.ntv.co.jp/hunterhunter/character/genei.html",
+      "status": 200,
+      "names": 0
+    },
+    {
+      "url": "https://www.ntv.co.jp/hunterhunter/character/jyunishin.html",
+      "status": 200,
+      "names": 0
+    },
+    {
+      "url": "https://www.ntv.co.jp/hunterhunter/character/other_01.html",
+      "status": 200,
+      "names": 34
+    },
+    {
+      "url": "https://www.ntv.co.jp/hunterhunter/character/other_02.html",
+      "status": 200,
+      "names": 11
+    },
+    {
+      "url": "https://www.ntv.co.jp/hunterhunter/character/other_03.html",
+      "status": 200,
+      "names": 9
+    },
+    {
+      "url": "https://www.ntv.co.jp/hunterhunter/character/other_04.html",
+      "status": 200,
+      "names": 19
+    },
+    {
+      "url": "https://www.ntv.co.jp/hunterhunter/character/other_05.html",
+      "status": 200,
+      "names": 37
+    },
+    {
+      "url": "https://www.ntv.co.jp/hunterhunter/character/other_06.html",
+      "status": 200,
+      "names": 18
+    },
+    {
+      "url": "https://jojo-portal.com/anime/pb-bt/character/pb/",
+      "status": 200,
+      "names": 5
+    },
+    {
+      "url": "https://jojo-portal.com/anime/pb-bt/character/bt/",
+      "status": 200,
+      "names": 4
+    },
+    {
+      "url": "https://jojo-portal.com/anime/sc/character/",
+      "status": 200,
+      "names": 32
+    },
+    {
+      "url": "https://jojo-portal.com/anime/du/character/",
+      "status": 200,
+      "names": 33
+    },
+    {
+      "url": "https://jojo-portal.com/anime/gw/character/",
+      "status": 200,
+      "names": 29
+    },
+    {
+      "url": "https://jojo-portal.com/anime/so/character/",
+      "status": 200,
+      "names": 0
+    }
+  ],
+  "limitations": "Name-only recognition; aliases editorial, tokenizer readings except seed overrides. No claim of complete canon or correct story details."
+}

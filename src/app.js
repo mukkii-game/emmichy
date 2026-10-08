@@ -6,18 +6,23 @@ import {createAudioDirector} from './audio.js?v=20261008-ready1';
 import {CHAT_API_URL} from './config.js?v=20261006-mix1';
 import {advancePerformance} from './performance.js?v=20261008-humor1';
 import {requestChat,chatAvailable} from './chat.js?v=20261008-humor1';
-import {readableText,loadReadings} from './readable.js?v=20261008-ready1';
+import {readableText,loadReadings} from './readable.js?v=20261008-names1';
 import {selectKnowledge} from './fandom.js?v=20261006-mix1';
 import {selectGap} from './gap.js?v=20261006-mix1';
 import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261008-humor1';
 import {cultureReply} from './culture.js?v=20261006-mix1';
-import {chooseFiller,startFiller,longFiller,retainAside,idleAside,createIdleSequence} from './filler.js?v=20261008-listen3';
+import {chooseFiller,startFiller,longFiller,retainAside,idleAside,createIdleSequence} from './filler.js?v=20261008-names1';
 import {learnInterests} from './balance.js?v=20261008-route2';
 import {selectOpening} from './openings.js?v=20261006-open1';
 import {preparedReply} from './routing.js?v=20261008-humor1';
 import {cleanConversation,noteConversationReply} from './conversation.js?v=20261008-humor1';
 import {offlineFallback} from './fallback.js?v=20261008-finish1';
 import {portraitColors} from './portrait-palette.js?v=20261008-portrait3';
+import {planContinuation,createContinuation} from './continuation.js?v=20261008-continue1';
+import {recognizeName,namedGesture} from './names.js?v=20261008-names1';
+const continuation=createContinuation();
+let continuationVersion=0,continuing=false,hadContinuation=false;
+function stopContinuation(clear=false){continuationVersion++;if(clear){continuation.clear();hadContinuation=false;}if(continuing){live='';draw();}}
 let recentFillers=[];
 const idleSequence=createIdleSequence();
 let tokenizer=null;
@@ -61,7 +66,7 @@ function recordAside(line,pendingState=null){
  const p=document.createElement('p');p.textContent=`えみちぃ：${line}`;$('transcript').append(p);
  if($('transcript').children.length>40)$('transcript').firstChild.remove();
 }
-function openingText(returning=false){const picked=selectOpening(state,returning);state.openingSeen=picked.seen;return picked.text;}
+function openingText(returning=false){const picked=selectOpening(state,returning);state.openingSeen=picked.seen;return /ちいかわ|チイカワ|chiikawa|ハチワレ|シーサー|モモンガ/i.test(picked.text)?picked.text:`${picked.text} ちいかわの話も、ついしたくなっちゃうの。`;}
 function addOpening(returning=false){const line=openingText(returning);add('enny',line);state.history.push({role:'enny',text:line});save();}
 $('send').disabled=true;
 loadReadings().then(value=>{tokenizer=value;readingsSettled=true;if(ready&&!session)session={startedAt:Date.now(),turns:0,finished:false};saveSession();renderConversation();if(ready&&!busy)$('send').disabled=false;if(!value)$('status').textContent='読みの辞書を使えないため、原文を交えて表示します。会話は続けられます。';return value;});
@@ -97,7 +102,7 @@ const wait=ms=>new Promise(r=>setTimeout(r,ms));
 async function endSession(reason='time'){
  if(!ready||ending||busy||session?.finished||state.ended||(!session&&reason!=='idle'))return;
  if(!session)session={startedAt:Date.now(),turns:0,finished:false};
- ending=true;busy=true;$('send').disabled=true;$('reset').disabled=true;$('restart-chat').disabled=true;
+ stopContinuation(true);ending=true;busy=true;$('send').disabled=true;$('reset').disabled=true;$('restart-chat').disabled=true;
  const end=finishSession(state,session,{reason});state=end.state;session=end.session;mood='soft';saveSession();save();
  audioDirector.se.ending();
  const endingDisplay=readableText(end.text,tokenizer);
@@ -109,6 +114,7 @@ async function endSession(reason='time'){
 $('talk').addEventListener('submit',async e=>{
  e.preventDefault();if(!ready||busy||composing||!readingsSettled)return;
  const raw=$('entry').value.trim();if(!raw)return;
+ stopContinuation(true);
  const isRestart=state.ended&&/コンニチ[ハワ]|タダイマ|オハヨウ/.test(normalize(raw));
  if(!session||isRestart){session={startedAt:Date.now(),turns:0,finished:false};if(isRestart){lines=[];state.performance={};state.conversation=cleanConversation(null);state.fan={worry:0,excitement:0,lastTopic:''};}saveSession();}
   session.turns++;saveSession();
@@ -137,12 +143,15 @@ $('talk').addEventListener('submit',async e=>{
  if(prepared){result.text=['everyday','conversation-move','context-name','greeting','island-water','gap','repertoire','culture'].includes(prepared.topic)?prepared.text:fandomReply||prepared.text;result.kind='curated';result.state.history.at(-1).text=result.text;if(/[！!]/.test(result.text))result.mood='excited';}
  if(isRestart){result.text=openingText(true);result.state.openingSeen=state.openingSeen;result.state.history.at(-1).text=result.text;}
  const ruleOnly=isRestart||['curated','bye','asleep','name','memory','arithmetic'].includes(result.kind);
+ let heard=['bye','asleep','name','memory','arithmetic','comfort','contradiction'].includes(result.kind)||isRestart?null:recognizeName(raw,{reading:readableText(raw,tokenizer),state:before});
+ if(heard?.soft&&recentFillers.includes(namedGesture(heard)))heard=null;
+ if(heard){const line=namedGesture(heard);recordAside(line,result.state);recentFillers=[...recentFillers,line].slice(-6);draw();}
  if(modelEnabled && !ruleOnly && chatAvailable(session)){
   $('status').textContent='';
   const stopFiller=startFiller(()=>{
-   const line=chooseFiller(raw,recentFillers);recentFillers=[...recentFillers,line].slice(-6);
+   const line=chooseFiller(raw,recentFillers,{match:heard});recentFillers=[...recentFillers,line].slice(-6);
    recordAside(line,result.state);draw();
-  },{later:()=>{
+  },{initialDelay:heard?5000:2000,later:()=>{
    const recent=result.state.history.filter(h=>h.role==='enny').slice(-20).map(h=>h.text);
    recordAside(longFiller(raw,recent),result.state);draw();
   }});
@@ -160,6 +169,8 @@ $('talk').addEventListener('submit',async e=>{
   result.state.repertoire=rememberReply(before,result.text,replyId,Boolean(prepared||polished.replaced));
   if(polished.replaced){if(usedModel)session.chatHealth={...session.chatHealth,replaced:(session.chatHealth?.replaced||0)+1};usedModel=false;locallyReplaced=true;}
  }
+ const paced=['bye','asleep','name','memory','arithmetic','contradiction'].includes(result.kind)||isRestart?{first:result.text,later:[]}:planContinuation(result.text,raw,before);
+ result.text=paced.first;result.state.history.at(-1).text=result.text;
  session.dialogueUse={ai:(session.dialogueUse?.ai||0)+(usedModel?1:0),bank:(session.dialogueUse?.bank||0)+(!usedModel&&(prepared||locallyReplaced)?1:0)};
  if(result.kind!=='bye')result.state.conversation=noteConversationReply(result.state.conversation,result.text,raw,session.turns);
  state=result.state;mood=result.mood;session.lastMood=mood;saveSession();save();
@@ -168,6 +179,7 @@ $('talk').addEventListener('submit',async e=>{
  const replyDisplay=readableText(result.text,tokenizer);
  for(const c of replyDisplay){live+=c;draw();await wait(mood==='excited'?12:mood==='worried'&&c==='\n'?420:22);}
  add('enny',result.text);live='';noteActivity();save();busy=false;$('send').disabled=false;$('reset').disabled=false;
+ continuation.start(paced.later,Date.now());hadContinuation=paced.later.length>0;
  $('status').textContent=usedModel?`AI会話${modelProvider?' / '+({groq:'Groq',gemini:'Google Gemini','workers-ai':'Cloudflare Workers AI',local:'ローカルAI'}[modelProvider]||modelProvider):''} / ENTER で送信`:locallyReplaced?'用意した会話で調整 / ENTER で送信':prepared?'用意した会話 / ENTER で送信':modelEnabled&&!ruleOnly?'AI失敗→ルール会話 / ENTER で送信':'ルール会話 / ENTER で送信';
  const item=document.createElement('p');item.textContent=`あなた：${raw}。Emmichy：${result.text}`;$('transcript').append(item);if($('transcript').children.length>40)$('transcript').firstChild.remove();
  $('entry').focus();draw();
@@ -176,12 +188,13 @@ $('talk').addEventListener('submit',async e=>{
 });
 let composing=false;
 function noteActivity(){lastActivity=Date.now();idleSequence.touch(lastActivity);}
-$('entry').addEventListener('compositionstart',()=>{composing=true;noteActivity();});
-$('entry').addEventListener('compositionend',()=>{composing=false;noteActivity();draw();});
-$('entry').addEventListener('input',()=>{noteActivity();if(!busy){live='';draw();}});
+function noteTyping(){continuation.typed(Date.now());stopContinuation();noteActivity();}
+$('entry').addEventListener('compositionstart',()=>{composing=true;noteTyping();});
+$('entry').addEventListener('compositionend',()=>{composing=false;noteTyping();draw();});
+$('entry').addEventListener('input',()=>{noteTyping();if(!busy){live='';draw();}});
 $('entry').addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.isComposing||e.keyCode===229))e.preventDefault();});
 let lastActivity=Date.now();
-$('entry').addEventListener('keydown',noteActivity);
+$('entry').addEventListener('keydown',noteTyping);
 document.addEventListener('pointerdown',noteActivity);
 canvas.addEventListener('click',()=>$('entry').focus());
 $('sound').onclick=async()=>{let on;try{on=await audioDirector.toggle();}catch{$('status').textContent='音を開始できません。もう一度音ボタンを押してください。';return;}$('sound').textContent='BGM + SE '+(on?'ON':'OFF');$('sound').setAttribute('aria-pressed',String(on));if(on)audioDirector.se.reply();};
@@ -190,9 +203,10 @@ $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await docume
 $('export').onclick=()=>{const body=state.history.map(h=>`${h.role==='user'?'YOU':'EMMICHY'}: ${h.text}`).join('\r\n\r\n');const url=URL.createObjectURL(new Blob(['\ufeff'+body],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='enny-conversation.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
 let resetArmed=false,resetTimer;
 $('reset').onclick=()=>{if(!resetArmed){resetArmed=true;$('reset-note').textContent=' もう一度押すと記憶が消えます。';resetTimer=setTimeout(()=>{resetArmed=false;$('reset-note').textContent='';},5000);return;}
- clearTimeout(resetTimer);resetArmed=false;$('reset-note').textContent=' 初期化しました。';state=freshState();session=null;saveSession();lines=[];live='';mood='idle';addOpening();$('transcript').replaceChildren();save();draw();};
+ stopContinuation(true);clearTimeout(resetTimer);resetArmed=false;$('reset-note').textContent=' 初期化しました。';state=freshState();session=null;saveSession();lines=[];live='';mood='idle';addOpening();$('transcript').replaceChildren();save();draw();};
 function showStartChoice(){
  if(busy)return;
+ stopContinuation(true);
  if(ready)saveSession();
  ready=false;$('start-choice').hidden=false;$('talk').hidden=true;$('send').disabled=true;$('entry').disabled=true;
  $('continue').disabled=!state.history.length;
@@ -204,7 +218,7 @@ $('continue').onclick=()=>{session=resumeSession(session);enterConversation();sa
 $('new-chat').onclick=()=>{const next=startConversation(state);state=next.state;session=next.session;lines=[];live='';mood='idle';$('transcript').replaceChildren();addOpening(true);enterConversation();save();saveSession();$('status').textContent='新しい会話 / 漢字・ひらがな OK';draw();};
 $('restart-chat').onclick=showStartChoice;
 if(hadSavedDialogue){ready=false;showStartChoice();}
-document.addEventListener('visibilitychange',()=>{if(!ready)return;if(document.hidden)saveSession();else{session=resumeSession(session);noteActivity();saveSession();}});
+document.addEventListener('visibilitychange',()=>{if(!ready)return;stopContinuation();if(document.hidden)saveSession();else{session=resumeSession(session);continuation.typed(Date.now());noteActivity();saveSession();}});
 setInterval(()=>{if(ready&&!document.hidden)saveSession();},5000);
 window.addEventListener('pagehide',saveSession);
 function setEngineNote(){
@@ -215,10 +229,20 @@ if(isLocal&&!offline){
  fetch('/api/config').then(r=>r.json()).then(c=>{if(c.localModel){chatEndpoint='/api/chat';modelProvider='local';}setEngineNote();}).catch(()=>{});
 }
 setInterval(draw,160);setInterval(async()=>{
- if(ready&&readingsSettled&&!document.hidden&&!busy&&!session?.finished&&!state.ended&&!composing){
+ if(ready&&readingsSettled&&!document.hidden&&!busy&&!continuing&&!session?.finished&&!state.ended&&!composing){
+  if(continuation.pending){
+   const line=continuation.peek(Date.now(),{composing});if(!line)return;
+   const version=continuationVersion;continuing=true;live='';
+   for(const c of readableText(line,tokenizer)){
+    if(version!==continuationVersion||busy||document.hidden||!ready||composing){continuing=false;draw();return;}
+    live+=c;draw();await wait(22);
+   }
+   if(version===continuationVersion&&!busy&&!document.hidden&&ready&&!composing){recordAside(line);continuation.spoken(Date.now());noteActivity();}
+   live='';continuing=false;draw();return;
+  }
   const stage=idleSequence.poll(Date.now(),{allowFinish:Boolean(session)&&Date.now()-session.startedAt>=5*60*1000});
   if(stage===3)await endSession('idle');
-  else if(stage){recordAside(idleAside(state.history,stage-1));draw();}
+  else if(stage&&!hadContinuation){recordAside(idleAside(state.history,stage-1));draw();}
  }
 },1000);draw();if(ready)$('entry').focus();
 

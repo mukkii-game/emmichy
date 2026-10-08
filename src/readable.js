@@ -1,12 +1,15 @@
 // Reading conversion stays on the device; the original input goes to the AI.
+import {nameData} from './name-data.js?v=20261008-names1';
 const katakana = value => String(value).normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96));
 const names=new Map([['ちいかわ','チイカワ'],['chiikawa','Chiikawa'],['えみちぃ','エミチィ'],['エミチィ','エミチィ'],['ハチワレ','ハチワレ'],['ドラクエ','ドラクエ']]);
 for(const [name,reading] of [['島二郎','シマジロウ'],['仗助','ジョウスケ'],['承太郎','ジョウタロウ'],['徐倫','ジョリーン'],['露伴','ロハン'],['億泰','オクヤス'],['康一','コウイチ'],['千空','センクウ'],['禰豆子','ネズコ'],['尸魂界','ソウルソサエティ']])names.set(name,reading);
 for(const [name,reading] of [['左門豊作','サモンホウサク'],['左門','サモン'],['星飛雄馬','ホシヒュウマ'],['飛雄馬','ヒュウマ']])names.set(name,reading);
 for(const spelling of ['箱根そば','箱根ソバ','はこねそば','ハコネソバ'])names.set(spelling,'ハコネソバ');
-const namePattern=new RegExp([...names.keys()].sort((a,b)=>b.length-a.length).join('|'),'gi');
+for(const row of nameData)for(const alias of row.aliases){if(alias.length<=3&&/\.html$/.test(row.source))continue;const key=alias.toLowerCase().replace(/\s/g,'');if(!names.has(key))names.set(key,row.reading.replace(/\s/g,''));if(/[ァ-ヶ]/.test(alias)){const hira=alias.replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-96)).toLowerCase().replace(/\s/g,'');if(!names.has(hira))names.set(hira,row.reading.replace(/\s/g,''));}}
+const escape=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+const namePattern=new RegExp([...names.keys()].sort((a,b)=>b.length-a.length).map(n=>/^[a-z0-9]+$/i.test(n)?`(?<![a-z0-9])${escape(n)}(?![a-z0-9])`:[...n].map(escape).join('\\s*')).join('|'),'gi');
 export function readableText(value, tokenizer) {
-  return String(value).split('\n').map(line => line.replace(namePattern,name=>` ${names.get(name.toLowerCase())||name} `).trim().split(/\s+/).filter(Boolean).map(part => {
+  return String(value).split('\n').map(line => line.replace(namePattern,name=>` ${names.get(name.toLowerCase().replace(/\s/g,''))||name} `).trim().split(/\s+/).filter(Boolean).map(part => {
     // AI/rule replies already contain word boundaries. Retokenizing kana
     // would split words incorrectly (e.g. エイガ -> エイ ガ).
     if (!tokenizer || !/[一-龠々ぁ-ゖ]/.test(part)) return katakana(part);

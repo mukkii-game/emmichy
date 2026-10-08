@@ -5,6 +5,12 @@ import {readableText,loadReadings} from '../src/readable.js';
 import {respond,freshState} from '../src/engine.js';
 import {requestChat} from '../src/chat.js';
 const tokenizer=await new Promise((resolve,reject)=>kuromoji.builder({dicPath:'assets/dict/'}).build((error,value)=>error?reject(error):resolve(value)));
+
+test('shared proper-name dictionary protects Leorio and related names from internal word breaks',()=>{
+ for(const input of ['レオリオが好き','れおりおが好き','レオ リオが好き']){assert.match(readableText(input,tokenizer),/レオリオ ガ ?スキ/);assert.doesNotMatch(readableText(input,tokenizer),/レオ リオ/);}
+ assert.match(readableText('ヒソカとクラピカ',tokenizer),/ヒソカ ト クラピカ/);
+ assert.match(readableText('空条承太郎と東方仗助',tokenizer),/クウジョウジョウタロウ ト ヒガシカタジョウスケ/);
+});
 test('kanji and hiragana render as spaced full-width kana with voiced marks',()=>{
  const text=readableText('明日は仕事が忙しい。',tokenizer);
  assert.match(text,/アシタ ハ シゴト ガ イソガシイ/);

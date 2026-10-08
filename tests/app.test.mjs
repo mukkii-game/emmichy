@@ -25,17 +25,19 @@ test('screen remains playable after dictionary failure and IME composition does 
   Date.now=()=>time;
   globalThis.setInterval=(fn,ms)=>{intervals.push({fn,ms});return 0;};
   // Advance only the app's typing delays, without waiting seconds per reply.
-  let expectPersisted=null,persistedBeforeAnimation=false,typingFrames=0,lastTyped='';
+  let expectPersisted=null,persistedBeforeAnimation=false,typingFrames=0,lastTyped='',interruptNextFrame=false;
   globalThis.setTimeout=fn=>{
    if(expectPersisted){const memory=JSON.parse(storage.get('enny-memory-v1')||'null');if(memory?.history?.at(-1)?.text.includes(expectPersisted))persistedBeforeAnimation=true;}
    const pending=elements.get('live-reply'),body=elements.get('live-body'),log=elements.get('conversation');
    if(body?.textContent){typingFrames++;lastTyped=body.textContent;assert.equal(log.children.at(-1),pending,'typing stays inside the history after the preceding message');assert.equal(pending.hidden,false);}
+   if(interruptNextFrame){interruptNextFrame=false;queueMicrotask(()=>elements.get('entry').emit('input'));}
    queueMicrotask(fn);return 0;
   };globalThis.clearTimeout=()=>{};
   await import('../src/app.js');await Promise.resolve();
   assert.ok(displayed.every(text=>!String(text).includes('ジュンビ')));
   const startedAt=JSON.parse(storage.get('emmichy-session')).startedAt;
   const entry=elements.get('entry'),send=elements.get('send'),talk=elements.get('talk');
+  assert.match(JSON.parse(storage.get('enny-memory-v1')).history.find(h=>h.role==='enny').text,/ちいかわ|チイカワ|chiikawa|ハチワレ|シーサー|モモンガ/i);
   assert.equal(send.disabled,false);assert.match(elements.get('status').textContent,/辞書/);
   entry.value='本を買った';await entry.emit('compositionstart');await talk.emit('submit');
   assert.equal(entry.value,'本を買った');
@@ -61,6 +63,29 @@ test('screen remains playable after dictionary failure and IME composition does 
   const rainy=JSON.parse(storage.get('enny-memory-v1'));
   assert.match(rainy.history.at(-1).text,/雨/);assert.doesNotMatch(rainy.history.at(-1).text,/クロイ ソラ|電気/);
   const idleTick=intervals.find(x=>x.ms===1000).fn;
+  // One accepted reply unfolds with no extra user turn or request. Unspoken
+  // continuations are not already present in saved history.
+  let pacedCount=JSON.parse(storage.get('enny-memory-v1')).history.length;
+  const turnCount=JSON.parse(storage.get('emmichy-session')).turns;
+  time+=3999;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,pacedCount);
+  time++;interruptNextFrame=true;await idleTick();
+  assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,pacedCount,'interrupted partial line is not saved');
+  assert.equal(elements.get('live-reply').hidden,true);
+  time+=5999;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,pacedCount);
+  await entry.emit('compositionstart');time+=20000;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,pacedCount);
+  await entry.emit('compositionend');time+=6000;await idleTick();
+  assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,pacedCount+1);
+  assert.equal(JSON.parse(storage.get('emmichy-session')).turns,turnCount);
+  assert.equal(elements.get('live-reply').hidden,true);
+  entry.value='ヒソカ';const pendingName=talk.emit('submit');
+  const heard=JSON.parse(storage.get('enny-memory-v1')).history;
+  await pendingName;
+  const nameIndex=heard.findLastIndex(h=>h.role==='user');
+  assert.equal(heard[nameIndex+1].text,'ヒソカ！','name is heard before answer animation');
+  assert.equal(heard[nameIndex].text,'ヒソカ','original player input is retained');
+  entry.value='2+2';await talk.emit('submit');
+  pacedCount=JSON.parse(storage.get('enny-memory-v1')).history.length;
+  time+=6000;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,pacedCount,'new turn cancels old continuation');
   let count=JSON.parse(storage.get('enny-memory-v1')).history.length;
   entry.value='途中の下書き';await entry.emit('input');time+=9999;await idleTick();
   assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,count);

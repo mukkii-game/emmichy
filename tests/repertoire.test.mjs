@@ -24,6 +24,16 @@ test('covered facts answer precisely; analysis and teaching stay with AI',()=>{
  assert.equal(chooseRepertoire('ジョジョとハンターの戦いの違いは？',{turn:2}).scripted,false);
  const teach=chooseRepertoire('京都の風習は、実は地域の人が助け合う仕組みだよ',{turn:2});assert.equal(teach.intent,'teaching');assert.equal(teach.candidate,null);
 });
+test('exhausted covered fact stays accurate and local after repeated questions',()=>{
+ const raw='ヒソカのバンジーガムって何？';let state={turn:2,history:[]};
+ for(let i=0;i<20;i++){
+  const reply=chooseRepertoire(raw,state);
+  assert.equal(reply.scripted,true);assert.match(reply.candidate.text,/ゴムとガム/);
+  state.repertoire=rememberReply(state,reply.candidate.text,reply.candidate.id,true);
+  state.history.push({role:'enny',text:reply.candidate.text});state.turn++;
+ }
+ assert.equal(chooseRepertoire('バンジーガムの弱点は？',state).candidate,null);
+});
 test('topic facets do not get hijacked and seen lines or same punchline families do not recur',()=>{
  let state={turn:2,knowledge:{work:'chiikawa',recent:['chiikawa-23']},history:[]};
  const seen=new Set();

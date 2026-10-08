@@ -5,7 +5,7 @@ import {unwantedFanRedirect} from '../src/chat.js';
 import {freshState,restoreState,respond,normalize} from '../src/engine.js';
 import {chiikawaReply} from '../src/topics.js';
 import {advancePerformance} from '../src/performance.js';
-import {selectKnowledge,knowledgeFallback} from '../src/fandom.js';
+import {selectKnowledge} from '../src/fandom.js';
 import {chooseRepertoire,polishReply,rememberReply} from '../src/repertoire.js';
 import {cultureReply} from '../src/culture.js';
 import {selectGap} from '../src/gap.js';
@@ -39,7 +39,7 @@ for(const [type,inputs] of entries){
   result.state.performance=before.performance;result.state.speechStyle=before.speechStyle;
   if(result.kind!=='bye')result.state.conversation=before.conversation;
   const knowledge=selectKnowledge(raw,before),repertoire=chooseRepertoire(raw,before),culture=cultureReply(raw,before,repertoire.intent);
-  const fandom=culture?.text||repertoire.candidate?.text||knowledgeFallback(knowledge);
+  const fandom=culture?.text||repertoire.candidate?.text;
   result.state.knowledge=knowledge.memory;
   if(fandom&&!/嫌い|キライ|苦手|やめ|ヤメ|以外|イガイ|ばかり|バカリ/.test(raw)&&!['bye','asleep','name','memory','arithmetic','comfort','contradiction','repeat'].includes(result.kind))result.text=fandom;
   const gap=selectGap(raw,state);

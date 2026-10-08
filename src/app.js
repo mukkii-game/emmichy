@@ -7,14 +7,14 @@ import {CHAT_API_URL} from './config.js?v=20261006-mix1';
 import {advancePerformance} from './performance.js?v=20261007-loop7';
 import {requestChat,chatAvailable} from './chat.js?v=20261008-hybrid1';
 import {readableText,loadReadings} from './readable.js?v=20261008-ready1';
-import {selectKnowledge,knowledgeFallback} from './fandom.js?v=20261006-mix1';
+import {selectKnowledge} from './fandom.js?v=20261006-mix1';
 import {selectGap} from './gap.js?v=20261006-mix1';
-import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261008-hybrid1';
+import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261008-route2';
 import {cultureReply} from './culture.js?v=20261006-mix1';
 import {chooseFiller,startFiller,longFiller,retainAside,idleAside} from './filler.js?v=20261006-idle1';
-import {learnInterests} from './balance.js?v=20261006-balance1';
+import {learnInterests} from './balance.js?v=20261008-route2';
 import {selectOpening} from './openings.js?v=20261006-open1';
-import {preparedReply} from './routing.js?v=20261008-hybrid1';
+import {preparedReply} from './routing.js?v=20261008-route2';
 import {cleanConversation,noteConversationReply} from './conversation.js?v=20261007-loop7';
 let recentFillers=[];
 let idleAsideAt=0,idleAsideIndex=0;
@@ -113,7 +113,7 @@ $('talk').addEventListener('submit',async e=>{
  const knowledge=selectKnowledge(raw,before);
  const repertoire=chooseRepertoire(raw,before);
  const culture=cultureReply(raw,before,repertoire.intent);
- const fandomReply=culture?.text||repertoire.candidate?.text||knowledgeFallback(knowledge);
+ const fandomReply=culture?.text||repertoire.candidate?.text;
  if(!isRestart&&!state.ended){
   result.state.knowledge=knowledge.memory;
   if(fandomReply&&!/嫌い|キライ|苦手|やめ|ヤメ|以外|イガイ|ばかり|バカリ/.test(raw)&&!['bye','asleep','name','memory','arithmetic','comfort','contradiction','repeat'].includes(result.kind)){

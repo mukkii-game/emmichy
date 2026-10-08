@@ -35,5 +35,9 @@ test('screen remains playable after dictionary failure and IME composition does 
   assert.equal(state.history.find(h=>h.role==='user').text,'本を買った');
   assert.match(state.history.at(-1).text,/本/);assert.equal(send.disabled,false);
   assert.ok(elements.get('conversation').children.length>1);
+  entry.value='漫画じゃなくて散歩の話にしよう';await talk.emit('submit');
+  const switched=JSON.parse(storage.get('enny-memory-v1'));
+  assert.doesNotMatch(switched.history.at(-1).text,/ちいかわ|チイカワ|島二郎|ジョジョ|ハチワレ|バキ/);
+  assert.equal(switched.history.filter(h=>h.role==='user').length,2);
  }finally{for(const [key,value] of Object.entries(saved)){if(value===undefined)delete globalThis[key];else globalThis[key]=value;}}
 });

@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {balanceRoute,learnInterests,cleanInterests} from '../src/balance.js';
-test('balance targets successful AI and relevant bank turns without forcing unrelated answers',()=>{
+test('route suitability is invariant under AI and bank usage counts',()=>{
  const p={topic:'repertoire',text:'answer'},c={intent:'react',candidate:{text:'fan'}};
- assert.equal(balanceRoute(p,c,{turns:3},true),null);
+ assert.equal(balanceRoute(p,c,{turns:3},true),p);
  assert.equal(balanceRoute(p,c,{turns:3,dialogueUse:{ai:1}},true),p);
- assert.equal(balanceRoute(null,c,{turns:4,dialogueUse:{ai:1}},true).text,'fan');
+ assert.equal(balanceRoute(null,c,{turns:4,dialogueUse:{ai:1}},true),null);
  assert.equal(balanceRoute(null,{intent:'teaching',candidate:null},{turns:8},true),null);
  assert.equal(balanceRoute(p,c,{turns:3},false),p);
 });

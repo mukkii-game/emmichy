@@ -1,3 +1,17 @@
+# Current checkpoint — suitability-first routing, 2026-10-08
+
+User explicitly deferred smartphone real-device verification; it is a remaining issue, not a reason to suspend accessible development.
+
+- Removed AI/bank minimum-per-play quota. Existing authored suitability decides routing independently of usage counts; open questions remain AI candidates, but accurate prepared replies no longer incur calls just to satisfy a ratio.
+- Covered factual questions reuse an accurate fact after reply-family exhaustion. Twenty repeated gum-property questions stay local and accurate; unknown weaknesses/analysis still have no canned answer.
+- Removed unconditional knowledgeFallback from the screen and offline driver: previous fandom memory alone must not overwrite an unrelated new input.
+- Regression checks cover denied purchases/preferences, loss, unfamiliar daily observations, explicit topic switches and technical explanation requests. Actual DOM submit test also checks switching away from manga without unsolicited bank content.
+- Verification: 88/88 tests; 15 offline through-plays finish with nonfan guards and ten fixture sequences distinct; syntax and whitespace checks pass. Evidence docs/playtest-20261008-routing-offline.json. Real AI calls 0 this step; no workflows, deployment or public integration.
+
+Remaining work: improve natural fallback on truly unfamiliar inputs when the relay is unavailable; verify live response quality when reachable. Physical IME/keyboard/audio remain deferred. No artificial AI quota, universal replay-quality claim, or background-running promise.
+
+---
+
 # Current checkpoint — hybrid routing audit, 2026-10-08
 
 Actual implementation resumed in the single authorized development session.

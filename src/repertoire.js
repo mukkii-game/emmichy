@@ -69,7 +69,9 @@ export function chooseRepertoire(raw,state={},now=new Date()){
  const turn=Number(state.turn)||0;
  const score=r=>r.rank*8+(r.angle===3?7:0)+((r.angle+turn)%5);
  candidates.sort((a,b)=>score(a)-score(b));
- const candidate=candidates[0]||null;
+ // Repetition avoidance is for reactions, not truth. Repeated covered factual
+ // questions keep the same accurate answer instead of spending an AI request.
+ const candidate=candidates[0]||(intent==='question'?replies.find(r=>r.mode==='fact'&&selection.cards.some(c=>c.id===r.cardId)):null)||null;
  const scripted=Boolean(candidate&&(intent==='question'||intent==='more'||(intent==='react'&&turn-mem.lastTurn>=2&&turn%3!==1)));
  return {intent,selection,candidate,scripted};
 }

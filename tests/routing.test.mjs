@@ -3,6 +3,9 @@ import assert from 'node:assert/strict';
 import {preparedReply} from '../src/routing.js';
 import {chooseRepertoire} from '../src/repertoire.js';
 import {balanceRoute} from '../src/balance.js';
+import {cultureReply} from '../src/culture.js';
+import {selectGap} from '../src/gap.js';
+import {freshState,respond} from '../src/engine.js';
 
 test('short replies keep grounded moves ahead of scripted bank and AI quota targets',()=>{
  const state={turn:6,history:[{role:'user',text:'オムライス食べた'}]};
@@ -22,11 +25,20 @@ test('grounded self-correction survives other authored opportunities',()=>{
 test('open-ended questions retain the AI path and ordinary bank balancing survives',()=>{
  const raw='FM音源の仕組みを説明して',repertoire=chooseRepertoire(raw,{turn:4});
  assert.equal(preparedReply(raw,{turn:4},{turns:4},{repertoire,modelEnabled:true}),null);
- assert.equal(balanceRoute({topic:'repertoire',text:'bank'},{},{turns:3},true),null);
+ const answer={topic:'repertoire',text:'bank'};
+ assert.equal(balanceRoute(answer,{},{turns:3},true),answer);
 });
 
 
 test('authored ordinary chat cannot overwrite authoritative name, memory, math or farewell',()=>{
  for(const kind of ['bye','asleep','name','memory','arithmetic'])
   assert.equal(preparedReply('パソコン買った',{}, {turns:1},{kind}),null);
+});
+test('denied, unfamiliar and analytical inputs do not inherit the previous fandom bank',()=>{
+ for(const raw of ['パソコンは買ってない','漫画じゃなくて散歩の話にしよう','音楽は好きじゃない','本を買ったけど盗まれた','今日は雨の匂いがした','FM音源の仕組みを説明して']){
+  const state={...freshState(),turn:5,knowledge:{work:'chiikawa',recent:[]},history:[{role:'user',text:'ちいかわが好き'}]};
+  const repertoire=chooseRepertoire(raw,state),kind=respond(raw,state).kind;
+  assert.equal(repertoire.candidate,null,raw);
+  assert.equal(preparedReply(raw,state,{turns:5},{modelEnabled:true,kind,repertoire,culture:cultureReply(raw,state,repertoire.intent),gap:selectGap(raw,state)}),null,raw);
+ }
 });

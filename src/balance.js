@@ -15,9 +15,7 @@ export function learnInterests(raw,value){
  return next;
 }
 export function balanceRoute(prepared,choice,session,enabled){
- const count=session?.dialogueUse||{};
- // One successful AI answer and one suitable bank answer per play are targets.
- if(enabled&&prepared?.topic==='repertoire'&&!count.ai&&session.turns>=3)return null;
- if(!prepared&&!count.bank&&session.turns>=4&&choice.candidate&&choice.intent==='react')return {text:choice.candidate.text,topic:'repertoire'};
+ // Suitability wins over an AI/bank quota. Do not spend a request solely to
+ // manufacture a hybrid ratio or substitute a non-scripted candidate by count.
  return prepared;
 }

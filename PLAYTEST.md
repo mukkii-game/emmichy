@@ -320,3 +320,9 @@ After fix: all 15 offline sessions terminate; all non-ending replies are checked
 Communication checks: 429 makes exactly one mocked request across save/reload; a new play can request again. Transport errors pause for 60 seconds and recover. Quality rejection increments attempted/rejected, while offline replies do not count. Accepted then locally replaced replies retain communication evidence separately from displayed AI count. Full suite 86 tests passes.
 
 One live attempt: 「雨の匂いって、なんだか昔の帰り道を思い出さない？」 returned null due to transport/timeout failure; no retry. Raw health/result saved in docs/playtest-20261008-hybrid-live.json. Live quality is unverified, not passed. Physical mobile input/audio remain unverified.
+
+## 2026-10-08 Suitability over AI/bank quotas
+
+Removed the forced first-AI turn and first-bank turn. Bank counters no longer override a suitable reply or promote a non-scripted candidate. Repeating 「ヒソカのバンジーガムって何？」 twenty times preserves the coveredゴムとガム property; 「弱点は？」 still has no invented fact.
+
+Unrelated input no longer gets unconditional knowledgeFallback from the previous fandom. Checked six negatives/open/technical inputs and a screen submit for 「漫画じゃなくて散歩の話にしよう」. Tests 88/88, fifteen complete offline sessions, nonfan guard on each ordinary reply. docs/playtest-20261008-routing-offline.json records actual text. No live provider requests this step. Smartphone verification is explicitly deferred by the user, not a development stop condition.

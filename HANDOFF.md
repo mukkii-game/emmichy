@@ -7,7 +7,9 @@ User supplied /goal to finish the candidate, verify dialogue/hybrid/save-resume,
 - Final resolved state now saves before typing animation, closing a reload window where turns were saved but the reply was not. DOM test checks persisted rain reply during animation scheduling. Save/resume preserves chatHealth and dialogueUse; new play clears those session counters.
 - Verification: 92/92 tests, sixteen offline complete sessions including disconnected daily/open-question flow, no live AI calls this step. Evidence docs/playtest-20261008-finish-offline.json. Syntax/whitespace checks pass. Physical smartphone verification is deferred.
 
-Next accessible check: candidate preview through-play if reachable. Live provider quality remains unverified since the last network attempt failed; no paid services or deployment changes.
+Candidate 48c29ed browser verification was attempted. HTML/CSS load, but module URL src/app.js?v=20261008-ready1 returns a site-served HTTP429 page when inspected directly. Submit clicks did not add dialogue or save history. This is a preview delivery blocker, not a successful browser through-play or evidence of an application syntax error. No visual certification for these newest changes. Prior candidate browser evidence remains historical only.
+
+Live provider quality remains unverified since the last network attempt failed. Smartphone verification is deferred. A next scope decision is whether to include the shared game-llm relay in diagnosis/fixes; avoid paid APIs and public deployment. No persistent background execution claimed.
 
 ---
 

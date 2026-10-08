@@ -334,3 +334,5 @@ Rain/walk/drawing inputs receive bounded authored reactions only when no AI/auth
 Each of three daily topics has three recent-history-aware variants. Protected/emotional/negative inputs remain outside this fallback. General unsupported inputs still retain legacy replies, so this is limited coverage rather than a general AI replacement.
 
 92 tests pass. Sixteen offline sessions finish, including disconnected daily/open-question scenario; ten replay sequences remain distinct. Resolved rain reply is persisted before animation delays in DOM test. Session JSON resume keeps rate limit and counts; new play resets them. Evidence docs/playtest-20261008-finish-offline.json. No live AI requests this step; physical smartphone checks deferred.
+
+Browser attempt on commit 48c29ed: HTML/CSS rendered but dialogue submit did not work and reload showed no saved history. Direct inspection of the observed module URL src/app.js?v=20261008-ready1 showed raw.githack HTTP429. This preview delivery failure is not a passed screen test. No retry loop, alternative network route or public deployment performed. Actual browser quality for this commit remains unverified.

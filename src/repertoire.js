@@ -1,3 +1,5 @@
+import {unwantedFanRedirect} from './chat.js?v=20261008-hybrid1';
+import {everydayReplies} from './everyday.js?v=20261008-hybrid1';
 import {cards,selectKnowledge,works} from './fandom.js?v=20261006-mix1';
 import {fanLines} from './fan-lines.js?v=20261006-mix1';
 // 600 individually authored reactions + 600 factual-answer combinations.
@@ -9,7 +11,7 @@ export const replies=Object.freeze(cards.flatMap(card=>{
   {id:`${card.id}:fact:${angle}`,cardId:card.id,work:card.work,angle,mode:'fact',text:`${card.fact} ${line}`,family:`${card.id}:${angle}`}
  ]).map(Object.freeze);
 }));
-const byId=new Map(replies.map(r=>[r.id,r]));
+const byId=new Map([...replies,...everydayReplies].map(r=>[r.id,r]));
 const fold=s=>String(s??'').normalize('NFKC').toLowerCase().replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/[\s。、!?！？「」…・]/g,'');
 const fingerprint=t=>{let n=2166136261;for(const ch of fold(t)){n^=ch.codePointAt(0);n=Math.imul(n,16777619);}return (n>>>0).toString(36);};
 export function cleanRepertoire(value){
@@ -67,15 +69,26 @@ export function chooseRepertoire(raw,state={},now=new Date()){
  const turn=Number(state.turn)||0;
  const score=r=>r.rank*8+(r.angle===3?7:0)+((r.angle+turn)%5);
  candidates.sort((a,b)=>score(a)-score(b));
- const candidate=candidates[0]||null;
+ // Repetition avoidance is for reactions, not truth. Repeated covered factual
+ // questions keep the same accurate answer instead of spending an AI request.
+ const candidate=candidates[0]||(intent==='question'?replies.find(r=>r.mode==='fact'&&selection.cards.some(c=>c.id===r.cardId)):null)||null;
  const scripted=Boolean(candidate&&(intent==='question'||intent==='more'||(intent==='react'&&turn-mem.lastTurn>=2&&turn%3!==1)));
  return {intent,selection,candidate,scripted};
 }
 export function polishReply(text,raw,state={},choice=null){
  let out=String(text).normalize('NFKC').trim().replace(/[\r\n]+/g,' ').replace(/\s{2,}/g,' ');
+ out=out.replace(/^(?:EMMICHY|EMMY|エミチ[ィイ]|エミ)\s*[:：>]\s*/i,'');
+ out=out.replace(/([。！!？?])\s*(?:エミ(?:チ[ィイ]|ちぃ)?|Emmichy)\s*$/i,'$1');
  out=out.replace(/([よね])[。！!]\s*(?:ね|よ)[。！!]$/,'$1。').replace(/([!?！？])\1{2,}/g,'$1$1');
+ const previous=Array.isArray(state.history)?state.history.filter(h=>h.role==='enny'&&!/^(?:ウ、ウン…。|ヤハ…。|エト、エト…。|ンショ…。|フムッ…。|ウンッ…。|ウンウン…。|アッ…。|フフ…。|ウン！|ンー…。)$/.test(h.text)).slice(-2):[];
+ if(previous.length===2&&previous.every(h=>/[?？]|教えて(?:くれる|ほしい|ね)|聞かせて/.test(h.text))){
+  // Keep a complete substantive reaction; never delete the only sentence.
+  const split=out.match(/^([\s\S]+[。！!])\s*[^。！!]*[?？]$/);
+  if(split&&split[1].trim().length>=12)out=split[1].trim();
+ }
  if(/島二郎|シマ\s*ジロウ/.test(raw)&&state.knowledge?.work==='chiikawa')out=out.replace(/しまじろう/g,'島二郎');
  const mem=cleanRepertoire(state.repertoire),recent=Array.isArray(state.history)?state.history.filter(h=>h.role==='enny').slice(-3).map(h=>h.text):[];
+ if(choice?.candidate&&unwantedFanRedirect(choice.candidate.text,raw,state))choice=null;
  const repeated=mem.prints.includes(fingerprint(out))||recent.some(t=>similarity(t,out)>.94);
  const islandError=/島二郎/.test(raw)&&/(?:トラ|虎|幼児|子供たちのヒーロー|お腹から|腹から|口から)/.test(out);
  // Substitute only if our candidate actually answers a covered question or is a direct reaction.

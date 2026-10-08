@@ -17,6 +17,14 @@ test('starting over clears dialogue and timer while retaining learned preference
  const next=startConversation(old,1234);assert.equal(next.state.name,'タロウ');assert.deepEqual(next.state.likes,{ネコ:1});assert.equal(next.state.ended,false);assert.deepEqual(next.state.history,[]);assert.equal(next.session.turns,0);assert.equal(next.session.startedAt,1234);
  assert.equal(old.history.length,1);
 });
+test('save-resume retains request cooldown and usage but new play resets both',()=>{
+ const health={attempts:2,accepted:1,failed:1,rateLimited:true,retryAt:100000};
+ const session=checkpointSession({startedAt:1000,turns:4,chatHealth:health,dialogueUse:{ai:1,bank:2}},2000);
+ const restored=resumeSession(JSON.parse(JSON.stringify(session)),5000);
+ assert.deepEqual(restored.chatHealth,health);assert.deepEqual(restored.dialogueUse,{ai:1,bank:2});
+ const fresh=startConversation(freshState(),5000).session;
+ assert.equal(fresh.chatHealth,undefined);assert.equal(fresh.dialogueUse,undefined);
+});
 
 import {endingReasons} from '../src/endings.js';
 test('five minutes never cuts off fewer than ten exchanges; 100 endings avoid repeats',()=>{

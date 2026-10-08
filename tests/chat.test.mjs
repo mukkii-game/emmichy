@@ -21,3 +21,47 @@ test('teaching raises curiosity and excitement without changing factual history'
  assert.ok(next.performance.curiosity>advancePerformance(state,'こんにちは',6).performance.curiosity);
  assert.ok(next.performance.hype>0);assert.deepEqual(next.history,[]);
 });
+
+test('explicit nonfan topic switch rejects unsolicited fan redirection without a retry',async()=>{
+ const input='漫画は詳しくないけど、音楽の話は好きだよ';
+ let calls=0;
+ const fetcher=async()=>{calls++;return Response.json({text:'音楽もいいね。ちいかわが歌ったらかわいい！',provider:'groq'});};
+ assert.equal(await requestChat('/chat',input,{}, {},{fetcher}),null);
+ assert.equal(calls,1);
+ const state={history:[{role:'user',text:input}]};
+ assert.equal(await requestChat('/chat','ギターも好き',state,{}, {fetcher}),null);
+ assert.ok(await requestChat('/chat','ジョジョの曲が好き',state,{}, {fetcher}));
+ assert.ok(await requestChat('/chat',input,{}, {},{fetcher:async()=>Response.json({text:'アタシ、好きな曲だと歩く速さが変わる。',provider:'groq'})}));
+ assert.ok(await requestChat('/chat','ギターも好き',{}, {},{fetcher}));
+});
+
+test('429 stops provider requests for this play and survives saved-session restore',async()=>{
+ const session={turns:4};let calls=0;
+ const fetcher=async()=>{calls++;return new Response('',{status:429});};
+ await requestChat('/chat','自由な話',{},session,{fetcher,now:1000});
+ const restored=JSON.parse(JSON.stringify(session));
+ await requestChat('/chat','別の話',{},restored,{fetcher,now:999999});
+ assert.equal(calls,1);assert.equal(restored.chatHealth.failed,1);
+ assert.equal(restored.chatHealth.lastOutcome,'rate-limit');
+ const fresh={};await requestChat('/chat','新しいプレイ',{},fresh,{fetcher,now:999999});
+ assert.equal(calls,2);
+});
+test('network failure cools down, then recovers with separate communication counters',async()=>{
+ const session={};let calls=0;
+ const failed=async()=>{calls++;throw new TypeError('offline');};
+ await requestChat('/chat','a',{},session,{fetcher:failed,now:1000});
+ await requestChat('/chat','b',{},session,{fetcher:failed,now:2000});
+ assert.equal(calls,1);
+ const success=async()=>{calls++;return Response.json({text:'それ、気になるね。',provider:'groq'});};
+ assert.ok(await requestChat('/chat','c',{},session,{fetcher:success,now:61000}));
+ assert.equal(calls,2);assert.equal(session.chatHealth.attempts,2);
+ assert.equal(session.chatHealth.failed,1);assert.equal(session.chatHealth.accepted,1);
+});
+test('quality rejection is counted as communication, offline replies are not',async()=>{
+ const session={};const fetcher=async()=>Response.json({text:'ちいかわ！',provider:'groq'});
+ await requestChat('/chat','漫画は詳しくない。別の話がいい',{},session,{fetcher});
+ assert.equal(session.chatHealth.attempts,1);assert.equal(session.chatHealth.rejected,1);
+ assert.equal(session.chatHealth.accepted,0);
+ await requestChat('/chat','hello',{},session,{offline:true,fetcher});
+ assert.equal(session.chatHealth.attempts,1);
+});

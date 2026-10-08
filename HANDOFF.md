@@ -1,3 +1,152 @@
+# Current checkpoint — server diagnosis and rate-limit restoration, 2026-10-08
+
+User asked us to investigate rather than delegate technical health checks back to them. Read-only Cloudflare control-plane run 37743437929 confirmed the public Worker enabled and the repaired version deployed. AI/provider-key bindings existed, but RL was absent; deployment logs explicitly warned that old Wrangler ignored `ratelimits`.
+
+Fixed relay deployment in game-llm PR #2: pinned project/lockfile and deployment action to Wrangler 4.36.0, the documented minimum supporting ratelimits. 25 relay tests and dry-run passed; dry-run includes RL at 20 requests/60s. Authorized relay merge fa64617 deployed in successful run 37743729349. Read-only verification run 37743902011 confirms RL/AI/both provider keys present, workers.dev enabled, and version d0458ac3-23c7-4ccd-b820-26ad9fd0fbf0 active at 100%. Evidence docs/playtest-20261008-control-plane.json. No public chat calls or paid API additions.
+
+Public-client error 1010 remains unresolved and live AI quality remains unverified. Official Cloudflare docs identify 1010 as client/browser-signature access denial; this does not establish ordinary-player accessibility. Management browser reaches sign-in but verification fails after one reload; no authenticated session or security-event detail is available. No security settings changed, no fingerprint/route workarounds. Do not ask the user to interpret technical health results again. Remaining decision: retain live AI/latest-screen checks as explicit candidate limitations, or arrange authenticated Cloudflare administration for deeper access diagnosis. Smartphone verification stays deferred. Game main/public unchanged; PR #3 remains the candidate.
+
+---
+
+# Earlier checkpoint — bounded completion goal, 2026-10-08
+
+Relay follow-up authorized and saved separately: https://github.com/mukkii-game/game-llm/pull/1, code d08bdaa. PR merged and deployed on 2026-10-08 with user authorization, merge 6ddf822. Per-provider 5s Emmichy waits, bounded Workers AI wait and message-context validation of unsolicited fandom redirects. Shared defaults/models/keys/CORS/deploy workflow preserved. 25 relay tests pass.
+
+Local client→worker contract verification passed valid answer, rejected redirect→next valid provider, client-side 429 stop and 502 cooldown. Mocked providers, zero live requests; docs/playtest-20261008-relay-contract.json. Container health probe still times out. A direct POST without Origin or raw.githack Origin would be rejected if it reaches the current allow-list; this does not prove production endpoint failure.
+
+Relay deployed successfully by run 37741421196, Worker version 01c35ad6-6eeb-41d0-91ed-bcd8f417eaff. Game candidate remains on PR #3; its public version is unchanged. User authorized relay integration/deployment in the latest instruction; do not ask again. Smartphone checks remain deferred.
+
+Bounded live smoke run 37741701113 stopped on non-JSON HTTP403 health. One diagnostic run 37741811205 captured `error code: 1010`. Both stopped before any AI call (chatRequests0). Browser direct health navigation was also blocked by client; container HTTP health returned403. No conclusion about live AI answer quality. No security-setting changes or fingerprint/route workaround. Superseded by the later control-plane checkpoint; do not delegate technical health interpretation back to the user. Do not repeat blocked probes. Evidence docs/playtest-20261008-deployed-relay.json.
+
+User supplied /goal to finish the candidate, verify dialogue/hybrid/save-resume, preserve PR #3 and defer mobile verification. This tool session cannot inspect or activate the platform Goal lifecycle; no persistent background run is claimed.
+
+- AI-unavailable fallback recognizes rain, walks and drawing with nine authored reactions and recent-history avoidance. It runs after, not before, the live-AI opportunity. Unsupported questions admit uncertainty without a new question; acknowledgement of that boundary does not trigger a generic follow-up.
+- Protected authored/personal/emotional/math/ending replies remain untouched. Negative/unsafe topic statements are excluded. Truly unmatched inputs still use legacy fallback; these nine lines are not general language understanding.
+- Final resolved state now saves before typing animation, closing a reload window where turns were saved but the reply was not. DOM test checks persisted rain reply during animation scheduling. Save/resume preserves chatHealth and dialogueUse; new play clears those session counters.
+- Verification: 92/92 tests, sixteen offline complete sessions including disconnected daily/open-question flow, no live AI calls this step. Evidence docs/playtest-20261008-finish-offline.json. Syntax/whitespace checks pass. Physical smartphone verification is deferred.
+
+Candidate 48c29ed browser verification was attempted. HTML/CSS load, but module URL src/app.js?v=20261008-ready1 returns a site-served HTTP429 page when inspected directly. Submit clicks did not add dialogue or save history. This is a preview delivery blocker, not a successful browser through-play or evidence of an application syntax error. No visual certification for these newest changes. Prior candidate browser evidence remains historical only.
+
+Live provider quality remains unverified since the last network attempt failed. Smartphone verification is deferred. Relay diagnosis and release were subsequently authorized; game public deployment remains prohibited. No persistent background execution claimed.
+
+---
+
+# Current checkpoint — suitability-first routing, 2026-10-08
+
+User explicitly deferred smartphone real-device verification; it is a remaining issue, not a reason to suspend accessible development.
+
+- Removed AI/bank minimum-per-play quota. Existing authored suitability decides routing independently of usage counts; open questions remain AI candidates, but accurate prepared replies no longer incur calls just to satisfy a ratio.
+- Covered factual questions reuse an accurate fact after reply-family exhaustion. Twenty repeated gum-property questions stay local and accurate; unknown weaknesses/analysis still have no canned answer.
+- Removed unconditional knowledgeFallback from the screen and offline driver: previous fandom memory alone must not overwrite an unrelated new input.
+- Regression checks cover denied purchases/preferences, loss, unfamiliar daily observations, explicit topic switches and technical explanation requests. Actual DOM submit test also checks switching away from manga without unsolicited bank content.
+- Verification: 88/88 tests; 15 offline through-plays finish with nonfan guards and ten fixture sequences distinct; syntax and whitespace checks pass. Evidence docs/playtest-20261008-routing-offline.json. Real AI calls 0 this step; no workflows, deployment or public integration.
+
+Remaining work: improve natural fallback on truly unfamiliar inputs when the relay is unavailable; verify live response quality when reachable. Physical IME/keyboard/audio remain deferred. No artificial AI quota, universal replay-quality claim, or background-running promise.
+
+---
+
+# Current checkpoint — hybrid routing audit, 2026-10-08
+
+Actual implementation resumed in the single authorized development session.
+- Separate session.chatHealth counters track network attempts, accepted responses, quality rejection, failures and AI-to-authored replacement. dialogueUse.ai remains displayed AI replies, not communication count.
+- HTTP429 disables further requests for the current play, including reload/continue; a genuinely new play resets it. Other transport failures pause requests for 60 seconds. Authored/rule play remains available, with no provider retry.
+- Through-play exposed a LOCAL fandom redirection after music repertoire exhaustion, despite earlier variation claims. Exhausted everyday topics now reuse on-topic material rather than falling through to unrelated bank content; polishing cannot substitute unwanted fan candidates after an explicit topic switch.
+- Full tests 86/86; 15 offline through-plays end, ten reply sequences differ, and every non-ending reply passes the explicit nonfan redirect assertion. Variation is fixture-limited; after exhaustion some authored lines repeat deliberately.
+- One live open-input attempt returned no response (transport/timeout failure). No successful live quality evidence or free-account billing verification. Raw evidence: docs/playtest-20261008-hybrid-live.json and docs/playtest-20261008-hybrid-offline.json.
+
+Remaining completion blockers: reachable live AI quality verification; physical mobile IME/keyboard/audio. Neither is certified by mocks. Public/main untouched; work remains on PR #3. No background execution or Director wait is implied by this checkpoint.
+
+---
+
+# Current checkpoint — release candidate hardening, 2026-10-08
+
+Continue in the single Web Work session; do not resume Director Relay. PR #3 remains the review branch; main/public integration is not authorized.
+
+Completed:
+- The game no longer locks input when the reading dictionary fails. Existing reading fallback displays original kanji with kana and preserves input/log/export text. Missing or throwing dictionary setup resolves safely.
+- Explicit nonfan/topic-switch requests reject unsolicited Chiikawa/JoJo/Baki name injections from the model, using the last eight user messages until a new explicit fandom topic. No retry or additional provider call. This is a conservative response guard, not a claim that general AI quality is fixed.
+- Sound OFF now mutes already scheduled tones immediately; re-enabling restores gain and keeps one BGM timer. Audio-start errors are surfaced without leaving a false ON label.
+- Offline driver now checks normal/quiet/corrective/music/automatic endings plus ten serialized/restarted plays of the same 12-input scenario. All ten complete reply sequences differ. This proves variation for that four-topic fixture only, not universal uniqueness or subjective fun.
+
+Verification: 83/83 tests, including screen submit after dictionary failure, IME composition suppression, audio mute/timer lifecycle, and the captured nonfan failure response. Fifteen offline through-plays all end; raw evidence docs/playtest-20261008-offline.json. Syntax and whitespace checks passed. Real AI calls 0, workflow runs 0.
+
+Browser limitation this turn: commit-pinned raw.githack preview returned HTTP429; the cloud browser cannot reach the local server (ERR_CONNECTION_REFUSED). Previously verified desktop preview evidence still applies to the preceding candidate; these new screen changes have DOM test evidence, not new visual certification.
+
+Remaining gates: physical smartphone Japanese IME, keyboard-visible layout and audible BGM/SE; a small live open-ended conversation quality check; public integration approval. Physical-device observations cannot be replaced with mocks. Human playtest candidate is READY; final public release is not certified. Ask only for a short final device check and explicit publication approval after the remaining accessible checks.
+
+---
+
+# Current checkpoint — playable completion candidate, 2026-10-07
+
+Candidate f57c46e is saved on PR #3's head branch. Actual desktop browser through-play is now verified via the commit-pinned raw.githack preview (not main/production). The earlier local-browser access blocker was resolved by using this reachable public source preview.
+
+Verified in the actual screen: dictionary readiness, kanji/hiragana entry, 12 exchanges, nonfan music kept on-topic, music farewell callback, reload/continue preserving ended history, readable original-log restoration, export, restart and a different second computer arc. A proxy-image canvas taint was detected and fixed with anonymous CORS loading. Saved evidence: docs/playtest-20261007-browser.json, browser-export.txt, candidate-ui-20261007.jpg.
+
+All 79 tests passed; five offline through-play scenarios and ten distinct two-beat arcs per everyday topic passed. No provider/deploy configuration changed. One direct AI probe was a quality failure; candidate recognized music entrance uses authored material instead. Human through-play candidate READY, but full hybrid quality, physical mobile IME/audio and ten fully distinct whole-game chains remain unverified. Do not claim a final public release or provider-wide quality fix.
+
+Single-session development, Relay paused. Main/public unchanged. This is the concrete candidate to assess/play; the remaining work is quality verification of open-ended AI and physical devices, not another Director handoff.
+
+---
+
+# Latest checkpoint — completion candidate, 2026-10-07
+
+Candidate work completed locally and prepared for PR #3 storage:
+- 80 original everyday beats: 4 topics (computer, meal, book, music), 10 two-beat arcs each. User statements receive a specific authored reaction; short acknowledgements continue only a premise that was actually spoken. Questions, denial, distress and teaching remain outside these arcs.
+- Usage IDs are preserved via existing bounded repertoire state through save/restart. Tests verified 10 distinct two-beat arcs per topic after serialization/restart; this is limited-topic evidence, not a guarantee of 10 wholly different full games.
+- A genuine everyday topic can appear at farewell only when an associated authored line was actually spoken. Existing shared-joke callbacks take precedence.
+- All changed module cache identifiers updated to avoid mixing old/new state cleaners.
+
+Evidence: full tests 78/78; 5 offline scenarios end successfully (four 12-exchange sessions and one 18-exchange automatic ending). Actual raw results in docs/playtest-20261007-offline.json. One live provider request succeeded technically but FAILED quality by returning to chiikawa after a nonfan music preference. Full probe recorded in docs/playtest-20261007-live-probe.json. The candidate handles that recognized music entrance locally without invoking the model. General model quality is still not verified.
+
+Concrete environment blocker: CUA browser cannot reach the local server (connection refused), and local Playwright has no browser binary; download returns invalid archives. Mobile IME/audio and candidate visual/hybrid through-play cannot be certified here yet. Do not call the game fully finished or the live-AI failure fixed at its provider.
+
+Development remains single-session, automated Relay paused, no Director wait. Main/public unchanged. Next verification must inspect the exact candidate via a reachable preview if available, and keep physical-device checks explicit.
+
+---
+
+# Latest checkpoint — 2026-10-07 autonomous development
+
+Loop6 recovery saved to PR #3 at 6e26db6. Git CLI has no GitHub credential in this environment; the authorized GitHub connector can save commits safely using an expected-head check.
+
+Follow-up quality work:
+- The screen and offline simulations now share preparedReply in src/routing.js. Grounded conversation moves win over unrelated bank/gap candidates and AI-use balancing.
+- Shared-name consent/correction/refusal are explicit beats. 「その呼び方はやめて」 removes nickname consent so the ending cannot use the rejected name.
+- Short replies inspect player distress rather than treating Emmichy's 「失敗じゃなくて」 as distress. 「まあ」 does not invent player disappointment.
+- Explicit question fatigue is acknowledged even when the immediately preceding reply was not a question.
+
+Validation: full suite 74/74; offline simulation normal / quiet / corrective players, 12 exchanges each, all reached farewell. Successful ending callback in normal, corrected nickname refusal in corrective. Full raw results: docs/playtest-20261007-offline.json; rerun with node scripts/playtest-offline.mjs. These are offline simulations sharing the screen selection function, not browser UI or live AI.
+
+Remaining: quiet scenario still exposes generic rule replies on open inputs such as パソコン買った before the short answer. True hybrid quality, visual/mobile IME/audio and replay variety remain unverified. Chromium installation was attempted but download returned invalid archives; no repeat attempts needed unless environment access changes.
+
+Next: improve ordinary open-input fallback/repertoire using these failures, then verify a browser-capable candidate. Do not restart Relay or require another Chat Director.
+
+---
+
+# Current development state — 2026-10-07
+
+The user designated one session for Director, implementation and tests. All three existing Relay/watch automations were confirmed paused. No new autonomous Relay sessions are needed.
+
+## Loop6 recovery completed
+
+PR #3 head was bf23a02; it had DOING 6027119860 but no loop6 implementation commit or REVIEW. The local checkout contained uncommitted loop6 work on an older, divergent loop5 commit. That work was preserved in /tmp/emmichy-loop6.patch and recovered on the current PR head rather than discarding or replaying the stale local commit.
+
+Short acknowledgements (うん/そう/まあ/まあね/へえ) now prefer authored non-question reactions to the nearest substantive user topic. Consecutive short answers retain that topic. Food requires an explicit eating/drinking context; school, fandom and computer-purchase replies have separate conditions. Distress does not get food/fandom jokes. Used variants are skipped; exhausted short-answer variants remain a short acknowledgement instead of handing control back to an AI interview. Existing SELF_CORRECT / half-price-king callbacks preserved.
+
+Browser module version identifiers updated in the candidate only. main/public unchanged. No live AI calls, paid API or workflow runs.
+
+Validation: targeted 11/11; full game suite 67/67; diff/syntax checks. Headless mobile UI attempt could not run because the installed Playwright package has no Chromium binary. No visual, real-device, audio or live-AI quality claim is made.
+
+## Next completion work
+
+1. Run the actual candidate UI through normal / quiet / corrective 12–18-turn sessions and examine ending callbacks and selection priority.
+2. Improve multi-turn repertoire variation based on those logs; the 1,200-candidate bank alone does not prove ten-session variety.
+3. Small hybrid-AI check only when it adds evidence, stop at 429; then verify mobile IME/audio.
+4. Prepare a reviewable completion candidate; public integration remains separate from development.
+
+HUMAN PLAYTEST READY: NOT YET for a verified hybrid completion candidate; local short-reply recovery is tested.
+
+---
+
 # 2026-10-04 共通AI中継への移行
 
 - 本体: pilot-audio-readable-retro / Draft PR #1。main未統合。Pagesの配信元をこの試作ブランチへ変更し、公開試遊できるようにした。
@@ -107,3 +256,64 @@ src/context.jsに公式TMS確認の左門豊作補助資料を追加し、巨人
 # 2026-10-06 フィラーも会話として保存
 
 ユーザーの追記を優先し、1秒・10秒の待ち時間の声と、無入力10秒の一言は黄色い通常の発言として残す。返答後も消さず、再開・テキスト書き出しにも含める。待機中の保存には現在の質問と出たフィラーだけを含め、未確定の本回答は保存しない。確定時は質問→フィラー→本回答の順序を維持。既存の直近40発言の保存上限は維持する。旧記載の一時表示扱いはこの変更で撤回。ゲーム54テスト成功。
+# 2026-10-06 Chatディレクション共同ループ1（レビュー待ち）
+
+- 開始時に本体pilot-audio-readable-retro、relay mainと未コミット3ファイルを確認。fetch後もSPECが存在しないことをユーザー確認済み。未コミット変更を保持して本体codex/dialogue-loop-1、relay codex/emmichy-dialogue-loop-1へ分岐。公開版・mainには反映しない。
+- SPEC.mdをユーザーの最新方針から新設。PLAYTEST.md、生ログJSON、再適用ログJSONを新設。最新のChiikawa＞JoJo≒Bakiを採用し、既存ハンターバンク・最低10往復・5分目安・フィラー保存は維持。
+- 小変更：署名／話者ラベル除去、質問2連続時の優先指示と局所的な末尾質問削除、AI文脈最大24発言（受信した履歴の初期8＋最後16）、訂正時の確信抑制、会話の続き・日常と漫画の温度差への指示。普通の相づちを中心に変更。元の序盤演技の途中変更も保持。共通relay src/client変更なし。
+- 検証：ゲーム56・relay21テスト成功。普通／無口／ツッコミ各12往復の実中継会話。33問い合わせ中22成功（Groq）、11null。bye3件はengine処理。UI全体・バンク選択・実時間・エンディングは試験ドライバの対象外。
+- 代表例：「王はスプーンを忘れた」→後で「何を忘れた？」に思い出せない。無口12返答の9が質問を含む。半額の強者→財布と忍耐力は多少可能性があるが、ユーザーがネタを振り直した結果。詳細はPLAYTEST。
+- 修正のログ再適用で質問は無口9→8のみ。署名・履歴・訂正の回帰チェックは通るが、新プロンプトの実AI品質比較はまだ行っていない。完成や面白さの改善を断定しない。
+- 気になる点：履歴40発言上限にフィラーも入るため、長いプレイでは序盤が落ちる。質問削除だけでは新しい遊びが生まれない。通信失敗時のengineはプレイヤーの「元気出た」を誤解する。共有語専用の状態・UIの一回の事件・素になる瞬間・終幕回収は未実装。
+- Chat側の判断待ち：共有語の記憶と小さな共同の行動を先に作るか、非AI返答を先に改善するか。新プロンプトの本番比較かテスト経路か。次ループで中盤の事件／終幕回収のどちらを先に試すか。今回のレビュー資料を渡す段階で止め、全面改修へ進まない。
+# 2026-10-06 ループ1追記：無入力時の漫画への誤誘導
+
+ユーザー報告「吉野家のチーズ牛丼の会話後、漫画じゃなくてもいいの」はLLMではなくappの無入力10秒の固定文。話題を見ない漫画への誘い・難しい質問だったという決めつけを撤去。filler.jsのidleAsideで直近ユーザー発言が食事なら食事の一言、それ以外は話題に中立の一言。相談は急がせない。ログ保存は維持。旧漫画→現在食事、一般話題、相談のテストを追加し57件成功。レビュー用codex/dialogue-loop-1へ追記、公開ブランチ未反映。
+# 2026-10-06 分かち書き追記：ツクッ テタ
+
+実辞書で「作ってた」の「て」が助詞ではなく非自立動詞と判定されることを確認。直前の動詞へ縮約のて／でを結合し、て＋補助動詞いるも結合。「ゲーム ヲ ツクッテタ」「ツクッテイタ」「タベテタ」「ミテイタ」へ。他の節「タベテ カラ カエッタ」「アルイテ イッタ」の空白は維持。表示のみ変更。レビュー用codex/dialogue-loop-1で保持。
+# 2026-10-06 同名への本人としての反応
+
+ユーザー報告「女の子の名前がEmmichy」に一般的なキャラ設定質問を返す件。context.jsで同名の紹介を検出し、自分と同じ名前への驚き・親近感・照れを3種の用意した会話で優先。相手キャラと同一人物とは断定しない。既出は回避、使い切りはAIへ。同じ気付きの補助指示をサーバーのcontextへ同期。名前の否定・別話題の誤反応をテスト。改善用ブランチ、公開未反映。
+# 2026-10-06 本人のアイデンティティ
+
+17歳・長い金髪の欧米人女性・日本語学習中をSPECとserver promptへ明記。話に合う一面のみ、本人の具体的な感想・立場・自己開示として混ぜ、毎回の自己紹介はしない。開幕の楽しみと教わったことから現在の関心を維持。仕事への反応で長年働いた経験を捏造しない。言葉を教わった時は使い所への気付きと会話中の試用を促す。国・都市・家族は勝手に設定追加しない。改善ブランチの未公開指示案であり、実AIの効果比較は次ループ。
+# 2026-10-06 ループ2：Issue mailbox運用・レビュー待ち
+
+- Issue #2のDirector TODO 6013762648を読み、SPEC/DECISIONSへEmmichy限定のmailbox運用を反映。AGENTSのf12909eを既存変更を保って取り込み。作業はcodex/dialogue-loop-1、relayはcodex/emmichy-dialogue-loop-1。公開pilot/mainは変更しない。
+- 半額プリンの重点ケースを最大4個の固定IDで記憶し、保存・復元・否定・あだ名拒否・訂正・最初からに対応。サーバーは自前の固定文だけへ変換。自然な接続の指示と4往復の間隔を追加。一般の自由な共有語はまだ対象外。
+- 終幕で成立した共有語を一度回収。例「半額王、次はスプーンも装備してね」。従来100種類の終了理由は維持。ルール側の「ちょっと元気出た」を本人の回復として扱い、否定・質問・他人と区別。
+- ゲーム63・relay23テスト成功。新旧3タイプ×12往復、66実AI問い合わせを記録。ただし成功は旧14/新1で429多数、旧先行の偏りもあり、品質比較は成立しない。2問い合わせの診断は両方Groq成功だが両方まだ薄い。
+- 追加4場面では3件制限で本文なし。無口場面はGroqが3連続質問、整形で削れたが本文は一般的。自発callbackや作品訂正の実AI品質は未確認。代表ログ・失敗・試験の限界はPLAYTESTとdocs/playtest-20261006-loop2-*.json。
+- 実通信専用relay branch codex/emmichy-ab-runはdeploy.ymlをテスト専用に置換しているため、mainへ統合禁止。SecretsはActions内部だけ、ブラウザには渡していない。Workers bindingなしで未試験。共通src/client変更なし。
+- 判断待ち：長くなったpromptを整理して制限条件を揃え再比較するか。重点ケース固定IDを他の共有語へ広げる前に、終幕の言い回しと質問以外の続けたくなる反応をレビューしてほしい。中盤UI事件・全面完成は未実施。Issue #2へREVIEWを返してこのループを止める。
+
+
+## 2026-10-06 ループ3：非質問返答の重点修正
+
+- Issue #2 TODO `dialogue-loop-3-20261006` をCloud Work 1回で実行。自動化累計2回（スモーク＋本ループ）。実AI問い合わせ0件。
+- 既存PLAYTESTの3重点fixtureだけに、具体的な観察・軽いツッコミ・短い自己開示・共有ネタ化を各3候補追加。漫画を知らず仕事で疲れた場面、プリン後の短い「うん」、半額王のスプーン忘れと箸でプリンが対象。
+- 終幕callbackは成立した固定ID一つを短く回収する方針を維持し、半額王＋スプーン、半額王のみ、半額の強者、箸でプリンを各3候補へ。セッション中一度だけの制約は維持。
+- 一般共有語、UI中盤事件、main/public、共通relayは変更なし。64テスト成功。公開UIと実AIの自然さは未確認。
+- 次の判断：PLAYTESTの前後9組と寒い可能性を人間レビューし、会話を続けたくなるか、仕事疲れへの比喩が作為的でないか、終幕3案の温度を決める。未知話題への一般化はまだ行わない。
+
+
+## 2026-10-06 ループ4：会話ムーブ選択・レビュー待ち
+
+- dialogue-loop-4-20261006 / TODO 6015038720。DOINGを先に記録。同識別子の先行実行なし。
+- src/moves.jsで5ムーブを選択し、一返答一ムーブ。自己訂正は直前の質問がある場合だけ。深刻な場面で遊びを抑制、質問/否定/訂正は通常経路へ。永続状態・一般共有語は追加なし。
+- contextのfixture候補群を小さな原則へ置換。プリン短答と王の装備忘れ、箸の流派一文は回帰確認。Directorが保留した比喩や永続記憶約束を撤去。
+- 未知5入力と寒い例はPLAYTEST。65テスト成功、実AI0件、公開UI未試験。main/public/relay未変更。
+- Cloud Work本ループ1回。重複受付を含む確認済み累計は少なくとも4回（旧累計2回を総数として撤回）。正確な利用枠・料金は未取得。
+- 次は抽象的な「伝わる」「輪郭」をどう扱うか、軽い失敗の茶化しの許容範囲をDirectorが判断。未指示の拡張はせずレビュー待ち。
+
+
+## 2026-10-06 ループ5：文体品質・レビュー待ち
+
+- dialogue-loop-5-20261006 / TODO 6015216091。DOINGを先に記録。同識別子の先行実行なし。
+- 5 moveと一返答一moveを維持。「伝わる」「輪郭」等の抽象評を、口が食べる準備をする、積読の下から本を抜く等の本人の具体反応へ置換。
+- LIGHT_TEASEは笑い、軽い被害、代替手段、共有ネタのいずれかが本文・状態にある時だけ。文脈なしの「傘を忘れた」は通常経路へ戻す。半額王＋スプーンの既存共有ネタは維持。
+- 上履きへ欧米人の小さな文化差を一面だけ返す例を追加。SELF_CORRECTと「ひと息」の日本語学習反応は維持。一般記憶・UI事件なし。
+- rule-only代表6例と安全側nullをPLAYTESTへ記録。ゲーム65テスト、app構文、差分検査成功。
+- 実AIは非公開のgame-llm/codex/emmichy-ab-runでloop5原則をsystemへ追加し、専用Actions run 37456682009だけを実行。短答は1件成功したが、ちいかわへの逸脱＋質問でAI臭い失敗。次の忘れ物ケースでGemini 429となり即停止。日本文化ケースは未実行。2ケース、provider呼出3回、成功1、timeout1、429 1。main/public/deployなし。テスト用workflowは手動実行専用へ戻した。
+- Cloud Workは本ループ1回。コメントから確認できる累計は少なくとも5回。次は長いsystem指示を増やすより、AI短答の優先順位とrule-onlyの具体文をレビューする。

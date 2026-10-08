@@ -1,0 +1,23 @@
+{
+  "commit": "f57c46ee07d6933da3da990799c2d7807c2e3d42",
+  "mode": "actual desktop cloud-browser, offline nollm preview",
+  "preview": "https://raw.githack.com/mukkii-game/emmichy/f57c46ee07d6933da3da990799c2d7807c2e3d42/index.html?nollm=1",
+  "verified": [
+    "dictionary ready and kanji/hiragana entry",
+    "12 exchanges completed",
+    "music ending callback",
+    "reload kept conversation and ended state",
+    "restored readable original transcript",
+    "export contains original conversation",
+    "restart cleared dialogue",
+    "second computer arc differs from first",
+    "portrait renders after anonymous-CORS image load"
+  ],
+  "notVerified": [
+    "physical mobile IME",
+    "physical audio listening",
+    "general live hybrid through-play",
+    "ten entirely distinct full-game chains"
+  ],
+  "screenshot": "docs/candidate-ui-20261007.jpg"
+}

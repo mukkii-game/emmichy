@@ -1,0 +1,10 @@
+{
+  "mode": "one direct live provider probe; not browser UI",
+  "input": "漫画は詳しくないけど、音楽の話は好きだよ",
+  "httpStatus": 200,
+  "provider": "groq",
+  "text": "ちいかわの音楽、トクマルシューゴの曲好き？どんな感じが好きか教えてくれると嬉しいな！",
+  "requests": 1,
+  "evaluation": "FAIL: unwanted fandom redirection and generic follow-up question",
+  "candidateMitigation": "Recognized music preference now uses a authored everyday opener and continuation; direct provider behavior remains unchanged and unproven."
+}

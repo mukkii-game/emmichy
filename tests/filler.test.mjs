@@ -1,6 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {chooseFiller,startFiller,retainAside} from '../src/filler.js';
+import {chooseFiller,startFiller,retainAside,idleAside} from '../src/filler.js';
+test('idle asides follow the current food topic rather than an old manga topic',()=>{
+ const history=[{role:'user',text:'ジョジョが好き'},{role:'user',text:'吉野家のチーズ牛丼が好き'}];
+ for(let i=0;i<3;i++){assert.doesNotMatch(idleAside(history,i),/漫画|マンガ|質問/);}
+ assert.match(idleAside(history,0),/ご飯/);
+ assert.doesNotMatch(idleAside([{role:'user',text:'今日は散歩した'}]),/ご飯|漫画/);
+ assert.match(idleAside([{role:'user',text:'つらいから相談したい'}]),/急がなくて/);
+});
 test('saved waiting dialogue retains the user and both asides before the final answer',()=>{
  const initial=[{role:'user',text:'音楽を教えて'},{role:'enny',text:'pending'}];
  let history=retainAside(initial,'エト…',{pendingReply:true});

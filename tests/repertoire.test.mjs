@@ -4,6 +4,15 @@ import {replies,chooseRepertoire,cleanRepertoire,rememberReply,polishReply} from
 import {freshState,restoreState} from '../src/engine.js';
 import {startConversation} from '../src/session.js';
 import {cultureReply} from '../src/culture.js';
+test('stray speaker labels are stripped but a spoken name remains',()=>{
+ assert.equal(polishReply('Emmy: スプーンで倒したんだ! エミ','',{}).text,'スプーンで倒したんだ!');
+ assert.equal(polishReply('エミって呼んでもいいよ。','',{}).text,'エミって呼んでもいいよ。');
+});
+test('a third closing question yields to a complete reaction, never an empty reply',()=>{
+ const state={history:[{role:'enny',text:'何が好き？'},{role:'user',text:'プリン'},{role:'enny',text:'どこで買った？'},{role:'enny',text:'エト、エト…。'}]};
+ assert.equal(polishReply('半額プリンを見つけたんだね！ どんな味だった？','プリン',state).text,'半額プリンを見つけたんだね!');
+ assert.equal(polishReply('どんな味だった？','プリン',state).text,'どんな味だった?');
+});
 test('expanded bank is genuinely distinct and all three favourite fandoms reach tenfold reply counts',()=>{
  assert.equal(replies.length,1200);assert.equal(new Set(replies.map(r=>r.text)).size,1200);
  for(const [w,n] of [['chiikawa',320],['jojo',200],['hunter',200]])assert.equal(replies.filter(r=>r.work===w).length,n);
@@ -14,6 +23,16 @@ test('covered facts answer precisely; analysis and teaching stay with AI',()=>{
  assert.equal(chooseRepertoire('バンジーガムの弱点は？',{turn:2}).scripted,false);
  assert.equal(chooseRepertoire('ジョジョとハンターの戦いの違いは？',{turn:2}).scripted,false);
  const teach=chooseRepertoire('京都の風習は、実は地域の人が助け合う仕組みだよ',{turn:2});assert.equal(teach.intent,'teaching');assert.equal(teach.candidate,null);
+});
+test('exhausted covered fact stays accurate and local after repeated questions',()=>{
+ const raw='ヒソカのバンジーガムって何？';let state={turn:2,history:[]};
+ for(let i=0;i<20;i++){
+  const reply=chooseRepertoire(raw,state);
+  assert.equal(reply.scripted,true);assert.match(reply.candidate.text,/ゴムとガム/);
+  state.repertoire=rememberReply(state,reply.candidate.text,reply.candidate.id,true);
+  state.history.push({role:'enny',text:reply.candidate.text});state.turn++;
+ }
+ assert.equal(chooseRepertoire('バンジーガムの弱点は？',state).candidate,null);
 });
 test('topic facets do not get hijacked and seen lines or same punchline families do not recur',()=>{
  let state={turn:2,knowledge:{work:'chiikawa',recent:['chiikawa-23']},history:[]};

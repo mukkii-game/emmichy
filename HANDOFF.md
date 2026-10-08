@@ -1,8 +1,16 @@
-# Current checkpoint — continuous conversation layout, 2026-10-08
+# Current checkpoint — departure reasons in idle farewells, 2026-10-08
+
+Player found the fixed idle goodbye boring and reasonless. Idle farewell bypassed the existing100 reasons and grounded callback while still consuming their state. Removed that override: timed, idle and player-requested departures now use the same100 authored fictional reasons, five departure/farewell voices and at most one existing shared-joke or actually spoken daily callback. Nickname refusal is respected. No extra LLM request or new character biography. Existing five-minute/IME/visibility/save guards remain intact; release IDs updated through the app/session/endings imports.
+
+100 tests pass, including100 nonrepeating idle reasons across serialize/restore, full saved farewell under160 characters, shared callback consumption, refusal and spoken-only music callback.16 offline through-plays finish. The old offline driver initially failed the automatic scenario because it simulated no elapsed time after the five-minute floor was introduced; repaired its fixture to advance17s per exchange,306s at18 turns. Successful and failed examples are recorded in PLAYTEST. Evidence docs/playtest-20261008-farewell.json and docs/playtest-20261008-farewell-through.json. Browser verification uses the shared renderer with explicit goodbye; idle timing is verified by the DOM/fake-clock test. Live provider and phone verification remain open. Follow-up publication targets the previously authorized Pages branch; main unchanged.
+
+---
+
+# Earlier checkpoint — continuous conversation layout, 2026-10-08
 
 Player reported a large gap after ウンウン and a jump upward when the eventual AI/authored reply finished. The animated reply was a separate flex sibling below the scrollable history, then copied into history on completion. It now sits at the end of that same history with identical message typography, speaker label and spacing. Completion clears the transient row before adding the final text, and existing message DOM nodes are reused. The terminal note is visually hidden while busy without shrinking its layout space. App and stylesheet release IDs updated together.
 
-97 tests pass, including animation inside history, retained preceding nodes, no duplicate final row, existing dictionary/IME/save-resume/end checks. Actual local desktop browser: delayed synthetic success at3s and failure at9s (two gestures plus authored waiting line then local fallback); visible message gaps22px and history height465px both busy and complete. Screenshot and measurements: docs/playtest-20261008-layout.png/json. Zero live AI calls; provider quality and physical-phone checks remain open. Publish this player-requested display fix through a follow-up PR into the previously authorized Pages branch pilot-audio-readable-retro; main is unchanged.
+97 tests pass, including animation inside history, retained preceding nodes, no duplicate final row, existing dictionary/IME/save-resume/end checks. Actual local desktop browser: delayed synthetic success at3s and failure at9s (two gestures plus authored waiting line then local fallback); visible message gaps22px and history height465px both busy and complete. Screenshot and measurements: docs/playtest-20261008-layout.png/json. Zero live AI calls; provider quality and physical-phone checks remain open. PR #7 merged as743fe44 into pilot-audio-readable-retro; Pages run37781500332 succeeded and the public browser loaded layout1. Main unchanged.
 
 ---
 

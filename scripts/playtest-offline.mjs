@@ -61,13 +61,15 @@ for(const [type,inputs] of entries){
   state=result.state;
   rows.push({turn:session.turns,input:raw,text:result.text,source:prepared?'authored':'rule',question:/[?？]/.test(result.text)});
   if(state.ended)break;
-  if(shouldEnd(session)){const end=finishSession(state,session);state=end.state;session=end.session;rows.push({input:'[auto-end]',text:end.text});break;}
+  // Account for the five-minute floor without a five-minute wall-clock test.
+  const fixtureNow=session.startedAt+session.turns*17000;
+  if(shouldEnd(session,fixtureNow)){const end=finishSession(state,session);state=end.state;session=end.session;rows.push({input:'[auto-end]',elapsedMs:fixtureNow-session.startedAt,text:end.text});break;}
  }
  if(type.startsWith('replay-'))replayState=state;
  results.push({type,rows,ended:state.ended});
 }
 const path=process.argv[2]||'docs/playtest-20261007-offline.json';
-await fs.writeFile(path,JSON.stringify({mode:'offline simulation; not browser UI or live AI',results},null,2)+'\n');
+await fs.writeFile(path,JSON.stringify({mode:'offline simulation; 17 seconds per exchange fixture, not browser UI or live AI',results},null,2)+'\n');
 const replays=results.filter(r=>r.type.startsWith('replay-'));
 if(!results.every(r=>r.ended)||new Set(replays.map(r=>r.rows.map(row=>row.text).join('\n'))).size!==10)throw new Error('Through-play or ten-session variation failed');
 for(const result of results){console.log(result.type);for(const row of result.rows)console.log(`${row.input} → ${row.text}`);console.log(`ended=${result.ended}`);}

@@ -105,5 +105,14 @@ export function selectEnding(state){
  const seen=Array.isArray(state.endingSeen)?state.endingSeen.filter(n=>Number.isInteger(n)&&n>=0&&n<100):[];
  const pool=endingReasons.map((reason,id)=>({reason,id})).filter(x=>!seen.includes(x.id));
  const pick=pool[Math.floor(Math.random()*pool.length)]||{reason:endingReasons[0],id:0};
- return {text:`あっ、そろそろ${pick.reason}時間なの！ また話そうね。バイバイ！`,seen:[...seen,pick.id].slice(-99)};
+ const departures=[
+  `あっ、${pick.reason}つもりだったの。話してたら時間、忘れてた！`,
+  `アタシ、${pick.reason}から、今日はここまでね。`,
+  `あ、${pick.reason}の、まだだった！`,
+  `今日は${pick.reason}って決めてたの。そろそろ行ってくるね。`,
+  `そろそろ${pick.reason}時間なの。もうちょっと話したかったな。`
+ ];
+ const farewells=['また話そうね。','また会えたら嬉しいな。','続きは今度聞かせて。','話せて楽しかった！','またね。'];
+ const departure=departures[pick.id%departures.length],farewell=farewells[pick.id%farewells.length];
+ return {text:`${departure} ${farewell}バイバイ！`,departure,farewell,seen:[...seen,pick.id].slice(-99)};
 }

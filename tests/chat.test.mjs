@@ -3,6 +3,17 @@ import assert from 'node:assert/strict';
 import {requestChat} from '../src/chat.js';
 import {advancePerformance} from '../src/performance.js';
 import {freshState} from '../src/engine.js';
+import {rejectedJoke} from '../src/humor.js';
+
+test('player-rejected nickname cannot reappear from a provider, including kana and spaced forms',async()=>{
+ for(const text of ['半額王、またね。','ハンガク オウ！','ﾊﾝｶﾞｸ ｵｳ','はんがくおう','半額 オウ']){
+  assert.equal(rejectedJoke(text),true);let calls=0;const session={};
+  const result=await requestChat('/chat','プリンを買った',{},session,{fetcher:async()=>{calls++;return Response.json({text,provider:'groq'});}});
+  assert.equal(result,null);assert.equal(calls,1);assert.equal(session.chatHealth.rejected,1);
+ }
+ assert.equal(rejectedJoke('王道のプリンが半額だった。'),false);
+ assert.ok(await requestChat('/chat','プリンを買った',{}, {},{fetcher:async()=>Response.json({text:'プリン、アタシも食べたくなった。',provider:'groq'})}));
+});
 test('provider and the complete state contract reach the relay',async()=>{
  let payload;const state=advancePerformance(freshState(),'好きなゲーム',8);
  const got=await requestChat('https://relay/api/chat/emmichy','ゲーム',state,{turns:8},{fetcher:async(u,o)=>{payload=JSON.parse(o.body);return Response.json({text:'ナニ デ アソンデル？',provider:'groq'});}});

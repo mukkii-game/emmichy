@@ -388,3 +388,11 @@ Player failure: 「ア、そろそろ帰るね。バイバイ！」 felt monoton
 Representative review: 「アタシ、漫画で覚えた敬語を確認するから、今日はここまでね。半額王、次はスプーンも装備してね。バイバイ！」; quiet play can instead say 「あっ、漫画の読めない言葉を調べるつもりだったの。話してたら時間、忘れてた！ また話そうね。バイバイ！」. Refusal drops the nickname; unspoken music material cannot be recalled. Reasons still come from the existing authored repertoire, not guaranteed exact continuation of the opening plan.
 
 100/100 tests pass, including100 idle reasons without repeats across restored saves and no saved-farewell truncation.16 offline sessions finish, including automatic end at306s of simulated elapsed time. The first driver run failed: its automatic18-turn scenario had no elapsed time and could no longer meet the current five-minute floor. The driver now explicitly simulates17s per exchange; this repairs test time, not the production ending threshold. Evidence: docs/playtest-20261008-farewell.json and docs/playtest-20261008-farewell-through.json. Actual local browser afterプリン→半額王→スプーン忘れ→バイバイ displayed 「そろそろアニメ鑑賞のお菓子を用意する時間なの。もうちょっと話したかったな。半額王、次はスプーンも装備してね。バイバイ！」 and END; screenshot docs/playtest-20261008-farewell.png. This uses explicit goodbye; actual five-minute idle behavior has DOM/fake-clock evidence. No live AI requests; subjective fun and phone checks remain unverified.
+
+## 2026-10-08 ユーザー評価: 半額王はつまらない、NG
+
+失敗: 以前の「半額王」再利用・終幕回収テストは記憶や配線の確認だった。ユーザーは造語自体をまったく面白くないと評価した。旧記録の成功は撤回・上書きせず、今回の評価で面白さの承認ではなかったことを明示する。関連する強者・流派・即位・装備ネタも固定採用停止。
+
+改修: ニックネームの生成・固定ID・終幕分岐を撤去。古い保存の二つのニックネームIDは捨て、実際のプリン・スプーン・箸素材は保持。LLMの半額王返答はNFKC、かな、空白表記も検出して通常フォールバックへ渡す（追加の再問い合わせなし）。LLM指示は既存の言い回しを基本にし、偶然のズレは許すが自作を決めネタ化しない方針へ。
+
+102/102テスト成功。旧保存復元、終幕、漢字/カナ/半角/空白入りNG、無関係な「王道」は許すことを確認。16ローカル通しプレイ成功、全新規出力でNG検出なし。docs/playtest-20261008-humor-through.json。以前のNG入力をあえて含むシナリオも保持した。新しい台詞が面白いという評価や実LLMの品質確認ではない。外部AI呼び出し0件。

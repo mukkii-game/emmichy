@@ -32,7 +32,7 @@ test('five moves ground novel inputs and protect questions, denial and serious f
   ['写真は詳しくない。今日はもう疲れた',{history:[{role:'enny',text:'好きな写真家は？'}]},'SELF_CORRECT'],
   ['うん',{history:[{role:'user',text:'オムライス食べた'}]},'NOTICE_WORDING'],
   ['傘を忘れたけど駅で借りた笑',{},'LIGHT_TEASE'],
-  ['スプーンを忘れた',{conversation:{entries:[{id:'half-price-king'}]}},'SHARED_FRAME'],
+  ['スプーンを忘れた',{conversation:{entries:[{id:'half-price-pudding'}]}},'SHARED_FRAME'],
   ['「ひと息」って休むという意味の言葉',{},'SMALL_SELF_DISCLOSURE']
  ];
  for(const [input,state,move] of fixtures){
@@ -45,7 +45,7 @@ test('five moves ground novel inputs and protect questions, denial and serious f
  assert.equal(conversationMove('傘を忘れた',{}),null);
  assert.equal(conversationMove('傘を忘れた。どうしたらいい？',{}),null);
  assert.equal(conversationMove('傘を忘れてつらい',{}),null);
- assert.equal(conversationMove('スプーンを忘れた',{conversation:{entries:[{id:'half-price-king'}]},history:[{role:'enny',text:'王、即位初日に装備品を忘れてる。'}]}),null);
+ assert.equal(conversationMove('スプーンを忘れた',{conversation:{entries:[{id:'half-price-pudding'}]},history:[{role:'enny',text:'プリンはあるのに、スプーンがないのね。'}]}),null);
  const noInventedApology=conversationMove('漫画は知らない。仕事でミスして疲れた',{});
  assert.equal(noInventedApology.move,'NOTICE_WORDING');assert.doesNotMatch(noInventedApology.text,/引っ込める|王/);
  const concrete=[
@@ -80,7 +80,7 @@ test('thin prompts get concrete non-question replies that leave hooks',()=>{
  assert.match(tired.text,/仕事|ミス|面接|再放送/);
  const pudding=contextualReply('うん',{history:[{role:'user',text:'プリン食べた'}]});
  assert.doesNotMatch(pudding.text,/[?？]/);assert.match(pudding.text,/プリン/);
- const spoon=contextualReply('王はスプーンを忘れました',{conversation:{entries:[{id:'half-price-king',turn:3}]}});
+ const spoon=contextualReply('王はスプーンを忘れました',{conversation:{entries:[{id:'half-price-pudding',turn:3}]}});
  assert.doesNotMatch(spoon.text,/[?？]|次は忘れ/);assert.match(spoon.text,/王|スプーン/);
  const chopsticks=contextualReply('箸でプリンを食べるしかない',{});
  assert.doesNotMatch(chopsticks.text,/[?？]/);assert.match(chopsticks.text,/箸|王|流派|修行/);
@@ -92,11 +92,11 @@ test('light negated failure does not turn a food acknowledgement into distress',
  assert.match(r.text,/プリン/);assert.doesNotMatch(r.text,/ゆっくり|短い返事/);
 });
 test('shared-name consent, correction and refusal have immediate grounded reactions',()=>{
- const state={conversation:{entries:[{id:'half-price-king'}]}};
- assert.match(conversationMove('半額王と呼んでいいよ',{}).text,/半額王/);
- assert.match(conversationMove('王じゃなくて強者ね',state).text,/強者.*王は引っ込める/);
+ const state={conversation:{entries:[{id:'half-price-pudding'}]}};
+ assert.doesNotMatch(conversationMove('半額王と呼んでいいよ',{}).text,/半額王/);
+ assert.equal(conversationMove('王じゃなくて強者ね',state),null);
  assert.match(conversationMove('その呼び方はやめて',state).text,/やめる/);
- assert.equal(conversationMove('その呼び方はやめて',{}),null);
+ assert.match(conversationMove('その呼び方はやめて',{}).text,/やめる/);
  assert.equal(conversationMove('プリンは半額じゃない',{}),null);
 });
 

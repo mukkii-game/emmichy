@@ -53,9 +53,9 @@ test('idle departures give a varied reason, avoid repeats across restore and sav
 
 test('idle farewell recalls one shared joke and respects a refused nickname',()=>{
  let state=freshState();
- for(const line of ['プリン半額だった','半額王と呼んでいいよ','王はスプーンを忘れました'])state=respond(line,state).state;
+ for(const line of ['プリン半額だった','スプーンを忘れた','箸でプリンを食べるしかない'])state=respond(line,state).state;
  const end=finishSession(state,{turns:3},{reason:'idle'});
- assert.match(end.text,/半額王|王、/);assert.match(end.text,/スプーン/);
+ assert.doesNotMatch(end.text,/半額王|王、|強者|流派/);assert.match(end.text,/スプーン|箸|プリン/);
  assert.equal(end.state.conversation.endingUsed,true);
  assert.equal((end.text.match(/バイバイ/g)||[]).length,1);
  state=respond('その呼び方はやめて',state).state;

@@ -1,6 +1,7 @@
 // No provider calls. Screen selection logic is shared via preparedReply.
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
+import {rejectedJoke} from '../src/humor.js';
 import {unwantedFanRedirect} from '../src/chat.js';
 import {offlineFallback} from '../src/fallback.js';
 import {freshState,restoreState,respond,normalize} from '../src/engine.js';
@@ -58,6 +59,7 @@ for(const [type,inputs] of entries){
   result.state.history.at(-1).text=result.text;
   if(result.kind!=='bye')result.state.conversation=noteConversationReply(result.state.conversation,result.text,raw,session.turns);
   if(result.kind!=='bye')assert.equal(unwantedFanRedirect(result.text,raw,before),false,`${type}: ${raw} redirected to fandom`);
+  assert.equal(rejectedJoke(result.text),false,`${type}: rejected joke returned`);
   state=result.state;
   rows.push({turn:session.turns,input:raw,text:result.text,source:prepared?'authored':'rule',question:/[?？]/.test(result.text)});
   if(state.ended)break;

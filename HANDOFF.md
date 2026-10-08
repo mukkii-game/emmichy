@@ -1,4 +1,12 @@
-# Current checkpoint — Japanese-learning listening gestures, 2026-10-08
+# Current checkpoint — continuous conversation layout, 2026-10-08
+
+Player reported a large gap after ウンウン and a jump upward when the eventual AI/authored reply finished. The animated reply was a separate flex sibling below the scrollable history, then copied into history on completion. It now sits at the end of that same history with identical message typography, speaker label and spacing. Completion clears the transient row before adding the final text, and existing message DOM nodes are reused. The terminal note is visually hidden while busy without shrinking its layout space. App and stylesheet release IDs updated together.
+
+97 tests pass, including animation inside history, retained preceding nodes, no duplicate final row, existing dictionary/IME/save-resume/end checks. Actual local desktop browser: delayed synthetic success at3s and failure at9s (two gestures plus authored waiting line then local fallback); visible message gaps22px and history height465px both busy and complete. Screenshot and measurements: docs/playtest-20261008-layout.png/json. Zero live AI calls; provider quality and physical-phone checks remain open. Publish this player-requested display fix through a follow-up PR into the previously authorized Pages branch pilot-audio-readable-retro; main is unchanged.
+
+---
+
+# Earlier checkpoint — Japanese-learning listening gestures, 2026-10-08
 
 Supersedes first1s/second4s/long7s below: first2s, second5s, authored long line8s. Keep at most two short gestures plus one long line, cancellation, and300ms final-reply breath. Neutral first reactions are affirmative ウンウン／ソウネー／フムフム, with ニホンゴデ、ナンテイウンダッケ and short word-search hesitation in the pool. The ordinary longer database line also uses the Japanese-learning persona.
 

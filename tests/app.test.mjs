@@ -25,8 +25,13 @@ test('screen remains playable after dictionary failure and IME composition does 
   Date.now=()=>time;
   globalThis.setInterval=(fn,ms)=>{intervals.push({fn,ms});return 0;};
   // Advance only the app's typing delays, without waiting seconds per reply.
-  let expectPersisted=null,persistedBeforeAnimation=false;
-  globalThis.setTimeout=fn=>{if(expectPersisted){const memory=JSON.parse(storage.get('enny-memory-v1')||'null');if(memory?.history?.at(-1)?.text.includes(expectPersisted))persistedBeforeAnimation=true;}queueMicrotask(fn);return 0;};globalThis.clearTimeout=()=>{};
+  let expectPersisted=null,persistedBeforeAnimation=false,typingFrames=0,lastTyped='';
+  globalThis.setTimeout=fn=>{
+   if(expectPersisted){const memory=JSON.parse(storage.get('enny-memory-v1')||'null');if(memory?.history?.at(-1)?.text.includes(expectPersisted))persistedBeforeAnimation=true;}
+   const pending=elements.get('live-reply'),body=elements.get('live-body'),log=elements.get('conversation');
+   if(body?.textContent){typingFrames++;lastTyped=body.textContent;assert.equal(log.children.at(-1),pending,'typing stays inside the history after the preceding message');assert.equal(pending.hidden,false);}
+   queueMicrotask(fn);return 0;
+  };globalThis.clearTimeout=()=>{};
   await import('../src/app.js');await Promise.resolve();
   assert.ok(displayed.every(text=>!String(text).includes('ジュンビ')));
   const startedAt=JSON.parse(storage.get('emmichy-session')).startedAt;
@@ -35,12 +40,18 @@ test('screen remains playable after dictionary failure and IME composition does 
   entry.value='本を買った';await entry.emit('compositionstart');await talk.emit('submit');
   assert.equal(entry.value,'本を買った');
   assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.filter(h=>h.role==='user').length,0);
+  const openingNode=elements.get('conversation').children[0];
   await entry.emit('compositionend');await talk.emit('submit');
   const state=JSON.parse(storage.get('enny-memory-v1'));
   assert.equal(state.history.filter(h=>h.role==='user').length,1);
   assert.equal(state.history.find(h=>h.role==='user').text,'本を買った');
   assert.match(state.history.at(-1).text,/本/);assert.equal(send.disabled,false);
   assert.ok(elements.get('conversation').children.length>1);
+  assert.ok(typingFrames>0);
+  assert.equal(elements.get('conversation').children[0],openingNode,'existing messages retain their DOM nodes');
+  assert.equal(elements.get('live-reply').hidden,true,'completion leaves no duplicate typing row');
+  assert.equal(elements.get('live-body').textContent,'');
+  assert.equal(elements.get('conversation').children.filter(p=>p.children[1]?.textContent===lastTyped).length,1);
   entry.value='漫画じゃなくて散歩の話にしよう';await talk.emit('submit');
   const switched=JSON.parse(storage.get('enny-memory-v1'));
   assert.doesNotMatch(switched.history.at(-1).text,/ちいかわ|チイカワ|島二郎|ジョジョ|ハチワレ|バキ/);

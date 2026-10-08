@@ -1,5 +1,11 @@
 # Current checkpoint — bounded completion goal, 2026-10-08
 
+Relay follow-up authorized and saved separately: https://github.com/mukkii-game/game-llm/pull/1 (draft), code d08bdaa. Per-provider 5s Emmichy waits, bounded Workers AI wait and message-context validation of unsolicited fandom redirects. Shared defaults/models/keys/CORS/deploy workflow preserved. 25 relay tests pass.
+
+Local client→worker contract verification passed valid answer, rejected redirect→next valid provider, client-side 429 stop and 502 cooldown. Mocked providers, zero live requests; docs/playtest-20261008-relay-contract.json. Container health probe still times out. A direct POST without Origin or raw.githack Origin would be rejected if it reaches the current allow-list; this does not prove production endpoint failure.
+
+Both candidates are saved; live relay is unchanged. Next concrete decision is whether to integrate/deploy the relay candidate, which requires a separate authorization because the current goal excludes main/public actions. Smartphone checks remain deferred.
+
 User supplied /goal to finish the candidate, verify dialogue/hybrid/save-resume, preserve PR #3 and defer mobile verification. This tool session cannot inspect or activate the platform Goal lifecycle; no persistent background run is claimed.
 
 - AI-unavailable fallback recognizes rain, walks and drawing with nine authored reactions and recent-history avoidance. It runs after, not before, the live-AI opportunity. Unsupported questions admit uncertainty without a new question; acknowledgement of that boundary does not trigger a generic follow-up.

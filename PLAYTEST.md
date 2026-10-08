@@ -336,3 +336,9 @@ Each of three daily topics has three recent-history-aware variants. Protected/em
 92 tests pass. Sixteen offline sessions finish, including disconnected daily/open-question scenario; ten replay sequences remain distinct. Resolved rain reply is persisted before animation delays in DOM test. Session JSON resume keeps rate limit and counts; new play resets them. Evidence docs/playtest-20261008-finish-offline.json. No live AI requests this step; physical smartphone checks deferred.
 
 Browser attempt on commit 48c29ed: HTML/CSS rendered but dialogue submit did not work and reload showed no saved history. Direct inspection of the observed module URL src/app.js?v=20261008-ready1 showed raw.githack HTTP429. This preview delivery failure is not a passed screen test. No retry loop, alternative network route or public deployment performed. Actual browser quality for this commit remains unverified.
+
+## 2026-10-08 Client/relay contract and review candidate
+
+game-llm Draft PR #1, code d08bdaa, passes 25 tests. Full local client→worker calls with mocked providers verified normal success; unsolicited nonfan redirect rejected then accepted next reply; HTTP429 skips the next client request; total failure returns502 and skips another request during the 60s cooldown. Four structured results: docs/playtest-20261008-relay-contract.json. Live API calls0, workflows0. The 5s per-provider deadline fits nominally below the client's22s wait; underlying Workers AI binding execution cannot be cancelled by this timer.
+
+Read-only live /health probe timed out after5s. No live endpoint health/quality claim. Origin restriction is preserved, including rejecting absent Origin and unregistered raw.githack preview Origin. Existing provider accounts' billing status is not verified. Main and live Worker untouched.

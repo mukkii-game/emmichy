@@ -1,5 +1,6 @@
 // Curated short factual notes, not scraped articles or dialogue reproductions.
 // Canonical copy: emmichy/src/fandom.js; sync unchanged to game-llm/games/emmichy-fandom.js.
+import {recognizeName} from './names.js?v=20261009-profile1';
 export const checkedAt='2026-10-06';
 const wiki=title=>`https://en.wikipedia.org/wiki/${encodeURIComponent(title)}`;
 export const sources={
@@ -195,9 +196,10 @@ export function cleanKnowledge(value){
 }
 export function selectKnowledge(input,state={},now=new Date()){
  const memory=cleanKnowledge(state.knowledge), text=String(input).slice(0,180);
+ const named=recognizeName(text,{state}),chii=named?.work==='chiikawa'&&!named.decline?named:null;
  const explicit=Object.keys(works).filter(w=>works[w].some(alias=>has(text,alias)));
  const tagged=cards.filter(c=>c.tags.some(tag=>has(text,tag)&&fold(tag).length>=2&&(!genericTags.has(tag)||c.work===memory.work)));
- let work=explicit[0]||tagged.find(c=>c.work===memory.work)?.work||tagged[0]?.work;
+ let work=chii?'chiikawa':explicit[0]||tagged.find(c=>c.work===memory.work)?.work||tagged[0]?.work;
  // Kana is ambiguous with the unrelated children's tiger. Clarify outside our fandom context.
  if(has(text,'シマジロウ')&&!/島二郎/.test(text)&&memory.work!=='chiikawa'&&!explicit.includes('chiikawa'))return {work:'ambiguous-shimajiro',cards:[],phrase:null,memory};
  const general=/おすすめ|オススメ|漫画|マンガ|アニメ|ジャンプ|好きな作品|スキナ作品/.test(text);
@@ -209,7 +211,9 @@ export function selectKnowledge(input,state={},now=new Date()){
  const filmExplicit=/映画|エイガ|人魚|ニンギョ|セイレーン|島二郎|シマ\s*ジロウ|サパー|水流/.test(text),history=Array.isArray(state.history)?state.history.slice(-6):[];
  const lastFilm=history.some(h=>h.role==='enny'&&/映画|エイガ|セイレーン|人魚/.test(String(h.text)));
  let selected=cards.filter(c=>c.work===work&&(!c.spoiler||spoilers)&&(!c.news||(day>=checkedAt&&day<=c.expires)));
- const score=c=>c.tags.reduce((n,t)=>n+(has(text,t)?(t.length>=3?14:5):0),0)+(c.movie&&(filmExplicit||(!lastFilm&&memory.movieRun<1))?8:0)-(memory.recent.includes(c.id)?22:0);
+ // An expanded cue with no matching fact must not pull in unrelated old film cards.
+ if(chii&&chii.name!=='ちいかわ')selected=selected.filter(c=>c.tags.some(t=>has(chii.name,t)||has(text,t)&&!genericTags.has(t)));
+ const score=c=>c.tags.reduce((n,t)=>n+(has(text,t)||chii&&has(chii.name,t)?(t.length>=3?14:5):0),0)+(c.movie&&(filmExplicit||(!lastFilm&&memory.movieRun<1))?8:0)-(memory.recent.includes(c.id)?22:0);
  selected.sort((a,b)=>score(b)-score(a)||a.id.localeCompare(b.id));
  if(work==='chiikawa'&&!filmExplicit&&(lastFilm||memory.movieRun>=1))selected=selected.filter(c=>!c.movie);
  selected=selected.slice(0,5);

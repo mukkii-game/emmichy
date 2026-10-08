@@ -426,3 +426,23 @@ src/context.jsに公式TMS確認の左門豊作補助資料を追加し、巨人
 - 詳細・更新手順は docs/dialogue-20261009.md。名前のみの中継同期は scripts/sync-dialogue.mjs ../game-llm --names-only。サーバー側は所有辞書の一致一項目を補助指示へ。
 - この時点では新PR／公開反映の確認が残る。前の彩度PR #12は公開ブランチへ統合済みだがPages run 37790615652がqueued・jobs空のまま。新しい公開更新で動くか確認する。本体mainは統合しない。
 - 未検証: 新指示の実LLM会話品質、近似のしつこさ、全名前と読みの網羅性。人間試遊で未登録・誤認・つまらない例を受けて小さく追加／修正する。
+
+
+## 2026-10-09 この変更の公開確認
+
+- コード候補 ef7053c235454011d13aed9b427e39adfb2f006c。PR #13をpilot-audio-readable-retroへ統合、公開commit 92d8bdd270767a564dcc00fc809c510928a94302。本体mainは未統合。
+- Pages run 37800302162がsuccess。公開HTMLのrelease 20261009-dialogue1、入力案内を確認。app.jsは改行形式を正規化して同じ内容、continuation/names/name-data/game-namesは公開ファイルとローカルが一致。前回待機中だった彩度素材も公開とローカルが完全一致、今回の公開に含まれた。古いrun 37790615652の待機は現在の公開版を妨げない。
+- AI側PR #4をmainへ統合、commit b33ab18279a61d62d7cf301c7756fe6a01ec5e48。deploy run 37800294235 success、Worker version ec013283-a276-4a02-8acd-98189c809388。
+- 公開URL https://mukkii-game.github.io/emmichy/ 。公開画面を読み取りのみで確認し、保存済み会話の開始／続行操作はしていない。案内の証跡 docs/playtest-20261009-input-public.png。ブラウザエラーなし。
+- 実LLM品質比較、近似のしつこさ、未登録名と読みの補充は引き続き人間試遊で確認する。新しい作業はこのWorkへ。公開済み機能を古いloopから再実装しない。
+
+
+## 2026-10-09 ちいかわ最優先の辞書と本人設定
+
+- 作業ブランチ codex/chiikawa-profile-20261009。既に公開されたPR #13の続きを、このWorkのみで実装。自動Relayなし。
+- ちいかわ182項目／360表記へ拡張。作者・音楽・声優・人物・食べ物・道具・用語・コラボを含む。人魚、ヒトハ、フタバ、あの子、ナガノ、トクマルシューゴ、オリオンビール、チャルメラを確認。別作品と同時でも先に拾い、一般語は文脈で認識。手がかりなしでは元の話題、拒否・深刻な相談は優先。
+- 名前のみの新項目は無関係な映画資料を選ばない。複数作品への質問の要点を捨てず、公開LLMへ併記された作品の該当資料も渡す。全原作・全アイテムの網羅ではない。
+- 本人設定の正本 src/profile.js、生成したCHARACTER.md。17歳、スウェーデンのヨーテボリ近郊、両親と14歳の弟、地元高校、東京へ5日1度だけ家族旅行。日本は耳知識中心、漫画・ゲーム・アニメ音楽・ドット絵・日本語ノート。プレイヤー記憶とは分離。用意済み返答・ローカルLLM・公開LLMへ共有。
+- ゲーム113件・中継28件、bundle dry-run、構文／差分検査成功。ローカル実画面で名前先行反応、担当と感想、プロフィールの固定・再開を確認。失敗もPLAYTESTへ記録。新しい実LLM品質比較は未実施。
+- 詳細 docs/chiikawa-profile-20261009.md、出典範囲 docs/chiikawa-coverage-20261009.json。同期は scripts/sync-dialogue.mjs ../game-llm --chiikawa-profile。
+- 公開追随の許可を引き継ぎ、Pages用pilot-audio-readable-retroとAI側mainへのPR・公開確認を次に進める。本体mainは未統合。残る試遊: 未登録・誤認・読み、LLMの自然さと設定一貫性。

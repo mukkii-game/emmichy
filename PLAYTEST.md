@@ -348,4 +348,11 @@ Read-only live /health probe timed out after5s. No live endpoint health/quality 
 
 User authorized proceeding with the prior concrete relay merge/deploy proposal. PR game-llm#1 merged as6ddf822. Deploy run37741421196 succeeded, including25 tests and Wrangler publish; Worker version01c35ad6-6eeb-41d0-91ed-bcd8f417eaff. No billing/provider/CORS/security changes. Game PR#3/public unchanged.
 
-Single bounded smoke from GitHub Actions37741701113 stopped at healthHTTP403, no AI calls. One diagnostic37741811205 captured response `error code: 1010`, also chatRequests0. Actual results docs/playtest-20261008-deployed-relay.json. Direct cloud-browser health navigation was ERR_BLOCKED_BY_CLIENT. Live quality is not tested or passed; access protections were not altered. Await ordinary user's browser health observation; do not re-run blocked clients.
+Single bounded smoke from GitHub Actions37741701113 stopped at healthHTTP403, no AI calls. One diagnostic37741811205 captured response `error code: 1010`, also chatRequests0. Actual results docs/playtest-20261008-deployed-relay.json. Direct cloud-browser health navigation was ERR_BLOCKED_BY_CLIENT. Live quality is not tested or passed; access protections were not altered. See later control-plane diagnosis; do not re-run blocked clients.
+
+
+## 2026-10-08 — read-only deployed configuration diagnosis
+
+Cloudflare API run 37743437929 confirmed a deployment defect: RL was absent and deployment logs warned old Wrangler ignored ratelimits. Relay PR #2 pins Wrangler 4.36.0, with 25 tests and dry-run listing RL at 20 requests/60s. Deployment 37743729349 succeeded; independent read-only run 37743902011 confirms RL/AI/provider secrets configured and new version active at 100%. Evidence docs/playtest-20261008-control-plane.json. No public AI calls.
+
+1010 access rejection remains unresolved; management sign-in verification fails after one reload, so account security events could not be examined. These checks prove deployed configuration, not live response quality or ordinary-player access. No security protections modified. Latest game visual/live-AI verification remains incomplete; smartphone checks deferred.

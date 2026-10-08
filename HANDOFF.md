@@ -1,4 +1,14 @@
-# Current checkpoint — bounded completion goal, 2026-10-08
+# Current checkpoint — server diagnosis and rate-limit restoration, 2026-10-08
+
+User asked us to investigate rather than delegate technical health checks back to them. Read-only Cloudflare control-plane run 37743437929 confirmed the public Worker enabled and the repaired version deployed. AI/provider-key bindings existed, but RL was absent; deployment logs explicitly warned that old Wrangler ignored `ratelimits`.
+
+Fixed relay deployment in game-llm PR #2: pinned project/lockfile and deployment action to Wrangler 4.36.0, the documented minimum supporting ratelimits. 25 relay tests and dry-run passed; dry-run includes RL at 20 requests/60s. Authorized relay merge fa64617 deployed in successful run 37743729349. Read-only verification run 37743902011 confirms RL/AI/both provider keys present, workers.dev enabled, and version d0458ac3-23c7-4ccd-b820-26ad9fd0fbf0 active at 100%. Evidence docs/playtest-20261008-control-plane.json. No public chat calls or paid API additions.
+
+Public-client error 1010 remains unresolved and live AI quality remains unverified. Official Cloudflare docs identify 1010 as client/browser-signature access denial; this does not establish ordinary-player accessibility. Management browser reaches sign-in but verification fails after one reload; no authenticated session or security-event detail is available. No security settings changed, no fingerprint/route workarounds. Do not ask the user to interpret technical health results again. Remaining decision: retain live AI/latest-screen checks as explicit candidate limitations, or arrange authenticated Cloudflare administration for deeper access diagnosis. Smartphone verification stays deferred. Game main/public unchanged; PR #3 remains the candidate.
+
+---
+
+# Earlier checkpoint — bounded completion goal, 2026-10-08
 
 Relay follow-up authorized and saved separately: https://github.com/mukkii-game/game-llm/pull/1, code d08bdaa. PR merged and deployed on 2026-10-08 with user authorization, merge 6ddf822. Per-provider 5s Emmichy waits, bounded Workers AI wait and message-context validation of unsolicited fandom redirects. Shared defaults/models/keys/CORS/deploy workflow preserved. 25 relay tests pass.
 
@@ -6,7 +16,7 @@ Local client→worker contract verification passed valid answer, rejected redire
 
 Relay deployed successfully by run 37741421196, Worker version 01c35ad6-6eeb-41d0-91ed-bcd8f417eaff. Game candidate remains on PR #3; its public version is unchanged. User authorized relay integration/deployment in the latest instruction; do not ask again. Smartphone checks remain deferred.
 
-Bounded live smoke run 37741701113 stopped on non-JSON HTTP403 health. One diagnostic run 37741811205 captured `error code: 1010`. Both stopped before any AI call (chatRequests0). Browser direct health navigation was also blocked by client; container HTTP health returned403. No conclusion about live AI answer quality. No security-setting changes or fingerprint/route workaround. Next needed evidence: ordinary user browser /health result to distinguish user accessibility from test-client rejection. Do not repeat blocked probes. Evidence docs/playtest-20261008-deployed-relay.json.
+Bounded live smoke run 37741701113 stopped on non-JSON HTTP403 health. One diagnostic run 37741811205 captured `error code: 1010`. Both stopped before any AI call (chatRequests0). Browser direct health navigation was also blocked by client; container HTTP health returned403. No conclusion about live AI answer quality. No security-setting changes or fingerprint/route workaround. Superseded by the later control-plane checkpoint; do not delegate technical health interpretation back to the user. Do not repeat blocked probes. Evidence docs/playtest-20261008-deployed-relay.json.
 
 User supplied /goal to finish the candidate, verify dialogue/hybrid/save-resume, preserve PR #3 and defer mobile verification. This tool session cannot inspect or activate the platform Goal lifecycle; no persistent background run is claimed.
 
@@ -17,7 +27,7 @@ User supplied /goal to finish the candidate, verify dialogue/hybrid/save-resume,
 
 Candidate 48c29ed browser verification was attempted. HTML/CSS load, but module URL src/app.js?v=20261008-ready1 returns a site-served HTTP429 page when inspected directly. Submit clicks did not add dialogue or save history. This is a preview delivery blocker, not a successful browser through-play or evidence of an application syntax error. No visual certification for these newest changes. Prior candidate browser evidence remains historical only.
 
-Live provider quality remains unverified since the last network attempt failed. Smartphone verification is deferred. A next scope decision is whether to include the shared game-llm relay in diagnosis/fixes; avoid paid APIs and public deployment. No persistent background execution claimed.
+Live provider quality remains unverified since the last network attempt failed. Smartphone verification is deferred. Relay diagnosis and release were subsequently authorized; game public deployment remains prohibited. No persistent background execution claimed.
 
 ---
 

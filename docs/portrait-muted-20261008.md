@@ -7,3 +7,5 @@ Selected eight colors: `#000000 #2222dd #dd2222 #dd22dd #22dd22 #22dddd #dddd22 
 `src/portrait-palette.js` supplies the PNG builder and mood overlays so overlays use the same colors. Final file: `assets/emmichy-nordic-muted-bust-20261008.png`. Source: existing `assets/emmichy-nordic-soft-source-20261008.png`. Previous final asset is retained.
 
 Validation: two targeted tests pass, including248×336 indexed PNG with exactly eight used colors, opacity/CRC and exact equality of the decoded pixel-index rows against the previous portrait. Thus every dot position, shape and dither pattern is unchanged. Local actual-browser crop: `portrait-muted-20261008-local.png`, module `portrait3`. No dialogue/AI quality check claimed.
+
+Publication: PR #12 merged as13e67a7. Pages37790615652 failed before build, then remains queued after accepted rerun. Public browser still shows portrait2; publication verification pending. Local image is the completed result.

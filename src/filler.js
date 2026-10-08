@@ -1,4 +1,5 @@
 import {waitingReply} from './waiting-db.js?v=20261008-listen3';
+import {recognizeName,namedGesture,namedFollowup} from './names.js?v=20261008-names1';
 // Listening gestures are dialogue, retained alongside the eventual answer.
 export function retainAside(history,line,{pendingReply=false}={}){
  const next=[...history];
@@ -12,7 +13,7 @@ export function waitingTone(input){
  if(/うれしい|嬉しい|楽しい|楽しかった|おいしい|美味しい|大好き|合格した|成功した|うまくできた|やった[!！]|最高/.test(text)&&!/ない|なかった|なく|じゃなく|ではなく|と言った|って言った|って言葉|という言葉|意味/.test(text))return 'positive';
  return 'neutral';
 }
-export function chooseFiller(input, recent=[]){
+export function chooseFiller(input, recent=[],{match=recognizeName(input)}={}){
  const text=String(input).normalize('NFKC').trim();
  const serious=/つらい|苦しい|相談|病気|入院|死に|亡く|いじめ|怖い|こわい|けが|怪我|事故/.test(text);
  const sound=/^[ァ-ヶーッっぁ-ん]{2,14}[!！?？]+$/.test(text)?text.replace(/[!！?？]+$/,''):'';
@@ -20,6 +21,7 @@ export function chooseFiller(input, recent=[]){
  const echo=sound?`えっ、${sound}！？`:topic?`${topic}…。`:null;
  const tone=waitingTone(text);
  const language=['ニホンゴデ、ナンテイウンダッケ…。','エト…コノコトバ…。'];
+ if(match&&!serious){const named=[namedGesture(match),namedFollowup(match,input),'ンー…。'];const next=named.find(line=>!recent.includes(line));if(next)return next;}
  const pool=serious?['うん、聞いてるよ。','そっか…。','うん…。']:
   tone==='negative'?['エエッ…。','そっか…。','うん、聞いてるよ。','フムフム…。']:
   sound?[echo,'！？','ウンウン…。',...language,'フムフム…。']:
@@ -37,7 +39,7 @@ export function idleAside(history=[],index=0){
  const pool=food?['さっきのご飯の話、思い出したらお腹すいてきちゃった。','アタシ、食べ物の話になると急に元気なの。フフ。','おいしい物の話、まだ聞いていたいな。']:['別の話でもいいよ。ゆっくりで大丈夫。','アタシ、覚えた日本語を小さいノートに書いてるの。字はまだ、ちょっとへた。','急がなくていいよ。アタシ、ここにいるから。'];
  return pool[index%pool.length];
 }
-export function startFiller(show,{schedule=setTimeout,cancel=clearTimeout,now=Date.now,later}={}){
+export function startFiller(show,{schedule=setTimeout,cancel=clearTimeout,now=Date.now,later,initialDelay=2000}={}){
  let active=true,timer,lastShown=null,count=0;
  const speak=()=>{
   if(!active)return;
@@ -46,7 +48,7 @@ export function startFiller(show,{schedule=setTimeout,cancel=clearTimeout,now=Da
   if(count<2)timer=schedule(speak,3000);
   else if(later)timer=schedule(()=>{if(active){lastShown=now();later();}},3000);
  };
- timer=schedule(speak,2000);
+ timer=schedule(speak,initialDelay);
  // Stop before displaying the answer; reserve breathing room after the last gesture.
  return ()=>{active=false;cancel(timer);return lastShown===null?0:Math.max(0,300-(now()-lastShown));};
 }

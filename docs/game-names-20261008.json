@@ -1,0 +1,158 @@
+{
+  "source": "https://store.steampowered.com/search/?category1=998&l=japanese",
+  "checkedAt": "2026-10-08",
+  "pages": [
+    {
+      "start": 0,
+      "received": 100,
+      "added": 98
+    },
+    {
+      "start": 100,
+      "received": 100,
+      "added": 98
+    },
+    {
+      "start": 200,
+      "received": 100,
+      "added": 100
+    },
+    {
+      "start": 300,
+      "received": 100,
+      "added": 99
+    },
+    {
+      "start": 400,
+      "received": 100,
+      "added": 100
+    },
+    {
+      "start": 500,
+      "received": 100,
+      "added": 100
+    },
+    {
+      "start": 600,
+      "received": 100,
+      "added": 99
+    },
+    {
+      "start": 700,
+      "received": 100,
+      "added": 100
+    },
+    {
+      "start": 800,
+      "received": 100,
+      "added": 97
+    },
+    {
+      "start": 900,
+      "received": 100,
+      "added": 99
+    },
+    {
+      "start": 1000,
+      "received": 100,
+      "added": 98
+    },
+    {
+      "start": 1100,
+      "received": 100,
+      "added": 98
+    },
+    {
+      "start": 1200,
+      "received": 100,
+      "added": 97
+    },
+    {
+      "start": 1300,
+      "received": 100,
+      "added": 99
+    },
+    {
+      "start": 1400,
+      "received": 100,
+      "added": 100
+    },
+    {
+      "start": 1500,
+      "received": 100,
+      "added": 100
+    },
+    {
+      "start": 1600,
+      "received": 100,
+      "added": 100
+    },
+    {
+      "start": 1700,
+      "received": 100,
+      "added": 100
+    },
+    {
+      "start": 1800,
+      "received": 100,
+      "added": 99
+    },
+    {
+      "start": 1900,
+      "received": 100,
+      "added": 100
+    },
+    {
+      "start": 2000,
+      "received": 100,
+      "added": 99
+    },
+    {
+      "start": 2100,
+      "received": 100,
+      "added": 100
+    },
+    {
+      "start": 2200,
+      "received": 100,
+      "added": 99
+    },
+    {
+      "start": 2300,
+      "received": 100,
+      "added": 98
+    },
+    {
+      "start": 2400,
+      "received": 100,
+      "added": 100
+    },
+    {
+      "start": 2500,
+      "received": 100,
+      "added": 97
+    },
+    {
+      "start": 2600,
+      "received": 100,
+      "added": 99
+    },
+    {
+      "start": 2700,
+      "received": 100,
+      "added": 99
+    },
+    {
+      "start": 2800,
+      "received": 100,
+      "added": 98
+    },
+    {
+      "start": 2900,
+      "received": 100,
+      "added": 100
+    }
+  ],
+  "count": 2970,
+  "stopped": "HTTP429 at3000"
+}

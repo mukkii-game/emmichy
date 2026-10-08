@@ -69,13 +69,10 @@ if(state.history.length) {for(const h of state.history){add(h.role,h.text);const
  addOpening();
  add('system','ニホンゴ デ フツウニ ハナシテネ');
 }
-const img=new Image();img.crossOrigin='anonymous';img.src='assets/emmichy-portrait.png';
+const img=new Image();img.crossOrigin='anonymous';img.src='assets/emmichy-nordic-bust-20261008.png';
 img.onload=()=>{
- const c=document.createElement('canvas');c.width=496;c.height=672;const p=c.getContext('2d',{willReadFrequently:true});
- const cropWidth=Math.min(img.width,img.height*496/672);
- p.drawImage(img,(img.width-cropWidth)/2,0,cropWidth,img.height,0,0,496,672);const d=p.getImageData(0,0,496,672),bayer=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5];
- for(let y=0;y<672;y++)for(let x=0;x<496;x++){const i=(y*496+x)*4,threshold=(bayer[(y%4)*4+x%4]+.5)*16;for(let z=0;z<3;z++)d.data[i+z]=d.data[i+z]>threshold?255:0;d.data[i+3]=255;}
- p.putImageData(d,0,0);portrait=c;draw();
+ // Native 248x336 indexed eight-color tile, expanded exactly 2x without smoothing.
+ portrait=img;draw();
 };
 img.onerror=()=>{$('status').textContent='人物画像を読み込めません。再読み込みしてください。';};
 function draw(){

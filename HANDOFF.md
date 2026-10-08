@@ -1,10 +1,20 @@
-# Current checkpoint — user humor feedback, 2026-10-08
+# Current checkpoint — Nordic bust / verified eight-color tile, 2026-10-08
+
+User supplied the braided Nordic woman and explicitly preferred the older naturalistic portrait over modern manga proportions. Three built-in imagegen drawing iterations; first and second drafts retained anime tendencies, second measured352,470 colors and cannot be called an8-color asset. Selected third drawing uses the approved earlier close portrait as the main style input. Preserve the old red-sweater asset.
+
+Final build is a real indexed PNG,248×336 native pixels, exactly8 digital RGB colors, opaque. Dependency-free scripts/build-portrait.mjs area-averages the bust crop then applies ordered dithering; no generated intermediate colors survive. This tile fits the initial PC-9801's640×400/8-color limit confirmed by NEC. The HTML interface and CRT signal/pixel aspect are not a full hardware emulation. App renders the already-constrained tile at2× without smoothing or double dithering. Social metadata points at this same final PNG.
+
+103 tests pass, including shipped-image palette/dimensions/index data/CRC; independent Pillow read confirms mode P and8 colors. Local desktop screenshot docs/portrait-20261008-local.png confirms head, bust and costume. Final source and full prompt/provenance/limitations are in docs/portrait-20261008.md. No live AI test or subjective-quality guarantee. Public follow-up targets the authorized Pages branch; status to be updated after deployment.
+
+---
+
+# Earlier checkpoint — user humor feedback, 2026-10-08
 
 User explicitly rejected「半額王」as unfunny: NG, including future canned callbacks. This was an invented pilot nickname, not an established popular phrase. Removed its authored moves, both king/strongman memory IDs (including restored saves), and related royal endings. Also stopped the invented strongman/決戦 and pudding流派 series as fixed highlights. Ordinary pudding/spoon/chopstick context remains. The player-requested humor rule is durable in SPEC: established expressions/verified short fandom patterns first; spontaneous LLM or arrangement oddities allowed; do not promote an invention merely because recall works.
 
-Client rejects provider outputs containing the banned nickname across kana/width/spacing variants without retrying. Local and public relay directions use this policy; stale assistant nickname lines are excluded from model history, user feedback retained. Prior on-screen saved history is preserved.102 tests and16 offline through-plays pass. Live provider fun is not verified. Review candidates and provenance caveats: docs/humor-review-20261008.md. Portrait task still needs the previously made Nordic-woman reference attached; no replacement generated.
+Client rejects provider outputs containing the banned nickname across kana/width/spacing variants without retrying. Local and public relay directions use this policy; stale assistant nickname lines are excluded from model history, user feedback retained. Prior on-screen saved history is preserved.102 tests and16 offline through-plays pass. Live provider fun is not verified. Review candidates and provenance caveats: docs/humor-review-20261008.md. The previously missing Nordic reference was subsequently attached; see the current portrait checkpoint above.
 
-Publication status to be updated after deployment.
+Published: Emmichy PR #9 merged as150c157, Pages run37785838813 success. Relay PR #3 merged as6d06589, deploy run37785849157 success (Worker version95c0a1c4-4a13-4b59-afc2-30d96c849d62). Main in Emmichy remains unchanged.
 
 ---
 

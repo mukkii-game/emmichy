@@ -1,4 +1,14 @@
-# Current checkpoint — server diagnosis and rate-limit restoration, 2026-10-08
+# Current checkpoint — authorized public candidate, 2026-10-08
+
+User explicitly approved reflecting this completion candidate into the public game after being told the former public version lacked these changes. PR #3 merged into the existing Pages source branch pilot-audio-readable-retro, merge 4a2dcf87360b213f5f1c1e3ea6cf5af3a71c8120. Main need not change: Pages already publishes this branch. Pages build/deploy run 37745240905 succeeded. Game tests rerun before release: 92/92 pass.
+
+Actual published browser https://mukkii-game.github.io/emmichy/ loads src/app.js?v=20261008-ready1 and enables input. Synthetic input 「漫画ではなく音楽の話がしたい。ピアノが好きです」 received the authored music reply about learning humming before all lyrics, without unsolicited fandom. Reload displayed the continue/restart chooser; Continue restored both input and response and enabled further input. This verifies latest public startup, one authored exchange and saved-history restoration, not a full new browser through-play. No live AI calls in this check. The earlier latest-module preview delivery blocker is superseded for these checked public paths.
+
+Remaining: live AI quality/access rejection diagnosis, full latest-browser through-play, physical smartphone IME/keyboard/audio and subjective fun. No paid API added or protection settings weakened. The candidate is available for the user's playtest; do not call it a fully validated final release. Earlier checkpoints below are historical and their no-public-integration wording is superseded by this authorization and release.
+
+---
+
+# Earlier checkpoint — server diagnosis and rate-limit restoration, 2026-10-08
 
 User asked us to investigate rather than delegate technical health checks back to them. Read-only Cloudflare control-plane run 37743437929 confirmed the public Worker enabled and the repaired version deployed. AI/provider-key bindings existed, but RL was absent; deployment logs explicitly warned that old Wrangler ignored `ratelimits`.
 

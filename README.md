@@ -6,7 +6,7 @@
 
 Node.js 22以降。起動は追加パッケージ不要、テスト前に `npm ci`。`npm start` で http://127.0.0.1:1984 を配信。`npm test` で検証します。
 
-本体は Draft PR #1 の `pilot-audio-readable-retro`。mainへの統合は試遊後です。公開試作: https://mukkii-game.github.io/emmichy/
+公開元は `pilot-audio-readable-retro`。2026-10-08、ユーザー許可で完成候補PR #3を統合し、Pages公開を確認しました。mainへの統合は未実施。試遊: https://mukkii-game.github.io/emmichy/
 
 ## 会話
 

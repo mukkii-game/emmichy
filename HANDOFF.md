@@ -1,4 +1,12 @@
-# Current checkpoint — softer illustrated face, 2026-10-08
+# Current checkpoint — slightly muted portrait palette, 2026-10-08
+
+User requests slightly lower saturation. The same softened illustration and every pixel index are preserved; only the eight-color palette changes. Chromatic colors use34/221 instead of0/255, black/white unchanged. Current asset uses later PC-98 analog RGB eight-of4096, not initial fixed digital8. Native248×336 indexed PNG remains exactly8 colors. Mood overlays share the new palette. Source/previous final retained; no new drawing or AI call.
+
+Two targeted tests pass: shipped PNG constraints and exact dot/index preservation with reduced saturation. Local actual-browser portrait crop docs/portrait-muted-20261008-local.png confirms portrait3. Details docs/portrait-muted-20261008.md. Ready for previously authorized Pages follow-up; public verification pending. Main unchanged.
+
+---
+
+# Earlier checkpoint — softer illustrated face, 2026-10-08
 
 User likes the Nordic portrait but asks for less realistic nose, eyes and facial outline. Built-in imagegen edit simplifies nasal modelling and eye detail and softens cheek/jaw while retaining pose, braids, costume and old-PC texture. New source/final assets use nordic-soft filenames; earlier assets remain for recovery. Same248×336 indexed8-color build and native2× nearest-neighbor renderer. Only asset references, release ID and build/test defaults change.
 

@@ -17,6 +17,7 @@ import {selectOpening} from './openings.js?v=20261006-open1';
 import {preparedReply} from './routing.js?v=20261008-humor1';
 import {cleanConversation,noteConversationReply} from './conversation.js?v=20261008-humor1';
 import {offlineFallback} from './fallback.js?v=20261008-finish1';
+import {portraitColors} from './portrait-palette.js?v=20261008-portrait3';
 let recentFillers=[];
 const idleSequence=createIdleSequence();
 let tokenizer=null;
@@ -69,7 +70,7 @@ if(state.history.length) {for(const h of state.history){add(h.role,h.text);const
  addOpening();
  add('system','ニホンゴ デ フツウニ ハナシテネ');
 }
-const img=new Image();img.crossOrigin='anonymous';img.src='assets/emmichy-nordic-soft-bust-20261008.png';
+const img=new Image();img.crossOrigin='anonymous';img.src='assets/emmichy-nordic-muted-bust-20261008.png';
 img.onload=()=>{
  // Native 248x336 indexed eight-color tile, expanded exactly 2x without smoothing.
  portrait=img;draw();
@@ -83,12 +84,12 @@ function draw(){
  $('terminal-note').textContent=session?.finished?'— END —　コンニチハ デ サイカイ':'アタシ エミチィ　ナンデモ ハナシテネ';
  $('terminal-note').setAttribute('aria-hidden',String(busy));
  ctx.save();ctx.scale(2,4);
- if(mood==='knowing' && Math.floor(Date.now()/700)%2)text(ctx,'*',230,10,'#00ffff');
+ if(mood==='knowing' && Math.floor(Date.now()/700)%2)text(ctx,'*',230,10,portraitColors[5]);
  if(mood==='worried'){
-   ctx.fillStyle='#00ffff';ctx.fillRect(229,42,2,2);ctx.fillRect(228,44,4,3);ctx.fillRect(229,47,2,1);
-   if(Math.floor(Date.now()/900)%2)kana(ctx,'シーサー...',16,161,'#00ffff');
+   ctx.fillStyle=portraitColors[5];ctx.fillRect(229,42,2,2);ctx.fillRect(228,44,4,3);ctx.fillRect(229,47,2,1);
+   if(Math.floor(Date.now()/900)%2)kana(ctx,'シーサー...',16,161,portraitColors[5]);
  }
- if(mood==='excited'){text(ctx,'*',225,20,'#ffff00');text(ctx,'*',16,90,'#00ffff');}
+ if(mood==='excited'){text(ctx,'*',225,20,portraitColors[6]);text(ctx,'*',16,90,portraitColors[5]);}
  ctx.restore();
 }
 function save(){try{localStorage.setItem(key,JSON.stringify(state));saveAvailable=true;}catch{saveAvailable=false;}$('disk').textContent=saveAvailable?'● DISK SAVED':'● MEMORY ONLY';}

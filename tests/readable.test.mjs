@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import kuromoji from 'kuromoji';
-import {readableText} from '../src/readable.js';
+import {readableText,loadReadings} from '../src/readable.js';
 import {respond,freshState} from '../src/engine.js';
 import {requestChat} from '../src/chat.js';
 const tokenizer=await new Promise((resolve,reject)=>kuromoji.builder({dicPath:'assets/dict/'}).build((error,value)=>error?reject(error):resolve(value)));
@@ -38,4 +38,14 @@ test('contracted and progressive verbs stay together without swallowing the next
  assert.equal(readableText('映画を見ていた',tokenizer),'エイガ ヲ ミテイタ');
  assert.equal(readableText('食べてから帰った',tokenizer),'タベテ カラ カエッタ');
  assert.equal(readableText('歩いて行った',tokenizer),'アルイテ イッタ');
+});
+
+test('a missing or broken dictionary loader resolves to usable display fallback',async()=>{
+ const previous=globalThis.kuromoji;
+ try{
+  delete globalThis.kuromoji;assert.equal(await loadReadings(),null);
+  globalThis.kuromoji={builder(){throw new Error('bad dictionary');}};
+  assert.equal(await loadReadings(),null);
+  assert.equal(readableText('日本語で話そう',null),'日本語デ話ソウ');
+ }finally{if(previous===undefined)delete globalThis.kuromoji;else globalThis.kuromoji=previous;}
 });

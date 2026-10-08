@@ -29,9 +29,9 @@ export function createAudioDirector(){
     step++;
   };
   const start=async()=>{
-    ensure();await ctx.resume();enabled=true;tick();clearInterval(timer);timer=setInterval(tick,1800);
+    ensure();await ctx.resume();master.gain.setValueAtTime(.18,ctx.currentTime);clearInterval(timer);enabled=true;tick();timer=setInterval(tick,1800);
   };
-  const stop=()=>{enabled=false;clearInterval(timer);timer=null;};
+  const stop=()=>{enabled=false;if(master&&ctx)master.gain.setValueAtTime(0,ctx.currentTime);clearInterval(timer);timer=null;};
   const toggle=async()=>{if(enabled)stop();else await start();return enabled;};
   const se={
     send(){tone(880,.045,0,'square',.025);tone(1320,.035,.045,'square',.016);},

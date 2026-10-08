@@ -21,3 +21,16 @@ test('teaching raises curiosity and excitement without changing factual history'
  assert.ok(next.performance.curiosity>advancePerformance(state,'こんにちは',6).performance.curiosity);
  assert.ok(next.performance.hype>0);assert.deepEqual(next.history,[]);
 });
+
+test('explicit nonfan topic switch rejects unsolicited fan redirection without a retry',async()=>{
+ const input='漫画は詳しくないけど、音楽の話は好きだよ';
+ let calls=0;
+ const fetcher=async()=>{calls++;return Response.json({text:'音楽もいいね。ちいかわが歌ったらかわいい！',provider:'groq'});};
+ assert.equal(await requestChat('/chat',input,{}, {},{fetcher}),null);
+ assert.equal(calls,1);
+ const state={history:[{role:'user',text:input}]};
+ assert.equal(await requestChat('/chat','ギターも好き',state,{}, {fetcher}),null);
+ assert.ok(await requestChat('/chat','ジョジョの曲が好き',state,{}, {fetcher}));
+ assert.ok(await requestChat('/chat',input,{}, {},{fetcher:async()=>Response.json({text:'アタシ、好きな曲だと歩く速さが変わる。',provider:'groq'})}));
+ assert.ok(await requestChat('/chat','ギターも好き',{}, {},{fetcher}));
+});

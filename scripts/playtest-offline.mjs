@@ -1,6 +1,6 @@
 // No provider calls. Screen selection logic is shared via preparedReply.
 import fs from 'node:fs/promises';
-import {freshState,respond,normalize} from '../src/engine.js';
+import {freshState,restoreState,respond,normalize} from '../src/engine.js';
 import {chiikawaReply} from '../src/topics.js';
 import {advancePerformance} from '../src/performance.js';
 import {selectKnowledge,knowledgeFallback} from '../src/fandom.js';
@@ -10,7 +10,7 @@ import {selectGap} from '../src/gap.js';
 import {preparedReply} from '../src/routing.js';
 import {learnInterests} from '../src/balance.js';
 import {noteConversationReply} from '../src/conversation.js';
-import {finishSession,shouldEnd} from '../src/session.js';
+import {finishSession,shouldEnd,startConversation} from '../src/session.js';
 const cases={
  music:['漫画は詳しくないけど、音楽の話は好きだよ','うん','パソコン買った','そう','本を買った','うん','オムライス食べた','そう','上履きは学校の靴だよ','うん','音楽が好き','バイバイ'],
  automatic:['本を買った','うん','パソコン買った','そう','オムライス食べた','うん','音楽が好き','そう','上履きは学校の靴だよ','うん','プリン半額だった','半額王と呼んでいいよ','王はスプーンを忘れました','箸でプリンを食べるしかない','そう','質問ばっかりだね','うん','まあ'],
@@ -19,8 +19,11 @@ const cases={
  corrective:['ジョジョが好き','プリン半額だった','半額王と呼んでいいよ','王はスプーンを忘れました','箸でプリンを食べるしかない','王じゃなくて強者ね','質問ばっかりだね','うん','上履きは学校で履き替える靴だよ','そう','その呼び方はやめて','バイバイ']
 };
 const results=[];
-for(const [type,inputs] of Object.entries(cases)){
+let replayState=freshState();
+const entries=[...Object.entries(cases),...Array.from({length:10},(_,i)=>[`replay-${i+1}`,cases.music])];
+for(const [type,inputs] of entries){
  let state=freshState(),session={startedAt:Date.now(),turns:0,finished:false,dialogueUse:{ai:0,bank:0}};
+ if(type.startsWith('replay-'))state=startConversation(restoreState(JSON.parse(JSON.stringify(replayState)))).state;
  const rows=[];
  for(const raw of inputs){
   session.turns++;
@@ -54,8 +57,11 @@ for(const [type,inputs] of Object.entries(cases)){
   if(state.ended)break;
   if(shouldEnd(session)){const end=finishSession(state,session);state=end.state;session=end.session;rows.push({input:'[auto-end]',text:end.text});break;}
  }
+ if(type.startsWith('replay-'))replayState=state;
  results.push({type,rows,ended:state.ended});
 }
 const path=process.argv[2]||'docs/playtest-20261007-offline.json';
 await fs.writeFile(path,JSON.stringify({mode:'offline simulation; not browser UI or live AI',results},null,2)+'\n');
+const replays=results.filter(r=>r.type.startsWith('replay-'));
+if(!results.every(r=>r.ended)||new Set(replays.map(r=>r.rows.map(row=>row.text).join('\n'))).size!==10)throw new Error('Through-play or ten-session variation failed');
 for(const result of results){console.log(result.type);for(const row of result.rows)console.log(`${row.input} → ${row.text}`);console.log(`ended=${result.ended}`);}

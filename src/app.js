@@ -2,11 +2,11 @@ import {freshState,restoreState,respond,normalize} from './engine.js?v=20261007-
 import {chiikawaReply,checkedAt} from './topics.js?v=20261006-mix1';
 import {text,kana} from './font.js?v=20261006-mix1';
 import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261007-candidate1';
-import {createAudioDirector} from './audio.js?v=20261006-mix1';
+import {createAudioDirector} from './audio.js?v=20261008-ready1';
 import {CHAT_API_URL} from './config.js?v=20261006-mix1';
 import {advancePerformance} from './performance.js?v=20261007-loop7';
-import {requestChat} from './chat.js?v=20261006-mix1';
-import {readableText,loadReadings} from './readable.js?v=20261006-verbs1';
+import {requestChat} from './chat.js?v=20261008-ready1';
+import {readableText,loadReadings} from './readable.js?v=20261008-ready1';
 import {selectKnowledge,knowledgeFallback} from './fandom.js?v=20261006-mix1';
 import {selectGap} from './gap.js?v=20261006-mix1';
 import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261007-candidate1';
@@ -36,7 +36,7 @@ const hadSavedDialogue=state.history.length>0;
 let lines=[];
 function renderConversation(){
  const log=$('conversation');log.replaceChildren();
- if(!tokenizer){const p=document.createElement('p');p.className='message system';p.textContent=readingsSettled?'コトバ ノ ヨミコミ ニ シッパイ。サイヨミコミ シテネ。':'コトバ ヲ ジュンビ シテイマス…';log.append(p);return;}
+ if(!readingsSettled){const p=document.createElement('p');p.className='message system';p.textContent='コトバ ヲ ジュンビ シテイマス…';log.append(p);return;}
  for(const item of lines){const p=document.createElement('p');p.className='message '+item.role;const label=document.createElement('span');label.className='speaker';label.textContent=item.role==='user'?'YOU >':item.role==='system'?'SYSTEM >':'EMMICHY >';const body=document.createElement('span');body.textContent=readableText(item.value,tokenizer);p.append(label,body);log.append(p);}
  log.scrollTop=log.scrollHeight;
 }
@@ -54,7 +54,7 @@ function recordAside(line,pendingState=null){
 function openingText(returning=false){const picked=selectOpening(state,returning);state.openingSeen=picked.seen;return picked.text;}
 function addOpening(returning=false){const line=openingText(returning);add('enny',line);state.history.push({role:'enny',text:line});save();}
 $('send').disabled=true;
-const readingsReady=loadReadings().then(value=>{tokenizer=value;readingsSettled=true;renderConversation();if(ready&&!busy)$('send').disabled=!value;return value;});
+loadReadings().then(value=>{tokenizer=value;readingsSettled=true;renderConversation();if(ready&&!busy)$('send').disabled=false;if(!value)$('status').textContent='読みの辞書を使えないため、原文を交えて表示します。会話は続けられます。';return value;});
 if(state.history.length) {for(const h of state.history){add(h.role,h.text);const p=document.createElement('p');p.textContent=`${h.role==='user'?'あなた':'えみちぃ'}：${h.text}`;$('transcript').append(p);}} else {
  add('system','EMMICHY / THE ALMOST CLEVER GAME');
  addOpening();
@@ -72,7 +72,7 @@ img.onerror=()=>{$('status').textContent='人物画像を読み込めません�
 function draw(){
  ctx.fillStyle='#000';ctx.fillRect(0,0,496,672);
  if(portrait)ctx.drawImage(portrait,0,0,496,672);
- const nextLive=tokenizer?live:'';
+ const nextLive=readingsSettled?live:'';
  if($('live-reply').textContent!==nextLive){$('live-reply').textContent=nextLive;const log=$('conversation');log.scrollTop=log.scrollHeight;}
  $('terminal-note').textContent=session?.finished?'— END —　コンニチハ デ サイカイ':busy?'':'アタシ エミチィ　ナンデモ ハナシテネ';
  ctx.save();ctx.scale(2,4);
@@ -98,7 +98,7 @@ async function endSession(){
  $('status').textContent='おしまい。「コンニチハ」で、もう一度。';draw();
 }
 $('talk').addEventListener('submit',async e=>{
- e.preventDefault();if(!ready||busy||composing||!tokenizer)return;
+ e.preventDefault();if(!ready||busy||composing||!readingsSettled)return;
  const raw=$('entry').value.trim();if(!raw)return;
  const isRestart=state.ended&&/コンニチ[ハワ]|タダイマ|オハヨウ/.test(normalize(raw));
  if(!session||isRestart){session={startedAt:Date.now(),turns:0,finished:false};if(isRestart){lines=[];state.performance={};state.conversation=cleanConversation(null);state.fan={worry:0,excitement:0,lastTopic:''};}saveSession();}
@@ -147,7 +147,6 @@ $('talk').addEventListener('submit',async e=>{
   result.state.repertoire=rememberReply(before,result.text,replyId,Boolean(prepared||polished.replaced));
   if(polished.replaced){usedModel=false;locallyReplaced=true;}
  }
- if(/[一-龠ぁ-ゖ]/.test(result.text)&&!tokenizer){$('status').textContent='読みやすい文字を準備しています…';if(!await readingsReady){result.text='ゴメン、コトバ ノ ヨミコミ ガ ウマク イカナイ。モウ イチド ハナシテネ。';result.state.history.at(-1).text=result.text;usedModel=false;}}
  session.dialogueUse={ai:(session.dialogueUse?.ai||0)+(usedModel?1:0),bank:(session.dialogueUse?.bank||0)+(!usedModel&&(prepared||locallyReplaced)?1:0)};
  if(result.kind!=='bye')result.state.conversation=noteConversationReply(result.state.conversation,result.text,raw,session.turns);
  state=result.state;mood=result.mood;session.lastMood=mood;saveSession();
@@ -170,7 +169,7 @@ $('entry').addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.isComposing||e.
 let lastActivity=Date.now();
 $('entry').addEventListener('input',()=>{lastActivity=Date.now();draw();});
 canvas.addEventListener('click',()=>$('entry').focus());
-$('sound').onclick=async()=>{const on=await audioDirector.toggle();$('sound').textContent='BGM + SE '+(on?'ON':'OFF');$('sound').setAttribute('aria-pressed',String(on));if(on)audioDirector.se.reply();};
+$('sound').onclick=async()=>{let on;try{on=await audioDirector.toggle();}catch{$('status').textContent='音を開始できません。もう一度音ボタンを押してください。';return;}$('sound').textContent='BGM + SE '+(on?'ON':'OFF');$('sound').setAttribute('aria-pressed',String(on));if(on)audioDirector.se.reply();};
 $('help').onclick=()=>{$('instructions').hidden=!$('instructions').hidden;};
 $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.querySelector('.screen-wrap').requestFullscreen();}catch{$('status').textContent='このブラウザでは全画面にできません。';}};
 $('export').onclick=()=>{const body=state.history.map(h=>`${h.role==='user'?'YOU':'EMMICHY'}: ${h.text}`).join('\r\n\r\n');const url=URL.createObjectURL(new Blob(['\ufeff'+body],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='enny-conversation.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
@@ -184,7 +183,7 @@ function showStartChoice(){
  $('continue').disabled=!state.history.length;
  $('status').textContent='続きから／最初から を選んでください';
 }
-function enterConversation(){ready=true;$('start-choice').hidden=true;$('send').disabled=!tokenizer;$('entry').disabled=false;lastActivity=Date.now();$('entry').focus();}
+function enterConversation(){ready=true;$('start-choice').hidden=true;$('send').disabled=!readingsSettled;$('entry').disabled=false;lastActivity=Date.now();$('entry').focus();}
 $('continue').onclick=()=>{session=resumeSession(session);enterConversation();saveSession();$('status').textContent=state.ended?'おしまい。「最初から」で、もう一度。':'会話を再開しました / ENTER で送信';};
 $('new-chat').onclick=()=>{const next=startConversation(state);state=next.state;session=next.session;lines=[];live='';mood='idle';$('transcript').replaceChildren();addOpening(true);enterConversation();save();saveSession();$('status').textContent='新しい会話 / 漢字・ひらがな OK';draw();};
 $('restart-chat').onclick=showStartChoice;

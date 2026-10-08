@@ -298,3 +298,14 @@ loop5原則をsystemへ追加した非公開テストbranch `game-llm/codex/emmi
 - Visual defect discovered: preview image redirect tainted canvas and left portrait blank. Anonymous CORS image loading fixed it; portrait verified on screenshot. Also restored original transcript on page load.
 - Evidence: docs/playtest-20261007-browser.json, docs/playtest-20261007-browser-export.txt, docs/candidate-ui-20261007.jpg.
 - Full tests 79/79. Physical mobile IME/audio, general live hybrid quality and ten whole-game replay chains remain unverified. Ready for human through-play as a candidate; no main/public deployment.
+
+
+## 2026-10-08 release-candidate hardening
+
+83 tests passed. Screen-level DOM harness verifies dictionary-failure fallback and that an unfinished IME composition does not submit; audio mock verifies immediate OFF mute and a single restarted timer. These are not physical-device certification.
+
+Captured failure regression: player “漫画は詳しくないけど、音楽の話は好きだよ”; model “音楽もいいね。ちいかわが歌ったらかわいい！” is rejected, with no retry. A relevant music response and explicit later “ジョジョの曲が好き” remain accepted. This narrow guard does not certify arbitrary AI output.
+
+15 offline through-plays end successfully, including 10 saved/restarted repeats of the same four-topic 12-input music fixture, all with different full reply sequences. Raw evidence: docs/playtest-20261008-offline.json. The evidence covers that fixture, not ten entirely different player trajectories.
+
+No real AI calls or workflows. raw.githack candidate preview HTTP429 and local cloud-browser ERR_CONNECTION_REFUSED prevent new visual verification. Remaining: real smartphone IME/layout/audio and small live AI quality check. main/public unchanged.

@@ -29,6 +29,6 @@ export function readableText(value, tokenizer) {
 export function loadReadings() {
   return new Promise(resolve => {
     if (!globalThis.kuromoji) return resolve(null);
-    globalThis.kuromoji.builder({dicPath:new URL('../assets/dict/',import.meta.url).pathname}).build((error,tokenizer)=>resolve(error?null:tokenizer));
+    try {globalThis.kuromoji.builder({dicPath:new URL('../assets/dict/',import.meta.url).pathname}).build((error,tokenizer)=>resolve(error?null:tokenizer));}catch{resolve(null);}
   });
 }

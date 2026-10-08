@@ -1,3 +1,21 @@
+# Current checkpoint — release candidate hardening, 2026-10-08
+
+Continue in the single Web Work session; do not resume Director Relay. PR #3 remains the review branch; main/public integration is not authorized.
+
+Completed:
+- The game no longer locks input when the reading dictionary fails. Existing reading fallback displays original kanji with kana and preserves input/log/export text. Missing or throwing dictionary setup resolves safely.
+- Explicit nonfan/topic-switch requests reject unsolicited Chiikawa/JoJo/Baki name injections from the model, using the last eight user messages until a new explicit fandom topic. No retry or additional provider call. This is a conservative response guard, not a claim that general AI quality is fixed.
+- Sound OFF now mutes already scheduled tones immediately; re-enabling restores gain and keeps one BGM timer. Audio-start errors are surfaced without leaving a false ON label.
+- Offline driver now checks normal/quiet/corrective/music/automatic endings plus ten serialized/restarted plays of the same 12-input scenario. All ten complete reply sequences differ. This proves variation for that four-topic fixture only, not universal uniqueness or subjective fun.
+
+Verification: 83/83 tests, including screen submit after dictionary failure, IME composition suppression, audio mute/timer lifecycle, and the captured nonfan failure response. Fifteen offline through-plays all end; raw evidence docs/playtest-20261008-offline.json. Syntax and whitespace checks passed. Real AI calls 0, workflow runs 0.
+
+Browser limitation this turn: commit-pinned raw.githack preview returned HTTP429; the cloud browser cannot reach the local server (ERR_CONNECTION_REFUSED). Previously verified desktop preview evidence still applies to the preceding candidate; these new screen changes have DOM test evidence, not new visual certification.
+
+Remaining gates: physical smartphone Japanese IME, keyboard-visible layout and audible BGM/SE; a small live open-ended conversation quality check; public integration approval. Physical-device observations cannot be replaced with mocks. Human playtest candidate is READY; final public release is not certified. Ask only for a short final device check and explicit publication approval after the remaining accessible checks.
+
+---
+
 # Current checkpoint — playable completion candidate, 2026-10-07
 
 Candidate f57c46e is saved on PR #3's head branch. Actual desktop browser through-play is now verified via the commit-pinned raw.githack preview (not main/production). The earlier local-browser access blocker was resolved by using this reachable public source preview.

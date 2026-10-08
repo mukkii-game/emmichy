@@ -2,7 +2,7 @@
 
 User requests slightly lower saturation. The same softened illustration and every pixel index are preserved; only the eight-color palette changes. Chromatic colors use34/221 instead of0/255, black/white unchanged. Current asset uses later PC-98 analog RGB eight-of4096, not initial fixed digital8. Native248×336 indexed PNG remains exactly8 colors. Mood overlays share the new palette. Source/previous final retained; no new drawing or AI call.
 
-Two targeted tests pass: shipped PNG constraints and exact dot/index preservation with reduced saturation. Local actual-browser portrait crop docs/portrait-muted-20261008-local.png confirms portrait3. Details docs/portrait-muted-20261008.md. Ready for previously authorized Pages follow-up; public verification pending. Main unchanged.
+Two targeted tests pass: shipped PNG constraints and exact dot/index preservation with reduced saturation. Local actual-browser portrait crop docs/portrait-muted-20261008-local.png confirms portrait3. Details docs/portrait-muted-20261008.md. PR #12 merged as13e67a7c51c7e57b2831da9c7e610bd2a8ca5ee5 into the authorized Pages branch. Pages run37790615652 initially reported failure before its build ran (no failed-step logs); rerun accepted but remains queued with no jobs across multiple spaced checks. Public browser still loads portrait2, so publication is NOT verified. Next: verify that run/deployment and public portrait3 once GitHub executes it, then capture the public crop and compare PNG bytes. Do not redraw or repeat the completed palette edit. Main unchanged.
 
 ---
 

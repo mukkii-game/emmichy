@@ -1,9 +1,10 @@
-// Build the illustration into a native-size tile that fits PC-9801's
-// 640x400 / digital 8-color mode; this is not a complete PC emulator.
+// Native tile for PC-98 640x400 / eight colors from analog RGB4096.
+// This is not a complete PC emulator.
 import fs from 'node:fs/promises';
-import {decodeRgb,encodeIndexed,digitalPalette} from './portrait-png.mjs';
+import {decodeRgb,encodeIndexed} from './portrait-png.mjs';
+import {portraitPalette} from '../src/portrait-palette.js';
 const source=process.argv[2]||'assets/emmichy-nordic-soft-source-20261008.png';
-const target=process.argv[3]||'assets/emmichy-nordic-soft-bust-20261008.png';
+const target=process.argv[3]||'assets/emmichy-nordic-muted-bust-20261008.png';
 const image=decodeRgb(await fs.readFile(source)),width=248,height=336;
 const cropHeight=Math.floor(image.height*.82),cropWidth=Math.min(image.width,cropHeight*width/height),left=(image.width-cropWidth)/2;
 const indices=new Uint8Array(width*height),bayer=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5];
@@ -20,5 +21,5 @@ for(let y=0;y<height;y++)for(let x=0;x<width;x++){
  const threshold=(bayer[(y%4)*4+x%4]+.5)*255/16;
  indices[y*width+x]=(rgb[2]/area>threshold?1:0)+(rgb[0]/area>threshold?2:0)+(rgb[1]/area>threshold?4:0);
 }
-await fs.writeFile(target,encodeIndexed(width,height,indices));
-console.log(JSON.stringify({source,target,nativePixels:[width,height],mode:'PC-9801 digital 8-color tile; not full-screen/CRT emulation',palette:digitalPalette,usedColors:new Set(indices).size}));
+await fs.writeFile(target,encodeIndexed(width,height,indices,portraitPalette));
+console.log(JSON.stringify({source,target,nativePixels:[width,height],mode:'PC-98 analog eight-color tile; not full-screen/CRT emulation',palette:portraitPalette,usedColors:new Set(indices).size}));

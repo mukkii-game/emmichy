@@ -23,8 +23,8 @@ export function decodeRgb(bytes){
  return {width,height,channels,pixels};
 }
 export const digitalPalette=Object.freeze([[0,0,0],[0,0,255],[255,0,0],[255,0,255],[0,255,0],[0,255,255],[255,255,0],[255,255,255]]);
-export function encodeIndexed(width,height,indices){
+export function encodeIndexed(width,height,indices,palette=digitalPalette){
  const head=Buffer.alloc(13);head.writeUInt32BE(width);head.writeUInt32BE(height,4);head[8]=8;head[9]=3;
  const rows=Buffer.alloc((width+1)*height);for(let y=0;y<height;y++)Buffer.from(indices.subarray(y*width,(y+1)*width)).copy(rows,y*(width+1)+1);
- return Buffer.concat([signature,chunk('IHDR',head),chunk('PLTE',Buffer.from(digitalPalette.flat())),chunk('IDAT',deflateSync(rows)),chunk('IEND',Buffer.alloc(0))]);
+ return Buffer.concat([signature,chunk('IHDR',head),chunk('PLTE',Buffer.from(palette.flat())),chunk('IDAT',deflateSync(rows)),chunk('IEND',Buffer.alloc(0))]);
 }

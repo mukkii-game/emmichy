@@ -552,3 +552,10 @@ src/context.jsに公式TMS確認の左門豊作補助資料を追加し、巨人
 - ちいかわは原作・アニメを見た詳しいファン、日本の日常生活は耳知識、を共通ポートフォリオとLLM指示で分離。確認済みのことを自信と自分の感想で話し、未知の場面は作らない。
 - 最終自動確認はゲーム132件・中継33件成功。新しい実LLM通信なし。release20261009-readmenu1で公開追随する。
 - 最終の回帰確認を追加しゲーム133件・中継33件成功。初回の日本語勉強中と正しい料理の実画面も確認。今後もこのWorkで試遊報告に対応する。
+
+### 最終公開確認
+
+- コード候補1cccf381c4bee270b3143d931df73b8277176f43、PR #20をpilot-audio-readable-retroへ統合、公開commit30c2114dc8809eb497c8fe90eca7f7648aa98c4c。Pages run37868679271 success。
+- release20261009-readmenu1、公開HTMLと変更対象・親module計15ファイルが候補と一致。URL https://mukkii-game.github.io/emmichy/ 。BGMとジョジョの修正も前のPR #19で反映済み。
+- 中継候補2e893c8e21a6d9ded327f2a64be689aa9e6539c0、game-llm PR #9 main統合3e7595ac7b0caf1c12e93fa62c8caf5ce19061ae、Deploy run37868675368 success、Worker version7a9561bc-831e-4ac9-b751-69828cf3548f。
+- ゲーム133件・中継33件成功、ローカル実画面の成功と途中の失敗はPLAYTESTへ保存。追加実LLM通信なし、自然さと音量の主観評価は人間試遊で確認する。Emmichy本体mainは6343213bc8f904a43c02319fc9b421ce2dd4dc0f、自動Relayなし。次もこのWorkで試遊報告に対応。

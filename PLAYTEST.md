@@ -524,3 +524,5 @@ Representative review: 「アタシ、漫画で覚えた敬語を確認するか
 - うさぎの最優先の実画面は成功。ただし本文に前のジョジョ由来のギャップ台詞が選ばれたため、別作品からちいかわの明示名へ移った場合のギャップ優先も止めた。初回の失敗画面は docs/playtest-20261009-usagi-local.jpg に保持。
 - 最終確認: 新たに前作品ギャップの誤優先の回帰確認を加えてゲーム133件成功、中継33件成功。実画面の初回日本語勉強中・島二郎のカツカレーと貝汁／島のパフェの区別も成功。docs/playtest-20261009-japanese-intro-local.jpg / playtest-20261009-island-menu-local.jpg。
 - 性的な語の実画面: エッチ→ワ、ワオ!?→急にその言葉→お茶をひと口→別の話にしない？。本文は用意した会話で通信なし。docs/playtest-20261009-deflection-local.jpg。
+
+- 公開確認: PR #20 / Pages run37868679271 success、release20261009-readmenu1、配信15ファイル一致。中継PR #9 / Deploy run37868675368 success。追加実LLM通信・公開ブラウザの保存データ操作なし。

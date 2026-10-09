@@ -1,9 +1,10 @@
+import {topicDeflection} from './deflection.js?v=20261009-readmenu1';
 import {everydayReply} from './everyday.js?v=20261008-hybrid1';
-import {contextualReply} from './context.js?v=20261009-pacing2';
+import {contextualReply} from './context.js?v=20261009-readmenu1';
 import {curatedReply} from './curated.js?v=20261006-mix1';
-import {balanceRoute} from './balance.js?v=20261009-pacing2';
-import {profileReply} from './profile.js?v=20261009-profile1';
-import {recognizeName,exactNames} from './names.js?v=20261009-pacing2';
+import {balanceRoute} from './balance.js?v=20261009-readmenu1';
+import {profileReply} from './profile.js?v=20261009-readmenu1';
+import {recognizeName,exactNames} from './names.js?v=20261009-readmenu1';
 import {chiikawaNotes} from './chiikawa-db.js?v=20261009-profile1';
 import {unwantedFanRedirect} from './chat.js?v=20261009-pacing2';
 
@@ -23,7 +24,9 @@ function chiikawaReply(raw,state){
 
 // Shared by the screen and offline through-play checks.
 export function preparedReply(raw,state,session,{gap=null,culture=null,repertoire={},modelEnabled=false,kind=null}={}){
- if(['bye','asleep','name','arithmetic'].includes(kind))return null;
+ if(['bye','asleep'].includes(kind))return null;
+ const deflect=topicDeflection(raw,state);if(deflect)return deflect;
+ if(['name','arithmetic'].includes(kind))return null;
  const own=profileReply(raw);if(own)return own;
  if(kind==='memory')return null;
  const named=recognizeName(raw,{state});
@@ -32,7 +35,7 @@ export function preparedReply(raw,state,session,{gap=null,culture=null,repertoir
  const legacy=contextualReply(raw,state)||curatedReply(raw,state);
  const daily=everydayReply(raw,state);
  const prepared=daily|| (legacy?.topic==='conversation-move'?legacy:
-  gap?{text:gap.text,topic:'gap'}:
+  gap&&!(named?.work==='chiikawa'&&state.knowledge?.work!=='chiikawa')?{text:gap.text,topic:'gap'}:
   culture?.kind==='curiosity'?{text:culture.text,topic:'culture'}:
   repertoire.scripted?{text:repertoire.candidate.text,topic:'repertoire'}:
   legacy&&(!repertoire.candidate||legacy.topic==='greeting')?legacy:null);

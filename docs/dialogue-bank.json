@@ -2410,9 +2410,9 @@
       "work": "chiikawa",
       "angle": 0,
       "mode": "react",
-      "text": "島二郎のカレー、食べたい！ あの頼れる感じでご飯まで出されたら、好きになっちゃうよ。",
+      "text": "カツカレーと貝汁、あの頼れる店主が出すご飯、アタシも食べたい！",
       "family": "chiikawa-25:0",
-      "source": "https://www.animatetimes.com/news/details.php?id=1764903101"
+      "source": "https://cafe.parco.jp/event/menu/chiikawamovie_cafe"
     },
     {
       "id": "chiikawa-25:fact:0",
@@ -2420,9 +2420,9 @@
       "work": "chiikawa",
       "angle": 0,
       "mode": "fact",
-      "text": "島二郎の店はカレーや貝汁を出す。 島二郎のカレー、食べたい！ あの頼れる感じでご飯まで出されたら、好きになっちゃうよ。",
+      "text": "島二郎の店はカツカレーと貝汁を出す。フルーツパフェは島の別の食べ物。 カツカレーと貝汁、あの頼れる店主が出すご飯、アタシも食べたい！",
       "family": "chiikawa-25:0",
-      "source": "https://www.animatetimes.com/news/details.php?id=1764903101"
+      "source": "https://cafe.parco.jp/event/menu/chiikawamovie_cafe"
     },
     {
       "id": "chiikawa-25:voice:1",
@@ -2432,7 +2432,7 @@
       "mode": "react",
       "text": "島二郎のカレー、頼れる人が出すご飯ってだけで味の期待が増えちゃう。",
       "family": "chiikawa-25:1",
-      "source": "https://www.animatetimes.com/news/details.php?id=1764903101"
+      "source": "https://cafe.parco.jp/event/menu/chiikawamovie_cafe"
     },
     {
       "id": "chiikawa-25:fact:1",
@@ -2440,9 +2440,9 @@
       "work": "chiikawa",
       "angle": 1,
       "mode": "fact",
-      "text": "島二郎の店はカレーや貝汁を出す。 島二郎のカレー、頼れる人が出すご飯ってだけで味の期待が増えちゃう。",
+      "text": "島二郎の店はカツカレーと貝汁を出す。フルーツパフェは島の別の食べ物。 島二郎のカレー、頼れる人が出すご飯ってだけで味の期待が増えちゃう。",
       "family": "chiikawa-25:1",
-      "source": "https://www.animatetimes.com/news/details.php?id=1764903101"
+      "source": "https://cafe.parco.jp/event/menu/chiikawamovie_cafe"
     },
     {
       "id": "chiikawa-25:voice:2",
@@ -2452,7 +2452,7 @@
       "mode": "react",
       "text": "強い島二郎の店で貝汁。アタシ、戦いの感想と食欲がぶつかってる！",
       "family": "chiikawa-25:2",
-      "source": "https://www.animatetimes.com/news/details.php?id=1764903101"
+      "source": "https://cafe.parco.jp/event/menu/chiikawamovie_cafe"
     },
     {
       "id": "chiikawa-25:fact:2",
@@ -2460,9 +2460,9 @@
       "work": "chiikawa",
       "angle": 2,
       "mode": "fact",
-      "text": "島二郎の店はカレーや貝汁を出す。 強い島二郎の店で貝汁。アタシ、戦いの感想と食欲がぶつかってる！",
+      "text": "島二郎の店はカツカレーと貝汁を出す。フルーツパフェは島の別の食べ物。 強い島二郎の店で貝汁。アタシ、戦いの感想と食欲がぶつかってる！",
       "family": "chiikawa-25:2",
-      "source": "https://www.animatetimes.com/news/details.php?id=1764903101"
+      "source": "https://cafe.parco.jp/event/menu/chiikawamovie_cafe"
     },
     {
       "id": "chiikawa-25:voice:3",
@@ -2472,7 +2472,7 @@
       "mode": "react",
       "text": "島二郎のお店なら、カレーと貝汁どっちから食べたい？",
       "family": "chiikawa-25:3",
-      "source": "https://www.animatetimes.com/news/details.php?id=1764903101"
+      "source": "https://cafe.parco.jp/event/menu/chiikawamovie_cafe"
     },
     {
       "id": "chiikawa-25:fact:3",
@@ -2480,9 +2480,9 @@
       "work": "chiikawa",
       "angle": 3,
       "mode": "fact",
-      "text": "島二郎の店はカレーや貝汁を出す。 島二郎のお店なら、カレーと貝汁どっちから食べたい？",
+      "text": "島二郎の店はカツカレーと貝汁を出す。フルーツパフェは島の別の食べ物。 島二郎のお店なら、カレーと貝汁どっちから食べたい？",
       "family": "chiikawa-25:3",
-      "source": "https://www.animatetimes.com/news/details.php?id=1764903101"
+      "source": "https://cafe.parco.jp/event/menu/chiikawamovie_cafe"
     },
     {
       "id": "chiikawa-25:voice:4",
@@ -2492,7 +2492,7 @@
       "mode": "react",
       "text": "島二郎に守られてご飯まで食べられたら、アタシはすぐ常連になるよ。",
       "family": "chiikawa-25:4",
-      "source": "https://www.animatetimes.com/news/details.php?id=1764903101"
+      "source": "https://cafe.parco.jp/event/menu/chiikawamovie_cafe"
     },
     {
       "id": "chiikawa-25:fact:4",
@@ -2500,9 +2500,9 @@
       "work": "chiikawa",
       "angle": 4,
       "mode": "fact",
-      "text": "島二郎の店はカレーや貝汁を出す。 島二郎に守られてご飯まで食べられたら、アタシはすぐ常連になるよ。",
+      "text": "島二郎の店はカツカレーと貝汁を出す。フルーツパフェは島の別の食べ物。 島二郎に守られてご飯まで食べられたら、アタシはすぐ常連になるよ。",
       "family": "chiikawa-25:4",
-      "source": "https://www.animatetimes.com/news/details.php?id=1764903101"
+      "source": "https://cafe.parco.jp/event/menu/chiikawamovie_cafe"
     },
     {
       "id": "chiikawa-26:voice:0",

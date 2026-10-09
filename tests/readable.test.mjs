@@ -55,3 +55,24 @@ test('a missing or broken dictionary loader resolves to usable display fallback'
   assert.equal(readableText('日本語で話そう',null),'日本語デ話ソウ');
  }finally{if(previous===undefined)delete globalThis.kuromoji;else globalThis.kuromoji=previous;}
 });
+
+test('everyday dialogue uses serifu and keeps the hiragana permission verb together',()=>{
+ assert.match(readableText('漫画の好きな台詞を普段の会話で使って、友達に笑われたの！',tokenizer),/スキナ セリフ ヲ/);
+ assert.doesNotMatch(readableText('好きな台詞',tokenizer),/ダイシ/);
+ for(const input of ['好きなことはなしていいよ','好きなこと話していいよ'])assert.equal(readableText(input,tokenizer),'スキナ コト ハナシテ イイヨ');
+ assert.equal(readableText('映画の台詞',null),'映画ノ セリフ');
+});
+
+ test('self-name aliases remain one readable name',()=>{for(const name of ['えみちい','エミチイ','エミチィ','えみちぃ','emmichy'])assert.equal(readableText(name+'は何歳？',tokenizer),'エミチィ ハ ナンサイ?');});
+
+test('colloquial contractions and conditional particles keep their readable units',()=>{
+ assert.equal(readableText('シーサーの話、心配になっちゃう。好きな子だと落ち着かないね。',tokenizer),'シーサー ノ ハナシ、 シンパイ ニ ナッチャウ。 スキナ コ ダト オチツカナイネ。');
+ assert.match(readableText('食べちゃう',tokenizer),/タベチャウ/);
+});
+
+test('small tsu never starts a separated interior word, including pre-spaced kana',()=>{
+ for(const input of ['モモンガ、見た目はとってもキュートなのに、ちょっと意地悪なところがあるって聞いたことあるよ。','モモンガ 、 ミタメ ハ トッテモ キュートナ ノニ、 チョット イジワルナ トコロ ガ アル ッテ キイタ コト アルヨ。']){
+  const text=readableText(input,tokenizer);assert.match(text,/アルッテ/);assert.doesNotMatch(text,/ ッ/);
+ }
+ assert.equal(readableText('ソウ ッテ イッタ',null),'ソウッテ イッタ');
+});

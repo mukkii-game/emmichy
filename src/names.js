@@ -14,11 +14,16 @@ function scan(value){const input=foldName(value),found=[];for(let i=0;i<input.le
  }}}return found;}
 function workIn(state){if(state.knowledge?.work)return state.knowledge.work;for(const h of (Array.isArray(state.history)?state.history:[]).slice(-8).toReversed()){const matches=scan(h?.text).filter(m=>m.row.work!=='games');if(matches.length)return matches.sort((a,b)=>b.length-a.length)[0].row.work;}return '';}
 export function oneEdit(a,b){if(a===b)return false;if(Math.abs(a.length-b.length)>1)return false;let i=0,j=0,edits=0;while(i<a.length&&j<b.length){if(a[i]===b[j]){i++;j++;continue;}if(++edits>1)return false;if(a.length>b.length)i++;else if(b.length>a.length)j++;else if(a[i]===b[j+1]&&a[i+1]===b[j]){i+=2;j+=2;}else{i++;j++;}}return edits+(i<a.length||j<b.length?1:0)===1;}
-export function exactNames(input,state={}){const work=workIn(state);return distinct(scan(input)).filter(m=>!m.row.contextOnly||m.row.work===work).map(m=>m.row);}
+function inContext(row,input,work){
+ if(!row.contextOnly||row.work===work)return true;
+ // A fan's praise or a standalone call names Chiikawa's Usagi even after another work.
+ return row.work==='chiikawa'&&row.name==='うさぎ'&&(!/飼|ペット|動物|野生|エサ|餌|牧場/.test(input))&&(foldName(input)==='ウサギ'||/かっこ|カッコ|好き|スキ|かわいい|カワイイ|キャラ|ちいかわ|チイカワ/.test(input));
+}
+export function exactNames(input,state={}){const work=workIn(state);return distinct(scan(input)).filter(m=>inContext(m.row,input,work)).map(m=>m.row);}
 export function recognizeName(input,{reading='',state={}}={}){
  const work=workIn(state),values=[input,reading].filter(Boolean);
  const decline=/(?:漫画|マンガ).*(?:ヤメ|以外|イガイ|苦手)|別ノ話|ベツノハナシ|ソノ話.*ヤメ|チイカワ.*(?:ヤメ|以外|イガイ|嫌イ|キライ|苦手)/.test(foldName(input));
- const matches=distinct(values.flatMap(scan)).filter(m=>!m.row.contextOnly||m.row.work===work);
+ const matches=distinct(values.flatMap(scan)).filter(m=>inContext(m.row,input,work));
  const common=values.flatMap(scan).filter(m=>m.row.work==='chiikawa'&&m.row.contextOnly&&work!=='chiikawa');
  matches.sort((a,b)=>b.length-a.length||(b.row.work===work?1:0)-(a.row.work===work?1:0));
  const chii=matches.find(m=>m.row.work==='chiikawa');

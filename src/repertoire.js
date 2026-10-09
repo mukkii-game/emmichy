@@ -1,7 +1,7 @@
 import {unwantedFanRedirect} from './chat.js?v=20261009-pacing2';
 import {rejectedJoke} from './humor.js?v=20261008-humor1';
 import {everydayReplies} from './everyday.js?v=20261008-hybrid1';
-import {cards,selectKnowledge,works} from './fandom.js?v=20261009-pacing2';
+import {cards,selectKnowledge,works,islandMenuCorrection} from './fandom.js?v=20261009-readmenu1';
 import {fanLines} from './fan-lines.js?v=20261006-mix1';
 // 600 individually authored reactions + 600 factual-answer combinations.
 // Counts describe reply candidates, not 1,200 distinct canon facts.
@@ -40,6 +40,7 @@ function coveredQuestion(raw,card){
  const t=fold(raw),tags=card.tags.map(fold),fact=fold(card.fact);
  // Closed facts only. Analysis, tactics, relationships and unfamiliar questions go to AI.
  if(/ナゼ|ドウシテ|ドウヤッテ|弱点|攻略|比較|違イ|考察|結末|最新|今.*上映|配信|説明シテ/.test(t))return false;
+ if(/島二郎|シマジロウ/.test(t)&&/(?:何|ナニ).*(?:作|ツク|料理|メニュー|出|ダス)|(?:作|ツク|料理|メニュー).*(?:何|ナニ)|何ヲ出ス/.test(t))return card.id==='chiikawa-25';
  if(/公開.*イツ|イツ.*公開|公開日/.test(t))return /公開サレタ/.test(fact)&&tags.includes('公開');
  if(/監督|脚本|制作|音楽/.test(t)&&/誰|ダレ|担当|ドコ|何|ナニ/.test(t))return tags.some(tag=>['監督','脚本','制作','音楽'].includes(tag)&&t.includes(tag));
  if(/バンジーガム|ドッキリテクスチャー|ジャジャン拳|ザハンド|ザ・ハンド|クレイジー|ゴールド.*エクスペリエンス|ヘブンズ|ストーン.*フリー/.test(t)&&/何|ナニ|能力|性質|ドウイウ|デキル/.test(t))return tags.some(tag=>tag.length>=3&&t.includes(tag))&&/性質|偽装|技ハ|空間|直シ|生命|本トシテ|糸ニ/.test(fact);
@@ -84,6 +85,7 @@ export function chooseRepertoire(raw,state={},now=new Date()){
 }
 export function polishReply(text,raw,state={},choice=null){
  if(rejectedJoke(text))return {text:'ウン。その呼び方は使わないね。',id:null,replaced:true};
+ const menuCorrection=islandMenuCorrection(text);if(menuCorrection)return {text:menuCorrection,id:null,replaced:true};
  let out=String(text).normalize('NFKC').trim().replace(/[\r\n]+/g,' ').replace(/\s{2,}/g,' ');
  out=out.replace(/^(?:EMMICHY|EMMY|エミチ[ィイ]|エミ)\s*[:：>]\s*/i,'');
  out=out.replace(/([。！!？?])\s*(?:エミ(?:チ[ィイ]|ちぃ)?|Emmichy)\s*$/i,'$1');

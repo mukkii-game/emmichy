@@ -110,6 +110,14 @@ test('screen remains playable after dictionary failure and IME composition does 
   time+=4000;await idleTick();time+=5000;await idleTick();
   jojo=JSON.parse(storage.get('enny-memory-v1')).history.slice(jojoAt+1).map(h=>h.text).join(' ');
   assert.match(jojo,/スタンド/);assert.doesNotMatch(jojo,/よく知らない|わかったふり/);
+  entry.value='ウサギ カッコイイヨネ';await talk.emit('submit');
+  const usagi=JSON.parse(storage.get('enny-memory-v1')).history,usagiAt=usagi.findLastIndex(h=>h.role==='user');
+  assert.equal(usagi[usagiAt+1].text,'ウサギ！');assert.notEqual(usagi[usagiAt+1].text,'セッコ！');
+  entry.value='えみちいは何歳？';await talk.emit('submit');
+  let own=JSON.parse(storage.get('enny-memory-v1')).history,ownAt=own.findLastIndex(h=>h.role==='user');
+  assert.match(own[ownAt+1].text,/ワオ.*アタシのこと/);assert.match(own[ownAt+2].text,/17歳/);
+  time+=4000;await idleTick();time+=5000;await idleTick();
+  own=JSON.parse(storage.get('enny-memory-v1')).history.slice(ownAt+1).map(h=>h.text).join(' ');assert.match(own,/うれしい/);
   entry.value='チイカワ イガイ ノ ハナシ ヲ シヨウ カ';await talk.emit('submit');
   const declined=JSON.parse(storage.get('enny-memory-v1')).history;
   const declineAt=declined.findLastIndex(h=>h.role==='user');

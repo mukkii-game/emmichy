@@ -27,3 +27,7 @@ test('returning greeting is split into short beats, with the two topic sentences
   assert.deepEqual(openingTiming,{firstDelay:1500,nextDelay:1500});
  }finally{Math.random=saved;}
 });
+
+test('first introduction says Japanese is still being learned',()=>{
+ const plan=planOpening(selectOpening({}));assert.equal(plan.later[1],'日本語、勉強中なの。');
+});

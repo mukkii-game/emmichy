@@ -23,3 +23,13 @@ test('one-character misses and user-requested peach mishearing are bounded and n
   const declined=recognizeName(raw);assert.equal(declined.decline,true);assert.equal(namedGesture(declined),'チイカワ、ね。');assert.match(namedFollowup(declined),/別の話/);
  }
 });
+
+test('Usagi praise leads after JoJo rather than mishearing kakkoii as Secco',()=>{
+ for(const state of [{},{knowledge:{work:'jojo'}},{knowledge:{work:'hunter'}}]){
+  for(const input of ['ウサギ カッコイイヨネ','うさぎかっこいいよね','ウサギ']){
+   const m=recognizeName(input,{state});assert.equal(m.name,'うさぎ');assert.equal(m.soft,false);assert.equal(namedGesture(m),'ウサギ！');
+  }
+ }
+ assert.equal(recognizeName('うさぎを飼っている',{state:{knowledge:{work:'jojo'}}}),null);
+ assert.equal(recognizeName('セッコかっこいいよね',{state:{knowledge:{work:'jojo'}}}).name,'セッコ');
+});

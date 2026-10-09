@@ -74,3 +74,13 @@ test('nonfans can teach culture, get an attributed specific reaction, and offer 
  const previous=cultureReply(taught,{turn:2},'teaching').text;
  assert.notEqual(cultureReply(taught,{turn:2,history:[{role:'enny',text:previous}]},'teaching').text,previous);
 });
+
+test('island shopkeeper menu questions use the owned curry and soup fact',()=>{
+ for(const input of ['島二郎は何を作るの？','島二郎の料理って何？','シマジロウ ハ ナニ ヲ ツクルノ ?']){
+  const r=chooseRepertoire(input,{knowledge:{work:'chiikawa'},turn:2});assert.equal(r.candidate?.cardId,'chiikawa-25');assert.match(r.candidate.text,/カツカレーと貝汁/);
+ }
+ assert.equal(chooseRepertoire('島二郎はなぜ料理するの？',{knowledge:{work:'chiikawa'}}).candidate,null);
+ const bad='島二郎が作るのは「島二郎のフルーツパフェ」だったんだ。';
+ const fixed=polishReply(bad,'島二郎の料理は？',{});assert.equal(fixed.replaced,true);assert.match(fixed.text,/カツカレーと貝汁/);assert.doesNotMatch(fixed.text,/島二郎のフルーツパフェ/);
+ for(const valid of ['島二郎の料理はカツカレーと貝汁。フルーツパフェは島の別の食べ物だよ。','島二郎のフルーツパフェじゃないよ。島の名物の方。','フルーツパフェを食べたいね。'])assert.equal(polishReply(valid,'島二郎の料理',{}).text,valid);
+});

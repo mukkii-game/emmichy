@@ -1,5 +1,6 @@
+import {japaneseExamples} from './profile.js?v=20261009-readmenu1';
 import {waitingReply} from './waiting-db.js?v=20261008-listen3';
-import {recognizeName,namedGesture,namedFollowup} from './names.js?v=20261009-pacing2';
+import {recognizeName,namedGesture,namedFollowup} from './names.js?v=20261009-readmenu1';
 // Listening gestures are dialogue, retained alongside the eventual answer.
 export function retainAside(history,line,{pendingReply=false}={}){
  const next=[...history];
@@ -36,7 +37,7 @@ export function idleAside(history=[],index=0){
  const lastUser=history.filter(h=>h.role==='user').at(-1)?.text||'';
  if(/つらい|苦しい|相談|病気|いじめ/.test(lastUser))return ['急がなくて大丈夫。ここにいるよ。','アタシ、少しここで待ってるね。'][index%2];
  const food=/ご飯|ごはん|ゴハン|牛丼|ギュウドン|丼|ドンブリ|吉野家|ヨシノヤ|チーズ|プリン|そば|ソバ|食べ|タベ/.test(lastUser);
- const pool=food?['さっきのご飯の話、思い出したらお腹すいてきちゃった。','アタシ、食べ物の話になると急に元気なの。フフ。','おいしい物の話、まだ聞いていたいな。']:['別の話でもいいよ。ゆっくりで大丈夫。','アタシ、覚えた日本語を小さいノートに書いてるの。字はまだ、ちょっとへた。','急がなくていいよ。アタシ、ここにいるから。'];
+ const pool=food?['さっきのご飯の話、思い出したらお腹すいてきちゃった。','アタシ、食べ物の話になると急に元気なの。フフ。','おいしい物の話、まだ聞いていたいな。']:['別の話でもいいよ。ゆっくりで大丈夫。',japaneseExamples[(history.filter(h=>h.role==='user').length+index)%japaneseExamples.length],'急がなくていいよ。アタシ、ここにいるから。'];
  return pool[index%pool.length];
 }
 export function startFiller(show,{schedule=setTimeout,cancel=clearTimeout,now=Date.now,later,initialDelay=2000}={}){

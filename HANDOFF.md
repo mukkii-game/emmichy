@@ -504,3 +504,11 @@ src/context.jsに公式TMS確認の左門豊作補助資料を追加し、巨人
 - コード候補5d6b3f96b54a55e59354a9168abdf483bf63c60a。PR #17をpilot-audio-readable-retroへ統合、公開commitd819154e42466305fdb85600e40f1495f713e7d3。Pages run37865851231 success。
 - 公開release20261009-farewell2とapp/session/endingsの配信内容一致を確認。公開URL https://mukkii-game.github.io/emmichy/ 。Emmichy本体mainは6343213bc8f904a43c02319fc9b421ce2dd4dc0fのまま。
 - 実画面で手動のお別れと再読み込みの二段落を確認。ゲーム119件成功。中継変更・追加実LLM通信・自動Relayなし。次は人間試遊で終幕の間と会話全体の自然さを確認する。
+
+
+## 2026-10-09 初回・最初からの「はじめまして」
+
+- codex/first-meeting-20261009。公開済みPR #17の続き。旧初回候補に「はじめまして」がなく、「最初から」が再会用の開幕を呼ぶ開始処理の問題だった。
+- 保存会話なしの初回と「最初から」は、必ず「はじめまして！」→1.5秒後に「アタシ、えみちぃ。」。40話題と会話の間を維持。保存済みの続きには新しい初対面挨拶を入れない。名前・好みの記憶は従来どおり保持。
+- ゲーム120件・構文／差分検査成功。全40開幕話題、初回、「最初から」、続きの履歴保持を確認。localhost:1997/?nollm=1で初回とリセットの実画面確認。docs/playtest-20261009-meeting-first-local.jpg / playtest-20261009-meeting-reset-local.jpg。
+- キャッシュの削除ではなく開始分岐を修正し、公開assetのバージョンを20261009-meeting1へ更新。中継の変更・追加実LLM通信・自動Relayなし。公開追随の既存許可でpilotへ反映、Emmichy本体mainは対象外。

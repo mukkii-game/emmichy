@@ -2,6 +2,14 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {openingTopics,selectOpening,planOpening,openingTiming} from '../src/openings.js';
 import {restoreState,freshState} from '../src/engine.js';
+test('every first meeting starts with hajimemashite, even after prior opening topics',()=>{
+ for(let id=0;id<40;id++){
+  const state={...freshState(),name:'タロウ',openingSeen:openingTopics.map((_,i)=>i).filter(i=>i!==id)};
+  const plan=planOpening(selectOpening(state));
+  assert.equal(plan.first,'はじめまして！');assert.equal(plan.later[0],'アタシ、えみちぃ。');
+  assert.doesNotMatch(plan.first,/おかえり|また会|やっほー/);
+ }
+});
 test('forty opening situations do not recur in a cycle and survive saved games',()=>{
  assert.equal(openingTopics.length,40);assert.equal(new Set(openingTopics).size,40);
  let state=freshState();const texts=new Set();

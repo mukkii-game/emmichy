@@ -464,3 +464,11 @@ src/context.jsに公式TMS確認の左門豊作補助資料を追加し、巨人
 - 名前の先行反応は送信後750ms待つ。「ちいかわ以外」でも辞書を拾って「チイカワ、ネ。」→別の話へ。漢字・カタカナ拒否表現をゲーム／中継で一致させた。
 - ゲーム116件・中継28件、構文／差分検査成功。ローカル実画面で短い開幕、送信直後の名前なし／後の反応、カタカナの話題変更を確認。証跡 docs/playtest-20261009-pacing-local.jpg。実LLM品質比較・人間の間の評価は未検証。
 - 公開追随の既存許可でPages用pilot-audio-readable-retroと中継mainへ反映する。Emmichy本体mainは対象外。
+
+
+### この変更の公開確認
+
+- コード候補64dbc707881da8d2c8cababf3b2819c8bb006925。PR #15をpilot-audio-readable-retroへ統合、公開commit34940372916e4ec2445ee17bcbda717c971534dc。Pages run37864582519 success。
+- 公開release20261009-pacing2。app/openings/continuation/names/routing/chat/engine/balance/context/fandom/filler/repertoireの12公開ファイルがローカルと一致。公開URL https://mukkii-game.github.io/emmichy/ 。
+- AI側PR #6、候補0c8d7b078e0328150d366e2cc59b3daf51ab67db、main統合de018d1104d894e55acc4c99e5b6fef19f75c0d4。Deploy run37864577146 success、Worker version2e428552-f958-4f8b-95d9-6163bbf18745。共有名前モジュールはimport先の変換を除いて一致。
+- Emmichy本体mainは6343213bc8f904a43c02319fc9b421ce2dd4dc0fのまま。自動Relay・追加実LLM試遊なし。次はこのWorkで人間の間の体感、未登録・誤認、会話の自然さの報告を受けて調整する。

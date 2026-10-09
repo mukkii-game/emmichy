@@ -18,7 +18,7 @@ import {preparedReply} from './routing.js?v=20261009-pacing2';
 import {cleanConversation,noteConversationReply} from './conversation.js?v=20261008-humor1';
 import {offlineFallback} from './fallback.js?v=20261008-finish1';
 import {portraitColors} from './portrait-palette.js?v=20261008-portrait3';
-import {planContinuation,createContinuation} from './continuation.js?v=20261009-pacing2';
+import {planContinuation,createContinuation} from './continuation.js?v=20261009-clause1';
 import {recognizeName,namedGesture,NAME_REACTION_MS} from './names.js?v=20261009-pacing2';
 const continuation=createContinuation();
 let continuationVersion=0,continuing=false,hadContinuation=false,awaitingOpening=[];
@@ -175,7 +175,7 @@ $('talk').addEventListener('submit',async e=>{
   result.state.repertoire=rememberReply(before,result.text,replyId,Boolean(prepared||polished.replaced));
   if(polished.replaced){if(usedModel)session.chatHealth={...session.chatHealth,replaced:(session.chatHealth?.replaced||0)+1};usedModel=false;locallyReplaced=true;}
  }
- const paced=greetingPlan||(['bye','asleep','name','memory','arithmetic','contradiction'].includes(result.kind)||isRestart?{first:result.text,later:[]}:planContinuation(result.text,raw,before));
+ const paced=greetingPlan||(['bye','asleep','name','memory','arithmetic','contradiction'].includes(result.kind)||isRestart?{first:result.text,later:[]}:planContinuation(result.text,raw,before,{display:s=>readableText(s,tokenizer),tokenizer}));
  result.text=paced.first;result.state.history.at(-1).text=result.text;
  session.dialogueUse={ai:(session.dialogueUse?.ai||0)+(usedModel?1:0),bank:(session.dialogueUse?.bank||0)+(!usedModel&&(prepared||locallyReplaced)?1:0)};
  if(result.kind!=='bye')result.state.conversation=noteConversationReply(result.state.conversation,result.text,raw,session.turns);
@@ -185,7 +185,7 @@ $('talk').addEventListener('submit',async e=>{
  const replyDisplay=readableText(result.text,tokenizer);
  for(const c of replyDisplay){live+=c;draw();await wait(mood==='excited'?12:mood==='worried'&&c==='\n'?420:22);}
  add('enny',result.text);live='';noteActivity();save();busy=false;$('send').disabled=false;$('reset').disabled=false;
- continuation.start(paced.later,Date.now(),greetingPlan?openingTiming:{});hadContinuation=paced.later.length>0;
+ continuation.start(paced.later,Date.now(),greetingPlan?openingTiming:paced.timing);hadContinuation=paced.later.length>0;
  $('status').textContent=usedModel?`AI会話${modelProvider?' / '+({groq:'Groq',gemini:'Google Gemini','workers-ai':'Cloudflare Workers AI',local:'ローカルAI'}[modelProvider]||modelProvider):''} / ENTER で送信`:locallyReplaced?'用意した会話で調整 / ENTER で送信':prepared?'用意した会話 / ENTER で送信':modelEnabled&&!ruleOnly?'AI失敗→ルール会話 / ENTER で送信':'ルール会話 / ENTER で送信';
  const item=document.createElement('p');item.textContent=`あなた：${raw}。Emmichy：${result.text}`;$('transcript').append(item);if($('transcript').children.length>40)$('transcript').firstChild.remove();
  $('entry').focus();draw();

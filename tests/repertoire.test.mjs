@@ -1,5 +1,12 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
+test('a known work familiarity question uses owned facts instead of being treated as an uncovered detail',()=>{
+ for(const raw of ['シラナイ ノカイ ジョジョ ?','ジョジョ知らないの？','ジョジョって知ってる？','知ってる？ジョジョ']){
+  const r=chooseRepertoire(raw,{turn:3});assert.equal(r.intent,'familiarity');assert.equal(r.scripted,true);
+  assert.match(r.candidate.text,/^知ってるよ！/);assert.match(r.candidate.text,/スタンド/);assert.equal(r.candidate.work,'jojo');
+ }
+ for(const raw of ['ジョジョの結末は？','ジョジョは知らないからどこから見ればいい？','ジョジョの強さの違いは？','未知の作品知ってる？'])assert.equal(chooseRepertoire(raw,{turn:3}).scripted,false,raw);
+});
 
 test('final polishing blocks old nickname echoes from rule or bank output',()=>{
  for(const text of ['半額王、スプーンも装備してね。','ハンガク オウ！'])assert.doesNotMatch(polishReply(text,'プリン',{}).text,/半額王|ハンガク.*オウ/);

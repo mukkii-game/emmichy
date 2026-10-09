@@ -542,3 +542,7 @@ Representative review: 「アタシ、漫画で覚えた敬語を確認するか
 - 秋葉原の実画面で名前反応後に同じ「アキハバラ！」を本文でも重ねた。初回 docs/playtest-20261009-akihabara-local.jpg を保持し、本文はアニメとゲームのお店の話から始めるよう修正。エ ミチ イト→エミチィ ト、ホッ コリ→ホッコリの実画面も成功。
 
 - 最終秋葉原実画面: アキハバラ!を一度だけ拾い、アニメとゲームの店→買う物で迷いそう、へ展開。docs/playtest-20261009-akihabara-fixed-local.jpg。本人名とホッコリの証拠 docs/playtest-20261009-name-hokkori-local.jpg。
+
+- 実時間での自発話も成功: 秋葉原の会話後、ちいかわの発言をしないまま約2分で「ア、チイカワ ノ コト オモイダシチャッタ。」→ハチワレへの感想→本人の表情、が順に表示された。残り2:28で動作を観測し、2:12の画面を docs/playtest-20261009-chiikawa-reminder-local.jpg へ保存。追加LLM通信なし。
+
+- 公開確認: PR #21 / Pages run37870731048 success、release20261009-talk1、配信16ファイル一致。中継PR #10 / Deploy run37870725942 success。実LLM追加通信・公開保存データ操作なし。

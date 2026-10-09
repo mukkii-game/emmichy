@@ -570,3 +570,10 @@ src/context.jsに公式TMS確認の左門豊作補助資料を追加し、巨人
 - 次: 実画面の読み修正・地名を確認後、既存の公開追随許可でpilot-audio-readable-retroと中継mainへ統合し配信を検証。Emmichy本体mainは対象外。release20261009-talk1、自動Relayなし。このWorkで続ける。
 
 - 実画面の称賛と本人名・ホッコリは成功。最初の秋葉原試遊では名前の二重反応があり、本文から冒頭の呼びかけを除去。PLAYTESTに失敗と修正を残す。最終140件・34件成功。
+
+
+### 公開確認
+
+- コード候補d5f48b9670db9271162c5b5776508e87d37032b2、PR #21 pilot統合0f5ee2846bcc438c4a6cd90ad242bdff5805f88a。Pages run37870731048 success。release20261009-talk1、配信HTML・CSS・変更module計16ファイルが候補と一致。URL https://mukkii-game.github.io/emmichy/ 。
+- 中継候補10535b92db84280c83ef5dc665e5fdd20e179441、game-llm PR #10 main統合be05a64f4112c8570663b6c1d736d001ca741854。Deploy run37870725942 success、Worker version2f6e24ed-0b5c-467c-b7c3-b40c2db198e6。
+- ゲーム140件・中継34件成功。ローカル実画面で残り時間、褒め言葉、読み、秋葉原、自発ちいかわ話を確認。実LLMの追加通信と公開ブラウザの保存データ操作なし。Emmichy本体mainは6343213bc8f904a43c02319fc9b421ce2dd4dc0f、自動Relayなし。次の人間試遊報告もこのWorkで対応する。

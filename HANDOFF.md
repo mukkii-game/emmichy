@@ -512,3 +512,10 @@ src/context.jsに公式TMS確認の左門豊作補助資料を追加し、巨人
 - 保存会話なしの初回と「最初から」は、必ず「はじめまして！」→1.5秒後に「アタシ、えみちぃ。」。40話題と会話の間を維持。保存済みの続きには新しい初対面挨拶を入れない。名前・好みの記憶は従来どおり保持。
 - ゲーム120件・構文／差分検査成功。全40開幕話題、初回、「最初から」、続きの履歴保持を確認。localhost:1997/?nollm=1で初回とリセットの実画面確認。docs/playtest-20261009-meeting-first-local.jpg / playtest-20261009-meeting-reset-local.jpg。
 - キャッシュの削除ではなく開始分岐を修正し、公開assetのバージョンを20261009-meeting1へ更新。中継の変更・追加実LLM通信・自動Relayなし。公開追随の既存許可でpilotへ反映、Emmichy本体mainは対象外。
+
+
+### この変更の公開確認
+
+- コード候補a9dfc85384a5e9293ac1c6458ee6a8b8c38911cc。PR #18をpilot-audio-readable-retroへ統合、公開commitc248ea53d5b2ee05287ac6002687bf08b5ebe480。Pages run37866238439 success。
+- 公開release20261009-meeting1とapp/openingsの配信一致を確認。公開URL https://mukkii-game.github.io/emmichy/ 。Emmichy本体mainは6343213bc8f904a43c02319fc9b421ce2dd4dc0fのまま。
+- 初回・最初からの実画面確認と120件成功。公開保存データの操作、中継変更・実LLM通信・自動Relayなし。今後もこのWorkで試遊報告を受けて調整する。

@@ -114,5 +114,6 @@ export function selectEnding(state){
  ];
  const farewells=['また話そうね。','また会えたら嬉しいな。','続きは今度聞かせて。','話せて楽しかった！','またね。'];
  const departure=departures[pick.id%departures.length],farewell=farewells[pick.id%farewells.length];
- return {text:`${departure} ${farewell}バイバイ！`,departure,farewell,seen:[...seen,pick.id].slice(-99)};
+ const [reason,...rest]=departure.match(/[^。!?！？]+[。!?！？]*/g);
+ return {text:`${departure} ${farewell}バイバイ！`,departure,farewell,reason,transition:rest.join(''),seen:[...seen,pick.id].slice(-99)};
 }

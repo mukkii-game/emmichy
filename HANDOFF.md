@@ -488,3 +488,12 @@ src/context.jsに公式TMS確認の左門豊作補助資料を追加し、巨人
 - コード候補b451ee3e3e946e4fb558b8cc46ba5bb7007956e4。PR #16をpilot-audio-readable-retroへ統合、公開commit99928dc2fc37e4326e25546566d6affa4d8f2376。Pages run37865374504 success。release20261009-clause1とapp/continuationの配信内容一致を確認。
 - AI側候補2a0e4741325c20dd94a135316fecc4f652e3458f、PR #7 main統合441646405cc4bd319c74edcd641abb99794ffde3。Deploy run37865369483 success、Worker version047d9570-0d8c-4520-9d22-f44a430632f1。
 - 公開URL https://mukkii-game.github.io/emmichy/ 。Emmichy本体mainは6343213bc8f904a43c02319fc9b421ce2dd4dc0fのまま。公開の保存済み会話は操作せず、実LLM品質比較なし。次は人間試遊で区切りの自然さ、接続句と読み、会話の広がりを確認する。
+
+
+## 2026-10-09 お別れの二段表示
+
+- codex/farewell-pacing-20261009。公開済みPR #16の続き。お別れだけ全文一括表示になっていた問題を修正。
+- 帰る理由と最後の挨拶を別の発言に分け、理由を表示後1500ms待つ。手動bye／時間／無入力の終幕で同じ表示処理。100理由、共有話題、バイバイ一度を維持。
+- 保存は終幕全文を二段落として保持し、再開・読みやすい履歴・書き出しで区切りを失わない。通常の話題展開キューへ終幕を預けないため、finished状態で続きが出なくなる問題を避ける。
+- ゲーム119件成功、構文／差分検査。ユーザーの念の例が希望の2まとまりになること、手動／自動とも待ち時間中は理由だけ表示、送信を止め、最後まで一度話すことを検査。実LLM通信・中継の変更なし。
+- 公開追随の既存許可でpilot-audio-readable-retroへ反映。Emmichy本体mainは対象外、自動Relayなし。

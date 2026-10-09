@@ -28,6 +28,14 @@ test('save-resume retains request cooldown and usage but new play resets both',(
 });
 
 import {endingReasons} from '../src/endings.js';
+test('departure reason and the final goodbye are separate beats and remain separate on reload',()=>{
+ const id=endingReasons.indexOf('自分ならどんな念を使うか考える');assert.ok(id>=0);
+ const state={...freshState(),endingSeen:endingReasons.map((_,i)=>i).filter(i=>i!==id)};
+ const end=finishSession(state,{turns:10});
+ assert.deepEqual(end.parts,['今日は自分ならどんな念を使うか考えるって決めてたの。','そろそろ行ってくるね。 話せて楽しかった！バイバイ！']);
+ assert.equal(end.text,end.parts.join('\n\n'));assert.equal((end.text.match(/バイバイ/g)||[]).length,1);
+ assert.equal(restoreState(JSON.parse(JSON.stringify(end.state))).history.at(-1).text,end.text);
+});
 test('five minutes never cuts off fewer than ten exchanges; 100 endings avoid repeats',()=>{
  assert.equal(shouldEnd({startedAt:1,turns:9},SESSION_MS*3),false);
  assert.equal(shouldEnd({startedAt:1,turns:10},SESSION_MS*3),true);

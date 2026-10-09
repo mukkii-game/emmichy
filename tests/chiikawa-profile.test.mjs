@@ -50,3 +50,13 @@ test('one fixed identity answers personal questions without taking player facts 
  assert.equal(profileReply('ジョジョが好き'),null);
  assert.match(profilePrompt(),/耳知識/);assert.doesNotMatch(profilePrompt(),/EVIL|40歳|アメリカ/);
 });
+
+test('all self-name spellings get excited acknowledgement and a fixed personal answer',async()=>{
+ const {selfMention,selfReaction}=await import('../src/profile.js');
+ for(const name of ['えみちい','エミチイ','エミチィ','えみちぃ','emmichy','EMMICHY']){
+  assert.equal(selfMention(name),true);assert.match(selfReaction(name,{turn:2}).gesture,/ワオ.*アタシのこと/);assert.match(selfReaction(name,{turn:2}).thanks,/うれしい/);
+  assert.match(profileReply(name+'は何歳？').text,/17歳/);assert.match(profileReply(name).text,/スウェーデン.*17歳/);
+ }
+ assert.equal(selfMention('ハチワレ'),false);assert.equal(selfMention('otheremmichyapp'),false);
+ assert.equal(selfReaction('えみちぃ、つらい相談だよ').thanks,null);
+});

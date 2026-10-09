@@ -1,9 +1,10 @@
 // Curated short factual notes, not scraped articles or dialogue reproductions.
 // Canonical copy: emmichy/src/fandom.js; sync unchanged to game-llm/games/emmichy-fandom.js.
-import {recognizeName} from './names.js?v=20261009-pacing2';
+import {recognizeName} from './names.js?v=20261009-readmenu1';
 export const checkedAt='2026-10-06';
 const wiki=title=>`https://en.wikipedia.org/wiki/${encodeURIComponent(title)}`;
 export const sources={
+ islandFood:{url:'https://cafe.parco.jp/event/menu/chiikawamovie_cafe',kind:'official'},
  movie:{url:'https://chiikawa.toho-movie.jp/atm/index.html',kind:'official'},
  cast:{url:'https://chiikawa.toho-movie.jp/atm/characters.html',kind:'official'},
  staff:{url:'https://chiikawa.toho-movie.jp/index.html',kind:'official'},
@@ -65,9 +66,11 @@ add('chiikawa','chiikawa',[
 ]);
 add('chiikawa','island',[
  ['島二郎|シマジロウ|水流|水','島二郎は手を回して水流を起こす。腹や口から水を噴く技ではない。虎のしまじろうとは別人。','島二郎の水流、な！ 手を回してあの強さ、マジでジャンプのアニメみたいに熱い！'],
- ['島二郎|シマジロウ|潜る|泳ぐ','島二郎は深く潜れる大柄な店主。','島二郎、な！ ただの頼れそうなお店の人かと思ったら、海の中でも強いのずるい！'],
- ['島二郎|シマジロウ|カレー|貝','島二郎の店はカレーや貝汁を出す。','島二郎のカレー、食べたい！ あの頼れる感じでご飯まで出されたら、好きになっちゃうよ。']
+ ['島二郎|シマジロウ|潜る|泳ぐ','島二郎は深く潜れる大柄な店主。','島二郎、な！ ただの頼れそうなお店の人かと思ったら、海の中でも強いのずるい！']
  ],{movie:true});
+add('chiikawa','islandFood',[
+ ['島二郎|シマジロウ|カレー|カツカレー|貝|貝汁|料理|作る|メニュー|フルーツパフェ','島二郎の店はカツカレーと貝汁を出す。フルーツパフェは島の別の食べ物。','カツカレーと貝汁、あの頼れる店主が出すご飯、アタシも食べたい！']
+ ],{movie:true,checkedAt:'2026-10-09'});
 add('chiikawa','interview',[
  ['島二郎|シマジロウ|酒まんじゅう|没','作者の初期案には酒まんじゅうという別の島の人物がいた。','島二郎、最初の案にはいなかったんだって。あの頼もしさが生まれてよかった、な！']
  ],{movie:true});
@@ -185,7 +188,14 @@ export const phrasePatterns=[
  {id:'next',work:'jojo',match:['次','予想','予測'],text:'次にあなたは、…と言う！',context:'次の発言を予想して外す。長い原作台詞は再現しない。'},
  {id:'vow',work:'hunter',match:['我慢','約束','条件','宿題'],text:'アタシの制約と誓約、',context:'日常の小さな約束を大げさに言ってから自分で弱気になる。'}
 ];
-export const cards=Object.freeze(rows.map(c=>Object.freeze({...c,checkedAt})));
+export const cards=Object.freeze(rows.map(c=>Object.freeze({checkedAt,...c})));
+// Repair only the observed affirmative attribution, without inventing another scene.
+export function islandMenuCorrection(value){
+ const t=String(value).normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/[\s「」『』"]/g,'');
+ const wrong=/(?:島二郎|シマジロウ)(?:ノ|ガ(?:作ル|ツクル|作ッタ|ツクッタ|出ス|ダス|出シタ|ダシタ|用意シタ)(?:ノハ|料理ハ|メニューハ)?)[^。!?！？]{0,14}フルーツパフェ/.test(t);
+ if(!wrong||/フルーツパフェ.{0,8}(?:デハナイ|ジャナイ|違ウ|チガウ)/.test(t))return null;
+ return '島二郎の料理はカツカレーと貝汁だよ。フルーツパフェは、島の別の食べ物。アタシ、混ぜちゃったね。';
+}
 const ids=new Set(cards.map(c=>c.id));
 const fold=s=>String(s??'').normalize('NFKC').toLowerCase().replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/[\s・×]/g,'');
 const has=(input,word)=>fold(input).includes(fold(word));

@@ -41,7 +41,7 @@ export const openingTopics=`
 読めなかった日本語を覚えたの！ 使える場面が増えると嬉しいね。
 おすすめを教えてもらうノートを作った！ あなたの好きな物も聞かせて！
 `.trim().split('\n');
-const firstGreeting='はじめまして！ アタシ、えみちぃ。';
+const firstGreeting='はじめまして！ アタシ、えみちぃ。日本語、勉強中なの。';
 const returns=['また会ったね！ 嬉しい！','おかえり！ 今日も話そう！','やっほー、また来てくれた！','あ、会えた！ 元気だった？','また話せるの、楽しみにしてた！'];
 export const openingTiming=Object.freeze({firstDelay:1500,nextDelay:1500});
 export function planOpening(picked){

@@ -1,25 +1,26 @@
-import {freshState,restoreState,respond,normalize} from './engine.js?v=20261009-audiojojo1';
+import {selfReaction} from './profile.js?v=20261009-readmenu1';
+import {freshState,restoreState,respond,normalize} from './engine.js?v=20261009-readmenu1';
 import {chiikawaReply,checkedAt} from './topics.js?v=20261006-mix1';
-import {text,kana} from './font.js?v=20261009-audiojojo1';
+import {text,kana} from './font.js?v=20261009-readmenu1';
 import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261009-farewell2';
 import {createAudioDirector} from './audio.js?v=20261009-audiojojo1';
 import {CHAT_API_URL} from './config.js?v=20261006-mix1';
 import {advancePerformance} from './performance.js?v=20261008-humor1';
 import {requestChat,chatAvailable,unwantedFanRedirect} from './chat.js?v=20261009-pacing2';
-import {readableText,loadReadings} from './readable.js?v=20261009-profile1';
-import {selectKnowledge} from './fandom.js?v=20261009-pacing2';
+import {readableText,loadReadings} from './readable.js?v=20261009-readmenu1';
+import {selectKnowledge} from './fandom.js?v=20261009-readmenu1';
 import {selectGap} from './gap.js?v=20261006-mix1';
-import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261009-audiojojo1';
+import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261009-readmenu1';
 import {cultureReply} from './culture.js?v=20261009-profile1';
-import {chooseFiller,startFiller,longFiller,retainAside,idleAside,createIdleSequence} from './filler.js?v=20261009-pacing2';
-import {learnInterests} from './balance.js?v=20261009-pacing2';
-import {selectOpening,planOpening,openingTiming} from './openings.js?v=20261009-meeting1';
-import {preparedReply} from './routing.js?v=20261009-pacing2';
+import {chooseFiller,startFiller,longFiller,retainAside,idleAside,createIdleSequence} from './filler.js?v=20261009-readmenu1';
+import {learnInterests} from './balance.js?v=20261009-readmenu1';
+import {selectOpening,planOpening,openingTiming} from './openings.js?v=20261009-readmenu1';
+import {preparedReply} from './routing.js?v=20261009-readmenu1';
 import {cleanConversation,noteConversationReply} from './conversation.js?v=20261008-humor1';
 import {offlineFallback} from './fallback.js?v=20261008-finish1';
 import {portraitColors} from './portrait-palette.js?v=20261008-portrait3';
 import {planContinuation,createContinuation} from './continuation.js?v=20261009-clause1';
-import {recognizeName,namedGesture,NAME_REACTION_MS} from './names.js?v=20261009-pacing2';
+import {recognizeName,namedGesture,NAME_REACTION_MS} from './names.js?v=20261009-readmenu1';
 const continuation=createContinuation();
 let continuationVersion=0,continuing=false,hadContinuation=false,awaitingOpening=[];
 function stopContinuation(clear=false){continuationVersion++;if(clear){continuation.clear();hadContinuation=false;awaitingOpening=[];}if(continuing){live='';draw();}}
@@ -153,10 +154,14 @@ $('talk').addEventListener('submit',async e=>{
  let greetingPlan=null;
  if(prepared?.topic==='greeting'){greetingPlan=openingPlan(true);prepared.text=greetingPlan.first;result.state.openingSeen=state.openingSeen;}
  if(gap)result.state.gap=gap.memory;
- if(prepared){result.text=['fandom-decline','profile','chiikawa-name','everyday','conversation-move','context-name','greeting','island-water','gap','repertoire','culture'].includes(prepared.topic)?prepared.text:fandomReply||prepared.text;result.kind='curated';result.state.history.at(-1).text=result.text;if(/[！!]/.test(result.text))result.mood='excited';}
+ if(prepared){result.text=['deflection','fandom-decline','profile','chiikawa-name','everyday','conversation-move','context-name','greeting','island-water','gap','repertoire','culture'].includes(prepared.topic)?prepared.text:fandomReply||prepared.text;result.kind='curated';result.state.history.at(-1).text=result.text;if(/[！!]/.test(result.text))result.mood='excited';}
  if(isRestart){greetingPlan=openingPlan(true);result.text=greetingPlan.first;result.state.openingSeen=state.openingSeen;result.state.history.at(-1).text=result.text;}
  const ruleOnly=isRestart||['curated','bye','asleep','name','memory','arithmetic'].includes(result.kind);
  let heard=['bye','asleep','name','memory','arithmetic','comfort','contradiction'].includes(result.kind)||isRestart||prepared?.topic==='profile'?null:recognizeName(raw,{reading:readableText(raw,tokenizer),state:before});
+ const self=['bye','asleep','comfort','contradiction'].includes(result.kind)||isRestart||prepared?.topic==='deflection'?null:selfReaction(raw,before);
+ if(self||prepared?.topic==='deflection')heard=null;
+ if(prepared?.gesture){await wait(NAME_REACTION_MS);recordAside(prepared.gesture,result.state);draw();}
+ if(self){await wait(NAME_REACTION_MS);recordAside(self.gesture,result.state);draw();}
  if(heard?.work==='chiikawa'&&!heard.decline&&unwantedFanRedirect('ちいかわ',raw,before))heard=null;
  if(heard?.soft&&recentFillers.includes(namedGesture(heard)))heard=null;
  if(heard){await wait(NAME_REACTION_MS);const line=namedGesture(heard);recordAside(line,result.state);recentFillers=[...recentFillers,line].slice(-6);draw();}
@@ -183,6 +188,7 @@ $('talk').addEventListener('submit',async e=>{
   result.state.repertoire=rememberReply(before,result.text,replyId,Boolean(prepared||polished.replaced));
   if(polished.replaced){if(usedModel)session.chatHealth={...session.chatHealth,replaced:(session.chatHealth?.replaced||0)+1};usedModel=false;locallyReplaced=true;}
  }
+ if(self?.thanks&&!/うれし|嬉し/.test(result.text)){result.text+=` ${self.thanks}`;result.state.history.at(-1).text=result.text;}
  const paced=greetingPlan||(['bye','asleep','name','memory','arithmetic','contradiction'].includes(result.kind)||isRestart?{first:result.text,later:[]}:planContinuation(result.text,raw,before,{display:s=>readableText(s,tokenizer),tokenizer}));
  result.text=paced.first;result.state.history.at(-1).text=result.text;
  session.dialogueUse={ai:(session.dialogueUse?.ai||0)+(usedModel?1:0),bank:(session.dialogueUse?.bank||0)+(!usedModel&&(prepared||locallyReplaced)?1:0)};

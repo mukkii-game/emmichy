@@ -51,10 +51,15 @@ function topicRelevant(raw,selection){
  const t=fold(raw);
  return selection.cards.some(c=>c.tags.some(tag=>fold(tag).length>=3&&t.includes(fold(tag))))||works[selection.work]?.some(w=>t.includes(fold(w)));
 }
+function familiarityQuestion(raw,work){
+ const t=fold(raw),check=/^(?:ッテ|ハ|ヲ|ノコト)?(?:知ッテル|シッテル|知ッテイル|シッテイル|知ラナイ|シラナイ)(?:ノカイ|ノカ|ノ|カイ|カ|ヨネ|ヨ)?$/;
+ return (works[work]||[]).some(name=>{const key=fold(name),at=t.indexOf(key);return at>=0&&check.test(t.slice(0,at)+t.slice(at+key.length));});
+}
 export function chooseRepertoire(raw,state={},now=new Date()){
- const intent=dialogueIntent(raw),mem=cleanRepertoire(state.repertoire);
+ let intent=dialogueIntent(raw);const mem=cleanRepertoire(state.repertoire);
  // Factual questions must keep the best matching fact even if that card was used before.
  let selection=selectKnowledge(raw,intent==='question'?{...state,knowledge:{...state.knowledge,recent:[]}}:state,now);
+ if(selection.cards.length&&familiarityQuestion(raw,selection.work))intent='familiarity';
  const plain=fold(raw),generic=new Set(['映画','名前','能力','漫画','マンガ','アニメ','ご飯','家','住ム','資格','心配','不安','好き','音楽','強イ','父','本','性質','話','次','条件','六','水']);
  // A named facet such as water flow or a camera stays on that facet, even after use.
  const facets=cards.filter(c=>c.work===selection.work&&c.tags.slice(1).some(tag=>!generic.has(fold(tag))&&(fold(tag).length>=2||tag==='4')&&plain.includes(fold(tag))));
@@ -62,9 +67,9 @@ export function chooseRepertoire(raw,state={},now=new Date()){
  if(['sensitive','teaching'].includes(intent)||!selection.cards.length)return {intent,selection,candidate:null,scripted:false};
  if(intent==='question')selection={...selection,cards:selection.cards.filter(c=>coveredQuestion(raw,c))};
  if(!selection.cards.length||(!topicRelevant(raw,selection)&&intent!=='more'))return {intent,selection,candidate:null,scripted:false};
- const mode=intent==='question'?'fact':'react',recentHistory=Array.isArray(state.history)?state.history.filter(h=>h.role==='enny').slice(-6).map(h=>h.text):[];
+ const mode=['question','familiarity'].includes(intent)?'fact':'react',recentHistory=Array.isArray(state.history)?state.history.filter(h=>h.role==='enny').slice(-6).map(h=>h.text):[];
  const families=new Set(mem.ids.map(id=>byId.get(id)?.family));
- let candidates=selection.cards.flatMap((c,rank)=>replies.filter(r=>r.cardId===c.id&&r.mode===mode).map(r=>({...r,rank})))
+ let candidates=selection.cards.flatMap((c,rank)=>replies.filter(r=>r.cardId===c.id&&r.mode===mode).map(r=>({...r,rank,text:intent==='familiarity'?`知ってるよ！ ${r.text}`:r.text})))
   .filter(r=>r.text.length<=180&&!mem.ids.includes(r.id)&&!families.has(r.family)&&!mem.prints.includes(fingerprint(r.text))&&recentHistory.every(t=>similarity(t,r.text)<.72));
  // An exhausted topic is handed to AI; offline does not pretend a repeated line is new.
  const turn=Number(state.turn)||0;
@@ -72,8 +77,9 @@ export function chooseRepertoire(raw,state={},now=new Date()){
  candidates.sort((a,b)=>score(a)-score(b));
  // Repetition avoidance is for reactions, not truth. Repeated covered factual
  // questions keep the same accurate answer instead of spending an AI request.
- const candidate=candidates[0]||(intent==='question'?replies.find(r=>r.mode==='fact'&&selection.cards.some(c=>c.id===r.cardId)):null)||null;
- const scripted=Boolean(candidate&&(intent==='question'||intent==='more'||(intent==='react'&&turn-mem.lastTurn>=2&&turn%3!==1)));
+ const exhausted=['question','familiarity'].includes(intent)?replies.find(r=>r.mode==='fact'&&selection.cards.some(c=>c.id===r.cardId)):null;
+ const candidate=candidates[0]||(exhausted&&intent==='familiarity'?{...exhausted,text:`知ってるよ！ ${exhausted.text}`}:exhausted)||null;
+ const scripted=Boolean(candidate&&(intent==='familiarity'||intent==='question'||intent==='more'||(intent==='react'&&turn-mem.lastTurn>=2&&turn%3!==1)));
  return {intent,selection,candidate,scripted};
 }
 export function polishReply(text,raw,state={},choice=null){

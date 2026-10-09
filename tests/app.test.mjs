@@ -104,6 +104,12 @@ test('screen remains playable after dictionary failure and IME composition does 
   assert.equal(heard[nameIndex+1].text,'ヒソカ！','name is heard before answer animation');
   assert.ok(delays.includes(750),'name reaction gives the player a short human pause');
   assert.equal(heard[nameIndex].text,'ヒソカ','original player input is retained');
+  entry.value='シラナイ ノカイ ジョジョ ?';await talk.emit('submit');
+  let jojo=JSON.parse(storage.get('enny-memory-v1')).history;const jojoAt=jojo.findLastIndex(h=>h.role==='user');
+  assert.equal(jojo[jojoAt+1].text,'ジョジョ！');assert.match(jojo[jojoAt+2].text,/知ってるよ/);
+  time+=4000;await idleTick();time+=5000;await idleTick();
+  jojo=JSON.parse(storage.get('enny-memory-v1')).history.slice(jojoAt+1).map(h=>h.text).join(' ');
+  assert.match(jojo,/スタンド/);assert.doesNotMatch(jojo,/よく知らない|わかったふり/);
   entry.value='チイカワ イガイ ノ ハナシ ヲ シヨウ カ';await talk.emit('submit');
   const declined=JSON.parse(storage.get('enny-memory-v1')).history;
   const declineAt=declined.findLastIndex(h=>h.role==='user');

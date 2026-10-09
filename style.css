@@ -13,6 +13,7 @@ label { font-size: 13px; white-space: nowrap; color: #d0d7ca; }
 label span { margin-left: 8px; color: #72c2a0; }
 input { flex: 1; width: 0; background: transparent; border: none; outline: none; font: 17px/1.55 'MS Gothic', 'Yu Gothic', monospace; color: #eff8f0; caret-color: #7df0bc; }
 input::placeholder { color: #7f8b7d; font-size: 14px; }
+#remaining-time { flex:none; color:#879184; font:14px/1.4 monospace; font-variant-numeric:tabular-nums; white-space:nowrap; }
 button { border: 1px solid #586052; background: #101310; color: #d4dccd; font: 12px/1.4 inherit; padding: 8px 12px; cursor: pointer; }
 button:hover, button:focus-visible { background: #2b3428; color: #fff; border-color: #8da57f; }
 button:disabled { opacity: .4; cursor: wait; }

@@ -20,7 +20,7 @@
   <meta name="twitter:title" content="えみちぃ / Emmichy — レトロ会話ゲーム">
   <meta name="twitter:description" content="ちいかわと日本のオタク文化が大好きなえみちぃと、約5分のおしゃべり。">
   <meta name="twitter:image" content="https://mukkii-game.github.io/emmichy/assets/emmichy-nordic-muted-bust-20261008.png">
-  <link rel="stylesheet" href="style.css?v=20261008-layout1">
+  <link rel="stylesheet" href="style.css?v=20261009-talk1">
 </head>
 <body>
   <main>
@@ -34,6 +34,7 @@
     <form id="talk" autocomplete="off">
       <label for="entry">漢字・ひらがな OK <span>›</span></label>
       <input id="entry" maxlength="120" placeholder="ねえ、ちいかわって知ってる？" aria-label="Emmichyに話しかける" aria-describedby="input-hint" spellcheck="false">
+      <span id="remaining-time" role="timer" aria-label="残り時間" aria-live="off">5:00</span>
       <button id="send" type="submit">RETURN ↵</button>
     </form>
     </div>
@@ -57,7 +58,7 @@
     <footer><span>THE ALMOST CLEVER GAME</span><span>EMMICHY / PILOT</span></footer>
   </main>
   <script src="assets/vendor/kuromoji.js"></script>
-  <script type="module" src="src/app.js?v=20261009-readmenu1"></script>
+  <script type="module" src="src/app.js?v=20261009-talk1"></script>
 </body>
 </html>
 

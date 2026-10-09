@@ -1,6 +1,6 @@
 // Curated short factual notes, not scraped articles or dialogue reproductions.
 // Canonical copy: emmichy/src/fandom.js; sync unchanged to game-llm/games/emmichy-fandom.js.
-import {recognizeName} from './names.js?v=20261009-readmenu1';
+import {recognizeName} from './names.js?v=20261009-talk1';
 export const checkedAt='2026-10-06';
 const wiki=title=>`https://en.wikipedia.org/wiki/${encodeURIComponent(title)}`;
 export const sources={

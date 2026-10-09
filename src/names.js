@@ -1,14 +1,17 @@
 import {nameData} from './name-data.js?v=20261009-profile1';
+import {placeNames} from './places.js?v=20261009-talk1';
 import {gameNames} from './game-names.js?v=20261009-profile1';
 export const foldName=s=>String(s||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).toLowerCase().replace(/[\s・×＝=\-:：'’"「」]/g,'');
 export const NAME_REACTION_MS=750;
 const trie=new Map(),exact=[];
 function insert(alias,row){const key=foldName(alias);if(key.length<2)return;let node=trie;for(const ch of key){if(!node.has(ch))node.set(ch,new Map());node=node.get(ch);}if(!node.has(''))node.set('',[]);node.get('').push({row,alias,key});}
 for(const row of nameData)for(const alias of row.aliases){insert(alias,row);exact.push({row,alias,key:foldName(alias)});}
+for(const row of placeNames)for(const alias of row.aliases)insert(alias,row);
 for(const name of gameNames)insert(name,{id:`steam:${name}`,name,reading:name,work:'games',aliases:[name],contextOnly:false});
 const distinct=matches=>[...new Map(matches.map(m=>[m.row.id,m])).values()];
 function scan(value){const input=foldName(value),found=[];for(let i=0;i<input.length;i++){let node=trie;for(let j=i;j<input.length;j++){node=node.get(input[j]);if(!node)break;for(const m of node.get('')||[]){
  if(/^[a-z0-9]+$/.test(m.key)&&m.key.length<=5&&!new RegExp(`\\b${m.key}\\b`,'i').test(String(value)))continue;
+ if(m.row.work==='japan'&&m.key.length<4&&!String(value).includes(m.row.name)&&input!==m.key&&!/旅行|観光|温泉|空港|地名|県|市/.test(value))continue;
  if(/^[ァ-ヶー]{2,3}$/.test(m.alias)&&/\.html$/.test(m.row.source)&&!String(value).normalize('NFKC').includes(m.alias)&&foldName(value)!==m.key)continue;
  found.push({...m,length:j-i+1});
  }}}return found;}

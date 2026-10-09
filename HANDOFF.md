@@ -559,3 +559,14 @@ src/context.jsに公式TMS確認の左門豊作補助資料を追加し、巨人
 - release20261009-readmenu1、公開HTMLと変更対象・親module計15ファイルが候補と一致。URL https://mukkii-game.github.io/emmichy/ 。BGMとジョジョの修正も前のPR #19で反映済み。
 - 中継候補2e893c8e21a6d9ded327f2a64be689aa9e6539c0、game-llm PR #9 main統合3e7595ac7b0caf1c12e93fa62c8caf5ce19061ae、Deploy run37868675368 success、Worker version7a9561bc-831e-4ac9-b751-69828cf3548f。
 - ゲーム133件・中継33件成功、ローカル実画面の成功と途中の失敗はPLAYTESTへ保存。追加実LLM通信なし、自然さと音量の主観評価は人間試遊で確認する。Emmichy本体mainは6343213bc8f904a43c02319fc9b421ce2dd4dc0f、自動Relayなし。次もこのWorkで試遊報告に対応。
+
+
+## 2026-10-09 言葉・地名・AI一度・ちいかわの2分・残り時間
+
+- codex/small-kana-20261009でPR #20公開済みの続き。小さい文字の接続、ホッコリ／エミチィ ト、褒め言葉への先行反応と喜び、JNTO公式112地名、最初の通常返答のAI優先を実装。
+- ちいかわなし約120秒の自発話と、RETURN左の秒単位5分タイマー。入力／IME／忙しい時に自発話を割り込ませず、拒否と深刻な相談を保護。保存は不在時間を除外したプレイ時間で扱う。記憶初期化でもタイマーを起動する。
+- 小さい文字・人物名と助詞・秋葉原の別名・他キャラの評価を本人の褒め言葉にしない・AI最初の成功と失敗後の再試行・リセットを自動確認。ゲーム140件・中継34件成功。模擬通信のみ、実LLM通信の追加なし。
+- game-llm codex/emmichy-place-llm-20261009へ共有names/profile/placesと公開プロンプトを同期。scripts/sync-dialogue.mjsに--places-profileを追加しフロント専用モジュールの不適切な一括同期を避ける。ローカルLLMにも本人への称賛と地名の同じ方向を共有。
+- 次: 実画面の読み修正・地名を確認後、既存の公開追随許可でpilot-audio-readable-retroと中継mainへ統合し配信を検証。Emmichy本体mainは対象外。release20261009-talk1、自動Relayなし。このWorkで続ける。
+
+- 実画面の称賛と本人名・ホッコリは成功。最初の秋葉原試遊では名前の二重反応があり、本文から冒頭の呼びかけを除去。PLAYTESTに失敗と修正を残す。最終140件・34件成功。

@@ -4,6 +4,10 @@ import {cleanConversation,endingCallback} from './conversation.js?v=20261008-hum
 export const SESSION_MS=5*60*1000;
 export const MIN_SESSION_TURNS=10;
 export const SESSION_TURNS=18;
+export function remainingTime(session,now=Date.now()){
+ const seconds=session?.finished?0:Math.ceil(Math.max(0,SESSION_MS-(session?Math.max(0,now-session.startedAt):0))/1000);
+ return `${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`;
+}
 export function checkpointSession(session,now=Date.now()) {
  return session?{...session,lastSavedAt:now}:null;
 }

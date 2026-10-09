@@ -1,4 +1,4 @@
-import {works} from './fandom.js?v=20261009-readmenu1';
+import {works} from './fandom.js?v=20261009-talk1';
 const fold=s=>String(s).normalize('NFKC').toLowerCase().replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');
 export function cleanInterests(value){
  return Object.fromEntries(Object.keys(works).filter(k=>Number.isFinite(value?.[k])).map(k=>[k,Math.max(-10,Math.min(10,Math.trunc(value[k])))]));
@@ -15,7 +15,12 @@ export function learnInterests(raw,value){
  return next;
 }
 export function balanceRoute(prepared,choice,session,enabled){
- // Suitability wins over an AI/bank quota. Do not spend a request solely to
- // manufacture a hybrid ratio or substitute a non-scripted candidate by count.
+ // Keep the suitable authored fallback. The first successful model reply is
+ // prioritized separately; later turns still have no fixed AI/bank ratio.
  return prepared;
+}
+export function needsFirstModelReply(session,{enabled=false,kind='',topic='',restart=false}={}){
+ return enabled&&!restart&&!session?.finished&&!(session?.dialogueUse?.ai>0)
+  &&!['bye','asleep','name','memory','arithmetic'].includes(kind)
+  &&!['deflection','fandom-decline','greeting'].includes(topic);
 }

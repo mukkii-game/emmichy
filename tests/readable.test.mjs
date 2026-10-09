@@ -76,3 +76,23 @@ test('small tsu never starts a separated interior word, including pre-spaced kan
  }
  assert.equal(readableText('ソウ ッテ イッタ',null),'ソウッテ イッタ');
 });
+
+test('small kana stay attached before and after reading conversion without merging separate words',()=>{
+ for(const input of ['しゃべりかたがへんよ','シ ャベリカタガヘンヨ','シ ャベリカタ ガ ヘンヨ','喋り方が変よ']){
+  assert.equal(readableText(input,tokenizer),'シャベリカタ ガ ヘンヨ');
+ }
+ for(const [input,want] of [['シ ャベル ノ','シャベル ノ'],['キ ュウ ケイ','キュウ ケイ'],['シ ョウガ スキ','ショウガ スキ'],['テ ィー ヲ ノム','ティー ヲ ノム'],['フ ァン ダヨ','ファン ダヨ'],['こ ゃく','コャク'],['ｼ ｬﾍﾞﾘｶﾀ ｶﾞ ﾍﾝﾖ','シャベリカタ ガ ヘンヨ']]){
+  assert.equal(readableText(input,tokenizer),want);assert.equal(readableText(input,null),want);
+ }
+ assert.equal(readableText('キャラ ガ スキ',tokenizer),'キャラ ガ スキ');
+ assert.equal(readableText('ダレカ イル\nユックリ シ ャベル',null),'ダレカ イル\nユックリ シャベル');
+});
+test('reported hokkori and spaced self-name preserve words and the following particle',()=>{
+ assert.equal(readableText('この三つ編み',tokenizer),'コノ ミツアミ');
+ for(const raw of ['ほっこり','ホッ コリ','ホッコリ'])assert.equal(readableText(raw,tokenizer),'ホッコリ');
+ for(const raw of ['えみちいと話していると、楽しいよ','エ ミチ イト ハナシテイル ト、 タノシイヨ']){
+  assert.match(readableText(raw,tokenizer),/^エミチィ ト /);
+  assert.doesNotMatch(readableText(raw,tokenizer),/エ ミチ|チ イト/);
+ }
+ assert.equal(readableText('秋葉原と銀山温泉',tokenizer),'アキハバラ ト ギンザンオンセン');
+});

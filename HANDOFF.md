@@ -529,3 +529,8 @@ src/context.jsに公式TMS確認の左門豊作補助資料を追加し、巨人
 - ゲーム122件・中継29件成功。起動待ち中OFF、後の入力でOFF維持、タイマー1個、名前反応→知ってる→スタンドの事実と感想、詳細質問のAI経路を確認。実LLM品質比較と体感音量の人間評価は未検証。
 - 公開追随の既存許可でpilotと中継mainへ反映する。Emmichy本体mainは対象外。release20261009-audiojojo1、自動Relayなし。
 - 実画面 localhost:1998/?nollm=1でも報告文から知ってる→スタンド→感想まで続いた。音の初期ON・OFF維持・再ONを確認、docs/playtest-20261009-audiojojo-local.jpg。体感音量は人間試遊待ち。
+### 公開確認
+
+- 候補e5a567a4883c3f4094713552b271929a413a502d、PR #19 pilot統合baa8719803dbc4760bed4c2bfd417916b428222f、Pages run37867228753 success。release20261009-audiojojo1。
+- 中継PR #8 main統合cab3ec64e637ecc72ee241d75e8f147643cd6a4f、Deploy run37867222674 success、Worker version369b7945-9f68-41c9-bc0b-1789071811cd。Emmichy本体mainは6343213bc8f904a43c02319fc9b421ce2dd4dc0f。
+- 次の試遊報告: 台詞がダイシになる／「はなして」を助詞「は」と誤分割／島二郎の料理と島フルーツパフェの混同。調査継続。

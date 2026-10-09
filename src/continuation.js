@@ -27,13 +27,13 @@ export function planContinuation(text,input='',state={}){
  return {first,later:later.slice(0,3)};
 }
 export function createContinuation(){
- let queue=[],due=Infinity,typingAt=-Infinity;
+ let queue=[],due=Infinity,typingAt=-Infinity,nextDelay=5000;
  return {
-  start(lines,time){queue=[...lines];due=time+4000;},
-  clear(){queue=[];due=Infinity;},
+  start(lines,time,{firstDelay=4000,nextDelay:between=5000}={}){queue=[...lines];nextDelay=between;due=time+firstDelay;},
+  clear(){queue=[];due=Infinity;typingAt=-Infinity;},
   typed(time){typingAt=time;due=Math.max(due,time+6000);},
   get pending(){return queue.length>0;},
   peek(time,{composing=false}={}){return !composing&&time>=due&&time-typingAt>=6000?queue[0]||null:null;},
-  spoken(time){queue.shift();due=time+5000;}
+  spoken(time){queue.shift();due=time+nextDelay;}
  };
 }

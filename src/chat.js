@@ -1,7 +1,7 @@
 // Reject the observed nonfan failure without another provider request.
 import {rejectedJoke} from './humor.js?v=20261008-humor1';
 const fanNames=/ちいかわ|チイカワ|chiikawa|ハチワレ|ジョジョ|バキ|刃牙/i;
-const decline=/(?:漫画|マンガ|アニメ|ちいかわ|チイカワ).{0,16}(?:詳しくない|興味ない|興味がない|苦手|以外|やめ|じゃなく)|(?:別|他|ほか)の話/;
+const decline=/(?:漫画|マンガ|アニメ|ちいかわ|チイカワ).{0,16}(?:詳しくない|興味ない|興味がない|苦手|以外|イガイ|いがい|やめ|ヤメ|じゃなく|ジャナク)|(?:別|他|ほか)の話/;
 export function unwantedFanRedirect(text,input,state={}){
  const raw=String(input).normalize('NFKC');
  if(fanNames.test(raw)&&!decline.test(raw))return false;

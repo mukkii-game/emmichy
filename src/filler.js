@@ -1,5 +1,5 @@
 import {waitingReply} from './waiting-db.js?v=20261008-listen3';
-import {recognizeName,namedGesture,namedFollowup} from './names.js?v=20261009-profile1';
+import {recognizeName,namedGesture,namedFollowup} from './names.js?v=20261009-pacing2';
 // Listening gestures are dialogue, retained alongside the eventual answer.
 export function retainAside(history,line,{pendingReply=false}={}){
  const next=[...history];

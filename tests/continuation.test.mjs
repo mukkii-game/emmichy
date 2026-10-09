@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {planContinuation,createContinuation} from '../src/continuation.js';
+import {openingTiming} from '../src/openings.js';
 test('substance precedes delayed invitation and grounded topic development',()=>{
  const p=planContinuation('チイカワ ハ チイサクテ カワイイ コタチ ノ オハナシダヨ。 シマジロウ ノ スイリュウ、アツイネ! モット キキタイ コト アル?','ちいかわって何？');
  assert.doesNotMatch(p.first,/キキタイ/);assert.match(p.later[0],/スイリュウ/);assert.match(p.later.at(-1),/聞きたいこと/);
@@ -15,6 +16,18 @@ test('substance precedes delayed invitation and grounded topic development',()=>
 表紙の猫に目が止まっちゃった。
 まだ中は読んでないよ。`,'本の話');
  assert.deepEqual(custom.later,['表紙の猫に目が止まっちゃった。','まだ中は読んでないよ。']);
+});
+test('opening pauses for 1.5 seconds per beat and typing or a new turn interrupts it',()=>{
+ const q=createContinuation();q.start(['今日も話そう！','念を考えてたの。条件がお菓子に甘い！','ちいかわの話も。'],0,openingTiming);
+ assert.equal(q.peek(1499),null);assert.equal(q.peek(1500),'今日も話そう！');
+ q.spoken(1800);assert.equal(q.peek(3299),null);assert.match(q.peek(3300),/念/);
+ q.typed(3300);assert.equal(q.peek(9299),null);assert.equal(q.peek(9300,{composing:true}),null);
+ assert.match(q.peek(9300),/念/);q.spoken(9300);
+ assert.equal(q.peek(10799),null);assert.match(q.peek(10800),/ちいかわ/);
+ q.clear();assert.equal(q.peek(99999),null);
+ q.start(['新しい挨拶。'],11000,openingTiming);assert.equal(q.peek(12500),'新しい挨拶。');
+ // A subsequent ordinary answer restores the existing slower topic development.
+ q.start(['普通の続き。'],20000);assert.equal(q.peek(23999),null);assert.equal(q.peek(24000),'普通の続き。');
 });
 test('followups wait between beats, pause during IME, resume after typing stops, and expire on new topic',()=>{
  const q=createContinuation();q.start(['同じ話の続き。','もう一言。'],0);

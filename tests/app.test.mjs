@@ -26,7 +26,9 @@ test('screen remains playable after dictionary failure and IME composition does 
   globalThis.setInterval=(fn,ms)=>{intervals.push({fn,ms});return 0;};
   // Advance only the app's typing delays, without waiting seconds per reply.
   let expectPersisted=null,persistedBeforeAnimation=false,typingFrames=0,lastTyped='',interruptNextFrame=false;
-  globalThis.setTimeout=fn=>{
+  const delays=[];
+  globalThis.setTimeout=(fn,ms)=>{
+   delays.push(ms);
    if(expectPersisted){const memory=JSON.parse(storage.get('enny-memory-v1')||'null');if(memory?.history?.at(-1)?.text.includes(expectPersisted))persistedBeforeAnimation=true;}
    const pending=elements.get('live-reply'),body=elements.get('live-body'),log=elements.get('conversation');
    if(body?.textContent){typingFrames++;lastTyped=body.textContent;assert.equal(log.children.at(-1),pending,'typing stays inside the history after the preceding message');assert.equal(pending.hidden,false);}
@@ -37,7 +39,14 @@ test('screen remains playable after dictionary failure and IME composition does 
   assert.ok(displayed.every(text=>!String(text).includes('ジュンビ')));
   const startedAt=JSON.parse(storage.get('emmichy-session')).startedAt;
   const entry=elements.get('entry'),send=elements.get('send'),talk=elements.get('talk');
-  assert.match(JSON.parse(storage.get('enny-memory-v1')).history.find(h=>h.role==='enny').text,/ちいかわ|チイカワ|chiikawa|ハチワレ|シーサー|モモンガ/i);
+  const firstOpening=JSON.parse(storage.get('enny-memory-v1')).history.find(h=>h.role==='enny').text;
+  assert.ok(firstOpening.length<30,'opening starts with a short greeting only');
+  const idleTick=intervals.find(x=>x.ms===250).fn;
+  let openingCount=JSON.parse(storage.get('enny-memory-v1')).history.length;
+  time+=1499;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,openingCount);
+  time++;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,openingCount+1);
+  for(let i=0;i<3;i++){time+=1500;await idleTick();}
+  assert.match(JSON.parse(storage.get('enny-memory-v1')).history.filter(h=>h.role==='enny').map(h=>h.text).join(' '),/ちいかわ|チイカワ|chiikawa|ハチワレ|シーサー|モモンガ/i);
   assert.equal(send.disabled,false);assert.match(elements.get('status').textContent,/辞書/);
   entry.value='本を買った';await entry.emit('compositionstart');await talk.emit('submit');
   assert.equal(entry.value,'本を買った');
@@ -62,7 +71,6 @@ test('screen remains playable after dictionary failure and IME composition does 
   assert.equal(persistedBeforeAnimation,true);
   const rainy=JSON.parse(storage.get('enny-memory-v1'));
   assert.match(rainy.history.at(-1).text,/雨/);assert.doesNotMatch(rainy.history.at(-1).text,/クロイ ソラ|電気/);
-  const idleTick=intervals.find(x=>x.ms===1000).fn;
   // One accepted reply unfolds with no extra user turn or request. Unspoken
   // continuations are not already present in saved history.
   let pacedCount=JSON.parse(storage.get('enny-memory-v1')).history.length;
@@ -77,12 +85,20 @@ test('screen remains playable after dictionary failure and IME composition does 
   assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,pacedCount+1);
   assert.equal(JSON.parse(storage.get('emmichy-session')).turns,turnCount);
   assert.equal(elements.get('live-reply').hidden,true);
+  const beforeName=displayed.length;
   entry.value='ヒソカ';const pendingName=talk.emit('submit');
-  const heard=JSON.parse(storage.get('enny-memory-v1')).history;
+  assert.ok(!displayed.slice(beforeName).includes('ヒソカ！'),'name is not echoed at the instant of submission');
   await pendingName;
+  const heard=JSON.parse(storage.get('enny-memory-v1')).history;
   const nameIndex=heard.findLastIndex(h=>h.role==='user');
   assert.equal(heard[nameIndex+1].text,'ヒソカ！','name is heard before answer animation');
+  assert.ok(delays.includes(750),'name reaction gives the player a short human pause');
   assert.equal(heard[nameIndex].text,'ヒソカ','original player input is retained');
+  entry.value='チイカワ イガイ ノ ハナシ ヲ シヨウ カ';await talk.emit('submit');
+  const declined=JSON.parse(storage.get('enny-memory-v1')).history;
+  const declineAt=declined.findLastIndex(h=>h.role==='user');
+  assert.equal(declined[declineAt+1].text,'チイカワ、ね。');
+  assert.equal(declined[declineAt+2].text,'うん、別の話にしよう。');
   entry.value='2+2';await talk.emit('submit');
   pacedCount=JSON.parse(storage.get('enny-memory-v1')).history.length;
   time+=6000;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,pacedCount,'new turn cancels old continuation');

@@ -42,3 +42,10 @@ test('denied, unfamiliar and analytical inputs do not inherit the previous fando
   assert.equal(preparedReply(raw,state,{turns:5},{modelEnabled:true,kind,repertoire,culture:cultureReply(raw,state,repertoire.intent),gap:selectGap(raw,state)}),null,raw);
  }
 });
+test('explicit Chiikawa topic refusal hears the word but accepts the requested topic change locally',()=>{
+ for(const raw of ['ちいかわ以外の話をしようか','チイカワ イガイ ノ ハナシ ヲ シヨウ カ']){
+  const r=preparedReply(raw,{knowledge:{work:'chiikawa'}},{turns:3},{modelEnabled:true});
+  assert.equal(r.topic,'fandom-decline');assert.equal(r.text,'うん、別の話にしよう。');
+ }
+ assert.notEqual(preparedReply('ちいかわの話より病気の相談をしたい',{}, {}, {})?.topic,'fandom-decline');
+});

@@ -1,5 +1,6 @@
 // Reading conversion stays on the device; the original input goes to the AI.
 import {nameData} from './name-data.js?v=20261009-profile1';
+import {placeNames} from './places.js?v=20261009-talk1';
 import {spokenAliases} from './chiikawa-db.js?v=20261009-profile1';
 const katakana = value => String(value).normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96));
 const names=new Map([['ちいかわ','チイカワ'],['chiikawa','Chiikawa'],['えみちぃ','エミチィ'],['エミチィ','エミチィ'],['ハチワレ','ハチワレ'],['ドラクエ','ドラクエ']]);
@@ -8,13 +9,22 @@ for(const [name,reading] of [['左門豊作','サモンホウサク'],['左門',
 for(const spelling of ['箱根そば','箱根ソバ','はこねそば','ハコネソバ'])names.set(spelling,'ハコネソバ');
 for(const row of nameData)for(const alias of row.aliases){if(alias.length<=3&&/\.html$/.test(row.source))continue;const key=alias.toLowerCase().replace(/\s/g,'');if(!names.has(key))names.set(key,row.reading.replace(/\s/g,''));if(/[ァ-ヶ]/.test(alias)){const hira=alias.replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-96)).toLowerCase().replace(/\s/g,'');if(!names.has(hira))names.set(hira,row.reading.replace(/\s/g,''));}}
 for(const [alias,reading] of Object.entries(spokenAliases))names.set(alias,reading);
+// Long place names are safe reading overrides; short ordinary homophones use the tokenizer.
+for(const row of placeNames)for(const alias of row.aliases)if(alias.length>=4||alias===row.name&&/[一-龠]/.test(alias)){
+ if(!names.has(alias.toLowerCase()))names.set(alias.toLowerCase(),row.reading);
+}
 // Preferred everyday readings also protect ambiguous hiragana before tokenization.
 for(const spelling of ['えみちい','エミチイ','エミチィ','えみちぃ','emmichy'])names.set(spelling,'エミチィ');
-const preferredReadings=new Map([['台詞','セリフ'],['はなして','ハナシテ']]);
+const preferredReadings=new Map([
+ ['台詞','セリフ'],['はなして','ハナシテ'],['しゃべりかた','シャベリカタ'],['ほっこり','ホッコリ'],['ホッコリ','ホッコリ'],['三つ編み','ミツアミ'],
+ ['しゃべりかたがへんよ','シャベリカタ ガ ヘンヨ'],['シャベリカタガヘンヨ','シャベリカタ ガ ヘンヨ']
+]);
+const joinSmallKana=value=>String(value).normalize('NFKC').replace(/[ \t]+(?=[ァィゥェォッャュョヮヵヶぁぃぅぇぉっゃゅょゎゕゖ])/g,'').replace(/([ッっ])[ \t]+(?=[ァ-ヶぁ-ゖ])/g,'$1');
 const escape=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+const preferredPattern=new RegExp([...preferredReadings.keys()].sort((a,b)=>b.length-a.length).map(escape).join('|'),'g');
 const namePattern=new RegExp([...names.keys()].sort((a,b)=>b.length-a.length).map(n=>/^[a-z0-9]+$/i.test(n)?`(?<![a-z0-9])${escape(n)}(?![a-z0-9])`:[...n].map(escape).join('\\s*')).join('|'),'gi');
 export function readableText(value, tokenizer) {
-  return String(value).split('\n').map(line => line.replace(/台詞|はなして/g,word=>` ${preferredReadings.get(word)} `).replace(namePattern,name=>` ${names.get(name.toLowerCase().replace(/\s/g,''))||name} `).trim().split(/\s+/).filter(Boolean).map(part => {
+  return joinSmallKana(value).split('\n').map(line => line.replace(preferredPattern,word=>` ${preferredReadings.get(word)} `).replace(namePattern,name=>` ${names.get(name.toLowerCase().replace(/\s/g,''))||name} `).trim().split(/\s+/).filter(Boolean).map(part => {
     // AI/rule replies already contain word boundaries. Retokenizing kana
     // would split words incorrectly (e.g. エイガ -> エイ ガ).
     if (!tokenizer || !/[一-龠々ぁ-ゖ]/.test(part)) return katakana(part);
@@ -35,7 +45,7 @@ export function readableText(value, tokenizer) {
       previous=token;
     }
     return words.join(' ');
-  }).join(' ')).join('\n').replace(/ +(?=ッ)/g,'');
+  }).join(' ')).join('\n').replace(/ +(?=[ァィゥェォッャュョヮヵヶ])/g,'');
 }
 export function loadReadings() {
   return new Promise(resolve => {

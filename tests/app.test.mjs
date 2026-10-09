@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readableText} from '../src/readable.js';
 
 test('screen remains playable after dictionary failure and IME composition does not send',async()=>{
  const saved={},displayed=[];
@@ -26,9 +27,17 @@ test('screen remains playable after dictionary failure and IME composition does 
   globalThis.setInterval=(fn,ms)=>{intervals.push({fn,ms});return 0;};
   // Advance only the app's typing delays, without waiting seconds per reply.
   let expectPersisted=null,persistedBeforeAnimation=false,typingFrames=0,lastTyped='',interruptNextFrame=false;
-  const delays=[];
+  const delays=[],farewellPauses=[];
   globalThis.setTimeout=(fn,ms)=>{
    delays.push(ms);
+   if(ms===1500){
+    const full=JSON.parse(storage.get('enny-memory-v1')).history.at(-1).text,reason=full.split('\n\n')[0];
+    assert.ok(full.includes('\n\n'),'complete ending preserves its paragraph break in memory');
+    const log=elements.get('conversation'),last=log.children.filter(p=>p!==elements.get('live-reply')).at(-1);
+    assert.equal(last.children[1].textContent,readableText(reason,null),'only the reason is displayed before the farewell pause');
+    assert.equal(elements.get('send').disabled,true,'finished session cannot start another farewell during its pause');
+    farewellPauses.push(reason);
+   }
    if(expectPersisted){const memory=JSON.parse(storage.get('enny-memory-v1')||'null');if(memory?.history?.at(-1)?.text.includes(expectPersisted))persistedBeforeAnimation=true;}
    const pending=elements.get('live-reply'),body=elements.get('live-body'),log=elements.get('conversation');
    if(body?.textContent){typingFrames++;lastTyped=body.textContent;assert.equal(log.children.at(-1),pending,'typing stays inside the history after the preceding message');assert.equal(pending.hidden,false);}
@@ -116,10 +125,16 @@ test('screen remains playable after dictionary failure and IME composition does 
   time=startedAt+299999;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,waitingCount);
   time++;await idleTick();const ended=JSON.parse(storage.get('enny-memory-v1'));
   assert.equal(ended.ended,true);assert.match(ended.history.at(-1).text,/バイバイ/);
+  assert.equal(farewellPauses.length,1,'automatic ending pauses between reason and farewell');
   assert.notEqual(ended.history.at(-1).text,'ア、そろそろ帰るね。バイバイ！');
   assert.equal(entry.value,'途中の下書き');
   elements.get('restart-chat').onclick();assert.equal(talk.hidden,true);assert.equal(elements.get('start-choice').hidden,false);
   elements.get('new-chat').onclick();assert.equal(talk.hidden,false);assert.equal(elements.get('start-choice').hidden,true);
   assert.equal(JSON.parse(storage.get('enny-memory-v1')).ended,false);
+  entry.value='バイバイ';await talk.emit('submit');
+  assert.equal(farewellPauses.length,2,'manual goodbye uses the same two-beat ending');
+  const manual=JSON.parse(storage.get('enny-memory-v1'));assert.equal(manual.ended,true);
+  assert.equal((manual.history.at(-1).text.match(/バイバイ/g)||[]).length,1);
+  assert.equal(elements.get('send').disabled,false);
  }finally{Date.now=originalNow;for(const [key,value] of Object.entries(saved)){if(value===undefined)delete globalThis[key];else globalThis[key]=value;}}
 });

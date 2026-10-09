@@ -1,5 +1,5 @@
 import {everydayEnding} from './everyday.js?v=20261008-hybrid1';
-import {selectEnding} from './endings.js?v=20261008-farewell1';
+import {selectEnding} from './endings.js?v=20261009-farewell2';
 import {cleanConversation,endingCallback} from './conversation.js?v=20261008-humor1';
 export const SESSION_MS=5*60*1000;
 export const MIN_SESSION_TURNS=10;
@@ -26,6 +26,6 @@ export function shouldEnd(session,now=Date.now()){
 export function finishSession(state,session){
  // Idle farewell uses the same reason and grounded callback as other endings.
  const mode='fandom',ending=selectEnding(state),callback=endingCallback(state.conversation),daily=callback?'':everydayEnding(state);
- const text=`${ending.departure} ${callback?.text||daily||ending.farewell}バイバイ！`;
- return {state:{...state,conversation:callback?.memory||cleanConversation(state.conversation),endingSeen:ending.seen,ended:true,history:[...state.history,{role:'enny',text}].slice(-40)},session:{...session,finished:true},text,mode};
+ const parts=[ending.reason,`${ending.transition} ${callback?.text||daily||ending.farewell}バイバイ！`.trim()],text=parts.join('\n\n');
+ return {state:{...state,conversation:callback?.memory||cleanConversation(state.conversation),endingSeen:ending.seen,ended:true,history:[...state.history,{role:'enny',text}].slice(-40)},session:{...session,finished:true},text,parts,mode};
 }

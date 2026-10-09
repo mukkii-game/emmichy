@@ -1,7 +1,7 @@
 import {freshState,restoreState,respond,normalize} from './engine.js?v=20261009-pacing2';
 import {chiikawaReply,checkedAt} from './topics.js?v=20261006-mix1';
 import {text,kana} from './font.js?v=20261006-mix1';
-import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261008-humor1';
+import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation} from './session.js?v=20261009-farewell2';
 import {createAudioDirector} from './audio.js?v=20261008-ready1';
 import {CHAT_API_URL} from './config.js?v=20261006-mix1';
 import {advancePerformance} from './performance.js?v=20261008-humor1';
@@ -103,15 +103,22 @@ function draw(){
 }
 function save(){try{localStorage.setItem(key,JSON.stringify(state));saveAvailable=true;}catch{saveAvailable=false;}$('disk').textContent=saveAvailable?'● DISK SAVED':'● MEMORY ONLY';}
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
+async function speakParts(parts,speed=22){
+ for(let i=0;i<parts.length;i++){
+  if(i)await wait(1500);
+  live='';
+  for(const c of readableText(parts[i],tokenizer)){live+=c;draw();await wait(speed);}
+  add('enny',parts[i]);live='';draw();
+ }
+}
 async function endSession(reason='time'){
  if(!ready||ending||busy||session?.finished||state.ended||(!session&&reason!=='idle'))return;
  if(!session)session={startedAt:Date.now(),turns:0,finished:false};
  stopContinuation(true);ending=true;busy=true;$('send').disabled=true;$('reset').disabled=true;$('restart-chat').disabled=true;
  const end=finishSession(state,session,{reason});state=end.state;session=end.session;mood='soft';saveSession();save();
  audioDirector.se.ending();
- const endingDisplay=readableText(end.text,tokenizer);
- for(const c of endingDisplay){live+=c;draw();await wait(32);}
- add('enny',end.text);live='';save();busy=false;ending=false;$('send').disabled=false;$('reset').disabled=false;$('restart-chat').disabled=false;
+ await speakParts(end.parts,32);
+ save();busy=false;ending=false;$('send').disabled=false;$('reset').disabled=false;$('restart-chat').disabled=false;
  const p=document.createElement('p');p.textContent=`えみちぃ：${end.text}。おしまい。`;$('transcript').append(p);
  $('status').textContent='おしまい。「コンニチハ」で、もう一度。';draw();
 }
@@ -125,7 +132,8 @@ $('talk').addEventListener('submit',async e=>{
  busy=true;live='';$('send').disabled=true;$('reset').disabled=true;$('entry').value='';audioDirector.se.send();
  add('user',raw);$('disk').textContent='● DISK ACCESS';
  const before=advancePerformance(state,raw,session.turns);let result=chiikawaReply(normalize(raw),respond(raw,state),undefined,raw);
- if(result.kind==='bye'){const end=finishSession({...result.state,history:result.state.history.slice(0,-1)},session);result.text=end.text;result.state=end.state;session=end.session;}
+ let farewellParts=null;
+ if(result.kind==='bye'){const end=finishSession({...result.state,history:result.state.history.slice(0,-1)},session);result.text=end.text;result.state=end.state;session=end.session;farewellParts=end.parts;}
  before.interests=learnInterests(raw,state.interests);result.state.interests=before.interests;
  result.state.performance=before.performance;result.state.speechStyle=before.speechStyle;
  if(result.kind!=='bye')result.state.conversation=before.conversation;
@@ -182,9 +190,13 @@ $('talk').addEventListener('submit',async e=>{
  state=result.state;mood=result.mood;session.lastMood=mood;saveSession();save();
  await wait(Math.max(fillerGap,300+Math.min(raw.length*10,500)));
  if(mood==='excited')audioDirector.se.excited();else if(mood==='worried')audioDirector.se.worried();else audioDirector.se.reply();
- const replyDisplay=readableText(result.text,tokenizer);
- for(const c of replyDisplay){live+=c;draw();await wait(mood==='excited'?12:mood==='worried'&&c==='\n'?420:22);}
- add('enny',result.text);live='';noteActivity();save();busy=false;$('send').disabled=false;$('reset').disabled=false;
+ if(farewellParts)await speakParts(farewellParts);
+ else{
+  const replyDisplay=readableText(result.text,tokenizer);
+  for(const c of replyDisplay){live+=c;draw();await wait(mood==='excited'?12:mood==='worried'&&c==='\n'?420:22);}
+  add('enny',result.text);live='';
+ }
+ noteActivity();save();busy=false;$('send').disabled=false;$('reset').disabled=false;
  continuation.start(paced.later,Date.now(),greetingPlan?openingTiming:paced.timing);hadContinuation=paced.later.length>0;
  $('status').textContent=usedModel?`AI会話${modelProvider?' / '+({groq:'Groq',gemini:'Google Gemini','workers-ai':'Cloudflare Workers AI',local:'ローカルAI'}[modelProvider]||modelProvider):''} / ENTER で送信`:locallyReplaced?'用意した会話で調整 / ENTER で送信':prepared?'用意した会話 / ENTER で送信':modelEnabled&&!ruleOnly?'AI失敗→ルール会話 / ENTER で送信':'ルール会話 / ENTER で送信';
  const item=document.createElement('p');item.textContent=`あなた：${raw}。Emmichy：${result.text}`;$('transcript').append(item);if($('transcript').children.length>40)$('transcript').firstChild.remove();

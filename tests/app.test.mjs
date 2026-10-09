@@ -49,6 +49,7 @@ test('screen remains playable after dictionary failure and IME composition does 
   const startedAt=JSON.parse(storage.get('emmichy-session')).startedAt;
   const entry=elements.get('entry'),send=elements.get('send'),talk=elements.get('talk');
   const firstOpening=JSON.parse(storage.get('enny-memory-v1')).history.find(h=>h.role==='enny').text;
+  assert.equal(firstOpening,'はじめまして！','a first visitor gets an explicit first-meeting greeting');
   assert.ok(firstOpening.length<30,'opening starts with a short greeting only');
   const idleTick=intervals.find(x=>x.ms===250).fn;
   let openingCount=JSON.parse(storage.get('enny-memory-v1')).history.length;
@@ -128,9 +129,13 @@ test('screen remains playable after dictionary failure and IME composition does 
   assert.equal(farewellPauses.length,1,'automatic ending pauses between reason and farewell');
   assert.notEqual(ended.history.at(-1).text,'ア、そろそろ帰るね。バイバイ！');
   assert.equal(entry.value,'途中の下書き');
+  const savedEnding=JSON.parse(storage.get('enny-memory-v1')).history;
   elements.get('restart-chat').onclick();assert.equal(talk.hidden,true);assert.equal(elements.get('start-choice').hidden,false);
+  elements.get('continue').onclick();assert.deepEqual(JSON.parse(storage.get('enny-memory-v1')).history,savedEnding,'continue keeps existing dialogue without starting a first meeting');
+  elements.get('restart-chat').onclick();
   elements.get('new-chat').onclick();assert.equal(talk.hidden,false);assert.equal(elements.get('start-choice').hidden,true);
   assert.equal(JSON.parse(storage.get('enny-memory-v1')).ended,false);
+  assert.deepEqual(JSON.parse(storage.get('enny-memory-v1')).history,[{role:'enny',text:'はじめまして！'}],'start over replaces old dialogue with a first meeting');
   entry.value='バイバイ';await talk.emit('submit');
   assert.equal(farewellPauses.length,2,'manual goodbye uses the same two-beat ending');
   const manual=JSON.parse(storage.get('enny-memory-v1'));assert.equal(manual.ended,true);

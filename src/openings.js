@@ -41,7 +41,7 @@ export const openingTopics=`
 読めなかった日本語を覚えたの！ 使える場面が増えると嬉しいね。
 おすすめを教えてもらうノートを作った！ あなたの好きな物も聞かせて！
 `.trim().split('\n');
-const greetings=['こんにちは！ アタシ、えみちぃ。','やっほー！ 来てくれて嬉しい！','こんにちは！ ちょうど話したかったの。','ハーイ！ 会えて嬉しい！','あ、来てくれた！ こんにちは！'];
+const firstGreeting='はじめまして！ アタシ、えみちぃ。';
 const returns=['また会ったね！ 嬉しい！','おかえり！ 今日も話そう！','やっほー、また来てくれた！','あ、会えた！ 元気だった？','また話せるの、楽しみにしてた！'];
 export const openingTiming=Object.freeze({firstDelay:1500,nextDelay:1500});
 export function planOpening(picked){
@@ -53,7 +53,6 @@ export function selectOpening(state,returning=false){
  const seen=Array.isArray(state.openingSeen)?state.openingSeen.filter(n=>Number.isInteger(n)&&n>=0&&n<40):[];
  const pool=openingTopics.map((text,id)=>({text,id})).filter(x=>!seen.includes(x.id));
  const pick=pool[Math.floor(Math.random()*pool.length)]||{text:openingTopics[0],id:0};
- const hello=returning?returns:greetings;
- const greeting=hello[pick.id%hello.length];
+ const greeting=returning?returns[pick.id%returns.length]:firstGreeting;
  return {text:`${greeting} ${pick.text}`,parts:[...greeting.match(/[^。!?！？]+[。!?！？]*/g).map(s=>s.trim()),pick.text],seen:[...seen,pick.id].slice(-39)};
 }

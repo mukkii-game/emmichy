@@ -13,7 +13,7 @@ import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=2026
 import {cultureReply} from './culture.js?v=20261009-profile1';
 import {chooseFiller,startFiller,longFiller,retainAside,idleAside,createIdleSequence} from './filler.js?v=20261009-pacing2';
 import {learnInterests} from './balance.js?v=20261009-pacing2';
-import {selectOpening,planOpening,openingTiming} from './openings.js?v=20261009-pacing2';
+import {selectOpening,planOpening,openingTiming} from './openings.js?v=20261009-meeting1';
 import {preparedReply} from './routing.js?v=20261009-pacing2';
 import {cleanConversation,noteConversationReply} from './conversation.js?v=20261008-humor1';
 import {offlineFallback} from './fallback.js?v=20261008-finish1';
@@ -233,7 +233,7 @@ function showStartChoice(){
 }
 function enterConversation(){ready=true;if(!session)session={startedAt:Date.now(),turns:0,finished:false};$('start-choice').hidden=true;$('talk').hidden=false;$('send').disabled=!readingsSettled;$('entry').disabled=false;noteActivity();$('entry').focus();}
 $('continue').onclick=()=>{session=resumeSession(session);enterConversation();saveSession();$('status').textContent=state.ended?'おしまい。「最初から」で、もう一度。':'会話を再開しました / ENTER で送信';};
-$('new-chat').onclick=()=>{const next=startConversation(state);state=next.state;session=next.session;lines=[];live='';mood='idle';$('transcript').replaceChildren();addOpening(true);enterConversation();save();saveSession();$('status').textContent='新しい会話 / 漢字・ひらがな OK';draw();};
+$('new-chat').onclick=()=>{const next=startConversation(state);state=next.state;session=next.session;lines=[];live='';mood='idle';$('transcript').replaceChildren();addOpening();enterConversation();save();saveSession();$('status').textContent='新しい会話 / 漢字・ひらがな OK';draw();};
 $('restart-chat').onclick=showStartChoice;
 if(hadSavedDialogue){ready=false;showStartChoice();}
 document.addEventListener('visibilitychange',()=>{if(!ready)return;stopContinuation();if(document.hidden)saveSession();else{session=resumeSession(session);continuation.typed(Date.now());noteActivity();saveSession();}});

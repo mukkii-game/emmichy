@@ -1,11 +1,11 @@
 import {everydayReply} from './everyday.js?v=20261008-hybrid1';
-import {contextualReply} from './context.js?v=20261009-profile1';
+import {contextualReply} from './context.js?v=20261009-pacing2';
 import {curatedReply} from './curated.js?v=20261006-mix1';
-import {balanceRoute} from './balance.js?v=20261009-profile1';
+import {balanceRoute} from './balance.js?v=20261009-pacing2';
 import {profileReply} from './profile.js?v=20261009-profile1';
-import {recognizeName,exactNames} from './names.js?v=20261009-profile1';
+import {recognizeName,exactNames} from './names.js?v=20261009-pacing2';
 import {chiikawaNotes} from './chiikawa-db.js?v=20261009-profile1';
-import {unwantedFanRedirect} from './chat.js?v=20261008-humor1';
+import {unwantedFanRedirect} from './chat.js?v=20261009-pacing2';
 
 function chiikawaReply(raw,state){
  if(/つらい|苦しい|病気|事故|亡く|死に|相談|やめ|以外|苦手|嫌い/.test(raw)||unwantedFanRedirect('ちいかわ',raw,state))return null;
@@ -26,6 +26,8 @@ export function preparedReply(raw,state,session,{gap=null,culture=null,repertoir
  if(['bye','asleep','name','arithmetic'].includes(kind))return null;
  const own=profileReply(raw);if(own)return own;
  if(kind==='memory')return null;
+ const named=recognizeName(raw,{state});
+ if(named?.decline&&named.work==='chiikawa'&&!/つらい|苦しい|相談|病気|いじめ|亡く|死に|事故/.test(raw)&&!exactNames(raw,state).some(n=>n.work!=='chiikawa'))return {topic:'fandom-decline',text:'うん、別の話にしよう。'};
  const chii=chiikawaReply(raw,state);if(chii)return chii;
  const legacy=contextualReply(raw,state)||curatedReply(raw,state);
  const daily=everydayReply(raw,state);

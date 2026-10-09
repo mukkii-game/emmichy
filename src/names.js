@@ -1,6 +1,7 @@
 import {nameData} from './name-data.js?v=20261009-profile1';
 import {gameNames} from './game-names.js?v=20261009-profile1';
 export const foldName=s=>String(s||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).toLowerCase().replace(/[\s・×＝=\-:：'’"「」]/g,'');
+export const NAME_REACTION_MS=750;
 const trie=new Map(),exact=[];
 function insert(alias,row){const key=foldName(alias);if(key.length<2)return;let node=trie;for(const ch of key){if(!node.has(ch))node.set(ch,new Map());node=node.get(ch);}if(!node.has(''))node.set('',[]);node.get('').push({row,alias,key});}
 for(const row of nameData)for(const alias of row.aliases){insert(alias,row);exact.push({row,alias,key:foldName(alias)});}
@@ -16,7 +17,7 @@ export function oneEdit(a,b){if(a===b)return false;if(Math.abs(a.length-b.length
 export function exactNames(input,state={}){const work=workIn(state);return distinct(scan(input)).filter(m=>!m.row.contextOnly||m.row.work===work).map(m=>m.row);}
 export function recognizeName(input,{reading='',state={}}={}){
  const work=workIn(state),values=[input,reading].filter(Boolean);
- const decline=/漫画.*(?:やめ|以外|苦手)|別の話|その話.*やめ|ちいかわ.*(?:やめ|以外|嫌い|苦手)/.test(input);
+ const decline=/(?:漫画|マンガ).*(?:ヤメ|以外|イガイ|苦手)|別ノ話|ベツノハナシ|ソノ話.*ヤメ|チイカワ.*(?:ヤメ|以外|イガイ|嫌イ|キライ|苦手)/.test(foldName(input));
  const matches=distinct(values.flatMap(scan)).filter(m=>!m.row.contextOnly||m.row.work===work);
  const common=values.flatMap(scan).filter(m=>m.row.work==='chiikawa'&&m.row.contextOnly&&work!=='chiikawa');
  matches.sort((a,b)=>b.length-a.length||(b.row.work===work?1:0)-(a.row.work===work?1:0));
@@ -35,8 +36,9 @@ export function recognizeName(input,{reading='',state={}}={}){
  if(direct)return {...direct.row,soft:false,decline};
  return near.length?{...near[0].row,soft:true}:null;
 }
-export function namedGesture(match){return match?`${match.reading}${match.decline?'の話はやめるね。':'！'}`:null;}
+export function namedGesture(match){return match?`${match.reading}${match.decline?'、ね。':'！'}`:null;}
 export function namedFollowup(match,input=''){
+ if(match.decline)return 'うん、別の話にしよう。';
  if(match.soft)return `${match.reading}って聞こえちゃった。あ、ちょっと似た言葉だった？`;
  if(/みたい|っぽい|言い方|イイカタ/.test(input))return `${match.reading}みたいな言い方、かー。`;
  return `${match.reading}の話ね。`;

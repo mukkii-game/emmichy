@@ -19,5 +19,7 @@ test('one-character misses and user-requested peach mishearing are bounded and n
  for(const input of ['ももが美味しい','桃が美味しい']){const match=recognizeName(input);assert.equal(match.name,'モモンガ');assert.equal(match.soft,true);assert.match(namedFollowup(match),/聞こえちゃった/);}
  assert.equal(oneEdit('ヒソカ','ヒサカ'),true);assert.equal(oneEdit('ヒソカ','カエル'),false);
  assert.equal(recognizeName('つらいから相談したい'),null);
- const declined=recognizeName('ちいかわ以外の話にして');assert.equal(declined.decline,true);assert.match(namedGesture(declined),/やめるね/);
+ for(const raw of ['ちいかわ以外の話をしようか','チイカワ イガイ ノ ハナシ ヲ シヨウ カ']){
+  const declined=recognizeName(raw);assert.equal(declined.decline,true);assert.equal(namedGesture(declined),'チイカワ、ね。');assert.match(namedFollowup(declined),/別の話/);
+ }
 });

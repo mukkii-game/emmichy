@@ -446,3 +446,21 @@ src/context.jsに公式TMS確認の左門豊作補助資料を追加し、巨人
 - ゲーム113件・中継28件、bundle dry-run、構文／差分検査成功。ローカル実画面で名前先行反応、担当と感想、プロフィールの固定・再開を確認。失敗もPLAYTESTへ記録。新しい実LLM品質比較は未実施。
 - 詳細 docs/chiikawa-profile-20261009.md、出典範囲 docs/chiikawa-coverage-20261009.json。同期は scripts/sync-dialogue.mjs ../game-llm --chiikawa-profile。
 - 公開追随の許可を引き継ぎ、Pages用pilot-audio-readable-retroとAI側mainへのPR・公開確認を次に進める。本体mainは未統合。残る試遊: 未登録・誤認・読み、LLMの自然さと設定一貫性。
+
+
+### この変更の公開確認
+
+- コード候補 bbc7f049b551827e21407d03920335b17ddaae34。PR #14をpilot-audio-readable-retroへ統合、公開commit dc7a00e9bb71ae4191b5e802b2442801a465b912。Pages run 37813835484 success。
+- 公開release 20261009-profile1。app/names/name-data/profile/chiikawa-db/routing/fandom/readableの8ファイルがローカルと一致。公開URL https://mukkii-game.github.io/emmichy/ 。
+- AI側コード候補0218d76a78bd9a94865df73263b75f89a76fc1d8、PR #5 main統合commit f351d2d36639b6a2ada3e41a3828fda75e747270。Deploy run 37813819540 success、Worker version d55b2a1c-a3c8-4757-a273-cb186bb3c2ad。6共有モジュールは両repoで一致。
+- Emmichy本体mainは未統合（6343213bc8f904a43c02319fc9b421ce2dd4dc0f）。自動Relay・追加AI試遊通信なし。公開の保存済み会話は操作していない。
+- 次はこのWorkで、人間の未登録語・誤認・読み・しつこさ・設定ズレの報告を受けて補充／調整する。実LLMの自然さ・一貫性は未検証。
+
+
+## 2026-10-09 開幕分割・名前の間・話題変更
+
+- codex/opening-pacing-20261009。公開済みPR #14の続きを唯一のWorkで実装、自動Relayなし。
+- 開幕／挨拶／終了後の再開を短いまとまりへ分割、各表示後1.5秒の間。通常の続き4秒／5秒を維持。入力・IMEで6秒待機、新送信／リセット／終了で取消、話した部分だけ保存。
+- 名前の先行反応は送信後750ms待つ。「ちいかわ以外」でも辞書を拾って「チイカワ、ネ。」→別の話へ。漢字・カタカナ拒否表現をゲーム／中継で一致させた。
+- ゲーム116件・中継28件、構文／差分検査成功。ローカル実画面で短い開幕、送信直後の名前なし／後の反応、カタカナの話題変更を確認。証跡 docs/playtest-20261009-pacing-local.jpg。実LLM品質比較・人間の間の評価は未検証。
+- 公開追随の既存許可でPages用pilot-audio-readable-retroと中継mainへ反映する。Emmichy本体mainは対象外。

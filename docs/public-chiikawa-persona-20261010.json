@@ -1,0 +1,68 @@
+{
+  "checkedAt": "2026-10-10T01:05:53.834584+00:00",
+  "release": "20261010-chiihype2",
+  "frontendCandidate": "46813e0e14ec334254ce70194872353040135264",
+  "backendCandidate": "dfd22fad6aafd3c9f511e45ee2281b180df2116c",
+  "pilotMerge": "264a3ca5bdc9d5c735efbb6ce156829743c0826a",
+  "backendMerge": "cbd867dcded1c76cea822c54dd2ac2e25d27fc53",
+  "pagesRun": 38011721715,
+  "pagesConclusion": "success",
+  "deployRun": 38011718144,
+  "deployConclusion": "success",
+  "workerVersion": "cf4349d1-13b1-4562-a1f7-ff8d8b6c3412",
+  "frontendMain": "6343213bc8f904a43c02319fc9b421ce2dd4dc0f",
+  "files": [
+    {
+      "path": "index.html",
+      "matches": true
+    },
+    {
+      "path": "src/app.js",
+      "matches": true
+    },
+    {
+      "path": "src/balance.js",
+      "matches": true
+    },
+    {
+      "path": "src/context.js",
+      "matches": true
+    },
+    {
+      "path": "src/continuation.js",
+      "matches": true
+    },
+    {
+      "path": "src/engine.js",
+      "matches": true
+    },
+    {
+      "path": "src/fandom.js",
+      "matches": true
+    },
+    {
+      "path": "src/filler.js",
+      "matches": true
+    },
+    {
+      "path": "src/font.js",
+      "matches": true
+    },
+    {
+      "path": "src/profile.js",
+      "matches": true
+    },
+    {
+      "path": "src/readable.js",
+      "matches": true
+    },
+    {
+      "path": "src/repertoire.js",
+      "matches": true
+    },
+    {
+      "path": "src/routing.js",
+      "matches": true
+    }
+  ]
+}

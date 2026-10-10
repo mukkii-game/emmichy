@@ -1,0 +1,684 @@
+{
+  "mode": "actual app; offline rule/bank; simulated DOM and virtual pauses; compressed typing animation; no live LLM or audio",
+  "actions": [
+    {
+      "action": {
+        "type": "start"
+      },
+      "result": {
+        "atSeconds": 0,
+        "messages": [
+          {
+            "atMs": 0,
+            "role": "enny",
+            "text": "はじめまして！",
+            "screen": "ハジメマシテ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 8
+      },
+      "result": {
+        "atSeconds": 8,
+        "messages": [
+          {
+            "atMs": 1500,
+            "role": "enny",
+            "text": "アタシ、えみちぃ。",
+            "screen": "アタシ、 エミチィ 。"
+          },
+          {
+            "atMs": 3000,
+            "role": "enny",
+            "text": "日本語、勉強中なの。",
+            "screen": "ニホンゴ、 ベンキョウチュウナノ。"
+          },
+          {
+            "atMs": 4500,
+            "role": "enny",
+            "text": "レオリオの話を読み返してた。まっすぐな気持ち、いいね。",
+            "screen": "レオリオ ノ ハナシ ヲ ヨミカエシテタ。 マッスグナ キモチ、 イイネ。"
+          },
+          {
+            "atMs": 6000,
+            "role": "enny",
+            "text": "ちいかわの話も、ついしたくなっちゃうの。",
+            "screen": "チイカワ ノ ハナシ モ、 ツイ シタク ナッチャウノ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0
+      }
+    },
+    {
+      "action": {
+        "type": "reset"
+      },
+      "result": {
+        "atSeconds": 8,
+        "messages": [
+          {
+            "atMs": 8000,
+            "role": "enny",
+            "text": "はじめまして！",
+            "screen": "ハジメマシテ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 8
+      },
+      "result": {
+        "atSeconds": 16,
+        "messages": [
+          {
+            "atMs": 9500,
+            "role": "enny",
+            "text": "アタシ、えみちぃ。",
+            "screen": "アタシ、 エミチィ 。"
+          },
+          {
+            "atMs": 11000,
+            "role": "enny",
+            "text": "日本語、勉強中なの。",
+            "screen": "ニホンゴ、 ベンキョウチュウナノ。"
+          },
+          {
+            "atMs": 12500,
+            "role": "enny",
+            "text": "今日は日本のアニメのコンベンションに行く準備してたの！ あなたなら何を見たい？",
+            "screen": "キョウ ハ ニッポン ノ アニメ ノ コンベ ンショ ン ニ イク ジュンビ シテタ ノ! アナタナラ ナニ ヲ ミタイ?"
+          },
+          {
+            "atMs": 14000,
+            "role": "enny",
+            "text": "ちいかわの話も、ついしたくなっちゃうの。",
+            "screen": "チイカワ ノ ハナシ モ、 ツイ シタク ナッチャウノ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "会場にはゲームもある？ 最近はゼルダが好き。"
+      },
+      "result": {
+        "atSeconds": 16,
+        "messages": [
+          {
+            "atMs": 16000,
+            "role": "user",
+            "text": "会場にはゲームもある？ 最近はゼルダが好き。",
+            "screen": "カイジョウ ニ ハ ゲーム モ アル? サイキン ハ ゼルダノデンセツ ガ スキ。"
+          },
+          {
+            "atMs": 16000,
+            "role": "enny",
+            "text": "ゼルダノデンセツ、スキ!?",
+            "screen": "ゼルダノデンセツ 、スキ!?"
+          },
+          {
+            "atMs": 16000,
+            "role": "enny",
+            "text": "アタシモ スキ!",
+            "screen": "アタシモ スキ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 16
+      },
+      "result": {
+        "atSeconds": 32,
+        "messages": [
+          {
+            "atMs": 20000,
+            "role": "enny",
+            "text": "サイキン ナニニ ハマッテル?",
+            "screen": "サイキン ナニニ ハマッテル?"
+          },
+          {
+            "atMs": 25000,
+            "role": "enny",
+            "text": "スキナ トコ キキタイ。",
+            "screen": "スキナ トコ キキタイ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "さっき言ったゼルダだよ。寄り道して景色を眺めるのが好き。"
+      },
+      "result": {
+        "atSeconds": 32,
+        "messages": [
+          {
+            "atMs": 32000,
+            "role": "user",
+            "text": "さっき言ったゼルダだよ。寄り道して景色を眺めるのが好き。",
+            "screen": "サッキ イッタ ゼルダノデンセツ ダヨ。 ヨリミチ シテ ケシキ ヲ ナガメル ノ ガ スキ。"
+          },
+          {
+            "atMs": 32000,
+            "role": "enny",
+            "text": "ゼルダノデンセツ、スキ!?",
+            "screen": "ゼルダノデンセツ 、スキ!?"
+          },
+          {
+            "atMs": 32000,
+            "role": "enny",
+            "text": "サッキ言ッタゼルダダヨ寄リ道シテ景色ヲ眺メルノ ガ スキ ナノ ソウイウ コトニ シテオクワ",
+            "screen": "サッキ ゲンッタ ゼルダノデンセツ ダヨ ヤドリキ リドウ シテ ケシキ ヲ 眺 メルノ ガ スキ ナノ ソウイウ コトニ シテオクワ"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 2
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 12
+      },
+      "result": {
+        "atSeconds": 44,
+        "messages": [
+          {
+            "atMs": 42000,
+            "role": "enny",
+            "text": "アタシ、スウェーデンのヨーテボリの近くで育ったの。",
+            "screen": "アタシ、 スウェーデン ノ ヨーテボリ ノ チカク デ ソダッタノ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 2
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "へえ、ヨーテボリ生まれなの？ 今もそこに住んでる？"
+      },
+      "result": {
+        "atSeconds": 44,
+        "messages": [
+          {
+            "atMs": 44000,
+            "role": "user",
+            "text": "へえ、ヨーテボリ生まれなの？ 今もそこに住んでる？",
+            "screen": "ヘエ、 ヨーテボリ ウマレナ ノ? イマ モ ソコ ニ スンデル?"
+          },
+          {
+            "atMs": 44000,
+            "role": "enny",
+            "text": "そこはまだよく知らないの。",
+            "screen": "ソコ ハ マダ ヨク シラナイノ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 3
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 12
+      },
+      "result": {
+        "atSeconds": 56,
+        "messages": [
+          {
+            "atMs": 48000,
+            "role": "enny",
+            "text": "わかったふりで答えたくないな。",
+            "screen": "ワカッタ フリ デ コタエタクナイナ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 3
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "じゃあジョジョは？ ブチャラティが好きなんだ。"
+      },
+      "result": {
+        "atSeconds": 56,
+        "messages": [
+          {
+            "atMs": 56000,
+            "role": "user",
+            "text": "じゃあジョジョは？ ブチャラティが好きなんだ。",
+            "screen": "ジャア ジョジョ ハ? ブチャラティ ガ スキナ ンダ。"
+          },
+          {
+            "atMs": 56000,
+            "role": "enny",
+            "text": "ジョジョ、スキ!?",
+            "screen": "ジョジョ 、スキ!?"
+          },
+          {
+            "atMs": 56000,
+            "role": "enny",
+            "text": "そこはまだよく知らないの。",
+            "screen": "ソコ ハ マダ ヨク シラナイノ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 4
+      }
+    },
+    {
+      "action": {
+        "type": "draft",
+        "text": "ちいかわなら"
+      },
+      "result": {
+        "atSeconds": 56,
+        "messages": [],
+        "draft": "ちいかわなら",
+        "finished": false,
+        "turns": 4
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 20
+      },
+      "result": {
+        "atSeconds": 76,
+        "messages": [
+          {
+            "atMs": 62000,
+            "role": "enny",
+            "text": "わかったふりで答えたくないな。",
+            "screen": "ワカッタ フリ デ コタエタクナイナ。"
+          }
+        ],
+        "draft": "ちいかわなら",
+        "finished": false,
+        "turns": 4
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "ちいかわなら詳しいんだよね。ハチワレはどう？"
+      },
+      "result": {
+        "atSeconds": 76,
+        "messages": [
+          {
+            "atMs": 76000,
+            "role": "user",
+            "text": "ちいかわなら詳しいんだよね。ハチワレはどう？",
+            "screen": "チイカワ ナラ クワシイ ンダヨネ。 ハチワレ ハ ドウ?"
+          },
+          {
+            "atMs": 76000,
+            "role": "enny",
+            "text": "チイカワ！",
+            "screen": "チイカワ !"
+          },
+          {
+            "atMs": 76000,
+            "role": "enny",
+            "text": "わあ、その話うれしい!",
+            "screen": "ワア、 ソノ ハナシ ウレシイ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 5
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 16
+      },
+      "result": {
+        "atSeconds": 92,
+        "messages": [
+          {
+            "atMs": 78000,
+            "role": "enny",
+            "text": "ハチワレのご飯、少し失敗しても一緒に食べたい。",
+            "screen": "ハチワレ ノ ゴハン、 スコシ シッパイ シテ モ イッショ ニ タベタイ。"
+          },
+          {
+            "atMs": 88000,
+            "role": "enny",
+            "text": "弟は14歳なの。ゲームで負けると、アタシ言い訳しちゃう。",
+            "screen": "オトウト ハ 14サイナノ。 ゲーム デ マケル ト、 アタシ イイワケ シチャウ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 5
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "今日はここまで。弟さんにもよろしく、バイバイ！"
+      },
+      "result": {
+        "atSeconds": 92,
+        "messages": [
+          {
+            "atMs": 92000,
+            "role": "user",
+            "text": "今日はここまで。弟さんにもよろしく、バイバイ！",
+            "screen": "キョウ ハ ココ マデ。 オトウト サン ニ モ ヨロシク、 バイバイ!"
+          },
+          {
+            "atMs": 92000,
+            "role": "enny",
+            "text": "フーン ツヅキ ハ アルノ?",
+            "screen": "フーン ツヅキ ハ アルノ?"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 6
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 16
+      },
+      "result": {
+        "atSeconds": 108,
+        "messages": [
+          {
+            "atMs": 102000,
+            "role": "enny",
+            "text": "覚えた日本語、小さいノートに書いてるの。字はまだちょっと下手。",
+            "screen": "オボエタ ニホンゴ、 チイサイ ノート ニ カイテルノ。 ジ ハ マダ チョット ヘタ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 6
+      }
+    }
+  ],
+  "transcript": [
+    {
+      "atMs": 0,
+      "message": {
+        "role": "enny",
+        "text": "はじめまして！"
+      }
+    },
+    {
+      "atMs": 1500,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、えみちぃ。"
+      }
+    },
+    {
+      "atMs": 3000,
+      "message": {
+        "role": "enny",
+        "text": "日本語、勉強中なの。"
+      }
+    },
+    {
+      "atMs": 4500,
+      "message": {
+        "role": "enny",
+        "text": "レオリオの話を読み返してた。まっすぐな気持ち、いいね。"
+      }
+    },
+    {
+      "atMs": 6000,
+      "message": {
+        "role": "enny",
+        "text": "ちいかわの話も、ついしたくなっちゃうの。"
+      }
+    },
+    {
+      "atMs": 8000,
+      "message": {
+        "role": "enny",
+        "text": "はじめまして！"
+      }
+    },
+    {
+      "atMs": 9500,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、えみちぃ。"
+      }
+    },
+    {
+      "atMs": 11000,
+      "message": {
+        "role": "enny",
+        "text": "日本語、勉強中なの。"
+      }
+    },
+    {
+      "atMs": 12500,
+      "message": {
+        "role": "enny",
+        "text": "今日は日本のアニメのコンベンションに行く準備してたの！ あなたなら何を見たい？"
+      }
+    },
+    {
+      "atMs": 14000,
+      "message": {
+        "role": "enny",
+        "text": "ちいかわの話も、ついしたくなっちゃうの。"
+      }
+    },
+    {
+      "atMs": 16000,
+      "message": {
+        "role": "user",
+        "text": "会場にはゲームもある？ 最近はゼルダが好き。"
+      }
+    },
+    {
+      "atMs": 16000,
+      "message": {
+        "role": "enny",
+        "text": "ゼルダノデンセツ、スキ!?"
+      }
+    },
+    {
+      "atMs": 16000,
+      "message": {
+        "role": "enny",
+        "text": "アタシモ スキ!"
+      }
+    },
+    {
+      "atMs": 20000,
+      "message": {
+        "role": "enny",
+        "text": "サイキン ナニニ ハマッテル?"
+      }
+    },
+    {
+      "atMs": 25000,
+      "message": {
+        "role": "enny",
+        "text": "スキナ トコ キキタイ。"
+      }
+    },
+    {
+      "atMs": 32000,
+      "message": {
+        "role": "user",
+        "text": "さっき言ったゼルダだよ。寄り道して景色を眺めるのが好き。"
+      }
+    },
+    {
+      "atMs": 32000,
+      "message": {
+        "role": "enny",
+        "text": "ゼルダノデンセツ、スキ!?"
+      }
+    },
+    {
+      "atMs": 32000,
+      "message": {
+        "role": "enny",
+        "text": "サッキ言ッタゼルダダヨ寄リ道シテ景色ヲ眺メルノ ガ スキ ナノ ソウイウ コトニ シテオクワ"
+      }
+    },
+    {
+      "atMs": 42000,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、スウェーデンのヨーテボリの近くで育ったの。"
+      }
+    },
+    {
+      "atMs": 44000,
+      "message": {
+        "role": "user",
+        "text": "へえ、ヨーテボリ生まれなの？ 今もそこに住んでる？"
+      }
+    },
+    {
+      "atMs": 44000,
+      "message": {
+        "role": "enny",
+        "text": "そこはまだよく知らないの。"
+      }
+    },
+    {
+      "atMs": 48000,
+      "message": {
+        "role": "enny",
+        "text": "わかったふりで答えたくないな。"
+      }
+    },
+    {
+      "atMs": 56000,
+      "message": {
+        "role": "user",
+        "text": "じゃあジョジョは？ ブチャラティが好きなんだ。"
+      }
+    },
+    {
+      "atMs": 56000,
+      "message": {
+        "role": "enny",
+        "text": "ジョジョ、スキ!?"
+      }
+    },
+    {
+      "atMs": 56000,
+      "message": {
+        "role": "enny",
+        "text": "そこはまだよく知らないの。"
+      }
+    },
+    {
+      "atMs": 62000,
+      "message": {
+        "role": "enny",
+        "text": "わかったふりで答えたくないな。"
+      }
+    },
+    {
+      "atMs": 76000,
+      "message": {
+        "role": "user",
+        "text": "ちいかわなら詳しいんだよね。ハチワレはどう？"
+      }
+    },
+    {
+      "atMs": 76000,
+      "message": {
+        "role": "enny",
+        "text": "チイカワ！"
+      }
+    },
+    {
+      "atMs": 76000,
+      "message": {
+        "role": "enny",
+        "text": "わあ、その話うれしい!"
+      }
+    },
+    {
+      "atMs": 78000,
+      "message": {
+        "role": "enny",
+        "text": "ハチワレのご飯、少し失敗しても一緒に食べたい。"
+      }
+    },
+    {
+      "atMs": 88000,
+      "message": {
+        "role": "enny",
+        "text": "弟は14歳なの。ゲームで負けると、アタシ言い訳しちゃう。"
+      }
+    },
+    {
+      "atMs": 92000,
+      "message": {
+        "role": "user",
+        "text": "今日はここまで。弟さんにもよろしく、バイバイ！"
+      }
+    },
+    {
+      "atMs": 92000,
+      "message": {
+        "role": "enny",
+        "text": "フーン ツヅキ ハ アルノ?"
+      }
+    },
+    {
+      "atMs": 102000,
+      "message": {
+        "role": "enny",
+        "text": "覚えた日本語、小さいノートに書いてるの。字はまだちょっと下手。"
+      }
+    }
+  ]
+}

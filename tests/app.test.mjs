@@ -110,6 +110,13 @@ test('screen remains playable after dictionary failure and IME composition does 
   time+=4000;await idleTick();time+=5000;await idleTick();
   jojo=JSON.parse(storage.get('enny-memory-v1')).history.slice(jojoAt+1).map(h=>h.text).join(' ');
   assert.match(jojo,/スタンド/);assert.doesNotMatch(jojo,/よく知らない|わかったふり/);
+  entry.value='ハチワレの話して';await talk.emit('submit');
+  entry.value='写真って';await entry.emit('input');
+  const draftedCount=JSON.parse(storage.get('enny-memory-v1')).history.length;
+  for(let i=0;i<80;i++){time+=250;await idleTick();}
+  assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,draftedCount,'a nonempty draft blocks the queued reply too, even after six seconds');
+  entry.value='';await entry.emit('input');time+=6000;await idleTick();
+  assert.ok(JSON.parse(storage.get('enny-memory-v1')).history.length>draftedCount,'clearing the draft allows the pending reply after the quiet delay');
   entry.value='ウサギ カッコイイヨネ';await talk.emit('submit');
   const usagi=JSON.parse(storage.get('enny-memory-v1')).history,usagiAt=usagi.findLastIndex(h=>h.role==='user');
   assert.equal(usagi[usagiAt+1].text,'ウサギ！');assert.notEqual(usagi[usagiAt+1].text,'セッコ！');

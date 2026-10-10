@@ -26,6 +26,8 @@ test('film enthusiasm has its own state and preserves title',()=>{const a=turn('
 test('uses concept bridges and remembers the topic for why/continue',()=>{let a=turn('資格の試験が不安');assert.equal(a.state.topic,'study');assert.doesNotMatch(a.text,/シーサー/);a=turn('どうして？',a.state);assert.equal(a.state.topic,'study');assert.doesNotMatch(a.text,/シーサー/);});
 test('raw kanji carries travel associations through limited kana input',()=>{const a=turn('旅行したい');assert.equal(a.state.topic,'travel');assert.match(a.text,/ドコニ イキタイ/);});
 test('explicit farewell phrases end immediately without treating a quoted farewell as an exit',()=>{
- for(const word of ['さようなら','バイバイ','じゃあバイバイ！','またね','今日はここまで'])assert.equal(respond(word,freshState()).kind,'bye');
+ for(const word of ['さようなら','バイバイ','じゃあバイバイ！','またね','今日はここまで','今日は寝るね、またね','今日はここまで。弟さんにもよろしく、バイバイ！'])assert.equal(respond(word,freshState()).kind,'bye');
  assert.notEqual(respond('バイバイってどういう意味？',freshState()).kind,'bye');
+ assert.notEqual(respond('合言葉はバイバイ',freshState()).kind,'bye');
+ assert.notEqual(respond('「またね」って言われた',freshState()).kind,'bye');
 });

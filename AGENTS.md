@@ -15,6 +15,8 @@ The user designated the current Emmichy development session as the sole Director
 
 ## Durable docs
 
+ユーザーが2026-10-10に手動の仮想プレイヤー試遊を許可した。サブエージェントはこのセッション内の限定試遊に使い、Director・実装・最終判断はここで行う。自動Relayや別Workは再開しない。トークン節約希望も受けたため、既知の問題は機械的に再現し、新しい主観評価だけ短い設定を渡した1〜2人・各6〜8送信を目安に使う。必要な時だけ追加し、報告は実例と重要3点に絞る。実LLMと模擬試遊、人間評価を区別し、使ったモデルの指定有無を説明する。
+
 - `SPEC.md`: stable game direction/spec
 - `DECISIONS.md`: durable decisions, when present
 - `HANDOFF.md`: current project state only when materially changed

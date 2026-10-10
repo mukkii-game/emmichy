@@ -1,10 +1,16 @@
+# 2026-10-10: three virtual players, bounded by token preference
+
+Three adaptive roles, 6/7/6 sends, actual offline app with simulated DOM/clock and compressed animation. Found draft continuation after six seconds, favourite question read as personal affection, birthplace question read as unknown, natural farewell ignored; all four repaired and targeted replay passes. Full suites: 153 frontend + 37 backend. First targeted replay still selected the earlier Shisa instead of asked Hachiware; retained failure analysis in report, then added the owned Hachiware preference answer and reran successfully. Original fan farewell hit missing remove() in the simulated DOM; harness repaired, original failure log kept. Remaining self-started-topic explanations, semantic repetition, topic/stop intent and tired-to-canule earworm documented. No external game-LLM calls, live/human/audio/real-browser conclusions. Report: docs/virtual-player-review-20261010.md.
+
+---
+
 ## 2026-10-10 スウェーデンを本人として拾う／沈黙時の短い自分の話
 
 - ユーザー報告の失敗：「スウェ ー デン ウマレナ ノ?」に無関係な驚き、「!?」、日本語探しの長いフィラー。profileReplyは明示的な「あなた」がない出身質問を認識せず、本人の国名も表示辞書になかった。
 - 空白を含むスウェーデン／ヨーテボリの出身質問を本人の閉じた事実として先に判定。「スウェーデン、アタシの国！」→近郊で生まれ育った返答。最初のモデル優先よりこの出身の固定事実を優先する一方、通常会話の実LLM利用・失敗後の再試行は残す。元の入力は保存したまま、国・都市名だけ表示の一語を保証する。本人設定／CHARACTER／公開promptを同期。
 - 続きが終わったあと10secの無入力で短い本人の話。用意した所有設定から1行を選び、最近の同じ行を避け、追加モデル要求なし。下書き・入力／IME中は待つ。これまでの「続きがあった会話では永久にidleを抑制」の条件を更新した。食べ物の文脈と深刻な相談は維持。
 - 実画面：スウェーデンとヨーテボリが一語で表示され、本人の国という先行反応と出生の返答を確認。docs/playtest-20261010-birthplace-draft-full-local.png。最初のDOM入力操作では送信されず、画面入力の確定で送れた。後から入力欄に下書きが残り、自発的idleは差し込まれなかった。idleの短い本人の話は実appの仮想時刻テストで確認し、手動UIで成功したとはしない。試遊音OFF、タブ25/26は閉じた。
-- 153frontend／37backend全テスト成功。実screenの出身・idle・下書き抑制、実tokenizerのスウェーデン／ヨーテボリ一語表示、初回モデル優先を壊さないチェックを含む。実LLM通信ゼロ。
+- 153frontend／37backend全テスト成功。実screenの出身・idle・下書き抑制、実tokenizerのスウェーデン／ヨーテボリ一語表示、初回モデル優先を壊さないチェックを含む。実LLM通信ゼロ。公開PR24／中継PR12、Pages38011721715／Deploy38011718144成功。配信13ファイルの候補との一致はdocs/public-chiikawa-persona-20261010.json。
 
 ## 2026-10-10 ちいかわの誘いで大興奮／胸の自作の飾り
 

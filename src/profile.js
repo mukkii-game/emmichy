@@ -43,6 +43,8 @@ export function complimentReaction(raw,state={}){
   ||folded.match(/^アイ(?:$|[!！?？。、])/);
  if(!praise||/嫌イ|苦手|ツマラ|ヤメ|ナイ|無イ|ジャナ|デハナ|相談|病気|事故|亡ク|死ニ/.test(folded))return null;
  const affection=/好キ|スキ|好ミ|コノミ|愛|アイ|ラブ/.test(praise[0]);
+ // Asking about a preference is not a declaration, even with her name in the sentence.
+ if(affection&&/(?:好キ|スキ|好ミ|コノミ)(?:ナノ|デスカ|カナ|カ)?[?？]$/.test(folded))return null;
  // Questions about her preferences retain their actual answer, rather than becoming a declaration.
  if(affection&&/(?:何|ナニ|ドンナ|誰|ダレ).*(?:好キ|スキ|好ミ|コノミ)|(?:好キナ|スキナ).*(?:キャラ|漫画|マンガ|作品|ゲーム)|(?:好ミ|コノミ).*(?:何|ナニ|ドンナ|[?？])/.test(folded))return null;
  const word=affection?/大好キ|ダイスキ/.test(praise[0])?'ダイスキ':/好キ|スキ/.test(praise[0])?'スキ':/好ミ|コノミ/.test(praise[0])?'コノミ':/愛シテ|アイシテ/.test(folded)?'アイシテル':'アイ':
@@ -89,10 +91,13 @@ export function profileReply(raw){
  const text=String(raw).normalize('NFKC').replace(/\s/g,'');
  if(accessoryCue(text))return {topic:'profile',id:'profile:accessory',text:accessoryReply};
  const folded=text.replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96));
- const home=/^(?:スウェーデン|ヨーテボリ).*(?:生マレ|ウマレ|育|ソダ|出身|シュッシン|住|スン|[?？])/.test(folded)&&!/(?:私|僕|俺|ワタシ|ボク|オレ|友達|彼女|彼氏)/.test(folded);
+ const home=/(?:スウェーデン|ヨーテボリ).*(?:生マレ|ウマレ|育|ソダ|出身|シュッシン|住|スン|[?？])/.test(folded)&&!/(?:私|僕|俺|ワタシ|ボク|オレ|友達|彼女|彼氏)/.test(folded);
  const own=selfMention(text)||/あなた|君|きみ/.test(text)||home;
  if(!own&&!/^(?:何歳|いくつ|どこ出身|出身は|どこに住|どこの国|家族は|趣味は|学校は|仕事は|何語|好きな(?:食べ物|漫画|マンガ|ゲーム)|日本に来た|自己紹介)/.test(text))return null;
  if(/(?:私|僕|俺|わたし|ぼく)(?:の|は|が)/.test(text)&&!own)return null;
+ // Answer her owned taste, rather than selecting an earlier character mentioned in the turn.
+ const question=folded.split(/[。!！]/).at(-1);
+ if(/ハチワレ(?:ガ|モ|ハ)?(?:好キ|スキ)(?:ナノ|デスカ|カナ|カ)?[?？]$/.test(question))return {topic:'profile',id:'profile:hachiware-preference',text:'うん、ハチワレ大好き！ 誰かに気を遣うところを見ると、アタシ弱いの。'};
  if((selfMention(text)&&text.replace(selfAlias,'').replace(/[。、!?！？]/g,'')==='')||/自己紹介|どんな(?:人|子)/.test(text))return {topic:'profile',text:`アタシ、エミチィ。${identity.country}の${identity.age}歳の学生だよ。ちいかわが好きで、日本語を勉強してるの。`};
  const topic=topics.find(([,pattern])=>pattern.test(text));return topic?{topic:'profile',id:`profile:${topic[0]}`,text:topic[2],...(home?{gesture:`${identity.country}、アタシの国！`}:{})}:null;
 }

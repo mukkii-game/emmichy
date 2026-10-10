@@ -41,6 +41,7 @@ test('ambiguous affection is heard as personal joy, explicit favourites retain t
  assert.equal(complimentReaction('猫が好き').target.reading,'ネコ');
  for(const raw of ['好きじゃない','スキ ジャ ナイ','愛してない','好みじゃない','あなたは何が好き？','好きなキャラは？','愛知','愛媛','あいさつ','ラブライブ'])assert.equal(complimentReaction(raw),null,raw);
  assert.match(complimentReaction('ラブライブが好き').gesture,/スキ!\?/);
+ for(const raw of ['シーサーが頑張ってると応援したくなるよね。えみちぃはハチワレも好き？','あなたはハチワレが好き？','エミチィはプリンが好きなの？'])assert.equal(complimentReaction(raw),null,raw);
 });
 test('timer ticks by visible played seconds, clamps zero and resumes without away time',()=>{
  const s={startedAt:1000,lastSavedAt:11000,turns:2};

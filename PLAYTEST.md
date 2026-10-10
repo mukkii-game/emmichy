@@ -1,3 +1,9 @@
+# 2026-10-10: three virtual players, bounded by token preference
+
+Three adaptive roles, 6/7/6 sends, actual offline app with simulated DOM/clock and compressed animation. Found draft continuation after six seconds, favourite question read as personal affection, birthplace question read as unknown, natural farewell ignored; all four repaired and targeted replay passes. Full suites: 153 frontend + 37 backend. First targeted replay still selected the earlier Shisa instead of asked Hachiware; retained failure analysis in report, then added the owned Hachiware preference answer and reran successfully. Original fan farewell hit missing remove() in the simulated DOM; harness repaired, original failure log kept. Remaining self-started-topic explanations, semantic repetition, topic/stop intent and tired-to-canule earworm documented. No external game-LLM calls, live/human/audio/real-browser conclusions. Report: docs/virtual-player-review-20261010.md.
+
+---
+
 ## 2026-10-10 スウェーデンを本人として拾う／沈黙時の短い自分の話
 
 - ユーザー報告の失敗：「スウェ ー デン ウマレナ ノ?」に無関係な驚き、「!?」、日本語探しの長いフィラー。profileReplyは明示的な「あなた」がない出身質問を認識せず、本人の国名も表示辞書になかった。

@@ -1,6 +1,6 @@
 // Verified supplemental names and short-reply context. Facts checked 2026-10-06.
 import {conversationMove} from './moves.js?v=20261008-humor1';
-import {works} from './fandom.js?v=20261010-chiihype2';
+import {works} from './fandom.js?v=20261010-virtual1';
 export const samonSource='https://www.tms-e.co.jp/alltitles/1960s/005101.html';
 const fold=s=>String(s||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/[\s・]/g,'').toLowerCase();
 function sharesOwnName(input){

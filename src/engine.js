@@ -1,8 +1,8 @@
 // Original Emmichy dialogue logic. No original Emmy code or dialogue tables used.
-import {cleanKnowledge} from './fandom.js?v=20261010-chiihype2';
+import {cleanKnowledge} from './fandom.js?v=20261010-virtual1';
 import {cleanGap} from './gap.js?v=20261006-mix1';
-import {cleanRepertoire} from './repertoire.js?v=20261010-chiihype2';
-import {cleanInterests} from './balance.js?v=20261010-chiihype2';
+import {cleanRepertoire} from './repertoire.js?v=20261010-virtual1';
+import {cleanInterests} from './balance.js?v=20261010-virtual1';
 import {cleanConversation,rememberConversation} from './conversation.js?v=20261008-humor1';
 const readings = { '知らない':'シラナイ','知ってる':'シッテル','以外':'イガイ','晴れ':'ハレ', '本当':'ホントウ','賢い':'カシコイ','頭':'アタマ','名前':'ナマエ','覚えて':'オボエテ','忘れて':'ワスレテ','好き':'スキ','嫌い':'キライ','可愛い':'カワイイ','綺麗':'キレイ','天気':'テンキ','今日':'キョウ','明日':'アシタ','疲れた':'ツカレタ','寂しい':'サミシイ','仕事':'シゴト','猫':'ネコ','犬':'イヌ','私':'ワタシ','僕':'ボク','君':'キミ','嘘':'ウソ','人間':'ニンゲン','機械':'キカイ','元気':'ゲンキ','趣味':'シュミ','秘密':'ヒミツ','未来':'ミライ','世界':'セカイ','宇宙':'ウチュウ','何':'ナニ','教えて':'オシエテ','眠い':'ネムイ','馬鹿':'バカ','無能':'ムノウ','一人':'ヒトリ','歳':'サイ','年齢':'ネンレイ','愛':'アイ' };
 export function normalize(raw) {
@@ -54,7 +54,8 @@ export function respond(raw,state) {
   const feeling=String(raw).normalize('NFKC').replace(/\s+/g,'');
   const recovered=/^(?:(?:ちょっと|少し|さっきより|なんか|おかげで|僕は|私は|チョット|スコシ|サッキヨリ|ナンカ|オカゲデ|ボクハ|ワタシハ)[、,]*)*(?:元気|ゲンキ)(?:が|ガ)?(?:出た|出てきた|デタ|デテキタ)(?:よ|ね|かも|ヨ|ネ|カモ)?[。！!]*$/.test(feeling);
   const lowEnergy=/^(?:(?:ちょっと|少し|なんか|チョット|スコシ|ナンカ)[、,]*)*(?:元気|ゲンキ)(?:が|ガ)?(?:出ない|出なかった|デナイ|デナカッタ)[。！!]*$/.test(feeling);
-  if(/^(?:(?:ジャア|ソレジャ|ソレデハ|デハ|マタ)[:：、,]*)?(?:バイバイ|サヨウナラ|サヨナラ|BYE|マタネ|今日ハココマデ|キョウハココマデ)(?:ネ|デス)?[?？]*$/.test(compact)) {s.ended=true;say(s.name?`${s.name} ハ オボエタワ\nホカハ ワスレタ フリ シトク`:'バイバイ\nディスク ハ ヌカナイデネ','bye','soft');}
+  const farewell=normalize(String(raw).trim().replace(/[。!！]+$/,'').split(/[。!！、,]/).at(-1)).replaceAll(' ','');
+  if(/^(?:(?:ジャア|ソレジャ|ソレデハ|デハ|マタ)[:：、,]*)?(?:バイバイ|サヨウナラ|サヨナラ|BYE|マタネ|今日ハココマデ|キョウハココマデ)(?:ネ|デス)?[?？]*$/.test(farewell)) {s.ended=true;say(s.name?`${s.name} ハ オボエタワ\nホカハ ワスレタ フリ シトク`:'バイバイ\nディスク ハ ヌカナイデネ','bye','soft');}
   else if(s.ended && !/コンニチ[ハワ]|タダイマ|オハヨウ/.test(compact)) say('モウ イチド コンニチハ ッテ\nイッテクレタラ オキルワ','asleep','soft');
   else if(recovered)say('少し元気出たのね。アタシも、ちょっとうれしい。','comfort','soft');
   else if(lowEnergy)say('まだ元気が出ないのね。無理に明るくしなくていいよ。','comfort','soft');

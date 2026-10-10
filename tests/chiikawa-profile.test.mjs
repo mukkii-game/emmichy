@@ -58,11 +58,12 @@ test('one fixed identity answers personal questions without taking player facts 
  assert.match(profileReply('あなたは日本に来たことある？').text,/1度.*東京.*5日/);
  assert.match(profileReply('あなたの家族は？').text,/14歳の弟/);
  assert.match(profileReply('あなたは何が好き？').text,/漫画|ゲーム/);
+ assert.match(profileReply('シーサーが頑張ってると応援したくなるよね。えみちぃはハチワレも好き？').text,/ハチワレ大好き/);
  assert.equal(profileReply('私の家族は4人だよ'),null);
  assert.equal(profileReply('私の年齢を覚えてる？'),null);
  assert.equal(profileReply('ジョジョが好き'),null);
  assert.match(profilePrompt(),/耳知識/);assert.doesNotMatch(profilePrompt(),/EVIL|40歳|アメリカ/);
- for(const raw of ['スウェーデン生まれなの？','スウェ ー デン ウマレナ ノ?','ヨーテボリ出身？']){
+ for(const raw of ['スウェーデン生まれなの？','スウェ ー デン ウマレナ ノ?','ヨーテボリ出身？','へえ、ヨーテボリ生まれなの？ 今もそこに住んでる？']){
   const answer=preparedReply(raw,state,{}, {kind:respond(raw,state).kind});assert.equal(answer.topic,'profile');assert.match(answer.text,/スウェーデン.*ヨーテボリ.*生まれ育った/);assert.match(answer.gesture,/アタシの国/);
  }
  assert.equal(profileReply('私もスウェーデン生まれなの'),null);

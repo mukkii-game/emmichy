@@ -1,22 +1,22 @@
-import {selfReaction,complimentReaction} from './profile.js?v=20261010-chiihype2';
-import {freshState,restoreState,respond,normalize} from './engine.js?v=20261010-chiihype2';
+import {selfReaction,complimentReaction} from './profile.js?v=20261010-virtual1';
+import {freshState,restoreState,respond,normalize} from './engine.js?v=20261010-virtual1';
 import {chiikawaReply,checkedAt} from './topics.js?v=20261006-mix1';
-import {text,kana} from './font.js?v=20261010-chiihype2';
+import {text,kana} from './font.js?v=20261010-virtual1';
 import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation,remainingTime} from './session.js?v=20261010-fanmemory1';
 import {noteChiikawa,chiikawaReminder} from './chiikawa-reminder.js?v=20261010-fanmemory1';
 import {createAudioDirector,bindAudioLifecycle} from './audio.js?v=20261010-bgm2';
 import {CHAT_API_URL} from './config.js?v=20261006-mix1';
 import {advancePerformance} from './performance.js?v=20261008-humor1';
 import {requestChat,chatAvailable,unwantedFanRedirect} from './chat.js?v=20261009-pacing2';
-import {readableText,loadReadings} from './readable.js?v=20261010-chiihype2';
-import {selectKnowledge,rememberKnowledge,fanRecovery} from './fandom.js?v=20261010-chiihype2';
+import {readableText,loadReadings} from './readable.js?v=20261010-virtual1';
+import {selectKnowledge,rememberKnowledge,fanRecovery} from './fandom.js?v=20261010-virtual1';
 import {selectGap} from './gap.js?v=20261006-mix1';
-import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261010-chiihype2';
+import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261010-virtual1';
 import {cultureReply} from './culture.js?v=20261009-profile1';
-import {chooseFiller,startFiller,longFiller,retainAside,idleAside,createIdleSequence} from './filler.js?v=20261010-chiihype2';
-import {learnInterests,needsFirstModelReply} from './balance.js?v=20261010-chiihype2';
+import {chooseFiller,startFiller,longFiller,retainAside,idleAside,createIdleSequence} from './filler.js?v=20261010-virtual1';
+import {learnInterests,needsFirstModelReply} from './balance.js?v=20261010-virtual1';
 import {selectOpening,planOpening,openingTiming} from './openings.js?v=20261009-readmenu1';
-import {preparedReply} from './routing.js?v=20261010-chiihype2';
+import {preparedReply} from './routing.js?v=20261010-virtual1';
 import {cleanConversation,noteConversationReply} from './conversation.js?v=20261008-humor1';
 import {offlineFallback} from './fallback.js?v=20261008-finish1';
 import {portraitColors} from './portrait-palette.js?v=20261008-portrait3';
@@ -270,10 +270,11 @@ if(isLocal&&!offline){
 setInterval(draw,160);setInterval(async()=>{
  if(ready&&readingsSettled&&!document.hidden&&!busy&&!continuing&&!session?.finished&&!state.ended&&!composing){
   if(continuation.pending){
+   if($('entry').value.trim())return;
    const line=continuation.peek(Date.now(),{composing});if(!line)return;
    const version=continuationVersion;continuing=true;live='';
    for(const c of readableText(line,tokenizer)){
-    if(version!==continuationVersion||busy||document.hidden||!ready||composing){continuing=false;draw();return;}
+    if(version!==continuationVersion||busy||document.hidden||!ready||composing||$('entry').value.trim()){continuing=false;draw();return;}
     live+=c;draw();await wait(22);
    }
    if(version===continuationVersion&&!busy&&!document.hidden&&ready&&!composing){recordAside(line);continuation.spoken(Date.now());noteActivity();}

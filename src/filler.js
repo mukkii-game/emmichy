@@ -1,8 +1,8 @@
 import {unwantedFanRedirect} from './chat.js?v=20261009-pacing2';
-import {japaneseExamples,complimentReaction,profileAside} from './profile.js?v=20261010-chiihype2';
+import {japaneseExamples,complimentReaction,profileAside} from './profile.js?v=20261010-virtual1';
 import {waitingReply} from './waiting-db.js?v=20261008-listen3';
 import {recognizeName,namedGesture,namedFollowup} from './names.js?v=20261010-fanmemory1';
-import {selectKnowledge,waterPlayCorrection} from './fandom.js?v=20261010-chiihype2';
+import {selectKnowledge,waterPlayCorrection} from './fandom.js?v=20261010-virtual1';
 // Listening gestures are dialogue, retained alongside the eventual answer.
 export function retainAside(history,line,{pendingReply=false}={}){
  const next=[...history];

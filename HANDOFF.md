@@ -1,3 +1,9 @@
+# Current checkpoint — bounded virtual players, 2026-10-10
+
+User authorized virtual test-player subagents, then requested restrained token use. Three same-parent-model roles made 19 adaptive offline sends; no game-LLM calls. Actual-app simulated DOM/virtual clock, compressed typing; no human/live-model/browser/audio validation. Fixed nonempty-draft continuation, preference-question misclassification, prefixed birthplace question and natural sentence-ending farewells. 153 frontend tests + 37 backend tests pass, plus targeted actual-app replay; no extra AI reviewer. Runtime 20261010-virtual1, branch codex/virtual-player-review-20261010. Report and remaining concrete failures: docs/virtual-player-review-20261010.md, original 3 logs/reviews, targeted-after.json. Known bugs use automated replay; future subjective rounds default 1–2 briefly instructed roles, 6–8 sends. Sole Director remains this session; no Relay. Candidate awaiting the authorized pilot/backend publication; frontend main untouched.
+
+---
+
 # Current checkpoint — Chiikawa excitement and handmade ornament, 2026-10-10
 
 Frontend codex/chiikawa-hype-20261010; backend codex/emmichy-chiikawa-hype-20261010. Runtime20261010-chiihype2. Builds on published PR23 BGM and PR22/11 memory/persona. Publication remains the authorized pilot branch and backend main; frontend main6343213bc8f904a43c02319fc9b421ce2dd4dc0f stays unchanged.

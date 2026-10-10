@@ -11,14 +11,14 @@ test('actual screen requests AI for its first ordinary bank turn, retries failur
   async emit(t){for(const fn of this.listeners[t]||[])await fn({preventDefault(){}});}
   setAttribute(){}focus(){}getContext(){return {fillRect(){},save(){},scale(){},restore(){}};}
  }
- const elements=new Map(),storage=new Map(),requests=[],intervals=[];let now=1000000,fail=false;
+ const elements=new Map(),storage=new Map(),requests=[],intervals=[],timers=[];let now=1000000,fail=false,deferred=false,settle;
  const store={getItem:k=>storage.get(k)||null,setItem:(k,v)=>storage.set(k,v)};
  try{
   globalThis.document={hidden:false,getElementById:id=>{if(!elements.has(id))elements.set(id,new Element());return elements.get(id);},createElement:()=>new Element(),addEventListener(){}};
   globalThis.window={addEventListener(){}};globalThis.location={hostname:'preview.invalid',search:''};
   globalThis.localStorage=store;globalThis.sessionStorage=store;globalThis.Image=class{};
-  globalThis.setInterval=(fn,ms)=>{intervals.push({fn,ms});return 0;};globalThis.setTimeout=(fn,ms)=>{if(ms<2000)queueMicrotask(fn);return 0;};globalThis.clearTimeout=()=>{};Date.now=()=>now;
-  globalThis.fetch=async(url,options)=>{const payload=JSON.parse(options.body);requests.push(payload);return fail?new Response('',{status:503}):Response.json({text:payload.input.includes('プリン')?'プリン、ひと口ずつ食べたいね。アタシなら途中で我慢できなくなっちゃう。':'その街の話、聞けてうれしい！ 地図を一緒に見たいな。',provider:'groq'});};
+  globalThis.setInterval=(fn,ms)=>{intervals.push({fn,ms});return 0;};globalThis.setTimeout=(fn,ms)=>{if(ms<2000)queueMicrotask(fn);else timers.push({fn,ms});return 0;};globalThis.clearTimeout=()=>{};Date.now=()=>now;
+  globalThis.fetch=async(url,options)=>{const payload=JSON.parse(options.body);requests.push(payload);if(deferred)return new Promise(resolve=>settle=resolve);return fail?new Response('',{status:503}):Response.json({text:payload.input.includes('プリン')?'プリン、ひと口ずつ食べたいね。アタシなら途中で我慢できなくなっちゃう。':'その街の話、聞けてうれしい！ 地図を一緒に見たいな。',provider:'groq'});};
   await import('../src/app.js?first-model-test');await Promise.resolve();
   const send=async raw=>{elements.get('entry').value=raw;await elements.get('talk').emit('submit');};
   const session=()=>JSON.parse(storage.get('emmichy-session'));
@@ -32,7 +32,7 @@ test('actual screen requests AI for its first ordinary bank turn, retries failur
   assert.equal(session().dialogueUse.ai,1);
   assert.match(JSON.parse(storage.get('enny-memory-v1')).history.at(-1).text,/その街/);
   await send('あなたは何歳？');assert.equal(requests.length,1,'after success a closed profile answer stays local');
-  await send('プリンを食べたよ');assert.equal(requests.length,2,'an ordinary prepared answer keeps using AI after the first success');
+  await send('プリンを食べたよ');assert.equal(requests.length,2,'a suitable bank does not force good AI conversation to stop at a quota');
   assert.equal(session().dialogueUse.ai,2);assert.match(JSON.parse(storage.get('enny-memory-v1')).history.at(-1).text,/ひと口ずつ/);
   elements.get('restart-chat').onclick();elements.get('new-chat').onclick();
   assert.equal(session().dialogueUse,undefined);
@@ -53,5 +53,15 @@ test('actual screen requests AI for its first ordinary bank turn, retries failur
   now+=6000;prior=count();await idle();assert.equal(count(),prior+1);
   assert.match(JSON.parse(storage.get('enny-memory-v1')).history.at(-1).text,/ちいかわ/);
   assert.equal(session().chiikawaReminders,1);assert.equal(requests.length,5,'the reminder never spends an extra AI request');
+  deferred=true;const pending=send('今日は雨の中を散歩してきた');
+  for(let i=0;i<30;i++)await Promise.resolve();
+  assert.equal(typeof settle,'function');
+  now+=2000;timers.findLast(timer=>timer.ms===2000).fn();
+  now+=3000;timers.findLast(timer=>timer.ms===3000).fn();
+  assert.ok(JSON.parse(storage.get('enny-memory-v1')).history.some(h=>/散歩してると、看板/.test(h.text)),'the second wait beat follows the topic rather than another generic filler');
+  intervals.find(timer=>timer.ms===5000).fn();
+  settle(new Response('',{status:429}));await pending;deferred=false;
+  assert.equal(session().chatHealth.rateLimited,true,'waiting dialogue and autosave must not detach the request session');
+  const attempts=requests.length;await send('プリンを食べたよ');assert.equal(requests.length,attempts,'a slow 429 prevents the next request too');
  }finally{Date.now=realNow;for(const key of keys)if(saved[key]===undefined)delete globalThis[key];else globalThis[key]=saved[key];}
 });

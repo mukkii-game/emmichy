@@ -1,0 +1,672 @@
+{
+  "mode": "actual app and live relay (max3 calls, stop429); simulated DOM/virtual pauses; compressed typing; real request wallMs; no browser/audio",
+  "actions": [
+    {
+      "action": {
+        "type": "start"
+      },
+      "result": {
+        "atSeconds": 0,
+        "messages": [
+          {
+            "atMs": 0,
+            "role": "enny",
+            "text": "はじめまして！",
+            "screen": "ハジメマシテ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0,
+        "liveCalls": [
+          {
+            "input": "今日は散歩で小さいパン屋を見つけたよ",
+            "wallMs": 3653,
+            "status": 200,
+            "provider": "groq",
+            "text": "小さなパン屋、かわいいね！　店内のにおいでお腹がすいたし、シナモンロールがあったらぜひ食べてみたいな。　日本のベーカリーは種類が多くて、どれも美味しそうでワクワクするよ。"
+          },
+          {
+            "input": "音楽は好きだけど、歌詞の日本語はまだわからないんだ",
+            "wallMs": 5401,
+            "status": 502
+          },
+          {
+            "input": "プリンを食べたよ",
+            "wallMs": 5345,
+            "status": 502
+          }
+        ]
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "今日は散歩で小さいパン屋を見つけたよ"
+      },
+      "result": {
+        "atSeconds": 0,
+        "messages": [
+          {
+            "atMs": 0,
+            "role": "user",
+            "text": "今日は散歩で小さいパン屋を見つけたよ",
+            "screen": "キョウ ハ サンポ デ チイサイ パンヤ ヲ ミツケタヨ"
+          },
+          {
+            "atMs": 0,
+            "role": "enny",
+            "text": "ウンウン…。",
+            "screen": "ウンウン...。"
+          },
+          {
+            "atMs": 0,
+            "role": "enny",
+            "text": "小さなパン屋、かわいいね!",
+            "screen": "チイサナ パンヤ、 カワイイネ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1,
+        "dialogueUse": {
+          "ai": 1,
+          "bank": 0
+        },
+        "dialogueMix": {
+          "ai": 1,
+          "bank": 0
+        },
+        "liveCalls": [
+          {
+            "input": "今日は散歩で小さいパン屋を見つけたよ",
+            "wallMs": 3653,
+            "status": 200,
+            "provider": "groq",
+            "text": "小さなパン屋、かわいいね！　店内のにおいでお腹がすいたし、シナモンロールがあったらぜひ食べてみたいな。　日本のベーカリーは種類が多くて、どれも美味しそうでワクワクするよ。"
+          },
+          {
+            "input": "音楽は好きだけど、歌詞の日本語はまだわからないんだ",
+            "wallMs": 5401,
+            "status": 502
+          },
+          {
+            "input": "プリンを食べたよ",
+            "wallMs": 5345,
+            "status": 502
+          }
+        ]
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 15
+      },
+      "result": {
+        "atSeconds": 15,
+        "messages": [
+          {
+            "atMs": 4000,
+            "role": "enny",
+            "text": "店内のにおいでお腹がすいたし、シナモンロールがあったらぜひ食べてみたいな。",
+            "screen": "テンナイ ノ ニオイ デ オナカ ガ スイタ シ、 シナモン ロール ガ アッタラ ゼヒ タベテ ミタイナ。"
+          },
+          {
+            "atMs": 9000,
+            "role": "enny",
+            "text": "日本のベーカリーは種類が多くて、どれも美味しそうでワクワクするよ。",
+            "screen": "ニッポン ノ ベーカリー ハ シュルイ ガ オオクテ、 ドレ モ オイシソウデ ワクワク スルヨ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1,
+        "dialogueUse": {
+          "ai": 1,
+          "bank": 0
+        },
+        "dialogueMix": {
+          "ai": 1,
+          "bank": 0
+        },
+        "liveCalls": [
+          {
+            "input": "今日は散歩で小さいパン屋を見つけたよ",
+            "wallMs": 3653,
+            "status": 200,
+            "provider": "groq",
+            "text": "小さなパン屋、かわいいね！　店内のにおいでお腹がすいたし、シナモンロールがあったらぜひ食べてみたいな。　日本のベーカリーは種類が多くて、どれも美味しそうでワクワクするよ。"
+          },
+          {
+            "input": "音楽は好きだけど、歌詞の日本語はまだわからないんだ",
+            "wallMs": 5401,
+            "status": 502
+          },
+          {
+            "input": "プリンを食べたよ",
+            "wallMs": 5345,
+            "status": 502
+          }
+        ]
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "プリンを食べたよ"
+      },
+      "result": {
+        "atSeconds": 15,
+        "messages": [
+          {
+            "atMs": 15000,
+            "role": "user",
+            "text": "プリンを食べたよ",
+            "screen": "プリン ヲ タベタヨ"
+          },
+          {
+            "atMs": 15000,
+            "role": "enny",
+            "text": "プリン食べたのね。",
+            "screen": "プリン タベタノネ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 2,
+        "dialogueUse": {
+          "ai": 1,
+          "bank": 1
+        },
+        "dialogueMix": {
+          "ai": 1,
+          "bank": 1
+        },
+        "liveCalls": [
+          {
+            "input": "今日は散歩で小さいパン屋を見つけたよ",
+            "wallMs": 3653,
+            "status": 200,
+            "provider": "groq",
+            "text": "小さなパン屋、かわいいね！　店内のにおいでお腹がすいたし、シナモンロールがあったらぜひ食べてみたいな。　日本のベーカリーは種類が多くて、どれも美味しそうでワクワクするよ。"
+          },
+          {
+            "input": "音楽は好きだけど、歌詞の日本語はまだわからないんだ",
+            "wallMs": 5401,
+            "status": 502
+          },
+          {
+            "input": "プリンを食べたよ",
+            "wallMs": 5345,
+            "status": 502
+          }
+        ]
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 15
+      },
+      "result": {
+        "atSeconds": 30,
+        "messages": [
+          {
+            "atMs": 19000,
+            "role": "enny",
+            "text": "アタシ、聞いただけでお腹すいてきた。",
+            "screen": "アタシ、 キイタ ダケ デ オナカ スイテ キタ。"
+          },
+          {
+            "atMs": 29000,
+            "role": "enny",
+            "text": "さっきのご飯の話、思い出したらお腹すいてきちゃった。",
+            "screen": "サッキ ノ ゴハン ノ ハナシ、 オモイダシタラ オナカ スイテ キチャッタ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 2,
+        "dialogueUse": {
+          "ai": 1,
+          "bank": 1
+        },
+        "dialogueMix": {
+          "ai": 1,
+          "bank": 1
+        },
+        "liveCalls": [
+          {
+            "input": "今日は散歩で小さいパン屋を見つけたよ",
+            "wallMs": 3653,
+            "status": 200,
+            "provider": "groq",
+            "text": "小さなパン屋、かわいいね！　店内のにおいでお腹がすいたし、シナモンロールがあったらぜひ食べてみたいな。　日本のベーカリーは種類が多くて、どれも美味しそうでワクワクするよ。"
+          },
+          {
+            "input": "音楽は好きだけど、歌詞の日本語はまだわからないんだ",
+            "wallMs": 5401,
+            "status": 502
+          },
+          {
+            "input": "プリンを食べたよ",
+            "wallMs": 5345,
+            "status": 502
+          }
+        ]
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "音楽は好きだけど、歌詞の日本語はまだわからないんだ"
+      },
+      "result": {
+        "atSeconds": 30,
+        "messages": [
+          {
+            "atMs": 30000,
+            "role": "user",
+            "text": "音楽は好きだけど、歌詞の日本語はまだわからないんだ",
+            "screen": "オンガク ハ スキダ ケド、 カシ ノ ニホンゴ ハ マダ ワカラナイ ンダ"
+          },
+          {
+            "atMs": 30000,
+            "role": "enny",
+            "text": "ソウネー…。",
+            "screen": "ソウネー...。"
+          },
+          {
+            "atMs": 30000,
+            "role": "enny",
+            "text": "アタシ、歌詞が全部わからなくても、気に入った曲は鼻歌で先に覚えちゃう。",
+            "screen": "アタシ、 カシ ガ ゼンブ ワカラナクテ モ、 キニイッタ キョク ハ ハナウタ デ サキ ニ オボエチャウ。"
+          },
+          {
+            "atMs": 30000,
+            "role": "enny",
+            "text": "音楽の話、いいね。",
+            "screen": "オンガク ノ ハナシ、 イイネ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 3,
+        "dialogueUse": {
+          "ai": 1,
+          "bank": 2
+        },
+        "dialogueMix": {
+          "ai": 1,
+          "bank": 2
+        },
+        "liveCalls": [
+          {
+            "input": "今日は散歩で小さいパン屋を見つけたよ",
+            "wallMs": 3653,
+            "status": 200,
+            "provider": "groq",
+            "text": "小さなパン屋、かわいいね！　店内のにおいでお腹がすいたし、シナモンロールがあったらぜひ食べてみたいな。　日本のベーカリーは種類が多くて、どれも美味しそうでワクワクするよ。"
+          },
+          {
+            "input": "音楽は好きだけど、歌詞の日本語はまだわからないんだ",
+            "wallMs": 5401,
+            "status": 502
+          },
+          {
+            "input": "プリンを食べたよ",
+            "wallMs": 5345,
+            "status": 502
+          }
+        ]
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 15
+      },
+      "result": {
+        "atSeconds": 45,
+        "messages": [
+          {
+            "atMs": 34000,
+            "role": "enny",
+            "text": "アタシ、曲の言葉が全部わからなくても鼻歌は先に覚える。",
+            "screen": "アタシ、 キョク ノ コトバ ガ ゼンブ ワカラナクテ モ ハナウタ ハ サキ ニ オボエル。"
+          },
+          {
+            "atMs": 44000,
+            "role": "enny",
+            "text": "アタシ、スウェーデンのヨーテボリの近くで育ったの。",
+            "screen": "アタシ、 スウェーデン ノ ヨーテボリ ノ チカク デ ソダッタノ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 3,
+        "dialogueUse": {
+          "ai": 1,
+          "bank": 2
+        },
+        "dialogueMix": {
+          "ai": 1,
+          "bank": 2
+        },
+        "liveCalls": [
+          {
+            "input": "今日は散歩で小さいパン屋を見つけたよ",
+            "wallMs": 3653,
+            "status": 200,
+            "provider": "groq",
+            "text": "小さなパン屋、かわいいね！　店内のにおいでお腹がすいたし、シナモンロールがあったらぜひ食べてみたいな。　日本のベーカリーは種類が多くて、どれも美味しそうでワクワクするよ。"
+          },
+          {
+            "input": "音楽は好きだけど、歌詞の日本語はまだわからないんだ",
+            "wallMs": 5401,
+            "status": 502
+          },
+          {
+            "input": "プリンを食べたよ",
+            "wallMs": 5345,
+            "status": 502
+          }
+        ]
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "プリンを食べたよ"
+      },
+      "result": {
+        "atSeconds": 45,
+        "messages": [
+          {
+            "atMs": 45000,
+            "role": "user",
+            "text": "プリンを食べたよ",
+            "screen": "プリン ヲ タベタヨ"
+          },
+          {
+            "atMs": 45000,
+            "role": "enny",
+            "text": "フムフム…。",
+            "screen": "フムフム...。"
+          },
+          {
+            "atMs": 45000,
+            "role": "enny",
+            "text": "食べ物の名前って、覚えたらすぐ役に立つ日本語だね。",
+            "screen": "タベモノ ノ ナマエッテ、 オボエタラ スグ ヤクニタツ ニホンゴダネ。"
+          },
+          {
+            "atMs": 45000,
+            "role": "enny",
+            "text": "プリン。",
+            "screen": "プリン。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 4,
+        "dialogueUse": {
+          "ai": 1,
+          "bank": 3
+        },
+        "dialogueMix": {
+          "ai": 1,
+          "bank": 3
+        },
+        "liveCalls": [
+          {
+            "input": "今日は散歩で小さいパン屋を見つけたよ",
+            "wallMs": 3653,
+            "status": 200,
+            "provider": "groq",
+            "text": "小さなパン屋、かわいいね！　店内のにおいでお腹がすいたし、シナモンロールがあったらぜひ食べてみたいな。　日本のベーカリーは種類が多くて、どれも美味しそうでワクワクするよ。"
+          },
+          {
+            "input": "音楽は好きだけど、歌詞の日本語はまだわからないんだ",
+            "wallMs": 5401,
+            "status": 502
+          },
+          {
+            "input": "プリンを食べたよ",
+            "wallMs": 5345,
+            "status": 502
+          }
+        ]
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 15
+      },
+      "result": {
+        "atSeconds": 60,
+        "messages": [
+          {
+            "atMs": 49000,
+            "role": "enny",
+            "text": "アタシ、今ちょっとメニューを見る目になった。",
+            "screen": "アタシ、 イマ チョット メニュー ヲ ミル メ ニ ナッタ。"
+          },
+          {
+            "atMs": 59000,
+            "role": "enny",
+            "text": "さっきのご飯の話、思い出したらお腹すいてきちゃった。",
+            "screen": "サッキ ノ ゴハン ノ ハナシ、 オモイダシタラ オナカ スイテ キチャッタ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 4,
+        "dialogueUse": {
+          "ai": 1,
+          "bank": 3
+        },
+        "dialogueMix": {
+          "ai": 1,
+          "bank": 3
+        },
+        "liveCalls": [
+          {
+            "input": "今日は散歩で小さいパン屋を見つけたよ",
+            "wallMs": 3653,
+            "status": 200,
+            "provider": "groq",
+            "text": "小さなパン屋、かわいいね！　店内のにおいでお腹がすいたし、シナモンロールがあったらぜひ食べてみたいな。　日本のベーカリーは種類が多くて、どれも美味しそうでワクワクするよ。"
+          },
+          {
+            "input": "音楽は好きだけど、歌詞の日本語はまだわからないんだ",
+            "wallMs": 5401,
+            "status": 502
+          },
+          {
+            "input": "プリンを食べたよ",
+            "wallMs": 5345,
+            "status": 502
+          }
+        ]
+      }
+    }
+  ],
+  "transcript": [
+    {
+      "atMs": 0,
+      "message": {
+        "role": "enny",
+        "text": "はじめまして！"
+      }
+    },
+    {
+      "atMs": 0,
+      "message": {
+        "role": "user",
+        "text": "今日は散歩で小さいパン屋を見つけたよ"
+      }
+    },
+    {
+      "atMs": 0,
+      "message": {
+        "role": "enny",
+        "text": "ウンウン…。"
+      }
+    },
+    {
+      "atMs": 0,
+      "message": {
+        "role": "enny",
+        "text": "小さなパン屋、かわいいね!"
+      }
+    },
+    {
+      "atMs": 4000,
+      "message": {
+        "role": "enny",
+        "text": "店内のにおいでお腹がすいたし、シナモンロールがあったらぜひ食べてみたいな。"
+      }
+    },
+    {
+      "atMs": 9000,
+      "message": {
+        "role": "enny",
+        "text": "日本のベーカリーは種類が多くて、どれも美味しそうでワクワクするよ。"
+      }
+    },
+    {
+      "atMs": 15000,
+      "message": {
+        "role": "user",
+        "text": "プリンを食べたよ"
+      }
+    },
+    {
+      "atMs": 15000,
+      "message": {
+        "role": "enny",
+        "text": "プリン食べたのね。"
+      }
+    },
+    {
+      "atMs": 19000,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、聞いただけでお腹すいてきた。"
+      }
+    },
+    {
+      "atMs": 29000,
+      "message": {
+        "role": "enny",
+        "text": "さっきのご飯の話、思い出したらお腹すいてきちゃった。"
+      }
+    },
+    {
+      "atMs": 30000,
+      "message": {
+        "role": "user",
+        "text": "音楽は好きだけど、歌詞の日本語はまだわからないんだ"
+      }
+    },
+    {
+      "atMs": 30000,
+      "message": {
+        "role": "enny",
+        "text": "ソウネー…。"
+      }
+    },
+    {
+      "atMs": 30000,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、歌詞が全部わからなくても、気に入った曲は鼻歌で先に覚えちゃう。"
+      }
+    },
+    {
+      "atMs": 30000,
+      "message": {
+        "role": "enny",
+        "text": "音楽の話、いいね。"
+      }
+    },
+    {
+      "atMs": 34000,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、曲の言葉が全部わからなくても鼻歌は先に覚える。"
+      }
+    },
+    {
+      "atMs": 44000,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、スウェーデンのヨーテボリの近くで育ったの。"
+      }
+    },
+    {
+      "atMs": 45000,
+      "message": {
+        "role": "user",
+        "text": "プリンを食べたよ"
+      }
+    },
+    {
+      "atMs": 45000,
+      "message": {
+        "role": "enny",
+        "text": "フムフム…。"
+      }
+    },
+    {
+      "atMs": 45000,
+      "message": {
+        "role": "enny",
+        "text": "食べ物の名前って、覚えたらすぐ役に立つ日本語だね。"
+      }
+    },
+    {
+      "atMs": 45000,
+      "message": {
+        "role": "enny",
+        "text": "プリン。"
+      }
+    },
+    {
+      "atMs": 49000,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、今ちょっとメニューを見る目になった。"
+      }
+    },
+    {
+      "atMs": 59000,
+      "message": {
+        "role": "enny",
+        "text": "さっきのご飯の話、思い出したらお腹すいてきちゃった。"
+      }
+    }
+  ],
+  "liveCalls": [
+    {
+      "input": "今日は散歩で小さいパン屋を見つけたよ",
+      "wallMs": 3653,
+      "status": 200,
+      "provider": "groq",
+      "text": "小さなパン屋、かわいいね！　店内のにおいでお腹がすいたし、シナモンロールがあったらぜひ食べてみたいな。　日本のベーカリーは種類が多くて、どれも美味しそうでワクワクするよ。"
+    },
+    {
+      "input": "音楽は好きだけど、歌詞の日本語はまだわからないんだ",
+      "wallMs": 5401,
+      "status": 502
+    },
+    {
+      "input": "プリンを食べたよ",
+      "wallMs": 5345,
+      "status": 502
+    }
+  ]
+}

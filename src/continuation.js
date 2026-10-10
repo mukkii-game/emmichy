@@ -56,7 +56,7 @@ export function planContinuation(text,input='',state={},options={}){
  const parts=sentences.flatMap(sentence=>speechChunks(sentence,options).map((text,i)=>({text,continues:i>0})));
  if(!parts.length)return {first:String(text),later:[]};
  if(parts.length>1&&parts[0].text.length<14&&/^(?:.+、[なねよ]|ウン|うん|そっか|ソッカ|エッ|えっ)[!！。…]*$/.test(parts[0].text)&&fold((options.display||String)(parts[0].text+parts[1].text)).length<=60)parts.splice(0,2,{text:parts.slice(0,2).map(p=>p.text).join(' '),continues:false});
- const first=parts.shift().text,later=parts.map(p=>p.text),delays=parts.map((p,i)=>p.continues?1500:i===0?4000:5000);
+ const first=parts.shift().text,later=parts.map(p=>p.text),delays=parts.map((p,i)=>p.continues?1500:options.enthusiastic?2000:i===0?4000:5000);
  const history=(state.history||[]).filter(h=>h.role==='enny').map(h=>fold(h.text));
  if(!later.length&&!/つらい|苦しい|相談|病気|いじめ|嫌い|苦手|やめ|以外|違う|ちがう|知らない/.test(input)&&!/わから|分から|知らない|シラナイ|ワカラ|わかんない/.test(first)&&!/[?？]$/.test(first)){
   const topic=extensions.find(e=>e.match.test(fold(input))&&e.facet.test(fold(input))&&(e.match.test(fold(text))||e.facet.test(fold(text))));

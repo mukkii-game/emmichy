@@ -24,6 +24,8 @@ test('actual screen requests AI for its first ordinary bank turn, retries failur
   const session=()=>JSON.parse(storage.get('emmichy-session'));
   const draw=intervals.find(x=>x.ms===160).fn,idle=intervals.find(x=>x.ms===250).fn;
   assert.equal(elements.get('remaining-time').textContent,'5:00');
+  await send('スウェ ー デン ウマレナ ノ?');assert.equal(requests.length,0,'her fixed birthplace is answered immediately before the first AI turn');
+  assert.match(JSON.parse(storage.get('enny-memory-v1')).history.at(-1).text,/生まれ育った/);
   now+=1000;draw();assert.equal(elements.get('remaining-time').textContent,'4:59');
   await send('アキハバラ');
   assert.equal(requests.length,1,'a prepared place reply no longer prevents the first AI call');

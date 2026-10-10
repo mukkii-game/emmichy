@@ -1,8 +1,8 @@
 import {unwantedFanRedirect} from './chat.js?v=20261009-pacing2';
-import {japaneseExamples,complimentReaction} from './profile.js?v=20261010-fanmemory1';
+import {japaneseExamples,complimentReaction,profileAside} from './profile.js?v=20261010-chiihype2';
 import {waitingReply} from './waiting-db.js?v=20261008-listen3';
 import {recognizeName,namedGesture,namedFollowup} from './names.js?v=20261010-fanmemory1';
-import {selectKnowledge,waterPlayCorrection} from './fandom.js?v=20261010-fanmemory1';
+import {selectKnowledge,waterPlayCorrection} from './fandom.js?v=20261010-chiihype2';
 // Listening gestures are dialogue, retained alongside the eventual answer.
 export function retainAside(history,line,{pendingReply=false}={}){
  const next=[...history];
@@ -51,10 +51,10 @@ export function longFiller(input,recent=[],state={}){
 }
 export function idleAside(history=[],index=0){
  const lastUser=history.filter(h=>h.role==='user').at(-1)?.text||'';
- if(/つらい|苦しい|相談|病気|いじめ/.test(lastUser))return ['急がなくて大丈夫。ここにいるよ。','アタシ、少しここで待ってるね。'][index%2];
+ if(/つらい|ツライ|苦しい|クルシイ|相談|病気|いじめ|イジメ/.test(lastUser))return ['急がなくて大丈夫。ここにいるよ。','アタシ、少しここで待ってるね。'][index%2];
  const food=/ご飯|ごはん|ゴハン|牛丼|ギュウドン|丼|ドンブリ|吉野家|ヨシノヤ|チーズ|プリン|そば|ソバ|食べ|タベ/.test(lastUser);
- const pool=food?['さっきのご飯の話、思い出したらお腹すいてきちゃった。','アタシ、食べ物の話になると急に元気なの。フフ。','おいしい物の話、まだ聞いていたいな。']:['別の話でもいいよ。ゆっくりで大丈夫。',japaneseExamples[(history.filter(h=>h.role==='user').length+index)%japaneseExamples.length],'急がなくていいよ。アタシ、ここにいるから。'];
- return pool[index%pool.length];
+ const pool=['さっきのご飯の話、思い出したらお腹すいてきちゃった。','アタシ、食べ物の話になると急に元気なの。フフ。','おいしい物の話、まだ聞いていたいな。'];
+ return food?pool[index%pool.length]:profileAside(history,index);
 }
 export function startFiller(show,{schedule=setTimeout,cancel=clearTimeout,now=Date.now,later,initialDelay=2000}={}){
  let active=true,timer,lastShown=null,count=0;

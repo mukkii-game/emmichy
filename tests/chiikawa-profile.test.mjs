@@ -4,10 +4,23 @@ import {nameData} from '../src/name-data.js';
 import {recognizeName} from '../src/names.js';
 import {selectKnowledge} from '../src/fandom.js';
 import {preparedReply} from '../src/routing.js';
-import {identity,profile,profilePrompt,profileReply} from '../src/profile.js';
+import {identity,profile,profilePrompt,profileReply,accessoryCue} from '../src/profile.js';
+import {fanRecovery,fandomDirection} from '../src/fandom.js';
 import {freshState,respond,restoreState} from '../src/engine.js';
 import {readableText} from '../src/readable.js';
 const hunter={knowledge:{work:'hunter'}};
+test('the visible chest ornament is her handmade Chiikawa and opens fan talk from another topic',()=>{
+ for(const raw of ['胸のそれ何？','ムネ ニ ツケテル ノ ナニ?','そのブローチかわいいね','あなたのその飾り、作ったの？','その人形って何？','服のちいかわって作ったの？','胸の猫みたいなの何？']){
+  assert.equal(accessoryCue(raw),true,raw);
+  assert.equal(selectKnowledge(raw,hunter).work,'chiikawa');
+  const own=profileReply(raw);assert.match(own.text,/これ、ちいかわなの.*アタシが作った/);
+  const reply=fanRecovery(raw,hunter,own.text);assert.match(reply,/アタシが作った/);assert.ok(['ハチワレ','ラッコ','シーサー','モモンガ','古本屋'].filter(n=>reply.includes(n)).length>=2);
+  assert.doesNotMatch(reply,/猫|買った|公式商品/);assert.ok(reply.length<=180);
+  assert.match(fandomDirection(raw,hunter),/胸の手作りちいかわ/);
+ }
+ for(const raw of ['私のブローチは猫だよ','胸が痛いので相談','そのブローチの話はやめて','ハチワレの人形買った'])assert.equal(accessoryCue(raw),false,raw);
+ assert.match(profilePrompt(),/自分で作ったちいかわ/);assert.doesNotMatch(profileReply('あなたの服は？').text,/猫のブローチ/);
+});
 test('expanded Chiikawa cues include the requested creators, island cast and objects',()=>{
  assert.ok(nameData.filter(n=>n.work==='chiikawa').length>=180);
  for(const word of ['トクマルシューゴ','トクマル・シューゴ','ナガノ先生','セイレーン','人魚','ヒトハ','フタバ','あの子','オリオンビール','チャルメラ','ちゃりめら','さすまた','ギョニソ','拾魔','むちゃうまヨーグルト']){
@@ -49,6 +62,11 @@ test('one fixed identity answers personal questions without taking player facts 
  assert.equal(profileReply('私の年齢を覚えてる？'),null);
  assert.equal(profileReply('ジョジョが好き'),null);
  assert.match(profilePrompt(),/耳知識/);assert.doesNotMatch(profilePrompt(),/EVIL|40歳|アメリカ/);
+ for(const raw of ['スウェーデン生まれなの？','スウェ ー デン ウマレナ ノ?','ヨーテボリ出身？']){
+  const answer=preparedReply(raw,state,{}, {kind:respond(raw,state).kind});assert.equal(answer.topic,'profile');assert.match(answer.text,/スウェーデン.*ヨーテボリ.*生まれ育った/);assert.match(answer.gesture,/アタシの国/);
+ }
+ assert.equal(profileReply('私もスウェーデン生まれなの'),null);
+ assert.equal(profileReply('スウェーデンって友達の出身？'),null);
 });
 
 test('all self-name spellings get excited acknowledgement and a fixed personal answer',async()=>{

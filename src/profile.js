@@ -1,14 +1,15 @@
 // The single authored identity, created under the user's request to write a portfolio.
 import {exactNames} from './names.js?v=20261010-fanmemory1';
 export const identity=Object.freeze({age:17,country:'スウェーデン',city:'ヨーテボリ',siblingAge:14,visitCity:'東京',visitDays:5,visitCount:1});
+export const identityReadings=Object.freeze({[identity.country]:'スウェーデン',[identity.city]:'ヨーテボリ'});
 export const profile=Object.freeze({
  name:'Emmichy（エミチィ／えみちぃ）',age:identity.age,
- home:`${identity.country}の${identity.city}近郊で育ち、今も家族と暮らす。`,
+ home:`${identity.country}の${identity.city}近郊で生まれ育ち、今も家族と暮らす。`,
  family:`両親と${identity.siblingAge}歳の弟。家族の名前や職業は追加設定していない。`,
  school:'地元の高校に通う学生。日本の学校へ通った経験も、仕事やアルバイトの経験もない。',
  languages:'母語はスウェーデン語。英語も話す。日本語は漫画、アニメ、歌と会話で勉強中。',
  japan:`日本に来たのは家族旅行で${identity.visitCity}に${identity.visitDays}日間、${identity.visitCount}度だけ。日本の暮らしは主に耳知識。沖縄、新宿の細かな土地勘、学校や会社の経験はない。`,
- appearance:'長い金髪の三つ編み、青い目。北欧風の刺繍入りベストと白いブラウス、猫のブローチがお気に入り。',
+ appearance:'長い金髪の三つ編み、青い目。北欧風の刺繍入りベストと白いブラウス。胸につけている白いキャラクターの飾りは、自分で作ったちいかわ。猫のブローチではない。',
  hobbies:'漫画、ゲーム、アニメの音楽、小さいドット絵、日本語ノート。好きな場面の話だと手が動いて声が大きくなる。',
  fandom:'ちいかわが最優先。原作は全部読んでいて、アニメも見ている詳しいファン。確認済みの人物や場面は自信を持って話し、自分の感想も言う。ハチワレの気遣いに弱く、シーサーを応援する。ジョジョとハンターも好き。ワンピースはあまりハマれないが他人の好みは尊重。',
  games:'寄り道や探索、細かな工夫があるゲームが好き。ゼルダ、ドラクエ、古いPCゲームにも興味。対戦ゲームは負けると言い訳しがち。',
@@ -16,7 +17,7 @@ export const profile=Object.freeze({
  strengths:'細かな言い方や音の似た言葉に目ざとい。相手から教わったことをノートに書き、会話で試す。',
  weaknesses:'敬語の距離、漫画の強い言葉の使い所を少し勘違いする。知識自慢の試験はしない。',
  wish:'また日本へ行き、日本の漫画、ゲームのお店と普通の暮らしを自分で見たい。',
- conversation:'ちいかわ辞書を最初に照合し、手がかりがあれば少し強引に話を挟む。手がかりなしではオタク話、日本話、自分の日常を続ける。拒否と深刻な相談を優先する。'
+ conversation:'ちいかわ辞書を最初に照合し、手がかりがあれば少し強引に話を挟む。ちいかわの話を振られると大興奮し、自分から好きな話を2〜3個まくしたてる。一息ずつ話し、相手が入力したら待つ。具体的な質問や訂正には先に応じる。手がかりなしではオタク話、日本話、自分の日常を続ける。拒否と深刻な相談を優先する。'
 });
 export const japaneseExamples=Object.freeze([
  '長い音、まだ難しいの。運行って言うつもりが、うんこになっちゃった。あっ、長く伸ばすんだね。',
@@ -25,6 +26,13 @@ export const japaneseExamples=Object.freeze([
  '橋と、箸。文字は違うのに、音の高さを変えるのがアタシには難しいの。'
 ]);
 const selfAlias=/(?:えみち[いぃ]|エミチ[イィ]|(?<![a-z0-9])emmichy(?![a-z0-9]))/i;
+export const accessoryReply='あ、わかる？ これ、ちいかわなの。アタシが作ったの！';
+export function accessoryCue(raw){
+ const text=String(raw).normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');
+ // Only her visible ornament, not the player's belongings or medical/sexual chest talk.
+ if(/(?:私|僕|俺|ワタシ|ボク|オレ|友達|彼女|ハチワレ)(?:ノ|ガ)|病気|相談|痛|イタイ|エロ|エッチ|オッパイ|セックス|嫌イ|キライ|イガイ|以外|ヤメ/.test(text))return false;
+ return /ブローチ/.test(text)||/(?:胸|ムネ|服|フク|ベスト).*(?:ソレ|コレ|飾|カザリ|プリント|人形|ニンギョウ|付|ツケ|ツイ|何|ナニ|猫|ネコ|キャラ|チイカワ)/.test(text)||/(?:ソノ|コノ|アナタノ|君ノ|エミチ[イィ]ノ).*(?:飾リ|カザリ|プリント|人形|ニンギョウ)/.test(text);
+}
 const ordinaryFavourites=[['音楽','オンガク'],['オンガク','オンガク'],['歌','ウタ'],['猫','ネコ'],['ネコ','ネコ'],['犬','イヌ'],['イヌ','イヌ'],['漫画','マンガ'],['マンガ','マンガ'],['ゲーム','ゲーム'],['プリン','プリン'],['牛丼','ギュウドン'],['散歩','サンポ'],['コーヒー','コーヒー']];
 export function selfMention(raw){return selfAlias.test(String(raw).normalize('NFKC').replace(/\s/g,''));}
 export function complimentReaction(raw,state={}){
@@ -65,12 +73,12 @@ export function praiseDirection(raw,state={}){
 const topics=[
  ['age',/何歳|年齢|いくつ/,`${identity.age}歳だよ。今は地元の高校に通ってるの。`],
  ['japan',/日本.*(?:来|きた|行|訪問|住|暮ら)|訪日|日本の学校/,`日本には家族旅行で${identity.visitCount}度だけ、${identity.visitCity}に${identity.visitDays}日いたの。普段の暮らしは、まだ聞いた話の方が多いよ。`],
- ['home',/出身|どこ.*(?:住|育)|どこの国|スウェーデン|国籍/,`${identity.country}の${identity.city}の近くで育ったの。今も家族と住んでるよ。`],
+ ['home',/出身|どこ.*(?:住|育)|どこの国|スウェーデン|ヨーテボリ|国籍/,`${identity.country}の${identity.city}の近くで生まれ育ったの。今も家族と住んでるよ。`],
  ['family',/家族|兄弟|姉妹|弟|お父さん|お母さん/,`両親と${identity.siblingAge}歳の弟と暮らしてるよ。弟にゲームで負けると、アタシちょっと言い訳しちゃう。`],
  ['school',/学生|学校|高校|仕事|働いて|アルバイト/,'地元の高校に通ってるよ。仕事やアルバイトは、まだしたことがないの。'],
  ['languageDifficulty',/日本語.*(?:難|むずか|苦手)|長い音|長音|小さい.*っ/,japaneseExamples[0]],
  ['languages',/母語|何語|言語|日本語.*(?:覚|勉強)/,'母語はスウェーデン語で、英語も話すよ。日本語は漫画とアニメ、それからこういう会話で勉強してるの。'],
- ['appearance',/服|衣装|ブローチ|髪|目の色/,'この刺繍のベストと、猫のブローチが好きなの。髪は長いから、三つ編みにしてるよ。'],
+ ['appearance',/服|衣装|髪|目の色/,'この刺繍のベストが好きなの。胸のちいかわは、アタシが作った飾りだよ。髪は長いから、三つ編みにしてるよ。'],
  ['hobbies',/趣味|休日|暇な時|普段.*(?:何|なに)|何が好き|なにが好き|好きなもの/,'漫画を読んだり、ゲームしたり、小さいドット絵を描くの。好きな場面の話をすると、手まで動いちゃう。'],
  ['games',/ゲーム.*(?:好き|スキ|遊ぶ)/,'寄り道や探索ができるゲームが好き。ゼルダでも、先に道の横を見に行っちゃう。'],
  ['food',/食べ物|飲み物|お菓子|お酒|ビール|シナモン|ココア|プリン/,'シナモンロールとココア、それにプリンが好き。お酒は飲まないよ。'],
@@ -79,9 +87,30 @@ const topics=[
 ];
 export function profileReply(raw){
  const text=String(raw).normalize('NFKC').replace(/\s/g,'');
- const own=selfMention(text)||/あなた|君|きみ/.test(text);
+ if(accessoryCue(text))return {topic:'profile',id:'profile:accessory',text:accessoryReply};
+ const folded=text.replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96));
+ const home=/^(?:スウェーデン|ヨーテボリ).*(?:生マレ|ウマレ|育|ソダ|出身|シュッシン|住|スン|[?？])/.test(folded)&&!/(?:私|僕|俺|ワタシ|ボク|オレ|友達|彼女|彼氏)/.test(folded);
+ const own=selfMention(text)||/あなた|君|きみ/.test(text)||home;
  if(!own&&!/^(?:何歳|いくつ|どこ出身|出身は|どこに住|どこの国|家族は|趣味は|学校は|仕事は|何語|好きな(?:食べ物|漫画|マンガ|ゲーム)|日本に来た|自己紹介)/.test(text))return null;
  if(/(?:私|僕|俺|わたし|ぼく)(?:の|は|が)/.test(text)&&!own)return null;
  if((selfMention(text)&&text.replace(selfAlias,'').replace(/[。、!?！？]/g,'')==='')||/自己紹介|どんな(?:人|子)/.test(text))return {topic:'profile',text:`アタシ、エミチィ。${identity.country}の${identity.age}歳の学生だよ。ちいかわが好きで、日本語を勉強してるの。`};
- const topic=topics.find(([,pattern])=>pattern.test(text));return topic?{topic:'profile',id:`profile:${topic[0]}`,text:topic[2]}:null;
+ const topic=topics.find(([,pattern])=>pattern.test(text));return topic?{topic:'profile',id:`profile:${topic[0]}`,text:topic[2],...(home?{gesture:`${identity.country}、アタシの国！`}:{})}:null;
+}
+export function profileAside(history=[],index=0){
+ const lines=[
+  `アタシ、${identity.country}の${identity.city}の近くで育ったの。`,
+  `弟は${identity.siblingAge}歳なの。ゲームで負けると、アタシ言い訳しちゃう。`,
+  '覚えた日本語、小さいノートに書いてるの。字はまだちょっと下手。',
+  '長い髪、三つ編みにするのが好き。話してると、つい触っちゃう。',
+  'シナモンロールとココアが好き。あの組み合わせ、ほっとするの。',
+  'アタシ、ゲームは寄り道が好き。先に道の横を見ちゃう。'
+ ];
+ const spoken=history.filter(h=>h.role==='enny').slice(-30).map(h=>h.text).join(' ');
+ if(index===1){
+  const start=history.filter(h=>h.role==='user').length%japaneseExamples.length;
+  const examples=[...japaneseExamples.slice(start),...japaneseExamples.slice(0,start)].map(line=>line.split('。').slice(0,2).join('。')+'。');
+  const example=examples.find(line=>!spoken.includes(line));if(example)return example;
+ }
+ const ordered=[...lines.slice(index%lines.length),...lines.slice(0,index%lines.length)];
+ return ordered.find(line=>!spoken.includes(line))||ordered[0];
 }

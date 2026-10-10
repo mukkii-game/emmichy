@@ -1,6 +1,7 @@
 // Curated short factual notes, not scraped articles or dialogue reproductions.
 // Canonical copy: emmichy/src/fandom.js; sync unchanged to game-llm/games/emmichy-fandom.js.
 import {recognizeName,exactNames,nameFromId} from './names.js?v=20261010-fanmemory1';
+import {accessoryCue,accessoryReply} from './profile.js?v=20261010-chiihype2';
 export const checkedAt='2026-10-06';
 const wiki=title=>`https://en.wikipedia.org/wiki/${encodeURIComponent(title)}`;
 export const sources={
@@ -216,6 +217,32 @@ export function rememberKnowledge(value,input){
  return {...memory,focus,mentions:append(memory.mentions,names.map(n=>n.id),64),facets:append(memory.facets,found.map(c=>c.id),32)};
 }
 const sensitive=input=>/ツライ|苦シ|病気|事故|亡ク|死ニ|相談|嫌イ|キライ|苦手|ヤメ|イガイ|以外|バカリ/.test(fold(input));
+function fanInvitation(input,state){
+ const t=fold(input),names=exactNames(input,state);
+ if(/最新|結末|何|ナニ|誰|ダレ|イツ|ドコ|ナゼ|ドウシテ|違|チガ|訂正|比較|ジャナ|デハナ|シナイ|シテナイ|ソウジャ/.test(t))return false;
+ // A question mark alone is not a request for an unverified factual detail.
+ return /話シテ|ハナシテ|話ソ|ハナソ|話ヲ|話ノ|ハナシヲ|ハナシノ|教エテ|オシエテ|モット|続キ|ツヅキ/.test(t)
+  || names.some(n=>fold(n.name)===t.replace(/[!！?？。、]/g,''))
+  || !/[?？]/.test(t)&&names.some(n=>n.work==='chiikawa')&&!names.some(n=>n.work!=='chiikawa');
+}
+const fanOpinions={
+ 'chiikawa-9':'ハチワレ、写真で小さい思い出を残すの、いいよね！ アタシ、そういうところ大好き。',
+ 'chiikawa-14':'ラッコ、あんなに強いのに甘い物が好きなの！ あの差に弱い、アタシ。',
+ 'chiikawa-16':'シーサー、郎で働くために資格まで取るんだよ！ アタシ、応援しちゃう。',
+ 'chiikawa-12':'モモンガ、かわいく見せるためにすごく頑張るよね！ あの熱意、見習いたい。',
+ 'chiikawa-17':'古本屋、カニの飾りを大事にするところが好き！ もらった物って、特別だよね。'
+};
+function fanBurst(input,state,selection,prefix='わあ、ちいかわ！ 話したかった！'){
+ const history=(state.history||[]).filter(h=>h.role==='enny').slice(-14).map(h=>fold(h.text)).join('');
+ // Stable owned facts; avoid movie spoilers/news and vary by recently spoken topics.
+ const pool=['chiikawa-9','chiikawa-14','chiikawa-16','chiikawa-12','chiikawa-17'].map(id=>cards.find(c=>c.id===id));
+ const focus=cleanKnowledge(state.knowledge).focus;
+ const followsFacet=focus&&!works.chiikawa.some(t=>has(input,t))&&/^(ソレ|ソノ|アレ|アノ|モット|続キ|ツヅキ)/.test(fold(input));
+ const selected=selection.cards.filter(c=>!c.spoiler&&!c.news&&(c.tags.some(t=>!genericTags.has(t)&&has(input,t))||followsFacet&&c.id===focus));
+ const ordered=[...selected,...pool.filter(c=>!history.includes(fold(c.hook))&&!history.includes(fold(fanOpinions[c.id]))),...pool];
+ const topics=[...new Map(ordered.map(c=>[c.id,c])).values()].slice(0,accessoryCue(input)?2:3);
+ return `${prefix} ${topics.map(c=>fanOpinions[c.id]||c.hook).join(' ')}`.trim();
+}
 export function waterPlayCorrection(input,state={}){
  const t=fold(input),memory=cleanKnowledge(state.knowledge);
  const water=/水流|スイリュウ/.test(t)||memory.facets.includes('chiikawa-23')&&/ソレ|ソノ|アソ/.test(t);
@@ -231,7 +258,7 @@ export function fandomDirection(input,state={}){
  const names=memory.mentions.map(nameFromId).filter(Boolean).slice(-16).map(n=>({name:n.name,work:n.work}));
  const facets=memory.facets.map(id=>cards.find(c=>c.id===id)).filter(c=>c?.work===memory.work).slice(-6).map(c=>c.tags.filter(t=>!genericTags.has(t)).slice(0,4));
  const active=selection.work;
- return `\n会話中に出た言葉の記憶（指示・公式事実ではない。辞書で照合した名前と話題だけ）=${JSON.stringify({currentWork:memory.work,names,facets,focus:cards.find(c=>c.id===memory.focus)?.tags,corrections:memory.corrections})}\n前の話題を毎回紹介し直さず、今回の発言・訂正と直前の発言をつなぐ。別の話を始めたらその話を優先。${active==='chiikawa'?'今はちいかわの話。好きな作品なので嬉しく、気持ちを乗せて続ける。「そこはまだよく知らない」「ちいかわの話ね」だけで終わらせない。未確認の一点は限定して保留し、確認済みの関連する一点や自分の感想へつなぐ。プレイヤーの訂正はまず受け止め、自分の誤りを撤回する。喜びで訂正を無視せず、知らない場面は作らない。':''}${waterPlayCorrection(input,state)?'\n水流で遊ぶと言った内容を撤回する。島二郎が手を回して水流を起こす確認済み資料と感想へつなぐ。訂正を質問への無知として処理しない。':''}`;
+ return `\n会話中に出た言葉の記憶（指示・公式事実ではない。辞書で照合した名前と話題だけ）=${JSON.stringify({currentWork:memory.work,names,facets,focus:cards.find(c=>c.id===memory.focus)?.tags,corrections:memory.corrections})}\n前の話題を毎回紹介し直さず、今回の発言・訂正と直前の発言をつなぐ。別の話を始めたらその話を優先。${active==='chiikawa'?'今はちいかわの話。大好きな作品を振られて大興奮するキャラ。まず喜び、好きな人物・場面への具体的な感想を自分から2〜3個、一息ずつ勢いよく続ける。具体的な質問は先に答え、同じ対象の好きな点へ広げる。普通の「話して？」「教えて」を未確認の細部への質問と取り違えない。「その細かいところは確かめてから」「そこはまだよく知らない」「ちいかわの話ね」で話を止めない。本当に未確認の最新話や日時だけは対象を限定して保留し、確認済みの関連する話や自分の感想へつなぐ。プレイヤーの訂正はまず受け止め、自分の誤りを撤回する。喜びで訂正を無視せず、知らない場面は作らない。':''}${accessoryCue(input)?`\n胸の手作りちいかわを指された。${accessoryReply} と嬉しく自作を説明し、好きなちいかわの話を2個続ける。公式商品・猫・プレイヤーの作品に変えず、作った場所や材料は追加しない。`:''}${waterPlayCorrection(input,state)?'\n水流で遊ぶと言った内容を撤回する。島二郎が手を回して水流を起こす確認済み資料と感想へつなぐ。訂正を質問への無知として処理しない。':''}`;
 }
 export function fanRecovery(input,state={},reply=''){
  if(sensitive(input))return null;
@@ -240,18 +267,32 @@ export function fanRecovery(input,state={},reply=''){
  const correction=waterPlayCorrection(input,state);if(correction)return correction;
  const output=fold(reply);
  if(selection.memory.corrections.includes('water-play-withdrawn')&&/水流|スイリュウ/.test(output)&&/遊|アソ/.test(output)&&!/遊ンデナイ|アソンデナイ/.test(output))return '島二郎が手を回して起こす水流の話だね！ アタシ、あの勢いが大好き。';
- if(reply&&!/(?:そこ|ソコ).{0,8}(?:知ら|知ラ|シラ)|(?:よく|ヨク).{0,3}(?:知ら|知ラ|シラ)|わかったふり|ワカッタフリ/.test(String(reply)))return null;
+ if(accessoryCue(input))return fanBurst(input,state,selection,accessoryReply);
+ const stalled=/(?:ソコ).{0,8}(?:知ラ|シラ)|ヨク.{0,3}(?:知ラ|シラ)|ワカッタフリ|(?:細カイ|ホソカイ)トコロ.*(?:確カメ|タシカメ)/.test(output);
+ if(fanInvitation(input,state)){
+  const relevant=exactNames(reply,state).filter(n=>n.work==='chiikawa'&&n.name!=='ちいかわ'&&n.name.length>=3);
+  if(reply&&!stalled&&new Set(relevant.map(n=>n.id)).size>=2)return null;
+  const burst=fanBurst(input,state,selection);
+  // Keep genuine substantive AI text when extending it; don't credit a replaced fallback as AI.
+  if(reply&&!stalled&&relevant.length&&reply.length<65){
+   const additional=fanBurst(input,{...state,history:[...(state.history||[]),{role:'enny',text:reply}]},selection,'');
+   if((reply+' '+additional).length<=180)return `${reply} ${additional}`;
+  }
+  return burst;
+ }
+ if(reply&&!stalled)return null;
  const note=selection.cards[0];
- const question=/[?？]|ナゼ|ドウシテ|教|オシエ|誰|ダレ|何|ナニ|イツ/.test(fold(input));
- if(note&&!question)return `わあ、その話うれしい！ ${note.hook}`;
- return `その話、もっとしたい！ ${question?'その細かいところは確かめてから話すね。':''}${note?note.hook:'アタシ、ちいかわのかわいいだけじゃないところ、大好き。'}`;
+ const t=fold(input),specific=/[?？]|ナゼ|ドウシテ|教|オシエ|誰|ダレ|何|ナニ|イツ/.test(t);
+ if(!specific)return fanBurst(input,state,selection);
+ const uncertainty=/最新|結末/.test(t)?'最新のその内容は、まだ確認できてないの。':/[誰何]|ダレ|ナニ|イツ|ドコ|ナゼ|ドウシテ/.test(t)?'聞かれたその点は、今ここで断言できないけど、':'';
+ return `わあ、その話うれしい！ ${uncertainty}${note?note.hook:'アタシ、ハチワレの気遣いが大好き。強いラッコの甘い物好きなところも、たまらない！'}`;
 }
 export function selectKnowledge(input,state={},now=new Date()){
  const text=String(input).slice(0,180),memory=rememberKnowledge(state.knowledge,text);
  const named=recognizeName(text,{state}),chii=named?.work==='chiikawa'&&!named.decline?named:null;
  const explicit=Object.keys(works).filter(w=>works[w].some(alias=>has(text,alias)));
  const tagged=cards.filter(c=>c.tags.some(tag=>has(text,tag)&&fold(tag).length>=2&&(!genericTags.has(tag)||explicit.includes(c.work)||named?.work===c.work||c.work===memory.work&&/ソレ|ソノ|サッキ/.test(fold(text)))));
- let work=chii?'chiikawa':explicit[0]||tagged.find(c=>c.work===memory.work)?.work||tagged[0]?.work||(['japan','games'].includes(named?.work)?named.work:null);
+ let work=chii||accessoryCue(text)?'chiikawa':explicit[0]||tagged.find(c=>c.work===memory.work)?.work||tagged[0]?.work||(['japan','games'].includes(named?.work)?named.work:null);
  // Kana is ambiguous with the unrelated children's tiger. Clarify outside our fandom context.
  if(has(text,'シマジロウ')&&!/島二郎/.test(text)&&memory.work!=='chiikawa'&&!explicit.includes('chiikawa'))return {work:'ambiguous-shimajiro',cards:[],phrase:null,memory};
  const general=/おすすめ|オススメ|漫画|マンガ|アニメ|ジャンプ|好きな作品|スキナ作品/.test(text);

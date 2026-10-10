@@ -2,6 +2,15 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {planContinuation,createContinuation,speechChunks} from '../src/continuation.js';
 import {openingTiming} from '../src/openings.js';
+import {fanRecovery} from '../src/fandom.js';
+test('excited fan topics are separate beats and stop when the player starts typing',()=>{
+ const body=fanRecovery('ちいかわの話して？',{}),plan=planContinuation(body,'ちいかわの話して？',{}, {enthusiastic:true});
+ assert.doesNotMatch(plan.first,/ラッコ|シーサー/);assert.match(plan.later.join(' '),/ハチワレ.*ラッコ.*シーサー/);
+ const queue=createContinuation();queue.start(plan.later,0,plan.timing);
+ assert.equal(queue.peek(1999),null);assert.ok(queue.peek(2000));
+ queue.typed(2000);assert.equal(queue.peek(7999),null);assert.equal(queue.peek(8000,{composing:true}),null);assert.ok(queue.peek(8000));
+ queue.clear();assert.equal(queue.pending,false);
+});
 test('substance precedes delayed invitation and grounded topic development',()=>{
  const p=planContinuation('チイカワ ハ チイサクテ カワイイ コタチ ノ オハナシダヨ。 シマジロウ ノ スイリュウ、アツイネ! モット キキタイ コト アル?','ちいかわって何？');
  assert.doesNotMatch(p.first,/キキタイ/);assert.match(p.later[0],/スイリュウ/);assert.match(p.later.at(-1),/聞きたいこと/);

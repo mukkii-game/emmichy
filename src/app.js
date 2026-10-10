@@ -1,26 +1,26 @@
-import {selfReaction,complimentReaction} from './profile.js?v=20261010-fanmemory1';
-import {freshState,restoreState,respond,normalize} from './engine.js?v=20261010-fanmemory1';
+import {selfReaction,complimentReaction} from './profile.js?v=20261010-chiihype2';
+import {freshState,restoreState,respond,normalize} from './engine.js?v=20261010-chiihype2';
 import {chiikawaReply,checkedAt} from './topics.js?v=20261006-mix1';
-import {text,kana} from './font.js?v=20261010-fanmemory1';
+import {text,kana} from './font.js?v=20261010-chiihype2';
 import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation,remainingTime} from './session.js?v=20261010-fanmemory1';
 import {noteChiikawa,chiikawaReminder} from './chiikawa-reminder.js?v=20261010-fanmemory1';
 import {createAudioDirector,bindAudioLifecycle} from './audio.js?v=20261010-bgm2';
 import {CHAT_API_URL} from './config.js?v=20261006-mix1';
 import {advancePerformance} from './performance.js?v=20261008-humor1';
 import {requestChat,chatAvailable,unwantedFanRedirect} from './chat.js?v=20261009-pacing2';
-import {readableText,loadReadings} from './readable.js?v=20261010-fanmemory1';
-import {selectKnowledge,rememberKnowledge,fanRecovery} from './fandom.js?v=20261010-fanmemory1';
+import {readableText,loadReadings} from './readable.js?v=20261010-chiihype2';
+import {selectKnowledge,rememberKnowledge,fanRecovery} from './fandom.js?v=20261010-chiihype2';
 import {selectGap} from './gap.js?v=20261006-mix1';
-import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261010-fanmemory1';
+import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261010-chiihype2';
 import {cultureReply} from './culture.js?v=20261009-profile1';
-import {chooseFiller,startFiller,longFiller,retainAside,idleAside,createIdleSequence} from './filler.js?v=20261010-fanmemory1';
-import {learnInterests,needsFirstModelReply} from './balance.js?v=20261010-fanmemory1';
+import {chooseFiller,startFiller,longFiller,retainAside,idleAside,createIdleSequence} from './filler.js?v=20261010-chiihype2';
+import {learnInterests,needsFirstModelReply} from './balance.js?v=20261010-chiihype2';
 import {selectOpening,planOpening,openingTiming} from './openings.js?v=20261009-readmenu1';
-import {preparedReply} from './routing.js?v=20261010-fanmemory1';
+import {preparedReply} from './routing.js?v=20261010-chiihype2';
 import {cleanConversation,noteConversationReply} from './conversation.js?v=20261008-humor1';
 import {offlineFallback} from './fallback.js?v=20261008-finish1';
 import {portraitColors} from './portrait-palette.js?v=20261008-portrait3';
-import {planContinuation,createContinuation} from './continuation.js?v=20261009-clause1';
+import {planContinuation,createContinuation} from './continuation.js?v=20261010-chiihype2';
 import {recognizeName,namedGesture,NAME_REACTION_MS} from './names.js?v=20261010-fanmemory1';
 const continuation=createContinuation();
 let continuationVersion=0,continuing=false,hadContinuation=false,awaitingOpening=[];
@@ -157,7 +157,7 @@ $('talk').addEventListener('submit',async e=>{
  let usedModel=false,locallyReplaced=false,fillerGap=0;
  const gap=!isRestart&&!state.ended&&selectGap(raw,state);
  let prepared=isRestart||state.ended?null:preparedReply(raw,state,session,{gap,culture,repertoire,modelEnabled,kind:result.kind});
- const firstModel=needsFirstModelReply(session,{enabled:modelEnabled,kind:result.kind,topic:prepared?.topic,restart:isRestart});
+ const firstModel=needsFirstModelReply(session,{enabled:modelEnabled,kind:result.kind,topic:prepared?.topic,restart:isRestart,fixedIdentity:prepared?.id==='profile:home'});
  let greetingPlan=null;
  if(prepared?.topic==='greeting'){greetingPlan=openingPlan(true);prepared.text=greetingPlan.first;result.state.openingSeen=state.openingSeen;}
  if(gap)result.state.gap=gap.memory;
@@ -190,7 +190,7 @@ $('talk').addEventListener('submit',async e=>{
  if(!isRestart&&!['bye','asleep','name','memory','arithmetic'].includes(result.kind)){
   const recovered=!unwantedFanRedirect('ちいかわ',raw,before)?fanRecovery(raw,before,usedModel||prepared||fandomReply?result.text:''):null;
   const fallback=!usedModel&&!prepared&&!fandomReply&&!recovered?offlineFallback(raw,before,result.kind):null;
-  if(recovered){if(usedModel)usedModel=false;result.text=recovered;locallyReplaced=true;result.mood='excited';}
+  if(recovered){if(usedModel&&!recovered.includes(result.text))usedModel=false;result.text=recovered;locallyReplaced=true;result.mood='excited';}
   if(fallback){result.text=fallback.text;locallyReplaced=true;}
   const polished=polishReply(result.text,raw,before,recovered||greetingPlan||['profile','compliment','japan-place','chiikawa-name'].includes(prepared?.topic)?null:repertoire);result.text=polished.text;
   result.state.history.at(-1).text=result.text;
@@ -201,7 +201,7 @@ $('talk').addEventListener('submit',async e=>{
  if(self?.thanks&&!/うれし|嬉し/.test(result.text)){result.text+=` ${self.thanks}`;result.state.history.at(-1).text=result.text;}
  if(knowledge.work==='chiikawa'&&!heard?.decline&&!['bye','asleep','name','memory','arithmetic','comfort','contradiction'].includes(result.kind)&&!/つらい|ツライ|苦しい|病気|事故|相談|亡く|死に|嫌い|キライ|苦手|ヤメ|やめ|以外|イガイ/.test(raw))result.mood='excited';
  noteChiikawa(session,result.text);
- const paced=greetingPlan||(['bye','asleep','name','memory','arithmetic','contradiction'].includes(result.kind)||isRestart?{first:result.text,later:[]}:planContinuation(result.text,raw,before,{display:s=>readableText(s,tokenizer),tokenizer}));
+ const paced=greetingPlan||(['bye','asleep','name','memory','arithmetic','contradiction'].includes(result.kind)||isRestart?{first:result.text,later:[]}:planContinuation(result.text,raw,before,{display:s=>readableText(s,tokenizer),tokenizer,enthusiastic:knowledge.work==='chiikawa'&&result.mood==='excited'}));
  result.text=paced.first;result.state.history.at(-1).text=result.text;
  session.dialogueUse={ai:(session.dialogueUse?.ai||0)+(usedModel?1:0),bank:(session.dialogueUse?.bank||0)+(!usedModel&&(prepared||locallyReplaced)?1:0)};
  if(result.kind!=='bye')result.state.conversation=noteConversationReply(result.state.conversation,result.text,raw,session.turns);
@@ -287,7 +287,7 @@ setInterval(draw,160);setInterval(async()=>{
   }
   const stage=idleSequence.poll(Date.now(),{allowFinish:Boolean(session)&&Date.now()-session.startedAt>=5*60*1000});
   if(stage===3)await endSession('idle');
-  else if(stage&&!hadContinuation){recordAside(idleAside(state.history,stage-1));draw();}
+  else if(stage&&!$('entry').value.trim()){recordAside(idleAside(state.history,stage-1));draw();}
  }
 },250);draw();if(ready)$('entry').focus();
 

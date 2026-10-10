@@ -135,14 +135,17 @@ test('screen remains playable after dictionary failure and IME composition does 
   let count=JSON.parse(storage.get('enny-memory-v1')).history.length;
   entry.value='途中の下書き';await entry.emit('input');time+=9999;await idleTick();
   assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,count);
-  time++;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,count+1);
+  time++;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,count,'a draft is not interrupted by spontaneous self-talk');
   await entry.emit('compositionstart');time+=20000;await idleTick();
-  assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,count+1);
+  assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,count);
   await entry.emit('compositionend');time+=10000;await idleTick();
-  const firstIdle=JSON.parse(storage.get('enny-memory-v1')).history.at(-1).text;
+  assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,count);
+  entry.value='';await entry.emit('input');time+=10000;await idleTick();
+  const firstIdle=JSON.parse(storage.get('enny-memory-v1')).history.at(-1).text;assert.match(firstIdle,/アタシ|ノート|髪|弟/);
   time+=10000;await idleTick();assert.notEqual(JSON.parse(storage.get('enny-memory-v1')).history.at(-1).text,firstIdle);
   time+=10000;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).ended,false);
   const waitingCount=JSON.parse(storage.get('enny-memory-v1')).history.length;
+  entry.value='途中の下書き';
   time=startedAt+299999;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,waitingCount);
   time++;await idleTick();const ended=JSON.parse(storage.get('enny-memory-v1'));
   assert.equal(ended.ended,true);assert.match(ended.history.at(-1).text,/バイバイ/);
@@ -164,6 +167,21 @@ test('screen remains playable after dictionary failure and IME composition does 
   const recovered=corrected.history.slice(correctedAt+1).map(h=>h.text).join(' ');
   assert.match(recovered,/混ぜない|言っちゃった/);assert.match(recovered,/島二郎.*水流/);assert.match(recovered,/大好き/);assert.doesNotMatch(recovered,/よく知らない|ワカッタフリ/);
   assert.ok(corrected.knowledge.mentions.length>0);assert.equal(corrected.knowledge.focus,'chiikawa-23');
+  entry.value='ちいかわの話して？';await talk.emit('submit');
+  let fan=JSON.parse(storage.get('enny-memory-v1')),fanAt=fan.history.findLastIndex(h=>h.role==='user');
+  for(let i=0;i<7;i++){time+=6000;await idleTick();}
+  fan=JSON.parse(storage.get('enny-memory-v1'));const excited=fan.history.slice(fanAt+1).map(h=>h.text).join(' ');
+  assert.match(excited,/ハチワレ/);assert.match(excited,/ラッコ/);assert.match(excited,/シーサー/);assert.doesNotMatch(excited,/細かいところ|よく知らない/);
+  entry.value='胸のそれ何？';await talk.emit('submit');
+  let ornament=JSON.parse(storage.get('enny-memory-v1')),ornamentAt=ornament.history.findLastIndex(h=>h.role==='user');
+  for(let i=0;i<8;i++){time+=6000;await idleTick();}
+  ornament=JSON.parse(storage.get('enny-memory-v1'));const handmade=ornament.history.slice(ornamentAt+1).map(h=>h.text).join(' ');
+  assert.match(handmade,/ちいかわなの/);assert.match(handmade,/アタシが作った/);assert.ok(['ハチワレ','ラッコ','シーサー','モモンガ','古本屋'].filter(n=>handmade.includes(n)).length>=2);assert.doesNotMatch(handmade,/猫のブローチ/);
+  entry.value='スウェ ー デン ウマレナ ノ?';await talk.emit('submit');
+  let birthplace=JSON.parse(storage.get('enny-memory-v1')).history;const birthplaceAt=birthplace.findLastIndex(h=>h.role==='user');
+  assert.match(birthplace[birthplaceAt+1].text,/スウェーデン.*アタシの国/);assert.match(birthplace[birthplaceAt+2].text,/ヨーテボリ.*生まれ育った/);
+  time+=5000;await idleTick();time+=10000;await idleTick();
+  birthplace=JSON.parse(storage.get('enny-memory-v1')).history;assert.match(birthplace.at(-1).text,/アタシ|弟|ノート|髪/);assert.doesNotMatch(birthplace.at(-1).text,/急がなくて|別の話/);
   entry.value='バイバイ';await talk.emit('submit');
   assert.equal(farewellPauses.length,2,'manual goodbye uses the same two-beat ending');
   const manual=JSON.parse(storage.get('enny-memory-v1'));assert.equal(manual.ended,true);

@@ -16,6 +16,15 @@ test('idle asides follow the current food topic rather than an old manga topic',
  assert.doesNotMatch(idleAside([{role:'user',text:'今日は散歩した'}]),/ご飯|漫画/);
  assert.match(idleAside([{role:'user',text:'つらいから相談したい'}]),/急がなくて/);
 });
+test('lulls offer short fixed self-details with no interview, repeated fact or distress interruption',()=>{
+ const history=[{role:'user',text:'今日は散歩した'}];
+ for(let i=0;i<4;i++){
+  const line=idleAside(history,i);assert.ok(line.length<50);assert.doesNotMatch(line,/[?？]|聞きたい|別の話|急がなくて/);
+  assert.ok(!history.some(h=>h.text===line));history.push({role:'enny',text:line});
+ }
+ assert.match(history.map(h=>h.text).join(' '),/スウェーデン|弟|日本語|三つ編み/);
+ assert.doesNotMatch(idleAside([{role:'user',text:'ツライ、相談したい'}]),/スウェーデン|弟|ゲーム/);
+});
 test('saved waiting dialogue retains the user and both asides before the final answer',()=>{
  const initial=[{role:'user',text:'音楽を教えて'},{role:'enny',text:'pending'}];
  let history=retainAside(initial,'エト…',{pendingReply:true});

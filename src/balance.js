@@ -1,4 +1,4 @@
-import {works} from './fandom.js?v=20261010-fanmemory1';
+import {works} from './fandom.js?v=20261010-chiihype2';
 const fold=s=>String(s).normalize('NFKC').toLowerCase().replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');
 export function cleanInterests(value){
  return Object.fromEntries(Object.keys(works).filter(k=>Number.isFinite(value?.[k])).map(k=>[k,Math.max(-10,Math.min(10,Math.trunc(value[k])))]));
@@ -19,8 +19,8 @@ export function balanceRoute(prepared,choice,session,enabled){
  // prioritized separately; later turns still have no fixed AI/bank ratio.
  return prepared;
 }
-export function needsFirstModelReply(session,{enabled=false,kind='',topic='',restart=false}={}){
- return enabled&&!restart&&!session?.finished&&!(session?.dialogueUse?.ai>0)
+export function needsFirstModelReply(session,{enabled=false,kind='',topic='',restart=false,fixedIdentity=false}={}){
+ return enabled&&!restart&&!fixedIdentity&&!session?.finished&&!(session?.dialogueUse?.ai>0)
   &&!['bye','asleep','name','memory','arithmetic'].includes(kind)
   &&!['deflection','fandom-decline','greeting'].includes(topic);
 }

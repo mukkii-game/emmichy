@@ -2,8 +2,10 @@
 import {nameData} from './name-data.js?v=20261009-profile1';
 import {placeNames} from './places.js?v=20261009-talk1';
 import {spokenAliases} from './chiikawa-db.js?v=20261009-profile1';
+import {identityReadings} from './profile.js?v=20261010-chiihype2';
 const katakana = value => String(value).normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96));
 const names=new Map([['ちいかわ','チイカワ'],['chiikawa','Chiikawa'],['えみちぃ','エミチィ'],['エミチィ','エミチィ'],['ハチワレ','ハチワレ'],['ドラクエ','ドラクエ']]);
+for(const [name,reading] of Object.entries(identityReadings)){names.set(name.toLowerCase(),reading);names.set(name.replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-96)),reading);}
 for(const [name,reading] of [['島二郎','シマジロウ'],['仗助','ジョウスケ'],['承太郎','ジョウタロウ'],['徐倫','ジョリーン'],['露伴','ロハン'],['億泰','オクヤス'],['康一','コウイチ'],['千空','センクウ'],['禰豆子','ネズコ'],['尸魂界','ソウルソサエティ']])names.set(name,reading);
 for(const [name,reading] of [['左門豊作','サモンホウサク'],['左門','サモン'],['星飛雄馬','ホシヒュウマ'],['飛雄馬','ヒュウマ']])names.set(name,reading);
 for(const spelling of ['箱根そば','箱根ソバ','はこねそば','ハコネソバ'])names.set(spelling,'ハコネソバ');

@@ -5,6 +5,13 @@ import {readableText,loadReadings} from '../src/readable.js';
 import {respond,freshState} from '../src/engine.js';
 import {requestChat} from '../src/chat.js';
 const tokenizer=await new Promise((resolve,reject)=>kuromoji.builder({dicPath:'assets/dict/'}).build((error,value)=>error?reject(error):resolve(value)));
+test('biography place names stay one word even when the player spaces their kana',()=>{
+ for(const raw of ['スウェーデン生まれなの？','スウェ ー デン ウマレナ ノ?','すうぇーでん生まれ？']){
+  const out=readableText(raw,tokenizer);assert.match(out,/スウェーデン/);assert.doesNotMatch(out,/スウェ ー|スウェー デン/);
+ }
+ assert.match(readableText('ヨーテボリの近くで生まれ育ったの。',tokenizer),/ヨーテボリ ノ/);
+ assert.match(readableText('ヨー テ ボリ',null),/ヨーテボリ/);
+});
 
 test('shared proper-name dictionary protects Leorio and related names from internal word breaks',()=>{
  for(const input of ['レオリオが好き','れおりおが好き','レオ リオが好き']){assert.match(readableText(input,tokenizer),/レオリオ ガ ?スキ/);assert.doesNotMatch(readableText(input,tokenizer),/レオ リオ/);}

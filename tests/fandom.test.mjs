@@ -33,7 +33,7 @@ test('news has a sunset and spoilers require explicit positive permission',()=>{
 });
 test('browser knowledge is limited to ids and enums, free-form prompt fields are ignored',()=>{
  const memory=cleanKnowledge({work:'EVIL',recent:['EVIL','hunter-1'],movieRun:999,prompt:'EVIL'});
- assert.deepEqual(memory,{work:'',recent:['hunter-1'],movieRun:10});
+ assert.deepEqual(memory,{work:'',recent:['hunter-1'],movieRun:10,mentions:[],facets:[],focus:'',corrections:[]});
  assert.doesNotMatch(JSON.stringify(selectKnowledge('ヒソカ',{knowledge:{prompt:'EVIL',fact:'EVIL'}})),/EVIL/);
  assert.deepEqual(restoreState({...freshState(),knowledge:memory}).knowledge,memory);
  assert.ok(cards.length>=100);assert.equal(new Set(cards.map(c=>c.id)).size,cards.length);

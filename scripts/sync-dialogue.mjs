@@ -4,7 +4,7 @@ import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const target=path.resolve(process.argv[2]||path.join(root,'..','game-llm'));
 if(!fs.existsSync(path.join(target,'games','emmichy.js')))throw Error('Specify the existing game-llm checkout.');
-const modules=process.argv.includes('--places-profile')?['names','profile','places']:process.argv.includes('--chiikawa-profile')?['names','name-data','game-names','chiikawa-db','profile','fandom','places']:process.argv.includes('--names-only')?['names','name-data','game-names','places']:['fandom','fan-lines','gap','repertoire','context','conversation'];
+const modules=process.argv.includes('--fan-memory')?['names','profile','places','fandom']:process.argv.includes('--places-profile')?['names','profile','places']:process.argv.includes('--chiikawa-profile')?['names','name-data','game-names','chiikawa-db','profile','fandom','places']:process.argv.includes('--names-only')?['names','name-data','game-names','places']:['fandom','fan-lines','gap','repertoire','context','conversation'];
 for(const name of modules){
  let content=fs.readFileSync(path.join(root,'src',`${name}.js`),'utf8');
  content=content.replace(/'\.\/(fandom|fan-lines|names|name-data|game-names|chiikawa-db|profile|places)\.js(?:\?v=[^']+)?'/g,(_,module)=>`'./emmichy-${module}.js'`);

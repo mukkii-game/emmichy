@@ -118,6 +118,12 @@ test('screen remains playable after dictionary failure and IME composition does 
   assert.match(own[ownAt+1].text,/ワオ.*アタシのこと/);assert.match(own[ownAt+2].text,/17歳/);
   time+=4000;await idleTick();time+=5000;await idleTick();
   own=JSON.parse(storage.get('enny-memory-v1')).history.slice(ownAt+1).map(h=>h.text).join(' ');assert.match(own,/うれしい/);
+  entry.value='スキダヨ';await talk.emit('submit');
+  let affection=JSON.parse(storage.get('enny-memory-v1')).history,affectionAt=affection.findLastIndex(h=>h.role==='user');
+  assert.equal(affection[affectionAt+1].text,'スキ!?');
+  for(let i=0;i<5;i++){time+=6000;await idleTick();}
+  affection=JSON.parse(storage.get('enny-memory-v1')).history.slice(affectionAt+1).map(h=>h.text).join(' ');
+  assert.match(affection,/うれしい/);assert.match(affection,/にやけ|跳ね|大きく/);assert.doesNotMatch(affection,/フムフム|ナンテイウンダッケ|とっておく/);
   entry.value='チイカワ イガイ ノ ハナシ ヲ シヨウ カ';await talk.emit('submit');
   const declined=JSON.parse(storage.get('enny-memory-v1')).history;
   const declineAt=declined.findLastIndex(h=>h.role==='user');
@@ -150,6 +156,14 @@ test('screen remains playable after dictionary failure and IME composition does 
   elements.get('new-chat').onclick();assert.equal(talk.hidden,false);assert.equal(elements.get('start-choice').hidden,true);
   assert.equal(JSON.parse(storage.get('enny-memory-v1')).ended,false);
   assert.deepEqual(JSON.parse(storage.get('enny-memory-v1')).history,[{role:'enny',text:'はじめまして！'}],'start over replaces old dialogue with a first meeting');
+  entry.value='スイリュウ ハ チイカワ タチ ハ アソンデ ナイヨ?';await talk.emit('submit');
+  let corrected=JSON.parse(storage.get('enny-memory-v1')),correctedAt=corrected.history.findLastIndex(h=>h.role==='user');
+  assert.equal(corrected.history[correctedAt+1].text,'チイカワ！');
+  for(let i=0;i<5;i++){time+=6000;await idleTick();}
+  corrected=JSON.parse(storage.get('enny-memory-v1'));
+  const recovered=corrected.history.slice(correctedAt+1).map(h=>h.text).join(' ');
+  assert.match(recovered,/混ぜない|言っちゃった/);assert.match(recovered,/島二郎.*水流/);assert.match(recovered,/大好き/);assert.doesNotMatch(recovered,/よく知らない|ワカッタフリ/);
+  assert.ok(corrected.knowledge.mentions.length>0);assert.equal(corrected.knowledge.focus,'chiikawa-23');
   entry.value='バイバイ';await talk.emit('submit');
   assert.equal(farewellPauses.length,2,'manual goodbye uses the same two-beat ending');
   const manual=JSON.parse(storage.get('enny-memory-v1'));assert.equal(manual.ended,true);

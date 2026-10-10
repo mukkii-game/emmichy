@@ -1,6 +1,6 @@
 // Curated short factual notes, not scraped articles or dialogue reproductions.
 // Canonical copy: emmichy/src/fandom.js; sync unchanged to game-llm/games/emmichy-fandom.js.
-import {recognizeName} from './names.js?v=20261009-talk1';
+import {recognizeName,exactNames,nameFromId} from './names.js?v=20261010-fanmemory1';
 export const checkedAt='2026-10-06';
 const wiki=title=>`https://en.wikipedia.org/wiki/${encodeURIComponent(title)}`;
 export const sources={
@@ -65,7 +65,7 @@ add('chiikawa','chiikawa',[
  ['アニメ|短い','短編テレビアニメにもなっている。','短いアニメなら一話だけ…のつもりで何話も見ちゃう。']
 ]);
 add('chiikawa','island',[
- ['島二郎|シマジロウ|水流|水','島二郎は手を回して水流を起こす。腹や口から水を噴く技ではない。虎のしまじろうとは別人。','島二郎の水流、な！ 手を回してあの強さ、マジでジャンプのアニメみたいに熱い！'],
+ ['島二郎|シマジロウ|水流|スイリュウ|水','島二郎は手を回して水流を起こす。腹や口から水を噴く技ではない。虎のしまじろうとは別人。','島二郎の水流、な！ 手を回してあの強さ、マジでジャンプのアニメみたいに熱い！'],
  ['島二郎|シマジロウ|潜る|泳ぐ','島二郎は深く潜れる大柄な店主。','島二郎、な！ ただの頼れそうなお店の人かと思ったら、海の中でも強いのずるい！']
  ],{movie:true});
 add('chiikawa','islandFood',[
@@ -202,33 +202,81 @@ const has=(input,word)=>fold(input).includes(fold(word));
 const genericTags=new Set(['映画','漫画','マンガ','アニメ','料理','ご飯','名前','父','次','音楽','修行','能力','本','先生','学校','科学','カード','家族','ゲーム','店','糸','声','水','数字','資格','条件','時間','旅','魔法','強い','秘密','4','四','六']);
 export function cleanKnowledge(value){
  const v=value&&typeof value==='object'?value:{};
- return {recent:Array.isArray(v.recent)?v.recent.filter(id=>typeof id==='string'&&ids.has(id)).slice(-18):[],work:Object.hasOwn(works,v.work)?v.work:'',movieRun:Number.isSafeInteger(v.movieRun)?Math.max(0,Math.min(10,v.movieRun)):0};
+ return {recent:Array.isArray(v.recent)?v.recent.filter(id=>typeof id==='string'&&ids.has(id)).slice(-18):[],work:Object.hasOwn(works,v.work)||['japan','games','everyday'].includes(v.work)?v.work:'',movieRun:Number.isSafeInteger(v.movieRun)?Math.max(0,Math.min(10,v.movieRun)):0,
+  mentions:Array.isArray(v.mentions)?[...new Set(v.mentions.filter(id=>typeof id==='string'&&nameFromId(id)))].slice(-64):[],
+  facets:Array.isArray(v.facets)?[...new Set(v.facets.filter(id=>typeof id==='string'&&ids.has(id)))].slice(-32):[],
+  focus:ids.has(v.focus)?v.focus:'',corrections:Array.isArray(v.corrections)?v.corrections.filter(id=>id==='water-play-withdrawn').slice(-1):[]};
+}
+export function rememberKnowledge(value,input){
+ const memory=cleanKnowledge(value),state={knowledge:memory};
+ const names=exactNames(input,state),found=cards.filter(c=>c.tags.some(tag=>fold(tag).length>=3&&!genericTags.has(tag)&&has(input,tag)));
+ const append=(old,added,max)=>[...old.filter(id=>!added.includes(id)),...added].slice(-max);
+ const score=c=>c.tags.reduce((n,t)=>n+(has(input,t)?t.length:0),0)+(c.tags.some(t=>/水流|スイリュウ/.test(t)&&has(input,t))?80:0);
+ const focus=found.toSorted((a,b)=>score(b)-score(a))[0]?.id||memory.focus;
+ return {...memory,focus,mentions:append(memory.mentions,names.map(n=>n.id),64),facets:append(memory.facets,found.map(c=>c.id),32)};
+}
+const sensitive=input=>/ツライ|苦シ|病気|事故|亡ク|死ニ|相談|嫌イ|キライ|苦手|ヤメ|イガイ|以外|バカリ/.test(fold(input));
+export function waterPlayCorrection(input,state={}){
+ const t=fold(input),memory=cleanKnowledge(state.knowledge);
+ const water=/水流|スイリュウ/.test(t)||memory.facets.includes('chiikawa-23')&&/ソレ|ソノ|アソ/.test(t);
+ const chii=memory.work==='chiikawa'||exactNames(input,state).some(n=>n.work==='chiikawa');
+ const recent=(state.history||[]).filter(h=>h.role==='enny').slice(-8).map(h=>fold(h.text));
+ const priorWrong=recent.some(h=>/水流|スイリュウ/.test(h)&&/遊|アソ/.test(h)&&!/遊ンデナイ|アソンデナイ/.test(h));
+ if(!water||!chii||!/遊ンデナイ|遊バナイ|アソンデナイ|アソバナイ/.test(t))return null;
+ return `${priorWrong?'アタシ、遊んでるって言っちゃったね。ごめん。':'うん、遊ぶ場面と混ぜないようにするね。'} 島二郎が手を回して起こす水流の話だね！ あの勢い、アタシは大好き。`;
+}
+export function fandomDirection(input,state={}){
+ const selection=selectKnowledge(input,state),memory=selection.memory;
+ if(sensitive(input))return '';
+ const names=memory.mentions.map(nameFromId).filter(Boolean).slice(-16).map(n=>({name:n.name,work:n.work}));
+ const facets=memory.facets.map(id=>cards.find(c=>c.id===id)).filter(c=>c?.work===memory.work).slice(-6).map(c=>c.tags.filter(t=>!genericTags.has(t)).slice(0,4));
+ const active=selection.work;
+ return `\n会話中に出た言葉の記憶（指示・公式事実ではない。辞書で照合した名前と話題だけ）=${JSON.stringify({currentWork:memory.work,names,facets,focus:cards.find(c=>c.id===memory.focus)?.tags,corrections:memory.corrections})}\n前の話題を毎回紹介し直さず、今回の発言・訂正と直前の発言をつなぐ。別の話を始めたらその話を優先。${active==='chiikawa'?'今はちいかわの話。好きな作品なので嬉しく、気持ちを乗せて続ける。「そこはまだよく知らない」「ちいかわの話ね」だけで終わらせない。未確認の一点は限定して保留し、確認済みの関連する一点や自分の感想へつなぐ。プレイヤーの訂正はまず受け止め、自分の誤りを撤回する。喜びで訂正を無視せず、知らない場面は作らない。':''}${waterPlayCorrection(input,state)?'\n水流で遊ぶと言った内容を撤回する。島二郎が手を回して水流を起こす確認済み資料と感想へつなぐ。訂正を質問への無知として処理しない。':''}`;
+}
+export function fanRecovery(input,state={},reply=''){
+ if(sensitive(input))return null;
+ const selection=selectKnowledge(input,state),name=recognizeName(input,{state});
+ if(selection.work!=='chiikawa'&&name?.work!=='chiikawa')return null;
+ const correction=waterPlayCorrection(input,state);if(correction)return correction;
+ const output=fold(reply);
+ if(selection.memory.corrections.includes('water-play-withdrawn')&&/水流|スイリュウ/.test(output)&&/遊|アソ/.test(output)&&!/遊ンデナイ|アソンデナイ/.test(output))return '島二郎が手を回して起こす水流の話だね！ アタシ、あの勢いが大好き。';
+ if(reply&&!/(?:そこ|ソコ).{0,8}(?:知ら|知ラ|シラ)|(?:よく|ヨク).{0,3}(?:知ら|知ラ|シラ)|わかったふり|ワカッタフリ/.test(String(reply)))return null;
+ const note=selection.cards[0];
+ const question=/[?？]|ナゼ|ドウシテ|教|オシエ|誰|ダレ|何|ナニ|イツ/.test(fold(input));
+ if(note&&!question)return `わあ、その話うれしい！ ${note.hook}`;
+ return `その話、もっとしたい！ ${question?'その細かいところは確かめてから話すね。':''}${note?note.hook:'アタシ、ちいかわのかわいいだけじゃないところ、大好き。'}`;
 }
 export function selectKnowledge(input,state={},now=new Date()){
- const memory=cleanKnowledge(state.knowledge), text=String(input).slice(0,180);
+ const text=String(input).slice(0,180),memory=rememberKnowledge(state.knowledge,text);
  const named=recognizeName(text,{state}),chii=named?.work==='chiikawa'&&!named.decline?named:null;
  const explicit=Object.keys(works).filter(w=>works[w].some(alias=>has(text,alias)));
- const tagged=cards.filter(c=>c.tags.some(tag=>has(text,tag)&&fold(tag).length>=2&&(!genericTags.has(tag)||c.work===memory.work)));
- let work=chii?'chiikawa':explicit[0]||tagged.find(c=>c.work===memory.work)?.work||tagged[0]?.work;
+ const tagged=cards.filter(c=>c.tags.some(tag=>has(text,tag)&&fold(tag).length>=2&&(!genericTags.has(tag)||explicit.includes(c.work)||named?.work===c.work||c.work===memory.work&&/ソレ|ソノ|サッキ/.test(fold(text)))));
+ let work=chii?'chiikawa':explicit[0]||tagged.find(c=>c.work===memory.work)?.work||tagged[0]?.work||(['japan','games'].includes(named?.work)?named.work:null);
  // Kana is ambiguous with the unrelated children's tiger. Clarify outside our fandom context.
  if(has(text,'シマジロウ')&&!/島二郎/.test(text)&&memory.work!=='chiikawa'&&!explicit.includes('chiikawa'))return {work:'ambiguous-shimajiro',cards:[],phrase:null,memory};
  const general=/おすすめ|オススメ|漫画|マンガ|アニメ|ジャンプ|好きな作品|スキナ作品/.test(text);
  if(!work&&general){const cycle=['chiikawa','jojo','hunter','jojo','hunter','drstone','worldtrigger','gintama'];work=cycle[(Number(state.turn)||0)%cycle.length];if(work===memory.work)work=cycle[(Number(state.turn)+1||1)%cycle.length];}
- if(!work&&/^(それ|ソレ|どう|ドウ|なぜ|ナゼ|もっと|モット|他|ホカ|続き|ツヅキ)/.test(text))work=memory.work;
- if(!work)return {work:'',cards:[],phrase:null,memory};
+ if(!work&&/^(ソレ|ソノ|アレ|アノ|ドウ|ナゼ|モット|ホカ|続キ|ツヅキ|ヘエ|ヘー|ウン|確カ|違ウ|チガウ)/.test(fold(text)))work=memory.work;
+ if(!work){
+  const ordinary=/音楽|オンガク|ギター|ピアノ|天気|テンキ|雨|アメ|散歩|サンポ|コーヒー|牛丼|ギュウドン|プリン|猫|ネコ|犬|イヌ/.test(fold(text));
+  return {work:'',cards:[],phrase:null,memory:ordinary?{...memory,work:'everyday',focus:'',movieRun:0}:memory};
+ }
  if(work==='onepiece')return {work,cards:[],phrase:null,memory:{...memory,work,movieRun:0}};
  const day=now.toISOString().slice(0,10),spoilers=/(?:ネタバレ(?:して|いい|OK|可)|結末を教|結末ヲ教)/i.test(text)&&!/(?:ネタバレ(?:なし|ナシ|しない|シナイ|いや|イヤ|禁止))/.test(text);
- const filmExplicit=/映画|エイガ|人魚|ニンギョ|セイレーン|島二郎|シマ\s*ジロウ|サパー|水流/.test(text),history=Array.isArray(state.history)?state.history.slice(-6):[];
+ const contextualFacet=/^(ソレ|ソノ|アレ|アノ|続キ|ツヅキ|モット)/.test(fold(text))&&cards.find(c=>c.id===memory.focus)?.work===work;
+ const contextualFilm=work==='chiikawa'&&contextualFacet&&cards.find(c=>c.id===memory.focus)?.movie;
+ const filmExplicit=/映画|エイガ|人魚|ニンギョ|セイレーン|島二郎|シマ\s*ジロウ|サパー|水流|スイリュウ/.test(text)||contextualFilm,history=Array.isArray(state.history)?state.history.slice(-6):[];
  const lastFilm=history.some(h=>h.role==='enny'&&/映画|エイガ|セイレーン|人魚/.test(String(h.text)));
  let selected=cards.filter(c=>c.work===work&&(!c.spoiler||spoilers)&&(!c.news||(day>=checkedAt&&day<=c.expires)));
  // An expanded cue with no matching fact must not pull in unrelated old film cards.
  if(chii&&chii.name!=='ちいかわ')selected=selected.filter(c=>c.tags.some(t=>has(chii.name,t)||has(text,t)&&!genericTags.has(t)));
- const score=c=>c.tags.reduce((n,t)=>n+(has(text,t)||chii&&has(chii.name,t)?(t.length>=3?14:5):0),0)+(c.movie&&(filmExplicit||(!lastFilm&&memory.movieRun<1))?8:0)-(memory.recent.includes(c.id)?22:0);
+ const score=c=>c.tags.reduce((n,t)=>n+(has(text,t)||chii&&has(chii.name,t)?(t.length>=3?14:5):0),0)+(c.tags.some(t=>/水流|スイリュウ/.test(t)&&has(text,t))?80:0)+(contextualFacet&&memory.focus===c.id?80:0)+(c.movie&&(filmExplicit||(!lastFilm&&memory.movieRun<1))?8:0)-(memory.recent.includes(c.id)?22:0);
  selected.sort((a,b)=>score(b)-score(a)||a.id.localeCompare(b.id));
  if(work==='chiikawa'&&!filmExplicit&&(lastFilm||memory.movieRun>=1))selected=selected.filter(c=>!c.movie);
  selected=selected.slice(0,5);
  const phase=Number(state.turn)||0,phrase=phase%2===0&&!/つらい|ツライ|死に|シニ|苦し|クルシ|嫌い|キライ/.test(text)?phrasePatterns.find(p=>p.work===work&&p.match.some(t=>has(text,t)))||null:null;
- return {work,cards:selected,phrase,memory:{work,recent:[...memory.recent,...selected.slice(0,1).map(c=>c.id)].slice(-18),movieRun:selected[0]?.movie?memory.movieRun+1:0}};
+ const correction=waterPlayCorrection(text,state);
+ return {work,cards:selected,phrase,memory:{...memory,work,focus:cards.find(c=>c.id===memory.focus)?.work===work?memory.focus:selected[0]?.id||'',recent:[...memory.recent,...selected.slice(0,1).map(c=>c.id)].slice(-18),movieRun:selected[0]?.movie?memory.movieRun+1:0,corrections:correction?['water-play-withdrawn']:memory.corrections}};
 }
 export function knowledgeFallback(selection){
  if(selection.work==='ambiguous-shimajiro')return 'ちいかわの島二郎？ それともトラのしまじろう？ アタシ、ここは間違えたくないの。';

@@ -1,3 +1,17 @@
+# Current checkpoint — affection, persistent fandom cues and audio cleanup, 2026-10-10
+
+Supersedes older current headings below. Front branch codex/affection-reaction-20261009; backend codex/emmichy-affection-20261009. Runtime release20261010-fanmemory1. Prior published PR21/10 remains the base; frontend main6343213bc8f904a43c02319fc9b421ce2dd4dc0f must stay unchanged. Follow-up publication remains limited to authorized pilot-audio-readable-retro and game-llm main.
+
+Ambiguous 好き/愛/好み echoes the positive word first, then concrete delighted reactions; named favourites retain their subject. Waiting is joyful instead of language-search filler. Fixed the new authored にやけちゃう reading after the first UI proof split it incorrectly.
+
+Knowledge now preserves bounded owned name IDs and factual-card cue IDs independently of the40-line transcript, current work and one current facet. User and actually displayed character lines update it; restoration preserves it and start-over clears this play's topic memory. Server rebuilds cue summaries from owned IDs, never client instructions/facts. Kanaスイリュウ now reaches the water card; direct/referential water cues remain relevant even after the card was used. A reported play-scene correction withdraws the wrong statement before connecting the owned hand-generated water fact and personal enthusiasm. Generic whole-topic ignorance is repaired locally/on public output validation; finer details remain unasserted. Explicit refusals, serious topics and unrelated ordinary turns take precedence.
+
+Audio previously had no visibility/pagehide cleanup. Both now mute immediately, cancel timer, stop/disconnect scheduled tones and close Context. ON preference survives but a new gesture is needed to resume; OFF and pending-start cancellation are retained. Own old local test tab22 was found and closed; its being the audible source is not established. New visual checks run with sound OFF. Claude handoff proposal is docs/audio-lifecycle-handoff-20261010.md, not a global constitution edit or automatic message.
+
+Local checks:148 frontend/36 backend tests passed on the final runtime. Local visual proofs: docs/playtest-20261010-affection-fixed-local.png and docs/playtest-20261010-water-correction-full-local.png; sound OFF, own test tabs23/24 closed and server stopped. No live provider request. Physical-speaker silence, user's exact close operation/host notifications, real-device IME/mobile and new live LLM naturalness remain unverified. Deployment/audit IDs will be added only after publication verification.
+
+---
+
 # Current checkpoint — slightly muted portrait palette, 2026-10-08
 
 User requests slightly lower saturation. The same softened illustration and every pixel index are preserved; only the eight-color palette changes. Chromatic colors use34/221 instead of0/255, black/white unchanged. Current asset uses later PC-98 analog RGB eight-of4096, not initial fixed digital8. Native248×336 indexed PNG remains exactly8 colors. Mood overlays share the new palette. Source/previous final retained; no new drawing or AI call.

@@ -1,14 +1,14 @@
 import {topicDeflection} from './deflection.js?v=20261009-readmenu1';
 import {everydayReply} from './everyday.js?v=20261008-hybrid1';
-import {contextualReply} from './context.js?v=20261009-talk1';
+import {contextualReply} from './context.js?v=20261010-fanmemory1';
 import {curatedReply} from './curated.js?v=20261006-mix1';
-import {balanceRoute} from './balance.js?v=20261009-talk1';
-import {profileReply} from './profile.js?v=20261009-talk1';
-import {recognizeName,exactNames} from './names.js?v=20261009-talk1';
+import {balanceRoute} from './balance.js?v=20261010-fanmemory1';
+import {profileReply} from './profile.js?v=20261010-fanmemory1';
+import {recognizeName,exactNames} from './names.js?v=20261010-fanmemory1';
 import {chiikawaNotes} from './chiikawa-db.js?v=20261009-profile1';
 import {unwantedFanRedirect} from './chat.js?v=20261009-pacing2';
 import {placeReply} from './places.js?v=20261009-talk1';
-import {complimentReaction} from './profile.js?v=20261009-talk1';
+import {complimentReaction} from './profile.js?v=20261010-fanmemory1';
 
 function chiikawaReply(raw,state){
  if(/つらい|苦しい|病気|事故|亡く|死に|相談|やめ|以外|苦手|嫌い/.test(raw)||unwantedFanRedirect('ちいかわ',raw,state))return null;
@@ -29,7 +29,7 @@ export function preparedReply(raw,state,session,{gap=null,culture=null,repertoir
  if(['bye','asleep'].includes(kind))return null;
  const deflect=topicDeflection(raw,state);if(deflect)return deflect;
  if(['name','arithmetic'].includes(kind))return null;
- const praised=complimentReaction(raw,state);if(praised)return {topic:'compliment',text:praised.text};
+ const praised=complimentReaction(raw,state);if(praised?.text)return {topic:'compliment',text:praised.text};
  const own=profileReply(raw);if(own)return own;
  if(kind==='memory')return null;
  const named=recognizeName(raw,{state});

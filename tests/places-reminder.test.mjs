@@ -26,6 +26,22 @@ test('praise echoes its word and responds personally instead of a combat metapho
  }
  for(const raw of ['ウサギ カッコイイヨネ','ハチワレかわいい','友達がかわいい','かわいいわけない','病気の相談があるけどかわいい'])assert.equal(complimentReaction(raw),null,raw);
 });
+test('ambiguous affection is heard as personal joy, explicit favourites retain their subject',()=>{
+ for(const [raw,word] of [['スキダヨ','スキ'],['好きだよ','スキ'],['すきだよ','スキ'],['大好き','ダイスキ'],['だいすき','ダイスキ'],['愛','アイ'],['愛してる','アイシテル'],['あいしてる','アイシテル'],['好みだよ','コノミ'],['俺は好きだよ','スキ']]){
+  const r=complimentReaction(raw);assert.equal(r?.gesture,`${word}!?`,raw);assert.equal(r.target,undefined);
+  assert.match(r.text,/うれしい/);assert.match(r.text,/にやけ|跳ね|大きく/);
+  assert.equal(preparedReply(raw,{},{}).topic,'compliment');
+ }
+ for(const [raw,target] of [['ハチワレが好き','ハチワレ'],['秋葉原が好き','秋葉原'],['京都が好み','京都']]){
+  const r=complimentReaction(raw);assert.equal(r.target?.name,target);assert.equal(r.thanks,null);assert.equal(r.text,null);
+  assert.match(r.gesture,/スキ|コノミ/);assert.notEqual(preparedReply(raw,{}, {})?.topic,'compliment');
+ }
+ assert.equal(complimentReaction('えみちいとハチワレが好き').target,undefined);
+ assert.equal(complimentReaction('音楽が好き').target.name,'音楽');
+ assert.equal(complimentReaction('猫が好き').target.reading,'ネコ');
+ for(const raw of ['好きじゃない','スキ ジャ ナイ','愛してない','好みじゃない','あなたは何が好き？','好きなキャラは？','愛知','愛媛','あいさつ','ラブライブ'])assert.equal(complimentReaction(raw),null,raw);
+ assert.match(complimentReaction('ラブライブが好き').gesture,/スキ!\?/);
+});
 test('timer ticks by visible played seconds, clamps zero and resumes without away time',()=>{
  const s={startedAt:1000,lastSavedAt:11000,turns:2};
  assert.equal(remainingTime(null,0),'5:00');assert.equal(remainingTime(s,1000),'5:00');assert.equal(remainingTime(s,2000),'4:59');

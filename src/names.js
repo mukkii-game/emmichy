@@ -9,6 +9,8 @@ for(const row of nameData)for(const alias of row.aliases){insert(alias,row);exac
 for(const row of placeNames)for(const alias of row.aliases)insert(alias,row);
 for(const name of gameNames)insert(name,{id:`steam:${name}`,name,reading:name,work:'games',aliases:[name],contextOnly:false});
 const distinct=matches=>[...new Map(matches.map(m=>[m.row.id,m])).values()];
+const ownedNames=new Map([...nameData,...placeNames,...gameNames.map(name=>({id:`steam:${name}`,name,reading:name,work:'games'}))].map(row=>[row.id,row]));
+export const nameFromId=id=>ownedNames.get(id)||null;
 function scan(value){const input=foldName(value),found=[];for(let i=0;i<input.length;i++){let node=trie;for(let j=i;j<input.length;j++){node=node.get(input[j]);if(!node)break;for(const m of node.get('')||[]){
  if(/^[a-z0-9]+$/.test(m.key)&&m.key.length<=5&&!new RegExp(`\\b${m.key}\\b`,'i').test(String(value)))continue;
  if(m.row.work==='japan'&&m.key.length<4&&!String(value).includes(m.row.name)&&input!==m.key&&!/旅行|観光|温泉|空港|地名|県|市/.test(value))continue;

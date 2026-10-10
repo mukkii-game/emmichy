@@ -1,6 +1,8 @@
-import {japaneseExamples} from './profile.js?v=20261009-talk1';
+import {unwantedFanRedirect} from './chat.js?v=20261009-pacing2';
+import {japaneseExamples,complimentReaction} from './profile.js?v=20261010-fanmemory1';
 import {waitingReply} from './waiting-db.js?v=20261008-listen3';
-import {recognizeName,namedGesture,namedFollowup} from './names.js?v=20261009-talk1';
+import {recognizeName,namedGesture,namedFollowup} from './names.js?v=20261010-fanmemory1';
+import {selectKnowledge,waterPlayCorrection} from './fandom.js?v=20261010-fanmemory1';
 // Listening gestures are dialogue, retained alongside the eventual answer.
 export function retainAside(history,line,{pendingReply=false}={}){
  const next=[...history];
@@ -14,15 +16,22 @@ export function waitingTone(input){
  if(/うれしい|嬉しい|楽しい|楽しかった|おいしい|美味しい|大好き|合格した|成功した|うまくできた|やった[!！]|最高/.test(text)&&!/ない|なかった|なく|じゃなく|ではなく|と言った|って言った|って言葉|という言葉|意味/.test(text))return 'positive';
  return 'neutral';
 }
-export function chooseFiller(input, recent=[],{match=recognizeName(input)}={}){
+export function chooseFiller(input, recent=[],{match=recognizeName(input),state={}}={}){
  const text=String(input).normalize('NFKC').trim();
  const serious=/つらい|苦しい|相談|病気|入院|死に|亡く|いじめ|怖い|こわい|けが|怪我|事故/.test(text);
  const sound=/^[ァ-ヶーッっぁ-ん]{2,14}[!！?？]+$/.test(text)?text.replace(/[!！?？]+$/,''):'';
  const topic=text.match(/ピアノ|ギター|音楽|プリン|牛丼|散歩|猫|ネコ|犬|イヌ/)?.[0];
  const echo=sound?`えっ、${sound}！？`:topic?`${topic}…。`:null;
  const tone=waitingTone(text);
+ const affection=complimentReaction(text)?.affection;
  const language=['ニホンゴデ、ナンテイウンダッケ…。','エト…コノコトバ…。'];
+ if(!serious&&!match?.decline&&!unwantedFanRedirect('ちいかわ',input,state)&&selectKnowledge(input,state).work==='chiikawa'){
+  const pool=waterPlayCorrection(input,state)?['うん、さっきの言い方、直すね。','そこ、混ぜないように話すね。']:['わあ、その話！','好きな話だと、つい声が大きくなっちゃう。'];
+  if(match&& !recent.includes(namedGesture(match)))return namedGesture(match);
+  return pool.find(line=>!recent.includes(line))||pool[0];
+ }
  if(match&&!serious){const named=[namedGesture(match),namedFollowup(match,input),'ンー…。'];const next=named.find(line=>!recent.includes(line));if(next)return next;}
+ if(affection){const joy=['ワア！','エヘヘ、うれしい！','フフッ、顔に出ちゃう。'];return joy.find(line=>!recent.includes(line))||joy[0];}
  const pool=serious?['うん、聞いてるよ。','そっか…。','うん…。']:
   tone==='negative'?['エエッ…。','そっか…。','うん、聞いてるよ。','フムフム…。']:
   sound?[echo,'！？','ウンウン…。',...language,'フムフム…。']:
@@ -30,7 +39,14 @@ export function chooseFiller(input, recent=[],{match=recognizeName(input)}={}){
   ['ウンウン…。','ソウネー…。','フムフム…。',...language,...(echo?[echo]:[]),'ンー…。'];
  return pool.find(line=>!recent.includes(line))||pool.find(line=>line!==recent.at(-1))||pool[0];
 }
-export function longFiller(input,recent=[]){
+export function longFiller(input,recent=[],state={}){
+ const reaction=complimentReaction(input);
+ if(reaction?.affection&&reaction.target?.work==='everyday'){
+  const prefix=`わあ、${reaction.target.reading}が好きなんだ！ `;
+  return prefix+waitingReply(input,recent.map(line=>line.startsWith(prefix)?line.slice(prefix.length):line));
+ }
+ if(reaction?.affection){const joy=reaction.target?['そんなに好きなんだ！ 好きなところを聞くと、アタシもわくわくしちゃう。','好きな話って、声が大きくなっちゃうね。あなたの話、まだ聞いてたいな。']:['えへへ、まだ喜んじゃってる。アタシ、嬉しいとすぐ顔に出るの。','今の言葉、聞き間違いじゃないよね？ わあ、アタシ、すごくうれしい！'];return joy.find(line=>!recent.includes(line))||joy[0];}
+ if(!unwantedFanRedirect('ちいかわ',input,state)&&selectKnowledge(input,state).work==='chiikawa'&&!/嫌い|キライ|苦手|ヤメ|やめ|以外|イガイ|相談|病気|事故|亡く|死に/.test(input))return waterPlayCorrection(input,state)?'さっきの話、言い方を混ぜちゃったね。島二郎の話に戻すね。':'ちいかわの話、好きなところが多くて迷っちゃう。あなたと話せてうれしい！';
  return waitingReply(input,recent);
 }
 export function idleAside(history=[],index=0){

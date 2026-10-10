@@ -1,6 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {chooseFiller,waitingTone,longFiller,startFiller,retainAside,idleAside,createIdleSequence} from '../src/filler.js';
+test('affection waits with delighted gestures instead of neutral language searching',()=>{
+ for(const raw of ['スキダヨ','好きだよ','愛してる','好みだよ']){
+  const first=chooseFiller(raw,[],{match:null}),second=chooseFiller(raw,[first],{match:null});
+  assert.match(first+second,/ワア|うれしい/);assert.doesNotMatch(first+second,/フムフム|ナンテイウンダッケ/);
+  assert.match(longFiller(raw),/嬉し|うれしい/);
+ }
+ assert.doesNotMatch(chooseFiller('好きじゃない',[],{match:null}),/ワア|うれしい/);
+});
 test('idle asides follow the current food topic rather than an old manga topic',()=>{
  const history=[{role:'user',text:'ジョジョが好き'},{role:'user',text:'吉野家のチーズ牛丼が好き'}];
  for(let i=0;i<3;i++){assert.doesNotMatch(idleAside(history,i),/漫画|マンガ|質問/);}

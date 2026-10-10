@@ -16,7 +16,7 @@ for(const row of placeNames)for(const alias of row.aliases)if(alias.length>=4||a
 // Preferred everyday readings also protect ambiguous hiragana before tokenization.
 for(const spelling of ['えみちい','エミチイ','エミチィ','えみちぃ','emmichy'])names.set(spelling,'エミチィ');
 const preferredReadings=new Map([
- ['台詞','セリフ'],['はなして','ハナシテ'],['しゃべりかた','シャベリカタ'],['ほっこり','ホッコリ'],['ホッコリ','ホッコリ'],['三つ編み','ミツアミ'],
+ ['台詞','セリフ'],['はなして','ハナシテ'],['しゃべりかた','シャベリカタ'],['ほっこり','ホッコリ'],['ホッコリ','ホッコリ'],['三つ編み','ミツアミ'],['にやけちゃう','ニヤケチャウ'],
  ['しゃべりかたがへんよ','シャベリカタ ガ ヘンヨ'],['シャベリカタガヘンヨ','シャベリカタ ガ ヘンヨ']
 ]);
 const joinSmallKana=value=>String(value).normalize('NFKC').replace(/[ \t]+(?=[ァィゥェォッャュョヮヵヶぁぃぅぇぉっゃゅょゎゕゖ])/g,'').replace(/([ッっ])[ \t]+(?=[ァ-ヶぁ-ゖ])/g,'$1');

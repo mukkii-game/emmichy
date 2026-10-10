@@ -20,7 +20,7 @@ export function resumeSession(session,now=Date.now()) {
  return {...session,startedAt:session.startedAt+Math.max(0,now-saved),lastSavedAt:now};
 }
 export function startConversation(state,now=Date.now()) {
- return {state:{...state,turn:0,last:'',repeat:0,praise:0,clues:0,topic:'',fan:{worry:0,excitement:0,lastTopic:''},performance:{},conversation:cleanConversation(null),gap:{...state.gap,lastTurn:-10},repertoire:{...state.repertoire,lastTurn:-10},speechStyle:'normal',ended:false,history:[]},session:{startedAt:now,lastSavedAt:now,turns:0,finished:false}};
+ return {state:{...state,turn:0,last:'',repeat:0,praise:0,clues:0,topic:'',knowledge:{...state.knowledge,work:'',movieRun:0,focus:'',mentions:[],facets:[],corrections:[]},fan:{worry:0,excitement:0,lastTopic:''},performance:{},conversation:cleanConversation(null),gap:{...state.gap,lastTurn:-10},repertoire:{...state.repertoire,lastTurn:-10},speechStyle:'normal',ended:false,history:[]},session:{startedAt:now,lastSavedAt:now,turns:0,finished:false}};
 }
 export function shouldEnd(session,now=Date.now()){
  if(!session||session.turns<MIN_SESSION_TURNS||now-session.startedAt<SESSION_MS)return false;

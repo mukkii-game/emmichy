@@ -1,3 +1,17 @@
+# Current checkpoint — affection, persistent fandom cues and audio cleanup, 2026-10-10
+
+Supersedes older current headings below. Front branch codex/affection-reaction-20261009; backend codex/emmichy-affection-20261009. Runtime release20261010-fanmemory1. Prior published PR21/10 remains the base; frontend main6343213bc8f904a43c02319fc9b421ce2dd4dc0f must stay unchanged. Follow-up publication remains limited to authorized pilot-audio-readable-retro and game-llm main.
+
+Ambiguous 好き/愛/好み echoes the positive word first, then concrete delighted reactions; named favourites retain their subject. Waiting is joyful instead of language-search filler. Fixed the new authored にやけちゃう reading after the first UI proof split it incorrectly.
+
+Knowledge now preserves bounded owned name IDs and factual-card cue IDs independently of the40-line transcript, current work and one current facet. User and actually displayed character lines update it; restoration preserves it and start-over clears this play's topic memory. Server rebuilds cue summaries from owned IDs, never client instructions/facts. Kanaスイリュウ now reaches the water card; direct/referential water cues remain relevant even after the card was used. A reported play-scene correction withdraws the wrong statement before connecting the owned hand-generated water fact and personal enthusiasm. Generic whole-topic ignorance is repaired locally/on public output validation; finer details remain unasserted. Explicit refusals, serious topics and unrelated ordinary turns take precedence.
+
+Audio previously had no visibility/pagehide cleanup. Both now mute immediately, cancel timer, stop/disconnect scheduled tones and close Context. ON preference survives but a new gesture is needed to resume; OFF and pending-start cancellation are retained. Own old local test tab22 was found and closed; its being the audible source is not established. New visual checks run with sound OFF. Claude handoff proposal is docs/audio-lifecycle-handoff-20261010.md, not a global constitution edit or automatic message.
+
+Local checks:148 frontend/36 backend tests passed on the final runtime. Local visual proofs: docs/playtest-20261010-affection-fixed-local.png and docs/playtest-20261010-water-correction-full-local.png; sound OFF, own test tabs23/24 closed and server stopped. No live provider request. Physical-speaker silence, user's exact close operation/host notifications, real-device IME/mobile and new live LLM naturalness remain unverified. Deployment/audit IDs will be added only after publication verification.
+
+---
+
 # Current checkpoint — slightly muted portrait palette, 2026-10-08
 
 User requests slightly lower saturation. The same softened illustration and every pixel index are preserved; only the eight-color palette changes. Chromatic colors use34/221 instead of0/255, black/white unchanged. Current asset uses later PC-98 analog RGB eight-of4096, not initial fixed digital8. Native248×336 indexed PNG remains exactly8 colors. Mood overlays share the new palette. Source/previous final retained; no new drawing or AI call.
@@ -570,3 +584,10 @@ src/context.jsに公式TMS確認の左門豊作補助資料を追加し、巨人
 - 次: 実画面の読み修正・地名を確認後、既存の公開追随許可でpilot-audio-readable-retroと中継mainへ統合し配信を検証。Emmichy本体mainは対象外。release20261009-talk1、自動Relayなし。このWorkで続ける。
 
 - 実画面の称賛と本人名・ホッコリは成功。最初の秋葉原試遊では名前の二重反応があり、本文から冒頭の呼びかけを除去。PLAYTESTに失敗と修正を残す。最終140件・34件成功。
+
+
+### 公開確認
+
+- コード候補d5f48b9670db9271162c5b5776508e87d37032b2、PR #21 pilot統合0f5ee2846bcc438c4a6cd90ad242bdff5805f88a。Pages run37870731048 success。release20261009-talk1、配信HTML・CSS・変更module計16ファイルが候補と一致。URL https://mukkii-game.github.io/emmichy/ 。
+- 中継候補10535b92db84280c83ef5dc665e5fdd20e179441、game-llm PR #10 main統合be05a64f4112c8570663b6c1d736d001ca741854。Deploy run37870725942 success、Worker version2f6e24ed-0b5c-467c-b7c3-b40c2db198e6。
+- ゲーム140件・中継34件成功。ローカル実画面で残り時間、褒め言葉、読み、秋葉原、自発ちいかわ話を確認。実LLMの追加通信と公開ブラウザの保存データ操作なし。Emmichy本体mainは6343213bc8f904a43c02319fc9b421ce2dd4dc0f、自動Relayなし。次の人間試遊報告もこのWorkで対応する。

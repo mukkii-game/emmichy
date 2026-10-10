@@ -1,0 +1,130 @@
+{
+  "mode": "actual app and live relay (max3 calls, stop429); simulated DOM/virtual pauses; compressed typing; real request wallMs; no browser/audio",
+  "actions": [
+    {
+      "action": {
+        "type": "start"
+      },
+      "result": {
+        "atSeconds": 0,
+        "messages": [
+          {
+            "atMs": 0,
+            "role": "enny",
+            "text": "はじめまして！",
+            "screen": "ハジメマシテ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0,
+        "liveCalls": [
+          {
+            "input": "今日は散歩で小さいパン屋を見つけたよ",
+            "wallMs": 6032,
+            "status": 200,
+            "provider": "groq",
+            "text": "小さなパン屋、見つけたんだね！　店内のいい匂い、すごく癒されるよね。　アタシ、シナモンロールの甘い香りが大好きで、つい手が伸びちゃうんだ。　どんなパンが売ってたのか、教えてくれる？"
+          }
+        ]
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "今日は散歩で小さいパン屋を見つけたよ"
+      },
+      "result": {
+        "atSeconds": 0,
+        "messages": [
+          {
+            "atMs": 0,
+            "role": "user",
+            "text": "今日は散歩で小さいパン屋を見つけたよ",
+            "screen": "キョウ ハ サンポ デ チイサイ パンヤ ヲ ミツケタヨ"
+          },
+          {
+            "atMs": 0,
+            "role": "enny",
+            "text": "ウンウン…。",
+            "screen": "ウンウン...。"
+          },
+          {
+            "atMs": 0,
+            "role": "enny",
+            "text": "ソウネー…。",
+            "screen": "ソウネー...。"
+          },
+          {
+            "atMs": 0,
+            "role": "enny",
+            "text": "小さなパン屋、見つけたんだね!",
+            "screen": "チイサナ パンヤ、 ミツケタ ンダネ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1,
+        "dialogueUse": {
+          "ai": 1,
+          "bank": 0
+        },
+        "liveCalls": [
+          {
+            "input": "今日は散歩で小さいパン屋を見つけたよ",
+            "wallMs": 6032,
+            "status": 200,
+            "provider": "groq",
+            "text": "小さなパン屋、見つけたんだね！　店内のいい匂い、すごく癒されるよね。　アタシ、シナモンロールの甘い香りが大好きで、つい手が伸びちゃうんだ。　どんなパンが売ってたのか、教えてくれる？"
+          }
+        ]
+      }
+    }
+  ],
+  "transcript": [
+    {
+      "atMs": 0,
+      "message": {
+        "role": "enny",
+        "text": "はじめまして！"
+      }
+    },
+    {
+      "atMs": 0,
+      "message": {
+        "role": "user",
+        "text": "今日は散歩で小さいパン屋を見つけたよ"
+      }
+    },
+    {
+      "atMs": 0,
+      "message": {
+        "role": "enny",
+        "text": "ウンウン…。"
+      }
+    },
+    {
+      "atMs": 0,
+      "message": {
+        "role": "enny",
+        "text": "ソウネー…。"
+      }
+    },
+    {
+      "atMs": 0,
+      "message": {
+        "role": "enny",
+        "text": "小さなパン屋、見つけたんだね!"
+      }
+    }
+  ],
+  "liveCalls": [
+    {
+      "input": "今日は散歩で小さいパン屋を見つけたよ",
+      "wallMs": 6032,
+      "status": 200,
+      "provider": "groq",
+      "text": "小さなパン屋、見つけたんだね！　店内のいい匂い、すごく癒されるよね。　アタシ、シナモンロールの甘い香りが大好きで、つい手が伸びちゃうんだ。　どんなパンが売ってたのか、教えてくれる？"
+    }
+  ]
+}

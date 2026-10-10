@@ -1,4 +1,4 @@
-import {unwantedFanRedirect} from './chat.js?v=20261009-pacing2';
+import {unwantedFanRedirect} from './chat.js?v=20261010-llm1';
 import {japaneseExamples,complimentReaction,profileAside} from './profile.js?v=20261010-virtual1';
 import {waitingReply} from './waiting-db.js?v=20261008-listen3';
 import {recognizeName,namedGesture,namedFollowup} from './names.js?v=20261010-fanmemory1';
@@ -60,7 +60,7 @@ export function startFiller(show,{schedule=setTimeout,cancel=clearTimeout,now=Da
  let active=true,timer,lastShown=null,count=0;
  const speak=()=>{
   if(!active)return;
-  lastShown=now();show();count++;
+  lastShown=now();show(count);count++;
   if(!active)return;
   if(count<2)timer=schedule(speak,3000);
   else if(later)timer=schedule(()=>{if(active){lastShown=now();later();}},3000);

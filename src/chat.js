@@ -1,6 +1,7 @@
 // Reject the observed nonfan failure without another provider request.
 import {rejectedJoke} from './humor.js?v=20261008-humor1';
 const fanNames=/ちいかわ|チイカワ|chiikawa|ハチワレ|ジョジョ|バキ|刃牙/i;
+export const CHAT_REPLY_BUDGET_MS=8000;
 const decline=/(?:漫画|マンガ|アニメ|ちいかわ|チイカワ).{0,16}(?:詳しくない|興味ない|興味がない|苦手|以外|イガイ|いがい|やめ|ヤメ|じゃなく|ジャナク)|(?:別|他|ほか)の話/;
 export function unwantedFanRedirect(text,input,state={}){
  const raw=String(input).normalize('NFKC');
@@ -31,7 +32,7 @@ export async function requestChat(url,input,state,session,{fetcher=fetch,offline
  if(!chatAvailable(session,now))return null;
  try {
   const r=await fetcher(url,{method:'POST',headers:{'Content-Type':'application/json'},
-   body:JSON.stringify({input,state,session}),signal:AbortSignal.timeout(22000)});
+   body:JSON.stringify({input,state,session}),signal:AbortSignal.timeout(CHAT_REPLY_BUDGET_MS)});
   if(!r.ok){noteAttempt(session,r.status===429?'rate-limit':'error',now);return null;}
   const d=await r.json();
   if(typeof d.text!=='string'||!d.text.trim()||d.text.length>180||rejectedJoke(d.text)||unwantedFanRedirect(d.text,input,state)){noteAttempt(session,'rejected',now);return null;}

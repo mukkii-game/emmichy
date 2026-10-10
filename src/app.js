@@ -1,22 +1,22 @@
 import {selfReaction,complimentReaction} from './profile.js?v=20261010-virtual1';
-import {freshState,restoreState,respond,normalize} from './engine.js?v=20261010-virtual1';
+import {freshState,restoreState,respond,normalize} from './engine.js?v=20261010-llm1';
 import {chiikawaReply,checkedAt} from './topics.js?v=20261006-mix1';
-import {text,kana} from './font.js?v=20261010-virtual1';
+import {text,kana} from './font.js?v=20261010-llm1';
 import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation,remainingTime} from './session.js?v=20261010-fanmemory1';
 import {noteChiikawa,chiikawaReminder} from './chiikawa-reminder.js?v=20261010-fanmemory1';
 import {createAudioDirector,bindAudioLifecycle} from './audio.js?v=20261010-bgm2';
 import {CHAT_API_URL} from './config.js?v=20261006-mix1';
 import {advancePerformance} from './performance.js?v=20261008-humor1';
-import {requestChat,chatAvailable,unwantedFanRedirect} from './chat.js?v=20261009-pacing2';
+import {requestChat,chatAvailable,unwantedFanRedirect} from './chat.js?v=20261010-llm1';
 import {readableText,loadReadings} from './readable.js?v=20261010-virtual1';
 import {selectKnowledge,rememberKnowledge,fanRecovery} from './fandom.js?v=20261010-virtual1';
 import {selectGap} from './gap.js?v=20261006-mix1';
-import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261010-virtual1';
+import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261010-llm1';
 import {cultureReply} from './culture.js?v=20261009-profile1';
-import {chooseFiller,startFiller,longFiller,retainAside,idleAside,createIdleSequence} from './filler.js?v=20261010-virtual1';
-import {learnInterests,needsFirstModelReply} from './balance.js?v=20261010-virtual1';
+import {chooseFiller,startFiller,longFiller,retainAside,idleAside,createIdleSequence} from './filler.js?v=20261010-llm1';
+import {learnInterests,shouldRequestModel} from './balance.js?v=20261010-llm1';
 import {selectOpening,planOpening,openingTiming} from './openings.js?v=20261009-readmenu1';
-import {preparedReply} from './routing.js?v=20261010-virtual1';
+import {preparedReply} from './routing.js?v=20261010-llm1';
 import {cleanConversation,noteConversationReply} from './conversation.js?v=20261008-humor1';
 import {offlineFallback} from './fallback.js?v=20261008-finish1';
 import {portraitColors} from './portrait-palette.js?v=20261008-portrait3';
@@ -157,13 +157,13 @@ $('talk').addEventListener('submit',async e=>{
  let usedModel=false,locallyReplaced=false,fillerGap=0;
  const gap=!isRestart&&!state.ended&&selectGap(raw,state);
  let prepared=isRestart||state.ended?null:preparedReply(raw,state,session,{gap,culture,repertoire,modelEnabled,kind:result.kind});
- const firstModel=needsFirstModelReply(session,{enabled:modelEnabled,kind:result.kind,topic:prepared?.topic,restart:isRestart,fixedIdentity:prepared?.id==='profile:home'});
+ const requestModel=shouldRequestModel(session,{enabled:modelEnabled,kind:result.kind,topic:prepared?.topic,restart:isRestart,fixedIdentity:prepared?.id==='profile:home'});
  let greetingPlan=null;
  if(prepared?.topic==='greeting'){greetingPlan=openingPlan(true);prepared.text=greetingPlan.first;result.state.openingSeen=state.openingSeen;}
  if(gap)result.state.gap=gap.memory;
  if(prepared){result.text=['compliment','japan-place','deflection','fandom-decline','profile','chiikawa-name','everyday','conversation-move','context-name','greeting','island-water','gap','repertoire','culture'].includes(prepared.topic)?prepared.text:fandomReply||prepared.text;result.kind='curated';result.state.history.at(-1).text=result.text;if(/[！!]/.test(result.text))result.mood='excited';}
  if(isRestart){greetingPlan=openingPlan(true);result.text=greetingPlan.first;result.state.openingSeen=state.openingSeen;result.state.history.at(-1).text=result.text;}
- const ruleOnly=isRestart||(['curated','bye','asleep','name','memory','arithmetic'].includes(result.kind)&&!firstModel);
+ const ruleOnly=!requestModel;
  let heard=['bye','asleep','name','memory','arithmetic','comfort','contradiction'].includes(result.kind)||isRestart||prepared?.topic==='profile'?null:recognizeName(raw,{reading:readableText(raw,tokenizer),state:before});
  const self=['bye','asleep','comfort','contradiction'].includes(result.kind)||isRestart||prepared?.topic==='deflection'?null:complimentReaction(raw,before)||selfReaction(raw,before);
  if(self||prepared?.topic==='deflection')heard=null;
@@ -175,13 +175,11 @@ $('talk').addEventListener('submit',async e=>{
  if(heard){await wait(NAME_REACTION_MS);const line=namedGesture(heard);recordAside(line,result.state);recentFillers=[...recentFillers,line].slice(-6);draw();}
  if(modelEnabled && !ruleOnly && chatAvailable(session)){
   $('status').textContent='';
-  const stopFiller=startFiller(()=>{
-   const line=chooseFiller(raw,recentFillers,{match:heard,state:before});recentFillers=[...recentFillers,line].slice(-6);
-   recordAside(line,result.state);draw();
-  },{initialDelay:heard||self?5000:2000,later:()=>{
+  const stopFiller=startFiller(index=>{
    const recent=result.state.history.filter(h=>h.role==='enny').slice(-20).map(h=>h.text);
-   recordAside(longFiller(raw,recent,before),result.state);draw();
-  }});
+   const line=index===1?planContinuation(longFiller(raw,recent,before),'',before,{display:s=>readableText(s,tokenizer),tokenizer}).first:chooseFiller(raw,recentFillers,{match:heard,state:before});recentFillers=[...recentFillers,line].slice(-6);
+   recordAside(line,result.state);draw();
+  },{initialDelay:2000});
   let data;
   try{data=await requestChat(chatEndpoint,raw,before,session,{offline});}
   finally{fillerGap=stopFiller();live='';draw();}

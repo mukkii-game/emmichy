@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {requestChat} from '../src/chat.js';
+import {requestChat,CHAT_REPLY_BUDGET_MS} from '../src/chat.js';
 import {advancePerformance} from '../src/performance.js';
 import {freshState} from '../src/engine.js';
 import {rejectedJoke} from '../src/humor.js';
@@ -22,6 +22,16 @@ test('provider and the complete state contract reach the relay',async()=>{
 test('unavailable, rate-limited, bad responses and disconnected network return fallback signal',async()=>{
  for(const fetcher of [async()=>new Response('',{status:502}),async()=>new Response('',{status:429}),async()=>{throw new TypeError('offline');},async()=>Response.json({text:42}),async()=>Response.json({text:'x'.repeat(181)})])assert.equal(await requestChat('https://relay','hi',{}, {},{fetcher}),null);
  let called=false;assert.equal(await requestChat('https://relay','hi',{}, {},{offline:true,fetcher:async()=>{called=true;}}),null);assert.equal(called,false);
+});
+test('slow requests receive the eight-second deadline and abort back to the fallback signal',async()=>{
+ const original=AbortSignal.timeout,controller=new AbortController();let budget;
+ AbortSignal.timeout=ms=>{budget=ms;return controller.signal;};
+ try{
+  const session={},pending=requestChat('/chat','散歩の話',{},session,{fetcher:async(url,options)=>new Promise((resolve,reject)=>options.signal.addEventListener('abort',()=>reject(options.signal.reason),{once:true}))});
+  assert.equal(budget,8000);assert.equal(CHAT_REPLY_BUDGET_MS,8000);
+  controller.abort(new DOMException('Timed out','TimeoutError'));
+  assert.equal(await pending,null);assert.equal(session.chatHealth.failed,1);
+ }finally{AbortSignal.timeout=original;}
 });
 test('plain Japanese from the relay can be converted locally instead of burdening the model',async()=>{
  const text='かわいいのに、急にこわくなるよね。';

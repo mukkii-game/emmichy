@@ -1,0 +1,22 @@
+{
+  "candidate": "d46e8c945d295f9063cb1f50ab6110206d48771d",
+  "pr": 23,
+  "pilot_merge": "cf893607b4cb213cbafd6f526ad2a12ebb3f272d",
+  "pages_run": 38010314441,
+  "release": "20261010-bgm2",
+  "frontend_main": "6343213bc8f904a43c02319fc9b421ce2dd4dc0f",
+  "files": [
+    {
+      "file": "index.html",
+      "matches_candidate": true
+    },
+    {
+      "file": "src/app.js",
+      "matches_candidate": true
+    },
+    {
+      "file": "src/audio.js",
+      "matches_candidate": true
+    }
+  ]
+}

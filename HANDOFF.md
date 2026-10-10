@@ -1,6 +1,6 @@
 # Current checkpoint — modest BGM increase, 2026-10-10
 
-User asks for a little more BGM while keeping it restrained. Only chord peaks .023→.028 and shimmer .018→.022 (about22%, +1.7dB) change; master .18, SE and lifecycle cleanup stay as published in PR22. Branch codex/bgm-level-20261010, runtime20261010-bgm2. Publication remains the authorized pilot branch, not frontend main. All4 existing audio tests pass (OFF, hidden/pagehide teardown, restoration and pending-resume cancellation); diff check passes. Actual listening preference is left to the player. Deployment/public-file verification pending. No backend or live AI change.
+User asks for a little more BGM while keeping it restrained. Only chord peaks .023→.028 and shimmer .018→.022 (about22%, +1.7dB) change; master .18, SE and lifecycle cleanup stay as published in PR22. Branch codex/bgm-level-20261010, runtime20261010-bgm2. Publication remains the authorized pilot branch, not frontend main. All4 existing audio tests pass (OFF, hidden/pagehide teardown, restoration and pending-resume cancellation); diff check passes. Actual listening preference is left to the player. Published: PR23 candidate d46e8c945d295f9063cb1f50ab6110206d48771d merged into pilot ascf893607b4cb213cbafd6f526ad2a12ebb3f272d. Pages38010314441 succeeded. Public HTML/app/audio match the candidate, release20261010-bgm2; evidence docs/public-bgm-20261010.json. Frontend main remains6343213bc8f904a43c02319fc9b421ce2dd4dc0f. This report commit changes docs/evidence only. No backend or live AI change.
 
 ---
 

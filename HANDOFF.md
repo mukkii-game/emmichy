@@ -1,3 +1,9 @@
+# Current checkpoint — modest BGM increase, 2026-10-10
+
+User asks for a little more BGM while keeping it restrained. Only chord peaks .023→.028 and shimmer .018→.022 (about22%, +1.7dB) change; master .18, SE and lifecycle cleanup stay as published in PR22. Branch codex/bgm-level-20261010, runtime20261010-bgm2. Publication remains the authorized pilot branch, not frontend main. All4 existing audio tests pass (OFF, hidden/pagehide teardown, restoration and pending-resume cancellation); diff check passes. Actual listening preference is left to the player. Deployment/public-file verification pending. No backend or live AI change.
+
+---
+
 # Current checkpoint — affection, persistent fandom cues and audio cleanup, 2026-10-10
 
 Supersedes older current headings below. Front branch codex/affection-reaction-20261009; backend codex/emmichy-affection-20261009. Runtime release20261010-fanmemory1. Prior published PR21/10 remains the base; frontend main6343213bc8f904a43c02319fc9b421ce2dd4dc0f must stay unchanged. Follow-up publication remains limited to authorized pilot-audio-readable-retro and game-llm main.

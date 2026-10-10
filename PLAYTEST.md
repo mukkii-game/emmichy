@@ -1,3 +1,9 @@
+# 2026-10-10: continuous LLM with bounded waiting
+
+Original scripted virtual-player round was deliberately offline. Actual-app live baseline succeeded: HTTP200/Groq,6032ms, displayed AI count1, bread-shop reply followed by cinnamon-roll aroma/personal taste. New actual-app mock regression confirms ordinary prepared replies keep using AI after success; abort/cooldown/control and original draft/ending regression retained. Failed probe adapters were character encoding then403/default user-agent; kept as harness failures, not generated model text. Publication/live-after evidence pending; max2 additional sends, stop429.
+
+---
+
 # 2026-10-10: three virtual players, bounded by token preference
 
 Three adaptive roles, 6/7/6 sends, actual offline app with simulated DOM/clock and compressed animation. Found draft continuation after six seconds, favourite question read as personal affection, birthplace question read as unknown, natural farewell ignored; all four repaired and targeted replay passes. Full suites: 153 frontend + 37 backend. First targeted replay still selected the earlier Shisa instead of asked Hachiware; retained failure analysis in report, then added the owned Hachiware preference answer and reran successfully. Original fan farewell hit missing remove() in the simulated DOM; harness repaired, original failure log kept. Remaining self-started-topic explanations, semantic repetition, topic/stop intent and tired-to-canule earworm documented. No external game-LLM calls, live/human/audio/real-browser conclusions. Report: docs/virtual-player-review-20261010.md.

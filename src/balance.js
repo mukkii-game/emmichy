@@ -24,3 +24,10 @@ export function needsFirstModelReply(session,{enabled=false,kind='',topic='',res
   &&!['bye','asleep','name','memory','arithmetic'].includes(kind)
   &&!['deflection','fandom-decline','greeting'].includes(topic);
 }
+export function shouldRequestModel(session,options={}){
+ if(needsFirstModelReply(session,options))return true;
+ const {enabled=false,kind='',topic='',restart=false}=options;
+ return enabled&&!restart&&!session?.finished
+  &&!['bye','asleep','name','memory','arithmetic'].includes(kind)
+  &&!['profile','deflection','fandom-decline','greeting'].includes(topic);
+}

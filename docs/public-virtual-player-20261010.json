@@ -1,0 +1,63 @@
+{
+  "release": "20261010-virtual1",
+  "frontCandidate": "bc44d51142075dcc452a020ed5bfaa5f11187cc5",
+  "frontMerge": "ee264dc747426d40a2bed3f2cbe03a1cab1b5eb7",
+  "pagesRun": 38012656355,
+  "backendCandidate": "acfb50e6cb5bdce499eea04175ddfc05143029b8",
+  "backendMerge": "6ea99e6b6139cb70473d5b8469a26939257c7d1a",
+  "deployRun": 38012657591,
+  "workerVersion": "95da9ad0-8d3b-4564-aabe-15aa66cb6290",
+  "frontMain": "6343213bc8f904a43c02319fc9b421ce2dd4dc0f",
+  "files": [
+    {
+      "path": "index.html",
+      "matches": true
+    },
+    {
+      "path": "src/app.js",
+      "matches": true
+    },
+    {
+      "path": "src/balance.js",
+      "matches": true
+    },
+    {
+      "path": "src/context.js",
+      "matches": true
+    },
+    {
+      "path": "src/engine.js",
+      "matches": true
+    },
+    {
+      "path": "src/fandom.js",
+      "matches": true
+    },
+    {
+      "path": "src/filler.js",
+      "matches": true
+    },
+    {
+      "path": "src/font.js",
+      "matches": true
+    },
+    {
+      "path": "src/profile.js",
+      "matches": true
+    },
+    {
+      "path": "src/readable.js",
+      "matches": true
+    },
+    {
+      "path": "src/repertoire.js",
+      "matches": true
+    },
+    {
+      "path": "src/routing.js",
+      "matches": true
+    }
+  ],
+  "liveModelCalls": 0,
+  "validation": "153 frontend + 37 backend tests; actual-app offline targeted replay; simulated DOM/clock, compressed typing; not human/live-model/browser/audio assessment"
+}

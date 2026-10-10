@@ -1,0 +1,99 @@
+{
+  "checkedAt": "2026-10-10T01:43:42.474222+00:00",
+  "release": "20261010-llm2",
+  "frontend": {
+    "pr": 27,
+    "candidate": "3b6e769d77d477d8fee434844a4dcac5ca6d8778",
+    "merge": "a7b42827e308bff73f9147da9b935ccfdcbd5051",
+    "pagesRun": 38014251026,
+    "url": "https://mukkii-game.github.io/emmichy/",
+    "mainUnchanged": "6343213bc8f904a43c02319fc9b421ce2dd4dc0f",
+    "files": [
+      {
+        "path": "index.html",
+        "matches": true,
+        "sha256": "71614b10d3c19c468f5f92857774b16507841278cab7a62658de0a8196d7e35d"
+      },
+      {
+        "path": "src/app.js",
+        "matches": true,
+        "sha256": "baa5f05df838055f47d47ec6cff342f16d9de06b02aa5e45368a4b553974fffe"
+      },
+      {
+        "path": "src/balance.js",
+        "matches": true,
+        "sha256": "5fb0f5cfbbbd28c1210d6f30f3566b7f388a9ce1894943de617836d9623d65f5"
+      },
+      {
+        "path": "src/chat.js",
+        "matches": true,
+        "sha256": "347a34fcae3d5ac34f7e82de60a76b877bfd3dcd51d5592066c207df350cf33e"
+      },
+      {
+        "path": "src/engine.js",
+        "matches": true,
+        "sha256": "ab5ea40233b4d9cf117dbad2d7538d679f8ae195f09b1bc2f11764f1dcc5cc55"
+      },
+      {
+        "path": "src/filler.js",
+        "matches": true,
+        "sha256": "711876b01f779611c092b8bcc654d9564ac47e9b9369c10ca4feacbedfc28150"
+      },
+      {
+        "path": "src/font.js",
+        "matches": true,
+        "sha256": "089d4be46ce51e9a11510b744d5a3ccd530abf18fb64df5f1dc0d621b481216e"
+      },
+      {
+        "path": "src/repertoire.js",
+        "matches": true,
+        "sha256": "4d2febd799faac76fce4a847348a3e44bd0c2ca7105878b3bedb968d14cb46d7"
+      },
+      {
+        "path": "src/routing.js",
+        "matches": true,
+        "sha256": "40b4389dd91e45bc592632a744b2d1e9636d8b3611a16155c2f9d364775f43f9"
+      }
+    ],
+    "pagesConclusion": "success"
+  },
+  "backend": {
+    "pr": 14,
+    "candidate": "781c67650e72b308fc38d567dc145f623d782640",
+    "merge": "f79214fd07e1cf74da33d277b18ff16ebe81f864",
+    "deployRun": 38013628053,
+    "workerVersion": "ce72b079-8640-4130-9246-0d57d9fa8b89",
+    "deployConclusion": "success"
+  },
+  "checks": {
+    "frontendTests": 155,
+    "backendTests": 37,
+    "targetedRegression": "pass"
+  },
+  "liveEvidence": {
+    "baseline": {
+      "accepted": 1,
+      "provider": "groq",
+      "wallMs": 6032
+    },
+    "followupProbe": {
+      "accepted": 1,
+      "provider": "groq",
+      "wallMs": 3653,
+      "failures": [
+        {
+          "status": 502,
+          "wallMs": 5401
+        },
+        {
+          "status": 502,
+          "wallMs": 5345
+        }
+      ],
+      "plannedCalls": 2,
+      "actualCalls": 3
+    },
+    "afterFinalRaceFix": "No additional live model calls; delayed429/autosave regression and public source match only"
+  },
+  "additionalSubagents": 0
+}

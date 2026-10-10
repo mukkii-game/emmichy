@@ -17,7 +17,7 @@ export function createAudioDirector(){
     o.onended=()=>{voices.delete(voice);o.disconnect?.();g.disconnect?.();};
     o.connect(g);g.connect(master);o.start(t);o.stop(t+dur+.03);
   };
-  const chord=(notes,when=0)=>notes.forEach((n,i)=>tone(n,.75,when+i*.018,'sine',.023));
+  const chord=(notes,when=0)=>notes.forEach((n,i)=>tone(n,.75,when+i*.018,'sine',.028));
   const tick=()=>{
     if(!enabled||!visible||!ctx)return;
     // Slow, lounge-like I–vi–IV–V loop with a tiny 80s computer shimmer.
@@ -28,7 +28,7 @@ export function createAudioDirector(){
       [196.00,246.94,293.66]
     ];
     chord(progression[step%progression.length]);
-    if(step%2===1)tone([659.25,587.33,523.25,587.33][step%4],.11,.32,'triangle',.018);
+    if(step%2===1)tone([659.25,587.33,523.25,587.33][step%4],.11,.32,'triangle',.022);
     step++;
   };
   const start=async()=>{

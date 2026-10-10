@@ -1,3 +1,9 @@
+# Current checkpoint — modest BGM increase, 2026-10-10
+
+User asks for a little more BGM while keeping it restrained. Only chord peaks .023→.028 and shimmer .018→.022 (about22%, +1.7dB) change; master .18, SE and lifecycle cleanup stay as published in PR22. Branch codex/bgm-level-20261010, runtime20261010-bgm2. Publication remains the authorized pilot branch, not frontend main. All4 existing audio tests pass (OFF, hidden/pagehide teardown, restoration and pending-resume cancellation); diff check passes. Actual listening preference is left to the player. Deployment/public-file verification pending. No backend or live AI change.
+
+---
+
 # Current checkpoint — affection, persistent fandom cues and audio cleanup, 2026-10-10
 
 Supersedes older current headings below. Front branch codex/affection-reaction-20261009; backend codex/emmichy-affection-20261009. Runtime release20261010-fanmemory1. Prior published PR21/10 remains the base; frontend main6343213bc8f904a43c02319fc9b421ce2dd4dc0f must stay unchanged. Follow-up publication remains limited to authorized pilot-audio-readable-retro and game-llm main.
@@ -8,7 +14,7 @@ Knowledge now preserves bounded owned name IDs and factual-card cue IDs independ
 
 Audio previously had no visibility/pagehide cleanup. Both now mute immediately, cancel timer, stop/disconnect scheduled tones and close Context. ON preference survives but a new gesture is needed to resume; OFF and pending-start cancellation are retained. Own old local test tab22 was found and closed; its being the audible source is not established. New visual checks run with sound OFF. Claude handoff proposal is docs/audio-lifecycle-handoff-20261010.md, not a global constitution edit or automatic message.
 
-Local checks:148 frontend/36 backend tests passed on the final runtime. Local visual proofs: docs/playtest-20261010-affection-fixed-local.png and docs/playtest-20261010-water-correction-full-local.png; sound OFF, own test tabs23/24 closed and server stopped. No live provider request. Physical-speaker silence, user's exact close operation/host notifications, real-device IME/mobile and new live LLM naturalness remain unverified. Deployment/audit IDs will be added only after publication verification.
+Local checks:148 frontend/36 backend tests passed on the final runtime. Local visual proofs: docs/playtest-20261010-affection-fixed-local.png and docs/playtest-20261010-water-correction-full-local.png; sound OFF, own test tabs23/24 closed and server stopped. No live provider request. Physical-speaker silence, user's exact close operation/host notifications, real-device IME/mobile and new live LLM naturalness remain unverified. Published: frontend PR22 code candidate db0e1523b01ad3fb5ee92ba19e89b754bfd9d3bd merged into pilot as5bfde4a552c50a792dba285bdb621727d6ed17d3; Pages38009460906 success. Backend PR11 candidatef8fe7a4bf0b9f202f47b48d72013314116d98418 merged asb023f686d745f1331ab968e1068146c4306ec263; deploy38009457221 success, Worker419a5a69-7749-4a3b-ab5b-f2b072d6d382. All16 changed public HTML/runtime files match the frontend candidate after newline normalization: docs/public-fanmemory-20261010.json. Frontend main remains6343213bc8f904a43c02319fc9b421ce2dd4dc0f. This post-release report commit changes documentation/evidence only.
 
 ---
 

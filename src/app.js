@@ -1,7 +1,7 @@
 import {selfReaction,complimentReaction} from './profile.js?v=20261010-virtual1';
-import {freshState,restoreState,respond,normalize} from './engine.js?v=20261010-llm1';
+import {freshState,restoreState,respond,normalize} from './engine.js?v=20261010-llm2';
 import {chiikawaReply,checkedAt} from './topics.js?v=20261006-mix1';
-import {text,kana} from './font.js?v=20261010-llm1';
+import {text,kana} from './font.js?v=20261010-llm2';
 import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation,remainingTime} from './session.js?v=20261010-fanmemory1';
 import {noteChiikawa,chiikawaReminder} from './chiikawa-reminder.js?v=20261010-fanmemory1';
 import {createAudioDirector,bindAudioLifecycle} from './audio.js?v=20261010-bgm2';
@@ -14,9 +14,9 @@ import {selectGap} from './gap.js?v=20261006-mix1';
 import {chooseRepertoire,rememberReply,polishReply} from './repertoire.js?v=20261010-llm1';
 import {cultureReply} from './culture.js?v=20261009-profile1';
 import {chooseFiller,startFiller,longFiller,retainAside,idleAside,createIdleSequence} from './filler.js?v=20261010-llm1';
-import {learnInterests,shouldRequestModel} from './balance.js?v=20261010-llm1';
+import {learnInterests,shouldRequestModel,noteDialogueMix} from './balance.js?v=20261010-llm2';
 import {selectOpening,planOpening,openingTiming} from './openings.js?v=20261009-readmenu1';
-import {preparedReply} from './routing.js?v=20261010-llm1';
+import {preparedReply} from './routing.js?v=20261010-llm2';
 import {cleanConversation,noteConversationReply} from './conversation.js?v=20261008-humor1';
 import {offlineFallback} from './fallback.js?v=20261008-finish1';
 import {portraitColors} from './portrait-palette.js?v=20261008-portrait3';
@@ -40,7 +40,8 @@ let session=null,ending=false,ready=true;
 const audioDirector=createAudioDirector();
 bindAudioLifecycle(audioDirector);
 try{const stored=JSON.parse(localStorage.getItem('emmichy-session')||sessionStorage.getItem('emmichy-session'));if(stored&&Number.isFinite(stored.startedAt)&&Number.isFinite(stored.turns))session=stored;}catch{}
-function saveSession(){if(ready)session=checkpointSession(session);try{localStorage.setItem('emmichy-session',JSON.stringify(session));sessionStorage.setItem('emmichy-session',JSON.stringify(session));}catch{}}
+function saveSession(){if(ready&&session)Object.assign(session,checkpointSession(session));try{localStorage.setItem('emmichy-session',JSON.stringify(session));sessionStorage.setItem('emmichy-session',JSON.stringify(session));}catch{}}
+function resumeCurrentSession(){const next=resumeSession(session);if(session&&next)Object.assign(session,next);else session=next;}
 try {state=restoreState(JSON.parse(localStorage.getItem(key)));}catch{saveAvailable=false;}
 const hadSavedDialogue=state.history.length>0;
 let lines=[];
@@ -202,6 +203,7 @@ $('talk').addEventListener('submit',async e=>{
  const paced=greetingPlan||(['bye','asleep','name','memory','arithmetic','contradiction'].includes(result.kind)||isRestart?{first:result.text,later:[]}:planContinuation(result.text,raw,before,{display:s=>readableText(s,tokenizer),tokenizer,enthusiastic:knowledge.work==='chiikawa'&&result.mood==='excited'}));
  result.text=paced.first;result.state.history.at(-1).text=result.text;
  session.dialogueUse={ai:(session.dialogueUse?.ai||0)+(usedModel?1:0),bank:(session.dialogueUse?.bank||0)+(!usedModel&&(prepared||locallyReplaced)?1:0)};
+ noteDialogueMix(session,{usedModel,usedBank:Boolean(!usedModel&&(prepared||locallyReplaced)),topic:prepared?.topic,kind:result.kind,restart:isRestart});
  if(result.kind!=='bye')result.state.conversation=noteConversationReply(result.state.conversation,result.text,raw,session.turns);
  state=result.state;mood=result.mood;session.lastMood=mood;saveSession();save();
  await wait(Math.max(fillerGap,300+Math.min(raw.length*10,500)));
@@ -251,11 +253,11 @@ function showStartChoice(){
  $('continue').focus();
 }
 function enterConversation(){ready=true;if(!session)session={startedAt:Date.now(),turns:0,finished:false};$('start-choice').hidden=true;$('talk').hidden=false;$('send').disabled=!readingsSettled;$('entry').disabled=false;noteActivity();$('entry').focus();}
-$('continue').onclick=()=>{session=resumeSession(session);enterConversation();saveSession();$('status').textContent=state.ended?'おしまい。「最初から」で、もう一度。':'会話を再開しました / ENTER で送信';};
+$('continue').onclick=()=>{resumeCurrentSession();enterConversation();saveSession();$('status').textContent=state.ended?'おしまい。「最初から」で、もう一度。':'会話を再開しました / ENTER で送信';};
 $('new-chat').onclick=()=>{const next=startConversation(state);state=next.state;session=next.session;lines=[];live='';mood='idle';$('transcript').replaceChildren();addOpening();enterConversation();save();saveSession();$('status').textContent='新しい会話 / 漢字・ひらがな OK';draw();};
 $('restart-chat').onclick=showStartChoice;
 if(hadSavedDialogue){ready=false;showStartChoice();}
-document.addEventListener('visibilitychange',()=>{if(!ready)return;stopContinuation();if(document.hidden)saveSession();else{session=resumeSession(session);continuation.typed(Date.now());noteActivity();saveSession();}});
+document.addEventListener('visibilitychange',()=>{if(!ready)return;stopContinuation();if(document.hidden)saveSession();else{resumeCurrentSession();continuation.typed(Date.now());noteActivity();saveSession();}});
 setInterval(()=>{if(ready&&!document.hidden)saveSession();},5000);
 window.addEventListener('pagehide',saveSession);
 function setEngineNote(){

@@ -27,7 +27,14 @@ export function needsFirstModelReply(session,{enabled=false,kind='',topic='',res
 export function shouldRequestModel(session,options={}){
  if(needsFirstModelReply(session,options))return true;
  const {enabled=false,kind='',topic='',restart=false}=options;
- return enabled&&!restart&&!session?.finished
-  &&!['bye','asleep','name','memory','arithmetic'].includes(kind)
-  &&!['profile','deflection','fandom-decline','greeting'].includes(topic);
+ if(!enabled||restart||session?.finished||['bye','asleep','name','memory','arithmetic'].includes(kind)||['profile','deflection','fandom-decline','greeting'].includes(topic))return false;
+ // Prefer a good model continuation. The mix is observed, never a quota:
+ // authored material supports waiting, failed replies and fandom enthusiasm.
+ return true;
+}
+export function noteDialogueMix(session,{usedModel=false,usedBank=false,topic='',kind='',restart=false}={}){
+ if(restart||['bye','asleep','name','memory','arithmetic'].includes(kind)||['profile','deflection','fandom-decline','greeting'].includes(topic))return;
+ if(!usedModel&&!usedBank)return;
+ const mix=session.dialogueMix||{ai:0,bank:0};
+ session.dialogueMix={ai:(mix.ai||0)+(usedModel?1:0),bank:(mix.bank||0)+(usedModel?0:1)};
 }

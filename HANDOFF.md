@@ -1,5 +1,7 @@
 # Current checkpoint — playable Chiikawa candidate, 2026-10-12
 
+Review candidates: frontend7d975cbf1430d7d21feb01476dc85dd43589b3db in draft PR28 (base pilot-audio-readable-retro); backend7a9df963df168cb43ff4f4ea2621367d0106b629 in draft PR15 (base main). Both branches pushed, neither merged. This follow-up only records candidate identities; runtime unchanged.
+
 Supersedes older checkpoints below. Both repos use codex/chiikawa-dialogue-20261011; frontend runtime20261012-chii1. Local human playtest ready: YES (offline). Full candidate with live relay: not published and not yet human-tested. No merge/deploy; frontend public remains a7b42827e308bff73f9147da9b935ccfdcbd5051 /20261010-llm2, main6343213bc8f904a43c02319fc9b421ce2dd4dc0f; backend mainf79214fd07e1cf74da33d277b18ff16ebe81f864. PR3 was already merged; do not restart its old loops.
 
 Implemented substantive delivered-only model memory, one frontend content director, focused enthusiastic Chiikawa replies, everyday connections, scoped correction/refusal, truthful origin metadata, bounded request time including lookup, and a conservative unsupported-scene guard. Shared sourced relations25 / existing recognition terms182; official anime title index354 is not scene knowledge. Latest manga body remains unverified. Python structural checker, manual-only knowledge workflow and Gemini/Claude research brief added; no external Claude/Gemini research performed. See docs/chiikawa-pilot-20261012.md and docs/chiikawa-research-brief.md.

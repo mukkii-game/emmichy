@@ -2,6 +2,8 @@
 
 ローカルで人間の試遊に渡せる候補を作成。runtime `20261012-chii1`、両リポジトリの作業ブランチは `codex/chiikawa-dialogue-20261011`。公開・マージ・デプロイは未実施。公開版は従来の `20261010-llm2` のまま。公開LLMを含む最終候補全体の試遊は、候補反映の許可後に行う。
 
+コード候補：[frontend PR28](https://github.com/mukkii-game/emmichy/pull/28) の `7d975cbf1430d7d21feb01476dc85dd43589b3db`、[backend PR15](https://github.com/mukkii-game/game-llm/pull/15) の `7a9df963df168cb43ff4f4ea2621367d0106b629`。いずれもレビュー用ドラフト。後続の記録コミットはこの候補識別だけを追記する。
+
 ## 会話の変更
 
 良いLLM返答を優先し、ブラウザの一か所で本文の補修を判断する。中継と画面で二重に別の定型文へ置き換えない。同じキャラを深める返答や具体的な質問を残し、固有名詞の個数やLLM／DBの比率を強制しない。

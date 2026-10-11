@@ -1,3 +1,15 @@
+# Current checkpoint — playable Chiikawa candidate, 2026-10-12
+
+Supersedes older checkpoints below. Both repos use codex/chiikawa-dialogue-20261011; frontend runtime20261012-chii1. Local human playtest ready: YES (offline). Full candidate with live relay: not published and not yet human-tested. No merge/deploy; frontend public remains a7b42827e308bff73f9147da9b935ccfdcbd5051 /20261010-llm2, main6343213bc8f904a43c02319fc9b421ce2dd4dc0f; backend mainf79214fd07e1cf74da33d277b18ff16ebe81f864. PR3 was already merged; do not restart its old loops.
+
+Implemented substantive delivered-only model memory, one frontend content director, focused enthusiastic Chiikawa replies, everyday connections, scoped correction/refusal, truthful origin metadata, bounded request time including lookup, and a conservative unsupported-scene guard. Shared sourced relations25 / existing recognition terms182; official anime title index354 is not scene knowledge. Latest manga body remains unverified. Python structural checker, manual-only knowledge workflow and Gemini/Claude research brief added; no external Claude/Gemini research performed. See docs/chiikawa-pilot-20261012.md and docs/chiikawa-research-brief.md.
+
+171 frontend /51 backend tests pass. One explicitly Sol6.1 medium virtual player,6 offline sends, followed by deterministic replay after fixes. Real browser checks offline/muted: fresh greeting5:00, split sentences, draft pause/resume. Real model CI at backend2c9cfb0 returned2 Groq outputs739/560ms total then429; STOPPED. Both outputs had unsupported scene claims; final guard/prompt/relations repaired captured outputs locally. No final-candidate live generation/end-to-end claim. Live CI38131712099 skipped deploy. Scene guard is heuristic, curation is incomplete, free-tier availability and human appeal remain unverified.
+
+Next: ask user to play the local offline candidate or authorize the prepared frontend pilot/backend publication for LLM-inclusive human play. Further knowledge work uses bounded official-source batches and source review, not automatic adoption. Same-session Director, no new Work/Relay/paid service.
+
+---
+
 # Current checkpoint — Chiikawa-first pilot direction, 2026-10-11
 
 The user accepts the architecture analysis and explicitly sharpens the pilot theme: make Emmichy likeable through frequent enthusiastic Chiikawa connections and short contextual catchphrases; other otaku topics may rank lower. SPEC records this as the highest thematic priority. Preserve answering/correction/refusal handling, owned persona, factual grounding and the user's rejected joke. Deepening one Chiikawa subject is valid; do not enforce distinct-name counts or replace a good reply solely to add more names.

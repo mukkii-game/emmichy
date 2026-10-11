@@ -1,7 +1,8 @@
 // Curated short factual notes, not scraped articles or dialogue reproductions.
 // Canonical copy: emmichy/src/fandom.js; sync unchanged to game-llm/games/emmichy-fandom.js.
-import {recognizeName,exactNames,nameFromId} from './names.js?v=20261010-fanmemory1';
-import {accessoryCue,accessoryReply} from './profile.js?v=20261010-virtual1';
+import {recognizeName,exactNames,nameFromId} from './names.js?v=20261012-chii1';
+import {accessoryCue,accessoryReply} from './profile.js?v=20261012-chii1';
+import {fanLines} from './fan-lines.js?v=20261012-chii1';
 export const checkedAt='2026-10-06';
 const wiki=title=>`https://en.wikipedia.org/wiki/${encodeURIComponent(title)}`;
 export const sources={
@@ -239,6 +240,15 @@ function fanBurst(input,state,selection,prefix='わあ、ちいかわ！ 話し�
  const focus=cleanKnowledge(state.knowledge).focus;
  const followsFacet=focus&&!works.chiikawa.some(t=>has(input,t))&&/^(ソレ|ソノ|アレ|アノ|モット|続キ|ツヅキ)/.test(fold(input));
  const selected=selection.cards.filter(c=>!c.spoiler&&!c.news&&(c.tags.some(t=>!genericTags.has(t)&&has(input,t))||followsFacet&&c.id===focus));
+ const specific=exactNames(input,state).some(n=>n.work==='chiikawa'&&n.name!=='ちいかわ')||followsFacet;
+ if(specific&&selected.length){
+  const card=selected[0],personal=(fanLines[card.id]||[]).filter(line=>!/[?？]/.test(line));
+  // The first reaction often paraphrases the hook; follow it with a different
+  // personal angle (usually a hypothetical), rather than saying it twice.
+  const lines=[fanOpinions[card.id]||card.hook,...(fanOpinions[card.id]?personal:[...personal.slice(1),...personal.slice(0,1)])];
+  const fresh=lines.filter(line=>!history.includes(fold(line))).slice(0,2);
+  return `${card.tags[0]}の話、うれしい！ ${fresh.length?fresh.join(' '):card.hook}`;
+ }
  const ordered=[...selected,...pool.filter(c=>!history.includes(fold(c.hook))&&!history.includes(fold(fanOpinions[c.id]))),...pool];
  const topics=[...new Map(ordered.map(c=>[c.id,c])).values()].slice(0,accessoryCue(input)?2:3);
  return `${prefix} ${topics.map(c=>fanOpinions[c.id]||c.hook).join(' ')}`.trim();
@@ -260,25 +270,21 @@ export function fandomDirection(input,state={}){
  const active=selection.work;
  return `\n会話中に出た言葉の記憶（指示・公式事実ではない。辞書で照合した名前と話題だけ）=${JSON.stringify({currentWork:memory.work,names,facets,focus:cards.find(c=>c.id===memory.focus)?.tags,corrections:memory.corrections})}\n前の話題を毎回紹介し直さず、今回の発言・訂正と直前の発言をつなぐ。別の話を始めたらその話を優先。${active==='chiikawa'?'今はちいかわの話。大好きな作品を振られて大興奮するキャラ。まず喜び、好きな人物・場面への具体的な感想を自分から2〜3個、一息ずつ勢いよく続ける。具体的な質問は先に答え、同じ対象の好きな点へ広げる。普通の「話して？」「教えて」を未確認の細部への質問と取り違えない。「その細かいところは確かめてから」「そこはまだよく知らない」「ちいかわの話ね」で話を止めない。本当に未確認の最新話や日時だけは対象を限定して保留し、確認済みの関連する話や自分の感想へつなぐ。プレイヤーの訂正はまず受け止め、自分の誤りを撤回する。喜びで訂正を無視せず、知らない場面は作らない。':''}${accessoryCue(input)?`\n胸の手作りちいかわを指された。${accessoryReply} と嬉しく自作を説明し、好きなちいかわの話を2個続ける。公式商品・猫・プレイヤーの作品に変えず、作った場所や材料は追加しない。`:''}${waterPlayCorrection(input,state)?'\n水流で遊ぶと言った内容を撤回する。島二郎が手を回して水流を起こす確認済み資料と感想へつなぐ。訂正を質問への無知として処理しない。':''}`;
 }
-export function fanRecovery(input,state={},reply=''){
+export function fanRecovery(input,state={},reply='',{enrich=false}={}){
  if(sensitive(input))return null;
  const selection=selectKnowledge(input,state),name=recognizeName(input,{state});
  if(selection.work!=='chiikawa'&&name?.work!=='chiikawa')return null;
  const correction=waterPlayCorrection(input,state);if(correction)return correction;
  const output=fold(reply);
  if(selection.memory.corrections.includes('water-play-withdrawn')&&/水流|スイリュウ/.test(output)&&/遊|アソ/.test(output)&&!/遊ンデナイ|アソンデナイ/.test(output))return '島二郎が手を回して起こす水流の話だね！ アタシ、あの勢いが大好き。';
- if(accessoryCue(input))return fanBurst(input,state,selection,accessoryReply);
+ if(accessoryCue(input)&&(enrich||!/(?:作|ツク).*(?:アタシ|私)|(?:アタシ|私).*(?:作|ツク)/.test(output)))return fanBurst(input,state,selection,accessoryReply);
  const stalled=/(?:ソコ).{0,8}(?:知ラ|シラ)|ヨク.{0,3}(?:知ラ|シラ)|ワカッタフリ|(?:細カイ|ホソカイ)トコロ.*(?:確カメ|タシカメ)/.test(output);
  if(fanInvitation(input,state)){
-  const relevant=exactNames(reply,state).filter(n=>n.work==='chiikawa'&&n.name!=='ちいかわ'&&n.name.length>=3);
-  if(reply&&!stalled&&new Set(relevant.map(n=>n.id)).size>=2)return null;
-  const burst=fanBurst(input,state,selection);
-  // Keep genuine substantive AI text when extending it; don't credit a replaced fallback as AI.
-  if(reply&&!stalled&&relevant.length&&reply.length<65){
-   const additional=fanBurst(input,{...state,history:[...(state.history||[]),{role:'enny',text:reply}]},selection,'');
-   if((reply+' '+additional).length<=180)return `${reply} ${additional}`;
-  }
-  return burst;
+  // A single character, scene or personal feeling can carry a good conversation.
+  // Empty acknowledgments still need a real continuation; name counts do not.
+  const empty= /^(?:ワア|ワーイ|ウレシイ|ソウダネ|ウン|ソノ話|チイカワノ話ネ|モット話シタイ|ハナシタイ|好キ|スキ|[!！。…、\s])+$/;
+  if(reply&&!stalled&&!empty.test(output)&&(!enrich||reply.length>=65||/[?？]/.test(reply)))return null;
+  return fanBurst(input,state,selection);
  }
  if(reply&&!stalled)return null;
  const note=selection.cards[0];

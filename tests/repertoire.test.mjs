@@ -20,9 +20,10 @@ test('stray speaker labels are stripped but a spoken name remains',()=>{
  assert.equal(polishReply('Emmy: スプーンで倒したんだ! エミ','',{}).text,'スプーンで倒したんだ!');
  assert.equal(polishReply('エミって呼んでもいいよ。','',{}).text,'エミって呼んでもいいよ。');
 });
-test('a third closing question yields to a complete reaction, never an empty reply',()=>{
+test('specific follow-up questions survive earlier questions; only generic sign-offs are removed',()=>{
  const state={history:[{role:'enny',text:'何が好き？'},{role:'user',text:'プリン'},{role:'enny',text:'どこで買った？'},{role:'enny',text:'エト、エト…。'}]};
- assert.equal(polishReply('半額プリンを見つけたんだね！ どんな味だった？','プリン',state).text,'半額プリンを見つけたんだね!');
+ assert.equal(polishReply('半額プリンを見つけたんだね！ どんな味だった？','プリン',state).text,'半額プリンを見つけたんだね! どんな味だった?');
+ assert.equal(polishReply('プリンを見つけたんだね！ もっと聞きたいことある？','プリン',state).text,'プリンを見つけたんだね!');
  assert.equal(polishReply('どんな味だった？','プリン',state).text,'どんな味だった?');
 });
 test('expanded bank is genuinely distinct and all three favourite fandoms reach tenfold reply counts',()=>{

@@ -1,8 +1,8 @@
 // Reading conversion stays on the device; the original input goes to the AI.
-import {nameData} from './name-data.js?v=20261009-profile1';
-import {placeNames} from './places.js?v=20261009-talk1';
-import {spokenAliases} from './chiikawa-db.js?v=20261009-profile1';
-import {identityReadings} from './profile.js?v=20261010-virtual1';
+import {nameData} from './name-data.js?v=20261012-chii1';
+import {placeNames} from './places.js?v=20261012-chii1';
+import {spokenAliases} from './chiikawa-db.js?v=20261012-chii1';
+import {identityReadings} from './profile.js?v=20261012-chii1';
 const katakana = value => String(value).normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96));
 const names=new Map([['ちいかわ','チイカワ'],['chiikawa','Chiikawa'],['えみちぃ','エミチィ'],['エミチィ','エミチィ'],['ハチワレ','ハチワレ'],['ドラクエ','ドラクエ']]);
 for(const [name,reading] of Object.entries(identityReadings)){names.set(name.toLowerCase(),reading);names.set(name.replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-96)),reading);}
@@ -26,7 +26,12 @@ const escape=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
 const preferredPattern=new RegExp([...preferredReadings.keys()].sort((a,b)=>b.length-a.length).map(escape).join('|'),'g');
 const namePattern=new RegExp([...names.keys()].sort((a,b)=>b.length-a.length).map(n=>/^[a-z0-9]+$/i.test(n)?`(?<![a-z0-9])${escape(n)}(?![a-z0-9])`:[...n].map(escape).join('\\s*')).join('|'),'gi');
 export function readableText(value, tokenizer) {
-  return joinSmallKana(value).split('\n').map(line => line.replace(preferredPattern,word=>` ${preferredReadings.get(word)} `).replace(namePattern,name=>` ${names.get(name.toLowerCase().replace(/\s/g,''))||name} `).trim().split(/\s+/).filter(Boolean).map(part => {
+  return joinSmallKana(value).split('\n').map(line => line.replace(preferredPattern,word=>` ${preferredReadings.get(word)} `).replace(namePattern,(name,offset,source)=>{
+    // A short hiragana alias inside ordinary grammar is not a name boundary:
+    // あるから must not become the Hunter name アルカ followed by ラ.
+    if(/^[ぁ-ゖ]{1,3}$/.test(name)&&/[ぁ-ゖ]/.test((source[offset-1]||'')+(source[offset+name.length]||'')))return name;
+    return ` ${names.get(name.toLowerCase().replace(/\s/g,''))||name} `;
+  }).trim().split(/\s+/).filter(Boolean).map(part => {
     // AI/rule replies already contain word boundaries. Retokenizing kana
     // would split words incorrectly (e.g. エイガ -> エイ ガ).
     if (!tokenizer || !/[一-龠々ぁ-ゖ]/.test(part)) return katakana(part);

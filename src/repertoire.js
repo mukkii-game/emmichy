@@ -1,8 +1,8 @@
-import {unwantedFanRedirect} from './chat.js?v=20261010-llm1';
-import {rejectedJoke} from './humor.js?v=20261008-humor1';
-import {everydayReplies} from './everyday.js?v=20261008-hybrid1';
-import {cards,selectKnowledge,works,islandMenuCorrection} from './fandom.js?v=20261010-virtual1';
-import {fanLines} from './fan-lines.js?v=20261006-mix1';
+import {unwantedFanRedirect} from './chat.js?v=20261012-chii1';
+import {rejectedJoke} from './humor.js?v=20261012-chii1';
+import {everydayReplies} from './everyday.js?v=20261012-chii1';
+import {cards,selectKnowledge,works,islandMenuCorrection} from './fandom.js?v=20261012-chii1';
+import {fanLines} from './fan-lines.js?v=20261012-chii1';
 // 600 individually authored reactions + 600 factual-answer combinations.
 // Counts describe reply candidates, not 1,200 distinct canon facts.
 export const replies=Object.freeze(cards.flatMap(card=>{
@@ -90,12 +90,9 @@ export function polishReply(text,raw,state={},choice=null){
  out=out.replace(/^(?:EMMICHY|EMMY|エミチ[ィイ]|エミ)\s*[:：>]\s*/i,'');
  out=out.replace(/([。！!？?])\s*(?:エミ(?:チ[ィイ]|ちぃ)?|Emmichy)\s*$/i,'$1');
  out=out.replace(/([よね])[。！!]\s*(?:ね|よ)[。！!]$/,'$1。').replace(/([!?！？])\1{2,}/g,'$1$1');
- const previous=Array.isArray(state.history)?state.history.filter(h=>h.role==='enny'&&!/^(?:ウ、ウン…。|ヤハ…。|エト、エト…。|ンショ…。|フムッ…。|ウンッ…。|ウンウン…。|アッ…。|フフ…。|ウン！|ンー…。)$/.test(h.text)).slice(-2):[];
- if(previous.length===2&&previous.every(h=>/[?？]|教えて(?:くれる|ほしい|ね)|聞かせて/.test(h.text))){
-  // Keep a complete substantive reaction; never delete the only sentence.
-  const split=out.match(/^([\s\S]+[。！!])\s*[^。！!]*[?？]$/);
-  if(split&&split[1].trim().length>=12)out=split[1].trim();
- }
+ // Remove only the generic assistant sign-off. A specific follow-up question
+ // (e.g. what bread they bought) remains useful even after earlier questions.
+ out=out.replace(/([。！!])\s*(?:もっと|他に|ほかに)?(?:聞きたいこと|質問)(?:は)?(?:ある|ありますか)[?？]$/,'$1');
  if(/島二郎|シマ\s*ジロウ/.test(raw)&&state.knowledge?.work==='chiikawa')out=out.replace(/しまじろう/g,'島二郎');
  const mem=cleanRepertoire(state.repertoire),recent=Array.isArray(state.history)?state.history.filter(h=>h.role==='enny').slice(-3).map(h=>h.text):[];
  if(choice?.candidate&&unwantedFanRedirect(choice.candidate.text,raw,state))choice=null;

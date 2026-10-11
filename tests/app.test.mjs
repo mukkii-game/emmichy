@@ -38,7 +38,7 @@ test('screen remains playable after dictionary failure and IME composition does 
     assert.equal(elements.get('send').disabled,true,'finished session cannot start another farewell during its pause');
     farewellPauses.push(reason);
    }
-   if(expectPersisted){const memory=JSON.parse(storage.get('enny-memory-v1')||'null');if(memory?.history?.at(-1)?.text.includes(expectPersisted))persistedBeforeAnimation=true;}
+   if(expectPersisted){const memory=JSON.parse(storage.get('enny-memory-v1')||'null');if(memory?.dialogue?.some(h=>h.role==='enny'&&h.text.includes(expectPersisted)))persistedBeforeAnimation=true;}
    const pending=elements.get('live-reply'),body=elements.get('live-body'),log=elements.get('conversation');
    if(body?.textContent){typingFrames++;lastTyped=body.textContent;assert.equal(log.children.at(-1),pending,'typing stays inside the history after the preceding message');assert.equal(pending.hidden,false);}
    if(interruptNextFrame){interruptNextFrame=false;queueMicrotask(()=>elements.get('entry').emit('input'));}
@@ -78,8 +78,9 @@ test('screen remains playable after dictionary failure and IME composition does 
   assert.doesNotMatch(switched.history.at(-1).text,/ちいかわ|チイカワ|島二郎|ジョジョ|ハチワレ|バキ/);
   assert.equal(switched.history.filter(h=>h.role==='user').length,2);
   expectPersisted='雨';entry.value='今日は雨の匂いがした';await talk.emit('submit');
-  assert.equal(persistedBeforeAnimation,true);
+  assert.equal(persistedBeforeAnimation,false,'undelivered reply must not enter model memory during animation');expectPersisted=null;
   const rainy=JSON.parse(storage.get('enny-memory-v1'));
+  assert.ok(rainy.dialogue.some(h=>h.role==='enny'&&h.text.includes('雨')),'completed beat is now remembered');
   assert.match(rainy.history.at(-1).text,/雨/);assert.doesNotMatch(rainy.history.at(-1).text,/クロイ ソラ|電気/);
   // One accepted reply unfolds with no extra user turn or request. Unspoken
   // continuations are not already present in saved history.

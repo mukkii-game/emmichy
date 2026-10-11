@@ -18,7 +18,7 @@ test('actual screen requests AI for its first ordinary bank turn, retries failur
   globalThis.window={addEventListener(){}};globalThis.location={hostname:'preview.invalid',search:''};
   globalThis.localStorage=store;globalThis.sessionStorage=store;globalThis.Image=class{};
   globalThis.setInterval=(fn,ms)=>{intervals.push({fn,ms});return 0;};globalThis.setTimeout=(fn,ms)=>{if(ms<2000)queueMicrotask(fn);else timers.push({fn,ms});return 0;};globalThis.clearTimeout=()=>{};Date.now=()=>now;
-  globalThis.fetch=async(url,options)=>{const payload=JSON.parse(options.body);requests.push(payload);if(deferred)return new Promise(resolve=>settle=resolve);return fail?new Response('',{status:503}):Response.json({text:payload.input.includes('プリン')?'プリン、ひと口ずつ食べたいね。アタシなら途中で我慢できなくなっちゃう。':'その街の話、聞けてうれしい！ 地図を一緒に見たいな。',provider:'groq'});};
+  globalThis.fetch=async(url,options)=>{const payload=JSON.parse(options.body);requests.push(payload);if(deferred)return new Promise(resolve=>settle=resolve);return fail?new Response('',{status:503}):Response.json({text:payload.input.includes('プリン')?'プリン、ひと口ずつ食べたいね。アタシなら途中で我慢できなくなっちゃう。':'その街の話、聞けてうれしい！ 地図を一緒に見たいな。',provider:'groq',source:'llm'});};
   await import('../src/app.js?first-model-test');await Promise.resolve();
   const send=async raw=>{elements.get('entry').value=raw;await elements.get('talk').emit('submit');};
   const session=()=>JSON.parse(storage.get('emmichy-session'));
@@ -33,6 +33,12 @@ test('actual screen requests AI for its first ordinary bank turn, retries failur
   assert.match(JSON.parse(storage.get('enny-memory-v1')).history.at(-1).text,/その街/);
   await send('あなたは何歳？');assert.equal(requests.length,1,'after success a closed profile answer stays local');
   await send('プリンを食べたよ');assert.equal(requests.length,2,'a suitable bank does not force good AI conversation to stop at a quota');
+  assert.equal(requests[1].input,'プリンを食べたよ','send original mixed Japanese');
+  assert.equal(requests[1].state.dialogue,undefined,'do not duplicate the context payload');
+  assert.ok(requests[1].state.history.some(h=>h.text.includes('その街の話、聞けてうれしい')));
+  assert.ok(!requests[1].state.history.some(h=>h.text.includes('地図を一緒に見たい')),'unspoken continuation is not model history');
+  assert.ok(!requests[1].state.history.some(h=>h.text==='アキハバラ！'),'name gestures do not crowd out substantive context');
+  assert.equal(session().replyOrigins.mixed,1,'a local connection added to model text is counted as mixed');
   assert.equal(session().dialogueUse.ai,2);assert.match(JSON.parse(storage.get('enny-memory-v1')).history.at(-1).text,/ひと口ずつ/);
   elements.get('restart-chat').onclick();elements.get('new-chat').onclick();
   assert.equal(session().dialogueUse,undefined);

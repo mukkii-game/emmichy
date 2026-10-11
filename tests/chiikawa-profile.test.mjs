@@ -14,7 +14,7 @@ test('the visible chest ornament is her handmade Chiikawa and opens fan talk fro
   assert.equal(accessoryCue(raw),true,raw);
   assert.equal(selectKnowledge(raw,hunter).work,'chiikawa');
   const own=profileReply(raw);assert.match(own.text,/これ、ちいかわなの.*アタシが作った/);
-  const reply=fanRecovery(raw,hunter,own.text);assert.match(reply,/アタシが作った/);assert.ok(['ハチワレ','ラッコ','シーサー','モモンガ','古本屋'].filter(n=>reply.includes(n)).length>=2);
+  const reply=fanRecovery(raw,hunter,own.text,{enrich:true});assert.match(reply,/アタシが作った/);assert.ok(['ハチワレ','ラッコ','シーサー','モモンガ','古本屋'].filter(n=>reply.includes(n)).length>=2);
   assert.doesNotMatch(reply,/猫|買った|公式商品/);assert.ok(reply.length<=180);
   assert.match(fandomDirection(raw,hunter),/胸の手作りちいかわ/);
  }

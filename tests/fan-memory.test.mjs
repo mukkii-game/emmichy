@@ -28,7 +28,8 @@ test('known words survive transcript eviction and restoration but unrelated inpu
  const state=restoreState({...freshState(),knowledge:memory,history:Array.from({length:40},()=>({role:'user',text:'へえ'}))});
  assert.ok(names.every(id=>state.knowledge.mentions.includes(id)));assert.ok(state.knowledge.facets.includes('chiikawa-23'));
  const continued=selectKnowledge('その場面の続き',state);assert.equal(continued.work,'chiikawa');assert.equal(continued.cards[0].id,'chiikawa-23');
- assert.match(fanRecovery('その場面の続き',state),/島二郎の水流.*ハチワレ/s);
+ assert.match(fanRecovery('その場面の続き',state),/島二郎の水流/);
+ assert.doesNotMatch(fanRecovery('その場面の続き',state),/ハチワレ|ラッコ/,'continue the requested scene rather than switching characters');
  assert.match(fandomDirection('その場面の続き',state),/ハチワレ/);assert.match(fandomDirection('その場面の続き',state),/レオリオ/);
  assert.equal(selectKnowledge('今日は猫をなでた',state).work,'');assert.equal(fanRecovery('今日は猫をなでた',state),null);
  const ordinary=selectKnowledge('今日は音楽の話',state);assert.equal(ordinary.memory.work,'everyday');assert.equal(selectKnowledge('それがいいね',{knowledge:ordinary.memory}).work,'everyday');
@@ -59,9 +60,8 @@ test('general Chiikawa invitations recover excitement without losing specific an
  assert.equal(fanRecovery('ちいかわの作者は誰？',state,factual),null);
  const good='ハチワレが写真を残すところが好き。シーサーの頑張りも応援したくなる！';
  assert.equal(fanRecovery('ちいかわの話して',state,good),null);
- const extended=fanRecovery('ちいかわの話して',state,'ハチワレの写真好きなところ、大好き！');
- assert.ok(extended.startsWith('ハチワレの写真好きなところ、大好き！'));assert.match(extended,/ラッコ|シーサー/);
- const casual=fanRecovery('ハチワレの人形',state,'ハチワレ、かわいいよね！');assert.match(casual,/ラッコ|シーサー/);
+ assert.equal(fanRecovery('ちいかわの話して',state,'ハチワレの写真好きなところ、大好き！'),null,'keep a focused generated opinion');
+ assert.equal(fanRecovery('ハチワレの人形',state,'ハチワレ、かわいいよね！'),null,'do not force unrelated characters into a valid response');
  assert.doesNotMatch(fanRecovery('ちいかわの話して？',state,'ソノ ホソ カイト コロ ハ タシカメテ カラ ハナスネ。'),/ホソ|タシカメ/);
 });
 test('topic memory accepts owned IDs only and remains bounded',()=>{

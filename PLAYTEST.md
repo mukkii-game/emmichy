@@ -1,3 +1,15 @@
+# 2026-10-12: focused Chiikawa candidate, bounded evidence
+
+Runtime20261012-chii1, not published. Local tests171/171 frontend +51/51 backend; knowledge25 structural checks and4 negative cases pass. One new subjective reviewer explicitly Sol6.1 medium,6 sends using offline actual app with mock DOM/time; original player log/review retained in docs/pilot-chiikawa-20261011-player*. Fixed preference/focus drift, scoped refusal and ordinary dessert sharing, then replayed the same6 sends (not a second subjective review). Captured real outputs also replayed; script scripts/replay-chiikawa-pilot.mjs makes zero calls.
+
+Before: “ちいかわ本人の好きなところ” moved toうさぎ; “プリンを買って写真を撮った” askedどうしたい; “別の漫画はやめて、ちいかわを続けたい” stopped the wanted topic. After:本人の努力/優しさを深める;ごほうびへの喜びからラッコの甘党へ;ちいかわの小さな幸せを継続。Actual text: docs/pilot-chiikawa-20261011-replay.json. Not a live LLM transcript.
+
+Live CI38131712099, backend2c9cfb0:2 Groq replies (739ms/560ms including message build in CI), then429 on third attempt and stopped. Failure evidence includes ungrounded Hachiware camera-smile scene and sky/“ヤハ” attribution. Added explicit scene constraints plus local scene guard; both saved outputs repair as mixed sources. Final generation quality is untested after429; no extra requests. Report/latency scopes: docs/chiikawa-pilot-20261012.md. No human evaluation yet.
+
+Browser27, local1985?nollm=1, audioOFF: fresh first greeting and5:00; Hachiware photo response in short beats. Earlier same-candidate draft stayed unchanged about42sec without spontaneous continuation, cleared draft resumed. Latest screenshot docs/pilot-chiikawa-20261012-browser.png. Audio preference and physical-device IME not evaluated here. Relations25/terms182/title index354 are distinct counts, latest manga remains unverified; heuristic scene guard does not prove all facts.
+
+---
+
 # 2026-10-11: read-only mechanics probes for design review
 
 No real model generation or human/competitor play this round. Synthetic inputs/candidates exercise the current functions; evidence docs/mechanics-audit-20261011.json, analysis docs/conversation-design-review-20261011.md. Runtime unchanged, no new test-suite pass claimed.

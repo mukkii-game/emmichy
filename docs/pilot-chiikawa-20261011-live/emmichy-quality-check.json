@@ -1,0 +1,95 @@
+{
+  "mode": "real provider generation with candidate server prompt; synthetic inputs; no browser or human evaluation",
+  "commit": "2c9cfb0e6b34e77df933eb0e21c4bc4225f5bb1d",
+  "at": "2026-10-11T10:22:28.072Z",
+  "limit": 3,
+  "turns": [
+    {
+      "input": "ハチワレの写真が好き。えみちぃはどこが好き？",
+      "systemCharacters": 4143,
+      "history": [],
+      "wallMs": 739,
+      "result": {
+        "text": "ワオ、ハチワレの写真好きって最高！私が好きなのは、ハチワレがカメラを構えてニコニコしてる瞬間。ちっちゃい思い出がぎゅっと詰まってて、見てるだけでほっこりするんだ。写真と一緒に、ハチワレのご飯シーンも大好きだよ。もっと聞きたいことある？",
+        "provider": "groq",
+        "source": "llm"
+      },
+      "attempts": [
+        {
+          "provider": "groq",
+          "source": "llm",
+          "ok": true,
+          "reason": "",
+          "ms": 721
+        }
+      ]
+    },
+    {
+      "input": "そう、何でもない日も残したくなるよね",
+      "systemCharacters": 3233,
+      "history": [
+        {
+          "role": "user",
+          "content": "ハチワレの写真が好き。えみちぃはどこが好き？"
+        },
+        {
+          "role": "assistant",
+          "content": "ワオ、ハチワレの写真好きって最高！私が好きなのは、ハチワレがカメラを構えてニコニコしてる瞬間。ちっちゃい思い出がぎゅっと詰まってて、見てるだけでほっこりするんだ。写真と一緒に、ハチワレのご飯シーンも大好きだよ。もっと聞きたいことある？"
+        }
+      ],
+      "wallMs": 560,
+      "result": {
+        "text": "うん、何でもない日が一番キラキラするよね。ハチワレがぼんやり空を見上げて「ヤハ」って言うシーン、ちょっとした瞬間が宝物になるんだ。そんな日常がちいかわ全体を温かくしてくれるんだよ。もっと聞きたいことある？",
+        "provider": "groq",
+        "source": "llm"
+      },
+      "attempts": [
+        {
+          "provider": "groq",
+          "source": "llm",
+          "ok": true,
+          "reason": "",
+          "ms": 542
+        }
+      ]
+    },
+    {
+      "input": "今日はプリンを買ったよ",
+      "systemCharacters": 3329,
+      "history": [
+        {
+          "role": "user",
+          "content": "ハチワレの写真が好き。えみちぃはどこが好き？"
+        },
+        {
+          "role": "assistant",
+          "content": "ワオ、ハチワレの写真好きって最高！私が好きなのは、ハチワレがカメラを構えてニコニコしてる瞬間。ちっちゃい思い出がぎゅっと詰まってて、見てるだけでほっこりするんだ。写真と一緒に、ハチワレのご飯シーンも大好きだよ。もっと聞きたいことある？"
+        },
+        {
+          "role": "user",
+          "content": "そう、何でもない日も残したくなるよね"
+        },
+        {
+          "role": "assistant",
+          "content": "うん、何でもない日が一番キラキラするよね。ハチワレがぼんやり空を見上げて「ヤハ」って言うシーン、ちょっとした瞬間が宝物になるんだ。そんな日常がちいかわ全体を温かくしてくれるんだよ。もっと聞きたいことある？"
+        }
+      ],
+      "wallMs": 52,
+      "result": {
+        "error": "rate-limited",
+        "provider": "groq"
+      },
+      "attempts": [
+        {
+          "provider": "groq",
+          "source": "llm",
+          "ok": false,
+          "reason": "http-429",
+          "ms": 36
+        }
+      ]
+    }
+  ],
+  "calls": 3,
+  "rateLimited": true
+}

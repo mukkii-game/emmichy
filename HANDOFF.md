@@ -1,3 +1,11 @@
+# Current checkpoint — Chiikawa-first pilot direction, 2026-10-11
+
+The user accepts the architecture analysis and explicitly sharpens the pilot theme: make Emmichy likeable through frequent enthusiastic Chiikawa connections and short contextual catchphrases; other otaku topics may rank lower. SPEC records this as the highest thematic priority. Preserve answering/correction/refusal handling, owned persona, factual grounding and the user's rejected joke. Deepening one Chiikawa subject is valid; do not enforce distinct-name counts or replace a good reply solely to add more names.
+
+Requested next workflow: review the content, implement, test and improve within this sole session, then ask the user to play a concrete candidate when ready. A same-chat Astra instruction is supplied; no model switch is claimed and no new Work/Relay is created. Current changes are direction/documents only; published runtime remains 20261010-llm2. Next implementation should use the existing design review, synthetic probes and recent relevant playtest evidence, preserve current work, and distinguish automated/mock evidence from real LLM and human evaluation. No new runtime publication is included in this checkpoint.
+
+---
+
 # Current checkpoint — conversation design review, 2026-10-11
 
 Read-only architecture/source research requested by the user: docs/conversation-design-review-20261011.md and docs/mechanics-audit-20261011.json. This chat is confirmed as local Codex, not inferred from its work title. Published runtime remains20261010-llm2 / pilot mergea7b42827e308bff73f9147da9b935ccfdcbd5051. No runtime edits, deployment, game-LLM request, new service or subagent. Local synthetic probes:15-character input creates6780-character system text; the10-message window retains2 user messages with generic waiting lines versus4 without; an86-character single-character Chiikawa candidate is replaced by fanRecovery on both server/client; the question-count rule removes a contextual bread question. Server repair lacks text-origin metadata, so provider/AI counts do not prove pure model text. These are constructed candidates, not newly generated real LLM responses.

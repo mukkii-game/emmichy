@@ -5,6 +5,10 @@ import {readableText,loadReadings} from '../src/readable.js';
 import {respond,freshState} from '../src/engine.js';
 import {requestChat} from '../src/chat.js';
 const tokenizer=await new Promise((resolve,reject)=>kuromoji.builder({dicPath:'assets/dict/'}).build((error,value)=>error?reject(error):resolve(value)));
+test('short name aliases do not split ordinary hiragana grammar',()=>{
+ assert.doesNotMatch(readableText('怖い気持ちがあるから、頑張る姿が好き。',tokenizer),/アルカ ラ/);
+ assert.match(readableText('アルカの話',tokenizer),/アルカ/);
+});
 test('biography place names stay one word even when the player spaces their kana',()=>{
  for(const raw of ['スウェーデン生まれなの？','スウェ ー デン ウマレナ ノ?','すうぇーでん生まれ？']){
   const out=readableText(raw,tokenizer);assert.match(out,/スウェーデン/);assert.doesNotMatch(out,/スウェ ー|スウェー デン/);

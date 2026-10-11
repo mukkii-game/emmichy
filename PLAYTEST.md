@@ -1,3 +1,27 @@
+# 2026-10-12: focused Chiikawa candidate, bounded evidence
+
+Runtime20261012-chii1, not published. Local tests171/171 frontend +51/51 backend; knowledge25 structural checks and4 negative cases pass. One new subjective reviewer explicitly Sol6.1 medium,6 sends using offline actual app with mock DOM/time; original player log/review retained in docs/pilot-chiikawa-20261011-player*. Fixed preference/focus drift, scoped refusal and ordinary dessert sharing, then replayed the same6 sends (not a second subjective review). Captured real outputs also replayed; script scripts/replay-chiikawa-pilot.mjs makes zero calls.
+
+Before: “ちいかわ本人の好きなところ” moved toうさぎ; “プリンを買って写真を撮った” askedどうしたい; “別の漫画はやめて、ちいかわを続けたい” stopped the wanted topic. After:本人の努力/優しさを深める;ごほうびへの喜びからラッコの甘党へ;ちいかわの小さな幸せを継続。Actual text: docs/pilot-chiikawa-20261011-replay.json. Not a live LLM transcript.
+
+Live CI38131712099, backend2c9cfb0:2 Groq replies (739ms/560ms including message build in CI), then429 on third attempt and stopped. Failure evidence includes ungrounded Hachiware camera-smile scene and sky/“ヤハ” attribution. Added explicit scene constraints plus local scene guard; both saved outputs repair as mixed sources. Final generation quality is untested after429; no extra requests. Report/latency scopes: docs/chiikawa-pilot-20261012.md. No human evaluation yet.
+
+Browser27, local1985?nollm=1, audioOFF: fresh first greeting and5:00; Hachiware photo response in short beats. Earlier same-candidate draft stayed unchanged about42sec without spontaneous continuation, cleared draft resumed. Latest screenshot docs/pilot-chiikawa-20261012-browser.png. Audio preference and physical-device IME not evaluated here. Relations25/terms182/title index354 are distinct counts, latest manga remains unverified; heuristic scene guard does not prove all facts.
+
+---
+
+# 2026-10-11: read-only mechanics probes for design review
+
+No real model generation or human/competitor play this round. Synthetic inputs/candidates exercise the current functions; evidence docs/mechanics-audit-20261011.json, analysis docs/conversation-design-review-20261011.md. Runtime unchanged, no new test-suite pass claimed.
+
+- History:4 synthetic substantive user replies, each with2 generic waiting lines. Current10-message server window keeps2 user replies; removing only those generic lines keeps4. Keep visible waiting evidence but propose a separate substantive model history.
+- Input15 Japanese characters, no history: current system content6780 characters. This is not a token/cost/latency measurement. Original mixed Japanese input passes unchanged.
+- Input「ちいかわの話して」, constructed86-character Hachiware-focused reply: fanRecovery replaces it with the Hachiware/Rakko/Shisa DB burst on server and frontend. The server returns a string without origin metadata, so the returned provider label does not reveal that replacement. This is not an observed live LLM output.
+- After2 constructed assistant questions, polishReply changes「パン屋を見つけたんだね。何パンを買ったの？」to「パン屋を見つけたんだね。」. Purposeful questions can be removed by the count rule; assess in context rather than labeling every question bad.
+- Successful bounded processing: all probes complete locally, no external lookup for the chosen ordinary input; artifact remains valid JSON. No live quality, speed, free-tier capacity or mobile success inferred.
+
+---
+
 # 2026-10-10: continuous LLM with bounded waiting
 
 Original scripted virtual-player round was deliberately offline. Actual-app live baseline succeeded: HTTP200/Groq,6032ms, displayed AI count1, bread-shop reply followed by cinnamon-roll aroma/personal taste. New actual-app mock regression confirms ordinary prepared replies keep using AI after success; abort/cooldown/control and original draft/ending regression retained. Failed probe adapters were character encoding then403/default user-agent; kept as harness failures, not generated model text. Additional live probe: Groq200/3653ms and502/5401ms, then an unintended third502/5345ms. Waiting save/autosave copied session and lost the error/cooldown, allowing this third call. Fixed session updates in place; real-app delayed429 regression verifies waiting history/autosave and no subsequent request. Final direction is AI priority without a fixed quota, with DB bridging/fallback; mix is measured only. All155 frontend/37 backend tests pass. No further live calls; final real-provider reliability is not claimed.

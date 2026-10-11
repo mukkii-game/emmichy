@@ -1,4 +1,4 @@
-import {works} from './fandom.js?v=20261010-virtual1';
+import {works} from './fandom.js?v=20261012-chii1';
 const fold=s=>String(s).normalize('NFKC').toLowerCase().replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');
 export function cleanInterests(value){
  return Object.fromEntries(Object.keys(works).filter(k=>Number.isFinite(value?.[k])).map(k=>[k,Math.max(-10,Math.min(10,Math.trunc(value[k])))]));

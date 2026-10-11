@@ -1,6 +1,7 @@
-import {nameData} from './name-data.js?v=20261009-profile1';
-import {placeNames} from './places.js?v=20261009-talk1';
-import {gameNames} from './game-names.js?v=20261009-profile1';
+import {nameData} from './name-data.js?v=20261012-chii1';
+import {placeNames} from './places.js?v=20261012-chii1';
+import {gameNames} from './game-names.js?v=20261012-chii1';
+import {requestsChiikawa} from './topic-intent.js?v=20261012-chii1';
 export const foldName=s=>String(s||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).toLowerCase().replace(/[\s・×＝=\-:：'’"「」]/g,'');
 export const NAME_REACTION_MS=750;
 const trie=new Map(),exact=[];
@@ -27,7 +28,7 @@ function inContext(row,input,work){
 export function exactNames(input,state={}){const work=workIn(state);return distinct(scan(input)).filter(m=>inContext(m.row,input,work)).map(m=>m.row);}
 export function recognizeName(input,{reading='',state={}}={}){
  const work=workIn(state),values=[input,reading].filter(Boolean);
- const decline=/(?:漫画|マンガ).*(?:ヤメ|以外|イガイ|苦手)|別ノ話|ベツノハナシ|ソノ話.*ヤメ|チイカワ.*(?:ヤメ|以外|イガイ|嫌イ|キライ|苦手)/.test(foldName(input));
+ const decline=!requestsChiikawa(input)&&/(?:漫画|マンガ).*(?:ヤメ|以外|イガイ|苦手)|別ノ話|ベツノハナシ|ソノ話.*ヤメ|チイカワ.*(?:ヤメ|以外|イガイ|嫌イ|キライ|苦手)/.test(foldName(input));
  const matches=distinct(values.flatMap(scan)).filter(m=>inContext(m.row,input,work));
  const common=values.flatMap(scan).filter(m=>m.row.work==='chiikawa'&&m.row.contextOnly&&work!=='chiikawa');
  matches.sort((a,b)=>b.length-a.length||(b.row.work===work?1:0)-(a.row.work===work?1:0));

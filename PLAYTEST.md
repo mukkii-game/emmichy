@@ -1,3 +1,15 @@
+# 2026-10-11: read-only mechanics probes for design review
+
+No real model generation or human/competitor play this round. Synthetic inputs/candidates exercise the current functions; evidence docs/mechanics-audit-20261011.json, analysis docs/conversation-design-review-20261011.md. Runtime unchanged, no new test-suite pass claimed.
+
+- History:4 synthetic substantive user replies, each with2 generic waiting lines. Current10-message server window keeps2 user replies; removing only those generic lines keeps4. Keep visible waiting evidence but propose a separate substantive model history.
+- Input15 Japanese characters, no history: current system content6780 characters. This is not a token/cost/latency measurement. Original mixed Japanese input passes unchanged.
+- Input「ちいかわの話して」, constructed86-character Hachiware-focused reply: fanRecovery replaces it with the Hachiware/Rakko/Shisa DB burst on server and frontend. The server returns a string without origin metadata, so the returned provider label does not reveal that replacement. This is not an observed live LLM output.
+- After2 constructed assistant questions, polishReply changes「パン屋を見つけたんだね。何パンを買ったの？」to「パン屋を見つけたんだね。」. Purposeful questions can be removed by the count rule; assess in context rather than labeling every question bad.
+- Successful bounded processing: all probes complete locally, no external lookup for the chosen ordinary input; artifact remains valid JSON. No live quality, speed, free-tier capacity or mobile success inferred.
+
+---
+
 # 2026-10-10: continuous LLM with bounded waiting
 
 Original scripted virtual-player round was deliberately offline. Actual-app live baseline succeeded: HTTP200/Groq,6032ms, displayed AI count1, bread-shop reply followed by cinnamon-roll aroma/personal taste. New actual-app mock regression confirms ordinary prepared replies keep using AI after success; abort/cooldown/control and original draft/ending regression retained. Failed probe adapters were character encoding then403/default user-agent; kept as harness failures, not generated model text. Additional live probe: Groq200/3653ms and502/5401ms, then an unintended third502/5345ms. Waiting save/autosave copied session and lost the error/cooldown, allowing this third call. Fixed session updates in place; real-app delayed429 regression verifies waiting history/autosave and no subsequent request. Final direction is AI priority without a fixed quota, with DB bridging/fallback; mix is measured only. All155 frontend/37 backend tests pass. No further live calls; final real-provider reliability is not claimed.

@@ -1,0 +1,132 @@
+{
+  "date": "2026-10-11",
+  "mode": "Read-only local synthetic probes. No live LLM generation, no quality/human approval.",
+  "networkGenerationCalls": 0,
+  "probes": {
+    "prompt": {
+      "input": "今日は散歩でパン屋を見つけたよ",
+      "inputCharacters": 15,
+      "systemCharacters": 6780,
+      "messages": [
+        {
+          "role": "system",
+          "characters": 6780
+        },
+        {
+          "role": "user",
+          "characters": 15
+        }
+      ]
+    },
+    "historyWindow": {
+      "synthetic": true,
+      "withFillers": {
+        "historyItems": 16,
+        "sentHistoryItems": 10,
+        "userItems": 2,
+        "texts": [
+          {
+            "role": "assistant",
+            "content": "少し考えてるの。"
+          },
+          {
+            "role": "assistant",
+            "content": "散歩で見つけたものが気になるよ1"
+          },
+          {
+            "role": "user",
+            "content": "今日は散歩したよ2"
+          },
+          {
+            "role": "assistant",
+            "content": "ウンウン…。"
+          },
+          {
+            "role": "assistant",
+            "content": "少し考えてるの。"
+          },
+          {
+            "role": "assistant",
+            "content": "散歩で見つけたものが気になるよ2"
+          },
+          {
+            "role": "user",
+            "content": "今日は散歩したよ3"
+          },
+          {
+            "role": "assistant",
+            "content": "ウンウン…。"
+          },
+          {
+            "role": "assistant",
+            "content": "少し考えてるの。"
+          },
+          {
+            "role": "assistant",
+            "content": "散歩で見つけたものが気になるよ3"
+          }
+        ]
+      },
+      "withoutGenericFillers": {
+        "historyItems": 8,
+        "sentHistoryItems": 8,
+        "userItems": 4,
+        "texts": [
+          {
+            "role": "user",
+            "content": "今日は散歩したよ0"
+          },
+          {
+            "role": "assistant",
+            "content": "散歩で見つけたものが気になるよ0"
+          },
+          {
+            "role": "user",
+            "content": "今日は散歩したよ1"
+          },
+          {
+            "role": "assistant",
+            "content": "散歩で見つけたものが気になるよ1"
+          },
+          {
+            "role": "user",
+            "content": "今日は散歩したよ2"
+          },
+          {
+            "role": "assistant",
+            "content": "散歩で見つけたものが気になるよ2"
+          },
+          {
+            "role": "user",
+            "content": "今日は散歩したよ3"
+          },
+          {
+            "role": "assistant",
+            "content": "散歩で見つけたものが気になるよ3"
+          }
+        ]
+      }
+    },
+    "fanRecovery": {
+      "syntheticCandidate": true,
+      "input": "ちいかわの話して",
+      "candidate": "ハチワレの話、アタシはずっとしていられるよ。好きなところを一つに決めるのが難しいの。あなたがハチワレを好きなら、どんなところが好きか教えてほしいな。そこから一緒に話したい！",
+      "candidateCharacters": 86,
+      "output": "わあ、ちいかわ！ 話したかった！ ハチワレ、写真で小さい思い出を残すの、いいよね！ アタシ、そういうところ大好き。 ラッコ、あんなに強いのに甘い物が好きなの！ あの差に弱い、アタシ。 シーサー、郎で働くために資格まで取るんだよ！ アタシ、応援しちゃう。",
+      "replaced": true
+    },
+    "questionPolicy": {
+      "syntheticCandidate": true,
+      "candidate": "パン屋を見つけたんだね。何パンを買ったの？",
+      "output": "パン屋を見つけたんだね。",
+      "edited": true
+    },
+    "serverRecovery": {
+      "syntheticCandidate": true,
+      "candidate": "ハチワレの話、アタシはずっとしていられるよ。好きなところを一つに決めるのが難しいの。あなたがハチワレを好きなら、どんなところが好きか教えてほしいな。そこから一緒に話したい！",
+      "output": "わあ、ちいかわ！ 話したかった！ ハチワレ、写真で小さい思い出を残すの、いいよね！ アタシ、そういうところ大好き。 ラッコ、あんなに強いのに甘い物が好きなの！ あの差に弱い、アタシ。 シーサー、郎で働くために資格まで取るんだよ！ アタシ、応援しちゃう。",
+      "rewritten": true,
+      "provenanceIssue": "runChain returns only text/provider; a server-side authored replacement has no source flag for the client."
+    }
+  }
+}

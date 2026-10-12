@@ -25,13 +25,26 @@ const joinSmallKana=value=>String(value).normalize('NFKC').replace(/[ \t]+(?=[�
 const escape=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
 const preferredPattern=new RegExp([...preferredReadings.keys()].sort((a,b)=>b.length-a.length).map(escape).join('|'),'g');
 const namePattern=new RegExp([...names.keys()].sort((a,b)=>b.length-a.length).map(n=>/^[a-z0-9]+$/i.test(n)?`(?<![a-z0-9])${escape(n)}(?![a-z0-9])`:[...n].map(escape).join('\\s*')).join('|'),'gi');
-export function readableText(value, tokenizer) {
-  return joinSmallKana(value).split('\n').map(line => line.replace(preferredPattern,word=>` ${preferredReadings.get(word)} `).replace(namePattern,(name,offset,source)=>{
+export function readableText(value, tokenizer, {protectedNames=[]}={}) {
+  // A player's nickname is not necessarily in the morphology dictionary.
+  // Protect the whole learned label before static aliases or token boundaries
+  // can split it. Keep the protection local to this render, never global.
+  const protectedWords=new Map(),aliases=new Map();
+  for(const value of protectedNames.slice(0,16)){
+    if(typeof value!=='string'||!value.trim())continue;
+    const word=joinSmallKana(value).trim(),marker=String.fromCharCode(0xe000+protectedWords.size);
+    const reading=tokenizer&&/[一-龠々ぁ-ゖ]/.test(word)?tokenizer.tokenize(word).map(t=>katakana(t.reading||t.surface_form)).join(''):katakana(word);
+    protectedWords.set(marker,reading);
+    for(const alias of [word,katakana(word),word.replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-96))])aliases.set(alias.toLowerCase().replace(/\s/g,''),marker);
+  }
+  const protectedPattern=aliases.size?new RegExp([...aliases.keys()].sort((a,b)=>b.length-a.length).map(n=>/^[a-z0-9]+$/i.test(n)?`(?<![a-z0-9])${escape(n)}(?![a-z0-9])`:[...n].map(escape).join('[ \\t]*')).join('|'),'gi'):null;
+  return joinSmallKana(value).split('\n').map(line => (protectedPattern?line.replace(protectedPattern,word=>` ${aliases.get(word.toLowerCase().replace(/\s/g,''))} `):line).replace(preferredPattern,word=>` ${preferredReadings.get(word)} `).replace(namePattern,(name,offset,source)=>{
     // A short hiragana alias inside ordinary grammar is not a name boundary:
     // あるから must not become the Hunter name アルカ followed by ラ.
     if(/^[ぁ-ゖ]{1,3}$/.test(name)&&/[ぁ-ゖ]/.test((source[offset-1]||'')+(source[offset+name.length]||'')))return name;
     return ` ${names.get(name.toLowerCase().replace(/\s/g,''))||name} `;
   }).trim().split(/\s+/).filter(Boolean).map(part => {
+    if(protectedWords.has(part))return protectedWords.get(part);
     // AI/rule replies already contain word boundaries. Retokenizing kana
     // would split words incorrectly (e.g. エイガ -> エイ ガ).
     if (!tokenizer || !/[一-龠々ぁ-ゖ]/.test(part)) return katakana(part);
@@ -48,7 +61,10 @@ export function readableText(value, tokenizer) {
       const question=token.surface_form==='か'&&previous?.surface_form==='の'&&previous.pos_detail_1==='非自立';
       const contractedTe=token.pos==='動詞'&&token.pos_detail_1==='非自立'&&/^[テデ]$/.test(reading)&&previous?.pos==='動詞';
       const progressive=token.pos==='動詞'&&token.pos_detail_1==='非自立'&&token.basic_form==='いる'&&/^[てで]$/.test(previous?.surface_form||'');
-      if((attach||prefix||question||contractedTe||progressive||contraction)&&words.length)words[words.length-1]+=reading;else words.push(reading);
+      // Contiguous katakana in the source is one spelling even when kuromoji
+      // calls its pieces separate words (ムッ / キー, カフェ / ラテ).
+      const katakanaRun=/^[ァ-ヶー]+$/.test(token.surface_form)&&/^[ァ-ヶー]+$/.test(previous?.surface_form||'');
+      if((attach||prefix||question||contractedTe||progressive||contraction||katakanaRun)&&words.length)words[words.length-1]+=reading;else words.push(reading);
       previous=token;
     }
     return words.join(' ');

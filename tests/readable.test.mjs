@@ -2,9 +2,29 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import kuromoji from 'kuromoji';
 import {readableText,loadReadings} from '../src/readable.js';
-import {respond,freshState} from '../src/engine.js';
+import {respond,freshState,restoreState} from '../src/engine.js';
 import {requestChat} from '../src/chat.js';
+import {answerPlayerQuestion} from '../src/player-memory.js';
 const tokenizer=await new Promise((resolve,reject)=>kuromoji.builder({dicPath:'assets/dict/'}).build((error,value)=>error?reject(error):resolve(value)));
+test('a learned player nickname stays whole in the actual name acknowledgment',()=>{
+ for(const name of ['ムッキー','むっきー','ﾑｯｷｰ','モモンガ王','ももんが王']){
+  const reply=answerPlayerQuestion(null,{pendingQuestion:{type:'name',id:'name'}},name);
+  const out=readableText(reply.reply,tokenizer,{protectedNames:[reply.memory.nickname]});
+  assert.match(out,/^(?:ムッキー|モモンガオウ)ッテ ヨブネ。/);
+  assert.doesNotMatch(out,/ムッ キー|モモンガ オウ/);
+  assert.equal(reply.memory.nickname,name.normalize('NFKC'));
+  const restored=restoreState({...freshState(),name:reply.name,playerMemory:reply.memory});
+  assert.equal(readableText(reply.reply,tokenizer,{protectedNames:[restored.playerMemory.nickname]}),out);
+ }
+ // Explicit word spacing is retained; protection does not leak between calls.
+ assert.equal(readableText('ムッキーと呼ぶね',tokenizer),'ムッキー ト ヨブネ');
+ assert.equal(readableText('カフェラテが好き',tokenizer),'カフェラテ ガ スキ');
+ assert.equal(readableText('カフェ ラテが好き',tokenizer),'カフェ ラテ ガ スキ');
+ assert.equal(readableText('むっきーって呼ぶね',null,{protectedNames:['むっきー']}),'ムッキーッテ呼ブネ');
+ assert.equal(readableText('TOMATOとTom',tokenizer,{protectedNames:['Tom']}),'TOMATO ト Tom');
+ assert.equal(readableText('むっきーちゃんって呼ぶね',tokenizer,{protectedNames:['むっきーちゃん']}),'ムッキーチャンッテ ヨブネ');
+ assert.match(readableText('ムッキー.+って呼ぶね',tokenizer,{protectedNames:['ムッキー.+']}),/^ムッキー\.\+ッテ ヨブネ/);
+});
 test('short name aliases do not split ordinary hiragana grammar',()=>{
  assert.doesNotMatch(readableText('怖い気持ちがあるから、頑張る姿が好き。',tokenizer),/アルカ ラ/);
  assert.match(readableText('アルカの話',tokenizer),/アルカ/);

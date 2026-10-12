@@ -1,3 +1,11 @@
+# 2026-10-12: nickname rendering regression
+
+Before:ムッキーって呼ぶね。→ムッ キーッテ ヨブネ。 kuromoji tokens areムッ(adverb),キー(noun),って(particle). Saved nickname and raw reply were correct; the error occurs locally during reading/spacing. Static character-name overrides did not cover arbitrary nicknames.
+
+After:ムッキーッテ ヨブネ。 Learned nickname is protected as one label; contiguous katakana spelling is kept together.186 tests pass. Actual-app offline simulated-DOM replay confirms user textムッキー /ムッキーチャン and assistant acknowledgments after name questions and restart; no display-internalムッ キー. Saving/restoring nickname and name examples with a character-name substring pass. Explicitカフェ ラテ spacing and ordinary verb/particle spacing remain. Evidence docs/player-nickname-reading-20261012.json. Zero LLM calls; no physical browser/phone or human-evaluation claim for this check. Entry/readable cache versions advanced to20261012-name1.
+
+---
+
 # 2026-10-12: memory2 publication and real provider smoke comparison
 
 Frontend185/backend52 local tests passed for the published memory2 candidate. PR32/37 pilot integration and Pages38214312206 succeeded;27 changed public source files matchffdbf23. Evidence docs/public-player-memory-20261012.json. Greeting/affection/character names no longer become accidental nicknames; a reintroduced player creation is acknowledged without unrelated word recognition. Browser tests remain viewport emulation rather than physical handset proof.

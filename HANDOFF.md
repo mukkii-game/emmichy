@@ -1,3 +1,11 @@
+# Current checkpoint — nickname display fix, 2026-10-12
+
+The user reproducedムッキーって呼ぶね→ムッ キーッテ ヨブネ. Root cause is display tokenization: kuromoji splitsムッ/キー; the saved name and original reply are intact. Prior static proper-name overrides did not cover arbitrary player nicknames. readableText now protects the learned nickname for each render, joins contiguous source katakana tokens, and retains explicit spaces between distinct words. App uses the same protected conversion for typing, history and continuations; cached user messages update when the nickname is first learned.
+
+Entry/readable release20261012-name1.186 local tests pass, including actual acknowledgment, hiragana/half-width aliases, saved-state restore, unknown names containing known character names, regex literals and dictionary-failure fallback. Actual-app offline simulated-DOM replay verifies both user and assistant visible text forムッキー andむっきーちゃん, including restart. Evidence docs/player-nickname-reading-20261012.json. Zero LLM calls, no external AI/subagents. Backend is unchanged. Public integration to the existing pilot is authorized immediately; publication result/source checks will follow. User should reload the published page and try starting over→ムッキー.
+
+---
+
 # Current checkpoint — published memory2; manual Claude handoff; free-model smoke check, 2026-10-12
 
 Public runtime20261012-memory2: frontend PR32/PR37 merged to pilot as034c7a39/6300f576. Code candidateffdbf23dd8abade587572ea6a2c061aba5af2b46, Pages38214312206 success; all27 changed public HTML/runtime files match the candidate (docs/public-player-memory-20261012.json).185 frontend tests pass. The nickname hotfix keeps greetings/affection/known character words from becoming names; returning player creations avoid unrelated name cues. Backend PR16 merged986c5189, deploy38212433032 succeeded with52 tests, Worker5b2e2264-58e1-497b-a098-9c72e668956c. Browser-only memory and physical-phone limitations remain as documented. User human play remains necessary.

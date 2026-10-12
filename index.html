@@ -20,7 +20,7 @@
   <meta name="twitter:title" content="えみちぃ / Emmichy — レトロ会話ゲーム">
   <meta name="twitter:description" content="ちいかわと日本のオタク文化が大好きなえみちぃと、約5分のおしゃべり。">
   <meta name="twitter:image" content="https://mukkii-game.github.io/emmichy/assets/emmichy-nordic-muted-bust-20261008.png">
-  <link rel="stylesheet" href="style.css?v=20261009-talk1">
+  <link rel="stylesheet" href="style.css?v=20261012-mobile1">
 </head>
 <body>
   <main>
@@ -38,12 +38,12 @@
       <button id="send" type="submit">RETURN ↵</button>
     </form>
     </div>
-    <p id="input-hint" class="small">カタカナに直さず、ふつうの漢字・かな交じりで書いてね。</p>
+    <p id="input-hint" class="small"><span class="desktop-hint">カタカナに直さず、ふつうの漢字・かな交じりで書いてね。</span><span class="mobile-hint">ふつうの漢字・かな交じりでどうぞ。</span></p>
     <div class="toolbar">
       <span id="status">日本語入力OK / ENTER で送信</span>
       <div><button id="restart-chat">最初から</button><button id="sound" aria-pressed="true">BGM + SE ON</button><button id="fullscreen">全画面</button><button id="help">アソビカタ</button></div>
     </div>
-    <p class="small">終わるときは「さようなら」「バイバイ」。目安5分。自動のお別れは5分経ってから。</p>
+    <p class="small session-hint">終わるときは「さようなら」「バイバイ」。目安5分。自動のお別れは5分経ってから。</p>
     <section id="instructions" hidden>
       <h1>Emmichy — ちょっと、わかってないフリ。</h1>
       <p>えみちぃは、日本文化が大好きな欧米人ティーン。日本語はかなり話せるけれど、ときどき語順や言い回しがちょっと変。アニメ・マンガ・ゲームに意外なほど詳しく、とくにChiikawaの話になると熱量がおかしくなります。</p>
@@ -53,16 +53,14 @@
       <button id="export">会話を保存</button> <button id="reset">記憶を初期化</button><span id="reset-note"></span>
       <p class="small">RETRO PERSONAL COMPUTER STYLE / 非公式パロディ試作。原作コード・原作画像・原作音源は不使用。</p>
     </section>
-    <p class="small">会話は AI サービス(Groq / Google / Cloudflare)に送られます。個人情報は入力しないでください。</p>
+    <p class="small privacy-hint">会話は AI サービス(Groq / Google / Cloudflare)に送られます。個人情報は入力しないでください。</p>
     <details class="readable-log"><summary>会話を読みやすく表示</summary><div id="transcript" role="log" aria-live="polite"></div></details>
     <footer><span>THE ALMOST CLEVER GAME</span><span>EMMICHY / PILOT</span></footer>
   </main>
   <script src="assets/vendor/kuromoji.js"></script>
-  <script type="module" src="src/app.js?v=20261012-chii1"></script>
+  <script type="module" src="src/app.js?v=20261012-mobile1"></script>
 </body>
 </html>
-
-
 
 
 

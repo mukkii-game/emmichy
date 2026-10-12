@@ -1,5 +1,7 @@
 # ちいかわ中心パイロット候補 — 2026-10-12
 
+追記：ユーザーの許可により公開済み。[公開版を遊ぶ](https://mukkii-game.github.io/emmichy/)。「最初から」を選んで試遊する。frontend PR28／Pages38170960518、backend PR15／Deploy38170890200が成功。配信25ファイルが候補と一致し、中継のhealthも正常。根拠は `public-chiikawa-pilot-20261012.json`。追加のLLM通信はせず、人間の試遊を待つ。以下は公開前の候補作成・検証の記録。
+
 ローカルで人間の試遊に渡せる候補を作成。runtime `20261012-chii1`、両リポジトリの作業ブランチは `codex/chiikawa-dialogue-20261011`。公開・マージ・デプロイは未実施。公開版は従来の `20261010-llm2` のまま。公開LLMを含む最終候補全体の試遊は、候補反映の許可後に行う。
 
 コード候補：[frontend PR28](https://github.com/mukkii-game/emmichy/pull/28) の `7d975cbf1430d7d21feb01476dc85dd43589b3db`、[backend PR15](https://github.com/mukkii-game/game-llm/pull/15) の `7a9df963df168cb43ff4f4ea2621367d0106b629`。いずれもレビュー用ドラフト。後続の記録コミットはこの候補識別だけを追記する。

@@ -1,3 +1,15 @@
+# 2026-10-12: mobile portrait layout check (unpublished)
+
+Browser viewport emulation320×568,390×844,430×932 and1280×900; offline, audioOFF. Phone portrait widths218/324/358px (previous130px), no horizontal overflow, input form bottom551/728/799px within each phone viewport. Top portrait with overlaid logo, concise input hint; desktop logo static and prior side-by-side composition retained. Start and one offline Hachiware-photo send at390px keep page scrollY0 with head visible after preventScroll focus fix.171 existing tests pass. Actual handset/browser keyboard not tested; no gameLLM/externalAI/subagents. Evidence docs/mobile-layout-20261012.json, -phone.png, -desktop.png and report .md. Public version unchanged pending the requested new-candidate approval.
+
+---
+
+# 2026-10-12: publication verification
+
+User authorized public trial. Frontend PR28/Pages38170960518 and backend PR15/Deploy38170890200 succeeded; runtime20261012-chii1. Read-only release verifier explicitly Luna medium compared25 changed HTML/runtime files with the tested candidate, all matched (docs/public-chiikawa-pilot-20261012.json). Health endpoint OK. Public browser opened at start-choice; saved older dialogue is not a new test transcript. No additional game LLM calls, virtual conversation or human evaluation. Frontend main unchanged. Await user's real playtest.
+
+---
+
 # 2026-10-12: focused Chiikawa candidate, bounded evidence
 
 Runtime20261012-chii1, not published. Local tests171/171 frontend +51/51 backend; knowledge25 structural checks and4 negative cases pass. One new subjective reviewer explicitly Sol6.1 medium,6 sends using offline actual app with mock DOM/time; original player log/review retained in docs/pilot-chiikawa-20261011-player*. Fixed preference/focus drift, scoped refusal and ordinary dessert sharing, then replayed the same6 sends (not a second subjective review). Captured real outputs also replayed; script scripts/replay-chiikawa-pilot.mjs makes zero calls.

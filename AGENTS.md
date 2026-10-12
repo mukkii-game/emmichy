@@ -26,6 +26,8 @@ Do not use these as a mailbox.
 
 ## Safety / scope
 
+2026-10-12の追加指示：ユーザーは「修正版への反映は、以後、すぐに行うように命令します」と指定した。検証を完了したEmmichyの修正は確認待ちを挟まず、既存の試遊用pilotブランチと必要な中継へ反映する。frontend mainへの統合や有料サービス追加の許可へ拡大しない。各公開の候補と検証結果を記録する。
+
 - Preserve existing work; inspect before overwriting.
 - Do not publish, merge, or deploy to main/public/production unless explicitly authorized.
 - Do not add metered APIs or paid services without explicit authorization.

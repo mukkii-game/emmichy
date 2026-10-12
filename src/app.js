@@ -24,6 +24,7 @@ import {planContinuation,createContinuation} from './continuation.js?v=20261012-
 import {recognizeName,namedGesture,NAME_REACTION_MS} from './names.js?v=20261012-chii1';
 import {substantiveHistory,appendDialogue} from './dialogue-history.js?v=20261012-chii1';
 import {directReply} from './dialogue-director.js?v=20261012-chii1';
+import {cleanPlayerMemory,nameQuestion,notePlayerQuestion,choosePlayerQuestion,answerPlayerQuestion,playerRecall,notePlayerReply} from './player-memory.js';
 const continuation=createContinuation();
 let continuationVersion=0,continuing=false,hadContinuation=false,awaitingOpening=[];
 function stopContinuation(clear=false){continuationVersion++;if(clear){continuation.clear();hadContinuation=false;awaitingOpening=[];}if(continuing){live='';draw();}}
@@ -66,6 +67,7 @@ function renderConversation(){
  log.scrollTop=log.scrollHeight;
 }
 function add(role,value,track=true){
+ if(track&&role==='enny'){state.playerMemory=notePlayerReply(state.playerMemory,value);notePlayerQuestion(value,session);}
  if(track&&role!=='system')noteChiikawa(session,value);
  if(track&&role!=='system')state.knowledge=rememberKnowledge(state.knowledge,value);
  live='';$('live-body').textContent='';$('live-reply').hidden=true;
@@ -84,7 +86,7 @@ function recordAside(line,pendingState=null,{substantive=!pendingState}={}){
  const p=document.createElement('p');p.textContent=`えみちぃ：${line}`;$('transcript').append(p);
  if($('transcript').children.length>40)$('transcript').firstChild.remove();
 }
-function openingPlan(returning=false){const picked=selectOpening(state,returning);state.openingSeen=picked.seen;return planOpening(picked);}
+function openingPlan(returning=false){const picked=selectOpening(state,returning);state.openingSeen=picked.seen;const plan=planOpening(picked);if(!returning){plan.later=['アタシ、エミチィ。日本語を勉強してるの。ちいかわが大好き！',nameQuestion];}return plan;}
 function addOpening(returning=false){
  const plan=openingPlan(returning);add('enny',plan.first);appendDialogue(state,'enny',plan.first);state.history.push({role:'enny',text:plan.first});save();
  hadContinuation=plan.later.length>0;
@@ -151,6 +153,11 @@ $('talk').addEventListener('submit',async e=>{
  busy=true;live='';$('send').disabled=true;$('reset').disabled=true;$('entry').value='';audioDirector.se.send();
  add('user',raw);$('disk').textContent='● DISK ACCESS';
  const before=advancePerformance({...state,history:substantiveHistory(state)},raw,session.turns);let result=chiikawaReply(normalize(raw),respond(raw,state),undefined,raw);
+ const player=['bye','asleep'].includes(result.kind)?{memory:cleanPlayerMemory(state.playerMemory)}:answerPlayerQuestion(state.playerMemory,session,raw);
+ result.state.playerMemory=player.memory;
+ if(player.name!==undefined)result.state.name=player.name;
+ const recall=playerRecall(player.memory,raw);
+ if(player.reply||recall){result.text=player.reply||recall;result.kind='memory';result.state.history.at(-1).text=result.text;}
  result.state.dialogue=isRestart?[]:substantiveHistory(before);
  appendDialogue(result.state,'user',raw);
  let farewellParts=null;
@@ -171,11 +178,12 @@ $('talk').addEventListener('submit',async e=>{
  let usedModel=false,locallyReplaced=false,fillerGap=0,replySource='authored';
  const gap=!isRestart&&!state.ended&&selectGap(raw,state);
  let prepared=isRestart||state.ended?null:preparedReply(raw,state,session,{gap,culture,repertoire,modelEnabled,kind:result.kind});
+ if(player.reply||recall)prepared={topic:'player-memory',text:result.text};
  const requestModel=shouldRequestModel(session,{enabled:modelEnabled,kind:result.kind,topic:prepared?.topic,restart:isRestart,fixedIdentity:prepared?.id==='profile:home'});
  let greetingPlan=null;
  if(prepared?.topic==='greeting'){greetingPlan=openingPlan(true);prepared.text=greetingPlan.first;result.state.openingSeen=state.openingSeen;}
  if(gap)result.state.gap=gap.memory;
- if(prepared){result.text=['compliment','japan-place','deflection','fandom-decline','profile','chiikawa-name','everyday','conversation-move','context-name','greeting','island-water','gap','repertoire','culture'].includes(prepared.topic)?prepared.text:fandomReply||prepared.text;result.kind='curated';result.state.history.at(-1).text=result.text;if(/[！!]/.test(result.text))result.mood='excited';}
+ if(prepared){result.text=['player-memory','japanese-word','compliment','japan-place','deflection','fandom-decline','profile','chiikawa-name','everyday','conversation-move','context-name','greeting','island-water','gap','repertoire','culture'].includes(prepared.topic)?prepared.text:fandomReply||prepared.text;result.kind='curated';result.state.history.at(-1).text=result.text;if(/[！!]/.test(result.text))result.mood='excited';}
  if(isRestart){greetingPlan=openingPlan(true);result.text=greetingPlan.first;result.state.openingSeen=state.openingSeen;result.state.history.at(-1).text=result.text;}
  const ruleOnly=!requestModel;
  let heard=['bye','asleep','name','memory','arithmetic','comfort','contradiction'].includes(result.kind)||isRestart||prepared?.topic==='profile'?null:recognizeName(raw,{reading:readableText(raw,tokenizer),state:before});
@@ -307,7 +315,9 @@ setInterval(draw,160);setInterval(async()=>{
    if(version===continuationVersion&&!busy&&!document.hidden&&ready&&!composing){recordAside(line);continuation.spoken(Date.now());noteActivity();}
    live='';continuing=false;draw();return;
   }
-  const reminder=Date.now()-lastActivity>=6000&&!$('entry').value.trim()?chiikawaReminder(state,session):null;
+ const question=Date.now()-lastActivity>=6000&&!$('entry').value.trim()?choosePlayerQuestion(state.playerMemory,session,{allowChiikawa:!unwantedFanRedirect('ちいかわ',state.history.filter(h=>h.role==='user').at(-1)?.text||'',state)}):null;
+ if(question){recordAside(question.text);noteActivity();draw();return;}
+ const reminder=Date.now()-lastActivity>=6000&&!$('entry').value.trim()?chiikawaReminder(state,session):null;
   if(reminder){
    const plan=planContinuation(reminder,'',state,{display:s=>readableText(s,tokenizer),tokenizer});
    session.chiikawaReminders=(session.chiikawaReminders||0)+1;
@@ -318,7 +328,5 @@ setInterval(draw,160);setInterval(async()=>{
   else if(stage&&!$('entry').value.trim()){recordAside(idleAside(state.history,stage-1));draw();}
  }
 },250);draw();if(ready)$('entry').focus({preventScroll:true});
-
-
 
 

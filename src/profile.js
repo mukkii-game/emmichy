@@ -91,6 +91,7 @@ export function profileReply(raw){
  const text=String(raw).normalize('NFKC').replace(/\s/g,'');
  if(accessoryCue(text))return {topic:'profile',id:'profile:accessory',text:accessoryReply};
  const folded=text.replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96));
+ if(/日本語|ニホンゴ/.test(folded)&&!/(?:私|僕|俺|ワタシ|ボク|オレ|友達|彼).{0,4}(?:ハ|ガ|モ|ノ)/.test(folded)&&(!/チイカワ|ハチワレ|ウサギ|シーサー/.test(folded)||/勉強|ベンキョウ|覚|学/.test(folded)))return {topic:'profile',id:'profile:languages',text:'うん、日本語を勉強してるよ！ 漫画とアニメ、それからこういう会話で覚えてるの。長い音と小さい「っ」は、まだ難しいの。'};
  const home=/(?:スウェーデン|ヨーテボリ).*(?:生マレ|ウマレ|育|ソダ|出身|シュッシン|住|スン|[?？])/.test(folded)&&!/(?:私|僕|俺|ワタシ|ボク|オレ|友達|彼女|彼氏)/.test(folded);
  const own=selfMention(text)||/あなた|君|きみ/.test(text)||home;
  if(!own&&!/^(?:何歳|いくつ|どこ出身|出身は|どこに住|どこの国|家族は|趣味は|学校は|仕事は|何語|好きな(?:食べ物|漫画|マンガ|ゲーム)|日本に来た|自己紹介)/.test(text))return null;

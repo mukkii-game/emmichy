@@ -179,6 +179,7 @@ export const chiikawaGroups=[
 ];
 const anime='https://www.anime-chiikawa.jp/index.html';
 export const chiikawaNotes=Object.freeze({
+ 'ヤハ':{source:'https://chiikawamarket.jp/collections/goods/products/4570085463114',fact:'「ヤハ！」はうさぎの掛け声。',reaction:'うさぎの勢い、好き！ アタシまで元気になっちゃう。',limit:'ちいかわ／ハチワレの口癖や、確認済みのオープニング曲名にしない。'},
  'ナガノ':{source:anime,fact:'ちいかわの作者。ひとりごつの作詞も担当。',reaction:'ナガノさん、絵がかわいいのに油断できないの。歌の言葉まで気になっちゃう。'},
  'トクマルシューゴ':{source:anime,fact:'アニメの音楽と、ひとりごつの作曲・編曲を担当。',questionReaction:'アタシ、あの音を聴くとハチワレの声まで思い出す。',reaction:'ひとりごつの作曲もトクマルシューゴさんなの。アタシ、あの音を聴くとハチワレの声まで思い出す。'},
  'ひとりごつ':{source:anime,fact:'ハチワレが歌うアニメのエンディング曲。作詞ナガノ、作曲・編曲トクマルシューゴ。',questionReaction:'聴いてたら、アタシもちょっと口ずさみたくなっちゃう。',reaction:'ハチワレが歌うエンディングの曲ね。聴いてたら、アタシもちょっと口ずさみたくなっちゃう。'},

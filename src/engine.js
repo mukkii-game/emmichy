@@ -1,4 +1,5 @@
 // Original Emmichy dialogue logic. No original Emmy code or dialogue tables used.
+import {cleanPlayerMemory} from './player-memory.js';
 import {cleanKnowledge} from './fandom.js?v=20261012-chii1';
 import {cleanGap} from './gap.js?v=20261012-chii1';
 import {cleanRepertoire} from './repertoire.js?v=20261012-chii1';
@@ -16,12 +17,13 @@ for(let i=0xff61;i<=0xff9f;i++) { const c=String.fromCharCode(i); half.set(c.nor
 export function displayText(raw) {
   return Array.from(normalize(raw).normalize('NFD')).map(c=> c==='\u3099'?'ﾞ':c==='\u309a'?'ﾟ':half.get(c) ?? (/^[\x20-\x7e]$/.test(c)?c:'?')).join('');
 }
-export function freshState() { return {version:1,turn:0,name:'',likes:{},last:'',repeat:0,praise:0,clues:0,topic:'',fan:{worry:0,excitement:0,lastTopic:''},ended:false,history:[]}; }
+export function freshState() { return {version:1,turn:0,name:'',likes:{},playerMemory:cleanPlayerMemory(null),last:'',repeat:0,praise:0,clues:0,topic:'',fan:{worry:0,excitement:0,lastTopic:''},ended:false,history:[]}; }
 export function restoreState(value) {
   const s=freshState();
   if(!value || value.version!==1) return s;
   for(const k of ['turn','repeat','praise','clues']) if(Number.isSafeInteger(value[k]) && value[k]>=0) s[k]=Math.min(value[k],100000);
-  if(typeof value.name==='string') s.name=normalize(value.name).slice(0,16);
+  if(typeof value.name==='string') s.name=normalize(value.name).slice(0,20);
+  s.playerMemory=cleanPlayerMemory(value.playerMemory||{nickname:value.name,likes:Object.entries(value.likes||{}).filter(([,v])=>v===1).map(([k])=>k)});
   if(typeof value.last==='string') s.last=value.last.slice(0,120);
   s.ended=value.ended===true;
   if(typeof value.topic==='string')s.topic=value.topic.slice(0,24);
@@ -103,4 +105,3 @@ export function respond(raw,state) {
   s.history.push({role:'user',text:String(raw).trim().slice(0,120)},{role:'enny',text});s.history=s.history.slice(-40);
   return {state:s,text,kind,mood};
 }
-

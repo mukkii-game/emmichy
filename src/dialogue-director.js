@@ -4,10 +4,16 @@ import {unwantedFanRedirect} from './chat.js?v=20261012-chii1';
 import {selectChiikawaBridge,personalFanReply} from './chiikawa-theme.js?v=20261012-chii1';
 import {groundModelReply} from './dialogue-grounding.js?v=20261012-chii1';
 import {asksCurrentSerial} from './chiikawa-relations.js?v=20261012-chii1';
+import {attributionRepair} from './chiikawa-attribution.js';
+import {learnerReply} from './japanese-learner.js';
 
 // The screen owns final content selection. The relay validates transport/output
 // shape; it does not silently substitute a different authored conversation.
 export function directReply(text,input,state={}, {source='authored',choice=null,allowBridge=true}={}){
+ const attributed=attributionRepair(text);
+ if(attributed&&!/シーン|場面|瞬間|エピソード/.test(text))return {text:attributed.text,source:'authored',reason:attributed.reason,id:null,replaced:source==='llm',recovered:false};
+ const learner=learnerReply(input,{force:true});
+ if(learner&&/よく知らない|よくわからない|ソコ.{0,8}シラナイ/.test(text))return {text:learner.text,source:'authored',reason:'learner-known-word',id:learner.id,replaced:source==='llm',recovered:false};
  let out=String(text||''),origin=source,reason='';
  const allowed=!unwantedFanRedirect('ちいかわ',input,state);
  if(allowed&&asksCurrentSerial(input,state))return {text:'今の最新話の細部は、まだ手元で確かめられてないの。読んだところの話は大好き！ どの場面のこと？',source:'authored',reason:'latest-serial-unverified',id:null,replaced:source==='llm',recovered:false};

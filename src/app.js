@@ -233,7 +233,7 @@ $('talk').addEventListener('submit',async e=>{
  continuation.start(paced.later,Date.now(),greetingPlan?openingTiming:paced.timing);hadContinuation=paced.later.length>0;
  $('status').textContent=usedModel?`AI会話${modelProvider?' / '+({groq:'Groq',gemini:'Google Gemini','workers-ai':'Cloudflare Workers AI',local:'ローカルAI'}[modelProvider]||modelProvider):''} / ENTER で送信`:locallyReplaced?'用意した会話で調整 / ENTER で送信':prepared?'用意した会話 / ENTER で送信':modelEnabled&&!ruleOnly?'AI失敗→ルール会話 / ENTER で送信':'ルール会話 / ENTER で送信';
  const item=document.createElement('p');item.textContent=`あなた：${raw}。Emmichy：${result.text}`;$('transcript').append(item);if($('transcript').children.length>40)$('transcript').firstChild.remove();
- $('entry').focus();draw();
+ $('entry').focus({preventScroll:true});draw();
  if(state.ended){session.finished=true;saveSession();}
  else if(shouldEnd(session)&&!$('entry').value.trim()&&!composing)await endSession();
 });
@@ -250,7 +250,7 @@ document.addEventListener('pointerdown',noteActivity);
 const activateAudio=e=>{if(e.target?.closest?.('#sound'))return;void audioDirector.activate().catch(()=>{});};
 document.addEventListener('pointerdown',activateAudio,{capture:true});
 document.addEventListener('keydown',activateAudio,{capture:true});
-canvas.addEventListener('click',()=>$('entry').focus());
+canvas.addEventListener('click',()=>$('entry').focus({preventScroll:true}));
 $('sound').onclick=async()=>{let on;try{on=await audioDirector.toggle();}catch{$('status').textContent='音を開始できません。もう一度音ボタンを押してください。';return;}$('sound').textContent='BGM + SE '+(on?'ON':'OFF');$('sound').setAttribute('aria-pressed',String(on));if(on)audioDirector.se.reply();};
 $('help').onclick=()=>{$('instructions').hidden=!$('instructions').hidden;};
 $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.querySelector('.screen-wrap').requestFullscreen();}catch{$('status').textContent='このブラウザでは全画面にできません。';}};
@@ -265,9 +265,9 @@ function showStartChoice(){
  ready=false;$('start-choice').hidden=false;$('talk').hidden=true;$('send').disabled=true;$('entry').disabled=true;
  $('continue').disabled=!state.history.length;
  $('status').textContent='続きから／最初から を選んでください';
- $('continue').focus();
+ $('continue').focus({preventScroll:true});
 }
-function enterConversation(){ready=true;if(!session)session={startedAt:Date.now(),turns:0,finished:false};$('start-choice').hidden=true;$('talk').hidden=false;$('send').disabled=!readingsSettled;$('entry').disabled=false;noteActivity();$('entry').focus();}
+function enterConversation(){ready=true;if(!session)session={startedAt:Date.now(),turns:0,finished:false};$('start-choice').hidden=true;$('talk').hidden=false;$('send').disabled=!readingsSettled;$('entry').disabled=false;noteActivity();$('entry').focus({preventScroll:true});}
 $('continue').onclick=()=>{resumeCurrentSession();enterConversation();saveSession();$('status').textContent=state.ended?'おしまい。「最初から」で、もう一度。':'会話を再開しました / ENTER で送信';};
 $('new-chat').onclick=()=>{const next=startConversation(state);state=next.state;session=next.session;lines=[];live='';mood='idle';$('transcript').replaceChildren();addOpening();enterConversation();save();saveSession();$('status').textContent='新しい会話 / 漢字・ひらがな OK';draw();};
 $('restart-chat').onclick=showStartChoice;
@@ -305,7 +305,7 @@ setInterval(draw,160);setInterval(async()=>{
   if(stage===3)await endSession('idle');
   else if(stage&&!$('entry').value.trim()){recordAside(idleAside(state.history,stage-1));draw();}
  }
-},250);draw();if(ready)$('entry').focus();
+},250);draw();if(ready)$('entry').focus({preventScroll:true});
 
 
 

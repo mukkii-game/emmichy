@@ -76,3 +76,30 @@ canvas { width:100%; aspect-ratio:248/336; }
 #start-choice .small { margin:10px 0 0; }
 #start-choice button { font-size:16px; margin-right:10px; padding:10px 18px; }
 @media(max-width:680px){ .message,#live-reply { font-size:24px; line-height:1.7; } .toolbar>div { display:flex; flex-wrap:wrap; } }
+.mobile-hint { display:none; }
+/* Portrait-first vertical phone layout. Keep the original canvas pixels. */
+@media(max-width:680px) and (orientation:portrait){
+ body { padding:6px; }
+ header, footer, .game-tagline, .terminal-heading, #terminal-note,
+ .toolbar #status, .session-hint, #start-choice .small, .desktop-hint { display:none; }
+ .mobile-hint { display:inline; }
+ .screen-wrap { padding:8px; gap:10px; }
+ .portrait-panel { position:relative; display:block; width:min(100%,calc(52svh * .738095)); margin-inline:auto; }
+ .portrait-panel canvas { width:100%; }
+ .game-logo { position:absolute; right:8px; bottom:6px; margin:0; font-size:24px; letter-spacing:1px; line-height:1; text-shadow:2px 2px #000,-1px -1px #000,0 0 8px #000; }
+ .conversation-panel { height:clamp(160px,23svh,240px); }
+ #conversation { padding-right:4px; }
+ .message,#live-reply { font-size:22px; line-height:1.55; margin-bottom:16px; }
+ .speaker { font-size:10px; }
+ .input-slot { position:sticky; bottom:env(safe-area-inset-bottom,0px); z-index:2; margin-top:8px; padding-top:4px; background:#0b0d0d; }
+ #talk { min-height:50px; padding:8px; gap:6px; }
+ #send { padding:8px; }
+ #input-hint { margin:5px 2px; }
+ .toolbar { margin-top:6px; }
+ .toolbar>div { width:100%; gap:4px; }
+ .toolbar button { min-height:34px; }
+ .readable-log { margin-top:8px; font-size:13px; }
+ .privacy-hint { margin:6px 2px; font-size:10px; line-height:1.5; }
+ .screen-wrap:fullscreen { padding:8px; gap:10px; align-content:start; overflow-y:auto; }
+ .screen-wrap:fullscreen .conversation-panel { height:clamp(160px,23svh,240px); }
+}

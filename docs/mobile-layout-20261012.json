@@ -1,0 +1,97 @@
+{
+  "mode": "real browser with viewport emulation; offline; no real device keyboard or live LLM",
+  "checks": [
+    {
+      "form": {
+        "bottom": 550.7768058776855,
+        "height": 50.28571701049805,
+        "width": 293.14288330078125,
+        "x": 6.000000476837158,
+        "y": 500.4910888671875
+      },
+      "horizontalOverflow": false,
+      "inputWidth": 152.0625,
+      "logoPosition": "absolute",
+      "portrait": {
+        "bottom": 309.9196653366089,
+        "height": 295.3482360839844,
+        "width": 218.00001525878903,
+        "x": 43.57143020629883,
+        "y": 14.571429252624512
+      },
+      "viewport": {
+        "height": 568,
+        "width": 320
+      }
+    },
+    {
+      "form": {
+        "bottom": 728.410717010498,
+        "height": 50.28571701049805,
+        "width": 363.4285888671875,
+        "x": 6.000000476837158,
+        "y": 678.125
+      },
+      "horizontalOverflow": false,
+      "inputWidth": 222.3482208251953,
+      "logoPosition": "absolute",
+      "portrait": {
+        "bottom": 453.437518119812,
+        "height": 438.8660888671875,
+        "width": 323.9285888671875,
+        "x": 25.750001907348633,
+        "y": 14.571429252624512
+      },
+      "viewport": {
+        "height": 844,
+        "width": 390
+      }
+    },
+    {
+      "form": {
+        "bottom": 798.9375114440918,
+        "height": 50.28571701049805,
+        "width": 418.2857360839844,
+        "x": 6.000000476837158,
+        "y": 748.6517944335938
+      },
+      "horizontalOverflow": false,
+      "inputWidth": 277.20538330078125,
+      "logoPosition": "absolute",
+      "portrait": {
+        "bottom": 503.72324562072754,
+        "height": 484.6250305175781,
+        "width": 357.70538330078125,
+        "x": 36.28571701049805,
+        "y": 19.098215103149418
+      },
+      "viewport": {
+        "height": 932,
+        "width": 430
+      }
+    },
+    {
+      "form": {
+        "bottom": 807.705394744873,
+        "height": 58.28571701049805,
+        "width": 1120,
+        "x": 72.5714340209961,
+        "y": 749.419677734375
+      },
+      "horizontalOverflow": false,
+      "inputWidth": 790.6339721679688,
+      "logoPosition": "static",
+      "portrait": {
+        "bottom": 606.8572006225586,
+        "height": 522.2857666015625,
+        "width": 385.5000305175781,
+        "x": 97.14286041259766,
+        "y": 84.5714340209961
+      },
+      "viewport": {
+        "height": 900,
+        "width": 1280
+      }
+    }
+  ]
+}

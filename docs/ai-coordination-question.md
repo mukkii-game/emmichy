@@ -7,7 +7,7 @@ EmmichyでGPT・Claude・Geminiの間の資料収集と検品を、人間が毎�
 - ClaudeとGeminiはPC／スマホのWeb・アプリで使え、Antigravity上でも起動できます。このPCのClaude Codeはインストール済みですが、Codexから調べた時点では未ログインでした。Gemini CLIは見つかっていません。
 - 既存の利用枠を使いたいです。チャットの余り枠とAPI課金を区別し、無断で有料APIや新しい契約を追加しないでください。
 - リポジトリはmukkii-game/emmichy、Windowsの作業場所はE:\ゲーム企画\Emmy。
-- 調査担当は、docs/chiikawa-research-brief.mdに従い、data/chiikawa/research/{gemini,claude,reviews}へJSONL成果物を置きます。原作本文の全文転載や、自動の知識採用・コード改変・公開はしません。
+- 調査担当は、docs/chiikawa-research-brief.mdに従い、research/chiikawa/gemini.csv または claude.csv へ固定22列の成果物を置き、排他制御付きスクリプトでSTATUS.mdへ結果を追記します。原作本文の全文転載や、自動の知識採用・コード改変・公開はしません。
 
 聞きたいこと：
 1. 現在使える正式な機能で、CodexからAntigravityのClaude／Geminiへ一回の限定調査を起動し、成果物と完了通知を受け取れますか？ CLI、MCP、共有フォルダ、GitHubのどの方法が実行可能ですか？ 想像上のAPIを提案せず、確認済みの機能と必要な初期設定を示してください。

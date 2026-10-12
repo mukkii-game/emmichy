@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {cleanPlayerMemory,learnPlayerMessage,answerPlayerQuestion,notePlayerQuestion,choosePlayerQuestion,playerRecall,nameQuestion,questions} from '../src/player-memory.js';
+import {cleanPlayerMemory,learnPlayerMessage,answerPlayerQuestion,notePlayerQuestion,choosePlayerQuestion,playerRecall,playerCreationReply,nameQuestion,questions} from '../src/player-memory.js';
 import {learnerReply} from '../src/japanese-learner.js';
 import {profileReply} from '../src/profile.js';
 import {directReply} from '../src/dialogue-director.js';
@@ -9,6 +9,15 @@ test('name elicitation accepts a nickname, keeps a real question first, and can 
  assert.equal(answerPlayerQuestion(null,session,'日本語勉強してるの？').reply,undefined);
  const out=answerPlayerQuestion(null,session,'名前はマッキーです');assert.equal(out.name,'マッキー');assert.equal(out.memory.nickname,'マッキー');assert.equal(session.pendingQuestion,null);
  notePlayerQuestion(nameQuestion,session);assert.equal(answerPlayerQuestion(out.memory,session,'名前は言いたくない').name,'');
+});
+
+test('greetings, affection and known character calls are not learned as nicknames',()=>{
+ for(const input of ['こんにちは','好きだよ','かわいい','ハチワレ','エミチィ']){
+  const session={turns:0};notePlayerQuestion(nameQuestion,session);
+  const out=answerPlayerQuestion(null,session,input);assert.equal(out.name,undefined);assert.equal(out.memory.nickname,'');
+ }
+ const session={turns:0};notePlayerQuestion(nameQuestion,session);
+ assert.equal(answerPlayerQuestion(null,session,'ハチワレって呼んで').name,'ハチワレ');
 });
 test('one word activity per play, ambiguity gets one clarification, then gives space',()=>{
  const session={turns:2};const q=choosePlayerQuestion(null,session);notePlayerQuestion(q.text,session);
@@ -36,6 +45,8 @@ test('a question about a creation cannot replace its remembered name',()=>{
  const asked=learnPlayerMessage(initial,'前に作った能力覚えてる？');
  assert.deepEqual(asked.creations,['砂糖シールド']);
  assert.match(playerRecall(asked,'前に作った能力覚えてる？'),/砂糖シールド/);
+ assert.match(playerCreationReply(initial,initial,'僕の念能力は砂糖シールド'),/前にも教えてくれた/);
+ assert.equal(playerCreationReply(initial,initial,'砂糖シールドって何？'),null);
 });
 
 test('a changed preference removes the conflicting remembered like',()=>{

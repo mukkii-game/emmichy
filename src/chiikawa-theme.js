@@ -1,6 +1,6 @@
 // Original everyday connections, grounded in the existing owned factual cards.
-import {cards,sources} from './fandom.js?v=20261012-memory1';
-import {relatedChiikawa} from './chiikawa-relations.js?v=20261012-memory1';
+import {cards,sources} from './fandom.js?v=20261012-memory2';
+import {relatedChiikawa} from './chiikawa-relations.js?v=20261012-memory2';
 const fold=value=>String(value||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');
 const bridges=[
  {id:'sweet',card:'chiikawa-14',match:/甘イ|アマイ|ケーキ|プリン|チョコ|スイーツ|シナモンロール/,lines:['甘い物って聞くと、ラッコを思い出しちゃう！ あんなに強いのに甘党なの、好き。','ラッコにも甘い物、選んであげたいな。アタシ、こういう時すぐちいかわのこと考えちゃう。']},

@@ -1,5 +1,6 @@
-import {cards,selectKnowledge} from './fandom.js?v=20261012-chii1';
-import {fanLines} from './fan-lines.js?v=20261012-chii1';
+import {cards,selectKnowledge} from './fandom.js?v=20261012-memory1';
+import {fanLines} from './fan-lines.js?v=20261012-memory1';
+import {reviewedChiikawa} from './chiikawa-reviewed.js?v=20261012-memory1';
 const compact=s=>String(s).normalize('NFKC').replace(/[\s。、!?！？]/g,'');
 
 // A lightweight guard, not a semantic fact checker. Specific scene/quotation
@@ -9,7 +10,7 @@ export function groundModelReply(text,input,state={}){
  const selected=selectKnowledge(input,state);
  if(selected.work!=='chiikawa'&&state.knowledge?.work!=='chiikawa')return {text,changed:false};
  const pieces=String(text).match(/[^。!?！？]+[。!?！？]*|[。!?！？]+/g)||[];
- const facts=cards.filter(c=>c.work==='chiikawa');
+ const facts=cards.filter(c=>c.work==='chiikawa').concat(reviewedChiikawa);
  const kept=[],removed=[];
  for(const piece of pieces){
   const scene=/シーン|場面|瞬間|エピソード|原作で|公式で/.test(piece)&&!/[?？]$/.test(piece);

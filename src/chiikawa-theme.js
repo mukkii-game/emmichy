@@ -1,6 +1,6 @@
 // Original everyday connections, grounded in the existing owned factual cards.
-import {cards,sources} from './fandom.js?v=20261012-chii1';
-import {relatedChiikawa} from './chiikawa-relations.js?v=20261012-chii1';
+import {cards,sources} from './fandom.js?v=20261012-memory1';
+import {relatedChiikawa} from './chiikawa-relations.js?v=20261012-memory1';
 const fold=value=>String(value||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');
 const bridges=[
  {id:'sweet',card:'chiikawa-14',match:/甘イ|アマイ|ケーキ|プリン|チョコ|スイーツ|シナモンロール/,lines:['甘い物って聞くと、ラッコを思い出しちゃう！ あんなに強いのに甘党なの、好き。','ラッコにも甘い物、選んであげたいな。アタシ、こういう時すぐちいかわのこと考えちゃう。']},
@@ -31,7 +31,7 @@ export function personalFanReply(input,state={}){
 export function selectChiikawaBridge(input,state={}){
  const t=fold(input);
  if(/ツライ|苦シ|病気|事故|亡ク|死ニ|相談|嫌イ|キライ|苦手|ヤメ|イガイ|以外|バカリ|違ウ|チガウ|訂正/.test(t))return null;
- const history=(state.dialogue||state.history||[]).filter(h=>h.role==='enny').slice(-8).map(h=>fold(h.text)).join('');
+ const history=(state.dialogue||state.history||[]).filter(h=>h.role==='enny').slice(-8).map(h=>fold(h.text)).concat((state.playerMemory?.recentReplies||[]).slice(-12).map(fold)).join('');
  for(const bridge of bridges){
   if(!bridge.match.test(t))continue;
   const text=bridge.lines.find(line=>!history.includes(fold(line)));

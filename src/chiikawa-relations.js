@@ -1,6 +1,7 @@
 // Relations reference the owned factual cards. Cue -> relation is an authored
 // association, never a claim that the cue itself appeared in the original.
-import {cards,sources} from './fandom.js?v=20261012-chii1';
+import {cards,sources} from './fandom.js?v=20261012-memory1';
+import {reviewedChiikawa} from './chiikawa-reviewed.js?v=20261012-memory1';
 const fold=s=>String(s||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');
 const cast='https://chiikawa.toho-movie.jp/atm/characters.html';
 const rows=[
@@ -35,6 +36,7 @@ export const chiikawaRelations=rows.map(([cardId,subject,predicate,object,cues,f
   scope:card.movie?'film':'character',spoiler:card.spoiler?'plot':'intro',
   limits:cardId==='chiikawa-23'?['ちいかわたちが水流で遊ぶとは言わない','腹や口から噴く技ではない']:cardId==='chiikawa-25'?['フルーツパフェを島二郎が作ると結び付けない','店のメニューという確認範囲を守り、調理担当者や作り方を追加しない']:['資料から未確認の場面や台詞を足さない']};
 });
+chiikawaRelations.push(...reviewedChiikawa);
 chiikawaRelations.push(
  {id:'relation:chiikawa-effort',subject:'ちいかわ',predicate:'性格',object:'不器用でも頑張る',cues:['ちいかわ本人','頑張る','こわい','緊張','不器用'],fact:'ちいかわは不器用ながら頑張る子で、驚いたり嫌なことがあると泣く。',feeling:'怖い時にも頑張るちいかわを見ると、アタシも応援したくなるの。',source:cast,evidence:'official',checkedAt:'2026-10-11',scope:'character',spoiler:'none',limits:['特定の未確認の成功や事件を作らない']},
  {id:'relation:hachi-friend',subject:'ハチワレ',predicate:'大好きな友達',object:'ちいかわ',cues:['友達','友情','仲良し'],fact:'ハチワレはちいかわの大切な友達。',feeling:'友達の話になると、ちいかわとハチワレを思い出しちゃう。あの近さ、いいよね。',source:cast,evidence:'official',checkedAt:'2026-10-11',scope:'character',spoiler:'none',limits:['友達のためにした未確認の行動を追加しない']},

@@ -1,4 +1,14 @@
-# 2026-10-12: phone conversation space, unpublished candidate
+# 2026-10-12: player memory and reviewed Chiikawa knowledge candidate
+
+Frontend184/backend52 local tests pass. Actual-app offline replay (simulated DOM/time, compressed typing; zero game-LLM calls) covers nickname elicitation, one choice activity, creation storage across starting over, Japanese-study identity, draft/IME pause. Report docs/player-memory-20261012.md; before/after transcripts preserve failures and repairs.
+
+Failures found: "うさぎかな" was learned as an activity answer but final content repair replaced its acknowledgment with a generic Usagi introduction. "前に作った能力覚えてる？" incorrectly learned "覚えてる" as a new creation. A creation name could also get a soft unrelated-name reaction ("ゴールド！"). Repairs protect activity answers, exclude questions from creation learning, and suppress unrelated name reactions on a newly recorded creation while still allowing LLM continuation. Final replay recalls "砂糖シールド", acknowledges the likeness answer and emits no speech during a20-second draft/IME period. Explicit dislikes now remove conflicting remembered likes.
+
+Codex checked and adopted8 bounded official-source notes/relations from the received research; unverified manga15 and Gemini's held172 rows are not canon. New memory reaches backend prompting, user-created ideas remain player-owned. Server persistence/cross-device identity/shared learning are not implemented. No final-candidate live-generation or human-assessment claim. Human playtest remains necessary.
+
+---
+
+# Previous checkpoint — 2026-10-12: phone conversation space, unpublished candidate
 
 Real browser viewport checks320×568/390×844/430×932/390×500 and1280×900 desktop, offline muted. Phone log heights185/318/360/153px; input bottom562/838/926/494px. No phone document or horizontal overflow; desktop existing scroll layout retained.390px portrait324px and22px text unchanged, log grows from194px to318px. Settings opens/closes, help unfolds, sound turns OFF, Escape closes; initial greeting and1 offline Hachiware-photo send observed.171 tests pass. No new model call or subjective reviewer. Reduced viewport is a simulation, not actual handset keyboard proof. docs/mobile-space-20261012.md/JSON/screenshots. Public unchanged until new-candidate approval.
 

@@ -30,6 +30,20 @@ test('explicit creation and preferences survive cleaning; personal contact data 
  let memory=learnPlayerMessage(null,'ハチワレが好き');memory=learnPlayerMessage(memory,'僕の念能力は砂糖シールド');assert.ok(memory.likes.includes('ハチワレ'));assert.equal(playerRecall(cleanPlayerMemory(memory),'前に作った能力覚えてる？').includes('砂糖シールド'),true);
  assert.equal(cleanPlayerMemory({nickname:'半額王',creations:['電話番号は09012345678']}).nickname,'');assert.equal(cleanPlayerMemory({creations:['電話番号は09012345678']}).creations.length,0);
 });
+
+test('a question about a creation cannot replace its remembered name',()=>{
+ const initial=learnPlayerMessage(null,'僕の念能力は砂糖シールド');
+ const asked=learnPlayerMessage(initial,'前に作った能力覚えてる？');
+ assert.deepEqual(asked.creations,['砂糖シールド']);
+ assert.match(playerRecall(asked,'前に作った能力覚えてる？'),/砂糖シールド/);
+});
+
+test('a changed preference removes the conflicting remembered like',()=>{
+ const before=learnPlayerMessage(null,'ハチワレが好き');
+ const after=learnPlayerMessage(before,'ハチワレは好きじゃない');
+ assert.deepEqual(after.likes,[]);assert.deepEqual(after.dislikes,['ハチワレ']);
+ const changed=learnPlayerMessage(after,'ハチワレが好き');assert.deepEqual(changed.dislikes,[]);
+});
 test('player corrections remain unverified suggestions rather than official knowledge',()=>{
  const memory=learnPlayerMessage(null,'ヤハはハチワレじゃなく、うさぎの口癖だよ');assert.equal(memory.knowledgeSuggestions[0].category,'chiikawa');assert.equal('facts' in memory,false);
 });

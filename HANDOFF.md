@@ -1,4 +1,12 @@
-# Current checkpoint — playable Chiikawa candidate, 2026-10-12
+# Current checkpoint — Chiikawa pilot published with permission, 2026-10-12
+
+User explicitly authorized publication for their playtest. Frontend PR28 merged to pilot-audio-readable-retro as8be7c77d166b6ed8bd6b2d8e7e78a0c8f270e5ff; Pages38170960518 success. Runtime20261012-chii1. Backend PR15 merged to main as636ac2d2013ff8a7f45daf237c9a6a13d9805258; Deploy38170890200 success including51 tests, Worker8e5a629c-ed5b-4d8e-9a86-def54ae6feeb. Health endpoint OK. All25 changed public HTML/runtime files match the code candidate; docs/public-chiikawa-pilot-20261012.json. Frontend main remains6343213bc8f904a43c02319fc9b421ce2dd4dc0f. Public URL https://mukkii-game.github.io/emmichy/ opened for the user; start-choice may show their previously saved conversation (not a new generated test).
+
+No additional game LLM calls or new generation after earlier429; human review is next. The public candidate includes the later locally-tested prompt/guard/relations; generation quality has not been rechecked live. One read-only release verifier used explicitly Luna medium,25 GET comparisons, no extra virtual player. This follow-up records publication only. Recommend Sol6.1 high for routine follow-up; the user changes this same chat's model setting. Gemini/Claude collection is useful now as bounded source-backed collection followed by independent checking; research brief ready, neither contacted automatically. No new Work/Relay/service.
+
+---
+
+# Previous checkpoint — playable Chiikawa candidate, 2026-10-12
 
 Review candidates: frontend7d975cbf1430d7d21feb01476dc85dd43589b3db in draft PR28 (base pilot-audio-readable-retro); backend7a9df963df168cb43ff4f4ea2621367d0106b629 in draft PR15 (base main). Both branches pushed, neither merged. This follow-up only records candidate identities; runtime unchanged.
 

@@ -158,7 +158,7 @@ $('talk').addEventListener('submit',async e=>{
  result.state.playerMemory=player.memory;
  if(player.name!==undefined)result.state.name=player.name;
  const recall=canRemember?playerRecall(player.memory,raw):null;
- const creation=canRemember?playerCreationReply(player.memory,state.playerMemory):null;
+ const creation=canRemember?playerCreationReply(player.memory,state.playerMemory,raw):null;
  before.playerMemory=player.memory;
  if(player.reply||recall){result.text=player.reply||recall;result.kind='memory';result.state.history.at(-1).text=result.text;}
  result.state.dialogue=isRestart?[]:substantiveHistory(before);

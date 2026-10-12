@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {cleanPlayerMemory,learnPlayerMessage,answerPlayerQuestion,notePlayerQuestion,choosePlayerQuestion,playerRecall,nameQuestion,questions} from '../src/player-memory.js';
+import {cleanPlayerMemory,learnPlayerMessage,answerPlayerQuestion,notePlayerQuestion,choosePlayerQuestion,playerRecall,playerCreationReply,nameQuestion,questions} from '../src/player-memory.js';
 import {learnerReply} from '../src/japanese-learner.js';
 import {profileReply} from '../src/profile.js';
 import {directReply} from '../src/dialogue-director.js';
@@ -45,6 +45,8 @@ test('a question about a creation cannot replace its remembered name',()=>{
  const asked=learnPlayerMessage(initial,'前に作った能力覚えてる？');
  assert.deepEqual(asked.creations,['砂糖シールド']);
  assert.match(playerRecall(asked,'前に作った能力覚えてる？'),/砂糖シールド/);
+ assert.match(playerCreationReply(initial,initial,'僕の念能力は砂糖シールド'),/前にも教えてくれた/);
+ assert.equal(playerCreationReply(initial,initial,'砂糖シールドって何？'),null);
 });
 
 test('a changed preference removes the conflicting remembered like',()=>{

@@ -20,11 +20,12 @@
   <meta name="twitter:title" content="えみちぃ / Emmichy — レトロ会話ゲーム">
   <meta name="twitter:description" content="ちいかわと日本のオタク文化が大好きなえみちぃと、約5分のおしゃべり。">
   <meta name="twitter:image" content="https://mukkii-game.github.io/emmichy/assets/emmichy-nordic-muted-bust-20261008.png">
-  <link rel="stylesheet" href="style.css?v=20261012-mobile1">
+  <link rel="stylesheet" href="style.css?v=20261012-mobile2">
 </head>
 <body>
   <main>
     <header><span class="brand">EMMICHY / PERSONAL COMPUTER SOFTWARE</span><span id="disk">● DISK READY</span></header>
+    <button id="settings-toggle" class="mobile-menu-toggle" type="button" aria-label="設定" aria-controls="settings-panel" aria-expanded="false">⚙</button>
     <div class="screen-wrap">
       <div class="portrait-panel"><canvas id="screen" width="496" height="672" tabindex="0" aria-label="えみちぃのポートレート"></canvas><div class="game-logo">EMMICHY</div><div class="game-tagline">THE ALMOST CLEVER GAME</div></div>
       <div class="conversation-panel"><div class="terminal-heading">EMMICHY / CONVERSATION</div><div id="conversation" role="log" aria-label="カタカナの会話履歴"><p id="live-reply" class="message enny" aria-live="off" hidden><span class="speaker">EMMICHY &gt;</span><span id="live-body"></span></p></div><div id="terminal-note">アタシ エミチィ　ナンデモ ハナシテネ</div></div>
@@ -38,6 +39,8 @@
       <button id="send" type="submit">RETURN ↵</button>
     </form>
     </div>
+    <div id="settings-panel" aria-label="設定と遊び方">
+    <div class="mobile-settings-heading"><strong>設定</strong><button id="settings-close" type="button">閉じる</button></div>
     <p id="input-hint" class="small"><span class="desktop-hint">カタカナに直さず、ふつうの漢字・かな交じりで書いてね。</span><span class="mobile-hint">ふつうの漢字・かな交じりでどうぞ。</span></p>
     <div class="toolbar">
       <span id="status">日本語入力OK / ENTER で送信</span>
@@ -55,13 +58,13 @@
     </section>
     <p class="small privacy-hint">会話は AI サービス(Groq / Google / Cloudflare)に送られます。個人情報は入力しないでください。</p>
     <details class="readable-log"><summary>会話を読みやすく表示</summary><div id="transcript" role="log" aria-live="polite"></div></details>
+    </div>
     <footer><span>THE ALMOST CLEVER GAME</span><span>EMMICHY / PILOT</span></footer>
   </main>
   <script src="assets/vendor/kuromoji.js"></script>
-  <script type="module" src="src/app.js?v=20261012-mobile1"></script>
+  <script type="module" src="src/app.js?v=20261012-mobile2"></script>
 </body>
 </html>
-
 
 
 

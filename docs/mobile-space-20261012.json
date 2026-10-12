@@ -1,0 +1,150 @@
+{
+  "mode": "real browser viewport checks, offline; smaller viewport simulates reduced space, not a physical keyboard test",
+  "checks": [
+    {
+      "conversation": {
+        "bottom": 501.1428680419922,
+        "height": 185.2232208251953,
+        "top": 315.9196472167969,
+        "width": 294.8571472167969
+      },
+      "fontSize": "22px",
+      "form": {
+        "bottom": 562.0000114440918,
+        "height": 50.28571701049805,
+        "top": 511.71429443359375,
+        "width": 308
+      },
+      "horizontalOverflow": false,
+      "pageOverflow": false,
+      "portrait": {
+        "bottom": 307.9196653366089,
+        "height": 295.3482360839844,
+        "top": 12.571429252624512,
+        "width": 218.00001525878903
+      },
+      "settingsVisible": false,
+      "viewport": {
+        "height": 568,
+        "width": 320
+      },
+      "visibleHeight": "568px"
+    },
+    {
+      "conversation": {
+        "bottom": 777.1429138183594,
+        "height": 317.70538330078125,
+        "top": 459.4375305175781,
+        "width": 365.1428833007813
+      },
+      "fontSize": "22px",
+      "form": {
+        "bottom": 838.0000114440918,
+        "height": 50.28571701049805,
+        "top": 787.7142944335938,
+        "width": 378.2857360839844
+      },
+      "horizontalOverflow": false,
+      "pageOverflow": false,
+      "portrait": {
+        "bottom": 451.437518119812,
+        "height": 438.8660888671875,
+        "top": 12.571429252624512,
+        "width": 323.9285888671875
+      },
+      "settingsVisible": false,
+      "viewport": {
+        "height": 844,
+        "width": 390
+      },
+      "visibleHeight": "844px"
+    },
+    {
+      "conversation": {
+        "bottom": 865.1428833007812,
+        "height": 359.9464416503906,
+        "top": 505.1964416503906,
+        "width": 405.1428833007813
+      },
+      "fontSize": "22px",
+      "form": {
+        "bottom": 926.0000114440918,
+        "height": 50.28571701049805,
+        "top": 875.7142944335938,
+        "width": 418.2857360839844
+      },
+      "horizontalOverflow": false,
+      "pageOverflow": false,
+      "portrait": {
+        "bottom": 497.19645977020264,
+        "height": 484.6250305175781,
+        "top": 12.571429252624512,
+        "width": 357.70538330078125
+      },
+      "settingsVisible": false,
+      "viewport": {
+        "height": 932,
+        "width": 430
+      },
+      "visibleHeight": "932px"
+    },
+    {
+      "conversation": {
+        "bottom": 433.1428680419922,
+        "height": 152.5803680419922,
+        "top": 280.5625,
+        "width": 365.1428833007813
+      },
+      "fontSize": "22px",
+      "form": {
+        "bottom": 494.0000114440918,
+        "height": 50.28571701049805,
+        "top": 443.71429443359375,
+        "width": 378.2857360839844
+      },
+      "horizontalOverflow": false,
+      "pageOverflow": false,
+      "portrait": {
+        "bottom": 272.562518119812,
+        "height": 259.9910888671875,
+        "top": 12.571429252624512,
+        "width": 191.90179443359375
+      },
+      "settingsVisible": false,
+      "viewport": {
+        "height": 500,
+        "width": 390
+      },
+      "visibleHeight": "500px"
+    },
+    {
+      "conversation": {
+        "bottom": 593.2053833007812,
+        "height": 464.8660888671875,
+        "top": 128.33929443359375,
+        "width": 661.357177734375
+      },
+      "fontSize": "24px",
+      "form": {
+        "bottom": 807.705394744873,
+        "height": 58.28571701049805,
+        "top": 749.419677734375,
+        "width": 1120
+      },
+      "horizontalOverflow": false,
+      "pageOverflow": true,
+      "portrait": {
+        "bottom": 606.8572006225586,
+        "height": 522.2857666015625,
+        "top": 84.5714340209961,
+        "width": 385.5000305175781
+      },
+      "settingsVisible": true,
+      "viewport": {
+        "height": 900,
+        "width": 1280
+      },
+      "visibleHeight": "900px"
+    }
+  ]
+}

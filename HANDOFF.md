@@ -1,4 +1,16 @@
-# Current checkpoint — larger phone conversation candidate, 2026-10-12
+# Current checkpoint — player-memory completion audit, 2026-10-12
+
+GitHub pilot-audio-readable-retro is7a07d6d45ea268e12a793f0c5b7f88b52c6a047f (PR31 research documents), with PR30 mobile conversation-space already merged asd01172ac; runtime20261012-mobile2. Backend main remains636ac2d2013ff8a7f45daf237c9a6a13d9805258. Earlier unpublished/public-approval wording below is historical and superseded: user authorized immediate tested pilot fixes on2026-10-12. Frontend main and paid services remain outside that authorization.
+
+Public code already stores basic name/likes/conversation in the browser and supplies bounded name/likes to the LLM. Expanded player-memory is currently uncommitted implementation oncodex/player-memory-20261012: explicit creations/preferences, limited question activity, nickname elicitation, previous reply records and unverified knowledge suggestions. Local suite179/179 passes. It is not yet publicly available; new memory fields are not yet integrated into the backend prompt. No server persistence binding or cross-device identity exists; all-player suggestion storage/review is not implemented. Do not present those as completed.
+
+Gemini300/Claude156 submissions received and preserved in GitHub branch; separate follow-ups are underway according to the user. Gemini revision has appeared withSTATUS reporting30 corrected/172 held/98 retained; Claude-scenes.csv has appeared but final receipt/review remains pending. Do not overwrite collaborators' files or automatically turn their primary-confirmation labels into accepted canon. Codex review isresearch/chiikawa/codex-review.md.
+
+Next priorities: finish and publish expanded local memory/LLM use; integrate source-checked useful Chiikawa facts and relations; verify corrections, focus, pacing, draft interruption and repeated-play variety; then a small live check stopping on429 and the user's phone/PC playtest. Server persistence and reviewed shared knowledge are a separate enhancement requiring a verified free path; browser memory suffices for the pilot milestone. No new game LLM calls in this audit. User-facing completion means a complete five-minute conversation plus a repeat visit works naturally, not a database row quota or automated-test count alone.
+
+---
+
+# Previous checkpoint — larger phone conversation candidate, 2026-10-12
 
 User reports frequent scrolling after portrait enlargement. Branch codex/mobile-conversation-space-20261012, entry/style20261012-mobile2, not published. Phone portrait and22px font retained; main fills available viewport, all remaining space goes to chat. Controls/descriptions move into a top-right settings panel; consecutive assistant labels omitted. visualViewport resize keeps form inside reduced visible space. Desktop retains normal controls/layout. Browser checks320/390/430 portrait,390×500 reduced-height simulation,1280 desktop.390×844 chat318px vs194px, portrait324px unchanged. Settings close/open, help, mute, Escape and offline1 send verified.171 tests pass, zero LLM/subagent. Real device keyboard remains unverified; report docs/mobile-space-20261012.md +JSON/screenshots.
 

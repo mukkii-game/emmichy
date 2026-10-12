@@ -189,7 +189,8 @@ test('screen remains playable after dictionary failure and IME composition does 
   let birthplace=JSON.parse(storage.get('enny-memory-v1')).history;const birthplaceAt=birthplace.findLastIndex(h=>h.role==='user');
   assert.match(birthplace[birthplaceAt+1].text,/スウェーデン.*アタシの国/);assert.match(birthplace[birthplaceAt+2].text,/ヨーテボリ.*生まれ育った/);
   time+=5000;await idleTick();time+=10000;await idleTick();
-  birthplace=JSON.parse(storage.get('enny-memory-v1')).history;assert.match(birthplace.at(-1).text,/アタシ|弟|ノート|髪/);assert.doesNotMatch(birthplace.at(-1).text,/急がなくて|別の話/);
+  // A personal wish about her favourite work also counts as a short self-aside.
+  birthplace=JSON.parse(storage.get('enny-memory-v1')).history;assert.match(birthplace.at(-1).text,/アタシ|弟|ノート|髪|したく|読み返したく/);assert.doesNotMatch(birthplace.at(-1).text,/急がなくて|別の話/);
   entry.value='バイバイ';await talk.emit('submit');
   assert.equal(farewellPauses.length,2,'manual goodbye uses the same two-beat ending');
   const manual=JSON.parse(storage.get('enny-memory-v1'));assert.equal(manual.ended,true);

@@ -1,4 +1,30 @@
-# Current checkpoint — larger phone conversation candidate, 2026-10-12
+# Current checkpoint — player memory and reviewed research ready, 2026-10-12
+
+Frontend candidate iscodex/player-memory-20261012, PR32, runtime20261012-memory1;184 local tests pass. Expanded browser memory and one short question activity are implemented; creations/preferences/answers and recent delivered lines reach the LLM with ownership boundaries. Starting over asks the name again and retains preferences/creations. Questions do not become creation names, activity answers avoid generic fandom replacement, unrelated soft-name reactions are suppressed on creation messages, and an ended play cannot be reopened by a memory lookup. Before/after actual-app offline replays plus the ended-session regression are stored in docs. Real browser390×844 verifies the basic mobile controls, first-meeting opening and stored creation response; physical phone keyboard remains unverified.
+
+Backend PR16 candidate74cdab2e51f18e966e52c8964a5090b1888acdb3 merged as986c51897cc3de717a737eec4a02fc41c56b5f45. Deploy38212433032 succeeded including52 tests. No new game LLM generation after earlier429; this candidate's generated-reply quality is not live-verified. Server persistence/cross-device identity/shared knowledge accumulation remain unimplemented, not claimed complete. Frontend publication will follow its final code commit/checks under the user's immediate pilot-fix authorization.
+
+Follow-up research completed and preserved on GitHub: Gemini revised300 with30 corrections/172 held/98 retained (primary-confirmed self-report97); Claude30 scenes plus20 overlap checks,5 correction points. Codex independently checked8 official-source facts/relations and loaded only that subset;2 plot-related notes stay out of default associations. X manga15 and held records are not canon. See docs/player-memory-20261012.md and research/chiikawa/codex-review.md.
+
+User authorized Claude preparation through GitHub Issues with@claude. Issue34 ran but stopped at0 results because git fetch/WebFetch were unapproved. PR36 provides narrow commands/domains for the existing Claude action; it targetsmain's workflow and remains unmerged. The current frontendmain has been updated externally to78c6fc4d1ae07a7b92f6170c3886d5528eecdeb5 for that action; do not overwrite it or claim the oldmain hash is current. This session remains sole Director/Implementer/Tester; no Relay/new Work/paid service.
+
+Next: complete frontend pilot publication/source matching, ask for human play of name→favourite→creation→restart→recall, then review feedback. Handle PR36 separately before retryingIssue34. Free-model comparison is scoped in docs/free-llm-comparison-20261012.md but has not been run.
+
+---
+
+# Previous checkpoint — player-memory completion audit, 2026-10-12
+
+GitHub pilot-audio-readable-retro is7a07d6d45ea268e12a793f0c5b7f88b52c6a047f (PR31 research documents), with PR30 mobile conversation-space already merged asd01172ac; runtime20261012-mobile2. Backend main remains636ac2d2013ff8a7f45daf237c9a6a13d9805258. Earlier unpublished/public-approval wording below is historical and superseded: user authorized immediate tested pilot fixes on2026-10-12. Frontend main and paid services remain outside that authorization.
+
+Public code already stores basic name/likes/conversation in the browser and supplies bounded name/likes to the LLM. Expanded player-memory is a work-in-progress implementation preserved oncodex/player-memory-20261012: explicit creations/preferences, limited question activity, nickname elicitation, previous reply records and unverified knowledge suggestions. Local suite179/179 passes. It is not yet publicly available; new memory fields are not yet integrated into the backend prompt. No server persistence binding or cross-device identity exists; all-player suggestion storage/review is not implemented. Do not present those as completed.
+
+Gemini300/Claude156 submissions received and preserved in GitHub branch; separate follow-ups are underway according to the user. Gemini revision has appeared withSTATUS reporting30 corrected/172 held/98 retained; Claude-scenes.csv has appeared but final receipt/review remains pending. Do not overwrite collaborators' files or automatically turn their primary-confirmation labels into accepted canon. Codex review isresearch/chiikawa/codex-review.md.
+
+Next priorities: finish and publish expanded local memory/LLM use; integrate source-checked useful Chiikawa facts and relations; verify corrections, focus, pacing, draft interruption and repeated-play variety; then a small live check stopping on429 and the user's phone/PC playtest. Server persistence and reviewed shared knowledge are a separate enhancement requiring a verified free path; browser memory suffices for the pilot milestone. No new game LLM calls in this audit. User-facing completion means a complete five-minute conversation plus a repeat visit works naturally, not a database row quota or automated-test count alone.
+
+---
+
+# Previous checkpoint — larger phone conversation candidate, 2026-10-12
 
 User reports frequent scrolling after portrait enlargement. Branch codex/mobile-conversation-space-20261012, entry/style20261012-mobile2, not published. Phone portrait and22px font retained; main fills available viewport, all remaining space goes to chat. Controls/descriptions move into a top-right settings panel; consecutive assistant labels omitted. visualViewport resize keeps form inside reduced visible space. Desktop retains normal controls/layout. Browser checks320/390/430 portrait,390×500 reduced-height simulation,1280 desktop.390×844 chat318px vs194px, portrait324px unchanged. Settings close/open, help, mute, Escape and offline1 send verified.171 tests pass, zero LLM/subagent. Real device keyboard remains unverified; report docs/mobile-space-20261012.md +JSON/screenshots.
 

@@ -1,10 +1,11 @@
 // Original Emmichy dialogue logic. No original Emmy code or dialogue tables used.
-import {cleanKnowledge} from './fandom.js?v=20261012-chii1';
-import {cleanGap} from './gap.js?v=20261012-chii1';
-import {cleanRepertoire} from './repertoire.js?v=20261012-chii1';
-import {cleanInterests} from './balance.js?v=20261012-chii1';
-import {cleanConversation,rememberConversation} from './conversation.js?v=20261012-chii1';
-import {substantiveHistory} from './dialogue-history.js?v=20261012-chii1';
+import {cleanPlayerMemory} from './player-memory.js?v=20261012-memory1';
+import {cleanKnowledge} from './fandom.js?v=20261012-memory1';
+import {cleanGap} from './gap.js?v=20261012-memory1';
+import {cleanRepertoire} from './repertoire.js?v=20261012-memory1';
+import {cleanInterests} from './balance.js?v=20261012-memory1';
+import {cleanConversation,rememberConversation} from './conversation.js?v=20261012-memory1';
+import {substantiveHistory} from './dialogue-history.js?v=20261012-memory1';
 const readings = { '知らない':'シラナイ','知ってる':'シッテル','以外':'イガイ','晴れ':'ハレ', '本当':'ホントウ','賢い':'カシコイ','頭':'アタマ','名前':'ナマエ','覚えて':'オボエテ','忘れて':'ワスレテ','好き':'スキ','嫌い':'キライ','可愛い':'カワイイ','綺麗':'キレイ','天気':'テンキ','今日':'キョウ','明日':'アシタ','疲れた':'ツカレタ','寂しい':'サミシイ','仕事':'シゴト','猫':'ネコ','犬':'イヌ','私':'ワタシ','僕':'ボク','君':'キミ','嘘':'ウソ','人間':'ニンゲン','機械':'キカイ','元気':'ゲンキ','趣味':'シュミ','秘密':'ヒミツ','未来':'ミライ','世界':'セカイ','宇宙':'ウチュウ','何':'ナニ','教えて':'オシエテ','眠い':'ネムイ','馬鹿':'バカ','無能':'ムノウ','一人':'ヒトリ','歳':'サイ','年齢':'ネンレイ','愛':'アイ' };
 export function normalize(raw) {
   let s = String(raw).normalize('NFKC');
@@ -16,12 +17,13 @@ for(let i=0xff61;i<=0xff9f;i++) { const c=String.fromCharCode(i); half.set(c.nor
 export function displayText(raw) {
   return Array.from(normalize(raw).normalize('NFD')).map(c=> c==='\u3099'?'ﾞ':c==='\u309a'?'ﾟ':half.get(c) ?? (/^[\x20-\x7e]$/.test(c)?c:'?')).join('');
 }
-export function freshState() { return {version:1,turn:0,name:'',likes:{},last:'',repeat:0,praise:0,clues:0,topic:'',fan:{worry:0,excitement:0,lastTopic:''},ended:false,history:[]}; }
+export function freshState() { return {version:1,turn:0,name:'',likes:{},playerMemory:cleanPlayerMemory(null),last:'',repeat:0,praise:0,clues:0,topic:'',fan:{worry:0,excitement:0,lastTopic:''},ended:false,history:[]}; }
 export function restoreState(value) {
   const s=freshState();
   if(!value || value.version!==1) return s;
   for(const k of ['turn','repeat','praise','clues']) if(Number.isSafeInteger(value[k]) && value[k]>=0) s[k]=Math.min(value[k],100000);
-  if(typeof value.name==='string') s.name=normalize(value.name).slice(0,16);
+  if(typeof value.name==='string') s.name=normalize(value.name).slice(0,20);
+  s.playerMemory=cleanPlayerMemory(value.playerMemory||{nickname:value.name,likes:Object.entries(value.likes||{}).filter(([,v])=>v===1).map(([k])=>k)});
   if(typeof value.last==='string') s.last=value.last.slice(0,120);
   s.ended=value.ended===true;
   if(typeof value.topic==='string')s.topic=value.topic.slice(0,24);
@@ -103,4 +105,3 @@ export function respond(raw,state) {
   s.history.push({role:'user',text:String(raw).trim().slice(0,120)},{role:'enny',text});s.history=s.history.slice(-40);
   return {state:s,text,kind,mood};
 }
-

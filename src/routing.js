@@ -1,14 +1,15 @@
-import {topicDeflection} from './deflection.js?v=20261012-chii1';
-import {everydayReply} from './everyday.js?v=20261012-chii1';
-import {contextualReply} from './context.js?v=20261012-chii1';
-import {curatedReply} from './curated.js?v=20261012-chii1';
-import {balanceRoute} from './balance.js?v=20261012-chii1';
-import {profileReply} from './profile.js?v=20261012-chii1';
-import {recognizeName,exactNames} from './names.js?v=20261012-chii1';
-import {chiikawaNotes} from './chiikawa-db.js?v=20261012-chii1';
-import {unwantedFanRedirect} from './chat.js?v=20261012-chii1';
-import {placeReply} from './places.js?v=20261012-chii1';
-import {complimentReaction} from './profile.js?v=20261012-chii1';
+import {topicDeflection} from './deflection.js?v=20261012-memory1';
+import {everydayReply} from './everyday.js?v=20261012-memory1';
+import {contextualReply} from './context.js?v=20261012-memory1';
+import {curatedReply} from './curated.js?v=20261012-memory1';
+import {balanceRoute} from './balance.js?v=20261012-memory1';
+import {profileReply} from './profile.js?v=20261012-memory1';
+import {recognizeName,exactNames} from './names.js?v=20261012-memory1';
+import {chiikawaNotes} from './chiikawa-db.js?v=20261012-memory1';
+import {unwantedFanRedirect} from './chat.js?v=20261012-memory1';
+import {placeReply} from './places.js?v=20261012-memory1';
+import {complimentReaction} from './profile.js?v=20261012-memory1';
+import {learnerReply} from './japanese-learner.js?v=20261012-memory1';
 
 function chiikawaReply(raw,state){
  if(/つらい|苦しい|病気|事故|亡く|死に|相談|やめ|以外|苦手|嫌い/.test(raw)||unwantedFanRedirect('ちいかわ',raw,state))return null;
@@ -17,7 +18,7 @@ function chiikawaReply(raw,state){
  const question=/[?？]|何|誰|担当|教えて|どう|なぜ|いつ|どこ|どんな|説明/.test(raw);
  if(question&&exactNames(raw,state).some(n=>n.work!=='chiikawa'))return null;
  // Only the closed fact covered by this note can bypass AI for a question.
- const covered={ナガノ:/作者|作詞|誰|何して/,トクマルシューゴ:/音楽|担当|作曲|編曲|誰|何して/,ひとりごつ:/誰|歌|作曲|作詞|曲/,チャルメラ:/チャリメラ|言い間違|何/,オリオンビール:/コラボ/,チータラ:/食べ|くりまんじゅう/,むちゃうまヨーグルト:/家|おうち/};
+ const covered={ヤハ:/誰|口癖|掛け声|曲|歌|OP|オープニング/,ナガノ:/作者|作詞|誰|何して/,トクマルシューゴ:/音楽|担当|作曲|編曲|誰|何して/,ひとりごつ:/誰|歌|作曲|作詞|曲/,チャルメラ:/チャリメラ|言い間違|何/,オリオンビール:/コラボ/,チータラ:/食べ|くりまんじゅう/,むちゃうまヨーグルト:/家|おうち/};
  if(question&&(!covered[name.name]?.test(raw)||/最新|結末|なぜ|どうして|比較|違い|いつ|どこ|何年/.test(raw)))return null;
  const text=question?`${note.fact} ${note.questionReaction||note.reaction}`:note.reaction;
  if(!question&&(state.history||[]).slice(-8).some(h=>h.role==='enny'&&h.text===text))return null;
@@ -36,6 +37,7 @@ export function preparedReply(raw,state,session,{gap=null,culture=null,repertoir
  if(named?.decline&&named.work==='chiikawa'&&!/つらい|苦しい|相談|病気|いじめ|亡く|死に|事故/.test(raw)&&!exactNames(raw,state).some(n=>n.work!=='chiikawa'))return {topic:'fandom-decline',text:'うん、別の話にしよう。'};
  const chii=chiikawaReply(raw,state);if(chii)return chii;
  const place=placeReply(named,raw,state);if(place)return place;
+ const learner=learnerReply(raw);if(learner)return learner;
  const legacy=contextualReply(raw,state)||curatedReply(raw,state);
  const daily=everydayReply(raw,state);
  const prepared=daily|| (legacy?.topic==='conversation-move'?legacy:

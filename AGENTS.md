@@ -15,6 +15,8 @@ The user designated the current Emmichy development session as the sole Director
 
 ## Durable docs
 
+2026-10-12追加：Claudeへ調査・下ごしらえを依頼する場合はmukkii-game/emmichyにIssueを作り、本文に@claudeと完結した依頼書を書く。成果はPRとIssueコメントで受領し、このCodexセッションがPR・根拠・差分を確認して取り込む。コードで検証できる修正を外部調査へ回さず、対象・件数・停止条件・担当ファイルを限定する。別Directorや自動Relayを再開せず、有料サービス追加の許可へ拡大しない。
+
 ユーザーが2026-10-10に手動の仮想プレイヤー試遊を許可した。サブエージェントはこのセッション内の限定試遊に使い、Director・実装・最終判断はここで行う。自動Relayや別Workは再開しない。トークン節約希望も受けたため、既知の問題は機械的に再現し、新しい主観評価だけ短い設定を渡した1〜2人・各6〜8送信を目安に使う。必要な時だけ追加し、報告は実例と重要3点に絞る。実LLMと模擬試遊、人間評価を区別し、使ったモデルの指定有無を説明する。
 
 - `SPEC.md`: stable game direction/spec
@@ -25,6 +27,8 @@ The user designated the current Emmichy development session as the sole Director
 Do not use these as a mailbox.
 
 ## Safety / scope
+
+2026-10-12の追加指示：ユーザーは「修正版への反映は、以後、すぐに行うように命令します」と指定した。検証を完了したEmmichyの修正は確認待ちを挟まず、既存の試遊用pilotブランチと必要な中継へ反映する。frontend mainへの統合や有料サービス追加の許可へ拡大しない。各公開の候補と検証結果を記録する。
 
 - Preserve existing work; inspect before overwriting.
 - Do not publish, merge, or deploy to main/public/production unless explicitly authorized.

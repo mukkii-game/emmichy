@@ -20,7 +20,7 @@
   <meta name="twitter:title" content="えみちぃ / Emmichy — レトロ会話ゲーム">
   <meta name="twitter:description" content="ちいかわと日本のオタク文化が大好きなえみちぃと、約5分のおしゃべり。">
   <meta name="twitter:image" content="https://mukkii-game.github.io/emmichy/assets/emmichy-nordic-muted-bust-20261008.png">
-  <link rel="stylesheet" href="style.css?v=20261012-mobile2">
+  <link rel="stylesheet" href="style.css?v=20261012-memory1">
 </head>
 <body>
   <main>
@@ -31,10 +31,10 @@
       <div class="conversation-panel"><div class="terminal-heading">EMMICHY / CONVERSATION</div><div id="conversation" role="log" aria-label="カタカナの会話履歴"><p id="live-reply" class="message enny" aria-live="off" hidden><span class="speaker">EMMICHY &gt;</span><span id="live-body"></span></p></div><div id="terminal-note">アタシ エミチィ　ナンデモ ハナシテネ</div></div>
     </div>
     <div class="input-slot">
-    <section id="start-choice" aria-label="会話の始め方" hidden><p>おかえり。会話をどう始める？</p><div><button id="continue" type="button">続きから</button><button id="new-chat" type="button">最初から</button></div><p class="small">最初から：今回の会話をやり直します。覚えた名前・好みは残ります。</p></section>
+    <section id="start-choice" aria-label="会話の始め方" hidden><p>おかえり。会話をどう始める？</p><div><button id="continue" type="button">続きから</button><button id="new-chat" type="button">最初から</button></div><p class="small">最初から：呼び名を聞き直します。好みと作ったものは残ります。</p></section>
     <form id="talk" autocomplete="off">
       <label for="entry">漢字・ひらがな OK <span>›</span></label>
-      <input id="entry" maxlength="120" placeholder="ねえ、ちいかわって知ってる？" aria-label="Emmichyに話しかける" aria-describedby="input-hint" spellcheck="false">
+      <input id="entry" maxlength="120" placeholder="漢字・かな交じりでどうぞ" aria-label="Emmichyに話しかける" aria-describedby="input-hint" spellcheck="false">
       <span id="remaining-time" role="timer" aria-label="残り時間" aria-live="off">5:00</span>
       <button id="send" type="submit">RETURN ↵</button>
     </form>
@@ -57,15 +57,15 @@
       <p class="small">RETRO PERSONAL COMPUTER STYLE / 非公式パロディ試作。原作コード・原作画像・原作音源は不使用。</p>
     </section>
     <p class="small privacy-hint">会話は AI サービス(Groq / Google / Cloudflare)に送られます。個人情報は入力しないでください。</p>
+    <p class="small privacy-hint">好みや教えてくれた創作は、このブラウザに保存します。「最初から」は名前を聞き直し、好みや創作は残します。</p>
     <details class="readable-log"><summary>会話を読みやすく表示</summary><div id="transcript" role="log" aria-live="polite"></div></details>
     </div>
     <footer><span>THE ALMOST CLEVER GAME</span><span>EMMICHY / PILOT</span></footer>
   </main>
   <script src="assets/vendor/kuromoji.js"></script>
-  <script type="module" src="src/app.js?v=20261012-mobile2"></script>
+  <script type="module" src="src/app.js?v=20261012-memory1"></script>
 </body>
 </html>
-
 
 
 

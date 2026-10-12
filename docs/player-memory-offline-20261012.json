@@ -1,0 +1,869 @@
+{
+  "mode": "actual app; offline rule/bank; simulated DOM and virtual pauses; compressed typing animation; no live LLM or audio",
+  "actions": [
+    {
+      "action": {
+        "type": "start"
+      },
+      "result": {
+        "atSeconds": 0,
+        "messages": [
+          {
+            "atMs": 0,
+            "role": "enny",
+            "text": "はじめまして！",
+            "screen": "ハジメマシテ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 15
+      },
+      "result": {
+        "atSeconds": 15,
+        "messages": [
+          {
+            "atMs": 1500,
+            "role": "enny",
+            "text": "アタシ、エミチィ。日本語を勉強してるの。ちいかわが大好き！",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "atMs": 3000,
+            "role": "enny",
+            "text": "あなた、なんて呼べばいい？ ニックネームでいいよ。",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "atMs": 13000,
+            "role": "enny",
+            "text": "好きなところを話すと、またちいかわを読み返したくなっちゃう。",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "名前はマッキーです"
+      },
+      "result": {
+        "atSeconds": 15,
+        "messages": [
+          {
+            "atMs": 15000,
+            "role": "user",
+            "text": "名前はマッキーです",
+            "screen": "ナマエ ハ マッキーデス"
+          },
+          {
+            "atMs": 15000,
+            "role": "enny",
+            "text": "マッキーって呼ぶね。",
+            "screen": "マッキーッテ ヨブネ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 15
+      },
+      "result": {
+        "atSeconds": 30,
+        "messages": [
+          {
+            "atMs": 19000,
+            "role": "enny",
+            "text": "覚えた!",
+            "screen": "オボエタ!"
+          },
+          {
+            "atMs": 24000,
+            "role": "enny",
+            "text": "こうして話せて、嬉しいよ。",
+            "screen": "コウシテ ハナセテ、 ウレシイヨ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "ハチワレが好き"
+      },
+      "result": {
+        "atSeconds": 30,
+        "messages": [
+          {
+            "atMs": 30000,
+            "role": "user",
+            "text": "ハチワレが好き",
+            "screen": "ハチワレ ガスキ"
+          },
+          {
+            "atMs": 30000,
+            "role": "enny",
+            "text": "ハチワレ、スキ!?",
+            "screen": "ハチワレ 、スキ!?"
+          },
+          {
+            "atMs": 30000,
+            "role": "enny",
+            "text": "ハチワレの話、うれしい!",
+            "screen": "ハチワレ ノ ハナシ、 ウレシイ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 2
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 15
+      },
+      "result": {
+        "atSeconds": 45,
+        "messages": [
+          {
+            "atMs": 32000,
+            "role": "enny",
+            "text": "ハチワレのご飯、少し失敗しても一緒に食べたい。",
+            "screen": "ハチワレ ノ ゴハン、 スコシ シッパイ シテ モ イッショ ニ タベタイ。"
+          },
+          {
+            "atMs": 34000,
+            "role": "enny",
+            "text": "ハチワレが料理してくれたら、おかわりする速さにだけは自信あるよ。",
+            "screen": "ハチワレ ガ リョウリ シテ クレタラ、 オカワリ スル ハヤサ ニ ダケ ハ ジシン アルヨ。"
+          },
+          {
+            "atMs": 40000,
+            "role": "enny",
+            "text": "ハチワレ、ちいかわ、うさぎ、シーサーなら、誰がアタシに一番似てると思う？ 一人、教えて！",
+            "screen": "ハチワレ 、 チイカワ 、 ウサギ 、 シーサー ナラ、 ダレ ガ アタシ ニ イチバン ニテル ト オモウ? イチニン、 オシエテ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 2
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "うさぎかな"
+      },
+      "result": {
+        "atSeconds": 45,
+        "messages": [
+          {
+            "atMs": 45000,
+            "role": "user",
+            "text": "うさぎかな",
+            "screen": "ウサギ カナ"
+          },
+          {
+            "atMs": 45000,
+            "role": "enny",
+            "text": "ウサギ！",
+            "screen": "ウサギ !"
+          },
+          {
+            "atMs": 45000,
+            "role": "enny",
+            "text": "うさぎの話、うれしい!",
+            "screen": "ウサギ ノ ハナシ、 ウレシイ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 3
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 12
+      },
+      "result": {
+        "atSeconds": 57,
+        "messages": [
+          {
+            "atMs": 47000,
+            "role": "enny",
+            "text": "うさぎの家、気になる。",
+            "screen": "ウサギ ノ イエ、 キ ニ ナル。"
+          },
+          {
+            "atMs": 49000,
+            "role": "enny",
+            "text": "でも案内してくれるかは別の話ね。",
+            "screen": "デモ アンナイ シテ クレル カ ハ ベツ ノ ハナシネ。"
+          },
+          {
+            "atMs": 51000,
+            "role": "enny",
+            "text": "うさぎに住所を聞いても、返事より先に走り出されそう。",
+            "screen": "ウサギ ニ ジュウショ ヲ キイテ モ、 ヘンジ ヨリ サキ ニ ハシリダサレソウ。"
+          },
+          {
+            "atMs": 53000,
+            "role": "enny",
+            "text": "これはアタシの想像!",
+            "screen": "コレ ハ アタシ ノ ソウゾウ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 3
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "僕の念能力は砂糖シールド"
+      },
+      "result": {
+        "atSeconds": 57,
+        "messages": [
+          {
+            "atMs": 57000,
+            "role": "user",
+            "text": "僕の念能力は砂糖シールド",
+            "screen": "ボク ノ ネン ノウリョク ハ サトウ シールド"
+          },
+          {
+            "atMs": 57000,
+            "role": "enny",
+            "text": "ソウナノ ソレデ アナタハ ドウシタイノ?",
+            "screen": "ソウナノ ソレデ アナタハ ドウシタイノ?"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 4
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 12
+      },
+      "result": {
+        "atSeconds": 69,
+        "messages": [
+          {
+            "atMs": 67000,
+            "role": "enny",
+            "text": "アタシ、スウェーデンのヨーテボリの近くで育ったの。",
+            "screen": "アタシ、 スウェーデン ノ ヨーテボリ ノ チカク デ ソダッタノ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 4
+      }
+    },
+    {
+      "action": {
+        "type": "reset"
+      },
+      "result": {
+        "atSeconds": 69,
+        "messages": [
+          {
+            "atMs": 69000,
+            "role": "enny",
+            "text": "はじめまして！",
+            "screen": "ハジメマシテ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 15
+      },
+      "result": {
+        "atSeconds": 84,
+        "messages": [
+          {
+            "atMs": 70500,
+            "role": "enny",
+            "text": "アタシ、エミチィ。日本語を勉強してるの。ちいかわが大好き！",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "atMs": 72000,
+            "role": "enny",
+            "text": "あなた、なんて呼べばいい？ ニックネームでいいよ。",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "atMs": 82000,
+            "role": "enny",
+            "text": "好きなところを話すと、またちいかわを読み返したくなっちゃう。",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "名前はマッキーです"
+      },
+      "result": {
+        "atSeconds": 84,
+        "messages": [
+          {
+            "atMs": 84000,
+            "role": "user",
+            "text": "名前はマッキーです",
+            "screen": "ナマエ ハ マッキーデス"
+          },
+          {
+            "atMs": 84000,
+            "role": "enny",
+            "text": "マッキーって呼ぶね。",
+            "screen": "マッキーッテ ヨブネ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 10
+      },
+      "result": {
+        "atSeconds": 94,
+        "messages": [
+          {
+            "atMs": 88000,
+            "role": "enny",
+            "text": "覚えた!",
+            "screen": "オボエタ!"
+          },
+          {
+            "atMs": 93000,
+            "role": "enny",
+            "text": "こうして話せて、嬉しいよ。",
+            "screen": "コウシテ ハナセテ、 ウレシイヨ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "前に作った能力覚えてる？"
+      },
+      "result": {
+        "atSeconds": 94,
+        "messages": [
+          {
+            "atMs": 94000,
+            "role": "user",
+            "text": "前に作った能力覚えてる？",
+            "screen": "マエ ニ ツクッタ ノウリョク オボエテル?"
+          },
+          {
+            "atMs": 94000,
+            "role": "enny",
+            "text": "前に「覚えてる」って作ってたね。",
+            "screen": "マエ ニ 「 オボエテル 」ッテ ツクッテタネ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 2
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 10
+      },
+      "result": {
+        "atSeconds": 104,
+        "messages": [
+          {
+            "atMs": 98000,
+            "role": "enny",
+            "text": "あなたが考えたものとして、覚えてるよ!",
+            "screen": "アナタ ガ カンガエタ モノ トシテ、 オボエテルヨ!"
+          },
+          {
+            "atMs": 104000,
+            "role": "enny",
+            "text": "ちいかわ、ハチワレ、うさぎ、シーサー。いちばん好きな子、誰？",
+            "screen": "チイカワ 、 ハチワレ 、 ウサギ 、 シーサー 。 イチバン スキナ コ、 ダレ?"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 2
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "日本語勉強してるの？"
+      },
+      "result": {
+        "atSeconds": 104,
+        "messages": [
+          {
+            "atMs": 104000,
+            "role": "user",
+            "text": "日本語勉強してるの？",
+            "screen": "ニホンゴ ベンキョウ シテル ノ?"
+          },
+          {
+            "atMs": 104000,
+            "role": "enny",
+            "text": "うん、日本語を勉強してるよ!",
+            "screen": "ウン、 ニホンゴ ヲ ベンキョウ シテルヨ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 3
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 12
+      },
+      "result": {
+        "atSeconds": 116,
+        "messages": [
+          {
+            "atMs": 108000,
+            "role": "enny",
+            "text": "漫画とアニメ、それからこういう会話で覚えてるの。",
+            "screen": "マンガ ト アニメ、 ソレカラ コウイウ カイワ デ オボエテルノ。"
+          },
+          {
+            "atMs": 113000,
+            "role": "enny",
+            "text": "長い音と小さい「っ」は、まだ難しいの。",
+            "screen": "ナガイ オト ト チイサイ 「ッ 」 ハ、 マダ ムズカシイノ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 3
+      }
+    },
+    {
+      "action": {
+        "type": "draft",
+        "text": "まだ入力中"
+      },
+      "result": {
+        "atSeconds": 116,
+        "messages": [],
+        "draft": "まだ入力中",
+        "finished": false,
+        "turns": 3
+      }
+    },
+    {
+      "action": {
+        "type": "composition",
+        "active": true
+      },
+      "result": {
+        "atSeconds": 116,
+        "messages": [],
+        "draft": "まだ入力中",
+        "finished": false,
+        "turns": 3
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 20
+      },
+      "result": {
+        "atSeconds": 136,
+        "messages": [],
+        "draft": "まだ入力中",
+        "finished": false,
+        "turns": 3
+      }
+    },
+    {
+      "action": {
+        "type": "composition",
+        "active": false
+      },
+      "result": {
+        "atSeconds": 136,
+        "messages": [],
+        "draft": "まだ入力中",
+        "finished": false,
+        "turns": 3
+      }
+    },
+    {
+      "action": {
+        "type": "draft",
+        "text": ""
+      },
+      "result": {
+        "atSeconds": 136,
+        "messages": [],
+        "draft": "",
+        "finished": false,
+        "turns": 3
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 10
+      },
+      "result": {
+        "atSeconds": 146,
+        "messages": [
+          {
+            "atMs": 146000,
+            "role": "enny",
+            "text": "アタシ、スウェーデンのヨーテボリの近くで育ったの。",
+            "screen": "アタシ、 スウェーデン ノ ヨーテボリ ノ チカク デ ソダッタノ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 3
+      }
+    }
+  ],
+  "transcript": [
+    {
+      "atMs": 0,
+      "message": {
+        "role": "enny",
+        "text": "はじめまして！"
+      }
+    },
+    {
+      "atMs": 1500,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、エミチィ。日本語を勉強してるの。ちいかわが大好き！"
+      }
+    },
+    {
+      "atMs": 3000,
+      "message": {
+        "role": "enny",
+        "text": "あなた、なんて呼べばいい？ ニックネームでいいよ。"
+      }
+    },
+    {
+      "atMs": 13000,
+      "message": {
+        "role": "enny",
+        "text": "好きなところを話すと、またちいかわを読み返したくなっちゃう。"
+      }
+    },
+    {
+      "atMs": 15000,
+      "message": {
+        "role": "user",
+        "text": "名前はマッキーです"
+      }
+    },
+    {
+      "atMs": 15000,
+      "message": {
+        "role": "enny",
+        "text": "マッキーって呼ぶね。"
+      }
+    },
+    {
+      "atMs": 19000,
+      "message": {
+        "role": "enny",
+        "text": "覚えた!"
+      }
+    },
+    {
+      "atMs": 24000,
+      "message": {
+        "role": "enny",
+        "text": "こうして話せて、嬉しいよ。"
+      }
+    },
+    {
+      "atMs": 30000,
+      "message": {
+        "role": "user",
+        "text": "ハチワレが好き"
+      }
+    },
+    {
+      "atMs": 30000,
+      "message": {
+        "role": "enny",
+        "text": "ハチワレ、スキ!?"
+      }
+    },
+    {
+      "atMs": 30000,
+      "message": {
+        "role": "enny",
+        "text": "ハチワレの話、うれしい!"
+      }
+    },
+    {
+      "atMs": 32000,
+      "message": {
+        "role": "enny",
+        "text": "ハチワレのご飯、少し失敗しても一緒に食べたい。"
+      }
+    },
+    {
+      "atMs": 34000,
+      "message": {
+        "role": "enny",
+        "text": "ハチワレが料理してくれたら、おかわりする速さにだけは自信あるよ。"
+      }
+    },
+    {
+      "atMs": 40000,
+      "message": {
+        "role": "enny",
+        "text": "ハチワレ、ちいかわ、うさぎ、シーサーなら、誰がアタシに一番似てると思う？ 一人、教えて！"
+      }
+    },
+    {
+      "atMs": 45000,
+      "message": {
+        "role": "user",
+        "text": "うさぎかな"
+      }
+    },
+    {
+      "atMs": 45000,
+      "message": {
+        "role": "enny",
+        "text": "ウサギ！"
+      }
+    },
+    {
+      "atMs": 45000,
+      "message": {
+        "role": "enny",
+        "text": "うさぎの話、うれしい!"
+      }
+    },
+    {
+      "atMs": 47000,
+      "message": {
+        "role": "enny",
+        "text": "うさぎの家、気になる。"
+      }
+    },
+    {
+      "atMs": 49000,
+      "message": {
+        "role": "enny",
+        "text": "でも案内してくれるかは別の話ね。"
+      }
+    },
+    {
+      "atMs": 51000,
+      "message": {
+        "role": "enny",
+        "text": "うさぎに住所を聞いても、返事より先に走り出されそう。"
+      }
+    },
+    {
+      "atMs": 53000,
+      "message": {
+        "role": "enny",
+        "text": "これはアタシの想像!"
+      }
+    },
+    {
+      "atMs": 57000,
+      "message": {
+        "role": "user",
+        "text": "僕の念能力は砂糖シールド"
+      }
+    },
+    {
+      "atMs": 57000,
+      "message": {
+        "role": "enny",
+        "text": "ソウナノ ソレデ アナタハ ドウシタイノ?"
+      }
+    },
+    {
+      "atMs": 67000,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、スウェーデンのヨーテボリの近くで育ったの。"
+      }
+    },
+    {
+      "atMs": 69000,
+      "message": {
+        "role": "enny",
+        "text": "はじめまして！"
+      }
+    },
+    {
+      "atMs": 70500,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、エミチィ。日本語を勉強してるの。ちいかわが大好き！"
+      }
+    },
+    {
+      "atMs": 72000,
+      "message": {
+        "role": "enny",
+        "text": "あなた、なんて呼べばいい？ ニックネームでいいよ。"
+      }
+    },
+    {
+      "atMs": 82000,
+      "message": {
+        "role": "enny",
+        "text": "好きなところを話すと、またちいかわを読み返したくなっちゃう。"
+      }
+    },
+    {
+      "atMs": 84000,
+      "message": {
+        "role": "user",
+        "text": "名前はマッキーです"
+      }
+    },
+    {
+      "atMs": 84000,
+      "message": {
+        "role": "enny",
+        "text": "マッキーって呼ぶね。"
+      }
+    },
+    {
+      "atMs": 88000,
+      "message": {
+        "role": "enny",
+        "text": "覚えた!"
+      }
+    },
+    {
+      "atMs": 93000,
+      "message": {
+        "role": "enny",
+        "text": "こうして話せて、嬉しいよ。"
+      }
+    },
+    {
+      "atMs": 94000,
+      "message": {
+        "role": "user",
+        "text": "前に作った能力覚えてる？"
+      }
+    },
+    {
+      "atMs": 94000,
+      "message": {
+        "role": "enny",
+        "text": "前に「覚えてる」って作ってたね。"
+      }
+    },
+    {
+      "atMs": 98000,
+      "message": {
+        "role": "enny",
+        "text": "あなたが考えたものとして、覚えてるよ!"
+      }
+    },
+    {
+      "atMs": 104000,
+      "message": {
+        "role": "enny",
+        "text": "ちいかわ、ハチワレ、うさぎ、シーサー。いちばん好きな子、誰？"
+      }
+    },
+    {
+      "atMs": 104000,
+      "message": {
+        "role": "user",
+        "text": "日本語勉強してるの？"
+      }
+    },
+    {
+      "atMs": 104000,
+      "message": {
+        "role": "enny",
+        "text": "うん、日本語を勉強してるよ!"
+      }
+    },
+    {
+      "atMs": 108000,
+      "message": {
+        "role": "enny",
+        "text": "漫画とアニメ、それからこういう会話で覚えてるの。"
+      }
+    },
+    {
+      "atMs": 113000,
+      "message": {
+        "role": "enny",
+        "text": "長い音と小さい「っ」は、まだ難しいの。"
+      }
+    },
+    {
+      "atMs": 146000,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、スウェーデンのヨーテボリの近くで育ったの。"
+      }
+    }
+  ]
+}

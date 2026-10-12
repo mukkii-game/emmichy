@@ -4,6 +4,8 @@ Before:ムッキーって呼ぶね。→ムッ キーッテ ヨブネ。 kuromoj
 
 After:ムッキーッテ ヨブネ。 Learned nickname is protected as one label; contiguous katakana spelling is kept together.186 tests pass. Actual-app offline simulated-DOM replay confirms user textムッキー /ムッキーチャン and assistant acknowledgments after name questions and restart; no display-internalムッ キー. Saving/restoring nickname and name examples with a character-name substring pass. Explicitカフェ ラテ spacing and ordinary verb/particle spacing remain. Evidence docs/player-nickname-reading-20261012.json. Zero LLM calls; no physical browser/phone or human-evaluation claim for this check. Entry/readable cache versions advanced to20261012-name1.
 
+Published PR38 mergef0a9514f /Pages38217747708 success. Public index.html/app.js/readable.js match candidate240dd89 exactly. docs/public-nickname-reading-20261012.json. No extra LLM generation or human evaluation.
+
 ---
 
 # 2026-10-12: memory2 publication and real provider smoke comparison

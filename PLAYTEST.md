@@ -1,3 +1,13 @@
+# 2026-10-12: memory2 publication and real provider smoke comparison
+
+Frontend185/backend52 local tests passed for the published memory2 candidate. PR32/37 pilot integration and Pages38214312206 succeeded;27 changed public source files matchffdbf23. Evidence docs/public-player-memory-20261012.json. Greeting/affection/character names no longer become accidental nicknames; a reintroduced player creation is acknowledged without unrelated word recognition. Browser tests remain viewport emulation rather than physical handset proof.
+
+Manual CI38216462736 at unpublished backendcc3e021 made8 real API generation attempts with two shared synthetic cases per model, no429. Qwen447/410ms andGPTOSS622/785ms succeeded; Gemini3.8Flash timeout/503, Gemini2.5FlashLite404/404. Qwen accepted the Usagi catchphrase correction and preserved the player's creation name, with short paragraphs and without the baseline's repeated generic final question. Qwen's shield/word-sound analogy is weak; GPTOSS invents a sweet smell/effects as remembered detail. Neither should invent properties of a player creation. This smoke check does not establish load stability, human appeal, display latency or universal factual accuracy. Full raw response/usage evidence: docs/free-llm-comparison-20261012.json.
+
+Mock comparison-script check: first429 stops all generation and excludes credentials. This mock is distinct from the8 actual calls. No new virtual player, monthly subscription API, provider key, paid billing, or runtime model switch.
+
+---
+
 # 2026-10-12: player memory and reviewed Chiikawa knowledge candidate
 
 Frontend184/backend52 local tests pass. Actual-app offline replay (simulated DOM/time, compressed typing; zero game-LLM calls) covers nickname elicitation, one choice activity, creation storage across starting over, Japanese-study identity, draft/IME pause. Report docs/player-memory-20261012.md; before/after transcripts preserve failures and repairs.

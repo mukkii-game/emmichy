@@ -1,0 +1,434 @@
+{
+  "mode": "actual app; offline rule/bank; simulated DOM and virtual pauses; compressed typing animation; no live LLM or audio",
+  "actions": [
+    {
+      "action": {
+        "type": "start"
+      },
+      "result": {
+        "atSeconds": 0,
+        "messages": [
+          {
+            "atMs": 0,
+            "role": "enny",
+            "text": "はじめまして！",
+            "screen": "ハジメマシテ!"
+          }
+        ],
+        "visibleMessages": [
+          {
+            "role": "system",
+            "screen": "エミチィ / THE ALMOST CLEVER GAME"
+          },
+          {
+            "role": "enny",
+            "screen": "ハジメマシテ!"
+          },
+          {
+            "role": "system",
+            "screen": "ニホンゴ デ フツウニ ハナシテネ"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 20
+      },
+      "result": {
+        "atSeconds": 20,
+        "messages": [
+          {
+            "atMs": 1500,
+            "role": "enny",
+            "text": "アタシ、エミチィ。日本語を勉強してるの。ちいかわが大好き！",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "atMs": 3000,
+            "role": "enny",
+            "text": "あなた、なんて呼べばいい？ ニックネームでいいよ。",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "atMs": 13000,
+            "role": "enny",
+            "text": "好きなところを話すと、またちいかわを読み返したくなっちゃう。",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          }
+        ],
+        "visibleMessages": [
+          {
+            "role": "system",
+            "screen": "エミチィ / THE ALMOST CLEVER GAME"
+          },
+          {
+            "role": "enny",
+            "screen": "ハジメマシテ!"
+          },
+          {
+            "role": "system",
+            "screen": "ニホンゴ デ フツウニ ハナシテネ"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "role": "enny",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "ムッキー"
+      },
+      "result": {
+        "atSeconds": 20,
+        "messages": [
+          {
+            "atMs": 20000,
+            "role": "user",
+            "text": "ムッキー",
+            "screen": "ムッキー"
+          },
+          {
+            "atMs": 20000,
+            "role": "enny",
+            "text": "ムッキーって呼ぶね。",
+            "screen": "ムッキーッテ ヨブネ。"
+          }
+        ],
+        "visibleMessages": [
+          {
+            "role": "system",
+            "screen": "エミチィ / THE ALMOST CLEVER GAME"
+          },
+          {
+            "role": "enny",
+            "screen": "ハジメマシテ!"
+          },
+          {
+            "role": "system",
+            "screen": "ニホンゴ デ フツウニ ハナシテネ"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "role": "enny",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          },
+          {
+            "role": "user",
+            "screen": "ムッキー"
+          },
+          {
+            "role": "enny",
+            "screen": "ムッキーッテ ヨブネ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 8
+      },
+      "result": {
+        "atSeconds": 28,
+        "messages": [
+          {
+            "atMs": 24000,
+            "role": "enny",
+            "text": "覚えた！",
+            "screen": "オボエタ!"
+          }
+        ],
+        "visibleMessages": [
+          {
+            "role": "system",
+            "screen": "エミチィ / THE ALMOST CLEVER GAME"
+          },
+          {
+            "role": "enny",
+            "screen": "ハジメマシテ!"
+          },
+          {
+            "role": "system",
+            "screen": "ニホンゴ デ フツウニ ハナシテネ"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "role": "enny",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          },
+          {
+            "role": "user",
+            "screen": "ムッキー"
+          },
+          {
+            "role": "enny",
+            "screen": "ムッキーッテ ヨブネ。"
+          },
+          {
+            "role": "enny",
+            "screen": "オボエタ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1
+      }
+    },
+    {
+      "action": {
+        "type": "reset"
+      },
+      "result": {
+        "atSeconds": 28,
+        "messages": [
+          {
+            "atMs": 28000,
+            "role": "enny",
+            "text": "はじめまして！",
+            "screen": "ハジメマシテ!"
+          }
+        ],
+        "visibleMessages": [
+          {
+            "role": "enny",
+            "screen": "ハジメマシテ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 20
+      },
+      "result": {
+        "atSeconds": 48,
+        "messages": [
+          {
+            "atMs": 29500,
+            "role": "enny",
+            "text": "アタシ、エミチィ。日本語を勉強してるの。ちいかわが大好き！",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "atMs": 31000,
+            "role": "enny",
+            "text": "あなた、なんて呼べばいい？ ニックネームでいいよ。",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "atMs": 41000,
+            "role": "enny",
+            "text": "好きなところを話すと、またちいかわを読み返したくなっちゃう。",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          }
+        ],
+        "visibleMessages": [
+          {
+            "role": "enny",
+            "screen": "ハジメマシテ!"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "role": "enny",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "むっきーちゃん"
+      },
+      "result": {
+        "atSeconds": 48,
+        "messages": [
+          {
+            "atMs": 48000,
+            "role": "user",
+            "text": "むっきーちゃん",
+            "screen": "ムッキ ーチャン"
+          },
+          {
+            "atMs": 48000,
+            "role": "enny",
+            "text": "むっきーちゃんって呼ぶね。",
+            "screen": "ムッキ ーチャンッテ ヨブネ。"
+          }
+        ],
+        "visibleMessages": [
+          {
+            "role": "enny",
+            "screen": "ハジメマシテ!"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "role": "enny",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          },
+          {
+            "role": "user",
+            "screen": "ムッキーチャン"
+          },
+          {
+            "role": "enny",
+            "screen": "ムッキーチャンッテ ヨブネ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1
+      }
+    }
+  ],
+  "transcript": [
+    {
+      "atMs": 0,
+      "message": {
+        "role": "enny",
+        "text": "はじめまして！"
+      }
+    },
+    {
+      "atMs": 1500,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、エミチィ。日本語を勉強してるの。ちいかわが大好き！"
+      }
+    },
+    {
+      "atMs": 3000,
+      "message": {
+        "role": "enny",
+        "text": "あなた、なんて呼べばいい？ ニックネームでいいよ。"
+      }
+    },
+    {
+      "atMs": 13000,
+      "message": {
+        "role": "enny",
+        "text": "好きなところを話すと、またちいかわを読み返したくなっちゃう。"
+      }
+    },
+    {
+      "atMs": 20000,
+      "message": {
+        "role": "user",
+        "text": "ムッキー"
+      }
+    },
+    {
+      "atMs": 20000,
+      "message": {
+        "role": "enny",
+        "text": "ムッキーって呼ぶね。"
+      }
+    },
+    {
+      "atMs": 24000,
+      "message": {
+        "role": "enny",
+        "text": "覚えた！"
+      }
+    },
+    {
+      "atMs": 28000,
+      "message": {
+        "role": "enny",
+        "text": "はじめまして！"
+      }
+    },
+    {
+      "atMs": 29500,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、エミチィ。日本語を勉強してるの。ちいかわが大好き！"
+      }
+    },
+    {
+      "atMs": 31000,
+      "message": {
+        "role": "enny",
+        "text": "あなた、なんて呼べばいい？ ニックネームでいいよ。"
+      }
+    },
+    {
+      "atMs": 41000,
+      "message": {
+        "role": "enny",
+        "text": "好きなところを話すと、またちいかわを読み返したくなっちゃう。"
+      }
+    },
+    {
+      "atMs": 48000,
+      "message": {
+        "role": "user",
+        "text": "むっきーちゃん"
+      }
+    },
+    {
+      "atMs": 48000,
+      "message": {
+        "role": "enny",
+        "text": "むっきーちゃんって呼ぶね。"
+      }
+    }
+  ]
+}

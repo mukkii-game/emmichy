@@ -74,7 +74,8 @@ async function snapshot(action){
  const session=JSON.parse(storage.get('emmichy-session'));
  const messages=seen.slice(delivered).map(({atMs,message})=>({atMs,role:message.role,text:message.text,screen:readableText(message.text,tokenizer)}));
  delivered=seen.length;
- const result={atSeconds:(now-origin)/1000,messages,draft:get('entry').value,finished:Boolean(session?.finished||state?.ended),turns:session?.turns||0,...(liveMode?{dialogueUse:session?.dialogueUse,dialogueMix:session?.dialogueMix,chatHealth:session?.chatHealth,liveCalls}: {})};
+ const visibleMessages=get('conversation').children.filter(node=>node.className?.startsWith('message ')).map(node=>({role:node.className.slice(8),screen:node.children[1]?.textContent||''}));
+ const result={atSeconds:(now-origin)/1000,messages,visibleMessages,draft:get('entry').value,finished:Boolean(session?.finished||state?.ended),turns:session?.turns||0,...(liveMode?{dialogueUse:session?.dialogueUse,dialogueMix:session?.dialogueMix,chatHealth:session?.chatHealth,liveCalls}: {})};
  if(action)actions.push({action,result});
  await fs.writeFile(output,JSON.stringify({mode:liveMode?'actual app and live relay (max3 calls, stop429); simulated DOM/virtual pauses; compressed typing; real request wallMs; no browser/audio':'actual app; offline rule/bank; simulated DOM and virtual pauses; compressed typing animation; no live LLM or audio',actions,transcript:seen,...(liveMode?{liveCalls}: {})},null,2)+'\n');
  console.log(JSON.stringify(result));

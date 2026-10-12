@@ -8,7 +8,7 @@ import {createAudioDirector,bindAudioLifecycle} from './audio.js?v=20261012-memo
 import {CHAT_API_URL} from './config.js?v=20261012-memory2';
 import {advancePerformance} from './performance.js?v=20261012-memory2';
 import {requestChat,chatAvailable,unwantedFanRedirect} from './chat.js?v=20261012-memory2';
-import {readableText,loadReadings} from './readable.js?v=20261012-memory2';
+import {readableText,loadReadings} from './readable.js?v=20261012-name1';
 import {selectKnowledge,rememberKnowledge} from './fandom.js?v=20261012-memory2';
 import {selectGap} from './gap.js?v=20261012-memory2';
 import {chooseRepertoire,rememberReply} from './repertoire.js?v=20261012-memory2';
@@ -53,6 +53,7 @@ function saveSession(){if(ready&&session)Object.assign(session,checkpointSession
 function resumeCurrentSession(){const next=resumeSession(session);if(session&&next)Object.assign(session,next);else session=next;}
 try {state=restoreState(JSON.parse(localStorage.getItem(key)));}catch{saveAvailable=false;}
 state.dialogue=substantiveHistory(state);
+const readable=value=>readableText(value,tokenizer,{protectedNames:[state.playerMemory?.nickname||state.name]});
 const hadSavedDialogue=state.history.length>0;
 let lines=[];
 const messageNodes=new WeakMap();
@@ -60,8 +61,10 @@ function renderConversation(){
  const log=$('conversation'),pending=$('live-reply');
  if(!readingsSettled)return;
  const nodes=lines.map(item=>{
-  if(messageNodes.has(item))return messageNodes.get(item);
-  const p=document.createElement('p');p.className='message '+item.role;const label=document.createElement('span');label.className='speaker';label.textContent=item.role==='user'?'YOU >':item.role==='system'?'SYSTEM >':'EMMICHY >';const body=document.createElement('span');body.textContent=readableText(item.value,tokenizer);p.append(label,body);messageNodes.set(item,p);return p;
+  const name=state.playerMemory?.nickname||state.name;
+  if(messageNodes.has(item)){const node=messageNodes.get(item);if(item.displayName!==name){node.children[1].textContent=readable(item.value);item.displayName=name;}return node;}
+  item.displayName=name;
+  const p=document.createElement('p');p.className='message '+item.role;const label=document.createElement('span');label.className='speaker';label.textContent=item.role==='user'?'YOU >':item.role==='system'?'SYSTEM >':'EMMICHY >';const body=document.createElement('span');body.textContent=readable(item.value);p.append(label,body);messageNodes.set(item,p);return p;
  });
  log.replaceChildren(...nodes,pending);
  log.scrollTop=log.scrollHeight;
@@ -128,7 +131,7 @@ async function speakParts(parts,speed=22){
  for(let i=0;i<parts.length;i++){
   if(i)await wait(1500);
   live='';
-  for(const c of readableText(parts[i],tokenizer)){live+=c;draw();await wait(speed);}
+  for(const c of readable(parts[i])){live+=c;draw();await wait(speed);}
   add('enny',parts[i]);live='';draw();
  }
 }
@@ -190,7 +193,7 @@ $('talk').addEventListener('submit',async e=>{
  if(prepared){result.text=['player-memory','player-creation','japanese-word','compliment','japan-place','deflection','fandom-decline','profile','chiikawa-name','everyday','conversation-move','context-name','greeting','island-water','gap','repertoire','culture'].includes(prepared.topic)?prepared.text:fandomReply||prepared.text;result.kind=prepared.topic==='player-memory'?'memory':'curated';result.state.history.at(-1).text=result.text;if(/[！!]/.test(result.text))result.mood='excited';}
  if(isRestart){greetingPlan=openingPlan(true);result.text=greetingPlan.first;result.state.openingSeen=state.openingSeen;result.state.history.at(-1).text=result.text;}
  const ruleOnly=!requestModel;
- let heard=['bye','asleep','name','memory','arithmetic','comfort','contradiction'].includes(result.kind)||isRestart||['profile','player-creation'].includes(prepared?.topic)?null:recognizeName(raw,{reading:readableText(raw,tokenizer),state:before});
+ let heard=['bye','asleep','name','memory','arithmetic','comfort','contradiction'].includes(result.kind)||isRestart||['profile','player-creation'].includes(prepared?.topic)?null:recognizeName(raw,{reading:readable(raw),state:before});
  const self=['bye','asleep','comfort','contradiction'].includes(result.kind)||isRestart||prepared?.topic==='deflection'?null:complimentReaction(raw,before)||selfReaction(raw,before);
  if(self||prepared?.topic==='deflection')heard=null;
  if(self?.affection){result.mood='excited';mood='excited';}
@@ -205,7 +208,7 @@ $('talk').addEventListener('submit',async e=>{
   $('status').textContent='';
   const stopFiller=startFiller(index=>{
    const recent=result.state.history.filter(h=>h.role==='enny').slice(-20).map(h=>h.text);
-   const line=index===1?planContinuation(longFiller(raw,recent,before),'',before,{display:s=>readableText(s,tokenizer),tokenizer}).first:chooseFiller(raw,recentFillers,{match:heard,state:before});recentFillers=[...recentFillers,line].slice(-6);
+   const line=index===1?planContinuation(longFiller(raw,recent,before),'',before,{display:s=>readable(s),tokenizer}).first:chooseFiller(raw,recentFillers,{match:heard,state:before});recentFillers=[...recentFillers,line].slice(-6);
    recordAside(line,result.state,{substantive:index===1});draw();
   },{initialDelay:2000});
   let data;
@@ -227,7 +230,7 @@ $('talk').addEventListener('submit',async e=>{
  if(self?.thanks&&!/うれし|嬉し/.test(result.text)){result.text+=` ${self.thanks}`;result.state.history.at(-1).text=result.text;if(replySource==='llm')replySource='mixed';}
  if(knowledge.work==='chiikawa'&&!heard?.decline&&!['bye','asleep','name','memory','arithmetic','comfort','contradiction'].includes(result.kind)&&!unwantedFanRedirect('ちいかわ',raw,before)&&!/つらい|ツライ|苦しい|病気|事故|相談|亡く|死に/.test(raw))result.mood='excited';
  noteChiikawa(session,result.text);
- const paced=greetingPlan||(['bye','asleep','name','arithmetic','contradiction'].includes(result.kind)||isRestart?{first:result.text,later:[]}:planContinuation(result.text,raw,before,{display:s=>readableText(s,tokenizer),tokenizer,enthusiastic:knowledge.work==='chiikawa'&&result.mood==='excited'}));
+ const paced=greetingPlan||(['bye','asleep','name','arithmetic','contradiction'].includes(result.kind)||isRestart?{first:result.text,later:[]}:planContinuation(result.text,raw,before,{display:s=>readable(s),tokenizer,enthusiastic:knowledge.work==='chiikawa'&&result.mood==='excited'}));
  if(replySource==='llm'&&paced.later.some(line=>!result.text.includes(line)))replySource='mixed';
  result.text=paced.first;result.state.history.at(-1).text=result.text;
  // Keep the selected reply pending until its first displayed beat completes.
@@ -238,7 +241,7 @@ $('talk').addEventListener('submit',async e=>{
  if(mood==='excited')audioDirector.se.excited();else if(mood==='worried')audioDirector.se.worried();else audioDirector.se.reply();
  if(farewellParts)await speakParts(farewellParts);
  else{
-  const replyDisplay=readableText(result.text,tokenizer);
+  const replyDisplay=readable(result.text);
   for(const c of replyDisplay){live+=c;draw();await wait(mood==='excited'?12:mood==='worried'&&c==='\n'?420:22);}
   add('enny',result.text);live='';
  }
@@ -312,7 +315,7 @@ setInterval(draw,160);setInterval(async()=>{
    if($('entry').value.trim())return;
    const line=continuation.peek(Date.now(),{composing});if(!line)return;
    const version=continuationVersion;continuing=true;live='';
-   for(const c of readableText(line,tokenizer)){
+   for(const c of readable(line)){
     if(version!==continuationVersion||busy||document.hidden||!ready||composing||$('entry').value.trim()){continuing=false;draw();return;}
     live+=c;draw();await wait(22);
    }
@@ -323,7 +326,7 @@ setInterval(draw,160);setInterval(async()=>{
  if(question){recordAside(question.text);noteActivity();draw();return;}
  const reminder=Date.now()-lastActivity>=6000&&!$('entry').value.trim()?chiikawaReminder(state,session):null;
   if(reminder){
-   const plan=planContinuation(reminder,'',state,{display:s=>readableText(s,tokenizer),tokenizer});
+   const plan=planContinuation(reminder,'',state,{display:s=>readable(s),tokenizer});
    session.chiikawaReminders=(session.chiikawaReminders||0)+1;
    recordAside(plan.first);continuation.start(plan.later,Date.now(),plan.timing);hadContinuation=plan.later.length>0;noteActivity();draw();return;
   }

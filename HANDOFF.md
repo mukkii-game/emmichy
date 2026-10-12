@@ -1,4 +1,12 @@
-# Current checkpoint — mobile portrait published, 2026-10-12
+# Current checkpoint — larger phone conversation candidate, 2026-10-12
+
+User reports frequent scrolling after portrait enlargement. Branch codex/mobile-conversation-space-20261012, entry/style20261012-mobile2, not published. Phone portrait and22px font retained; main fills available viewport, all remaining space goes to chat. Controls/descriptions move into a top-right settings panel; consecutive assistant labels omitted. visualViewport resize keeps form inside reduced visible space. Desktop retains normal controls/layout. Browser checks320/390/430 portrait,390×500 reduced-height simulation,1280 desktop.390×844 chat318px vs194px, portrait324px unchanged. Settings close/open, help, mute, Escape and offline1 send verified.171 tests pass, zero LLM/subagent. Real device keyboard remains unverified; report docs/mobile-space-20261012.md +JSON/screenshots.
+
+Public remains PR29 merge72efdbbb /20261012-mobile1; backend unchanged. Next: prepare draft PR against pilot-audio-readable-retro, then ask approval for this new candidate under existing publication instruction. Single-session Director/Implementer/Tester continues.
+
+---
+
+# Previous checkpoint — mobile portrait published, 2026-10-12
 
 User explicitly instructed reflection/publication. PR29 merged to pilot-audio-readable-retro as72efdbbb209534679b6f8d3e2f58c48191ad7551; Pages38193268352 success. Entry/style release20261012-mobile1, code candidatead9d0c1642015ac8080655f8caa79aaac4541b1f. Public index.html/style.css/src/app.js all match the tested candidate; docs/public-mobile-layout-20261012.json. Frontend main remains6343213bc8f904a43c02319fc9b421ce2dd4dc0f. Backend unchanged; zero new LLM calls. Next: user's physical-phone review, especially software keyboard. This follow-up records evidence only.
 

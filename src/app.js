@@ -32,6 +32,12 @@ const idleSequence=createIdleSequence();
 let tokenizer=null;
 let readingsSettled=false;
 const $=id=>document.getElementById(id),canvas=$('screen'),ctx=canvas.getContext('2d',{willReadFrequently:true});
+// Use the space above the phone keyboard as the available game height.
+if(window.visualViewport){
+ const viewport=window.visualViewport;
+ const fitViewport=()=>{if(viewport.height>0)document.documentElement.style.setProperty('--visible-height',`${Math.round(viewport.height)}px`);};
+ viewport.addEventListener('resize',fitViewport);fitViewport();
+}
 ctx.imageSmoothingEnabled=false;
 const key='enny-memory-v1';
 const isLocal=['127.0.0.1','localhost','[::1]'].includes(location.hostname);
@@ -253,6 +259,12 @@ document.addEventListener('keydown',activateAudio,{capture:true});
 canvas.addEventListener('click',()=>$('entry').focus({preventScroll:true}));
 $('sound').onclick=async()=>{let on;try{on=await audioDirector.toggle();}catch{$('status').textContent='音を開始できません。もう一度音ボタンを押してください。';return;}$('sound').textContent='BGM + SE '+(on?'ON':'OFF');$('sound').setAttribute('aria-pressed',String(on));if(on)audioDirector.se.reply();};
 $('help').onclick=()=>{$('instructions').hidden=!$('instructions').hidden;};
+let settingsOpen=false;
+function setSettings(open){settingsOpen=open;$('settings-panel').setAttribute('data-open',String(open));$('settings-toggle').setAttribute('aria-expanded',String(open));}
+$('settings-toggle').onclick=()=>setSettings(!settingsOpen);
+$('settings-close').onclick=()=>{setSettings(false);$('settings-toggle').focus({preventScroll:true});};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&settingsOpen){setSettings(false);$('settings-toggle').focus({preventScroll:true});}});
+document.addEventListener('click',e=>{if(settingsOpen&&!e.target?.closest?.('#settings-panel,#settings-toggle'))setSettings(false);});
 $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.querySelector('.screen-wrap').requestFullscreen();}catch{$('status').textContent='このブラウザでは全画面にできません。';}};
 $('export').onclick=()=>{const body=state.history.map(h=>`${h.role==='user'?'YOU':'EMMICHY'}: ${h.text}`).join('\r\n\r\n');const url=URL.createObjectURL(new Blob(['\ufeff'+body],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='enny-conversation.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
 let resetArmed=false,resetTimer;
@@ -270,7 +282,7 @@ function showStartChoice(){
 function enterConversation(){ready=true;if(!session)session={startedAt:Date.now(),turns:0,finished:false};$('start-choice').hidden=true;$('talk').hidden=false;$('send').disabled=!readingsSettled;$('entry').disabled=false;noteActivity();$('entry').focus({preventScroll:true});}
 $('continue').onclick=()=>{resumeCurrentSession();enterConversation();saveSession();$('status').textContent=state.ended?'おしまい。「最初から」で、もう一度。':'会話を再開しました / ENTER で送信';};
 $('new-chat').onclick=()=>{const next=startConversation(state);state=next.state;session=next.session;lines=[];live='';mood='idle';$('transcript').replaceChildren();addOpening();enterConversation();save();saveSession();$('status').textContent='新しい会話 / 漢字・ひらがな OK';draw();};
-$('restart-chat').onclick=showStartChoice;
+$('restart-chat').onclick=()=>{setSettings(false);showStartChoice();};
 if(hadSavedDialogue){ready=false;showStartChoice();}
 document.addEventListener('visibilitychange',()=>{if(!ready)return;stopContinuation();if(document.hidden)saveSession();else{resumeCurrentSession();continuation.typed(Date.now());noteActivity();saveSession();}});
 setInterval(()=>{if(ready&&!document.hidden)saveSession();},5000);
@@ -306,7 +318,6 @@ setInterval(draw,160);setInterval(async()=>{
   else if(stage&&!$('entry').value.trim()){recordAside(idleAside(state.history,stage-1));draw();}
  }
 },250);draw();if(ready)$('entry').focus({preventScroll:true});
-
 
 
 

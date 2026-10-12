@@ -1,3 +1,9 @@
+# 2026-10-12: phone conversation space, unpublished candidate
+
+Real browser viewport checks320×568/390×844/430×932/390×500 and1280×900 desktop, offline muted. Phone log heights185/318/360/153px; input bottom562/838/926/494px. No phone document or horizontal overflow; desktop existing scroll layout retained.390px portrait324px and22px text unchanged, log grows from194px to318px. Settings opens/closes, help unfolds, sound turns OFF, Escape closes; initial greeting and1 offline Hachiware-photo send observed.171 tests pass. No new model call or subjective reviewer. Reduced viewport is a simulation, not actual handset keyboard proof. docs/mobile-space-20261012.md/JSON/screenshots. Public unchanged until new-candidate approval.
+
+---
+
 # 2026-10-12: mobile portrait publication check
 
 User authorized publication. PR29 merged72efdbbb, Pages38193268352 success. Published index/style/app all match candidatead9d0c1, release20261012-mobile1; docs/public-mobile-layout-20261012.json. Local viewport evidence and171 tests remain the validation basis; no extra model call or claim of physical keyboard testing. Await user phone review.

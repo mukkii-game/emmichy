@@ -1,4 +1,10 @@
-# Current checkpoint — mobile portrait candidate, 2026-10-12
+# Current checkpoint — mobile portrait published, 2026-10-12
+
+User explicitly instructed reflection/publication. PR29 merged to pilot-audio-readable-retro as72efdbbb209534679b6f8d3e2f58c48191ad7551; Pages38193268352 success. Entry/style release20261012-mobile1, code candidatead9d0c1642015ac8080655f8caa79aaac4541b1f. Public index.html/style.css/src/app.js all match the tested candidate; docs/public-mobile-layout-20261012.json. Frontend main remains6343213bc8f904a43c02319fc9b421ce2dd4dc0f. Backend unchanged; zero new LLM calls. Next: user's physical-phone review, especially software keyboard. This follow-up records evidence only.
+
+---
+
+# Previous checkpoint — mobile portrait candidate, 2026-10-12
 
 User reports portrait too small on a vertical phone. Branch codex/mobile-portrait-20261012, entry/style release20261012-mobile1. Implemented top-centred large canvas (viewport-height bounded), logo over lower-right portrait, concise mobile labels, reduced duplicate descriptions, sticky input slot. Focus calls prevent unintended page scrolling. Original image/conversation logic and desktop/landscape layout retained. 171 tests pass; real-browser viewport checks320/390/430 portrait and1280 desktop have no horizontal overflow and phone form remains visible.390px portrait324px vs old130px; start/send scrollY0. Offline1 send, muted; no LLM/subagent. Physical phone keyboard remains unverified. Report docs/mobile-layout-20261012.md +JSON/screenshots.
 

@@ -1,0 +1,32 @@
+{
+  "checkedAt": "2026-10-12T10:48:22.559448+09:00",
+  "release": "20261012-mobile1",
+  "pr": 29,
+  "candidate": "ad9d0c1642015ac8080655f8caa79aaac4541b1f",
+  "merge": "72efdbbb209534679b6f8d3e2f58c48191ad7551",
+  "pagesRun": 38193268352,
+  "pagesConclusion": "success",
+  "mainUnchanged": "6343213bc8f904a43c02319fc9b421ce2dd4dc0f",
+  "files": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "matches": true,
+      "sha256": "4ce62499964cd5d8ab66a3643f016dea51a337dd2bfefdb2620b411feb1e7ee3"
+    },
+    {
+      "path": "style.css",
+      "status": 200,
+      "matches": true,
+      "sha256": "310cb8eba98b742dec6f262c20b93fb398cf43d814a8ab4c82585dd2286c2d1f"
+    },
+    {
+      "path": "src/app.js",
+      "status": 200,
+      "matches": true,
+      "sha256": "a2cba52c044de495a483d2233179428a5261c0b443099a8dfff05f9f2473e03f"
+    }
+  ],
+  "llmCalls": 0,
+  "backendChanged": false
+}

@@ -1,6 +1,6 @@
-import {everydayEnding} from './everyday.js?v=20261012-memory1';
-import {selectEnding} from './endings.js?v=20261012-memory1';
-import {cleanConversation,endingCallback} from './conversation.js?v=20261012-memory1';
+import {everydayEnding} from './everyday.js?v=20261012-memory2';
+import {selectEnding} from './endings.js?v=20261012-memory2';
+import {cleanConversation,endingCallback} from './conversation.js?v=20261012-memory2';
 export const SESSION_MS=5*60*1000;
 export const MIN_SESSION_TURNS=10;
 export const SESSION_TURNS=18;

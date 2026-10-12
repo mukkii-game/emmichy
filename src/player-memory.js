@@ -59,7 +59,9 @@ export function answerPlayerQuestion(value,session,raw){
  if(['choice','word'].includes(q.type)&&/今日|昨日|散歩|行った|行って|してきた|シテキタ|食べた|食べて|だった|でした/.test(t)){session.pendingQuestion=null;return {memory};}
  const ignore=/[?？]|なぜ|どうして|勉強|教えて|知って|どこ|何歳|話して|聞きたい|どんな/.test(t);
  if(q.type==='name'){
-  if(ignore){q.ignored=(q.ignored||0)+1;if(q.ignored>=2)session.pendingQuestion=null;return {memory};}
+  const explicit=/^(?:名前は|私の名前は|僕の名前は|俺の名前は|私は|僕は|俺は)|って呼んで|と呼んで/.test(t);
+  const otherIntent=!explicit&&/^(?:コンニチハ|コンバンハ|オハヨウ|ハロー|ハジメマシテ|スキ(?:ダヨ|デス)?|カワイイ|可愛イ|キレイ|綺麗|愛シテル|楽シイ|タノシイ|チイカワ|ハチワレ|ウサギ|シーサー|モモンガ|エミチ[イィー]|EMMICHY|EMMY|ハイ|イイエ|ウン|アリガト)[!！。ー]*$/i.test(f);
+  if(ignore||otherIntent){q.ignored=(q.ignored||0)+1;if(q.ignored>=2)session.pendingQuestion=null;return {memory};}
   if(/言いたくない|匿名|秘密|名乗らない|名前なし/.test(t)){session.pendingQuestion=null;memory.nickname='';return {memory,reply:'うん、呼び名は決めなくても大丈夫。一緒に話せるの、嬉しいよ！',name:''};}
   const name=t.replace(/^(?:名前は|私は|僕は|俺は|ワタシハ|ボクハ|オレハ)/,'').replace(/(?:って呼んで|と呼んで|です|デス|だよ|ダヨ|といいます)[。！!]*$/,'').replace(/[「」『』。！!]/g,'').trim();
   if(!ignore&&name.length>0&&name.length<=20&&clean(name)&&!/日本語|ちいかわの|ハチワレの/.test(name)){memory.nickname=name;session.pendingQuestion=null;return {memory,reply:`${name}って呼ぶね。覚えた！ こうして話せて、嬉しいよ。`,name};}

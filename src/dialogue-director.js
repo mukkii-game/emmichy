@@ -1,11 +1,11 @@
-import {fanRecovery} from './fandom.js?v=20261012-memory1';
-import {polishReply} from './repertoire.js?v=20261012-memory1';
-import {unwantedFanRedirect} from './chat.js?v=20261012-memory1';
-import {selectChiikawaBridge,personalFanReply} from './chiikawa-theme.js?v=20261012-memory1';
-import {groundModelReply} from './dialogue-grounding.js?v=20261012-memory1';
-import {asksCurrentSerial} from './chiikawa-relations.js?v=20261012-memory1';
-import {attributionRepair} from './chiikawa-attribution.js?v=20261012-memory1';
-import {learnerReply} from './japanese-learner.js?v=20261012-memory1';
+import {fanRecovery} from './fandom.js?v=20261012-memory2';
+import {polishReply} from './repertoire.js?v=20261012-memory2';
+import {unwantedFanRedirect} from './chat.js?v=20261012-memory2';
+import {selectChiikawaBridge,personalFanReply} from './chiikawa-theme.js?v=20261012-memory2';
+import {groundModelReply} from './dialogue-grounding.js?v=20261012-memory2';
+import {asksCurrentSerial} from './chiikawa-relations.js?v=20261012-memory2';
+import {attributionRepair} from './chiikawa-attribution.js?v=20261012-memory2';
+import {learnerReply} from './japanese-learner.js?v=20261012-memory2';
 
 // The screen owns final content selection. The relay validates transport/output
 // shape; it does not silently substitute a different authored conversation.

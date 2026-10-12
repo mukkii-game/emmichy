@@ -10,6 +10,15 @@ test('name elicitation accepts a nickname, keeps a real question first, and can 
  const out=answerPlayerQuestion(null,session,'名前はマッキーです');assert.equal(out.name,'マッキー');assert.equal(out.memory.nickname,'マッキー');assert.equal(session.pendingQuestion,null);
  notePlayerQuestion(nameQuestion,session);assert.equal(answerPlayerQuestion(out.memory,session,'名前は言いたくない').name,'');
 });
+
+test('greetings, affection and known character calls are not learned as nicknames',()=>{
+ for(const input of ['こんにちは','好きだよ','かわいい','ハチワレ','エミチィ']){
+  const session={turns:0};notePlayerQuestion(nameQuestion,session);
+  const out=answerPlayerQuestion(null,session,input);assert.equal(out.name,undefined);assert.equal(out.memory.nickname,'');
+ }
+ const session={turns:0};notePlayerQuestion(nameQuestion,session);
+ assert.equal(answerPlayerQuestion(null,session,'ハチワレって呼んで').name,'ハチワレ');
+});
 test('one word activity per play, ambiguity gets one clarification, then gives space',()=>{
  const session={turns:2};const q=choosePlayerQuestion(null,session);notePlayerQuestion(q.text,session);
  assert.equal(choosePlayerQuestion(null,session),null);assert.match(answerPlayerQuestion(null,session,'わからない').reply,/誰かな/);

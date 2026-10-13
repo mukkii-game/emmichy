@@ -1,33 +1,34 @@
-import {bindMobileViewport} from './mobile-viewport.js?v=20261013-integrity1';
-import {selfReaction,complimentReaction} from './profile.js?v=20261013-integrity1';
-import {freshState,restoreState,respond,normalize} from './engine.js?v=20261013-integrity1';
-import {chiikawaReply,checkedAt} from './topics.js?v=20261013-integrity1';
-import {text,kana} from './font.js?v=20261013-integrity1';
-import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation,remainingTime} from './session.js?v=20261013-integrity1';
-import {noteChiikawa,chiikawaReminder} from './chiikawa-reminder.js?v=20261013-integrity1';
-import {createAudioDirector,bindAudioLifecycle} from './audio.js?v=20261013-integrity1';
-import {CHAT_API_URL} from './config.js?v=20261013-integrity1';
-import {advancePerformance} from './performance.js?v=20261013-integrity1';
-import {requestChat,chatAvailable,unwantedFanRedirect} from './chat.js?v=20261013-integrity1';
-import {readableText,loadReadings} from './readable.js?v=20261013-integrity1';
-import {selectKnowledge,rememberKnowledge} from './fandom.js?v=20261013-integrity1';
-import {selectGap} from './gap.js?v=20261013-integrity1';
-import {chooseRepertoire,rememberReply} from './repertoire.js?v=20261013-integrity1';
-import {cultureReply} from './culture.js?v=20261013-integrity1';
-import {chooseFiller,startFiller,longFiller,retainAside,idleAside,createIdleSequence} from './filler.js?v=20261013-integrity1';
-import {learnInterests,shouldRequestModel,noteDialogueMix} from './balance.js?v=20261013-integrity1';
-import {selectOpening,planOpening,openingTiming} from './openings.js?v=20261013-integrity1';
-import {preparedReply} from './routing.js?v=20261013-integrity1';
-import {cleanConversation,noteConversationReply} from './conversation.js?v=20261013-integrity1';
-import {offlineFallback} from './fallback.js?v=20261013-integrity1';
-import {portraitColors} from './portrait-palette.js?v=20261013-integrity1';
-import {planContinuation,createContinuation} from './continuation.js?v=20261013-integrity1';
-import {recognizeName,namedGesture,NAME_REACTION_MS} from './names.js?v=20261013-integrity1';
-import {substantiveHistory,appendDialogue} from './dialogue-history.js?v=20261013-integrity1';
-import {directReply} from './dialogue-director.js?v=20261013-integrity1';
-import {cleanPlayerMemory,nameQuestion,notePlayerQuestion,choosePlayerQuestion,answerPlayerQuestion,playerRecall,playerCreationReply,notePlayerReply} from './player-memory.js?v=20261013-integrity1';
-import {conversationRepair,updateDialogueControl,waitForPlayer} from './conversation-repair.js?v=20261013-integrity1';
-import {personalFanReply} from './chiikawa-theme.js?v=20261013-integrity1';
+import {bindMobileViewport} from './mobile-viewport.js?v=20261013-specialist1';
+import {selfReaction,complimentReaction} from './profile.js?v=20261013-specialist1';
+import {freshState,restoreState,respond,normalize} from './engine.js?v=20261013-specialist1';
+import {chiikawaReply,checkedAt} from './topics.js?v=20261013-specialist1';
+import {text,kana} from './font.js?v=20261013-specialist1';
+import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation,remainingTime} from './session.js?v=20261013-specialist1';
+import {noteChiikawa,chiikawaReminder} from './chiikawa-reminder.js?v=20261013-specialist1';
+import {createAudioDirector,bindAudioLifecycle} from './audio.js?v=20261013-specialist1';
+import {CHAT_API_URL} from './config.js?v=20261013-specialist1';
+import {advancePerformance} from './performance.js?v=20261013-specialist1';
+import {requestChat,chatAvailable,unwantedFanRedirect} from './chat.js?v=20261013-specialist1';
+import {readableText,loadReadings} from './readable.js?v=20261013-specialist1';
+import {selectKnowledge,rememberKnowledge} from './fandom.js?v=20261013-specialist1';
+import {selectGap} from './gap.js?v=20261013-specialist1';
+import {chooseRepertoire,rememberReply} from './repertoire.js?v=20261013-specialist1';
+import {cultureReply} from './culture.js?v=20261013-specialist1';
+import {chooseFiller,startFiller,longFiller,retainAside,idleAside,createIdleSequence} from './filler.js?v=20261013-specialist1';
+import {learnInterests,shouldRequestModel,noteDialogueMix} from './balance.js?v=20261013-specialist1';
+import {selectOpening,planOpening,openingTiming} from './openings.js?v=20261013-specialist1';
+import {preparedReply} from './routing.js?v=20261013-specialist1';
+import {cleanConversation,noteConversationReply} from './conversation.js?v=20261013-specialist1';
+import {offlineFallback} from './fallback.js?v=20261013-specialist1';
+import {portraitColors} from './portrait-palette.js?v=20261013-specialist1';
+import {planContinuation,createContinuation} from './continuation.js?v=20261013-specialist1';
+import {recognizeName,namedGesture,NAME_REACTION_MS} from './names.js?v=20261013-specialist1';
+import {substantiveHistory,appendDialogue} from './dialogue-history.js?v=20261013-specialist1';
+import {directReply} from './dialogue-director.js?v=20261013-specialist1';
+import {cleanPlayerMemory,nameQuestion,notePlayerQuestion,choosePlayerQuestion,answerPlayerQuestion,playerRecall,playerCreationReply,notePlayerReply} from './player-memory.js?v=20261013-specialist1';
+import {conversationRepair,updateDialogueControl,waitForPlayer} from './conversation-repair.js?v=20261013-specialist1';
+import {personalFanReply} from './chiikawa-theme.js?v=20261013-specialist1';
+import {specialistPacket,noteSpecialistDelivery} from './specialist.js?v=20261013-specialist1';
 const continuation=createContinuation();
 let continuationVersion=0,continuing=false,hadContinuation=false,awaitingOpening=[];
 function stopContinuation(clear=false){continuationVersion++;if(clear){continuation.clear();hadContinuation=false;awaitingOpening=[];}if(continuing){live='';draw();}}
@@ -69,6 +70,7 @@ function renderConversation(){
  log.scrollTop=log.scrollHeight;
 }
 function add(role,value,track=true){
+ if(track&&role==='enny')state.specialist=noteSpecialistDelivery(state.specialist,value,state.dialogue);
  if(track&&role==='enny'){state.playerMemory=notePlayerReply(state.playerMemory,value);notePlayerQuestion(value,session);}
  if(track&&role!=='system')noteChiikawa(session,value);
  if(track&&role!=='system')state.knowledge=rememberKnowledge(state.knowledge,value);
@@ -176,6 +178,8 @@ $('talk').addEventListener('submit',async e=>{
  result.state.performance=before.performance;result.state.speechStyle=before.speechStyle;
  if(result.kind!=='bye')result.state.conversation=before.conversation;
  const knowledge=selectKnowledge(raw,before);
+ const specialist=specialistPacket(raw,before);
+ before.specialist=specialist.memory;result.state.specialist=specialist.memory;
  const repertoire=chooseRepertoire(raw,before);
  const culture=cultureReply(raw,before,repertoire.intent);
  const fandomReply=culture?.text||repertoire.candidate?.text;
@@ -293,7 +297,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&settingsOpen){setSe
 document.addEventListener('click',e=>{if(settingsOpen&&!e.target?.closest?.('#settings-panel,#settings-toggle'))setSettings(false);});
 $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.querySelector('.screen-wrap').requestFullscreen();}catch{$('status').textContent='このブラウザでは全画面にできません。';}};
 $('export').onclick=()=>{const body=state.history.map(h=>`${h.role==='user'?'YOU':'EMMICHY'}: ${h.text}`).join('\r\n\r\n');const url=URL.createObjectURL(new Blob(['\ufeff'+body],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='enny-conversation.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
-$('export-debug').onclick=()=>{const body=JSON.stringify({version:'20261013-integrity1',mode:modelEnabled?'online':'offline',state,session},null,2);const url=URL.createObjectURL(new Blob([body],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='emmichy-playtest.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+$('export-debug').onclick=()=>{const body=JSON.stringify({version:'20261013-specialist1',mode:modelEnabled?'online':'offline',state,session},null,2);const url=URL.createObjectURL(new Blob([body],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='emmichy-playtest.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
 let resetArmed=false,resetTimer;
 $('reset').onclick=()=>{if(!resetArmed){resetArmed=true;$('reset-note').textContent=' もう一度押すと記憶が消えます。';resetTimer=setTimeout(()=>{resetArmed=false;$('reset-note').textContent='';},5000);return;}
  stopContinuation(true);clearTimeout(resetTimer);resetArmed=false;$('reset-note').textContent=' 初期化しました。';state=freshState();session=readingsSettled?{startedAt:Date.now(),turns:0,finished:false}:null;saveSession();lines=[];live='';mood='idle';addOpening();$('transcript').replaceChildren();save();draw();};

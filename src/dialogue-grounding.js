@@ -1,7 +1,7 @@
-import {dialogueSentences} from './dialogue-sentences.js?v=20261013-integrity1';
-import {cards,selectKnowledge} from './fandom.js?v=20261013-integrity1';
-import {fanLines} from './fan-lines.js?v=20261013-integrity1';
-import {reviewedChiikawa} from './chiikawa-reviewed.js?v=20261013-integrity1';
+import {dialogueSentences} from './dialogue-sentences.js?v=20261013-specialist1';
+import {cards,selectKnowledge} from './fandom.js?v=20261013-specialist1';
+import {fanLines} from './fan-lines.js?v=20261013-specialist1';
+import {reviewedChiikawa} from './chiikawa-reviewed.js?v=20261013-specialist1';
 const compact=s=>String(s).normalize('NFKC').replace(/[\s。、!?！？]/g,'');
 
 // A lightweight guard, not a semantic fact checker. Specific scene/quotation

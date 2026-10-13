@@ -1,7 +1,7 @@
-import {nameData} from './name-data.js?v=20261013-integrity1';
-import {placeNames} from './places.js?v=20261013-integrity1';
-import {gameNames} from './game-names.js?v=20261013-integrity1';
-import {requestsChiikawa} from './topic-intent.js?v=20261013-integrity1';
+import {nameData} from './name-data.js?v=20261013-specialist1';
+import {placeNames} from './places.js?v=20261013-specialist1';
+import {gameNames} from './game-names.js?v=20261013-specialist1';
+import {requestsChiikawa} from './topic-intent.js?v=20261013-specialist1';
 export const foldName=s=>String(s||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).toLowerCase().replace(/[\s・×＝=\-:：'’"「」]/g,'');
 export const NAME_REACTION_MS=750;
 const trie=new Map(),exact=[];

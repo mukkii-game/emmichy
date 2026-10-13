@@ -1,5 +1,5 @@
-import {exactNames} from './names.js?v=20261013-integrity1';
-import {foldRepair} from './conversation-repair.js?v=20261013-integrity1';
+import {exactNames} from './names.js?v=20261013-specialist1';
+import {foldRepair} from './conversation-repair.js?v=20261013-specialist1';
 // Used only after the AI path is unavailable, never to preempt a live answer.
 const scenes=[
  {match:/プリン.*(?:買|カッタ|食|タベ)|(?:写真|シャシン).*(?:撮|トッタ)/,lines:[

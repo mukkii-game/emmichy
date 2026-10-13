@@ -10,4 +10,7 @@ for(const name of modules){
  content=content.replace(/'\.\/(conversation-repair|fandom|fan-lines|names|name-data|game-names|chiikawa-db|chiikawa-relations|chiikawa-reviewed|profile|places|topic-intent|player-memory|japanese-learner|chiikawa-attribution|humor)\.js(?:\?v=[^']+)?'/g,(_,module)=>`'./emmichy-${module}.js'`);
  fs.writeFileSync(path.join(target,'games',`emmichy-${name}.js`),content);
 }
+let specialist=fs.readFileSync(path.join(root,'src','specialist.js'),'utf8');
+specialist=specialist.replace(/'\.\/(chiikawa-relations|fandom|names|dialogue-history|conversation-repair)\.js(?:\?v=[^']+)?'/g,(_,module)=>`'./emmichy-${module}.js'`);
+fs.writeFileSync(path.join(target,'games','emmichy-specialist.js'),specialist);
 console.log('Synced Emmichy dialogue data and selection logic. Server prompts stay in games/emmichy.js.');

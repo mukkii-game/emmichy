@@ -1,6 +1,6 @@
-import {everydayEnding} from './everyday.js?v=20261013-integrity1';
-import {selectEnding} from './endings.js?v=20261013-integrity1';
-import {cleanConversation,endingCallback} from './conversation.js?v=20261013-integrity1';
+import {everydayEnding} from './everyday.js?v=20261013-specialist1';
+import {selectEnding} from './endings.js?v=20261013-specialist1';
+import {cleanConversation,endingCallback} from './conversation.js?v=20261013-specialist1';
 export const SESSION_MS=5*60*1000;
 export const MIN_SESSION_TURNS=10;
 export const SESSION_TURNS=18;
@@ -20,6 +20,7 @@ export function resumeSession(session,now=Date.now()) {
  return {...session,startedAt:session.startedAt+Math.max(0,now-saved),lastSavedAt:now};
 }
 export function startConversation(state,now=Date.now()) {
+ state={...state,specialist:{subject:'',scene:'',focus:'',said:[]}};
  return {state:{...state,name:'',turn:0,last:'',repeat:0,praise:0,clues:0,topic:'',knowledge:{...state.knowledge,work:'',movieRun:0,focus:'',mentions:[],facets:[],corrections:[]},fan:{worry:0,excitement:0,lastTopic:''},performance:{},conversation:cleanConversation(null),gap:{...state.gap,lastTurn:-10},repertoire:{...state.repertoire,lastTurn:-10},speechStyle:'normal',dialogueControl:{...state.dialogueControl,quiet:false,avoidFandom:false,lastIntent:'',lastWord:''},ended:false,history:[],dialogue:[]},session:{startedAt:now,lastSavedAt:now,turns:0,finished:false,askNameAgain:true}};
 }
 export function shouldEnd(session,now=Date.now()){

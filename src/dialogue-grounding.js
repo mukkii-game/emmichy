@@ -1,6 +1,6 @@
-import {cards,selectKnowledge} from './fandom.js?v=20261013-talk1';
-import {fanLines} from './fan-lines.js?v=20261013-talk1';
-import {reviewedChiikawa} from './chiikawa-reviewed.js?v=20261013-talk1';
+import {cards,selectKnowledge} from './fandom.js?v=20261013-talk2';
+import {fanLines} from './fan-lines.js?v=20261013-talk2';
+import {reviewedChiikawa} from './chiikawa-reviewed.js?v=20261013-talk2';
 const compact=s=>String(s).normalize('NFKC').replace(/[\s。、!?！？]/g,'');
 
 // A lightweight guard, not a semantic fact checker. Specific scene/quotation
@@ -13,7 +13,8 @@ export function groundModelReply(text,input,state={}){
  const facts=cards.filter(c=>c.work==='chiikawa').concat(reviewedChiikawa);
  const kept=[],removed=[];
  for(const piece of pieces){
-  const scene=/シーン|場面|瞬間|エピソード|原作で|公式で/.test(piece)&&!/[?？]$/.test(piece);
+  const personalMoment=/(?:私|アタシ)(?:が|は).{0,24}(?:勇気をもらう|嬉しくなる|うれしくなる|励まされる)瞬間/.test(piece)&&!/シーン|場面|エピソード|原作で|公式で/.test(piece);
+  const scene=/シーン|場面|瞬間|エピソード|原作で|公式で/.test(piece)&&!personalMoment&&!/[?？]$/.test(piece);
   const quote=/「[^」]+」.{0,16}(?:言|叫|台詞|セリフ)/.test(piece);
   const imagined=/もし|想像|してくれたら|撮ってもらうなら|だったら/.test(piece);
   const owned=facts.some(c=>compact(c.fact).includes(compact(piece)));

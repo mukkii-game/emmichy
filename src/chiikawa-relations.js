@@ -1,7 +1,7 @@
 // Relations reference the owned factual cards. Cue -> relation is an authored
 // association, never a claim that the cue itself appeared in the original.
-import {cards,sources} from './fandom.js?v=20261013-talk1';
-import {reviewedChiikawa} from './chiikawa-reviewed.js?v=20261013-talk1';
+import {cards,sources} from './fandom.js?v=20261013-talk2';
+import {reviewedChiikawa} from './chiikawa-reviewed.js?v=20261013-talk2';
 const fold=s=>String(s||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');
 const cast='https://chiikawa.toho-movie.jp/atm/characters.html';
 const rows=[

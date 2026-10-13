@@ -13,7 +13,7 @@ Priority now: present question/correction/feedback → owned identity and known-
 - Second repair: answer the final question rather than earlier preference words; Shisa rereading/support reasons stay on topic; explain owned rain/footstep feelings; accept forgiveness/reassurance; stop gratitude for dropping fandom from generating another Chiikawa cue. The failed-meal example is framed as a personal hypothetical, never as a verified scene.
 - Root mechanically replayed the same eight inputs for both personas after the second change, added a six-send otaku persona and replayed thirteen human-failure inputs with selected prior human lines as seeded state. No additional subagent generation for mechanical replays. The seed is marked as supplied human content, not a generated/live session.
 - Actual-app offline simulated DOM/virtual pauses: docs/persona-{fan,general}-{before,after,after2}-20261013.json; docs/persona-otaku-root-20261013.json; docs/human-failure-{seed,replay}-20261013.json. Typing/IME draft stops continuation and idle speech. These do not measure physical phone/audio, real timing or human amusement.
-- 201 frontend tests and 53 relay tests pass. Existing nickname integrity, factual corrections, topic memory, display pacing, typing interruption and late farewell checks remain.
+- 202 frontend tests and 53 relay tests pass. Existing nickname integrity, factual corrections, topic memory, display pacing, typing interruption and late farewell checks remain.
 - Real generation: CI38383844592, candidate relay24904f5, three total provider attempts. GPT OSS two responses at609/685ms; third returned429. Stopped immediately, no additional provider calls. Raw output in docs/conversation-repair-live-20261013.json. The generated reasons were usable but added repetitive catchphrases and broad follow-up questions. Client now preserves the reasons and removes those unnecessary tails; final voice-prompt refinement is locally tested, not a new live quality check.
 
 ## Representative changes
@@ -28,9 +28,11 @@ Priority now: present question/correction/feedback → owned identity and known-
 | ちいかわをやめてくれてありがとう | another Chiikawa cue | continue rainy-day conversation |
 | ignored activity / feedback | captures words as answers | cancel pending activity |
 
+Captured-output follow-up: running the two actual replies through the final client exposed a personal「勇気をもらう瞬間」being treated as a canon-scene claim and replaced with a stock introduction. The guard now distinguishes that narrow personal-feeling construction, and the actual captured outputs are regression-tested through the full director. No new LLM call.
+
 ## Publication and next human check
 
-Frontend runtime20261013-talk1 targets main/Cloudflare. BackendPR18 merged main09751fc522862a77c18452f7c4fb79e6cd78df4c; provider order and CORS unchanged. No migration of old GitHub Pages player data needed by the user's latest instruction. No shared/server player database or paid service added.
+Frontend runtime20261013-talk2 targets main/Cloudflare. BackendPR18 merged main09751fc522862a77c18452f7c4fb79e6cd78df4c; provider order and CORS unchanged. No migration of old GitHub Pages player data needed by the user's latest instruction. No shared/server player database or paid service added.
 
 A settings/help button now downloads emmichy-playtest.json with bounded reply routes, provider outcome and history. It is a user-triggered local download, not automatic upload. Existing plain conversation export remains.
 

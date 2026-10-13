@@ -1,5 +1,5 @@
 // The single authored identity, created under the user's request to write a portfolio.
-import {exactNames} from './names.js?v=20261013-talk1';
+import {exactNames} from './names.js?v=20261013-talk2';
 export const identity=Object.freeze({age:17,country:'スウェーデン',city:'ヨーテボリ',siblingAge:14,visitCity:'東京',visitDays:5,visitCount:1});
 export const identityReadings=Object.freeze({[identity.country]:'スウェーデン',[identity.city]:'ヨーテボリ'});
 export const profile=Object.freeze({

@@ -106,3 +106,16 @@ test('the offline otaku answer uses the described trait instead of pretending th
  const out=offlineFallback('ジョジョが好き。特にジョセフの口がうまいところ。えみちぃは？',{},'question');
  assert.match(out.text,/ジョセフの口がうまい/);assert.match(out.text,/駆け引き/);assert.doesNotMatch(out.text,/知らない|三つ編み/);
 });
+
+test('captured real reasons keep personal feelings without a replacement topic introduction',async()=>{
+ const fs=await import('node:fs');
+ const captured=JSON.parse(fs.readFileSync(new URL('../docs/conversation-repair-live-20261013.json',import.meta.url)));
+ const state={history:[],knowledge:{work:'chiikawa'}};
+ for(const t of captured.turns.filter(t=>t.result?.text)){
+  const out=directReply(t.result.text,t.input,state,{source:'llm'});
+  assert.doesNotMatch(out.text,/もっと聞きたいこと|他に気になるキャラ|シーサーは郎で働く資格を得た助手/);
+  assert.match(out.text,/応援したくなる|頑張ろう/);
+  if(state.history.length)assert.doesNotMatch(out.text,/ヤハ/);
+  state.history.push({role:'user',text:t.input},{role:'enny',text:out.text});
+ }
+});

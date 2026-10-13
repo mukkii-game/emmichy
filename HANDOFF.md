@@ -1,3 +1,16 @@
+# 現状(2026-10-13 更新・これが最優先)
+
+- **ブランチは main 1本に集約した。** 旧公開ブランチ pilot-audio-readable-retro は main に合流済み。今後の作業・PR はすべて main 向け(旧ブランチ向けの PR は作らない)。
+- 公開先: Cloudflare Workers https://emmichy.mucky-totoro.workers.dev (main に push すると deploy-cloudflare.yml が出す)。GitHub Pages は旧ブランチ配信のまま、repo 非公開化で止まる予定。
+- 中継(game-llm)は *.mucky-totoro.workers.dev からの呼び出しを許可済み。
+- 以下の英文の記録は合流前のもの(「main は触らない」等の記述は無効)。
+
+## 最新コードの統合確認（2026-10-13）
+
+Cloudflareの初回main50fa6b0は古い20261012-chii1を配信していた。最新pilotのスマホ会話欄・プレイヤー記憶・名前表示20261012-name1を失わないよう、Codexの最新341529fとmainのCloudflare設定をcodex/main-sync-20261013で統合する。Cloudflare設定・既存のClaudeワークフローを維持し、PRの宛先はmain。公開・ソース照合の結果は統合後に追記する。旧pilot向けPRは作らない。Claudeの調査は当面ユーザー仲介で受領し、自動依頼・再試行は再開しない。有料サービス追加は未許可。
+
+---
+
 # Current checkpoint — nickname display fix, 2026-10-12
 
 The user reproducedムッキーって呼ぶね→ムッ キーッテ ヨブネ. Root cause is display tokenization: kuromoji splitsムッ/キー; the saved name and original reply are intact. Prior static proper-name overrides did not cover arbitrary player nicknames. readableText now protects the learned nickname for each render, joins contiguous source katakana tokens, and retains explicit spaces between distinct words. App uses the same protected conversion for typing, history and continuations; cached user messages update when the nickname is first learned.

@@ -1,0 +1,156 @@
+{
+  "date": "2026-10-13",
+  "candidate": "cc8275dd51a8a3071553b571a97bf98c42b03817",
+  "merge": "d8ffc9f4b822a1a34f6882c3977488a0b7d3b3a6",
+  "release": "20261012-name1",
+  "workflow": 38376537979,
+  "publicURL": "https://emmichy.mucky-totoro.workers.dev/",
+  "tests": 186,
+  "LLMCalls": 0,
+  "results": [
+    {
+      "path": "index.html",
+      "match": true,
+      "sha256": "b9886b1501b5b69887aafd709371ae99ce1ccddb776099850b03dc3599ba15e4"
+    },
+    {
+      "path": "src/app.js",
+      "match": true,
+      "sha256": "72927a721c9cd99730fe4fe9662cb1921a7411dde9b50ae81239592160f0452f"
+    },
+    {
+      "path": "src/balance.js",
+      "match": true,
+      "sha256": "d025c644227d3904567dc190afd5f0ba277e1acabcc02c8a7af2c39c37df3c84"
+    },
+    {
+      "path": "src/chat.js",
+      "match": true,
+      "sha256": "d4f8c2fe13e1bc6445d07223e30099278b63c14c18ecbea753f7d5e529de087d"
+    },
+    {
+      "path": "src/chiikawa-attribution.js",
+      "match": true,
+      "sha256": "151df1586f9797efded9623db8554f5a333c1f120801b923b1d03a88bfd82e83"
+    },
+    {
+      "path": "src/chiikawa-db.js",
+      "match": true,
+      "sha256": "63701ccde9701e46e66840ab18ac6dfe58a8c0e6256e34bbdc1cec46385803af"
+    },
+    {
+      "path": "src/chiikawa-relations.js",
+      "match": true,
+      "sha256": "d7cbdf9dabbf8b4f89ddd62d3e146b7f77f0f6078892ff89568f4ee0a2217d16"
+    },
+    {
+      "path": "src/chiikawa-reminder.js",
+      "match": true,
+      "sha256": "ed61126246afae7583df5780ac10d809598af5d595bb796ef8e4c78ae103584b"
+    },
+    {
+      "path": "src/chiikawa-reviewed.js",
+      "match": true,
+      "sha256": "2c5033103bd78984daf44f23fdf1096b9616b19c8c0048e3a6f46a29ee3ffa6b"
+    },
+    {
+      "path": "src/chiikawa-theme.js",
+      "match": true,
+      "sha256": "f781afa6790a98d5d885307c6a99edcf0afefa5c9aa250457cdb653a34a5f6cf"
+    },
+    {
+      "path": "src/context.js",
+      "match": true,
+      "sha256": "d0fe6b39e77a9e4e805d29669ebe81e4850f6fcb0fb36a7ffb9705bb3d2b7f70"
+    },
+    {
+      "path": "src/dialogue-director.js",
+      "match": true,
+      "sha256": "9417280a13ce23eb314b81168321843849dbc4a2f360f6567870613cdc676b8d"
+    },
+    {
+      "path": "src/dialogue-grounding.js",
+      "match": true,
+      "sha256": "8763ab4760af3ea84423a6920072c24765a218ae668bb6fb6df22cc25ff08c32"
+    },
+    {
+      "path": "src/engine.js",
+      "match": true,
+      "sha256": "837c614e9f2edabe544aa1c68667681553d60b8c0d9061d1dcf499daf2a3dfd7"
+    },
+    {
+      "path": "src/fandom.js",
+      "match": true,
+      "sha256": "7f4c1aaa5f8e0e2a402ce7e9aaedbf7e3a8f145c7347b9efd7ea7f4acf4729d8"
+    },
+    {
+      "path": "src/filler.js",
+      "match": true,
+      "sha256": "e1c4f85b9761f2043831375d647287a4c8eea76f197674c5c6a733d8dc849620"
+    },
+    {
+      "path": "src/font.js",
+      "match": true,
+      "sha256": "494868272cfdd9af98d9993155f9c8cf49a69373c018cad162d1c1f2e49a655e"
+    },
+    {
+      "path": "src/japanese-learner.js",
+      "match": true,
+      "sha256": "af8c724618234968ba9d2ae9e010b2bc0f3c15013c3f0a896a2ab2e5ea075203"
+    },
+    {
+      "path": "src/moves.js",
+      "match": true,
+      "sha256": "250b8915edf34d1a9b7335c365cc60df27c8ffb71d4d20ace8ef125488e0e9af"
+    },
+    {
+      "path": "src/names.js",
+      "match": true,
+      "sha256": "0a5b98913a1a78f1fe2a295703d6e4ef421a312fc8bc9e3aac64a02e29c98b0f"
+    },
+    {
+      "path": "src/performance.js",
+      "match": true,
+      "sha256": "664bd842ca973919377f57b66ef44d0a6a7c44a07025fbd1a5e1196e6fd0013e"
+    },
+    {
+      "path": "src/player-memory.js",
+      "match": true,
+      "sha256": "72c7fab5ec7bbc61f6e99c295fd6907c5925b0f02ecc10c21ae13865db5e0f77"
+    },
+    {
+      "path": "src/profile.js",
+      "match": true,
+      "sha256": "ebd417782bc9e9b92c875b164825fb2e42053a033015894cce82a11333493620"
+    },
+    {
+      "path": "src/readable.js",
+      "match": true,
+      "sha256": "ba8dd9ebe11627264aaf8d4f0cd8031bb07057a0191824f0f0165bdb067d134a"
+    },
+    {
+      "path": "src/repertoire.js",
+      "match": true,
+      "sha256": "3c1e6e662f0c0352195152dc8e87a0649882ba65671ace6618e9c9ebbc9a66eb"
+    },
+    {
+      "path": "src/routing.js",
+      "match": true,
+      "sha256": "7ba4d6714040bb614b28199556c5e1c399c45634631b63dba64fde7d252122c8"
+    },
+    {
+      "path": "src/session.js",
+      "match": true,
+      "sha256": "ab9d129be48f999b469c36145e97442cfd83fb46bb2dde7fbfc865e8aa332159"
+    },
+    {
+      "path": "style.css",
+      "match": true,
+      "sha256": "508bd9cfe37b8626340ed6974fcf22ab334fe9549b9d2abcae52073fa1333ad7"
+    }
+  ],
+  "cors": {
+    "status": 204,
+    "allowOrigin": "https://emmichy.mucky-totoro.workers.dev"
+  }
+}

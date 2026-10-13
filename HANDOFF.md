@@ -7,7 +7,9 @@
 
 ## 最新コードの統合確認（2026-10-13）
 
-Cloudflareの初回main50fa6b0は古い20261012-chii1を配信していた。最新pilotのスマホ会話欄・プレイヤー記憶・名前表示20261012-name1を失わないよう、Codexの最新341529fとmainのCloudflare設定をcodex/main-sync-20261013で統合する。Cloudflare設定・既存のClaudeワークフローを維持し、PRの宛先はmain。公開・ソース照合の結果は統合後に追記する。旧pilot向けPRは作らない。Claudeの調査は当面ユーザー仲介で受領し、自動依頼・再試行は再開しない。有料サービス追加は未許可。
+Cloudflareの初回main50fa6b0は古い20261012-chii1を配信していた。最新のスマホ会話欄・プレイヤー記憶・名前表示20261012-name1と調査記録を保持し、Cloudflare設定と統合した。PR41はmainへマージ済み（d8ffc9f4b822a1a34f6882c3977488a0b7d3b3a6、候補cc8275dd51a8a3071553b571a97bf98c42b03817）。Cloudflare公開38376537979成功、28個の変更対象HTML/CSS/JSが候補と一致。186件のローカルテスト合格。中継の新公開URLからのOPTIONSも204と一致するAllow-Originを確認（通常のブラウザ用User-Agent）。LLM生成0回。docs/public-cloudflare-main-20261013.jsonに記録。
+
+今後はmainが唯一の統合・公開ブランチで、PRもmain向け。旧pilot向けPRは作らない。既存のCloudflare設定・Claudeワークフローを維持したが、Claude調査は当面ユーザー仲介で受領し、自動依頼・再試行は再開しない。有料サービス追加は未許可。新URLのブラウザ記憶は旧GitHub Pagesとは別で、記憶の自動移送は未実装。
 
 ---
 

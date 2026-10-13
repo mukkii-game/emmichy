@@ -1,3 +1,9 @@
+# 2026-10-13: main and Cloudflare integration verified
+
+Initial Cloudflare main50fa6b0 served the old20261012-chii1. Restored latest previously tested phone chat space, browser memory, curated research and nickname display while preserving the new Wrangler/deploy workflow. PR41 mergedmain asd8ffc9f4; candidatecc8275d.186 local tests pass. Cloudflare deployment38376537979 completed with the actual Deploy step successful. All28 changed public HTML/CSS/JS files match the candidate byte-for-byte. New-origin relay OPTIONS returns204 and Access-Control-Allow-Origin=https://emmichy.mucky-totoro.workers.dev using a browser User-Agent. Evidence docs/public-cloudflare-main-20261013.json. No new LLM generation, physical handset check or human evaluation. Browser data is origin-specific; old Pages memories are not automatically transferred.
+
+---
+
 # 2026-10-12: nickname rendering regression
 
 Before:ムッキーって呼ぶね。→ムッ キーッテ ヨブネ。 kuromoji tokens areムッ(adverb),キー(noun),って(particle). Saved nickname and raw reply were correct; the error occurs locally during reading/spacing. Static character-name overrides did not cover arbitrary nicknames.

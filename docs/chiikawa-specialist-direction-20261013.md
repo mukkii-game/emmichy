@@ -21,6 +21,8 @@ First test a neutral specialist conversation using the same verified evidence, t
 
 ## Priority scope
 
+The user added public X/Twitter, Threads, Instagram and web-news topic scouting. Store dated topic snapshots separately from canon, with original official evidence and independently recorded discussion/engagement evidence. A publisher calling something topical is media-reported attention, not a measured viral post. Use the player's present character/scene/interest as the bridge. Curated updates happen outside player turns; no new automatic monitor or per-turn browsing is implied. Initial policy, two grounded candidates and access limitations: research/chiikawa/topics/README.md and snapshot-20261013.json. These are research inputs, not runtime integration.
+
 First build a few deep, verified conversation clusters (examination/encouragement, island/movie, favourite characters and food), each supporting question→follow-up→correction→opinion→related goods/events. Then expand coverage. Do not equate thousands of aliases or canned-line counts with specialist knowledge. Do not declare official-bot accuracy until event/product updates and scene assertions are validated.
 
 Official source entry points verified during this turn:

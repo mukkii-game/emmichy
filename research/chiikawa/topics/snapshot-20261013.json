@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-13",
+  "researcher": "Codex",
+  "runtimeImported": false,
+  "coverage": {
+    "webNews": "記事本文確認",
+    "officialWeb": "商品・イベント本文確認",
+    "x": "INSIDE記事がリンクした公式元投稿を取得試行、403。本文・反応数未確認",
+    "threads": "公開検索で投稿本文・反応数取得不可",
+    "instagram": "公開検索で投稿本文・反応数取得不可"
+  },
+  "topics": [
+    {
+      "id": "goods:parallel-world:strong-hachiware:20260928",
+      "subjectIds": ["hachiware"],
+      "tags": ["グッズ", "パラレルワールド", "姿の違い", "飾る"],
+      "publishedAt": "不明",
+      "checkedAt": "2026-10-13",
+      "fact": "公式の商品ページに『パラレルワールド！？ マスコット（強くなったハチワレ）』が掲載され、受注期間は2026年9月28日18時から10月13日正午、出荷は12月中旬予定と案内されている。",
+      "factSources": [
+        {
+          "url": "https://chiikawamarket.jp/collections/newitems/products/4571609344117",
+          "publisher": "ちいかわマーケット",
+          "kind": "official-goods",
+          "bodyChecked": true
+        }
+      ],
+      "attention": {
+        "status": "media-reported",
+        "sources": [
+          {
+            "url": "https://www.inside-games.jp/article/2026/09/25/188221.html",
+            "publisher": "INSIDE",
+            "kind": "news",
+            "publishedAt": "2026-09-25",
+            "bodyChecked": true,
+            "evidence": "記事の見出し・本文が強くなったハチワレを『話題』と紹介している。元投稿の反響の規模までは検証していない。"
+          },
+          {
+            "url": "https://x.com/chiikawa_market/status/2103252423284547898",
+            "publisher": "ちいかわマーケット（記事のリンク先）",
+            "kind": "x",
+            "bodyChecked": false,
+            "evidence": "INSIDEからリンクを辿ったが403。投稿本文・投稿日時・反応数の根拠には使わない。"
+          }
+        ],
+        "metrics": [],
+        "limitations": "媒体が話題と報道。投稿を直接読んだ／大流行しているとは言わない。原作の場面やアニメ話数はこの商品の根拠だけでは採用しない。"
+      },
+      "conversation": {
+        "connectFrom": ["ハチワレの姿の違いを話した後", "ぬいぐるみを飾る話", "好きなグッズを聞かれた時"],
+        "personalAngle": "創作の感想案：アタシ、いつものハチワレと並べたい。同じ名前なのに、雰囲気が違うの、気になっちゃう。",
+        "question": "部屋に飾るなら、いつものハチワレとこの姿、どっちが好き？",
+        "avoid": ["買った・持っていると断言", "現在予約できると無確認で案内", "商品説明から原作の出来事や動機を創作", "予約終了を人気の証拠にする"]
+      },
+      "spoiler": "minor",
+      "temporal": {
+        "validFrom": "2026-09-28T18:00:00+09:00",
+        "validUntil": "2026-10-13T12:00:00+09:00",
+        "recheckBy": "2026-10-20",
+        "rule": "validUntilは予約期間の終了。商品そのものの存在期限ではない。予約可能・在庫・発送実績は再確認する。過去の商品案内として話せる。"
+      },
+      "reviewStatus": "research-only"
+    },
+    {
+      "id": "event:chiikawa-park:christmas:20261120",
+      "subjectIds": ["chiikawa", "chiikawa-park"],
+      "tags": ["パーク", "クリスマス", "衣装", "写真", "冬"],
+      "publishedAt": "2026-10-13",
+      "checkedAt": "2026-10-13",
+      "fact": "ちいかわパーク公式が11月20日から12月25日のクリスマス企画を発表。限定衣装のグリーティングとSNS投稿キャンペーンを予定し、投稿キャンペーンの詳細は後日案内としている。",
+      "factSources": [
+        {
+          "url": "https://chiikawapark-tokyo.jp/news/cm5k0_3-gq5p/",
+          "publisher": "ちいかわパーク",
+          "kind": "official-event",
+          "bodyChecked": true
+        }
+      ],
+      "attention": {
+        "status": "unverified",
+        "sources": [],
+        "metrics": [],
+        "limitations": "新着公式告知であり、SNSで特に話題かは未確認。将来の投稿キャンペーンは現在の反響の証拠ではない。"
+      },
+      "conversation": {
+        "connectFrom": ["パークの質問", "クリスマスの話", "キャラクターの衣装や写真の話"],
+        "personalAngle": "創作の感想案：冬の衣装、見たいな。写真を撮るなら、あとで何度も見たくなる一枚にしたい。",
+        "question": "冬の衣装のちいかわたち、誰と写真を撮りたい？",
+        "avoid": ["実際に訪問したと断言", "今もう開催中と言う", "登場人物や日時を追加で断言", "キャンペーンの未公開条件を補う"]
+      },
+      "spoiler": "none",
+      "temporal": {
+        "validFrom": "2026-11-20",
+        "validUntil": "2026-12-25",
+        "recheckBy": "2026-10-20",
+        "rule": "発表時点の予定。開始前は予定、終了後は過去形。詳細・変更・中止・在庫は公式再確認する。"
+      },
+      "reviewStatus": "research-only"
+    }
+  ]
+}

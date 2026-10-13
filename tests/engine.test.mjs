@@ -8,14 +8,26 @@ test('remembers a name through serialization and recalls it',()=>{let r=turn('�
 test('detects changed preference before rerouting to Chiikawa',()=>{let r=turn('猫 が 好き');r=turn('猫 が 嫌い',r.state);assert.equal(r.kind,'contradiction');assert.match(r.text,/ネコ ハ スキ/);assert.equal(r.state.likes['ネコ'],-1);});
 test('remembers preferences rather than claiming fabricated memory',()=>{assert.doesNotMatch(turn('ナニ ガ スキ？').text,/ネコ/);const a=turn('ネコ ガ スキ');assert.match(turn('ナニ ガ スキ？',a.state).text,/ネコ/);});
 test('arithmetic is actual arithmetic and handles division by zero',()=>{assert.match(turn('17 * 23').text,/391/);assert.match(turn('4 / 0').text,/ゼロ/);});
-test('redirects diverse topics, but preserves goodbye/restart',()=>{for(const q of ['宇宙','仕事 疲れた','恋愛','天気','政治','AI','リンゴ'])assert.match(turn(q).text,/チイカワ|ハチワレ|ウサギ|シーサー/);let r=turn('バイバイ');assert.equal(r.state.ended,true);r=turn('ウチュウ',r.state);assert.equal(r.kind,'asleep');r=turn('コンニチハ',r.state);assert.equal(r.state.ended,false);});
-test('resistance becomes a topic-switching gag',()=>assert.match(turn('チイカワ イガイ ノ ハナシ').text,/ハチワレ|ウサギ|ガクシュウ/));
-test('repeated compliments expose the intent',()=>{let s=freshState();for(const q of ['カワイイ','キレイ','ステキ'])s=turn(q,s).state;assert.equal(s.praise,3);assert.match(s.history.at(-1).text,/サンカイメ/);});
+test('ordinary topics stay ordinary and goodbye/restart survives',()=>{for(const q of ['宇宙','仕事 疲れた','恋愛','天気','政治','AI','リンゴ'])assert.doesNotMatch(turn(q).text,/チイカワ|ハチワレ|シーサー/);let r=turn('バイバイ');assert.equal(r.state.ended,true);r=turn('ウチュウ',r.state);assert.equal(r.kind,'asleep');r=turn('コンニチハ',r.state);assert.equal(r.state.ended,false);});
+test('resistance is respected',()=>assert.match(turn('チイカワ イガイ ノ ハナシ').text,/ホカノ ハナシ/));
 test('kana conversion preserves voiced marks and ASCII digits',()=>{assert.equal(displayText('がっこう 17'),'ｶﾞｯｺｳ 17');assert.equal(normalize('ﾈｺ　が　好き'),'ネコ ガ スキ');});
 test('news expires; future release is explicitly a plan',()=>{assert.equal(activeNews('2030-01-01').length,0);assert.equal(activeNews('2026-08-01').length,0);assert.match(activeNews('2026-10-04').find(n=>n.id==='phone').line,/ヨテイ/);assert.equal(activeNews('2026-10-31').some(n=>n.id==='phone'),false);});
 test('state remains bounded and ignores corrupt saves',()=>{let s=freshState();for(let i=0;i<40;i++)s=turn(`モノ${i} ガ スキ`,s).state;assert.equal(Object.keys(s.likes).length,24);assert.equal(s.history.length,40);assert.deepEqual(restoreState({version:8}),freshState());});
-test('model output must obey kana, length, and obsession constraints',()=>{assert.equal(validModelText('今日はニュースです'),null);assert.equal(validModelText('ソウネ'),null);assert.ok(validModelText('ソウネ チイカワ ナラ ワカルワ'));});
-test('Shisa anxiety survives a topic change and reassurance reduces it',()=>{let a=turn('シーサー ガ シンパイ');assert.equal(a.state.fan.worry,2);assert.equal(a.mood,'worried');a=turn('コンニチハ',a.state);a=turn('天気',a.state);assert.equal(a.kind,'fan-distraction');assert.match(a.text,/シーサー/);a=turn('ダイジョウブ',a.state);assert.equal(a.state.fan.worry,0);assert.equal(a.mood,'soft');});
+test('player recovery and lack of energy are not mistaken for Emmichy\'s own condition',()=>{
+ for(const input of ['ちょっと元気出た','元気が出てきた','スコシ ゲンキ デタ']){
+  const r=respond(input,freshState());assert.equal(r.kind,'comfort');assert.match(r.text,/元気出たのね/);assert.doesNotMatch(r.text,/ツウデン/);
+ }
+ assert.match(respond('元気が出ない',freshState()).text,/まだ元気が出ない/);
+ for(const input of ['元気出た？','友達が元気出た','元気なの？'])assert.notEqual(respond(input,freshState()).text,'少し元気出たのね。アタシも、ちょっとうれしい。');
+});
+test('model output must obey kana, length, and obsession constraints',()=>{assert.equal(validModelText('今日はニュースです'),null);assert.equal(validModelText('ソウネ'),'ソウネ');assert.ok(validModelText('ソウネ チイカワ ナラ ワカルワ'));});
+test('Shisa anxiety survives a topic change and reassurance reduces it',()=>{let a=turn('シーサー ガ シンパイ');assert.equal(a.state.fan.worry,2);assert.equal(a.mood,'worried');a=turn('コンニチハ',a.state);a=turn('天気',a.state);assert.doesNotMatch(a.text,/シーサー/);a=turn('ダイジョウブ',a.state);assert.equal(a.state.fan.worry,0);assert.equal(a.mood,'soft');});
 test('film enthusiasm has its own state and preserves title',()=>{const a=turn('映画ちいかわ');assert.equal(a.kind,'movie');assert.equal(a.state.fan.excitement,2);assert.equal(a.mood,'excited');assert.match(a.text,/ニンギョノ シマノ ヒミツ/);assert.equal(restoreState(JSON.parse(JSON.stringify(a.state))).fan.lastTopic,'movie');});
-test('uses concept bridges and remembers the topic for why/continue',()=>{let a=turn('資格の試験が不安');assert.equal(a.kind,'association');assert.equal(a.state.topic,'study');assert.match(a.text,/シーサー/);a=turn('どうして？',a.state);assert.equal(a.kind,'association');assert.equal(a.state.topic,'study');assert.match(a.text,/シーサー/);});
-test('raw kanji carries travel associations through limited kana input',()=>{const a=turn('旅行したい');assert.equal(a.state.topic,'travel');assert.match(a.text,/エイガ チイカワ|ニンギョ/);});
+test('uses concept bridges and remembers the topic for why/continue',()=>{let a=turn('資格の試験が不安');assert.equal(a.state.topic,'study');assert.doesNotMatch(a.text,/シーサー/);a=turn('どうして？',a.state);assert.equal(a.state.topic,'study');assert.doesNotMatch(a.text,/シーサー/);});
+test('raw kanji carries travel associations through limited kana input',()=>{const a=turn('旅行したい');assert.equal(a.state.topic,'travel');assert.match(a.text,/ドコニ イキタイ/);});
+test('explicit farewell phrases end immediately without treating a quoted farewell as an exit',()=>{
+ for(const word of ['さようなら','バイバイ','じゃあバイバイ！','またね','今日はここまで','今日は寝るね、またね','今日はここまで。弟さんにもよろしく、バイバイ！'])assert.equal(respond(word,freshState()).kind,'bye');
+ assert.notEqual(respond('バイバイってどういう意味？',freshState()).kind,'bye');
+ assert.notEqual(respond('合言葉はバイバイ',freshState()).kind,'bye');
+ assert.notEqual(respond('「またね」って言われた',freshState()).kind,'bye');
+});

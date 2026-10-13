@@ -1,0 +1,1485 @@
+{
+  "checkedAt": "2026-10-09",
+  "count": 182,
+  "spellings": 360,
+  "episodeIndexCount": 354,
+  "limitations": "Selected recognition cues, not complete canon. Episode presence only; licensed goods and toy-only furniture are separate sources. Prior rows retained, source coverage does not newly verify every old fact.",
+  "entries": [
+    {
+      "name": "ナガノ",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/index.html"
+    },
+    {
+      "name": "トクマルシューゴ",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/index.html"
+    },
+    {
+      "name": "動画工房",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/index.html"
+    },
+    {
+      "name": "青木遥",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/index.html"
+    },
+    {
+      "name": "田中誠人",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/index.html"
+    },
+    {
+      "name": "小澤亜李",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/index.html"
+    },
+    {
+      "name": "井口裕香",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/index.html"
+    },
+    {
+      "name": "淺井孝行",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/index.html"
+    },
+    {
+      "name": "内田雄馬",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/index.html"
+    },
+    {
+      "name": "島袋美由利",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/index.html"
+    },
+    {
+      "name": "春海百乃",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/index.html"
+    },
+    {
+      "name": "杉田智和",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/index.html"
+    },
+    {
+      "name": "東地宏樹",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/index.html"
+    },
+    {
+      "name": "松岡禎丞",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/index.html"
+    },
+    {
+      "name": "青山吉能",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/index.html"
+    },
+    {
+      "name": "三宅健太",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/index.html"
+    },
+    {
+      "name": "諸星すみれ",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/index.html"
+    },
+    {
+      "name": "長縄まりあ",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/index.html"
+    },
+    {
+      "name": "篠原侑",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/index.html"
+    },
+    {
+      "name": "内山茉莉",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/index.html"
+    },
+    {
+      "name": "ひとりごつ",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/index.html"
+    },
+    {
+      "name": "及川啓",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://chiikawa.toho-movie.jp/index.html"
+    },
+    {
+      "name": "サイピク",
+      "category": "people",
+      "contextOnly": false,
+      "source": "https://chiikawa.toho-movie.jp/index.html"
+    },
+    {
+      "name": "人魚",
+      "category": "character",
+      "contextOnly": false,
+      "source": "https://chiikawa.toho-movie.jp/atm/characters.html"
+    },
+    {
+      "name": "セイレーン",
+      "category": "character",
+      "contextOnly": false,
+      "source": "https://chiikawa.toho-movie.jp/atm/characters.html"
+    },
+    {
+      "name": "ヒトハ",
+      "category": "character",
+      "contextOnly": false,
+      "source": "https://chiikawa.toho-movie.jp/atm/characters.html"
+    },
+    {
+      "name": "フタバ",
+      "category": "character",
+      "contextOnly": false,
+      "source": "https://chiikawa.toho-movie.jp/atm/characters.html"
+    },
+    {
+      "name": "島二郎",
+      "category": "character",
+      "contextOnly": false,
+      "source": "https://chiikawa.toho-movie.jp/atm/characters.html"
+    },
+    {
+      "name": "あのこ",
+      "category": "character",
+      "contextOnly": false,
+      "source": "https://chiikawamarket.jp/collections/"
+    },
+    {
+      "name": "でかつよ",
+      "category": "character",
+      "contextOnly": false,
+      "source": "https://chiikawamarket.jp/collections/"
+    },
+    {
+      "name": "むちゃうマン",
+      "category": "character",
+      "contextOnly": false,
+      "source": "https://chiikawamarket.jp/collections/"
+    },
+    {
+      "name": "カブトムシ",
+      "category": "character",
+      "contextOnly": false,
+      "source": "https://chiikawamarket.jp/collections/"
+    },
+    {
+      "name": "パジャマパーティーズ",
+      "category": "character",
+      "contextOnly": false,
+      "source": "https://chiikawamarket.jp/collections/"
+    },
+    {
+      "name": "チャルメラ",
+      "category": "brand",
+      "contextOnly": false,
+      "source": "https://www.nissin.com/jp/company/news/10925/"
+    },
+    {
+      "name": "明星食品",
+      "category": "brand",
+      "contextOnly": false,
+      "source": "https://www.nissin.com/jp/company/news/10925/"
+    },
+    {
+      "name": "本田翼",
+      "category": "brand",
+      "contextOnly": false,
+      "source": "https://www.nissin.com/jp/company/news/10925/"
+    },
+    {
+      "name": "オリオンビール",
+      "category": "brand",
+      "contextOnly": false,
+      "source": "https://www.orionbeer.co.jp/utility/history/h2025/0410.html"
+    },
+    {
+      "name": "シーサーのおみやげやさん",
+      "category": "brand",
+      "contextOnly": false,
+      "source": "https://www.orionbeer.co.jp/utility/history/h2025/0410.html"
+    },
+    {
+      "name": "オリオンクリアフリー",
+      "category": "brand",
+      "contextOnly": false,
+      "source": "https://www.orionbeer.co.jp/utility/history/h2026/0714.html"
+    },
+    {
+      "name": "チータラ",
+      "category": "food",
+      "contextOnly": false,
+      "source": "https://www.natori.co.jp/dcms_media/other/NR20231017.pdf"
+    },
+    {
+      "name": "なとり",
+      "category": "food",
+      "contextOnly": false,
+      "source": "https://www.natori.co.jp/dcms_media/other/NR20231017.pdf"
+    },
+    {
+      "name": "むちゃうまヨーグルト",
+      "category": "item",
+      "contextOnly": false,
+      "source": "https://www.segatoys.co.jp/brand/chiikawahouse/chiikawaouchi/"
+    },
+    {
+      "name": "くまさんポシェット",
+      "category": "item",
+      "contextOnly": false,
+      "source": "https://www.segatoys.co.jp/brand/chiikawahouse/chiikawaouchi/"
+    },
+    {
+      "name": "ちいかわのおうち",
+      "category": "item",
+      "contextOnly": false,
+      "source": "https://www.segatoys.co.jp/brand/chiikawahouse/chiikawaouchi/"
+    },
+    {
+      "name": "プリンハウス",
+      "category": "item",
+      "contextOnly": false,
+      "source": "https://www.segatoys.co.jp/company/press_release/pdf/20230531.pdf"
+    },
+    {
+      "name": "無限白米湧きドコロ",
+      "category": "item",
+      "contextOnly": false,
+      "source": "https://www.segatoys.co.jp/company/press_release/pdf/20230531.pdf"
+    },
+    {
+      "name": "さすまた",
+      "category": "item",
+      "contextOnly": false,
+      "source": "https://www.segatoys.co.jp/company/press_release/pdf/20230531.pdf"
+    },
+    {
+      "name": "オムライスのベッド",
+      "category": "item",
+      "contextOnly": false,
+      "source": "https://www.segatoys.co.jp/company/press_release/pdf/20230531.pdf"
+    },
+    {
+      "name": "パイシチューのお風呂",
+      "category": "item",
+      "contextOnly": false,
+      "source": "https://www.segatoys.co.jp/company/press_release/pdf/20230531.pdf"
+    },
+    {
+      "name": "スライスチーズの服",
+      "category": "item",
+      "contextOnly": false,
+      "source": "https://www.segatoys.co.jp/company/press_release/pdf/20230531.pdf"
+    },
+    {
+      "name": "タコウインナーのドレッサー",
+      "category": "item",
+      "contextOnly": false,
+      "source": "https://www.segatoys.co.jp/company/press_release/pdf/20230531.pdf"
+    },
+    {
+      "name": "ツタのはしご",
+      "category": "item",
+      "contextOnly": false,
+      "source": "https://www.segatoys.co.jp/company/press_release/pdf/20230531.pdf"
+    },
+    {
+      "name": "虹の橋",
+      "category": "item",
+      "contextOnly": false,
+      "source": "https://www.segatoys.co.jp/company/press_release/pdf/20230531.pdf"
+    },
+    {
+      "name": "スフィンクス",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "002"
+      ]
+    },
+    {
+      "name": "パイシチュー",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "003"
+      ]
+    },
+    {
+      "name": "ヤクルト",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "007",
+        "008"
+      ]
+    },
+    {
+      "name": "キラカード",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "007"
+      ]
+    },
+    {
+      "name": "たべっ子どうぶつ",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "009"
+      ]
+    },
+    {
+      "name": "ブタメン",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "009"
+      ]
+    },
+    {
+      "name": "ラッキーマンボウ",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "014",
+        "035"
+      ]
+    },
+    {
+      "name": "なんとかバニア",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "021",
+        "022",
+        "023"
+      ]
+    },
+    {
+      "name": "ケチャップパスタ",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "023"
+      ]
+    },
+    {
+      "name": "カルメ焼き",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "025"
+      ]
+    },
+    {
+      "name": "ふしぎな杖",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "036",
+        "037",
+        "038",
+        "039"
+      ]
+    },
+    {
+      "name": "ニンニクカラメ",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "042"
+      ]
+    },
+    {
+      "name": "ギチギチ",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "051"
+      ]
+    },
+    {
+      "name": "討伐ランキング",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "053"
+      ]
+    },
+    {
+      "name": "上位ランカー",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "053"
+      ]
+    },
+    {
+      "name": "あみあぶら",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "055"
+      ]
+    },
+    {
+      "name": "三ツ星レストラン",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "070",
+        "071",
+        "072",
+        "073",
+        "074",
+        "075"
+      ]
+    },
+    {
+      "name": "擬態型",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "077"
+      ]
+    },
+    {
+      "name": "けん玉おじさん",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "084"
+      ]
+    },
+    {
+      "name": "ほんこわ",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "096",
+        "097",
+        "098",
+        "099",
+        "100"
+      ]
+    },
+    {
+      "name": "肉みがき",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "103"
+      ]
+    },
+    {
+      "name": "むちゃうまプリン",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "111"
+      ]
+    },
+    {
+      "name": "すきやきの歌",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "112"
+      ]
+    },
+    {
+      "name": "いもむしパン",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "125"
+      ]
+    },
+    {
+      "name": "パジャマのつどい",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "133"
+      ]
+    },
+    {
+      "name": "おかしのまちおか",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "136"
+      ]
+    },
+    {
+      "name": "ほめられリボン",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "160",
+        "161",
+        "162",
+        "163",
+        "164"
+      ]
+    },
+    {
+      "name": "さたぱんびん",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "165"
+      ]
+    },
+    {
+      "name": "さんぴん茶",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "165"
+      ]
+    },
+    {
+      "name": "ムニヤーム",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "171"
+      ]
+    },
+    {
+      "name": "アリジゴク",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "171"
+      ]
+    },
+    {
+      "name": "オデと牢獄",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "189",
+        "190",
+        "191",
+        "192",
+        "193",
+        "194",
+        "195",
+        "196",
+        "197",
+        "198"
+      ]
+    },
+    {
+      "name": "黒い流れ星",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "213",
+        "215",
+        "216",
+        "217",
+        "218",
+        "219",
+        "220",
+        "221",
+        "222",
+        "223",
+        "224",
+        "225",
+        "226",
+        "227",
+        "228",
+        "229",
+        "230",
+        "231",
+        "232",
+        "233",
+        "234",
+        "235"
+      ]
+    },
+    {
+      "name": "ディナーロール",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "214"
+      ]
+    },
+    {
+      "name": "柿の種わさび",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "241"
+      ]
+    },
+    {
+      "name": "ホッピー",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "243"
+      ]
+    },
+    {
+      "name": "お酒の資格",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "243"
+      ]
+    },
+    {
+      "name": "シーサーの資格",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "249",
+        "250",
+        "251",
+        "252",
+        "253",
+        "254",
+        "255",
+        "256"
+      ]
+    },
+    {
+      "name": "ギョニソ",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "259"
+      ]
+    },
+    {
+      "name": "純露",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "260"
+      ]
+    },
+    {
+      "name": "みかんそうめん",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "261"
+      ]
+    },
+    {
+      "name": "泡盛コーヒー",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "264"
+      ]
+    },
+    {
+      "name": "湧きドコロ",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "068",
+        "265",
+        "266",
+        "267",
+        "268"
+      ]
+    },
+    {
+      "name": "つっぱっぱ",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "274"
+      ]
+    },
+    {
+      "name": "島らっきょう",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "276"
+      ]
+    },
+    {
+      "name": "だだちゃ豆",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "279"
+      ]
+    },
+    {
+      "name": "たこぎ",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "279",
+        "280"
+      ]
+    },
+    {
+      "name": "赤福",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "282"
+      ]
+    },
+    {
+      "name": "焼きそばごはん",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "288"
+      ]
+    },
+    {
+      "name": "拾魔",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "291",
+        "292",
+        "293",
+        "294",
+        "295",
+        "296",
+        "297",
+        "298",
+        "299"
+      ]
+    },
+    {
+      "name": "まもる君",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "300"
+      ]
+    },
+    {
+      "name": "あまえん本",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "304"
+      ]
+    },
+    {
+      "name": "山姥",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "306",
+        "307",
+        "308",
+        "309",
+        "310",
+        "311"
+      ]
+    },
+    {
+      "name": "おまけケシゴム",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "312"
+      ]
+    },
+    {
+      "name": "鬼カレー",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "315",
+        "316",
+        "317"
+      ]
+    },
+    {
+      "name": "ドラ焼き布団",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "321"
+      ]
+    },
+    {
+      "name": "軸汁",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "321"
+      ]
+    },
+    {
+      "name": "おちょコーラ",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "334"
+      ]
+    },
+    {
+      "name": "ラーメン「山」",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "342"
+      ]
+    },
+    {
+      "name": "コンビーフ丼",
+      "category": "term",
+      "contextOnly": false,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "344"
+      ]
+    },
+    {
+      "name": "かためのプリン",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "001"
+      ]
+    },
+    {
+      "name": "ホットケーキ",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "001"
+      ]
+    },
+    {
+      "name": "イカ",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "003",
+        "172",
+        "173",
+        "174",
+        "175",
+        "176",
+        "177"
+      ]
+    },
+    {
+      "name": "ブロッコリー",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "004"
+      ]
+    },
+    {
+      "name": "ピザまん",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "004"
+      ]
+    },
+    {
+      "name": "ドラ焼き",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "006",
+        "321"
+      ]
+    },
+    {
+      "name": "パック寿司",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "012"
+      ]
+    },
+    {
+      "name": "焼きマシュマロ",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "013"
+      ]
+    },
+    {
+      "name": "酢こんぶ",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "014"
+      ]
+    },
+    {
+      "name": "カヌレ",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "015"
+      ]
+    },
+    {
+      "name": "ポシェット",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "028"
+      ]
+    },
+    {
+      "name": "焼きしいたけ",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "045"
+      ]
+    },
+    {
+      "name": "クエン酸",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "049"
+      ]
+    },
+    {
+      "name": "ふりかけ",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "067"
+      ]
+    },
+    {
+      "name": "鮭とば",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "069"
+      ]
+    },
+    {
+      "name": "たこ焼きパーティー",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "083"
+      ]
+    },
+    {
+      "name": "ジャムトースト",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "104"
+      ]
+    },
+    {
+      "name": "からあげレモン",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "105"
+      ]
+    },
+    {
+      "name": "ビリーブ",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "119"
+      ]
+    },
+    {
+      "name": "パジャマ",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "046",
+        "127",
+        "133",
+        "144",
+        "145",
+        "146",
+        "147",
+        "148",
+        "149",
+        "150",
+        "151",
+        "152",
+        "153",
+        "154",
+        "155"
+      ]
+    },
+    {
+      "name": "たこウィンナー",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "135"
+      ]
+    },
+    {
+      "name": "アラザン",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "158"
+      ]
+    },
+    {
+      "name": "ウィンナーコーヒー",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "179"
+      ]
+    },
+    {
+      "name": "締めのステーキ",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "180"
+      ]
+    },
+    {
+      "name": "缶クッキー",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "181"
+      ]
+    },
+    {
+      "name": "フレンチトースト",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "187"
+      ]
+    },
+    {
+      "name": "青雲",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "199"
+      ]
+    },
+    {
+      "name": "かまぼこ",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "244"
+      ]
+    },
+    {
+      "name": "かき氷シロップ",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "258"
+      ]
+    },
+    {
+      "name": "あげ玉",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "261"
+      ]
+    },
+    {
+      "name": "寄生",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "262",
+        "263"
+      ]
+    },
+    {
+      "name": "カップ焼きそば",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "288"
+      ]
+    },
+    {
+      "name": "デラウェア",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "300"
+      ]
+    },
+    {
+      "name": "ダブルクリーム",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "333"
+      ]
+    },
+    {
+      "name": "玉こんにゃく",
+      "category": "context-item",
+      "contextOnly": true,
+      "source": "https://www.anime-chiikawa.jp/json/episodeHistories.json",
+      "episodeNumbers": [
+        "338"
+      ]
+    },
+    {
+      "name": "ちいかわ",
+      "category": "name",
+      "contextOnly": false,
+      "source": "https://www.chiikawaofficial.com/characters"
+    },
+    {
+      "name": "ハチワレ",
+      "category": "name",
+      "contextOnly": false,
+      "source": "https://www.chiikawaofficial.com/characters"
+    },
+    {
+      "name": "うさぎ",
+      "category": "name",
+      "contextOnly": true,
+      "source": "https://www.chiikawaofficial.com/characters"
+    },
+    {
+      "name": "モモンガ",
+      "category": "name",
+      "contextOnly": false,
+      "source": "https://www.chiikawaofficial.com/characters"
+    },
+    {
+      "name": "くりまんじゅう",
+      "category": "name",
+      "contextOnly": false,
+      "source": "https://www.chiikawaofficial.com/characters"
+    },
+    {
+      "name": "ラッコ",
+      "category": "name",
+      "contextOnly": true,
+      "source": "https://www.chiikawaofficial.com/characters"
+    },
+    {
+      "name": "シーサー",
+      "category": "name",
+      "contextOnly": false,
+      "source": "https://www.chiikawaofficial.com/characters"
+    },
+    {
+      "name": "古本屋",
+      "category": "name",
+      "contextOnly": true,
+      "source": "https://www.chiikawaofficial.com/characters"
+    },
+    {
+      "name": "ポシェットの鎧さん",
+      "category": "name",
+      "contextOnly": false,
+      "source": "https://www.chiikawaofficial.com/characters"
+    },
+    {
+      "name": "労働の鎧さん",
+      "category": "name",
+      "contextOnly": false,
+      "source": "https://www.chiikawaofficial.com/characters"
+    },
+    {
+      "name": "ラーメンの鎧さん",
+      "category": "name",
+      "contextOnly": false,
+      "source": "https://www.chiikawaofficial.com/characters"
+    },
+    {
+      "name": "鎧さん",
+      "category": "name",
+      "contextOnly": false,
+      "source": "https://www.chiikawaofficial.com/characters"
+    },
+    {
+      "name": "オデ",
+      "category": "name",
+      "contextOnly": true,
+      "source": "https://chiikawamarket.jp/collections/"
+    },
+    {
+      "name": "キメラ",
+      "category": "name",
+      "contextOnly": false,
+      "source": "https://chiikawamarket.jp/collections/"
+    },
+    {
+      "name": "ゴブリン",
+      "category": "name",
+      "contextOnly": false,
+      "source": "https://chiikawamarket.jp/collections/"
+    },
+    {
+      "name": "星",
+      "category": "name",
+      "contextOnly": true,
+      "source": "https://chiikawamarket.jp/collections/"
+    },
+    {
+      "name": "討伐",
+      "category": "name",
+      "contextOnly": false,
+      "source": "repo:src/fandom.js"
+    },
+    {
+      "name": "草むしり",
+      "category": "name",
+      "contextOnly": false,
+      "source": "repo:src/fandom.js"
+    },
+    {
+      "name": "草むしり検定",
+      "category": "name",
+      "contextOnly": false,
+      "source": "repo:src/fandom.js"
+    },
+    {
+      "name": "スーパーアルバイター",
+      "category": "name",
+      "contextOnly": false,
+      "source": "repo:src/fandom.js"
+    },
+    {
+      "name": "郎",
+      "category": "name",
+      "contextOnly": true,
+      "source": "repo:src/fandom.js"
+    },
+    {
+      "name": "サパー",
+      "category": "name",
+      "contextOnly": false,
+      "source": "repo:src/fandom.js"
+    },
+    {
+      "name": "ヤハ",
+      "category": "name",
+      "contextOnly": false,
+      "source": "repo:src/fandom.js"
+    },
+    {
+      "name": "ウラ",
+      "category": "name",
+      "contextOnly": false,
+      "source": "repo:src/fandom.js"
+    },
+    {
+      "name": "ンショ",
+      "category": "name",
+      "contextOnly": false,
+      "source": "repo:src/fandom.js"
+    },
+    {
+      "name": "三ツ星",
+      "category": "name",
+      "contextOnly": false,
+      "source": "repo:src/fandom.js"
+    },
+    {
+      "name": "無限白米",
+      "category": "name",
+      "contextOnly": false,
+      "source": "repo:src/fandom.js"
+    },
+    {
+      "name": "むちゃうま",
+      "category": "name",
+      "contextOnly": false,
+      "source": "repo:src/fandom.js"
+    },
+    {
+      "name": "なんとかなれ",
+      "category": "name",
+      "contextOnly": false,
+      "source": "repo:src/fandom.js"
+    },
+    {
+      "name": "流れ星",
+      "category": "name",
+      "contextOnly": false,
+      "source": "repo:src/fandom.js"
+    },
+    {
+      "name": "チラシ",
+      "category": "name",
+      "contextOnly": true,
+      "source": "repo:src/fandom.js#chiikawa-2"
+    },
+    {
+      "name": "カチューシャ",
+      "category": "name",
+      "contextOnly": true,
+      "source": "repo:src/fandom.js#chiikawa-17"
+    },
+    {
+      "name": "シマジロウ",
+      "category": "name",
+      "contextOnly": true,
+      "source": "repo:src/fandom.js#chiikawa-23"
+    },
+    {
+      "name": "酒まんじゅう",
+      "category": "name",
+      "contextOnly": true,
+      "source": "repo:src/fandom.js#chiikawa-26"
+    }
+  ]
+}

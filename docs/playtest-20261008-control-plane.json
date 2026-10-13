@@ -1,0 +1,55 @@
+{
+  "diagnosisRun": 37743437929,
+  "initialRL": false,
+  "cause": "Old deployment Wrangler ignored ratelimits",
+  "fix": {
+    "pullRequest": "https://github.com/mukkii-game/game-llm/pull/2",
+    "merge": "fa64617c2e5742159890a1da2cd3c72d749b1928",
+    "wrangler": "4.36.0",
+    "deployRun": 37743729349,
+    "version": "d0458ac3-23c7-4ccd-b820-26ad9fd0fbf0",
+    "relayTests": 25,
+    "dryRun": "env.RL (20 requests/60s)"
+  },
+  "verificationRun": 37743902011,
+  "verification": {
+    "read_only": true,
+    "chat_requests": 0,
+    "checks": {
+      "subdomain": {
+        "success": true,
+        "enabled": true,
+        "previews_enabled": false
+      },
+      "settings": {
+        "success": true,
+        "required_bindings_present": {
+          "AI": true,
+          "RL": true,
+          "GROQ_API_KEY": true,
+          "GEMINI_API_KEY": true
+        },
+        "compatibility_date": "2026-10-01"
+      },
+      "deployments": {
+        "success": true,
+        "latest_created_on": "2026-10-08T07:29:44.574095Z",
+        "active_versions": [
+          {
+            "version_id": "d0458ac3-23c7-4ccd-b820-26ad9fd0fbf0",
+            "percentage": 100
+          }
+        ],
+        "expected_version_active": true
+      }
+    }
+  },
+  "access": {
+    "priorHealthStatus": 403,
+    "priorHealthBody": "error code: 1010",
+    "managementBrowser": "Sign-in verification error persists after one reload; no login attempted",
+    "publicChatRequests": 0,
+    "liveQualityVerified": false,
+    "securitySettingsModified": false
+  }
+}

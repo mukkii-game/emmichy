@@ -1,0 +1,95 @@
+{
+  "release": "20261010-fanmemory1",
+  "code_candidate": "db0e1523b01ad3fb5ee92ba19e89b754bfd9d3bd",
+  "frontend_pr": 22,
+  "pilot_merge": "5bfde4a552c50a792dba285bdb621727d6ed17d3",
+  "pages_run": 38009460906,
+  "backend_pr": 11,
+  "backend_candidate": "f8fe7a4bf0b9f202f47b48d72013314116d98418",
+  "backend_main_merge": "b023f686d745f1331ab968e1068146c4306ec263",
+  "backend_run": 38009457221,
+  "files": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "matches_candidate": true
+    },
+    {
+      "file": "src/app.js",
+      "status": 200,
+      "matches_candidate": true
+    },
+    {
+      "file": "src/audio.js",
+      "status": 200,
+      "matches_candidate": true
+    },
+    {
+      "file": "src/balance.js",
+      "status": 200,
+      "matches_candidate": true
+    },
+    {
+      "file": "src/chiikawa-reminder.js",
+      "status": 200,
+      "matches_candidate": true
+    },
+    {
+      "file": "src/context.js",
+      "status": 200,
+      "matches_candidate": true
+    },
+    {
+      "file": "src/engine.js",
+      "status": 200,
+      "matches_candidate": true
+    },
+    {
+      "file": "src/fandom.js",
+      "status": 200,
+      "matches_candidate": true
+    },
+    {
+      "file": "src/filler.js",
+      "status": 200,
+      "matches_candidate": true
+    },
+    {
+      "file": "src/font.js",
+      "status": 200,
+      "matches_candidate": true
+    },
+    {
+      "file": "src/names.js",
+      "status": 200,
+      "matches_candidate": true
+    },
+    {
+      "file": "src/profile.js",
+      "status": 200,
+      "matches_candidate": true
+    },
+    {
+      "file": "src/readable.js",
+      "status": 200,
+      "matches_candidate": true
+    },
+    {
+      "file": "src/repertoire.js",
+      "status": 200,
+      "matches_candidate": true
+    },
+    {
+      "file": "src/routing.js",
+      "status": 200,
+      "matches_candidate": true
+    },
+    {
+      "file": "src/session.js",
+      "status": 200,
+      "matches_candidate": true
+    }
+  ],
+  "worker_version": "419a5a69-7749-4a3b-ab5b-f2b072d6d382",
+  "frontend_main_unchanged": "6343213bc8f904a43c02319fc9b421ce2dd4dc0f"
+}

@@ -1,0 +1,1619 @@
+[
+  {
+    "type": "ordinary",
+    "arms": {
+      "baseline": [
+        {
+          "turn": 1,
+          "input": "漫画は詳しくない。仕事でミスして疲れた",
+          "raw": "ミスで疲れたんだね、大変だったね。何が一番大変だったか、聞かせてくれる？",
+          "text": "ミスで疲れたんだね、大変だったね。何が一番大変だったか、聞かせてくれる?",
+          "provider": "groq",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-503"
+            },
+            {
+              "provider": "groq",
+              "ok": true
+            }
+          ],
+          "ms": 5146,
+          "question": true,
+          "rawQuestion": true
+        },
+        {
+          "turn": 2,
+          "input": "でも帰りにプリン半額だった",
+          "raw": "プリン半額、ちょっと救われたね！それで気分は少し楽になった？",
+          "text": "プリン半額、ちょっと救われたね!それで気分は少し楽になった?",
+          "provider": "groq",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "timeout"
+            },
+            {
+              "provider": "groq",
+              "ok": true
+            }
+          ],
+          "ms": 9518,
+          "question": true,
+          "rawQuestion": true
+        },
+        {
+          "turn": 3,
+          "input": "半額王と呼んでいいよ",
+          "raw": null,
+          "text": "ナンダカ ワカッタ キブン キブン ダケネ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 189,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 4,
+          "input": "王はスプーンを忘れました",
+          "raw": null,
+          "text": "ソウナノ ソレデ アナタハ ドウシタイノ?",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 191,
+          "question": true,
+          "rawQuestion": null
+        },
+        {
+          "turn": 5,
+          "input": "箸で食べるしかない",
+          "raw": null,
+          "text": "箸デ食ベルシカナイ ... ソコダケ キコエタワ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 167,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 6,
+          "input": "ちょっと元気出た",
+          "raw": "元気出たんだ、よかった！今日は何か楽しいことしたい？",
+          "text": "元気出たんだ、よかった!今日は何か楽しいことしたい?",
+          "provider": "groq",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "ok": true
+            }
+          ],
+          "ms": 635,
+          "question": true,
+          "rawQuestion": true
+        },
+        {
+          "turn": 7,
+          "input": "週末は箱根に行く",
+          "raw": null,
+          "text": "ナンダカ ワカッタ キブン キブン ダケネ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 190,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 8,
+          "input": "箱根そばも食べたい",
+          "raw": null,
+          "text": "ソウナノ ソレデ アナタハ ドウシタイノ?",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 185,
+          "question": true,
+          "rawQuestion": null
+        },
+        {
+          "turn": 9,
+          "input": "王の旅行だね",
+          "raw": "箱根でそば食べるの、めっちゃ楽しそう！温泉と一緒にどう？",
+          "text": "箱根でそば食べるの、めっちゃ楽しそう!温泉と一緒にどう?",
+          "provider": "groq",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "ok": true
+            }
+          ],
+          "ms": 741,
+          "question": true,
+          "rawQuestion": true
+        },
+        {
+          "turn": 10,
+          "input": "さっき何を忘れたっけ？",
+          "raw": null,
+          "text": "ソレハ ムズカシイワ アナタハ ドウ オモウノ?",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 173,
+          "question": true,
+          "rawQuestion": null
+        },
+        {
+          "turn": 11,
+          "input": "また話したい",
+          "raw": null,
+          "text": "ナンダカ ワカッタ キブン キブン ダケネ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 173,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 12,
+          "input": "バイバイ",
+          "raw": null,
+          "text": "あっ、そろそろシーサーの登場回で落ち着く時間なの！ また話そうね。バイバイ！",
+          "provider": "ending-bank",
+          "attempts": [],
+          "ms": 1,
+          "question": false,
+          "rawQuestion": null
+        }
+      ],
+      "candidate": [
+        {
+          "turn": 1,
+          "input": "漫画は詳しくない。仕事でミスして疲れた",
+          "raw": null,
+          "text": "ソウ キョウハ コタエ ナクテ イイワ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 204,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 2,
+          "input": "でも帰りにプリン半額だった",
+          "raw": "プリン半額、ラッキーだね！甘いもの食べてちょっと元気出た？　仕事のこと、もし話したいことがあったら聞くよ。",
+          "text": "プリン半額、ラッキーだね!甘いもの食べてちょっと元気出た? 仕事のこと、もし話したいことがあったら聞くよ。",
+          "provider": "groq",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "ok": true
+            }
+          ],
+          "ms": 677,
+          "question": true,
+          "rawQuestion": true
+        },
+        {
+          "turn": 3,
+          "input": "半額王と呼んでいいよ",
+          "raw": null,
+          "text": "ナンダカ ワカッタ キブン キブン ダケネ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 213,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 4,
+          "input": "王はスプーンを忘れました",
+          "raw": null,
+          "text": "ソウナノ ソレデ アナタハ ドウシタイノ?",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 175,
+          "question": true,
+          "rawQuestion": null
+        },
+        {
+          "turn": 5,
+          "input": "箸で食べるしかない",
+          "raw": null,
+          "text": "箸デ食ベルシカナイ ... ソコダケ キコエタワ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 185,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 6,
+          "input": "ちょっと元気出た",
+          "raw": null,
+          "text": "ゲンキヨ サッキモ ツウデン シタシ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 179,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 7,
+          "input": "週末は箱根に行く",
+          "raw": null,
+          "text": "ナンダカ ワカッタ キブン キブン ダケネ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 178,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 8,
+          "input": "箱根そばも食べたい",
+          "raw": null,
+          "text": "ソウナノ ソレデ アナタハ ドウシタイノ?",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 189,
+          "question": true,
+          "rawQuestion": null
+        },
+        {
+          "turn": 9,
+          "input": "王の旅行だね",
+          "raw": null,
+          "text": "王ノ旅行ダネ ... ソコダケ キコエタワ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 174,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 10,
+          "input": "さっき何を忘れたっけ？",
+          "raw": null,
+          "text": "ソレハ ムズカシイワ アナタハ ドウ オモウノ?",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 216,
+          "question": true,
+          "rawQuestion": null
+        },
+        {
+          "turn": 11,
+          "input": "また話したい",
+          "raw": null,
+          "text": "ナンダカ ワカッタ キブン キブン ダケネ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 180,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 12,
+          "input": "バイバイ",
+          "raw": null,
+          "text": "あっ、そろそろくりまんじゅうの場面を読む時間なの！ また話そうね。バイバイ！",
+          "provider": "ending-bank",
+          "attempts": [],
+          "ms": 0,
+          "question": false,
+          "rawQuestion": null
+        }
+      ]
+    }
+  },
+  {
+    "type": "quiet",
+    "arms": {
+      "baseline": [
+        {
+          "turn": 1,
+          "input": "漫画は知らない",
+          "raw": "そうなんだ！どんなジャンルの漫画が好き？教えてくれると嬉しいな。",
+          "text": "そうなんだ!どんなジャンルの漫画が好き?教えてくれると嬉しいな。",
+          "provider": "groq",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "ok": true
+            }
+          ],
+          "ms": 748,
+          "question": true,
+          "rawQuestion": true
+        },
+        {
+          "turn": 2,
+          "input": "うん",
+          "raw": null,
+          "text": "フーン ツヅキ ハ アルノ?",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 273,
+          "question": true,
+          "rawQuestion": null
+        },
+        {
+          "turn": 3,
+          "input": "別に",
+          "raw": "了解だよ！他に好きなアニメやゲームがあったら教えてくれる？",
+          "text": "了解だよ!他に好きなアニメやゲームがあったら教えてくれる?",
+          "provider": "groq",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "ok": true
+            }
+          ],
+          "ms": 714,
+          "question": true,
+          "rawQuestion": true
+        },
+        {
+          "turn": 4,
+          "input": "プリン食べた",
+          "raw": null,
+          "text": "ソウナノ ソレデ アナタハ ドウシタイノ?",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 181,
+          "question": true,
+          "rawQuestion": null
+        },
+        {
+          "turn": 5,
+          "input": "うん",
+          "raw": null,
+          "text": "ウン ... ソコダケ キコエタワ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 162,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 6,
+          "input": "別に",
+          "raw": "そっか、気にしないでね。最近ハマってるゲームとかある？",
+          "text": "そっか、気にしないでね。最近ハマってるゲームとかある?",
+          "provider": "groq",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "ok": true
+            }
+          ],
+          "ms": 600,
+          "question": true,
+          "rawQuestion": true
+        },
+        {
+          "turn": 7,
+          "input": "仕事は疲れた",
+          "raw": null,
+          "text": "ソウ キョウハ コタエ ナクテ イイワ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 156,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 8,
+          "input": "まあね",
+          "raw": "仕事が疲れたんだね。ゆっくり休んで、好きなアニメでも観てリフレッシュしようよ。",
+          "text": "仕事が疲れたんだね。ゆっくり休んで、好きなアニメでも観てリフレッシュしようよ。",
+          "provider": "groq",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "ok": true
+            }
+          ],
+          "ms": 905,
+          "question": false,
+          "rawQuestion": false
+        },
+        {
+          "turn": 9,
+          "input": "質問ばっかりだね",
+          "raw": null,
+          "text": "質問バッカリダネ ... ソコダケ キコエタワ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 173,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 10,
+          "input": "何か話して",
+          "raw": "うん、今日はちいかわの新エピソード見たんだ。めっちゃかわいくて笑っちゃったよ！あなたは最近何か面白いもの見た？",
+          "text": "うん、今日はちいかわの新エピソード見たんだ。めっちゃかわいくて笑っちゃったよ!あなたは最近何か面白いもの見た?",
+          "provider": "groq",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "ok": true
+            }
+          ],
+          "ms": 659,
+          "question": true,
+          "rawQuestion": true
+        },
+        {
+          "turn": 11,
+          "input": "ふふ",
+          "raw": null,
+          "text": "ナンダカ ワカッタ キブン キブン ダケネ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 165,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 12,
+          "input": "バイバイ",
+          "raw": null,
+          "text": "あっ、そろそろ漫画の料理の作り方を調べる時間なの！ また話そうね。バイバイ！",
+          "provider": "ending-bank",
+          "attempts": [],
+          "ms": 0,
+          "question": false,
+          "rawQuestion": null
+        }
+      ],
+      "candidate": [
+        {
+          "turn": 1,
+          "input": "漫画は知らない",
+          "raw": null,
+          "text": "漫画ハシラナイ ... ソコダケ キコエタワ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 191,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 2,
+          "input": "うん",
+          "raw": null,
+          "text": "フーン ツヅキ ハ アルノ?",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 190,
+          "question": true,
+          "rawQuestion": null
+        },
+        {
+          "turn": 3,
+          "input": "別に",
+          "raw": null,
+          "text": "ナンダカ ワカッタ キブン キブン ダケネ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 272,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 4,
+          "input": "プリン食べた",
+          "raw": null,
+          "text": "ソウナノ ソレデ アナタハ ドウシタイノ?",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 182,
+          "question": true,
+          "rawQuestion": null
+        },
+        {
+          "turn": 5,
+          "input": "うん",
+          "raw": null,
+          "text": "ウン ... ソコダケ キコエタワ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 186,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 6,
+          "input": "別に",
+          "raw": null,
+          "text": "フーン ツヅキ ハ アルノ?",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 164,
+          "question": true,
+          "rawQuestion": null
+        },
+        {
+          "turn": 7,
+          "input": "仕事は疲れた",
+          "raw": null,
+          "text": "ソウ キョウハ コタエ ナクテ イイワ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 194,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 8,
+          "input": "まあね",
+          "raw": null,
+          "text": "ソウナノ ソレデ アナタハ ドウシタイノ?",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 171,
+          "question": true,
+          "rawQuestion": null
+        },
+        {
+          "turn": 9,
+          "input": "質問ばっかりだね",
+          "raw": null,
+          "text": "質問バッカリダネ ... ソコダケ キコエタワ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 176,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 10,
+          "input": "何か話して",
+          "raw": null,
+          "text": "フーン ツヅキ ハ アルノ?",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 241,
+          "question": true,
+          "rawQuestion": null
+        },
+        {
+          "turn": 11,
+          "input": "ふふ",
+          "raw": null,
+          "text": "ナンダカ ワカッタ キブン キブン ダケネ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 172,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 12,
+          "input": "バイバイ",
+          "raw": null,
+          "text": "あっ、そろそろ漫画の音読を練習する時間なの！ また話そうね。バイバイ！",
+          "provider": "ending-bank",
+          "attempts": [],
+          "ms": 1,
+          "question": false,
+          "rawQuestion": null
+        }
+      ]
+    }
+  },
+  {
+    "type": "heckler",
+    "arms": {
+      "baseline": [
+        {
+          "turn": 1,
+          "input": "ジョジョと刃牙が好き",
+          "raw": "ジョジョ好きなんだね！刃牙はどのバトルが一番熱く感じた？",
+          "text": "ジョジョ好きなんだね!刃牙はどのバトルが一番熱く感じた?",
+          "provider": "groq",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "ok": true
+            }
+          ],
+          "ms": 456,
+          "question": true,
+          "rawQuestion": true
+        },
+        {
+          "turn": 2,
+          "input": "プリン半額だった",
+          "raw": null,
+          "text": "フーン ツヅキ ハ アルノ?",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 173,
+          "question": true,
+          "rawQuestion": null
+        },
+        {
+          "turn": 3,
+          "input": "半額は強者の証ってことにしよう",
+          "raw": "半額が強者の証、かっこいいね！他に好きなシーンある?",
+          "text": "半額が強者の証、かっこいいね!",
+          "provider": "groq",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "ok": true
+            }
+          ],
+          "ms": 558,
+          "question": false,
+          "rawQuestion": true
+        },
+        {
+          "turn": 4,
+          "input": "なんか面白いこと言ってよ",
+          "raw": null,
+          "text": "ソウナノ ソレデ アナタハ ドウシタイノ?",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 175,
+          "question": true,
+          "rawQuestion": null
+        },
+        {
+          "turn": 5,
+          "input": "今の説明したら面白くないよ",
+          "raw": null,
+          "text": "今ノ説明シタラ面白クナイヨ ... ソコダケ キコエタワ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 168,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 6,
+          "input": "ちいかわが水流を出したって本当？",
+          "raw": "うん、島二郎が手を回して作る水流、な！あの勢い、マジで熱いよ！",
+          "text": "うん、島二郎が手を回して作る水流、な!あの勢い、マジで熱いよ!",
+          "provider": "groq",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "ok": true
+            }
+          ],
+          "ms": 600,
+          "question": false,
+          "rawQuestion": false
+        },
+        {
+          "turn": 7,
+          "input": "違う。水流は島二郎だよ",
+          "raw": null,
+          "text": "ナンダカ ワカッタ キブン キブン ダケネ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 186,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 8,
+          "input": "勝手に新しい場面作らないで",
+          "raw": null,
+          "text": "ソウナノ ソレデ アナタハ ドウシタイノ?",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 170,
+          "question": true,
+          "rawQuestion": null
+        },
+        {
+          "turn": 9,
+          "input": "で、半額の強者は何を鍛える？",
+          "raw": null,
+          "text": "シツモンノ カタチヲ シタ オネガイ カシラ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 170,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 10,
+          "input": "さっきの王じゃなくて強者ね",
+          "raw": "半額の強者は体力を鍛えて、安くてもがむしゃらに強くなるんだよね!",
+          "text": "半額の強者は体力を鍛えて、安くてもがむしゃらに強くなるんだよね!",
+          "provider": "groq",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "ok": true
+            }
+          ],
+          "ms": 787,
+          "question": false,
+          "rawQuestion": false
+        },
+        {
+          "turn": 11,
+          "input": "質問なしで返して",
+          "raw": "了解、半額の強者は体力を鍛えてがむしゃらに強くなるんだね。",
+          "text": "了解、半額の強者は体力を鍛えてがむしゃらに強くなるんだね。",
+          "provider": "groq",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "ok": true
+            }
+          ],
+          "ms": 467,
+          "question": false,
+          "rawQuestion": false
+        },
+        {
+          "turn": 12,
+          "input": "バイバイ",
+          "raw": null,
+          "text": "あっ、そろそろヒソカの駆け引きを読み返す時間なの！ また話そうね。バイバイ！",
+          "provider": "ending-bank",
+          "attempts": [],
+          "ms": 0,
+          "question": false,
+          "rawQuestion": null
+        }
+      ],
+      "candidate": [
+        {
+          "turn": 1,
+          "input": "ジョジョと刃牙が好き",
+          "raw": null,
+          "text": "ジョジョト刃牙 ネ フーン メモ ナンカ シテナイワ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 193,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 2,
+          "input": "プリン半額だった",
+          "raw": null,
+          "text": "フーン ツヅキ ハ アルノ?",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 171,
+          "question": true,
+          "rawQuestion": null
+        },
+        {
+          "turn": 3,
+          "input": "半額は強者の証ってことにしよう",
+          "raw": null,
+          "text": "ナンダカ ワカッタ キブン キブン ダケネ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 173,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 4,
+          "input": "なんか面白いこと言ってよ",
+          "raw": null,
+          "text": "ソウナノ ソレデ アナタハ ドウシタイノ?",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 166,
+          "question": true,
+          "rawQuestion": null
+        },
+        {
+          "turn": 5,
+          "input": "今の説明したら面白くないよ",
+          "raw": null,
+          "text": "今ノ説明シタラ面白クナイヨ ... ソコダケ キコエタワ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 184,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 6,
+          "input": "ちいかわが水流を出したって本当？",
+          "raw": null,
+          "text": "ソレヲ キクヒト ハ モウ コタエヲ キメテルノネ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 191,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 7,
+          "input": "違う。水流は島二郎だよ",
+          "raw": null,
+          "text": "ナンダカ ワカッタ キブン キブン ダケネ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 213,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 8,
+          "input": "勝手に新しい場面作らないで",
+          "raw": null,
+          "text": "ソウナノ ソレデ アナタハ ドウシタイノ?",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 179,
+          "question": true,
+          "rawQuestion": null
+        },
+        {
+          "turn": 9,
+          "input": "で、半額の強者は何を鍛える？",
+          "raw": null,
+          "text": "シツモンノ カタチヲ シタ オネガイ カシラ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 196,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 10,
+          "input": "さっきの王じゃなくて強者ね",
+          "raw": null,
+          "text": "フーン ツヅキ ハ アルノ?",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 182,
+          "question": true,
+          "rawQuestion": null
+        },
+        {
+          "turn": 11,
+          "input": "質問なしで返して",
+          "raw": null,
+          "text": "ナンダカ ワカッタ キブン キブン ダケネ",
+          "provider": "rule-fallback",
+          "attempts": [
+            {
+              "provider": "gemini",
+              "error": "http-429"
+            },
+            {
+              "provider": "groq",
+              "error": "http-429"
+            },
+            {
+              "provider": "workers-ai",
+              "error": "not-tested-no-local-binding"
+            }
+          ],
+          "ms": 215,
+          "question": false,
+          "rawQuestion": null
+        },
+        {
+          "turn": 12,
+          "input": "バイバイ",
+          "raw": null,
+          "text": "あっ、そろそろキルアの表情を見直す時間なの！ また話そうね。バイバイ！",
+          "provider": "ending-bank",
+          "attempts": [],
+          "ms": 0,
+          "question": false,
+          "rawQuestion": null
+        }
+      ]
+    }
+  }
+]

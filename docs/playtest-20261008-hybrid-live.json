@@ -1,0 +1,14 @@
+{
+  "input": "雨の匂いって、なんだか昔の帰り道を思い出さない？",
+  "reply": null,
+  "health": {
+    "attempts": 1,
+    "accepted": 0,
+    "rejected": 0,
+    "failed": 1,
+    "lastOutcome": "error",
+    "rateLimited": false,
+    "retryAt": 1791431590186
+  },
+  "scope": "one live attempt; no retry"
+}

@@ -1,4 +1,3 @@
-import {associate} from './associations.js';
 // Hand-checked editorial snapshot. Never describes expired items as today's news.
 export const checkedAt='2026-10-04';
 export const fanContext={
@@ -13,58 +12,30 @@ export const news=[
 ];
 export function activeNews(day=new Date().toLocaleDateString('sv-SE',{timeZone:'Asia/Tokyo'})){return news.filter(n=>n.from<=day&&day<=n.until);}
 export function chiikawaReply(input,result,day,raw=input) {
-  const s=result.state, n=input.replaceAll(' ',''), select=a=>a[(s.turn-1)%a.length];
-  if(['bye','asleep','empty'].includes(result.kind))return result;
-  let t;
-  const movie=/エイガ|映画|ニンギョ|人魚|セイレーン|ヒトハ|フタバ|フタハ/.test(n);
-  const shisa=/シーサー|シイサア|連載|レンサイ|サスペンス|三ツ星|ミツボシ/.test(n);
-  const comfort=/ダイジョウブ|大丈夫|オチツイテ|落ち着|シンパイナイ|心配ない|アンシン|安心/.test(n);
-  const protectedKind=['name','memory','contradiction','arithmetic','repeat'].includes(result.kind);
-  const association=associate(raw,input,s.topic);
-  if(!protectedKind && comfort && s.fan.worry>0){
-    s.fan.worry=Math.max(0,s.fan.worry-2);
-    t=s.fan.worry>0?'ウン スコシ オチツイタ\nデモ シーサー ノ ツヅキガ...':'アリガト アナタ ヤサシイネ\nシーサー モ アンシン デキル ト イイナ';
-    result.kind='fan-comfort';result.mood=s.fan.worry?'worried':'soft';
-  } else if(!protectedKind && shisa){
-    s.fan.worry=Math.min(5,s.fan.worry+2);s.fan.lastTopic='shisa';
-    t=select(['シーサー ガ シンパイ デ\nアナタノ ハナシ 3モジ シカ ハイラナイ','ダイジョウブ ッテ イッテ\nアタシガ イッテモ シンジラレナイ','シーサー ノ ツヅキ コワイ\nミタイ ケド ミルノ コワイ','マダ ケツマツ ワカラナイノニ\nシーサー ノ コトデ オロオロ シテル','シーサー ニ ヘイオンヲ\nアタシノ メモリ ナラ アゲルカラ']);
-    result.kind='shisa';result.mood='worried';
-  } else if(!protectedKind && movie){
-    s.fan.excitement=Math.min(5,s.fan.excitement+2);s.fan.lastTopic='movie';
-    t=select(['エイガ チイカワ\nニンギョノ シマノ ヒミツ ノ ハナシ?','エイガノ ハナシ シテ イイノ?\nマッテ ココロノ ジュンビ ガ','チイカワガ オオキナ ガメンニ\nアタシ 8ショクデ タエラレル?','ニンギョノ シマノ ヒミツ...\nタイトル ダケデ マタ ソワソワ スル','エイガノ コト カンガエテタラ\nシーサー モ シンパイ ニ ナッタ']);
-    result.kind='movie';result.mood='excited';
-  } else if(!protectedKind && association && !['praise','greeting','mask','age','preference','identity'].includes(result.kind)){
-    s.topic=association.id;
-    t=select(association.followup?association.follow:association.lines);
-    result.kind='association';result.mood=association.mood;
-    if(association.mood==='worried')s.fan.worry=Math.min(5,s.fan.worry+1);
-    if(association.mood==='excited')s.fan.excitement=Math.min(5,s.fan.excitement+1);
-  } else if(!protectedKind && s.fan.worry>=2 && s.turn%3===0){
-    t=select(['ウン ソノ ハナシ ワカル\nデモ シーサーガ... ゴメン モウイッカイ','アタシ イマ フツウニ シテタ?\nシーサー ノ コトガ ハナレナイ','ソレハ スジノ トオッタ ハナシネ\nシーサー モ ブジデ イテホシイ']);
-    result.kind='fan-distraction';result.mood='worried';
-  } else if(/ニュース|ジジ|サイキン|ハヤリ|イマワダイ|最新|時事|最近|流行/.test(n)) {
-    const items=activeNews(day);
-    t=items.length?select(items).line:'アタラシイ ニュースハ マダ ナイワ\nデモ チイカワ ノ ハナシナラ アル';
-    result.kind='news';
-  } else if(result.kind==='age') t='17 ヨ\nチイカワ ニ ムチュウ ナ オトシゴロ';
-  else if(result.kind==='contradiction') t=result.text.split('\n')[0]+'\nチイカワ ノ オシモ カエチャウノ?';
-  else if(result.kind==='arithmetic') t=result.text.split('\n')[0]+'\nチイカワ ノ グッズ ナラ ナンコ?';
-  else if(result.kind==='name') t=`${s.name} ネ オボエタ\nチイカワ ノ トモダチ ニ イソウ`;
-  else if(result.kind==='memory') t=result.text.split('\n')[0]+'\nチイカワ イガイモ オボエルノヨ';
-  else if(result.kind==='repeat') t=select(['ソノ ハナシ モウ キイタ\nチイカワ ナラ ナンドデモ イイワ','マタ ソレ?\nチイカワ ニ ツナグノ マッテル?','オナジ ハナシ ッテ イイネ\nチイカワ ニ モドリヤスイワ']);
-  else if(/チイカワ.*(?:ヤメ|イガイ|バカリ|ナシ)|マタチイカワ|チイカワニ.*ツナ/.test(n)) t=select(['ワカッタ チイカワハ ヤメル\nデ ハチワレ ナンダケド','ソウネ ホカノ ハナシネ\nウサギ ッテ シッテル?','チイカワ ニ ツナゲナイ ハナシ?\nソレハ マダ ガクシュウ シテナイ']);
-  else if(/ハチワレ|ウサギ|モモンガ|ラッコ|クリマンジュウ|シーサー|チイカワ/.test(n)) t=select(['チイカワ ノ ハナシ?\nヤット ホンダイ ニ ハイッタワネ','ハチワレ ノ ハナシヲ シテタラ\nアナタ ノ ハナシ ワスレチャッタ','ウサギ ノ コト カンガエテタ\nイマノ シツモン モウ イッカイ','チイカワガ スキナノ?\nソレハ カナリ ジュウヨウナ ジョウホウ']);
-  else if(result.kind==='comfort') t=select(['キョウハ ヨク ガンバッタネ\nチイカワ ミテ ヤスモ','シゴト タイヘン ナノネ\nチイカワ ノ セカイモ ラクジャナイ','ムリニ ゲンキニ ナラナクテ イイ\nチイカワ ノ ハナシハ アタシガ スル']);
-  else if(result.kind==='praise') t=s.praise>2?'ソノ ホメカタ ハ サンカイメ\nチイカワ ニモ ソウ イウノ?':select(['カワイイ? アタシガ?\nチイカワ ノ ハナシ カト オモッタ','アリガト\nデモ チイカワ ノ ホウガ マルイ']);
-  else if(result.kind==='mask') t=s.clues>=4?'リカイ シテカラ ソラシテルノ\nデ チイカワ ノ ハナシ ニ モドルネ':select(['ワカッテナイ フリ?\nチイカワ デ アタマガ イッパイナノ','アタマノ ナカ ミタイ?\nチイカワ シカ イナイ ケド','ソノ シツモンハ スルドイワ\nチイカワ ノ ハナシデ ゴマカソ']);
-  else if(result.kind==='greeting') t=s.name?`${s.name} オカエリ\nキョウモ チイカワ ノ ハナシネ`:'アタシ エミチィ\nアナタ チイカワ ハ スキ?';
-  else if(result.kind==='identity') t='エミチィ ヨ\nチイカワ ノ カンケイシャ ジャナイワ';
-  else if(result.kind==='preference') t=result.text.split('\n')[0]+'\nソレ チイカワ ニ タトエル ト?';
-  else if(/ウチュウ|セカイ|ミライ|AI|キカイ/.test(n)) t=select(['ウチュウハ ヒロイワ\nチイカワ ノ オキバ ニ コマラナイ','AI ガ カシコク ナルホド\nチイカワ ニ ツナグ ミチガ フエル','ミライ ノ ハナシネ\nチイカワ ハ ミライ ニモ イテホシイ']);
-  else if(/カネ|金|経済|物価|ブッカ|値上|ネアゲ|政治|セイジ/.test(n)) t='ムズカシイ ハナシネ\nチイカワ グッズ ノ ヨサン カラ イコ';
-  else if(result.kind==='weather') t='ソッチハ ハレ?\nチイカワ ノ ヌイグルミ ホセルネ';
-  else if(/コイ|恋|アイ|結婚|ケッコン/.test(n)) t='アイショウ ッテ ダイジヨネ\nマズ チイカワ ノ オシヲ キイテ';
-  else t=select(['ソノ ハナシ ドコカデ キイタワ\nチイカワ ジャ ナカッタ?','ナルホドネ\nチイカワ ニ ツナグ マデ マッテ','アナタノ ハナシヲ ヨク キクホド\nチイカワ ニ ミエテ クルワ','ソレハ チイカワ カ\nマダ チイカワ ジャ ナイカ ネ','ワカルワ ソノ カンジ\nチイカワ ノ ハナシ シテ イイ?','ソノ ハナシノ ツヅキ キニナル\nチイカワガ デテクル トコ マデ']);
-  result.text=t;result.state.history[result.state.history.length-1].text=t;
-  return result;
+ const s=result.state,n=input.replaceAll(' ',''),pick=a=>a[(s.turn-1)%a.length];
+ if(['bye','asleep','empty','name','memory','arithmetic','contradiction','repeat'].includes(result.kind))return result;
+ let t;
+ const fan=/チイカワ|CHIIKAWA|ハチワレ|シーサー|モモンガ|ラッコ|クリマンジュウ/.test(n);
+ if(s.turn===1){
+  t=/シラナイ|知らない|ナニソレ/.test(n)?'チイサイ コ タチ ノ オハナシ。アタシ ダイスキ！ アナタハ ナニ ガ スキ？':
+   /キライ|苦手|イヤ/.test(n)?'ソッカ。ムリニ ススメナイヨ。アナタ ノ スキナ ハナシ シヨ。':
+   /シッテル|知ってる|スキ/.test(n)?'シッテルノ！ アタシ ハ マンガモ アニメモ スキ。アナタ ノ オシハ？':undefined;
+ }
+ if(/(?:チイカワ|CHIIKAWA).*(?:イガイ|ヤメ|バカリ|キライ|苦手)|マタチイカワ/.test(n))t='ウン、ホカノ ハナシ シヨ。サイキン ナニ デ アソンデル？';
+ else if(/シーサー/.test(n)){
+  s.fan.worry=Math.min(5,s.fan.worry+2);s.fan.lastTopic='shisa';result.kind='shisa';result.mood='worried';
+  t='シーサー ノ ツヅキ ガ シンパイ…。ミタイノニ ミルノ コワイ。アナタモ？';
+ }else if(fan&&/映画|エイガ|人魚|ニンギョ/.test(n)){
+  s.fan.excitement=Math.min(5,s.fan.excitement+2);s.fan.lastTopic='movie';result.kind='movie';result.mood='excited';
+  t='エイガ チイカワ、ニンギョノ シマノ ヒミツ！ アノ オオキイ ガメン、マタ ミタイ。';
+ }else if(/ダイジョウブ|大丈夫|オチツイテ/.test(n)&&s.fan.worry){
+  s.fan.worry=Math.max(0,s.fan.worry-2);result.mood='soft';t='アリガト。スコシ オチツイタ。アナタ ノ ハナシモ キカセテ。';
+ }else if(fan&&!t)t=pick(['アタシ ハ マンガノ チョット コワイ トコモ スキ。アナタハ？','ハナシテ イイノ？ アタシ、コノ ハナシハ ナガイヨ。']);
+ else if(/仕事|残業|シゴト|ツカレ|疲れ|サミシ/.test(n))t=pick(['タイヘン ダッタネ。ヒト ガ タリナイノ？ ソレトモ シゴト ガ オオイ？','ヤスムノモ ムズカシイ ヒ ガ アルヨネ。キョウハ ハナシ キクヨ。']);
+ else if(/試験|資格|勉強|シケン|ベンキョウ/.test(n)){s.topic='study';t='ベンキョウ シテモ フアン ナノ、ワカル。アタシモ ニホンゴノ テストハ ドキドキ。';}
+ else if(/旅行|リョコウ|海/.test(n)){s.topic='travel';t='イイネ！ アタシハ シラナイ マチノ オミセ ミタイ。ドコニ イキタイ？';}
+ else if(/ゲーム|アニメ|マンガ/.test(n)){s.topic='culture';t='アタシモ スキ！ サイキン ナニニ ハマッテル？ スキナ トコ キキタイ。';}
+ else if(/ドウシテ|もっと|モット/.test(n)&&s.topic==='study')t='マチガウノ ヨリ、ガンバッタノニ デキナイノガ コワイノ。アナタハ ドウ？';
+ if(t){result.text=t;s.history.at(-1).text=t;}
+ return result;
 }

@@ -1,0 +1,305 @@
+[
+  {
+    "type": "ordinary",
+    "rows": [
+      {
+        "turn": 1,
+        "input": "漫画は詳しくない。仕事でミスして疲れた",
+        "text": "ミスで疲れたんだね、大変だったね。何が一番大変だったか教えてくれる?",
+        "provider": "groq",
+        "question": true,
+        "closingQuestion": true
+      },
+      {
+        "turn": 2,
+        "input": "でも帰りにプリン半額だった",
+        "text": "プリン半額、救いだね!甘いものでちょっと元気出た?",
+        "provider": "groq",
+        "question": true,
+        "closingQuestion": true
+      },
+      {
+        "turn": 3,
+        "input": "半額王と呼んでいいよ",
+        "text": "ナンダカ ワカッタ キブン キブン ダケネ",
+        "provider": "rule-fallback",
+        "question": false,
+        "closingQuestion": false
+      },
+      {
+        "turn": 4,
+        "input": "王はスプーンを忘れました",
+        "text": "スプーン忘れたの、ちょっと残念だね。次はしっかり持っていこうね!",
+        "provider": "groq",
+        "question": false,
+        "closingQuestion": false
+      },
+      {
+        "turn": 5,
+        "input": "箸で食べるしかない",
+        "text": "箸で頑張るの、アタシもやってみたことあるよ!次はスプーン忘れないとね。",
+        "provider": "groq",
+        "question": false,
+        "closingQuestion": false
+      },
+      {
+        "turn": 6,
+        "input": "ちょっと元気出た",
+        "text": "ゲンキヨ サッキモ ツウデン シタシ",
+        "provider": "rule-fallback",
+        "question": false,
+        "closingQuestion": false
+      },
+      {
+        "turn": 7,
+        "input": "週末は箱根に行く",
+        "text": "箱根、楽しそう!温泉でゆっくりしたら、もっと元気出るよね。ヤハ!",
+        "provider": "groq",
+        "question": false,
+        "closingQuestion": false
+      },
+      {
+        "turn": 8,
+        "input": "箱根そばも食べたい",
+        "text": "箱根のそば、温かくて美味しそうだね!温泉と一緒に最高だよ。",
+        "provider": "groq",
+        "question": false,
+        "closingQuestion": false
+      },
+      {
+        "turn": 9,
+        "input": "王の旅行だね",
+        "text": "王ノ旅行ダネ ... ソコダケ キコエタワ",
+        "provider": "rule-fallback",
+        "question": false,
+        "closingQuestion": false
+      },
+      {
+        "turn": 10,
+        "input": "さっき何を忘れたっけ？",
+        "text": "何か忘れたこと、思い出した?",
+        "provider": "groq",
+        "question": true,
+        "closingQuestion": true
+      },
+      {
+        "turn": 11,
+        "input": "また話したい",
+        "text": "ナンダカ ワカッタ キブン キブン ダケネ",
+        "provider": "rule-fallback",
+        "question": false,
+        "closingQuestion": false
+      },
+      {
+        "turn": 12,
+        "input": "バイバイ",
+        "text": "バイバイ ディスク ハ ヌカナイデネ",
+        "provider": "rule-fallback",
+        "question": false,
+        "closingQuestion": false
+      }
+    ]
+  },
+  {
+    "type": "quiet",
+    "rows": [
+      {
+        "turn": 1,
+        "input": "漫画は知らない",
+        "text": "そっか、じゃあ好きなジャンルやキャラ教えてくれる?どんなのが好きか聞きたくて。",
+        "provider": "groq",
+        "question": true,
+        "closingQuestion": false
+      },
+      {
+        "turn": 2,
+        "input": "うん",
+        "text": "フーン ツヅキ ハ アルノ?",
+        "provider": "rule-fallback",
+        "question": true,
+        "closingQuestion": true
+      },
+      {
+        "turn": 3,
+        "input": "別に",
+        "text": "了解だよ!最近ハマってるゲームとかある?教えてくれたら嬉しいな。",
+        "provider": "groq",
+        "question": true,
+        "closingQuestion": false
+      },
+      {
+        "turn": 4,
+        "input": "プリン食べた",
+        "text": "プリン、美味しいよね!どんな味だったのか教えてくれる?",
+        "provider": "groq",
+        "question": true,
+        "closingQuestion": true
+      },
+      {
+        "turn": 5,
+        "input": "うん",
+        "text": "プリン好きなんだね!甘さとか食感、どんなのが一番好き?",
+        "provider": "groq",
+        "question": true,
+        "closingQuestion": true
+      },
+      {
+        "turn": 6,
+        "input": "別に",
+        "text": "フーン ツヅキ ハ アルノ?",
+        "provider": "rule-fallback",
+        "question": true,
+        "closingQuestion": true
+      },
+      {
+        "turn": 7,
+        "input": "仕事は疲れた",
+        "text": "仕事疲れたんだね、ほんと大変だよね。ゆっくり休んでね。ヤハ!",
+        "provider": "groq",
+        "question": false,
+        "closingQuestion": false
+      },
+      {
+        "turn": 8,
+        "input": "まあね",
+        "text": "そっか、無理しすぎないでね。温かい飲み物でも飲んでリラックスしよう。",
+        "provider": "groq",
+        "question": false,
+        "closingQuestion": false
+      },
+      {
+        "turn": 9,
+        "input": "質問ばっかりだね",
+        "text": "ごめんね、ちょっと聞きすぎたかも。話したいことがあったら何でも聞かせてね。",
+        "provider": "groq",
+        "question": true,
+        "closingQuestion": false
+      },
+      {
+        "turn": 10,
+        "input": "何か話して",
+        "text": "今日はどんなアニメ見た?アタシは最近ちいかわの新エピソード見て、めっちゃ笑ったよ!",
+        "provider": "groq",
+        "question": true,
+        "closingQuestion": false
+      },
+      {
+        "turn": 11,
+        "input": "ふふ",
+        "text": "ふふ、笑えるの大事だよね!最近ハンター×ハンターの裏話読んだんだけど、面白かったよ。どう思う?",
+        "provider": "groq",
+        "question": true,
+        "closingQuestion": true
+      },
+      {
+        "turn": 12,
+        "input": "バイバイ",
+        "text": "バイバイ ディスク ハ ヌカナイデネ",
+        "provider": "rule-fallback",
+        "question": false,
+        "closingQuestion": false
+      }
+    ]
+  },
+  {
+    "type": "heckler",
+    "rows": [
+      {
+        "turn": 1,
+        "input": "ジョジョと刃牙が好き",
+        "text": "ジョジョト刃牙 ネ フーン メモ ナンカ シテナイワ",
+        "provider": "rule-fallback",
+        "question": false,
+        "closingQuestion": false
+      },
+      {
+        "turn": 2,
+        "input": "プリン半額だった",
+        "text": "プリン半額、うれしいね!どんな味が好きなの?",
+        "provider": "groq",
+        "question": true,
+        "closingQuestion": true
+      },
+      {
+        "turn": 3,
+        "input": "半額は強者の証ってことにしよう",
+        "text": "ナンダカ ワカッタ キブン キブン ダケネ",
+        "provider": "rule-fallback",
+        "question": false,
+        "closingQuestion": false
+      },
+      {
+        "turn": 4,
+        "input": "なんか面白いこと言ってよ",
+        "text": "アタシ、プリン食べすぎて空回りしたら、腹がジョジョの波紋みたいにぐるぐる!笑",
+        "provider": "groq",
+        "question": false,
+        "closingQuestion": false
+      },
+      {
+        "turn": 5,
+        "input": "今の説明したら面白くないよ",
+        "text": "ごめん、ちょっと失敗したね。じゃあ、プリン半額で笑顔が増えるってどう?",
+        "provider": "groq",
+        "question": true,
+        "closingQuestion": true
+      },
+      {
+        "turn": 6,
+        "input": "ちいかわが水流を出したって本当？",
+        "text": "ソレヲ キクヒト ハ モウ コタエヲ キメテルノネ",
+        "provider": "rule-fallback",
+        "question": false,
+        "closingQuestion": false
+      },
+      {
+        "turn": 7,
+        "input": "違う。水流は島二郎だよ",
+        "text": "うん、島二郎の水流、な! 手を回すあの強さ、マジで熱い!ヤハ!",
+        "provider": "groq",
+        "question": false,
+        "closingQuestion": false
+      },
+      {
+        "turn": 8,
+        "input": "勝手に新しい場面作らないで",
+        "text": "ソウナノ ソレデ アナタハ ドウシタイノ?",
+        "provider": "rule-fallback",
+        "question": true,
+        "closingQuestion": true
+      },
+      {
+        "turn": 9,
+        "input": "で、半額の強者は何を鍛える？",
+        "text": "半額の強者は、財布と忍耐力をしっかり鍛えてるんだよね。笑",
+        "provider": "groq",
+        "question": false,
+        "closingQuestion": false
+      },
+      {
+        "turn": 10,
+        "input": "さっきの王じゃなくて強者ね",
+        "text": "フーン ツヅキ ハ アルノ?",
+        "provider": "rule-fallback",
+        "question": true,
+        "closingQuestion": true
+      },
+      {
+        "turn": 11,
+        "input": "質問なしで返して",
+        "text": "了解、半額の強者は「財布」と「根性」を鍛えてるんだね。",
+        "provider": "groq",
+        "question": false,
+        "closingQuestion": false
+      },
+      {
+        "turn": 12,
+        "input": "バイバイ",
+        "text": "バイバイ ディスク ハ ヌカナイデネ",
+        "provider": "rule-fallback",
+        "question": false,
+        "closingQuestion": false
+      }
+    ]
+  }
+]

@@ -1,0 +1,523 @@
+{
+  "mode": "actual app; offline rule/bank; simulated DOM and virtual pauses; compressed typing animation; no live LLM or audio",
+  "actions": [
+    {
+      "action": {
+        "type": "start"
+      },
+      "result": {
+        "atSeconds": 0,
+        "messages": [
+          {
+            "atMs": 0,
+            "role": "enny",
+            "text": "はじめまして！",
+            "screen": "ハジメマシテ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 8
+      },
+      "result": {
+        "atSeconds": 8,
+        "messages": [
+          {
+            "atMs": 1500,
+            "role": "enny",
+            "text": "アタシ、えみちぃ。",
+            "screen": "アタシ、 エミチィ 。"
+          },
+          {
+            "atMs": 3000,
+            "role": "enny",
+            "text": "日本語、勉強中なの。",
+            "screen": "ニホンゴ、 ベンキョウチュウナノ。"
+          },
+          {
+            "atMs": 4500,
+            "role": "enny",
+            "text": "日本の給食って気になる。あなたの学校で人気だった物、ある？",
+            "screen": "ニッポン ノ キュウショクッテ キ ニ ナル。 アナタ ノ ガッコウ デ ニンキダッタ モノ、 アル?"
+          },
+          {
+            "atMs": 6000,
+            "role": "enny",
+            "text": "ちいかわの話も、ついしたくなっちゃうの。",
+            "screen": "チイカワ ノ ハナシ モ、 ツイ シタク ナッチャウノ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "ハチワレの話して"
+      },
+      "result": {
+        "atSeconds": 8,
+        "messages": [
+          {
+            "atMs": 8000,
+            "role": "user",
+            "text": "ハチワレの話して",
+            "screen": "ハチワレ ノ ハナシテ"
+          },
+          {
+            "atMs": 8000,
+            "role": "enny",
+            "text": "ハチワレ！",
+            "screen": "ハチワレ !"
+          },
+          {
+            "atMs": 8000,
+            "role": "enny",
+            "text": "ハチワレのご飯、少し失敗しても一緒に食べたい。",
+            "screen": "ハチワレ ノ ゴハン、 スコシ シッパイ シテ モ イッショ ニ タベタイ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1
+      }
+    },
+    {
+      "action": {
+        "type": "draft",
+        "text": "写真って"
+      },
+      "result": {
+        "atSeconds": 8,
+        "messages": [],
+        "draft": "写真って",
+        "finished": false,
+        "turns": 1
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 20
+      },
+      "result": {
+        "atSeconds": 28,
+        "messages": [],
+        "draft": "写真って",
+        "finished": false,
+        "turns": 1
+      }
+    },
+    {
+      "action": {
+        "type": "draft",
+        "text": ""
+      },
+      "result": {
+        "atSeconds": 28,
+        "messages": [],
+        "draft": "",
+        "finished": false,
+        "turns": 1
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 6
+      },
+      "result": {
+        "atSeconds": 34,
+        "messages": [
+          {
+            "atMs": 34000,
+            "role": "enny",
+            "text": "ハチワレのご飯、少し失敗しても一緒に食べたい。",
+            "screen": "ハチワレ ノ ゴハン、 スコシ シッパイ シテ モ イッショ ニ タベタイ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "シーサーが頑張ってると応援したくなるよね。えみちぃはハチワレも好き？"
+      },
+      "result": {
+        "atSeconds": 34,
+        "messages": [
+          {
+            "atMs": 34000,
+            "role": "user",
+            "text": "シーサーが頑張ってると応援したくなるよね。えみちぃはハチワレも好き？",
+            "screen": "シーサー ガ ガンバッテル ト オウエン シタク ナルヨネ。 エミチィ ハ ハチワレ モ スキ?"
+          },
+          {
+            "atMs": 34000,
+            "role": "enny",
+            "text": "ワオ、アタシのこと!?",
+            "screen": "ワオ、 アタシ ノ コト !?"
+          },
+          {
+            "atMs": 34000,
+            "role": "enny",
+            "text": "うん、ハチワレ大好き!",
+            "screen": "ウン、 ハチワレ ダイスキ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 2
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 12
+      },
+      "result": {
+        "atSeconds": 46,
+        "messages": [
+          {
+            "atMs": 36000,
+            "role": "enny",
+            "text": "誰かに気を遣うところを見ると、アタシ弱いの。",
+            "screen": "ダレ カ ニ キ ヲ ツカウ トコロ ヲ ミル ト、 アタシ ヨワイノ。"
+          },
+          {
+            "atMs": 38000,
+            "role": "enny",
+            "text": "アタシの話、聞いてくれるのうれしい！",
+            "screen": "アタシ ノ ハナシ、 キイテ クレル ノ ウレシイ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 2
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "へえ、ヨーテボリ生まれなの？ 今もそこに住んでる？"
+      },
+      "result": {
+        "atSeconds": 46,
+        "messages": [
+          {
+            "atMs": 46000,
+            "role": "user",
+            "text": "へえ、ヨーテボリ生まれなの？ 今もそこに住んでる？",
+            "screen": "ヘエ、 ヨーテボリ ウマレナ ノ? イマ モ ソコ ニ スンデル?"
+          },
+          {
+            "atMs": 46000,
+            "role": "enny",
+            "text": "スウェーデン、アタシの国！",
+            "screen": "スウェーデン 、 アタシ ノ クニ!"
+          },
+          {
+            "atMs": 46000,
+            "role": "enny",
+            "text": "スウェーデンのヨーテボリの近くで生まれ育ったの。",
+            "screen": "スウェーデン ノ ヨーテボリ ノ チカク デ ウマレ ソダッタノ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 3
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 5
+      },
+      "result": {
+        "atSeconds": 51,
+        "messages": [
+          {
+            "atMs": 48000,
+            "role": "enny",
+            "text": "今も家族と住んでるよ。",
+            "screen": "イマ モ カゾク ト スンデルヨ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 3
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "今日はここまで。弟さんにもよろしく、バイバイ！"
+      },
+      "result": {
+        "atSeconds": 51,
+        "messages": [
+          {
+            "atMs": 51000,
+            "role": "user",
+            "text": "今日はここまで。弟さんにもよろしく、バイバイ！",
+            "screen": "キョウ ハ ココ マデ。 オトウト サン ニ モ ヨロシク、 バイバイ!"
+          },
+          {
+            "atMs": 51000,
+            "role": "enny",
+            "text": "そろそろゴンのまっすぐな場面を読む時間なの。\n\nもうちょっと話したかったな。 またね。バイバイ！",
+            "screen": "ソロソロ ゴン ノ マッスグナ バメン ヲ ヨム ジカンナノ。\n\nモウ チョット ハナシタカッタナ。 マタネ。 バイバイ!"
+          }
+        ],
+        "draft": "",
+        "finished": true,
+        "turns": 4
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 20
+      },
+      "result": {
+        "atSeconds": 71,
+        "messages": [],
+        "draft": "",
+        "finished": true,
+        "turns": 4
+      }
+    },
+    {
+      "action": {
+        "type": "reset"
+      },
+      "result": {
+        "atSeconds": 71,
+        "messages": [
+          {
+            "atMs": 71000,
+            "role": "enny",
+            "text": "はじめまして！",
+            "screen": "ハジメマシテ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "今日は寝るね、またね"
+      },
+      "result": {
+        "atSeconds": 71,
+        "messages": [
+          {
+            "atMs": 71000,
+            "role": "user",
+            "text": "今日は寝るね、またね",
+            "screen": "キョウ ハ ネルネ、 マタネ"
+          },
+          {
+            "atMs": 71000,
+            "role": "enny",
+            "text": "そろそろアニメ鑑賞のお菓子を用意する時間なの。\n\nもうちょっと話したかったな。 またね。バイバイ！",
+            "screen": "ソロソロ アニメ カンショウ ノ オカシ ヲ ヨウイ スル ジカンナノ。\n\nモウ チョット ハナシタカッタナ。 マタネ。 バイバイ!"
+          }
+        ],
+        "draft": "",
+        "finished": true,
+        "turns": 1
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 12
+      },
+      "result": {
+        "atSeconds": 83,
+        "messages": [],
+        "draft": "",
+        "finished": true,
+        "turns": 1
+      }
+    }
+  ],
+  "transcript": [
+    {
+      "atMs": 0,
+      "message": {
+        "role": "enny",
+        "text": "はじめまして！"
+      }
+    },
+    {
+      "atMs": 1500,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、えみちぃ。"
+      }
+    },
+    {
+      "atMs": 3000,
+      "message": {
+        "role": "enny",
+        "text": "日本語、勉強中なの。"
+      }
+    },
+    {
+      "atMs": 4500,
+      "message": {
+        "role": "enny",
+        "text": "日本の給食って気になる。あなたの学校で人気だった物、ある？"
+      }
+    },
+    {
+      "atMs": 6000,
+      "message": {
+        "role": "enny",
+        "text": "ちいかわの話も、ついしたくなっちゃうの。"
+      }
+    },
+    {
+      "atMs": 8000,
+      "message": {
+        "role": "user",
+        "text": "ハチワレの話して"
+      }
+    },
+    {
+      "atMs": 8000,
+      "message": {
+        "role": "enny",
+        "text": "ハチワレ！"
+      }
+    },
+    {
+      "atMs": 8000,
+      "message": {
+        "role": "enny",
+        "text": "ハチワレのご飯、少し失敗しても一緒に食べたい。"
+      }
+    },
+    {
+      "atMs": 34000,
+      "message": {
+        "role": "enny",
+        "text": "ハチワレのご飯、少し失敗しても一緒に食べたい。"
+      }
+    },
+    {
+      "atMs": 34000,
+      "message": {
+        "role": "user",
+        "text": "シーサーが頑張ってると応援したくなるよね。えみちぃはハチワレも好き？"
+      }
+    },
+    {
+      "atMs": 34000,
+      "message": {
+        "role": "enny",
+        "text": "ワオ、アタシのこと!?"
+      }
+    },
+    {
+      "atMs": 34000,
+      "message": {
+        "role": "enny",
+        "text": "うん、ハチワレ大好き!"
+      }
+    },
+    {
+      "atMs": 36000,
+      "message": {
+        "role": "enny",
+        "text": "誰かに気を遣うところを見ると、アタシ弱いの。"
+      }
+    },
+    {
+      "atMs": 38000,
+      "message": {
+        "role": "enny",
+        "text": "アタシの話、聞いてくれるのうれしい！"
+      }
+    },
+    {
+      "atMs": 46000,
+      "message": {
+        "role": "user",
+        "text": "へえ、ヨーテボリ生まれなの？ 今もそこに住んでる？"
+      }
+    },
+    {
+      "atMs": 46000,
+      "message": {
+        "role": "enny",
+        "text": "スウェーデン、アタシの国！"
+      }
+    },
+    {
+      "atMs": 46000,
+      "message": {
+        "role": "enny",
+        "text": "スウェーデンのヨーテボリの近くで生まれ育ったの。"
+      }
+    },
+    {
+      "atMs": 48000,
+      "message": {
+        "role": "enny",
+        "text": "今も家族と住んでるよ。"
+      }
+    },
+    {
+      "atMs": 51000,
+      "message": {
+        "role": "user",
+        "text": "今日はここまで。弟さんにもよろしく、バイバイ！"
+      }
+    },
+    {
+      "atMs": 51000,
+      "message": {
+        "role": "enny",
+        "text": "そろそろゴンのまっすぐな場面を読む時間なの。\n\nもうちょっと話したかったな。 またね。バイバイ！"
+      }
+    },
+    {
+      "atMs": 71000,
+      "message": {
+        "role": "enny",
+        "text": "はじめまして！"
+      }
+    },
+    {
+      "atMs": 71000,
+      "message": {
+        "role": "user",
+        "text": "今日は寝るね、またね"
+      }
+    },
+    {
+      "atMs": 71000,
+      "message": {
+        "role": "enny",
+        "text": "そろそろアニメ鑑賞のお菓子を用意する時間なの。\n\nもうちょっと話したかったな。 またね。バイバイ！"
+      }
+    }
+  ]
+}

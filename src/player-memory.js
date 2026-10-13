@@ -1,5 +1,5 @@
 import {rejectedJoke} from './humor.js';
-import {cleanDialogueControl,feedbackIntent,updateDialogueControl} from './conversation-repair.js?v=20261013-talk2';
+import {cleanDialogueControl,feedbackIntent,updateDialogueControl} from './conversation-repair.js?v=20261013-integrity1';
 const text=(s,n=160)=>typeof s==='string'?s.normalize('NFKC').replace(/[\x00-\x1f]/g,' ').trim().slice(0,n):'';
 const fold=s=>text(s,600).replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');
 const privateText=s=>/@|https?:|\d{3}[-ー]\d{4}|\d{10,}|住所|電話番号|メールアドレス/.test(s);

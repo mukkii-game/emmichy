@@ -6,7 +6,10 @@ export const attributionFacts=[
 export function attributionRepair(text){
  const t=fold(text);if(!/ヤハ/.test(t)||/もし|想像|だったら/.test(text))return null;
  const song=/(?:オープニング|OP|主題歌|曲名|歌ノタイトル|挿入歌|エンディング).{0,22}ヤハ|ヤハ.{0,22}(?:オープニング|OP|主題歌|曲名|挿入歌|エンディング)/i.test(t);
- const wrongSpeaker=!/ウサギ/.test(t)&&/(?:チイカワ|ハチワレ|ミンナ).{0,32}ヤハ/.test(t)&&/口癖|クチグセ|掛ケ声|言|イウ|叫|セリフ|台詞|笑|シーン|場面/.test(t);
+ const wrongSpeaker=[...t.matchAll(/(?:チイカワ|ハチワレ|ミンナ)(?:タチ)?(?:ガ|ハ|ノ)[^。!?！？\n]{0,32}?ヤハ/g)].some(m=>{
+  const span=m[0],tail=t.slice(m.index+m[0].length,m.index+m[0].length+36).split(/[。\n]/)[0];
+  return !/アタシ|ワタシ|私|自分|ジブン|ウサギ/.test(span)&&/口癖|クチグセ|掛ケ声|言|イウ|叫|セリフ|台詞|笑|シーン|場面/.test(span+tail);
+ });
  if(song)return {reason:'yaha-song',text:'「ヤハ！」はうさぎの掛け声。曲名と混ぜちゃったね。TVアニメの確認済みのEDは「ひとりごつ」で、ハチワレが歌うよ。'};
  return wrongSpeaker?{reason:'yaha-speaker',text:'「ヤハ！」はうさぎの掛け声だよ！ あの勢いを真似すると、アタシまで元気になるの。'}:null;
 }

@@ -1,0 +1,26 @@
+{
+  "mode": "selected fragments supplied by the human; provider/route unknown; local mechanisms checked with separately reconstructed inputs",
+  "samples": [
+    {
+      "input": "5キュウ オチタ トキ",
+      "outputFragment": "キュウ!",
+      "confirmedLocalMechanism": "numeric grade recognized as Hunter Kyuu"
+    },
+    {
+      "input": "オナジ コト、 クリカエシテ、 2ド モ",
+      "outputFragment": "「 ヤハ !」 ハ ウサギ ノ カケゴエダヨ!",
+      "confirmedLocalMechanism": "this katakana complaint was not recognized; attribution repair could bypass regular polishing"
+    },
+    {
+      "input": "ナンカ チイカワ ノ ハナシ デ モ ナニデモ イイ",
+      "outputFragment": "チイカワ ガ 「 プリン ガ フッテ クル 」ッテ ソウゾウ シテ、 ミンナ デ クウソウ ゴハンゴッコ シタ",
+      "confirmedLocalMechanism": "quoted scene checking and imagination scope admit a character-attributed invented fantasy"
+    },
+    {
+      "input": "アサキ コキュウッテ イッテ モ ワカンナカッタ ケド、 ハンノウ ガ オクレタノ",
+      "outputFragment": "オニヤタイ ノ コキュウ ノ レンシュウ デ、 マズハ リズム ヲ アワセル ノ ガ ダイジ。",
+      "confirmedLocalMechanism": null,
+      "status": "original reference not identified; do not turn into guessed training advice"
+    }
+  ]
+}

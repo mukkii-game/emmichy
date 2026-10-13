@@ -20,30 +20,33 @@
   <meta name="twitter:title" content="えみちぃ / Emmichy — レトロ会話ゲーム">
   <meta name="twitter:description" content="ちいかわと日本のオタク文化が大好きなえみちぃと、約5分のおしゃべり。">
   <meta name="twitter:image" content="https://mukkii-game.github.io/emmichy/assets/emmichy-nordic-muted-bust-20261008.png">
-  <link rel="stylesheet" href="style.css?v=20261009-talk1">
+  <link rel="stylesheet" href="style.css?v=20261012-memory2">
 </head>
 <body>
   <main>
     <header><span class="brand">EMMICHY / PERSONAL COMPUTER SOFTWARE</span><span id="disk">● DISK READY</span></header>
+    <button id="settings-toggle" class="mobile-menu-toggle" type="button" aria-label="設定" aria-controls="settings-panel" aria-expanded="false">⚙</button>
     <div class="screen-wrap">
       <div class="portrait-panel"><canvas id="screen" width="496" height="672" tabindex="0" aria-label="えみちぃのポートレート"></canvas><div class="game-logo">EMMICHY</div><div class="game-tagline">THE ALMOST CLEVER GAME</div></div>
       <div class="conversation-panel"><div class="terminal-heading">EMMICHY / CONVERSATION</div><div id="conversation" role="log" aria-label="カタカナの会話履歴"><p id="live-reply" class="message enny" aria-live="off" hidden><span class="speaker">EMMICHY &gt;</span><span id="live-body"></span></p></div><div id="terminal-note">アタシ エミチィ　ナンデモ ハナシテネ</div></div>
     </div>
     <div class="input-slot">
-    <section id="start-choice" aria-label="会話の始め方" hidden><p>おかえり。会話をどう始める？</p><div><button id="continue" type="button">続きから</button><button id="new-chat" type="button">最初から</button></div><p class="small">最初から：今回の会話をやり直します。覚えた名前・好みは残ります。</p></section>
+    <section id="start-choice" aria-label="会話の始め方" hidden><p>おかえり。会話をどう始める？</p><div><button id="continue" type="button">続きから</button><button id="new-chat" type="button">最初から</button></div><p class="small">最初から：呼び名を聞き直します。好みと作ったものは残ります。</p></section>
     <form id="talk" autocomplete="off">
       <label for="entry">漢字・ひらがな OK <span>›</span></label>
-      <input id="entry" maxlength="120" placeholder="ねえ、ちいかわって知ってる？" aria-label="Emmichyに話しかける" aria-describedby="input-hint" spellcheck="false">
+      <input id="entry" maxlength="120" placeholder="漢字・かな交じりでどうぞ" aria-label="Emmichyに話しかける" aria-describedby="input-hint" spellcheck="false">
       <span id="remaining-time" role="timer" aria-label="残り時間" aria-live="off">5:00</span>
       <button id="send" type="submit">RETURN ↵</button>
     </form>
     </div>
-    <p id="input-hint" class="small">カタカナに直さず、ふつうの漢字・かな交じりで書いてね。</p>
+    <div id="settings-panel" aria-label="設定と遊び方">
+    <div class="mobile-settings-heading"><strong>設定</strong><button id="settings-close" type="button">閉じる</button></div>
+    <p id="input-hint" class="small"><span class="desktop-hint">カタカナに直さず、ふつうの漢字・かな交じりで書いてね。</span><span class="mobile-hint">ふつうの漢字・かな交じりでどうぞ。</span></p>
     <div class="toolbar">
       <span id="status">日本語入力OK / ENTER で送信</span>
       <div><button id="restart-chat">最初から</button><button id="sound" aria-pressed="true">BGM + SE ON</button><button id="fullscreen">全画面</button><button id="help">アソビカタ</button></div>
     </div>
-    <p class="small">終わるときは「さようなら」「バイバイ」。目安5分。自動のお別れは5分経ってから。</p>
+    <p class="small session-hint">終わるときは「さようなら」「バイバイ」。目安5分。自動のお別れは5分経ってから。</p>
     <section id="instructions" hidden>
       <h1>Emmichy — ちょっと、わかってないフリ。</h1>
       <p>えみちぃは、日本文化が大好きな欧米人ティーン。日本語はかなり話せるけれど、ときどき語順や言い回しがちょっと変。アニメ・マンガ・ゲームに意外なほど詳しく、とくにChiikawaの話になると熱量がおかしくなります。</p>
@@ -53,18 +56,16 @@
       <button id="export">会話を保存</button> <button id="reset">記憶を初期化</button><span id="reset-note"></span>
       <p class="small">RETRO PERSONAL COMPUTER STYLE / 非公式パロディ試作。原作コード・原作画像・原作音源は不使用。</p>
     </section>
-    <p class="small">会話は AI サービス(Groq / Google / Cloudflare)に送られます。個人情報は入力しないでください。</p>
+    <p class="small privacy-hint">会話は AI サービス(Groq / Google / Cloudflare)に送られます。個人情報は入力しないでください。</p>
+    <p class="small privacy-hint">好みや教えてくれた創作は、このブラウザに保存します。「最初から」は名前を聞き直し、好みや創作は残します。</p>
     <details class="readable-log"><summary>会話を読みやすく表示</summary><div id="transcript" role="log" aria-live="polite"></div></details>
+    </div>
     <footer><span>THE ALMOST CLEVER GAME</span><span>EMMICHY / PILOT</span></footer>
   </main>
   <script src="assets/vendor/kuromoji.js"></script>
-  <script type="module" src="src/app.js?v=20261012-chii1"></script>
+  <script type="module" src="src/app.js?v=20261012-name1"></script>
 </body>
 </html>
-
-
-
-
 
 
 

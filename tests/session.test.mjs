@@ -15,7 +15,7 @@ test('returning later preserves played time rather than ending while away',()=>{
 });
 test('starting over clears dialogue and timer while retaining learned preferences',()=>{
  const old={...freshState(),name:'タロウ',likes:{ネコ:1},turn:18,ended:true,history:[{role:'enny',text:'バイバイ'}]};
- const next=startConversation(old,1234);assert.equal(next.state.name,'タロウ');assert.deepEqual(next.state.likes,{ネコ:1});assert.equal(next.state.ended,false);assert.deepEqual(next.state.history,[]);assert.equal(next.session.turns,0);assert.equal(next.session.startedAt,1234);
+ const next=startConversation(old,1234);assert.equal(next.state.name,'');assert.equal(next.session.askNameAgain,true);assert.deepEqual(next.state.likes,{ネコ:1});assert.equal(next.state.ended,false);assert.deepEqual(next.state.history,[]);assert.equal(next.session.turns,0);assert.equal(next.session.startedAt,1234);
  assert.equal(old.history.length,1);
 });
 test('save-resume retains request cooldown and usage but new play resets both',()=>{

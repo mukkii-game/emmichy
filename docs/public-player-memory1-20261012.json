@@ -1,0 +1,168 @@
+{
+  "date": "2026-10-12",
+  "release": "20261012-memory1",
+  "frontendCandidate": "7d7427bc12abc38f6231e507abdc5fc49414d906",
+  "frontendMerge": "034c7a3938f2e3a2ccd077eee02b5efe13874c87",
+  "frontendWorkflow": 38212905242,
+  "backendMerge": "986c51897cc3de717a737eec4a02fc41c56b5f45",
+  "backendWorkflow": 38212433032,
+  "results": [
+    {
+      "path": "index.html",
+      "match": true,
+      "sha256": "69e7b965b048ba13ac8a78d47fc1c547a97ea957eac60c7793323a6d475fe1b5"
+    },
+    {
+      "path": "src/app.js",
+      "match": true,
+      "sha256": "71952fbd0140867eaf32a35e5b1d9b48df6ee749d5dd4feef9a4c549739dea78"
+    },
+    {
+      "path": "src/balance.js",
+      "match": true,
+      "sha256": "8f4530fca14c88b45483d70d33fb77e342f2ca215fc9d7c672f8662c8b45452c"
+    },
+    {
+      "path": "src/chat.js",
+      "match": true,
+      "sha256": "33a88862fc05e574b6b0de515946c69b10587f9ca2acc82d1b2ca3b23d1110ad"
+    },
+    {
+      "path": "src/chiikawa-attribution.js",
+      "match": true,
+      "sha256": "151df1586f9797efded9623db8554f5a333c1f120801b923b1d03a88bfd82e83"
+    },
+    {
+      "path": "src/chiikawa-db.js",
+      "match": true,
+      "sha256": "63701ccde9701e46e66840ab18ac6dfe58a8c0e6256e34bbdc1cec46385803af"
+    },
+    {
+      "path": "src/chiikawa-relations.js",
+      "match": true,
+      "sha256": "8dc5a78aee116777f8d5c4f0b56e0d26d1bd19487b89b82f6ff8554a4908c66e"
+    },
+    {
+      "path": "src/chiikawa-reminder.js",
+      "match": true,
+      "sha256": "860f4728b1c62005306235e9ddcd24c41438da464e730af0c6f9e9c69dc5f497"
+    },
+    {
+      "path": "src/chiikawa-reviewed.js",
+      "match": true,
+      "sha256": "2c5033103bd78984daf44f23fdf1096b9616b19c8c0048e3a6f46a29ee3ffa6b"
+    },
+    {
+      "path": "src/chiikawa-theme.js",
+      "match": true,
+      "sha256": "047f1af3daa071db55afbd4e26c82fbf10fcef5de443b1dd41bab773ed4b47f5"
+    },
+    {
+      "path": "src/context.js",
+      "match": true,
+      "sha256": "9651c8f63ec46e24fd723554a4828b8297053ecf7b4626e1b9348d8a4910e6ee"
+    },
+    {
+      "path": "src/dialogue-director.js",
+      "match": true,
+      "sha256": "761e9bb075ccb28eb9a1e190ee69b3f8cce5c0391fb24ca577b6648d097e79fa"
+    },
+    {
+      "path": "src/dialogue-grounding.js",
+      "match": true,
+      "sha256": "d18ac7eebcbbed6a7784a6f380a6d3161be46a264a95e9b1120407d6e94444ed"
+    },
+    {
+      "path": "src/engine.js",
+      "match": true,
+      "sha256": "6376d029b38e148f3d03d832e9a38d4492985eda4bcf2b72a16119262a7d1d86"
+    },
+    {
+      "path": "src/fandom.js",
+      "match": true,
+      "sha256": "5f0d25d806493e971c4b628be69589156ebd43c3c39fb211f2c66e12a4205af3"
+    },
+    {
+      "path": "src/filler.js",
+      "match": true,
+      "sha256": "5229139780f21ae5ed051349961c13c6db0a287d8eba67019e9d709648312c25"
+    },
+    {
+      "path": "src/font.js",
+      "match": true,
+      "sha256": "387a1d0a7100980ba1649ae14c1d0b15114a6a0a47704f663a7784bf611e69e1"
+    },
+    {
+      "path": "src/japanese-learner.js",
+      "match": true,
+      "sha256": "af8c724618234968ba9d2ae9e010b2bc0f3c15013c3f0a896a2ab2e5ea075203"
+    },
+    {
+      "path": "src/moves.js",
+      "match": true,
+      "sha256": "7e0787dd72c68c51b4bcca3f82a2db1217082b36b82c3bad89e9d91c1b8e56a5"
+    },
+    {
+      "path": "src/names.js",
+      "match": true,
+      "sha256": "ccaa0c7b47a0716fb02bf5d097ddcb802c9f20f6d96a4fc9b5bab392cb40dedf"
+    },
+    {
+      "path": "src/performance.js",
+      "match": true,
+      "sha256": "79eef5e10447e17df2123e68c8aa4d7dd1ff859e75f22eacdaf481b7e08a5929"
+    },
+    {
+      "path": "src/player-memory.js",
+      "match": true,
+      "sha256": "d1f163cef182c3c5eed2a42086cac3fbe8dd66202240702f02d3b620fc6175e2"
+    },
+    {
+      "path": "src/profile.js",
+      "match": true,
+      "sha256": "342e5ee11d8d7f4261e9acd329db08f627c7ace4afe49efffc4ea5030257bb31"
+    },
+    {
+      "path": "src/readable.js",
+      "match": true,
+      "sha256": "1fbf16e9cb6ebdb166692221478f59f4056c766bda56459f8340938d5e589fdb"
+    },
+    {
+      "path": "src/repertoire.js",
+      "match": true,
+      "sha256": "7968bfc4076007af18963aa64ba3d412ac2f2cb4282c3cbe938e50d393ab61f0"
+    },
+    {
+      "path": "src/routing.js",
+      "match": true,
+      "sha256": "7a3356ca1db274efe808a328d70efb36b77fdc57390fe5b4bc7e87356d81200c"
+    },
+    {
+      "path": "src/session.js",
+      "match": true,
+      "sha256": "41a477535718dc32ad0d4efc89c9ba5d1381818ffb58bc6d94b585e62410063f"
+    }
+  ],
+  "health": {
+    "requestCount": 1,
+    "llmCalls": 0,
+    "status": 200,
+    "body": {
+      "ok": true,
+      "games": [
+        "emmichy"
+      ],
+      "decisions": {
+        "emmichy": [
+          "talk"
+        ]
+      },
+      "providers": [
+        "groq",
+        "gemini",
+        "workers-ai"
+      ]
+    }
+  },
+  "liveLLMCalls": 0
+}

@@ -5,7 +5,89 @@
 - 中継(game-llm)は *.mucky-totoro.workers.dev からの呼び出しを許可済み。
 - 以下の英文の記録は合流前のもの(「main は触らない」等の記述は無効)。
 
-# Current checkpoint — playable Chiikawa candidate, 2026-10-12
+## 最新コードの統合確認（2026-10-13）
+
+Cloudflareの初回main50fa6b0は古い20261012-chii1を配信していた。最新pilotのスマホ会話欄・プレイヤー記憶・名前表示20261012-name1を失わないよう、Codexの最新341529fとmainのCloudflare設定をcodex/main-sync-20261013で統合する。Cloudflare設定・既存のClaudeワークフローを維持し、PRの宛先はmain。公開・ソース照合の結果は統合後に追記する。旧pilot向けPRは作らない。Claudeの調査は当面ユーザー仲介で受領し、自動依頼・再試行は再開しない。有料サービス追加は未許可。
+
+---
+
+# Current checkpoint — nickname display fix, 2026-10-12
+
+The user reproducedムッキーって呼ぶね→ムッ キーッテ ヨブネ. Root cause is display tokenization: kuromoji splitsムッ/キー; the saved name and original reply are intact. Prior static proper-name overrides did not cover arbitrary player nicknames. readableText now protects the learned nickname for each render, joins contiguous source katakana tokens, and retains explicit spaces between distinct words. App uses the same protected conversion for typing, history and continuations; cached user messages update when the nickname is first learned.
+
+Entry/readable release20261012-name1.186 local tests pass, including actual acknowledgment, hiragana/half-width aliases, saved-state restore, unknown names containing known character names, regex literals and dictionary-failure fallback. Actual-app offline simulated-DOM replay verifies both user and assistant visible text forムッキー andむっきーちゃん, including restart. Evidence docs/player-nickname-reading-20261012.json. Zero LLM calls, no external AI/subagents. Backend is unchanged. Published: PR38 merged to pilot asf0a9514fe9795345fc41357edcb5cc9b023af7ff, code candidate240dd894fe27995c3ff0542d30343f59bc9f2986. Pages38217747708 succeeded. All3 changed public HTML/runtime files match the tested candidate; docs/public-nickname-reading-20261012.json. Frontendmain/backend unchanged. User should reload the published page and try starting over→ムッキー.
+
+---
+
+# Current checkpoint — published memory2; manual Claude handoff; free-model smoke check, 2026-10-12
+
+Public runtime20261012-memory2: frontend PR32/PR37 merged to pilot as034c7a39/6300f576. Code candidateffdbf23dd8abade587572ea6a2c061aba5af2b46, Pages38214312206 success; all27 changed public HTML/runtime files match the candidate (docs/public-player-memory-20261012.json).185 frontend tests pass. The nickname hotfix keeps greetings/affection/known character words from becoming names; returning player creations avoid unrelated name cues. Backend PR16 merged986c5189, deploy38212433032 succeeded with52 tests, Worker5b2e2264-58e1-497b-a098-9c72e668956c. Browser-only memory and physical-phone limitations remain as documented. User human play remains necessary.
+
+Frontendmain has workflow-only PR36 merge2cf44464; game runtime remains on the pilot branch. Claude Issue34 retry38215272908 read the CSV but X HTTP402 and branch-creation permissions prevented files/PR. User now mediates: stop automatic Claude requests/retries; do not expand workflow permissions or resume Relay. Read suppliedcodex/chiikawa-research-claude/claude-handoff.md first; imported handoff/theory/crosscheck preserve provenance. Two oldclaude.csv rows are superseded byresearch/chiikawa/codex-corrections.csv. Body-swap stays fan theory; catalogue354 is not the latest episode. No new unverified manga scenes are loaded into the game.
+
+User authorized small free-provider comparison. Unpublished backend scriptcc3e021, manual run38216462736:8 real generation attempts, no429. Same server prompt/history: Qwenqwen/qwen3.8-27b2/2 success447/410ms; baselinegpt-oss-120b2/2 success622/785ms; Gemini3.8Flash timeout3500ms/503; Gemini2.5FlashLite404/404 despite catalogue listing. This is synthetic smoke evaluation, not human quality/stability proof. Qwen joins the usable model shortlist and the existingGROQ_MODEL selector supports it; published default/order is unchanged pending further comparison. No new paid API/key/billing setup. Artifacts retain raw texts, model IDs, usage and validation separately; no end-to-end display timing claim. The new comparison workflow only runs manually and does not deploy. See docs/free-llm-comparison-20261012.md/.json.
+
+Next: user PC/phone play of name→favourite→creation→restart→recall, improve feedback locally, then narrowly verify any default-model change. Server persistence/cross-device identity/shared knowledge remain unimplemented. Monthly subscriptions are not generic runtime API credit: official Claude docs now list conditional Max/Team API credits that require Console linking; user plan/link is unverified. Development AI quota and public game runtime quota are separate.
+
+---
+
+# Current checkpoint — player memory and reviewed research ready, 2026-10-12
+
+Frontend candidate iscodex/player-memory-20261012, PR32, runtime20261012-memory1;184 local tests pass. Expanded browser memory and one short question activity are implemented; creations/preferences/answers and recent delivered lines reach the LLM with ownership boundaries. Starting over asks the name again and retains preferences/creations. Questions do not become creation names, activity answers avoid generic fandom replacement, unrelated soft-name reactions are suppressed on creation messages, and an ended play cannot be reopened by a memory lookup. Before/after actual-app offline replays plus the ended-session regression are stored in docs. Real browser390×844 verifies the basic mobile controls, first-meeting opening and stored creation response; physical phone keyboard remains unverified.
+
+Backend PR16 candidate74cdab2e51f18e966e52c8964a5090b1888acdb3 merged as986c51897cc3de717a737eec4a02fc41c56b5f45. Deploy38212433032 succeeded including52 tests. No new game LLM generation after earlier429; this candidate's generated-reply quality is not live-verified. Server persistence/cross-device identity/shared knowledge accumulation remain unimplemented, not claimed complete. Frontend publication will follow its final code commit/checks under the user's immediate pilot-fix authorization.
+
+Follow-up research completed and preserved on GitHub: Gemini revised300 with30 corrections/172 held/98 retained (primary-confirmed self-report97); Claude30 scenes plus20 overlap checks,5 correction points. Codex independently checked8 official-source facts/relations and loaded only that subset;2 plot-related notes stay out of default associations. X manga15 and held records are not canon. See docs/player-memory-20261012.md and research/chiikawa/codex-review.md.
+
+User authorized Claude preparation through GitHub Issues with@claude. Issue34 ran but stopped at0 results because git fetch/WebFetch were unapproved. PR36 provides narrow commands/domains for the existing Claude action; it targetsmain's workflow and remains unmerged. The current frontendmain has been updated externally to78c6fc4d1ae07a7b92f6170c3886d5528eecdeb5 for that action; do not overwrite it or claim the oldmain hash is current. This session remains sole Director/Implementer/Tester; no Relay/new Work/paid service.
+
+Next: complete frontend pilot publication/source matching, ask for human play of name→favourite→creation→restart→recall, then review feedback. Handle PR36 separately before retryingIssue34. Free-model comparison is scoped in docs/free-llm-comparison-20261012.md but has not been run.
+
+---
+
+# Previous checkpoint — player-memory completion audit, 2026-10-12
+
+GitHub pilot-audio-readable-retro is7a07d6d45ea268e12a793f0c5b7f88b52c6a047f (PR31 research documents), with PR30 mobile conversation-space already merged asd01172ac; runtime20261012-mobile2. Backend main remains636ac2d2013ff8a7f45daf237c9a6a13d9805258. Earlier unpublished/public-approval wording below is historical and superseded: user authorized immediate tested pilot fixes on2026-10-12. Frontend main and paid services remain outside that authorization.
+
+Public code already stores basic name/likes/conversation in the browser and supplies bounded name/likes to the LLM. Expanded player-memory is a work-in-progress implementation preserved oncodex/player-memory-20261012: explicit creations/preferences, limited question activity, nickname elicitation, previous reply records and unverified knowledge suggestions. Local suite179/179 passes. It is not yet publicly available; new memory fields are not yet integrated into the backend prompt. No server persistence binding or cross-device identity exists; all-player suggestion storage/review is not implemented. Do not present those as completed.
+
+Gemini300/Claude156 submissions received and preserved in GitHub branch; separate follow-ups are underway according to the user. Gemini revision has appeared withSTATUS reporting30 corrected/172 held/98 retained; Claude-scenes.csv has appeared but final receipt/review remains pending. Do not overwrite collaborators' files or automatically turn their primary-confirmation labels into accepted canon. Codex review isresearch/chiikawa/codex-review.md.
+
+Next priorities: finish and publish expanded local memory/LLM use; integrate source-checked useful Chiikawa facts and relations; verify corrections, focus, pacing, draft interruption and repeated-play variety; then a small live check stopping on429 and the user's phone/PC playtest. Server persistence and reviewed shared knowledge are a separate enhancement requiring a verified free path; browser memory suffices for the pilot milestone. No new game LLM calls in this audit. User-facing completion means a complete five-minute conversation plus a repeat visit works naturally, not a database row quota or automated-test count alone.
+
+---
+
+# Previous checkpoint — larger phone conversation candidate, 2026-10-12
+
+User reports frequent scrolling after portrait enlargement. Branch codex/mobile-conversation-space-20261012, entry/style20261012-mobile2, not published. Phone portrait and22px font retained; main fills available viewport, all remaining space goes to chat. Controls/descriptions move into a top-right settings panel; consecutive assistant labels omitted. visualViewport resize keeps form inside reduced visible space. Desktop retains normal controls/layout. Browser checks320/390/430 portrait,390×500 reduced-height simulation,1280 desktop.390×844 chat318px vs194px, portrait324px unchanged. Settings close/open, help, mute, Escape and offline1 send verified.171 tests pass, zero LLM/subagent. Real device keyboard remains unverified; report docs/mobile-space-20261012.md +JSON/screenshots.
+
+Public remains PR29 merge72efdbbb /20261012-mobile1; backend unchanged. Next: prepare draft PR against pilot-audio-readable-retro, then ask approval for this new candidate under existing publication instruction. Single-session Director/Implementer/Tester continues.
+
+---
+
+# Previous checkpoint — mobile portrait published, 2026-10-12
+
+User explicitly instructed reflection/publication. PR29 merged to pilot-audio-readable-retro as72efdbbb209534679b6f8d3e2f58c48191ad7551; Pages38193268352 success. Entry/style release20261012-mobile1, code candidatead9d0c1642015ac8080655f8caa79aaac4541b1f. Public index.html/style.css/src/app.js all match the tested candidate; docs/public-mobile-layout-20261012.json. Frontend main remains6343213bc8f904a43c02319fc9b421ce2dd4dc0f. Backend unchanged; zero new LLM calls. Next: user's physical-phone review, especially software keyboard. This follow-up records evidence only.
+
+---
+
+# Previous checkpoint — mobile portrait candidate, 2026-10-12
+
+User reports portrait too small on a vertical phone. Branch codex/mobile-portrait-20261012, entry/style release20261012-mobile1. Implemented top-centred large canvas (viewport-height bounded), logo over lower-right portrait, concise mobile labels, reduced duplicate descriptions, sticky input slot. Focus calls prevent unintended page scrolling. Original image/conversation logic and desktop/landscape layout retained. 171 tests pass; real-browser viewport checks320/390/430 portrait and1280 desktop have no horizontal overflow and phone form remains visible.390px portrait324px vs old130px; start/send scrollY0. Offline1 send, muted; no LLM/subagent. Physical phone keyboard remains unverified. Report docs/mobile-layout-20261012.md +JSON/screenshots.
+
+Candidate not yet published; public frontend still8be7c77d /20261012-chii1, backend636ac2d unchanged. Prepare PR against pilot-audio-readable-retro and ask user approval under their instruction to confirm each new candidate publication. Current single session remains Director/Implementer/Tester, no Relay.
+
+---
+
+# Previous checkpoint — Chiikawa pilot published with permission, 2026-10-12
+
+User explicitly authorized publication for their playtest. Frontend PR28 merged to pilot-audio-readable-retro as8be7c77d166b6ed8bd6b2d8e7e78a0c8f270e5ff; Pages38170960518 success. Runtime20261012-chii1. Backend PR15 merged to main as636ac2d2013ff8a7f45daf237c9a6a13d9805258; Deploy38170890200 success including51 tests, Worker8e5a629c-ed5b-4d8e-9a86-def54ae6feeb. Health endpoint OK. All25 changed public HTML/runtime files match the code candidate; docs/public-chiikawa-pilot-20261012.json. Frontend main remains6343213bc8f904a43c02319fc9b421ce2dd4dc0f. Public URL https://mukkii-game.github.io/emmichy/ opened for the user; start-choice may show their previously saved conversation (not a new generated test).
+
+No additional game LLM calls or new generation after earlier429; human review is next. The public candidate includes the later locally-tested prompt/guard/relations; generation quality has not been rechecked live. One read-only release verifier used explicitly Luna medium,25 GET comparisons, no extra virtual player. This follow-up records publication only. Recommend Sol6.1 high for routine follow-up; the user changes this same chat's model setting. Gemini/Claude collection is useful now as bounded source-backed collection followed by independent checking; research brief ready, neither contacted automatically. No new Work/Relay/service.
+
+---
+
+# Previous checkpoint — playable Chiikawa candidate, 2026-10-12
 
 Review candidates: frontend7d975cbf1430d7d21feb01476dc85dd43589b3db in draft PR28 (base pilot-audio-readable-retro); backend7a9df963df168cb43ff4f4ea2621367d0106b629 in draft PR15 (base main). Both branches pushed, neither merged. This follow-up only records candidate identities; runtime unchanged.
 

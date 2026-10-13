@@ -2,6 +2,14 @@
 
 This file is a repo-local experiment for Emmichy. Do not treat it as the user's global development constitution.
 
+## Main and Cloudflare publication (2026-10-13; highest priority)
+
+- The user confirmed the new policy directly: main is the sole integration/publication branch. Create all future PRs against main; never target pilot-audio-readable-retro.
+- Validated fixes are authorized for immediate integration to main, which deploys automatically via deploy-cloudflare.yml to https://emmichy.mucky-totoro.workers.dev.
+- Preserve current game fixes and research evidence when merging migration/configuration changes. Older instructions reserving main or publishing to pilot are superseded.
+- GitHub remains the source of truth. Temporary codex/ branches are for main-targeted review; no new Work or automated Relay.
+- Paid services still require explicit authorization. Claude research currently arrives through the user; do not resume automatic @claude requests/retries.
+
 ## Single-session development (2026-10-07)
 
 The user designated the current Emmichy development session as the sole Director, Implementer and Tester. The automated Relay experiment is ended; its tasks are paused. Do not create another session, post TODOs to wake an agent, or wait for another Director.
@@ -11,9 +19,11 @@ The user designated the current Emmichy development session as the sole Director
 - Preserve existing work. Implement, test and review the result in this session, then continue clear improvements toward a finished game.
 - Record concrete completed work, remaining limitations and next actions in HANDOFF; keep successful and failed dialogue examples in PLAYTEST.
 - Do not use external AI for a change that can be verified locally. Any live quality check must be small and stop on 429.
-- Maintain GitHub as the source of truth. Keep work on PR #3's head branch until public integration is explicitly authorized.
+- Maintain GitHub as the source of truth. PR #3 is historical; current integration and publication follow the main/Cloudflare policy above.
 
 ## Durable docs
+
+2026-10-12追加：Claudeへ調査・下ごしらえを依頼する場合はmukkii-game/emmichyにIssueを作り、本文に@claudeと完結した依頼書を書く。成果はPRとIssueコメントで受領し、このCodexセッションがPR・根拠・差分を確認して取り込む。コードで検証できる修正を外部調査へ回さず、対象・件数・停止条件・担当ファイルを限定する。別Directorや自動Relayを再開せず、有料サービス追加の許可へ拡大しない。
 
 ユーザーが2026-10-10に手動の仮想プレイヤー試遊を許可した。サブエージェントはこのセッション内の限定試遊に使い、Director・実装・最終判断はここで行う。自動Relayや別Workは再開しない。トークン節約希望も受けたため、既知の問題は機械的に再現し、新しい主観評価だけ短い設定を渡した1〜2人・各6〜8送信を目安に使う。必要な時だけ追加し、報告は実例と重要3点に絞る。実LLMと模擬試遊、人間評価を区別し、使ったモデルの指定有無を説明する。
 
@@ -25,6 +35,8 @@ The user designated the current Emmichy development session as the sole Director
 Do not use these as a mailbox.
 
 ## Safety / scope
+
+2026-10-13の追加指示：検証を完了したEmmichyの修正は確認待ちを挟まずmainへ反映し、Cloudflareへ自動公開する。旧pilot向けのPR・公開は行わない。有料サービス追加の許可へ拡大しない。各公開の候補と検証結果を記録する。
 
 - Preserve existing work; inspect before overwriting.
 - Do not publish, merge, or deploy to main/public/production unless explicitly authorized.

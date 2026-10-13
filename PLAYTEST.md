@@ -1,3 +1,57 @@
+# 2026-10-12: nickname rendering regression
+
+Before:ムッキーって呼ぶね。→ムッ キーッテ ヨブネ。 kuromoji tokens areムッ(adverb),キー(noun),って(particle). Saved nickname and raw reply were correct; the error occurs locally during reading/spacing. Static character-name overrides did not cover arbitrary nicknames.
+
+After:ムッキーッテ ヨブネ。 Learned nickname is protected as one label; contiguous katakana spelling is kept together.186 tests pass. Actual-app offline simulated-DOM replay confirms user textムッキー /ムッキーチャン and assistant acknowledgments after name questions and restart; no display-internalムッ キー. Saving/restoring nickname and name examples with a character-name substring pass. Explicitカフェ ラテ spacing and ordinary verb/particle spacing remain. Evidence docs/player-nickname-reading-20261012.json. Zero LLM calls; no physical browser/phone or human-evaluation claim for this check. Entry/readable cache versions advanced to20261012-name1.
+
+Published PR38 mergef0a9514f /Pages38217747708 success. Public index.html/app.js/readable.js match candidate240dd89 exactly. docs/public-nickname-reading-20261012.json. No extra LLM generation or human evaluation.
+
+---
+
+# 2026-10-12: memory2 publication and real provider smoke comparison
+
+Frontend185/backend52 local tests passed for the published memory2 candidate. PR32/37 pilot integration and Pages38214312206 succeeded;27 changed public source files matchffdbf23. Evidence docs/public-player-memory-20261012.json. Greeting/affection/character names no longer become accidental nicknames; a reintroduced player creation is acknowledged without unrelated word recognition. Browser tests remain viewport emulation rather than physical handset proof.
+
+Manual CI38216462736 at unpublished backendcc3e021 made8 real API generation attempts with two shared synthetic cases per model, no429. Qwen447/410ms andGPTOSS622/785ms succeeded; Gemini3.8Flash timeout/503, Gemini2.5FlashLite404/404. Qwen accepted the Usagi catchphrase correction and preserved the player's creation name, with short paragraphs and without the baseline's repeated generic final question. Qwen's shield/word-sound analogy is weak; GPTOSS invents a sweet smell/effects as remembered detail. Neither should invent properties of a player creation. This smoke check does not establish load stability, human appeal, display latency or universal factual accuracy. Full raw response/usage evidence: docs/free-llm-comparison-20261012.json.
+
+Mock comparison-script check: first429 stops all generation and excludes credentials. This mock is distinct from the8 actual calls. No new virtual player, monthly subscription API, provider key, paid billing, or runtime model switch.
+
+---
+
+# 2026-10-12: player memory and reviewed Chiikawa knowledge candidate
+
+Frontend184/backend52 local tests pass. Actual-app offline replay (simulated DOM/time, compressed typing; zero game-LLM calls) covers nickname elicitation, one choice activity, creation storage across starting over, Japanese-study identity, draft/IME pause. Report docs/player-memory-20261012.md; before/after transcripts preserve failures and repairs.
+
+Failures found: "うさぎかな" was learned as an activity answer but final content repair replaced its acknowledgment with a generic Usagi introduction. "前に作った能力覚えてる？" incorrectly learned "覚えてる" as a new creation. A creation name could also get a soft unrelated-name reaction ("ゴールド！"). Repairs protect activity answers, exclude questions from creation learning, and suppress unrelated name reactions on a newly recorded creation while still allowing LLM continuation. Final replay recalls "砂糖シールド", acknowledges the likeness answer and emits no speech during a20-second draft/IME period. Explicit dislikes now remove conflicting remembered likes.
+
+Codex checked and adopted8 bounded official-source notes/relations from the received research; unverified manga15 and Gemini's held172 rows are not canon. New memory reaches backend prompting, user-created ideas remain player-owned. Server persistence/cross-device identity/shared learning are not implemented. No final-candidate live-generation or human-assessment claim. Human playtest remains necessary.
+
+---
+
+# Previous checkpoint — 2026-10-12: phone conversation space, unpublished candidate
+
+Real browser viewport checks320×568/390×844/430×932/390×500 and1280×900 desktop, offline muted. Phone log heights185/318/360/153px; input bottom562/838/926/494px. No phone document or horizontal overflow; desktop existing scroll layout retained.390px portrait324px and22px text unchanged, log grows from194px to318px. Settings opens/closes, help unfolds, sound turns OFF, Escape closes; initial greeting and1 offline Hachiware-photo send observed.171 tests pass. No new model call or subjective reviewer. Reduced viewport is a simulation, not actual handset keyboard proof. docs/mobile-space-20261012.md/JSON/screenshots. Public unchanged until new-candidate approval.
+
+---
+
+# 2026-10-12: mobile portrait publication check
+
+User authorized publication. PR29 merged72efdbbb, Pages38193268352 success. Published index/style/app all match candidatead9d0c1, release20261012-mobile1; docs/public-mobile-layout-20261012.json. Local viewport evidence and171 tests remain the validation basis; no extra model call or claim of physical keyboard testing. Await user phone review.
+
+---
+
+# 2026-10-12: mobile portrait layout check (unpublished)
+
+Browser viewport emulation320×568,390×844,430×932 and1280×900; offline, audioOFF. Phone portrait widths218/324/358px (previous130px), no horizontal overflow, input form bottom551/728/799px within each phone viewport. Top portrait with overlaid logo, concise input hint; desktop logo static and prior side-by-side composition retained. Start and one offline Hachiware-photo send at390px keep page scrollY0 with head visible after preventScroll focus fix.171 existing tests pass. Actual handset/browser keyboard not tested; no gameLLM/externalAI/subagents. Evidence docs/mobile-layout-20261012.json, -phone.png, -desktop.png and report .md. Public version unchanged pending the requested new-candidate approval.
+
+---
+
+# 2026-10-12: publication verification
+
+User authorized public trial. Frontend PR28/Pages38170960518 and backend PR15/Deploy38170890200 succeeded; runtime20261012-chii1. Read-only release verifier explicitly Luna medium compared25 changed HTML/runtime files with the tested candidate, all matched (docs/public-chiikawa-pilot-20261012.json). Health endpoint OK. Public browser opened at start-choice; saved older dialogue is not a new test transcript. No additional game LLM calls, virtual conversation or human evaluation. Frontend main unchanged. Await user's real playtest.
+
+---
+
 # 2026-10-12: focused Chiikawa candidate, bounded evidence
 
 Runtime20261012-chii1, not published. Local tests171/171 frontend +51/51 backend; knowledge25 structural checks and4 negative cases pass. One new subjective reviewer explicitly Sol6.1 medium,6 sends using offline actual app with mock DOM/time; original player log/review retained in docs/pilot-chiikawa-20261011-player*. Fixed preference/focus drift, scoped refusal and ordinary dessert sharing, then replayed the same6 sends (not a second subjective review). Captured real outputs also replayed; script scripts/replay-chiikawa-pilot.mjs makes zero calls.

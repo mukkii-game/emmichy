@@ -76,3 +76,38 @@ canvas { width:100%; aspect-ratio:248/336; }
 #start-choice .small { margin:10px 0 0; }
 #start-choice button { font-size:16px; margin-right:10px; padding:10px 18px; }
 @media(max-width:680px){ .message,#live-reply { font-size:24px; line-height:1.7; } .toolbar>div { display:flex; flex-wrap:wrap; } }
+.mobile-hint { display:none; }
+.mobile-menu-toggle,.mobile-settings-heading { display:none; }
+/* Portrait-first vertical phone layout. Keep the original canvas pixels. */
+@media(max-width:680px) and (orientation:portrait){
+ body { padding:6px; min-height:0; height:var(--visible-height,100dvh); display:block; overflow:hidden; }
+ main { position:relative; display:flex; flex-direction:column; height:calc(var(--visible-height,100dvh) - 12px); min-height:0; }
+ header, footer, .game-tagline, .terminal-heading, #terminal-note,
+ .toolbar #status, .session-hint, #start-choice .small, .desktop-hint { display:none; }
+ .mobile-hint { display:inline; }
+ .screen-wrap { flex:1; min-height:0; padding:6px; gap:8px; grid-template-rows:auto minmax(0,1fr); }
+ .portrait-panel { position:relative; display:block; width:min(100%,calc(var(--visible-height,100svh) * .3838094)); margin-inline:auto; }
+ .portrait-panel canvas { width:100%; }
+ .game-logo { position:absolute; right:8px; bottom:6px; margin:0; font-size:24px; letter-spacing:1px; line-height:1; text-shadow:2px 2px #000,-1px -1px #000,0 0 8px #000; }
+ .conversation-panel { height:auto; min-height:0; }
+ #conversation { padding-right:4px; }
+ .message,#live-reply { font-size:22px; line-height:1.55; margin-bottom:16px; }
+ .speaker { font-size:10px; }
+ .message.enny + .message.enny .speaker { display:none; }
+ .input-slot { flex:none; margin-top:4px; padding-bottom:env(safe-area-inset-bottom,0px); background:#0b0d0d; }
+ #talk { min-height:50px; padding:8px; gap:6px; }
+ #send { padding:8px; }
+ #input-hint { margin:5px 2px; }
+ .toolbar { margin-top:6px; }
+ .toolbar>div { width:100%; display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+ .toolbar button { min-height:44px; font-size:13px; }
+ .readable-log { margin-top:8px; font-size:13px; }
+ .privacy-hint { margin:6px 2px; font-size:10px; line-height:1.5; }
+ .mobile-menu-toggle { display:block; position:absolute; top:8px; right:8px; z-index:4; width:44px; height:44px; padding:0; font-size:25px; line-height:1; }
+ #settings-panel { display:none; position:fixed; top:58px; right:8px; left:8px; z-index:5; max-height:calc(var(--visible-height,100dvh) - 72px); overflow-y:auto; padding:14px; border:1px solid #78916d; background:#111610; box-shadow:0 12px 40px #000c; }
+ #settings-panel[data-open="true"] { display:block; }
+ .mobile-settings-heading { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+ .mobile-settings-heading button { min-height:44px; }
+ .screen-wrap:fullscreen { padding:6px; gap:8px; align-content:start; height:100%; }
+ .screen-wrap:fullscreen .conversation-panel { height:auto; }
+}

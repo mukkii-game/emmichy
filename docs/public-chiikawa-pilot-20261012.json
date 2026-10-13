@@ -1,0 +1,219 @@
+{
+  "checkedAt": "2026-10-12T05:09:36.102+09:00",
+  "release": "20261012-chii1",
+  "frontend": {
+    "pr": 28,
+    "candidate": "7d975cbf1430d7d21feb01476dc85dd43589b3db",
+    "merge": "8be7c77d166b6ed8bd6b2d8e7e78a0c8f270e5ff",
+    "pagesRun": 38170960518,
+    "url": "https://mukkii-game.github.io/emmichy/",
+    "mainUnchanged": "6343213bc8f904a43c02319fc9b421ce2dd4dc0f",
+    "files": [
+      {
+        "path": "index.html",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "77c4732a644607d9423e51b69e7b2c5502373d67b6f1f980ad1511f56da6adbc",
+        "candidateSha256": "77c4732a644607d9423e51b69e7b2c5502373d67b6f1f980ad1511f56da6adbc"
+      },
+      {
+        "path": "src/app.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "36fb7c5a45bb7eb32ad3084322635f67865f16994aa9b16489c406ef3e460193",
+        "candidateSha256": "36fb7c5a45bb7eb32ad3084322635f67865f16994aa9b16489c406ef3e460193"
+      },
+      {
+        "path": "src/balance.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "7f128fe0e3c37532d1b3d3d0373c4c464e9d8d3ed556b0dde4be0efbe50de2ec",
+        "candidateSha256": "7f128fe0e3c37532d1b3d3d0373c4c464e9d8d3ed556b0dde4be0efbe50de2ec"
+      },
+      {
+        "path": "src/chat.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "e07bbcf3632ca737e9c2a27ec10e204df3ad764dd8225ab0db977bb60e8e48a2",
+        "candidateSha256": "e07bbcf3632ca737e9c2a27ec10e204df3ad764dd8225ab0db977bb60e8e48a2"
+      },
+      {
+        "path": "src/chiikawa-relations.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "d3b3847cd885fcb013550738f243e80657afae0df49d46d4670e1af9312d5d2c",
+        "candidateSha256": "d3b3847cd885fcb013550738f243e80657afae0df49d46d4670e1af9312d5d2c"
+      },
+      {
+        "path": "src/chiikawa-reminder.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "6a8bc53901399233fa85cb4a9ccaa10e65d2fbc6285476dba9bcd1fa81c631bb",
+        "candidateSha256": "6a8bc53901399233fa85cb4a9ccaa10e65d2fbc6285476dba9bcd1fa81c631bb"
+      },
+      {
+        "path": "src/chiikawa-theme.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "8585bc4d9321cbc48760d8a24d8178ef3cc0cb9e3f9e28def68fbc47b044be43",
+        "candidateSha256": "8585bc4d9321cbc48760d8a24d8178ef3cc0cb9e3f9e28def68fbc47b044be43"
+      },
+      {
+        "path": "src/context.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "4c88e23f6137d370508f583173b766f11cd3f26c5bd7fe2776b000e51ee7ec5e",
+        "candidateSha256": "4c88e23f6137d370508f583173b766f11cd3f26c5bd7fe2776b000e51ee7ec5e"
+      },
+      {
+        "path": "src/dialogue-director.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "6fdb2b1c664259f7f4e39862dac660e16a6d5ecd243011a67b4a308185cb8274",
+        "candidateSha256": "6fdb2b1c664259f7f4e39862dac660e16a6d5ecd243011a67b4a308185cb8274"
+      },
+      {
+        "path": "src/dialogue-grounding.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "45e9b0865e9a4bd5debca3427c5fdd848e881b60c00d03e831f044993927ffb6",
+        "candidateSha256": "45e9b0865e9a4bd5debca3427c5fdd848e881b60c00d03e831f044993927ffb6"
+      },
+      {
+        "path": "src/dialogue-history.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "26e384a696533294011a8aa8d697726a9a96e6f513c431d7a06292ea75e1606d",
+        "candidateSha256": "26e384a696533294011a8aa8d697726a9a96e6f513c431d7a06292ea75e1606d"
+      },
+      {
+        "path": "src/engine.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "7d199d6c1074767755891ef785d253499b6138174416c6e6b5b9767325bed9c5",
+        "candidateSha256": "7d199d6c1074767755891ef785d253499b6138174416c6e6b5b9767325bed9c5"
+      },
+      {
+        "path": "src/fallback.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "a9a976fd6467bb3c68f4363eb75f65d59003fb400d8f456aed80dee70a27564e",
+        "candidateSha256": "a9a976fd6467bb3c68f4363eb75f65d59003fb400d8f456aed80dee70a27564e"
+      },
+      {
+        "path": "src/fandom.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "450cf9a64ba345c8734447dedb6e488cd7f423e82262ea7e487e98d903ea09d1",
+        "candidateSha256": "450cf9a64ba345c8734447dedb6e488cd7f423e82262ea7e487e98d903ea09d1"
+      },
+      {
+        "path": "src/filler.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "2d0d8f20666c1779e47534bcf7cd86ad929ebda09463e435452b05909919bab8",
+        "candidateSha256": "2d0d8f20666c1779e47534bcf7cd86ad929ebda09463e435452b05909919bab8"
+      },
+      {
+        "path": "src/font.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "02390f7d77e46deeae2df87fd19ab7e31126bfda54e8b37b1e59bad17720689f",
+        "candidateSha256": "02390f7d77e46deeae2df87fd19ab7e31126bfda54e8b37b1e59bad17720689f"
+      },
+      {
+        "path": "src/moves.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "9b3a9345408b194cf845691b92c2a1c3328c181614ecee9dfd26030aac516df7",
+        "candidateSha256": "9b3a9345408b194cf845691b92c2a1c3328c181614ecee9dfd26030aac516df7"
+      },
+      {
+        "path": "src/names.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "de33a1f713ce4e153c95ca70b9592fa42daaaccaef14f7a1cbefb05c129c83c0",
+        "candidateSha256": "de33a1f713ce4e153c95ca70b9592fa42daaaccaef14f7a1cbefb05c129c83c0"
+      },
+      {
+        "path": "src/performance.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "a2c802b44c2a543612cb6ad2b880efee71d958cadf1f911a511d58ee8ee7501d",
+        "candidateSha256": "a2c802b44c2a543612cb6ad2b880efee71d958cadf1f911a511d58ee8ee7501d"
+      },
+      {
+        "path": "src/profile.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "1aae940032323ab260d5c3b3dd784c74f014c157ca0a9601dc6f9ee0a734bbbe",
+        "candidateSha256": "1aae940032323ab260d5c3b3dd784c74f014c157ca0a9601dc6f9ee0a734bbbe"
+      },
+      {
+        "path": "src/readable.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "1ece870ec9d95800d4f94b1d0d78833880b15fa5a28232eb1a613a3f3b64b4c5",
+        "candidateSha256": "1ece870ec9d95800d4f94b1d0d78833880b15fa5a28232eb1a613a3f3b64b4c5"
+      },
+      {
+        "path": "src/repertoire.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "5386b91c196d460e20d776a62b208bfb52e7512dfb72b83cece31b8c1aa9bb89",
+        "candidateSha256": "5386b91c196d460e20d776a62b208bfb52e7512dfb72b83cece31b8c1aa9bb89"
+      },
+      {
+        "path": "src/routing.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "b67ed6a797dcef39c321c940af694ad3ecfbbeb36b1da54af10069f9ac9ba8eb",
+        "candidateSha256": "b67ed6a797dcef39c321c940af694ad3ecfbbeb36b1da54af10069f9ac9ba8eb"
+      },
+      {
+        "path": "src/session.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "8f99ee7941509a06833dd871639861c71fac800ca27e7d1fea5a94366d26de96",
+        "candidateSha256": "8f99ee7941509a06833dd871639861c71fac800ca27e7d1fea5a94366d26de96"
+      },
+      {
+        "path": "src/topic-intent.js",
+        "httpStatus": 200,
+        "matches": true,
+        "sha256": "1f9ad4042e49328268df308bb88d05505f4ce03cb77fbc8b19ef324f5dbf8369",
+        "candidateSha256": "1f9ad4042e49328268df308bb88d05505f4ce03cb77fbc8b19ef324f5dbf8369"
+      }
+    ],
+    "pagesConclusion": "success"
+  },
+  "backend": {
+    "pr": 15,
+    "candidate": "7a9df963df168cb43ff4f4ea2621367d0106b629",
+    "merge": "636ac2d2013ff8a7f45daf237c9a6a13d9805258",
+    "deployRun": 38170890200,
+    "workerVersion": "8e5a629c-ed5b-4d8e-9a86-def54ae6feeb",
+    "deployConclusion": "success"
+  },
+  "checks": {
+    "frontendTests": 171,
+    "backendTests": 51,
+    "targetedRegression": "pass"
+  },
+  "liveEvidence": {
+    "llmCalls": 0,
+    "newGenerationTest": false,
+    "healthCheckedByParent": true
+  },
+  "additionalSubagents": 1,
+  "releaseVerifier": {
+    "model": "gpt-6-luna",
+    "reasoningEffort": "medium",
+    "role": "read-only public file comparison",
+    "llmGameCalls": 0
+  },
+  "browserEvidence": {
+    "image": "docs/public-chiikawa-pilot-20261012.png",
+    "scope": "public start-choice with previously saved dialogue; not a new generation test"
+  }
+}

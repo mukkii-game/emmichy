@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-12",
+  "release": "20261012-name1",
+  "candidate": "240dd894fe27995c3ff0542d30343f59bc9f2986",
+  "merge": "f0a9514fe9795345fc41357edcb5cc9b023af7ff",
+  "results": [
+    {
+      "path": "index.html",
+      "match": true,
+      "expectedSHA256": "b9886b1501b5b69887aafd709371ae99ce1ccddb776099850b03dc3599ba15e4",
+      "publicSHA256": "b9886b1501b5b69887aafd709371ae99ce1ccddb776099850b03dc3599ba15e4"
+    },
+    {
+      "path": "src/app.js",
+      "match": true,
+      "expectedSHA256": "72927a721c9cd99730fe4fe9662cb1921a7411dde9b50ae81239592160f0452f",
+      "publicSHA256": "72927a721c9cd99730fe4fe9662cb1921a7411dde9b50ae81239592160f0452f"
+    },
+    {
+      "path": "src/readable.js",
+      "match": true,
+      "expectedSHA256": "ba8dd9ebe11627264aaf8d4f0cd8031bb07057a0191824f0f0165bdb067d134a",
+      "publicSHA256": "ba8dd9ebe11627264aaf8d4f0cd8031bb07057a0191824f0f0165bdb067d134a"
+    }
+  ],
+  "gameLLMCalls": 0,
+  "tests": 186,
+  "pagesWorkflow": 38217747708,
+  "pagesConclusion": "success"
+}

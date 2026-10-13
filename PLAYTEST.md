@@ -1,3 +1,9 @@
+# 2026-10-13: phone portrait remains visible during typing
+
+Human reported large portrait shrinking/leaving view during mobile input. Actual local browser before390×844→430 reduces portrait width324→165 and chat to119px. Width-based portrait scale, a cropped face viewport during keyboard entry and fixed visual-viewport anchoring now keep320px in both states and increase keyboard chat to153px without reducing22px text.4 phone-size pairs, settings/start controls and1280×900 desktop inspected; page remains unscrolled and input stays visible.204 tests pass, including pan offsets and focus/keyboard classification. Evidence docs/mobile-keyboard-browser-20261013.json and normal/typing PNGs. This uses real Chromium rendering with simulated viewport height, not a physical OS keyboard. No LLM calls/backend changes. Physical iPhone/Android check remains for the human.
+
+---
+
 # 2026-10-13: human conversation failure → two repair iterations
 
 Human supplied transcript: own運行 joke was repeated at least five times, questions about it received「そこはまだよく知らない」, unrelated word activity capturedウンコウ as a preference,「許す」triggered another question, criticism was followed by more unsolicited biography/fandom and an unverified「みんながヤハ」scene. This is human-reported failure with unreported origin/provider, not a newly recorded provider test.

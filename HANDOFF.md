@@ -1,3 +1,10 @@
+# 現状(2026-10-13 更新・これが最優先)
+
+- **ブランチは main 1本に集約した。** 旧公開ブランチ pilot-audio-readable-retro は main に合流済み。今後の作業・PR はすべて main 向け(旧ブランチ向けの PR は作らない)。
+- 公開先: Cloudflare Workers https://emmichy.mucky-totoro.workers.dev (main に push すると deploy-cloudflare.yml が出す)。GitHub Pages は旧ブランチ配信のまま、repo 非公開化で止まる予定。
+- 中継(game-llm)は *.mucky-totoro.workers.dev からの呼び出しを許可済み。
+- 以下の英文の記録は合流前のもの(「main は触らない」等の記述は無効)。
+
 # Current checkpoint — playable Chiikawa candidate, 2026-10-12
 
 Review candidates: frontend7d975cbf1430d7d21feb01476dc85dd43589b3db in draft PR28 (base pilot-audio-readable-retro); backend7a9df963df168cb43ff4f4ea2621367d0106b629 in draft PR15 (base main). Both branches pushed, neither merged. This follow-up only records candidate identities; runtime unchanged.

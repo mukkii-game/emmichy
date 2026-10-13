@@ -1,0 +1,183 @@
+{
+  "candidate": "a8dcbac4f92ae816ef0c3e55dc44c050513f960f",
+  "frontendMain": "96b5195222f4e2cb414e00281ae369d3cf8162de",
+  "frontendDeployment": 38391753193,
+  "backendMain": "6a660e2c60c4ff609a4930946dee2af23e628c92",
+  "backendDeployment": 38391620240,
+  "runtime": "20261013-integrity1",
+  "checkedAt": "2026-10-13T11:41:58.323879+00:00",
+  "files": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "1728c4e320f3eec69e9b6b9678c344648b09b1a0372ffc56a0d4e164d728051e"
+    },
+    {
+      "path": "src/app.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "6cd1ea0900ef0365a28496856ccc9ec1cfdd1a3fa807cc404738c04a0c5c5a1c"
+    },
+    {
+      "path": "src/balance.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "f19128557859b358adcce10fa41834920ca1a34aef8475ec13c4ad7a5a9b2dd8"
+    },
+    {
+      "path": "src/chat.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "7135a63c9332b9e8769fd297a586df91ff3a3400a99320709814214e6eff517a"
+    },
+    {
+      "path": "src/chiikawa-attribution.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "ceaae7257914b4e63e9df62ce0156d68232798eaa19e01b19d485eba5d4b23c5"
+    },
+    {
+      "path": "src/chiikawa-relations.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "0cfb5a3b804cb06cec0d00023749321e94e0231b5f155c73c48820dc3d64df3c"
+    },
+    {
+      "path": "src/chiikawa-reminder.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "a814945cb89d9f7d3447607c339ef80198c74730dd929eaeaf52041cbe92aed4"
+    },
+    {
+      "path": "src/chiikawa-theme.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "051bb7c7c84844db59d732d79171b211b092c687d02a47ef28543144f9374042"
+    },
+    {
+      "path": "src/context.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "db5050a0e19c6b632ebaeed66576bf46d1c53cfbb1908cb4f487078b3be781c7"
+    },
+    {
+      "path": "src/continuation.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "ad0cba66f258a4f3f51aed09ee1c51cc5bac4e762328dd02f984c2fd73e1e95c"
+    },
+    {
+      "path": "src/conversation-repair.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "acefed0273bac860df36a8c35b12cca85f9d59c4ebd1fe54e1fdc6f97dcd9b22"
+    },
+    {
+      "path": "src/dialogue-director.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "e1800901759ca260ad3f742dc5246bd23d864967eb94dd3d81a36bceeaa02ab0"
+    },
+    {
+      "path": "src/dialogue-grounding.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "3beeab822f4cb8343b84ab8e69c5679c2dfbc93933c71c8549e57bc611864fd3"
+    },
+    {
+      "path": "src/dialogue-sentences.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "b63d39791d2d381454a46a6f4a6f84537a236de43dd6051cb8c77ef08fcff58c"
+    },
+    {
+      "path": "src/engine.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "8279c338d9d660a532541ba12374422ec463d6fb1004afb673c9318f25bb0ee8"
+    },
+    {
+      "path": "src/fallback.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "461125e65237bd3322cd2e980ac2de85f6c612e8a85a7fc1dc7676c32d1b5b7c"
+    },
+    {
+      "path": "src/fandom.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "5625644c0d6ba7a2fa67ab006366db3c0ab0aec751ea25db2f7444984d561c41"
+    },
+    {
+      "path": "src/filler.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "bc9f40e0cf1ef3c69a4ab43eb558e6397807851ea3ddebf5bb4343a9468f1470"
+    },
+    {
+      "path": "src/font.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "243830f4d6cb87e7c97e0e321049b33255d0c5ad436bfcf2cf2f300ce7128207"
+    },
+    {
+      "path": "src/moves.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "2b424d2bfb3ebf3d3d3f17e8ec59d8789263a0b50ae85541094d102e29dfa6e1"
+    },
+    {
+      "path": "src/names.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "26d7523f8f8a44ed6ad21f684a29a3880cab5e0c04c42e2a9475a9dc5583f446"
+    },
+    {
+      "path": "src/performance.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "8ef1893f4f6861767569c33b3131b4c4e165bf1f8bec488261339198f0ab9d44"
+    },
+    {
+      "path": "src/player-memory.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "4f7f8e4ffbc06b8676ee7e052f44943c38d4b95826df463125b8e6eb912c7055"
+    },
+    {
+      "path": "src/profile.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "8b4dbac34bb953737a01cb953138acc61e95b5a61b817a828359fb3d687155fb"
+    },
+    {
+      "path": "src/readable.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "e1ede0d30cac6bd31dd3904b5f123a9d4efbaa5769d0212091812f5ba752bcc6"
+    },
+    {
+      "path": "src/repertoire.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "e71e8667f8a3558e52982b3a19129df50bbe4d8baf7c2da149edbeb000e4ee72"
+    },
+    {
+      "path": "src/routing.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "73d17303bee96d04ae143e8ea58cad17e316b5f56475ce3eeb3720e833fe4ac8"
+    },
+    {
+      "path": "src/session.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "830d1270ef2101a1da12fef3808f378c024cf02f65f224fe2a7c4595a0f97383"
+    }
+  ],
+  "frontendTests": 209,
+  "backendTests": 54,
+  "llmGenerationCalls": 0,
+  "specialistRedesignImplemented": false
+}

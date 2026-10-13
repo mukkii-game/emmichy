@@ -25,6 +25,8 @@ Official source entry points verified during this turn:
 - Park news: https://chiikawapark-tokyo.jp/news/ (checked2026-10-13; latest announcements include upcoming seasonal events, availability changes and operational corrections).
 These are research pointers, not newly imported runtime facts. Latest news must be read at its individual source, dated and checked for corrections before use.
 
+Coverage audit from runtime exports:32 basic Chiikawa cards,182 name records,9 closed named notes and8 independently reviewed records. These counts overlap and are not a sum of distinct facts. There is no basic grass-weeding-examination card despite the term being recognized. This explains why name matching can succeed while precise follow-up knowledge is absent.
+
 ## Current human failure and confirmed mechanisms
 
 The human pasted a new bad play transcript; model/provider/route are unreported. Reconstructed local tests confirm:
@@ -41,3 +43,5 @@ The term「アサキ コキュウ」was not identified from verified material in
 ## Completion criteria for the redesign
 
 A human should be able to stay with one scene for6–8 turns including two differently-worded follow-ups, a correction and a complaint about repetition. The answer must follow their last question, retain who did what, avoid repeating the same factual explanation and label interpretation. Unknown detail should be scoped; personality and enthusiasm should remain. Compare offline/retrieval behaviour, captured/live generation and human enjoyment separately. Provider429 still stops additional live attempts. Unit-test count alone is not the completion criterion.
+
+公開確認: integrity1の緊急修正はフロントPR45/main96b5195・中継PR19/main6a660e2へ統合し、両Cloudflare公開成功。変更対象28ファイルが候補a8dcbacと一致。生成0回。記録docs/public-dialogue-integrity-20261013.json。専門版への大改修と人間の面白さ評価は完了していない。

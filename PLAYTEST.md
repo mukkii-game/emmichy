@@ -708,3 +708,5 @@ Representative review: 「アタシ、漫画で覚えた敬語を確認するか
 公開確認: フロントPR42/43はmainへ統合済み（最終5d5ed4d6、コード候補40c37e1）。Cloudflare38385295165成功、変更対象27ファイルが候補と完全一致。中継PR18/main09751fc5の38384588766もテスト・公開成功。新URLのCORS204一致。公開確認の追加LLM生成0回。記録docs/public-conversation-repair-20261013.json。
 
 公開済み: PR44はmainへ統合（64c58f6）、最終コード50dee31。Cloudflare38389487798成功、4個の変更対象HTML/CSS/JSが候補と完全一致。追加生成0回。docs/public-mobile-keyboard-20261013.json。
+
+公開確認: integrity1の緊急修正はフロントPR45/main96b5195・中継PR19/main6a660e2へ統合し、両Cloudflare公開成功。変更対象28ファイルが候補a8dcbacと一致。生成0回。記録docs/public-dialogue-integrity-20261013.json。専門版への大改修と人間の面白さ評価は完了していない。

@@ -1,5 +1,5 @@
 // One grounded move per authored reply. No new persistent memory.
-import {rejectedJoke} from './humor.js?v=20261013-talk1';
+import {rejectedJoke} from './humor.js?v=20261013-talk2';
 export const MOVES=Object.freeze(['SELF_CORRECT','NOTICE_WORDING','LIGHT_TEASE','SHARED_FRAME','SMALL_SELF_DISCLOSURE']);
 export function conversationMove(input,state={}){
  const raw=String(input||'').normalize('NFKC').trim();

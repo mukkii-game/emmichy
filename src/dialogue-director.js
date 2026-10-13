@@ -1,13 +1,13 @@
-import {ownedFollowup} from './fallback.js?v=20261013-talk1';
-import {fanRecovery} from './fandom.js?v=20261013-talk1';
-import {polishReply} from './repertoire.js?v=20261013-talk1';
-import {unwantedFanRedirect} from './chat.js?v=20261013-talk1';
-import {selectChiikawaBridge,personalFanReply} from './chiikawa-theme.js?v=20261013-talk1';
-import {groundModelReply} from './dialogue-grounding.js?v=20261013-talk1';
-import {asksCurrentSerial} from './chiikawa-relations.js?v=20261013-talk1';
-import {attributionRepair} from './chiikawa-attribution.js?v=20261013-talk1';
-import {learnerReply} from './japanese-learner.js?v=20261013-talk1';
-import {conversationRepair} from './conversation-repair.js?v=20261013-talk1';
+import {ownedFollowup} from './fallback.js?v=20261013-talk2';
+import {fanRecovery} from './fandom.js?v=20261013-talk2';
+import {polishReply} from './repertoire.js?v=20261013-talk2';
+import {unwantedFanRedirect} from './chat.js?v=20261013-talk2';
+import {selectChiikawaBridge,personalFanReply} from './chiikawa-theme.js?v=20261013-talk2';
+import {groundModelReply} from './dialogue-grounding.js?v=20261013-talk2';
+import {asksCurrentSerial} from './chiikawa-relations.js?v=20261013-talk2';
+import {attributionRepair} from './chiikawa-attribution.js?v=20261013-talk2';
+import {learnerReply} from './japanese-learner.js?v=20261013-talk2';
+import {conversationRepair} from './conversation-repair.js?v=20261013-talk2';
 
 // The screen owns final content selection. The relay validates transport/output
 // shape; it does not silently substitute a different authored conversation.
@@ -29,7 +29,7 @@ export function directReply(text,input,state={}, {source='authored',choice=null,
  }
  const personal=allowed?personalFanReply(input,state):null;
  if(source!=='authored'&&personal){
-  const focused=out.replace(/(?:もっと|他に|ほかに).{0,22}(?:聞きたいこと|気になるキャラ|好きなキャラ|質問).{0,18}[?？]\s*$/,'').trim();
+  const focused=out.replace(/(?:もっと|他に|ほかに)[^。!?！？]{0,22}(?:聞きたいこと|気になるキャラ|好きなキャラ|質問)[^。!?！？]{0,18}[?？]\s*/g,'').trim();
   if(focused.length>=16&&focused!==out){out=focused;origin='mixed';reason='keep-question-focus';}
   const recent=(state.history||[]).filter(h=>h.role==='enny').slice(-4).map(h=>h.text).join(' ');
   if(/ヤハ/.test(recent)&&/ヤハ[!！]\s*$/.test(out)){out=out.replace(/ヤハ[!！]\s*$/,'').trim();origin='mixed';}

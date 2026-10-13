@@ -1,0 +1,190 @@
+// Names are recognition cues. Notes below are short source-checked facts, never full story summaries.
+// This intentional mispronunciation is part of the conversation, not a reading correction.
+export const spokenAliases=Object.freeze({'チャリメラ':'チャリメラ','ちゃりめら':'チャリメラ'});
+export const chiikawaGroups=[
+ {category:'people',source:'https://www.anime-chiikawa.jp/index.html',names:`
+ナガノ=ナガノ|ナガノ先生|ナガノさん|nagano
+トクマルシューゴ=トクマルシューゴ|トクマル|トクマル・シューゴ|shugo tokumaru
+動画工房=ドウガコウボウ
+青木遥=アオキハルカ
+田中誠人=タナカマコト
+小澤亜李=オザワアリ
+井口裕香=イグチユカ
+淺井孝行=アサイタカユキ|浅井孝行
+内田雄馬=ウチダユウマ
+島袋美由利=シマブクロミユリ
+春海百乃=ハルミモモ
+杉田智和=スギタトモカズ
+東地宏樹=トウチヒロキ
+松岡禎丞=マツオカヨシツグ
+青山吉能=アオヤマヨシノ
+三宅健太=ミヤケケンタ
+諸星すみれ=モロホシスミレ
+長縄まりあ=ナガナワマリア
+篠原侑=ササハラユウ
+内山茉莉=ウチヤママリ
+ひとりごつ=ヒトリゴツ
+`},
+ {category:'people',source:'https://chiikawa.toho-movie.jp/index.html',names:`
+及川啓=オイカワケイ
+サイピク=サイピク|Cypic
+`},
+ {category:'character',source:'https://chiikawa.toho-movie.jp/atm/characters.html',names:`
+人魚=ニンギョ|人魚たち
+セイレーン=セイレーン|siren
+ヒトハ=ヒトハ
+フタバ=フタバ
+島二郎=シマジロウ|しま二郎
+`},
+ {category:'character',source:'https://chiikawamarket.jp/collections/',names:`
+あのこ=アノコ|あの子
+でかつよ=デカツヨ|でかくてつよいやつ
+むちゃうマン=ムチャウマン
+カブトムシ=カブトムシ|カブちゃん
+パジャマパーティーズ=パジャマパーティーズ|パジャパ
+`},
+ {category:'brand',source:'https://www.nissin.com/jp/company/news/10925/',names:`
+チャルメラ=チャルメラ|チャリメラ|明星チャルメラ
+明星食品=ミョウジョウショクヒン
+本田翼=ホンダツバサ
+`},
+ {category:'brand',source:'https://www.orionbeer.co.jp/utility/history/h2025/0410.html',names:`
+オリオンビール=オリオンビール|オリオン
+シーサーのおみやげやさん=シーサーノオミヤゲヤサン
+`},
+ {category:'brand',source:'https://www.orionbeer.co.jp/utility/history/h2026/0714.html',names:`
+オリオンクリアフリー=オリオンクリアフリー|クリアフリー
+`},
+ {category:'food',source:'https://www.natori.co.jp/dcms_media/other/NR20231017.pdf',names:`
+チータラ=チータラ|チーたら|なめらかチータラ
+なとり=ナトリ
+`},
+ {category:'item',source:'https://www.segatoys.co.jp/brand/chiikawahouse/chiikawaouchi/',names:`
+むちゃうまヨーグルト=ムチャウマヨーグルト
+くまさんポシェット=クマサンポシェット|くまのポシェット
+ちいかわのおうち=チイカワノオウチ|ちいかわの家
+`},
+ {category:'item',source:'https://www.segatoys.co.jp/company/press_release/pdf/20230531.pdf',names:`
+プリンハウス=プリンハウス
+無限白米湧きドコロ=ムゲンハクマイワキドコロ
+さすまた=サスマタ|刺股
+オムライスのベッド=オムライスノベッド
+パイシチューのお風呂=パイシチューノオフロ
+スライスチーズの服=スライスチーズノフク
+タコウインナーのドレッサー=タコウインナーノドレッサー|タコウィンナーのドレッサー
+ツタのはしご=ツタノハシゴ
+虹の橋=ニジノハシ
+`},
+ // Selected nouns/objects from the official episode index. A title proves the cue,
+ // not the unseen scene or a product's current availability. Common words are contextual.
+ {category:'term',source:'https://www.anime-chiikawa.jp/json/episodeHistories.json',names:`
+スフィンクス=スフィンクス
+パイシチュー=パイシチュー
+ヤクルト=ヤクルト
+キラカード=キラカード
+たべっ子どうぶつ=タベッコドウブツ|たべっこどうぶつ
+ブタメン=ブタメン
+ラッキーマンボウ=ラッキーマンボウ|乗りマンボー
+なんとかバニア=ナントカバニア|バニア
+ケチャップパスタ=ケチャップパスタ
+カルメ焼き=カルメヤキ
+ふしぎな杖=フシギナツエ|不思議な杖
+ニンニクカラメ=ニンニクカラメ
+ギチギチ=ギチギチ
+討伐ランキング=トウバツランキング
+上位ランカー=ジョウイランカー
+あみあぶら=アミアブラ|網脂
+三ツ星レストラン=ミツボシレストラン|三つ星レストラン
+擬態型=ギタイガタ
+けん玉おじさん=ケンダマオジサン
+ほんこわ=ホンコワ
+肉みがき=ニクミガキ|肉磨き
+むちゃうまプリン=ムチャウマプリン
+すきやきの歌=スキヤキノウタ
+いもむしパン=イモムシパン
+パジャマのつどい=パジャマノツドイ
+おかしのまちおか=オカシノマチオカ
+ほめられリボン=ホメラレリボン|褒められリボン
+さたぱんびん=サタパンビン|サーターアンダギー
+さんぴん茶=サンピンチャ
+ムニヤーム=ムニヤーム
+アリジゴク=アリジゴク|蟻地獄
+オデと牢獄=オデトロウゴク
+黒い流れ星=クロイナガレボシ
+ディナーロール=ディナーロール
+柿の種わさび=カキノタネワサビ
+ホッピー=ホッピー
+お酒の資格=オサケノシカク
+シーサーの資格=シーサーノシカク
+ギョニソ=ギョニソ|魚肉ソーセージ
+純露=ジュンツユ
+みかんそうめん=ミカンソウメン
+泡盛コーヒー=アワモリコーヒー
+湧きドコロ=ワキドコロ|湧きどころ|湧くトコロ
+つっぱっぱ=ツッパッパ
+島らっきょう=シマラッキョウ
+だだちゃ豆=ダダチャマメ
+たこぎ=タコギ
+赤福=アカフク
+焼きそばごはん=ヤキソバゴハン
+拾魔=シュウマ
+まもる君=マモルクン
+あまえん本=アマエンボン
+山姥=ヤマンバ|やまんば
+おまけケシゴム=オマケケシゴム
+鬼カレー=オニカレー
+ドラ焼き布団=ドラヤキブトン
+軸汁=ジクジル
+おちょコーラ=オチョコーラ
+ラーメン「山」=ラーメンヤマ|ラーメン山
+コンビーフ丼=コンビーフドン
+`},
+ {category:'context-item',contextOnly:true,source:'https://www.anime-chiikawa.jp/json/episodeHistories.json',names:`
+かためのプリン=カタメノプリン
+ホットケーキ=ホットケーキ
+イカ=イカ
+ブロッコリー=ブロッコリー
+ピザまん=ピザマン
+ドラ焼き=ドラヤキ|どら焼き
+パック寿司=パックズシ
+焼きマシュマロ=ヤキマシュマロ
+酢こんぶ=スコンブ
+カヌレ=カヌレ
+ポシェット=ポシェット
+焼きしいたけ=ヤキシイタケ
+クエン酸=クエンサン
+ふりかけ=フリカケ
+鮭とば=サケトバ
+たこ焼きパーティー=タコヤキパーティー
+ジャムトースト=ジャムトースト
+からあげレモン=カラアゲレモン
+ビリーブ=ビリーブ|Believe
+パジャマ=パジャマ
+たこウィンナー=タコウィンナー|たこウインナー
+アラザン=アラザン
+ウィンナーコーヒー=ウィンナーコーヒー
+締めのステーキ=シメノステーキ
+缶クッキー=カンクッキー
+フレンチトースト=フレンチトースト
+青雲=セイウン
+かまぼこ=カマボコ
+かき氷シロップ=カキゴオリシロップ
+あげ玉=アゲダマ
+寄生=キセイ
+カップ焼きそば=カップヤキソバ
+デラウェア=デラウェア
+ダブルクリーム=ダブルクリーム
+玉こんにゃく=タマコンニャク
+`}
+];
+const anime='https://www.anime-chiikawa.jp/index.html';
+export const chiikawaNotes=Object.freeze({
+ 'ナガノ':{source:anime,fact:'ちいかわの作者。ひとりごつの作詞も担当。',reaction:'ナガノさん、絵がかわいいのに油断できないの。歌の言葉まで気になっちゃう。'},
+ 'トクマルシューゴ':{source:anime,fact:'アニメの音楽と、ひとりごつの作曲・編曲を担当。',questionReaction:'アタシ、あの音を聴くとハチワレの声まで思い出す。',reaction:'ひとりごつの作曲もトクマルシューゴさんなの。アタシ、あの音を聴くとハチワレの声まで思い出す。'},
+ 'ひとりごつ':{source:anime,fact:'ハチワレが歌うアニメのエンディング曲。作詞ナガノ、作曲・編曲トクマルシューゴ。',questionReaction:'聴いてたら、アタシもちょっと口ずさみたくなっちゃう。',reaction:'ハチワレが歌うエンディングの曲ね。聴いてたら、アタシもちょっと口ずさみたくなっちゃう。'},
+ 'チャルメラ':{source:'https://www.nissin.com/jp/company/news/10925/',fact:'ハチワレがチャリメラと言い間違え、ちいかわがチャルメラと伝えようとする原作をCMでもアレンジ。',reaction:'ハチワレのチャリメラを思い出しちゃった。ちいかわ、チャルメラだよって伝えたいのね。'},
+ 'オリオンビール':{source:'https://www.orionbeer.co.jp/utility/history/h2025/0410.html',fact:'ちいかわとの公式コラボがあり、シーサーのおみやげやさんのデザインも使われた。',limit:'作中の飲料の銘柄を断定する資料ではない。',reaction:'オリオンって聞くと、シーサーとくりまんじゅうのコラボも思い出しちゃう。アタシは缶の絵を見る方ね。'},
+ 'チータラ':{source:'https://www.natori.co.jp/dcms_media/other/NR20231017.pdf',fact:'くりまんじゅうがチータラを食べる原作場面を使った公式パッケージがある。',reaction:'くりまんじゅうが食べてるのを思い出すの。あの顔を見ると、アタシまでひと口ほしくなる。'},
+ 'むちゃうまヨーグルト':{source:'https://www.segatoys.co.jp/brand/chiikawahouse/chiikawaouchi/',fact:'ちいかわのおうちは、むちゃうまヨーグルトのキャンペーンで当選した家。',reaction:'あのおうち、ヨーグルトのキャンペーンで当たったんだよね。アタシなら応募の紙を何度も見ちゃう。'},
+ '人魚':{source:'https://chiikawa.toho-movie.jp/atm/characters.html',fact:'人魚の島のひみつに登場する。',limit:'展開・正体・結末は資料なしに追加しない。',reaction:'人魚って聞くと、ちいかわの島を思い出しちゃう。かわいいだけで安心できないところ、アタシ好きなの。'}
+});

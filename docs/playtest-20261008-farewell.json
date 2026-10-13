@@ -1,0 +1,31 @@
+{
+  "mode": "deterministic authored dialogue; zero live AI calls",
+  "before": "ア、そろそろ帰るね。バイバイ！",
+  "examples": [
+    {
+      "caseName": "quiet",
+      "departureReason": "漫画の読めない言葉を調べる",
+      "text": "あっ、漫画の読めない言葉を調べるつもりだったの。話してたら時間、忘れてた！ また話そうね。バイバイ！"
+    },
+    {
+      "caseName": "shared joke",
+      "departureReason": "漫画で覚えた敬語を確認する",
+      "text": "アタシ、漫画で覚えた敬語を確認するから、今日はここまでね。 半額王、次はスプーンも装備してね。バイバイ！"
+    },
+    {
+      "caseName": "nickname refusal",
+      "departureReason": "台詞を使っていい場面を調べる",
+      "text": "あ、台詞を使っていい場面を調べるの、まだだった！ 続きは今度聞かせて。バイバイ！"
+    },
+    {
+      "caseName": "music callback",
+      "departureReason": "漫画の料理の作り方を調べる",
+      "text": "今日は漫画の料理の作り方を調べるって決めてたの。そろそろ行ってくるね。 次に曲を聴いたら、今の音楽の話を思い出しそう。バイバイ！"
+    },
+    {
+      "caseName": "quiet wistful",
+      "departureReason": "好きな物の話でもらった元気で読書する",
+      "text": "そろそろ好きな物の話でもらった元気で読書する時間なの。もうちょっと話したかったな。 またね。バイバイ！"
+    }
+  ]
+}

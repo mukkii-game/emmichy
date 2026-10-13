@@ -1,0 +1,631 @@
+{
+  "mode": "actual app; offline rule/bank; simulated DOM and virtual pauses; compressed typing animation; no live LLM or audio",
+  "actions": [
+    {
+      "action": {
+        "type": "start"
+      },
+      "result": {
+        "atSeconds": 0,
+        "messages": [
+          {
+            "atMs": 0,
+            "role": "enny",
+            "text": "はじめまして！",
+            "screen": "ハジメマシテ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 8
+      },
+      "result": {
+        "atSeconds": 8,
+        "messages": [
+          {
+            "atMs": 1500,
+            "role": "enny",
+            "text": "アタシ、えみちぃ。",
+            "screen": "アタシ、 エミチィ 。"
+          },
+          {
+            "atMs": 3000,
+            "role": "enny",
+            "text": "日本語、勉強中なの。",
+            "screen": "ニホンゴ、 ベンキョウチュウナノ。"
+          },
+          {
+            "atMs": 4500,
+            "role": "enny",
+            "text": "念を一つ考える遊びをしてたの。アタシの条件、お菓子に甘すぎる！",
+            "screen": "ネン ヲ ヒトツ カンガエル アソビ ヲ シテタノ。 アタシ ノ ジョウケン、 オカシ ニ アマ スギル!"
+          },
+          {
+            "atMs": 6000,
+            "role": "enny",
+            "text": "ちいかわの話も、ついしたくなっちゃうの。",
+            "screen": "チイカワ ノ ハナシ モ、 ツイ シタク ナッチャウノ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "はじめまして。念ってなに？"
+      },
+      "result": {
+        "atSeconds": 8,
+        "messages": [
+          {
+            "atMs": 8000,
+            "role": "user",
+            "text": "はじめまして。念ってなに？",
+            "screen": "ハジメマシテ。 ネンッテナ ニ?"
+          },
+          {
+            "atMs": 8000,
+            "role": "enny",
+            "text": "そこはまだよく知らないの。",
+            "screen": "ソコ ハ マダ ヨク シラナイノ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 12
+      },
+      "result": {
+        "atSeconds": 20,
+        "messages": [
+          {
+            "atMs": 12000,
+            "role": "enny",
+            "text": "わかったふりで答えたくないな。",
+            "screen": "ワカッタ フリ デ コタエタクナイナ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "そうなんだ。今日はちょっと疲れた。"
+      },
+      "result": {
+        "atSeconds": 20,
+        "messages": [
+          {
+            "atMs": 20000,
+            "role": "user",
+            "text": "そうなんだ。今日はちょっと疲れた。",
+            "screen": "ソウナ ンダ。 キョウ ハ チョット ツカレタ。"
+          },
+          {
+            "atMs": 20000,
+            "role": "enny",
+            "text": "カヌレ！",
+            "screen": "カヌレ !"
+          },
+          {
+            "atMs": 20000,
+            "role": "enny",
+            "text": "「疲れ」のところ、軽く流したくないな。",
+            "screen": "「 ツカレ 」 ノ トコロ、 カルク ナガシタクナイナ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 2
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 18
+      },
+      "result": {
+        "atSeconds": 38,
+        "messages": [
+          {
+            "atMs": 30000,
+            "role": "enny",
+            "text": "アタシ、スウェーデンのヨーテボリの近くで育ったの。",
+            "screen": "アタシ、 スウェーデン ノ ヨーテボリ ノ チカク デ ソダッタノ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 2
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "スウェーデン、寒そうだね。"
+      },
+      "result": {
+        "atSeconds": 38,
+        "messages": [
+          {
+            "atMs": 38000,
+            "role": "user",
+            "text": "スウェーデン、寒そうだね。",
+            "screen": "スウェーデン 、 サムソウダネ。"
+          },
+          {
+            "atMs": 38000,
+            "role": "enny",
+            "text": "ナンダカ ワカッタ キブン キブン ダケネ",
+            "screen": "ナンダカ ワカッタ キブン キブン ダケネ"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 3
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 12
+      },
+      "result": {
+        "atSeconds": 50,
+        "messages": [
+          {
+            "atMs": 48000,
+            "role": "enny",
+            "text": "弟は14歳なの。ゲームで負けると、アタシ言い訳しちゃう。",
+            "screen": "オトウト ハ 14サイナノ。 ゲーム デ マケル ト、 アタシ イイワケ シチャウ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 3
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "ゲーム好きなんだ。どんなゲームするの？"
+      },
+      "result": {
+        "atSeconds": 50,
+        "messages": [
+          {
+            "atMs": 50000,
+            "role": "user",
+            "text": "ゲーム好きなんだ。どんなゲームするの？",
+            "screen": "ゲームスキナ ンダ。 ドンナ ゲーム スル ノ?"
+          },
+          {
+            "atMs": 50000,
+            "role": "enny",
+            "text": "そこはまだよく知らないの。",
+            "screen": "ソコ ハ マダ ヨク シラナイノ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 4
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 12
+      },
+      "result": {
+        "atSeconds": 62,
+        "messages": [
+          {
+            "atMs": 54000,
+            "role": "enny",
+            "text": "わかったふりで答えたくないな。",
+            "screen": "ワカッタ フリ デ コタエタクナイナ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 4
+      }
+    },
+    {
+      "action": {
+        "type": "draft",
+        "text": "何の話をしようかな"
+      },
+      "result": {
+        "atSeconds": 62,
+        "messages": [],
+        "draft": "何の話をしようかな",
+        "finished": false,
+        "turns": 4
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 20
+      },
+      "result": {
+        "atSeconds": 82,
+        "messages": [],
+        "draft": "何の話をしようかな",
+        "finished": false,
+        "turns": 4
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "ちいかわ、あまり知らないけど好きなんだね。"
+      },
+      "result": {
+        "atSeconds": 82,
+        "messages": [
+          {
+            "atMs": 82000,
+            "role": "user",
+            "text": "ちいかわ、あまり知らないけど好きなんだね。",
+            "screen": "チイカワ 、 アマリ シラナイ ケド スキナ ンダネ。"
+          },
+          {
+            "atMs": 82000,
+            "role": "enny",
+            "text": "チイカワ！",
+            "screen": "チイカワ !"
+          },
+          {
+            "atMs": 82000,
+            "role": "enny",
+            "text": "わあ、ちいかわ!",
+            "screen": "ワア、 チイカワ !"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 5
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 20
+      },
+      "result": {
+        "atSeconds": 102,
+        "messages": [
+          {
+            "atMs": 84000,
+            "role": "enny",
+            "text": "話したかった!",
+            "screen": "ハナシタカッタ!"
+          },
+          {
+            "atMs": 86000,
+            "role": "enny",
+            "text": "ハチワレ、写真で小さい思い出を残すの、いいよね!",
+            "screen": "ハチワレ 、 シャシン デ チイサイ オモイデ ヲ ノコス ノ、 イイヨネ!"
+          },
+          {
+            "atMs": 88000,
+            "role": "enny",
+            "text": "アタシ、そういうところ大好き。",
+            "screen": "アタシ、 ソウイウ トコロ ダイスキ。"
+          },
+          {
+            "atMs": 90000,
+            "role": "enny",
+            "text": "ラッコ、あんなに強いのに甘い物が好きなの!",
+            "screen": "ラッコ 、 アンナニ ツヨイ ノ ニ アマイ モノ ガ スキナ ノ!"
+          },
+          {
+            "atMs": 92000,
+            "role": "enny",
+            "text": "あの差に弱い、アタシ。",
+            "screen": "アノ サ ニ ヨワイ、 アタシ。"
+          },
+          {
+            "atMs": 94000,
+            "role": "enny",
+            "text": "シーサー、郎で働くために資格まで取るんだよ!",
+            "screen": "シーサー 、 ロウ デ ハタラク タメ ニ シカク マデ トル ンダヨ!"
+          },
+          {
+            "atMs": 96000,
+            "role": "enny",
+            "text": "アタシ、応援しちゃう。",
+            "screen": "アタシ、 オウエン シチャウ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 5
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "楽しそうだね。今日は寝るね、またね。"
+      },
+      "result": {
+        "atSeconds": 102,
+        "messages": [
+          {
+            "atMs": 102000,
+            "role": "user",
+            "text": "楽しそうだね。今日は寝るね、またね。",
+            "screen": "タノシソウダネ。 キョウ ハ ネルネ、 マタネ。"
+          },
+          {
+            "atMs": 102000,
+            "role": "enny",
+            "text": "フーン ツヅキ ハ アルノ?",
+            "screen": "フーン ツヅキ ハ アルノ?"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 6
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 15
+      },
+      "result": {
+        "atSeconds": 117,
+        "messages": [
+          {
+            "atMs": 112000,
+            "role": "enny",
+            "text": "覚えた日本語、小さいノートに書いてるの。字はまだちょっと下手。",
+            "screen": "オボエタ ニホンゴ、 チイサイ ノート ニ カイテルノ。 ジ ハ マダ チョット ヘタ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 6
+      }
+    }
+  ],
+  "transcript": [
+    {
+      "atMs": 0,
+      "message": {
+        "role": "enny",
+        "text": "はじめまして！"
+      }
+    },
+    {
+      "atMs": 1500,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、えみちぃ。"
+      }
+    },
+    {
+      "atMs": 3000,
+      "message": {
+        "role": "enny",
+        "text": "日本語、勉強中なの。"
+      }
+    },
+    {
+      "atMs": 4500,
+      "message": {
+        "role": "enny",
+        "text": "念を一つ考える遊びをしてたの。アタシの条件、お菓子に甘すぎる！"
+      }
+    },
+    {
+      "atMs": 6000,
+      "message": {
+        "role": "enny",
+        "text": "ちいかわの話も、ついしたくなっちゃうの。"
+      }
+    },
+    {
+      "atMs": 8000,
+      "message": {
+        "role": "user",
+        "text": "はじめまして。念ってなに？"
+      }
+    },
+    {
+      "atMs": 8000,
+      "message": {
+        "role": "enny",
+        "text": "そこはまだよく知らないの。"
+      }
+    },
+    {
+      "atMs": 12000,
+      "message": {
+        "role": "enny",
+        "text": "わかったふりで答えたくないな。"
+      }
+    },
+    {
+      "atMs": 20000,
+      "message": {
+        "role": "user",
+        "text": "そうなんだ。今日はちょっと疲れた。"
+      }
+    },
+    {
+      "atMs": 20000,
+      "message": {
+        "role": "enny",
+        "text": "カヌレ！"
+      }
+    },
+    {
+      "atMs": 20000,
+      "message": {
+        "role": "enny",
+        "text": "「疲れ」のところ、軽く流したくないな。"
+      }
+    },
+    {
+      "atMs": 30000,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、スウェーデンのヨーテボリの近くで育ったの。"
+      }
+    },
+    {
+      "atMs": 38000,
+      "message": {
+        "role": "user",
+        "text": "スウェーデン、寒そうだね。"
+      }
+    },
+    {
+      "atMs": 38000,
+      "message": {
+        "role": "enny",
+        "text": "ナンダカ ワカッタ キブン キブン ダケネ"
+      }
+    },
+    {
+      "atMs": 48000,
+      "message": {
+        "role": "enny",
+        "text": "弟は14歳なの。ゲームで負けると、アタシ言い訳しちゃう。"
+      }
+    },
+    {
+      "atMs": 50000,
+      "message": {
+        "role": "user",
+        "text": "ゲーム好きなんだ。どんなゲームするの？"
+      }
+    },
+    {
+      "atMs": 50000,
+      "message": {
+        "role": "enny",
+        "text": "そこはまだよく知らないの。"
+      }
+    },
+    {
+      "atMs": 54000,
+      "message": {
+        "role": "enny",
+        "text": "わかったふりで答えたくないな。"
+      }
+    },
+    {
+      "atMs": 82000,
+      "message": {
+        "role": "user",
+        "text": "ちいかわ、あまり知らないけど好きなんだね。"
+      }
+    },
+    {
+      "atMs": 82000,
+      "message": {
+        "role": "enny",
+        "text": "チイカワ！"
+      }
+    },
+    {
+      "atMs": 82000,
+      "message": {
+        "role": "enny",
+        "text": "わあ、ちいかわ!"
+      }
+    },
+    {
+      "atMs": 84000,
+      "message": {
+        "role": "enny",
+        "text": "話したかった!"
+      }
+    },
+    {
+      "atMs": 86000,
+      "message": {
+        "role": "enny",
+        "text": "ハチワレ、写真で小さい思い出を残すの、いいよね!"
+      }
+    },
+    {
+      "atMs": 88000,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、そういうところ大好き。"
+      }
+    },
+    {
+      "atMs": 90000,
+      "message": {
+        "role": "enny",
+        "text": "ラッコ、あんなに強いのに甘い物が好きなの!"
+      }
+    },
+    {
+      "atMs": 92000,
+      "message": {
+        "role": "enny",
+        "text": "あの差に弱い、アタシ。"
+      }
+    },
+    {
+      "atMs": 94000,
+      "message": {
+        "role": "enny",
+        "text": "シーサー、郎で働くために資格まで取るんだよ!"
+      }
+    },
+    {
+      "atMs": 96000,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、応援しちゃう。"
+      }
+    },
+    {
+      "atMs": 102000,
+      "message": {
+        "role": "user",
+        "text": "楽しそうだね。今日は寝るね、またね。"
+      }
+    },
+    {
+      "atMs": 102000,
+      "message": {
+        "role": "enny",
+        "text": "フーン ツヅキ ハ アルノ?"
+      }
+    },
+    {
+      "atMs": 112000,
+      "message": {
+        "role": "enny",
+        "text": "覚えた日本語、小さいノートに書いてるの。字はまだちょっと下手。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "scope": "local client/worker contract; mocked provider; zero live requests",
+  "results": [
+    {
+      "mode": "valid",
+      "reply": {
+        "text": "アタシ、好きな曲だと歩く速さが変わる。",
+        "provider": "gemini"
+      },
+      "providerCalls": 1,
+      "relayCalls": 1,
+      "health": {
+        "attempts": 1,
+        "accepted": 1,
+        "rejected": 0,
+        "failed": 0,
+        "lastOutcome": "accepted",
+        "rateLimited": false,
+        "retryAt": 0
+      }
+    },
+    {
+      "mode": "redirect",
+      "reply": {
+        "text": "アタシ、好きな曲だと歩く速さが変わる。",
+        "provider": "groq"
+      },
+      "providerCalls": 2,
+      "relayCalls": 1,
+      "health": {
+        "attempts": 1,
+        "accepted": 1,
+        "rejected": 0,
+        "failed": 0,
+        "lastOutcome": "accepted",
+        "rateLimited": false,
+        "retryAt": 0
+      }
+    },
+    {
+      "mode": "rate-limit",
+      "reply": null,
+      "providerCalls": 0,
+      "relayCalls": 1,
+      "health": {
+        "attempts": 1,
+        "accepted": 0,
+        "rejected": 0,
+        "failed": 1,
+        "lastOutcome": "rate-limit",
+        "rateLimited": true,
+        "retryAt": 0
+      }
+    },
+    {
+      "mode": "unavailable",
+      "reply": null,
+      "providerCalls": 2,
+      "relayCalls": 1,
+      "health": {
+        "attempts": 1,
+        "accepted": 0,
+        "rejected": 0,
+        "failed": 1,
+        "lastOutcome": "error",
+        "rateLimited": false,
+        "retryAt": 61000
+      }
+    }
+  ]
+}

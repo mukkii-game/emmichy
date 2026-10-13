@@ -1,0 +1,159 @@
+{
+  "mode": "actual app and live relay (max3 calls, stop429); simulated DOM/virtual pauses; compressed typing; real request wallMs; no browser/audio",
+  "actions": [
+    {
+      "action": {
+        "type": "start"
+      },
+      "result": {
+        "atSeconds": 0,
+        "messages": [
+          {
+            "atMs": 0,
+            "role": "enny",
+            "text": "はじめまして！",
+            "screen": "ハジメマシテ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0,
+        "liveCalls": [
+          {
+            "input": "今日は散歩で小さいパン屋を見つけたよ"
+          }
+        ]
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "今日は散歩で小さいパン屋を見つけたよ"
+      },
+      "result": {
+        "atSeconds": 0,
+        "messages": [
+          {
+            "atMs": 0,
+            "role": "user",
+            "text": "今日は散歩で小さいパン屋を見つけたよ",
+            "screen": "キョウ ハ サンポ デ チイサイ パンヤ ヲ ミツケタヨ"
+          },
+          {
+            "atMs": 0,
+            "role": "enny",
+            "text": "キョウハ散歩デ小サイパン屋ヲ ... ソコダケ キコエタワ",
+            "screen": "キョウハ サンポ デ ショウサイパンヤ ヲ ... ソコダケ キコエタワ"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1,
+        "dialogueUse": {
+          "ai": 0,
+          "bank": 0
+        },
+        "chatHealth": {
+          "attempts": 1,
+          "accepted": 0,
+          "rejected": 0,
+          "failed": 1,
+          "lastOutcome": "error",
+          "rateLimited": false,
+          "retryAt": 1791601260000
+        },
+        "liveCalls": [
+          {
+            "input": "今日は散歩で小さいパン屋を見つけたよ"
+          }
+        ]
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 15
+      },
+      "result": {
+        "atSeconds": 15,
+        "messages": [
+          {
+            "atMs": 4000,
+            "role": "enny",
+            "text": "散歩って、小さいお店を見つけると少し寄り道したくなるの。",
+            "screen": "サンポッテ、 チイサイ オミセ ヲ ミツケル ト スコシ ヨリミチ シタク ナルノ。"
+          },
+          {
+            "atMs": 9000,
+            "role": "enny",
+            "text": "アタシなら、何のお店か看板を読むところで止まっちゃう。",
+            "screen": "アタシナラ、 ナニ ノ オミセ カ カンバン ヲ ヨム トコロ デ トマッチャウ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1,
+        "dialogueUse": {
+          "ai": 0,
+          "bank": 0
+        },
+        "chatHealth": {
+          "attempts": 1,
+          "accepted": 0,
+          "rejected": 0,
+          "failed": 1,
+          "lastOutcome": "error",
+          "rateLimited": false,
+          "retryAt": 1791601260000
+        },
+        "liveCalls": [
+          {
+            "input": "今日は散歩で小さいパン屋を見つけたよ"
+          }
+        ]
+      }
+    }
+  ],
+  "transcript": [
+    {
+      "atMs": 0,
+      "message": {
+        "role": "enny",
+        "text": "はじめまして！"
+      }
+    },
+    {
+      "atMs": 0,
+      "message": {
+        "role": "user",
+        "text": "今日は散歩で小さいパン屋を見つけたよ"
+      }
+    },
+    {
+      "atMs": 0,
+      "message": {
+        "role": "enny",
+        "text": "キョウハ散歩デ小サイパン屋ヲ ... ソコダケ キコエタワ"
+      }
+    },
+    {
+      "atMs": 4000,
+      "message": {
+        "role": "enny",
+        "text": "散歩って、小さいお店を見つけると少し寄り道したくなるの。"
+      }
+    },
+    {
+      "atMs": 9000,
+      "message": {
+        "role": "enny",
+        "text": "アタシなら、何のお店か看板を読むところで止まっちゃう。"
+      }
+    }
+  ],
+  "liveCalls": [
+    {
+      "input": "今日は散歩で小さいパン屋を見つけたよ"
+    }
+  ]
+}

@@ -1,5 +1,11 @@
 // Original Emmichy dialogue logic. No original Emmy code or dialogue tables used.
-const readings = { '本当':'ホントウ','賢い':'カシコイ','頭':'アタマ','名前':'ナマエ','覚えて':'オボエテ','忘れて':'ワスレテ','好き':'スキ','嫌い':'キライ','可愛い':'カワイイ','綺麗':'キレイ','天気':'テンキ','今日':'キョウ','明日':'アシタ','疲れた':'ツカレタ','寂しい':'サミシイ','仕事':'シゴト','猫':'ネコ','犬':'イヌ','私':'ワタシ','僕':'ボク','君':'キミ','嘘':'ウソ','人間':'ニンゲン','機械':'キカイ','元気':'ゲンキ','趣味':'シュミ','秘密':'ヒミツ','未来':'ミライ','世界':'セカイ','宇宙':'ウチュウ','何':'ナニ','教えて':'オシエテ','眠い':'ネムイ','馬鹿':'バカ','無能':'ムノウ','一人':'ヒトリ','歳':'サイ','年齢':'ネンレイ','愛':'アイ' };
+import {cleanKnowledge} from './fandom.js?v=20261012-chii1';
+import {cleanGap} from './gap.js?v=20261012-chii1';
+import {cleanRepertoire} from './repertoire.js?v=20261012-chii1';
+import {cleanInterests} from './balance.js?v=20261012-chii1';
+import {cleanConversation,rememberConversation} from './conversation.js?v=20261012-chii1';
+import {substantiveHistory} from './dialogue-history.js?v=20261012-chii1';
+const readings = { '知らない':'シラナイ','知ってる':'シッテル','以外':'イガイ','晴れ':'ハレ', '本当':'ホントウ','賢い':'カシコイ','頭':'アタマ','名前':'ナマエ','覚えて':'オボエテ','忘れて':'ワスレテ','好き':'スキ','嫌い':'キライ','可愛い':'カワイイ','綺麗':'キレイ','天気':'テンキ','今日':'キョウ','明日':'アシタ','疲れた':'ツカレタ','寂しい':'サミシイ','仕事':'シゴト','猫':'ネコ','犬':'イヌ','私':'ワタシ','僕':'ボク','君':'キミ','嘘':'ウソ','人間':'ニンゲン','機械':'キカイ','元気':'ゲンキ','趣味':'シュミ','秘密':'ヒミツ','未来':'ミライ','世界':'セカイ','宇宙':'ウチュウ','何':'ナニ','教えて':'オシエテ','眠い':'ネムイ','馬鹿':'バカ','無能':'ムノウ','一人':'ヒトリ','歳':'サイ','年齢':'ネンレイ','愛':'アイ' };
 export function normalize(raw) {
   let s = String(raw).normalize('NFKC');
   for (const [a,b] of Object.entries(readings)) s = s.replaceAll(a,b);
@@ -25,20 +31,37 @@ export function restoreState(value) {
   }
   if(value.likes && typeof value.likes==='object') for(const [k,v] of Object.entries(value.likes).slice(-24)) if(v===1||v===-1) Object.defineProperty(s.likes,k.slice(0,30),{value:v,writable:true,enumerable:true,configurable:true});
   if(Array.isArray(value.history)) s.history=value.history.filter(x=>x && typeof x.text==='string' && ['user','enny'].includes(x.role)).slice(-40).map(x=>({role:x.role,text:x.text.slice(0,160)}));
+  if(Array.isArray(value.dialogue))s.dialogue=substantiveHistory(value.dialogue);
+  else if(Array.isArray(value.history))s.dialogue=substantiveHistory(value.history);
+  if(value.performance&&typeof value.performance==='object')s.performance={...value.performance};
+  s.conversation=cleanConversation(value.conversation);
+  s.knowledge=cleanKnowledge(value.knowledge);
+  s.gap=cleanGap(value.gap);
+  s.repertoire=cleanRepertoire(value.repertoire);
+  s.interests=cleanInterests(value.interests);
+  s.endingSeen=Array.isArray(value.endingSeen)?[...new Set(value.endingSeen.filter(n=>Number.isInteger(n)&&n>=0&&n<100))].slice(-99):[];
+  s.openingSeen=Array.isArray(value.openingSeen)?[...new Set(value.openingSeen.filter(n=>Number.isInteger(n)&&n>=0&&n<40))].slice(-39):[];
   return s;
 }
 export function respond(raw,state) {
   const s=restoreState(state), input=normalize(raw).slice(0,120), compact=input.replaceAll(' ','');
   if(!compact) return {state:s,text:'ナニカ ハナシテネ',kind:'empty',mood:'idle'};
   s.turn++; s.repeat=compact===s.last?s.repeat+1:0; s.last=compact;
+  s.conversation=rememberConversation(s.conversation,raw,s.turn);
   let text='',kind='fallback',mood='idle';
   const say=(t,k='ordinary',m='idle')=>{text=t;kind=k;mood=m;};
   const pick=a=>a[(s.turn-1)%a.length];
   const fact=compact.match(/^(?:(?:ボク|ワタシ|オレ)ハ)?(.{1,24}?)(?:ガ|ハ)(スキ|キライ)(?:ダヨ|ダ|デス|ナノ)?\??$/);
   const name=compact.match(/^(?:ボク|ワタシ|オレ)ノナマエ(?:ハ|=)(.{1,16}?)(?:ダヨ|デス|ダ)?$/);
   const arithmetic=compact.match(/^(-?\d{1,7})([+*×/÷-])(-?\d{1,7})(?:=|\?)?$/);
-  if(/^(バイバイ|サヨウナラ|BYE)$/.test(compact)) {s.ended=true;say(s.name?`${s.name} ハ オボエタワ\nホカハ ワスレタ フリ シトク`:'バイバイ\nディスク ハ ヌカナイデネ','bye','soft');}
+  const feeling=String(raw).normalize('NFKC').replace(/\s+/g,'');
+  const recovered=/^(?:(?:ちょっと|少し|さっきより|なんか|おかげで|僕は|私は|チョット|スコシ|サッキヨリ|ナンカ|オカゲデ|ボクハ|ワタシハ)[、,]*)*(?:元気|ゲンキ)(?:が|ガ)?(?:出た|出てきた|デタ|デテキタ)(?:よ|ね|かも|ヨ|ネ|カモ)?[。！!]*$/.test(feeling);
+  const lowEnergy=/^(?:(?:ちょっと|少し|なんか|チョット|スコシ|ナンカ)[、,]*)*(?:元気|ゲンキ)(?:が|ガ)?(?:出ない|出なかった|デナイ|デナカッタ)[。！!]*$/.test(feeling);
+  const farewell=normalize(String(raw).trim().replace(/[。!！]+$/,'').split(/[。!！、,]/).at(-1)).replaceAll(' ','');
+  if(/^(?:(?:ジャア|ソレジャ|ソレデハ|デハ|マタ)[:：、,]*)?(?:バイバイ|サヨウナラ|サヨナラ|BYE|マタネ|今日ハココマデ|キョウハココマデ)(?:ネ|デス)?[?？]*$/.test(farewell)) {s.ended=true;say(s.name?`${s.name} ハ オボエタワ\nホカハ ワスレタ フリ シトク`:'バイバイ\nディスク ハ ヌカナイデネ','bye','soft');}
   else if(s.ended && !/コンニチ[ハワ]|タダイマ|オハヨウ/.test(compact)) say('モウ イチド コンニチハ ッテ\nイッテクレタラ オキルワ','asleep','soft');
+  else if(recovered)say('少し元気出たのね。アタシも、ちょっとうれしい。','comfort','soft');
+  else if(lowEnergy)say('まだ元気が出ないのね。無理に明るくしなくていいよ。','comfort','soft');
   else if(name && !compact.includes('?')) {const old=s.name;s.name=name[1];say(old && old!==s.name?`${old} ジャ ナカッタ?\nマ イイワ ${s.name} ネ`:`${s.name} ネ\nワスレル レンシュウ シテオクワ`,'name','soft');}
   else if(/(?:ボク|ワタシ|オレ)ノナマエ.*\?|ナマエ.*オボエ/.test(compact)) { say(s.name?`${s.name} デショ\nイマ ディスク ニ キイタノ`:'マダ キイテナイワ\nアテタラ コワイ デショ','memory','knowing');if(s.name)s.clues++; }
   else if(fact && !compact.endsWith('?') && !/^(キミ|アナタ|エミチィ|EMMICHY|ナニ)$/.test(fact[1])) {
@@ -77,6 +100,7 @@ export function respond(raw,state) {
     const topic=input.split(' ').filter(w=>w.length>1)[0]?.slice(0,14);
     say(pick([`${topic || 'ソレ'} ...\nソコダケ キコエタワ`,'フーン\nツヅキ ハ アルノ?','ナンダカ ワカッタ キブン\nキブン ダケネ','ソウナノ\nソレデ アナタハ ドウシタイノ?']),'fallback');
   }
-  s.history.push({role:'user',text:input},{role:'enny',text});s.history=s.history.slice(-40);
+  s.history.push({role:'user',text:String(raw).trim().slice(0,120)},{role:'enny',text});s.history=s.history.slice(-40);
   return {state:s,text,kind,mood};
 }
+

@@ -1,0 +1,199 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readableText} from '../src/readable.js';
+
+test('screen remains playable after dictionary failure and IME composition does not send',async()=>{
+ const saved={},displayed=[];
+ for(const key of ['document','window','location','localStorage','sessionStorage','Image','setInterval','setTimeout','clearTimeout'])saved[key]=globalThis[key];
+ class Element{
+  constructor(){this.children=[];this.listeners={};this.value='';this.textContent='';this.disabled=false;this.hidden=false;this.scrollHeight=0;}
+  set textContent(value){this.text=value;displayed.push(value);} get textContent(){return this.text;}
+  append(...items){this.children.push(...items);}
+  replaceChildren(...items){this.children=items;}
+  get firstChild(){return this.children[0];}
+  addEventListener(type,fn){(this.listeners[type]??=[]).push(fn);}
+  async emit(type,event={}){for(const fn of this.listeners[type]||[])await fn({preventDefault(){},...event});}
+  setAttribute(){} focus(){}
+  getContext(){return {fillRect(){},save(){},scale(){},restore(){},drawImage(){}};}
+ }
+ const elements=new Map(),storage=new Map(),intervals=[];
+ const originalNow=Date.now;let time=originalNow();
+ const store={getItem:k=>storage.get(k)||null,setItem:(k,v)=>storage.set(k,v)};
+ try{
+  globalThis.document={getElementById:id=>{if(!elements.has(id))elements.set(id,new Element());return elements.get(id);},createElement:()=>new Element(),addEventListener(){},hidden:false};
+  globalThis.window={addEventListener(){}};globalThis.location={hostname:'preview.invalid',search:'?nollm=1'};
+  globalThis.localStorage=store;globalThis.sessionStorage=store;globalThis.Image=class{};
+  Date.now=()=>time;
+  globalThis.setInterval=(fn,ms)=>{intervals.push({fn,ms});return 0;};
+  // Advance only the app's typing delays, without waiting seconds per reply.
+  let expectPersisted=null,persistedBeforeAnimation=false,typingFrames=0,lastTyped='',interruptNextFrame=false;
+  const delays=[],farewellPauses=[];
+  globalThis.setTimeout=(fn,ms)=>{
+   delays.push(ms);
+   if(ms===1500){
+    const full=JSON.parse(storage.get('enny-memory-v1')).history.at(-1).text,reason=full.split('\n\n')[0];
+    assert.ok(full.includes('\n\n'),'complete ending preserves its paragraph break in memory');
+    const log=elements.get('conversation'),last=log.children.filter(p=>p!==elements.get('live-reply')).at(-1);
+    assert.equal(last.children[1].textContent,readableText(reason,null),'only the reason is displayed before the farewell pause');
+    assert.equal(elements.get('send').disabled,true,'finished session cannot start another farewell during its pause');
+    farewellPauses.push(reason);
+   }
+   if(expectPersisted){const memory=JSON.parse(storage.get('enny-memory-v1')||'null');if(memory?.dialogue?.some(h=>h.role==='enny'&&h.text.includes(expectPersisted)))persistedBeforeAnimation=true;}
+   const pending=elements.get('live-reply'),body=elements.get('live-body'),log=elements.get('conversation');
+   if(body?.textContent){typingFrames++;lastTyped=body.textContent;assert.equal(log.children.at(-1),pending,'typing stays inside the history after the preceding message');assert.equal(pending.hidden,false);}
+   if(interruptNextFrame){interruptNextFrame=false;queueMicrotask(()=>elements.get('entry').emit('input'));}
+   queueMicrotask(fn);return 0;
+  };globalThis.clearTimeout=()=>{};
+  await import('../src/app.js');await Promise.resolve();
+  assert.ok(displayed.every(text=>!String(text).includes('ジュンビ')));
+  const startedAt=JSON.parse(storage.get('emmichy-session')).startedAt;
+  const entry=elements.get('entry'),send=elements.get('send'),talk=elements.get('talk');
+  const firstOpening=JSON.parse(storage.get('enny-memory-v1')).history.find(h=>h.role==='enny').text;
+  assert.equal(firstOpening,'はじめまして！','a first visitor gets an explicit first-meeting greeting');
+  assert.ok(firstOpening.length<30,'opening starts with a short greeting only');
+  const idleTick=intervals.find(x=>x.ms===250).fn;
+  let openingCount=JSON.parse(storage.get('enny-memory-v1')).history.length;
+  time+=1499;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,openingCount);
+  time++;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,openingCount+1);
+  for(let i=0;i<3;i++){time+=1500;await idleTick();}
+  assert.match(JSON.parse(storage.get('enny-memory-v1')).history.filter(h=>h.role==='enny').map(h=>h.text).join(' '),/ちいかわ|チイカワ|chiikawa|ハチワレ|シーサー|モモンガ/i);
+  assert.equal(send.disabled,false);assert.match(elements.get('status').textContent,/辞書/);
+  entry.value='本を買った';await entry.emit('compositionstart');await talk.emit('submit');
+  assert.equal(entry.value,'本を買った');
+  assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.filter(h=>h.role==='user').length,0);
+  const openingNode=elements.get('conversation').children[0];
+  await entry.emit('compositionend');await talk.emit('submit');
+  const state=JSON.parse(storage.get('enny-memory-v1'));
+  assert.equal(state.history.filter(h=>h.role==='user').length,1);
+  assert.equal(state.history.find(h=>h.role==='user').text,'本を買った');
+  assert.match(state.history.at(-1).text,/本/);assert.equal(send.disabled,false);
+  assert.ok(elements.get('conversation').children.length>1);
+  assert.ok(typingFrames>0);
+  assert.equal(elements.get('conversation').children[0],openingNode,'existing messages retain their DOM nodes');
+  assert.equal(elements.get('live-reply').hidden,true,'completion leaves no duplicate typing row');
+  assert.equal(elements.get('live-body').textContent,'');
+  assert.equal(elements.get('conversation').children.filter(p=>p.children[1]?.textContent===lastTyped).length,1);
+  entry.value='漫画じゃなくて散歩の話にしよう';await talk.emit('submit');
+  const switched=JSON.parse(storage.get('enny-memory-v1'));
+  assert.doesNotMatch(switched.history.at(-1).text,/ちいかわ|チイカワ|島二郎|ジョジョ|ハチワレ|バキ/);
+  assert.equal(switched.history.filter(h=>h.role==='user').length,2);
+  expectPersisted='雨';entry.value='今日は雨の匂いがした';await talk.emit('submit');
+  assert.equal(persistedBeforeAnimation,false,'undelivered reply must not enter model memory during animation');expectPersisted=null;
+  const rainy=JSON.parse(storage.get('enny-memory-v1'));
+  assert.ok(rainy.dialogue.some(h=>h.role==='enny'&&h.text.includes('雨')),'completed beat is now remembered');
+  assert.match(rainy.history.at(-1).text,/雨/);assert.doesNotMatch(rainy.history.at(-1).text,/クロイ ソラ|電気/);
+  // One accepted reply unfolds with no extra user turn or request. Unspoken
+  // continuations are not already present in saved history.
+  let pacedCount=JSON.parse(storage.get('enny-memory-v1')).history.length;
+  const turnCount=JSON.parse(storage.get('emmichy-session')).turns;
+  time+=3999;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,pacedCount);
+  time++;interruptNextFrame=true;await idleTick();
+  assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,pacedCount,'interrupted partial line is not saved');
+  assert.equal(elements.get('live-reply').hidden,true);
+  time+=5999;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,pacedCount);
+  await entry.emit('compositionstart');time+=20000;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,pacedCount);
+  await entry.emit('compositionend');time+=6000;await idleTick();
+  assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,pacedCount+1);
+  assert.equal(JSON.parse(storage.get('emmichy-session')).turns,turnCount);
+  assert.equal(elements.get('live-reply').hidden,true);
+  const beforeName=displayed.length;
+  entry.value='ヒソカ';const pendingName=talk.emit('submit');
+  assert.ok(!displayed.slice(beforeName).includes('ヒソカ！'),'name is not echoed at the instant of submission');
+  await pendingName;
+  const heard=JSON.parse(storage.get('enny-memory-v1')).history;
+  const nameIndex=heard.findLastIndex(h=>h.role==='user');
+  assert.equal(heard[nameIndex+1].text,'ヒソカ！','name is heard before answer animation');
+  assert.ok(delays.includes(750),'name reaction gives the player a short human pause');
+  assert.equal(heard[nameIndex].text,'ヒソカ','original player input is retained');
+  entry.value='シラナイ ノカイ ジョジョ ?';await talk.emit('submit');
+  let jojo=JSON.parse(storage.get('enny-memory-v1')).history;const jojoAt=jojo.findLastIndex(h=>h.role==='user');
+  assert.equal(jojo[jojoAt+1].text,'ジョジョ！');assert.match(jojo[jojoAt+2].text,/知ってるよ/);
+  time+=4000;await idleTick();time+=5000;await idleTick();
+  jojo=JSON.parse(storage.get('enny-memory-v1')).history.slice(jojoAt+1).map(h=>h.text).join(' ');
+  assert.match(jojo,/スタンド/);assert.doesNotMatch(jojo,/よく知らない|わかったふり/);
+  entry.value='ハチワレの話して';await talk.emit('submit');
+  entry.value='写真って';await entry.emit('input');
+  const draftedCount=JSON.parse(storage.get('enny-memory-v1')).history.length;
+  for(let i=0;i<80;i++){time+=250;await idleTick();}
+  assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,draftedCount,'a nonempty draft blocks the queued reply too, even after six seconds');
+  entry.value='';await entry.emit('input');time+=6000;await idleTick();
+  assert.ok(JSON.parse(storage.get('enny-memory-v1')).history.length>draftedCount,'clearing the draft allows the pending reply after the quiet delay');
+  entry.value='ウサギ カッコイイヨネ';await talk.emit('submit');
+  const usagi=JSON.parse(storage.get('enny-memory-v1')).history,usagiAt=usagi.findLastIndex(h=>h.role==='user');
+  assert.equal(usagi[usagiAt+1].text,'ウサギ！');assert.notEqual(usagi[usagiAt+1].text,'セッコ！');
+  entry.value='えみちいは何歳？';await talk.emit('submit');
+  let own=JSON.parse(storage.get('enny-memory-v1')).history,ownAt=own.findLastIndex(h=>h.role==='user');
+  assert.match(own[ownAt+1].text,/ワオ.*アタシのこと/);assert.match(own[ownAt+2].text,/17歳/);
+  time+=4000;await idleTick();time+=5000;await idleTick();
+  own=JSON.parse(storage.get('enny-memory-v1')).history.slice(ownAt+1).map(h=>h.text).join(' ');assert.match(own,/うれしい/);
+  entry.value='スキダヨ';await talk.emit('submit');
+  let affection=JSON.parse(storage.get('enny-memory-v1')).history,affectionAt=affection.findLastIndex(h=>h.role==='user');
+  assert.equal(affection[affectionAt+1].text,'スキ!?');
+  for(let i=0;i<5;i++){time+=6000;await idleTick();}
+  affection=JSON.parse(storage.get('enny-memory-v1')).history.slice(affectionAt+1).map(h=>h.text).join(' ');
+  assert.match(affection,/うれしい/);assert.match(affection,/にやけ|跳ね|大きく/);assert.doesNotMatch(affection,/フムフム|ナンテイウンダッケ|とっておく/);
+  entry.value='チイカワ イガイ ノ ハナシ ヲ シヨウ カ';await talk.emit('submit');
+  const declined=JSON.parse(storage.get('enny-memory-v1')).history;
+  const declineAt=declined.findLastIndex(h=>h.role==='user');
+  assert.equal(declined[declineAt+1].text,'チイカワ、ね。');
+  assert.equal(declined[declineAt+2].text,'うん、別の話にしよう。');
+  entry.value='2+2';await talk.emit('submit');
+  pacedCount=JSON.parse(storage.get('enny-memory-v1')).history.length;
+  time+=6000;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,pacedCount,'new turn cancels old continuation');
+  let count=JSON.parse(storage.get('enny-memory-v1')).history.length;
+  entry.value='途中の下書き';await entry.emit('input');time+=9999;await idleTick();
+  assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,count);
+  time++;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,count,'a draft is not interrupted by spontaneous self-talk');
+  await entry.emit('compositionstart');time+=20000;await idleTick();
+  assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,count);
+  await entry.emit('compositionend');time+=10000;await idleTick();
+  assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,count);
+  entry.value='';await entry.emit('input');time+=10000;await idleTick();
+  const firstIdle=JSON.parse(storage.get('enny-memory-v1')).history.at(-1).text;assert.match(firstIdle,/アタシ|ノート|髪|弟/);
+  time+=10000;await idleTick();assert.notEqual(JSON.parse(storage.get('enny-memory-v1')).history.at(-1).text,firstIdle);
+  time+=10000;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).ended,false);
+  const waitingCount=JSON.parse(storage.get('enny-memory-v1')).history.length;
+  entry.value='途中の下書き';
+  time=startedAt+299999;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,waitingCount);
+  time++;await idleTick();const ended=JSON.parse(storage.get('enny-memory-v1'));
+  assert.equal(ended.ended,true);assert.match(ended.history.at(-1).text,/バイバイ/);
+  assert.equal(farewellPauses.length,1,'automatic ending pauses between reason and farewell');
+  assert.notEqual(ended.history.at(-1).text,'ア、そろそろ帰るね。バイバイ！');
+  assert.equal(entry.value,'途中の下書き');
+  const savedEnding=JSON.parse(storage.get('enny-memory-v1')).history;
+  elements.get('restart-chat').onclick();assert.equal(talk.hidden,true);assert.equal(elements.get('start-choice').hidden,false);
+  elements.get('continue').onclick();assert.deepEqual(JSON.parse(storage.get('enny-memory-v1')).history,savedEnding,'continue keeps existing dialogue without starting a first meeting');
+  elements.get('restart-chat').onclick();
+  elements.get('new-chat').onclick();assert.equal(talk.hidden,false);assert.equal(elements.get('start-choice').hidden,true);
+  assert.equal(JSON.parse(storage.get('enny-memory-v1')).ended,false);
+  assert.deepEqual(JSON.parse(storage.get('enny-memory-v1')).history,[{role:'enny',text:'はじめまして！'}],'start over replaces old dialogue with a first meeting');
+  entry.value='スイリュウ ハ チイカワ タチ ハ アソンデ ナイヨ?';await talk.emit('submit');
+  let corrected=JSON.parse(storage.get('enny-memory-v1')),correctedAt=corrected.history.findLastIndex(h=>h.role==='user');
+  assert.equal(corrected.history[correctedAt+1].text,'チイカワ！');
+  for(let i=0;i<5;i++){time+=6000;await idleTick();}
+  corrected=JSON.parse(storage.get('enny-memory-v1'));
+  const recovered=corrected.history.slice(correctedAt+1).map(h=>h.text).join(' ');
+  assert.match(recovered,/混ぜない|言っちゃった/);assert.match(recovered,/島二郎.*水流/);assert.match(recovered,/大好き/);assert.doesNotMatch(recovered,/よく知らない|ワカッタフリ/);
+  assert.ok(corrected.knowledge.mentions.length>0);assert.equal(corrected.knowledge.focus,'chiikawa-23');
+  entry.value='ちいかわの話して？';await talk.emit('submit');
+  let fan=JSON.parse(storage.get('enny-memory-v1')),fanAt=fan.history.findLastIndex(h=>h.role==='user');
+  for(let i=0;i<7;i++){time+=6000;await idleTick();}
+  fan=JSON.parse(storage.get('enny-memory-v1'));const excited=fan.history.slice(fanAt+1).map(h=>h.text).join(' ');
+  assert.match(excited,/ハチワレ/);assert.match(excited,/ラッコ/);assert.match(excited,/シーサー/);assert.doesNotMatch(excited,/細かいところ|よく知らない/);
+  entry.value='胸のそれ何？';await talk.emit('submit');
+  let ornament=JSON.parse(storage.get('enny-memory-v1')),ornamentAt=ornament.history.findLastIndex(h=>h.role==='user');
+  for(let i=0;i<8;i++){time+=6000;await idleTick();}
+  ornament=JSON.parse(storage.get('enny-memory-v1'));const handmade=ornament.history.slice(ornamentAt+1).map(h=>h.text).join(' ');
+  assert.match(handmade,/ちいかわなの/);assert.match(handmade,/アタシが作った/);assert.ok(['ハチワレ','ラッコ','シーサー','モモンガ','古本屋'].filter(n=>handmade.includes(n)).length>=2);assert.doesNotMatch(handmade,/猫のブローチ/);
+  entry.value='スウェ ー デン ウマレナ ノ?';await talk.emit('submit');
+  let birthplace=JSON.parse(storage.get('enny-memory-v1')).history;const birthplaceAt=birthplace.findLastIndex(h=>h.role==='user');
+  assert.match(birthplace[birthplaceAt+1].text,/スウェーデン.*アタシの国/);assert.match(birthplace[birthplaceAt+2].text,/ヨーテボリ.*生まれ育った/);
+  time+=5000;await idleTick();time+=10000;await idleTick();
+  birthplace=JSON.parse(storage.get('enny-memory-v1')).history;assert.match(birthplace.at(-1).text,/アタシ|弟|ノート|髪/);assert.doesNotMatch(birthplace.at(-1).text,/急がなくて|別の話/);
+  entry.value='バイバイ';await talk.emit('submit');
+  assert.equal(farewellPauses.length,2,'manual goodbye uses the same two-beat ending');
+  const manual=JSON.parse(storage.get('enny-memory-v1'));assert.equal(manual.ended,true);
+  assert.equal((manual.history.at(-1).text.match(/バイバイ/g)||[]).length,1);
+  assert.equal(elements.get('send').disabled,false);
+ }finally{Date.now=originalNow;for(const [key,value] of Object.entries(saved)){if(value===undefined)delete globalThis[key];else globalThis[key]=value;}}
+});

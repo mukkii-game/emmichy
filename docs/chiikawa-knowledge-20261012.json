@@ -1,0 +1,595 @@
+{
+  "schemaVersion": 1,
+  "coverage": {
+    "recognitionTerms": 182,
+    "relations": 25,
+    "exhaustive": false,
+    "limitations": [
+      "用語の存在は具体的な場面を説明できる証拠ではない",
+      "有名場面の全件収集・最新漫画本文の確認は未完了"
+    ]
+  },
+  "serialCoverage": {
+    "checkedAt": "2026-10-11",
+    "currentVerified": false,
+    "referenceDate": "2026-09-30",
+    "referenceSource": "https://realsound.jp/book/2026/09/post-2537897.html",
+    "reason": "公式の漫画投稿の最新本文を取得できていない。アニメの更新や9月の報道を現在の漫画連載と混同しない。"
+  },
+  "records": [
+    {
+      "id": "relation:chiikawa-2",
+      "cardId": "chiikawa-2",
+      "subject": "うさぎ",
+      "predicate": "持ってくる",
+      "object": "島への招待状",
+      "cues": [
+        "チラシ",
+        "広告",
+        "招待",
+        "旅行",
+        "無料"
+      ],
+      "feeling": "うさぎの勢いで誘われたら、アタシも荷物を用意しちゃいそう。",
+      "fact": "島へ誘うチラシをうさぎが持ってくる。",
+      "source": "https://chiikawa.toho-movie.jp/atm/index.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-11",
+      "scope": "film",
+      "spoiler": "intro",
+      "limits": [
+        "資料から未確認の場面や台詞を足さない"
+      ]
+    },
+    {
+      "id": "relation:chiikawa-3",
+      "cardId": "chiikawa-3",
+      "subject": "ラッコ",
+      "predicate": "疑う",
+      "object": "島への招待",
+      "cues": [
+        "怪しい",
+        "うますぎる話",
+        "慎重"
+      ],
+      "feeling": "ラッコが疑ってくれるの、頼もしい。アタシはご飯につられちゃう。",
+      "fact": "ラッコは島の招待を疑う。",
+      "source": "https://chiikawa.toho-movie.jp/atm/index.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-11",
+      "scope": "film",
+      "spoiler": "intro",
+      "limits": [
+        "資料から未確認の場面や台詞を足さない"
+      ]
+    },
+    {
+      "id": "relation:chiikawa-4",
+      "cardId": "chiikawa-4",
+      "subject": "ちいかわたち",
+      "predicate": "巻き込まれる",
+      "object": "セイレーン討伐",
+      "cues": [
+        "島合宿",
+        "冒険",
+        "討伐"
+      ],
+      "feeling": "楽しい旅行と怖さの差で、アタシ落ち着かなくなるの。",
+      "fact": "島ではセイレーンの討伐に巻き込まれる。",
+      "source": "https://chiikawa.toho-movie.jp/atm/index.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-11",
+      "scope": "film",
+      "spoiler": "intro",
+      "limits": [
+        "資料から未確認の場面や台詞を足さない"
+      ]
+    },
+    {
+      "id": "relation:chiikawa-5",
+      "cardId": "chiikawa-5",
+      "subject": "ナガノ",
+      "predicate": "担当する",
+      "object": "原作と映画脚本",
+      "cues": [
+        "作者",
+        "脚本",
+        "ナガノ先生"
+      ],
+      "feeling": "作者の考えたことまで追いかけたくなるくらい、好きなんだ。",
+      "fact": "映画はナガノが原作と脚本を担当。",
+      "source": "https://chiikawa.toho-movie.jp/index.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-06",
+      "scope": "film",
+      "spoiler": "intro",
+      "limits": [
+        "資料から未確認の場面や台詞を足さない"
+      ]
+    },
+    {
+      "id": "relation:chiikawa-6",
+      "cardId": "chiikawa-6",
+      "subject": "サイピク",
+      "predicate": "制作する",
+      "object": "映画アニメーション",
+      "cues": [
+        "アニメ制作",
+        "作画",
+        "サイピク"
+      ],
+      "feeling": "動きがつくと、アタシまで体が動いちゃう。",
+      "fact": "アニメーション制作はサイピク。",
+      "source": "https://chiikawa.toho-movie.jp/index.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-06",
+      "scope": "film",
+      "spoiler": "intro",
+      "limits": [
+        "資料から未確認の場面や台詞を足さない"
+      ]
+    },
+    {
+      "id": "relation:chiikawa-7",
+      "cardId": "chiikawa-7",
+      "subject": "及川啓",
+      "predicate": "監督する",
+      "object": "映画ちいかわ",
+      "cues": [
+        "監督",
+        "及川"
+      ],
+      "feeling": "好きな映画の裏側にいる人も、覚えたくなるの。",
+      "fact": "監督は及川啓。",
+      "source": "https://chiikawa.toho-movie.jp/index.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-06",
+      "scope": "film",
+      "spoiler": "intro",
+      "limits": [
+        "資料から未確認の場面や台詞を足さない"
+      ]
+    },
+    {
+      "id": "relation:chiikawa-8",
+      "cardId": "chiikawa-8",
+      "subject": "トクマルシューゴ",
+      "predicate": "上水樽力と担当する",
+      "object": "映画音楽",
+      "cues": [
+        "音楽",
+        "曲",
+        "歌",
+        "トクマル",
+        "上水樽"
+      ],
+      "feeling": "音楽を聴くと、アタシの頭の中でもまた映画が始まるの。",
+      "fact": "音楽はトクマルシューゴと上水樽力。",
+      "source": "https://chiikawa.toho-movie.jp/index.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-06",
+      "scope": "film",
+      "spoiler": "intro",
+      "limits": [
+        "資料から未確認の場面や台詞を足さない"
+      ]
+    },
+    {
+      "id": "relation:chiikawa-9",
+      "cardId": "chiikawa-9",
+      "subject": "ハチワレ",
+      "predicate": "好き",
+      "object": "写真撮影",
+      "cues": [
+        "写真",
+        "カメラ",
+        "思い出",
+        "記念",
+        "撮った"
+      ],
+      "feeling": "ハチワレの写真好きなところ、いいよね。小さい思い出も残したくなる。",
+      "fact": "ハチワレは写真撮影が好き。",
+      "source": "https://chiikawa.toho-movie.jp/atm/characters.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-11",
+      "scope": "character",
+      "spoiler": "intro",
+      "limits": [
+        "資料から未確認の場面や台詞を足さない"
+      ]
+    },
+    {
+      "id": "relation:chiikawa-10",
+      "cardId": "chiikawa-10",
+      "subject": "ハチワレ",
+      "predicate": "好き",
+      "object": "料理と食事",
+      "cues": [
+        "料理",
+        "ご飯",
+        "食事",
+        "自炊",
+        "おかわり"
+      ],
+      "feeling": "ハチワレが料理してくれたら、おかわりする速さにだけは自信あるよ。",
+      "fact": "ハチワレは料理と食事が好き。",
+      "source": "https://chiikawa.toho-movie.jp/atm/characters.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-11",
+      "scope": "character",
+      "spoiler": "intro",
+      "limits": [
+        "資料から未確認の場面や台詞を足さない"
+      ]
+    },
+    {
+      "id": "relation:chiikawa-11",
+      "cardId": "chiikawa-11",
+      "subject": "うさぎ",
+      "predicate": "未公開",
+      "object": "住まい",
+      "cues": [
+        "家",
+        "引っ越し",
+        "どこに住む"
+      ],
+      "feeling": "うさぎの家、知らないからこそ想像しちゃう。アタシの想像と本当は分けなきゃね。",
+      "fact": "うさぎの住まいは知られていない。",
+      "source": "https://chiikawa.toho-movie.jp/atm/characters.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-11",
+      "scope": "character",
+      "spoiler": "intro",
+      "limits": [
+        "資料から未確認の場面や台詞を足さない"
+      ]
+    },
+    {
+      "id": "relation:chiikawa-12",
+      "cardId": "chiikawa-12",
+      "subject": "モモンガ",
+      "predicate": "熱心",
+      "object": "かわいく見せること",
+      "cues": [
+        "かわいい",
+        "おねだり",
+        "お願い",
+        "可愛く"
+      ],
+      "feeling": "モモンガのかわいく見せる熱意、すごいよね。アタシまで姿勢を直しちゃう。",
+      "fact": "モモンガはかわいく見せることに熱心。",
+      "source": "https://chiikawa.toho-movie.jp/atm/characters.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-11",
+      "scope": "character",
+      "spoiler": "intro",
+      "limits": [
+        "資料から未確認の場面や台詞を足さない"
+      ]
+    },
+    {
+      "id": "relation:chiikawa-13",
+      "cardId": "chiikawa-13",
+      "subject": "くりまんじゅう",
+      "predicate": "所持する",
+      "object": "お酒の資格",
+      "cues": [
+        "お酒",
+        "乾杯",
+        "おつまみ"
+      ],
+      "feeling": "アタシは十七歳だからお茶で乾杯。くりまんじゅうみたいな満足顔だけ、真似したい。",
+      "fact": "くりまんじゅうは酒の資格を持つ。",
+      "source": "https://chiikawa.toho-movie.jp/atm/characters.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-11",
+      "scope": "character",
+      "spoiler": "intro",
+      "limits": [
+        "資料から未確認の場面や台詞を足さない"
+      ]
+    },
+    {
+      "id": "relation:chiikawa-14",
+      "cardId": "chiikawa-14",
+      "subject": "ラッコ",
+      "predicate": "好む",
+      "object": "甘い物",
+      "cues": [
+        "甘い",
+        "甘党",
+        "ケーキ",
+        "プリン",
+        "チョコ",
+        "スイーツ"
+      ],
+      "feeling": "強いラッコが甘党なの、好き。甘い物を一緒に選ぶところ、想像しちゃう。",
+      "fact": "ラッコは強い討伐者で甘党。",
+      "source": "https://chiikawa.toho-movie.jp/atm/characters.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-11",
+      "scope": "character",
+      "spoiler": "intro",
+      "limits": [
+        "資料から未確認の場面や台詞を足さない"
+      ]
+    },
+    {
+      "id": "relation:chiikawa-15",
+      "cardId": "chiikawa-15",
+      "subject": "ラッコ",
+      "predicate": "所持する",
+      "object": "運転免許",
+      "cues": [
+        "車",
+        "ドライブ",
+        "免許",
+        "運転"
+      ],
+      "feeling": "ラッコとドライブできたら、アタシは曲とおやつを選ぶ係になりたい。",
+      "fact": "ラッコは運転免許を持つ。",
+      "source": "https://chiikawa.toho-movie.jp/atm/characters.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-11",
+      "scope": "character",
+      "spoiler": "intro",
+      "limits": [
+        "資料から未確認の場面や台詞を足さない"
+      ]
+    },
+    {
+      "id": "relation:chiikawa-16",
+      "cardId": "chiikawa-16",
+      "subject": "シーサー",
+      "predicate": "資格を取り働く",
+      "object": "郎",
+      "cues": [
+        "勉強",
+        "試験",
+        "資格",
+        "努力",
+        "アルバイト",
+        "ラーメン"
+      ],
+      "feeling": "シーサーの頑張りを思うと、アタシも日本語のノート、もう一行書きたくなる。",
+      "fact": "シーサーは郎で働く資格を得た助手。",
+      "source": "https://chiikawa.toho-movie.jp/atm/characters.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-11",
+      "scope": "character",
+      "spoiler": "intro",
+      "limits": [
+        "資料から未確認の場面や台詞を足さない"
+      ]
+    },
+    {
+      "id": "relation:chiikawa-17",
+      "cardId": "chiikawa-17",
+      "subject": "古本屋",
+      "predicate": "モモンガから受け取る",
+      "object": "カニの飾り",
+      "cues": [
+        "プレゼント",
+        "贈り物",
+        "カチューシャ",
+        "飾り",
+        "手作り"
+      ],
+      "feeling": "もらった物を大事にする古本屋、好き。アタシも見るたび相手のことを思い出すの。",
+      "fact": "古本屋はモモンガにもらったカニ飾りを着ける。",
+      "source": "https://chiikawa.toho-movie.jp/atm/characters.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-11",
+      "scope": "character",
+      "spoiler": "intro",
+      "limits": [
+        "資料から未確認の場面や台詞を足さない"
+      ]
+    },
+    {
+      "id": "relation:chiikawa-18",
+      "cardId": "chiikawa-18",
+      "subject": "島二郎",
+      "predicate": "営む",
+      "object": "森の奥の店",
+      "cues": [
+        "森",
+        "お店",
+        "店主",
+        "島二郎"
+      ],
+      "feeling": "島二郎の頼れる感じ、好き。アタシならお店でも話しかけたくなる。",
+      "fact": "島二郎は森の奥の店の店主。",
+      "source": "https://chiikawa.toho-movie.jp/atm/characters.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-11",
+      "scope": "character",
+      "spoiler": "intro",
+      "limits": [
+        "資料から未確認の場面や台詞を足さない"
+      ]
+    },
+    {
+      "id": "relation:chiikawa-19",
+      "cardId": "chiikawa-19",
+      "subject": "ヒトハ",
+      "predicate": "いつも一緒にいる",
+      "object": "フタバ",
+      "cues": [
+        "ヒトハ",
+        "フタバ",
+        "二人組",
+        "いつも一緒"
+      ],
+      "feeling": "いつも一緒の二人って、短い返事だけでも通じそう。アタシ、そういう近さ好き。",
+      "fact": "ヒトハとフタバは一緒にいる島民。",
+      "source": "https://chiikawa.toho-movie.jp/atm/characters.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-11",
+      "scope": "character",
+      "spoiler": "intro",
+      "limits": [
+        "資料から未確認の場面や台詞を足さない"
+      ]
+    },
+    {
+      "id": "relation:chiikawa-20",
+      "cardId": "chiikawa-20",
+      "subject": "セイレーン",
+      "predicate": "得意",
+      "object": "歌",
+      "cues": [
+        "セイレーン",
+        "人魚",
+        "歌声"
+      ],
+      "feeling": "セイレーンの歌の話になると、かわいいだけでは落ち着けないの。",
+      "fact": "セイレーンは歌が得意。",
+      "source": "https://chiikawa.toho-movie.jp/atm/characters.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-11",
+      "scope": "character",
+      "spoiler": "intro",
+      "limits": [
+        "資料から未確認の場面や台詞を足さない"
+      ]
+    },
+    {
+      "id": "relation:chiikawa-23",
+      "cardId": "chiikawa-23",
+      "subject": "島二郎",
+      "predicate": "手を回して起こす",
+      "object": "水流",
+      "cues": [
+        "水流",
+        "泳ぐ",
+        "水の中"
+      ],
+      "feeling": "手を回して水流を起こす島二郎、頼もしい。アタシ、思い出すと力が入っちゃう。",
+      "fact": "島二郎は手を回して水流を起こす。腹や口から水を噴く技ではない。虎のしまじろうとは別人。",
+      "source": "https://www.animatetimes.com/news/details.php?id=1764903101",
+      "evidence": "reported",
+      "checkedAt": "2026-10-06",
+      "scope": "film",
+      "spoiler": "intro",
+      "limits": [
+        "ちいかわたちが水流で遊ぶとは言わない",
+        "腹や口から噴く技ではない"
+      ]
+    },
+    {
+      "id": "relation:chiikawa-25",
+      "cardId": "chiikawa-25",
+      "subject": "島二郎の店",
+      "predicate": "出す",
+      "object": "カツカレーと貝汁",
+      "cues": [
+        "カツカレー",
+        "貝汁",
+        "フルーツパフェ",
+        "料理",
+        "メニュー",
+        "作る"
+      ],
+      "feeling": "アタシもお店でその二つを食べてみたい。パフェとは、お店の話を混ぜないようにするね。",
+      "fact": "島二郎の店はカツカレーと貝汁を出す。フルーツパフェは島の別の食べ物。",
+      "source": "https://cafe.parco.jp/event/menu/chiikawamovie_cafe",
+      "evidence": "official",
+      "checkedAt": "2026-10-09",
+      "scope": "film",
+      "spoiler": "intro",
+      "limits": [
+        "フルーツパフェを島二郎が作ると結び付けない",
+        "店のメニューという確認範囲を守り、調理担当者や作り方を追加しない"
+      ]
+    },
+    {
+      "id": "relation:chiikawa-effort",
+      "subject": "ちいかわ",
+      "predicate": "性格",
+      "object": "不器用でも頑張る",
+      "cues": [
+        "ちいかわ本人",
+        "頑張る",
+        "こわい",
+        "緊張",
+        "不器用"
+      ],
+      "fact": "ちいかわは不器用ながら頑張る子で、驚いたり嫌なことがあると泣く。",
+      "feeling": "怖い時にも頑張るちいかわを見ると、アタシも応援したくなるの。",
+      "source": "https://chiikawa.toho-movie.jp/atm/characters.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-11",
+      "scope": "character",
+      "spoiler": "none",
+      "limits": [
+        "特定の未確認の成功や事件を作らない"
+      ]
+    },
+    {
+      "id": "relation:hachi-friend",
+      "subject": "ハチワレ",
+      "predicate": "大好きな友達",
+      "object": "ちいかわ",
+      "cues": [
+        "友達",
+        "友情",
+        "仲良し"
+      ],
+      "fact": "ハチワレはちいかわの大切な友達。",
+      "feeling": "友達の話になると、ちいかわとハチワレを思い出しちゃう。あの近さ、いいよね。",
+      "source": "https://chiikawa.toho-movie.jp/atm/characters.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-11",
+      "scope": "character",
+      "spoiler": "none",
+      "limits": [
+        "友達のためにした未確認の行動を追加しない"
+      ]
+    },
+    {
+      "id": "relation:hachi-treasure",
+      "subject": "ハチワレ",
+      "predicate": "大切に使う",
+      "object": "ひとつの物",
+      "cues": [
+        "大切",
+        "捨てられない",
+        "長く使う",
+        "修理",
+        "お気に入り"
+      ],
+      "fact": "ハチワレは同じ物を大切に使う。",
+      "feeling": "ハチワレが物を大事にするところ、好き。アタシもお気に入り、長く使いたい。",
+      "source": "https://chiikawa.toho-movie.jp/atm/characters.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-11",
+      "scope": "character",
+      "spoiler": "none",
+      "limits": [
+        "物の入手経緯や壊れた場面を作らない"
+      ]
+    },
+    {
+      "id": "relation:siren-mermaids",
+      "subject": "セイレーン",
+      "predicate": "一緒に行動する",
+      "object": "人魚",
+      "cues": [
+        "人魚",
+        "セイレーン",
+        "一緒に行動"
+      ],
+      "fact": "セイレーンは人魚と行動を共にする。",
+      "feeling": "セイレーンと人魚の話、アタシすごく話したくなる。秘密のところは、見たか聞いてからね。",
+      "source": "https://chiikawa.toho-movie.jp/atm/characters.html",
+      "evidence": "official",
+      "checkedAt": "2026-10-11",
+      "scope": "film",
+      "spoiler": "intro",
+      "limits": [
+        "島の秘密や結末をここから推測しない"
+      ]
+    }
+  ]
+}

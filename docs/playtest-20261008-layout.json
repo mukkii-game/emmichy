@@ -1,0 +1,32 @@
+{
+  "mode": "local synthetic provider, zero live AI calls",
+  "cases": [
+    "3s accepted synthetic reply after listening gesture",
+    "9s synthetic failure after two gestures and authored waiting line, local fallback"
+  ],
+  "beforeHeight": 465,
+  "finalLayout": {
+    "height": 465,
+    "rows": [
+      {
+        "bottom": -29.1875,
+        "gap": null,
+        "text": "EMMICHY >フムフム...。",
+        "top": -96.98214721679688
+      },
+      {
+        "bottom": 146.99999952316284,
+        "gap": 21.99999952316284,
+        "text": "EMMICHY >サンポ シテル ト、 カンバン ノ ニホンゴ マデ ヨン ジャウ。 トオク カラ ヨメタ キ ガ シテ、 チカヅイタラ ゼンゼン チガウ コトバダッ タリ スルノ。",
+        "top": -7.187500476837158
+      },
+      {
+        "bottom": 279.99107360839844,
+        "gap": 22.00000047683716,
+        "text": "EMMICHY >ソコ ハ マダ ヨク シラナイノ。 ワカッタ フリ デ コタエタクナイナ。",
+        "top": 169
+      }
+    ],
+    "typing": false
+  }
+}

@@ -1,0 +1,853 @@
+{
+  "mode": "actual app; offline rule/bank; simulated DOM and virtual pauses; compressed typing animation; no live LLM or audio",
+  "actions": [
+    {
+      "action": {
+        "type": "start"
+      },
+      "result": {
+        "atSeconds": 0,
+        "messages": [
+          {
+            "atMs": 0,
+            "role": "enny",
+            "text": "はじめまして！",
+            "screen": "ハジメマシテ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 8
+      },
+      "result": {
+        "atSeconds": 8,
+        "messages": [
+          {
+            "atMs": 1500,
+            "role": "enny",
+            "text": "アタシ、えみちぃ。",
+            "screen": "アタシ、 エミチィ 。"
+          },
+          {
+            "atMs": 3000,
+            "role": "enny",
+            "text": "日本語、勉強中なの。",
+            "screen": "ニホンゴ、 ベンキョウチュウナノ。"
+          },
+          {
+            "atMs": 4500,
+            "role": "enny",
+            "text": "シーサーの話、心配になっちゃう。好きな子だと落ち着かないね。",
+            "screen": "シーサー ノ ハナシ、 シンパイ ニ ナッチャウ。 スキナ コ ダト オチツカナイネ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "はじめまして！私もちいかわ好き。シーサーの何が心配なの？"
+      },
+      "result": {
+        "atSeconds": 8,
+        "messages": [
+          {
+            "atMs": 8000,
+            "role": "user",
+            "text": "はじめまして！私もちいかわ好き。シーサーの何が心配なの？",
+            "screen": "ハジメマシテ! ワタシ モ チイカワ スキ。 シーサー ノ ナニ ガ シンパイナ ノ?"
+          },
+          {
+            "atMs": 8000,
+            "role": "enny",
+            "text": "チイカワ、スキ!?",
+            "screen": "チイカワ 、スキ!?"
+          },
+          {
+            "atMs": 8000,
+            "role": "enny",
+            "text": "わあ、その話うれしい!",
+            "screen": "ワア、 ソノ ハナシ ウレシイ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 18
+      },
+      "result": {
+        "atSeconds": 26,
+        "messages": [
+          {
+            "atMs": 10000,
+            "role": "enny",
+            "text": "聞かれたその点は、今ここで断言できないけど、疲れていても星を助けるシーサー、優しいね。",
+            "screen": "キカレタ ソノ テン ハ、 イマ ココ デ ダンゲン デキナイ ケド、 ツカレテイテ モ ホシ ヲ タスケル シーサー 、 ヤサシイネ。"
+          },
+          {
+            "atMs": 12000,
+            "role": "enny",
+            "text": "まず休んでほしい。",
+            "screen": "マズ ヤスンデ ホシ イ。"
+          },
+          {
+            "atMs": 22000,
+            "role": "enny",
+            "text": "アタシ、スウェーデンのヨーテボリの近くで育ったの。",
+            "screen": "アタシ、 スウェーデン ノ ヨーテボリ ノ チカク デ ソダッタノ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "星を助けるシーサー？その場面は覚えてないな。シーサーは郎で頑張ってるところが好きだよ。"
+      },
+      "result": {
+        "atSeconds": 26,
+        "messages": [
+          {
+            "atMs": 26000,
+            "role": "user",
+            "text": "星を助けるシーサー？その場面は覚えてないな。シーサーは郎で頑張ってるところが好きだよ。",
+            "screen": "ホシ ヲ タスケル シーサー ? ソノ バメン ハ オボエテナイナ。 シーサー ハ ロウ デ ガンバッテル トコロ ガ スキダヨ。"
+          },
+          {
+            "atMs": 26000,
+            "role": "enny",
+            "text": "シーサー！",
+            "screen": "シーサー !"
+          },
+          {
+            "atMs": 26000,
+            "role": "enny",
+            "text": "わあ、その話うれしい!",
+            "screen": "ワア、 ソノ ハナシ ウレシイ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 2
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 14
+      },
+      "result": {
+        "atSeconds": 40,
+        "messages": [
+          {
+            "atMs": 28000,
+            "role": "enny",
+            "text": "郎で働くために資格まで取るシーサー、応援したくなる。",
+            "screen": "ロウ デ ハタラク タメ ニ シカク マデ トル シーサー 、 オウエン シタク ナル。"
+          },
+          {
+            "atMs": 38000,
+            "role": "enny",
+            "text": "弟は14歳なの。ゲームで負けると、アタシ言い訳しちゃう。",
+            "screen": "オトウト ハ 14サイナノ。 ゲーム デ マケル ト、 アタシ イイワケ シチャウ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 2
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "シーサーが頑張ってると応援したくなるよね。えみちぃはハチワレも好き？"
+      },
+      "result": {
+        "atSeconds": 40,
+        "messages": [
+          {
+            "atMs": 40000,
+            "role": "user",
+            "text": "シーサーが頑張ってると応援したくなるよね。えみちぃはハチワレも好き？",
+            "screen": "シーサー ガ ガンバッテル ト オウエン シタク ナルヨネ。 エミチィ ハ ハチワレ モ スキ?"
+          },
+          {
+            "atMs": 40000,
+            "role": "enny",
+            "text": "スキ!?",
+            "screen": "スキ!?"
+          },
+          {
+            "atMs": 40000,
+            "role": "enny",
+            "text": "アタシのことだと思って、喜んじゃうよ?",
+            "screen": "アタシ ノ コト ダト オモッテ、 ヨロコン ジャウヨ?"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 3
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 14
+      },
+      "result": {
+        "atSeconds": 54,
+        "messages": [
+          {
+            "atMs": 42000,
+            "role": "enny",
+            "text": "えへへ、うれしい!",
+            "screen": "エ ヘ ヘ、 ウレシイ!"
+          },
+          {
+            "atMs": 44000,
+            "role": "enny",
+            "text": "今の言葉、ノートに大きく書きたいな。",
+            "screen": "イマ ノ コトバ、 ノート ニ オオキク カキタイナ。"
+          },
+          {
+            "atMs": 54000,
+            "role": "enny",
+            "text": "覚えた日本語、小さいノートに書いてるの。字はまだちょっと下手。",
+            "screen": "オボエタ ニホンゴ、 チイサイ ノート ニ カイテルノ。 ジ ハ マダ チョット ヘタ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 3
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "ハチワレの写真が好きなんだよね。あの瞬間を残したい気持ち、すごくわかる。"
+      },
+      "result": {
+        "atSeconds": 54,
+        "messages": [
+          {
+            "atMs": 54000,
+            "role": "user",
+            "text": "ハチワレの写真が好きなんだよね。あの瞬間を残したい気持ち、すごくわかる。",
+            "screen": "ハチワレ ノ シャシン ガ スキナ ンダヨネ。 アノ シュンカン ヲ ノコシタイ キモチ、 スゴク ワカル。"
+          },
+          {
+            "atMs": 54000,
+            "role": "enny",
+            "text": "ハチワレ、スキ!?",
+            "screen": "ハチワレ 、スキ!?"
+          },
+          {
+            "atMs": 54000,
+            "role": "enny",
+            "text": "ハチワレの写真、上手さだけじゃなく大事なものが写る感じが好き。",
+            "screen": "ハチワレ ノ シャシン、 ジョウズサ ダケ ジャナク ダイジナ モノ ガ ウツル カンジ ガ スキ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 4
+      }
+    },
+    {
+      "action": {
+        "type": "draft",
+        "text": "写真って"
+      },
+      "result": {
+        "atSeconds": 54,
+        "messages": [],
+        "draft": "写真って",
+        "finished": false,
+        "turns": 4
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 20
+      },
+      "result": {
+        "atSeconds": 74,
+        "messages": [
+          {
+            "atMs": 60000,
+            "role": "enny",
+            "text": "ハチワレ、写真で小さい思い出を残すの、いいよね!",
+            "screen": "ハチワレ 、 シャシン デ チイサイ オモイデ ヲ ノコス ノ、 イイヨネ!"
+          },
+          {
+            "atMs": 62000,
+            "role": "enny",
+            "text": "アタシ、そういうところ大好き。",
+            "screen": "アタシ、 ソウイウ トコロ ダイスキ。"
+          },
+          {
+            "atMs": 64000,
+            "role": "enny",
+            "text": "ハチワレのご飯、少し失敗しても一緒に食べたい。",
+            "screen": "ハチワレ ノ ゴハン、 スコシ シッパイ シテ モ イッショ ニ タベタイ。"
+          },
+          {
+            "atMs": 66000,
+            "role": "enny",
+            "text": "ラッコ、あんなに強いのに甘い物が好きなの!",
+            "screen": "ラッコ 、 アンナニ ツヨイ ノ ニ アマイ モノ ガ スキナ ノ!"
+          },
+          {
+            "atMs": 68000,
+            "role": "enny",
+            "text": "あの差に弱い、アタシ。",
+            "screen": "アノ サ ニ ヨワイ、 アタシ。"
+          }
+        ],
+        "draft": "写真って",
+        "finished": false,
+        "turns": 4
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "ちょっと待って、写真の話を続けたかった。話題がいくつも飛ぶと返事に迷うよ。"
+      },
+      "result": {
+        "atSeconds": 74,
+        "messages": [
+          {
+            "atMs": 74000,
+            "role": "user",
+            "text": "ちょっと待って、写真の話を続けたかった。話題がいくつも飛ぶと返事に迷うよ。",
+            "screen": "チョット マッテ、 シャシン ノ ハナシ ヲ ツヅケタカッタ。 ワダイ ガ イクツ モ トブ ト ヘンジ ニ マヨウヨ。"
+          },
+          {
+            "atMs": 74000,
+            "role": "enny",
+            "text": "わあ、ちいかわ!",
+            "screen": "ワア、 チイカワ !"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 5
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 10
+      },
+      "result": {
+        "atSeconds": 84,
+        "messages": [
+          {
+            "atMs": 76000,
+            "role": "enny",
+            "text": "話したかった!",
+            "screen": "ハナシタカッタ!"
+          },
+          {
+            "atMs": 78000,
+            "role": "enny",
+            "text": "モモンガ、かわいく見せるためにすごく頑張るよね!",
+            "screen": "モモンガ 、 カワイク ミセル タメ ニ スゴク ガンバルヨネ!"
+          },
+          {
+            "atMs": 80000,
+            "role": "enny",
+            "text": "あの熱意、見習いたい。",
+            "screen": "アノ ネツイ、 ミナライタイ。"
+          },
+          {
+            "atMs": 82000,
+            "role": "enny",
+            "text": "古本屋、カニの飾りを大事にするところが好き!",
+            "screen": "フルホンヤ 、 カニ ノ カザリ ヲ ダイジ ニ スル トコロ ガ スキ!"
+          },
+          {
+            "atMs": 84000,
+            "role": "enny",
+            "text": "もらった物って、特別だよね。",
+            "screen": "モラッタ モノッテ、 トクベツダヨネ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 5
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "その胸につけてるちいかわ、えみちぃが作ったの？かわいいね！"
+      },
+      "result": {
+        "atSeconds": 84,
+        "messages": [
+          {
+            "atMs": 84000,
+            "role": "user",
+            "text": "その胸につけてるちいかわ、えみちぃが作ったの？かわいいね！",
+            "screen": "ソノ ムネ ニ ツケテル チイカワ 、 エミチィ ガ ツクッタ ノ? カワイイネ!"
+          },
+          {
+            "atMs": 84000,
+            "role": "enny",
+            "text": "カワイイ!?",
+            "screen": "カワイイ!?"
+          },
+          {
+            "atMs": 84000,
+            "role": "enny",
+            "text": "あ、わかる?",
+            "screen": "ア、 ワカル?"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 6
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 12
+      },
+      "result": {
+        "atSeconds": 96,
+        "messages": [
+          {
+            "atMs": 86000,
+            "role": "enny",
+            "text": "これ、ちいかわなの。",
+            "screen": "コレ、 チイカワ ナノ。"
+          },
+          {
+            "atMs": 88000,
+            "role": "enny",
+            "text": "アタシが作ったの!",
+            "screen": "アタシ ガ ツクッタ ノ!"
+          },
+          {
+            "atMs": 90000,
+            "role": "enny",
+            "text": "モモンガ、かわいく見せるためにすごく頑張るよね!",
+            "screen": "モモンガ 、 カワイク ミセル タメ ニ スゴク ガンバルヨネ!"
+          },
+          {
+            "atMs": 92000,
+            "role": "enny",
+            "text": "あの熱意、見習いたい。",
+            "screen": "アノ ネツイ、 ミナライタイ。"
+          },
+          {
+            "atMs": 94000,
+            "role": "enny",
+            "text": "シーサー、郎で働くために資格まで取るんだよ!",
+            "screen": "シーサー 、 ロウ デ ハタラク タメ ニ シカク マデ トル ンダヨ!"
+          },
+          {
+            "atMs": 96000,
+            "role": "enny",
+            "text": "アタシ、応援しちゃう。",
+            "screen": "アタシ、 オウエン シチャウ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 6
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "作ったのすごいね！今日はありがとう、またちいかわの話をしようね。バイバイ！"
+      },
+      "result": {
+        "atSeconds": 96,
+        "messages": [
+          {
+            "atMs": 96000,
+            "role": "user",
+            "text": "作ったのすごいね！今日はありがとう、またちいかわの話をしようね。バイバイ！",
+            "screen": "ツクッタ ノ スゴイネ! キョウ ハ アリガトウ、 マタ チイカワ ノ ハナシ ヲ シヨウネ。 バイバイ!"
+          },
+          {
+            "atMs": 96000,
+            "role": "enny",
+            "text": "チイカワ！",
+            "screen": "チイカワ !"
+          },
+          {
+            "atMs": 96000,
+            "role": "enny",
+            "text": "うさぎの顔にチラシ。",
+            "screen": "ウサギ ノ カオ ニ チラシ 。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 7
+      }
+    }
+  ],
+  "transcript": [
+    {
+      "atMs": 0,
+      "message": {
+        "role": "enny",
+        "text": "はじめまして！"
+      }
+    },
+    {
+      "atMs": 1500,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、えみちぃ。"
+      }
+    },
+    {
+      "atMs": 3000,
+      "message": {
+        "role": "enny",
+        "text": "日本語、勉強中なの。"
+      }
+    },
+    {
+      "atMs": 4500,
+      "message": {
+        "role": "enny",
+        "text": "シーサーの話、心配になっちゃう。好きな子だと落ち着かないね。"
+      }
+    },
+    {
+      "atMs": 8000,
+      "message": {
+        "role": "user",
+        "text": "はじめまして！私もちいかわ好き。シーサーの何が心配なの？"
+      }
+    },
+    {
+      "atMs": 8000,
+      "message": {
+        "role": "enny",
+        "text": "チイカワ、スキ!?"
+      }
+    },
+    {
+      "atMs": 8000,
+      "message": {
+        "role": "enny",
+        "text": "わあ、その話うれしい!"
+      }
+    },
+    {
+      "atMs": 10000,
+      "message": {
+        "role": "enny",
+        "text": "聞かれたその点は、今ここで断言できないけど、疲れていても星を助けるシーサー、優しいね。"
+      }
+    },
+    {
+      "atMs": 12000,
+      "message": {
+        "role": "enny",
+        "text": "まず休んでほしい。"
+      }
+    },
+    {
+      "atMs": 22000,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、スウェーデンのヨーテボリの近くで育ったの。"
+      }
+    },
+    {
+      "atMs": 26000,
+      "message": {
+        "role": "user",
+        "text": "星を助けるシーサー？その場面は覚えてないな。シーサーは郎で頑張ってるところが好きだよ。"
+      }
+    },
+    {
+      "atMs": 26000,
+      "message": {
+        "role": "enny",
+        "text": "シーサー！"
+      }
+    },
+    {
+      "atMs": 26000,
+      "message": {
+        "role": "enny",
+        "text": "わあ、その話うれしい!"
+      }
+    },
+    {
+      "atMs": 28000,
+      "message": {
+        "role": "enny",
+        "text": "郎で働くために資格まで取るシーサー、応援したくなる。"
+      }
+    },
+    {
+      "atMs": 38000,
+      "message": {
+        "role": "enny",
+        "text": "弟は14歳なの。ゲームで負けると、アタシ言い訳しちゃう。"
+      }
+    },
+    {
+      "atMs": 40000,
+      "message": {
+        "role": "user",
+        "text": "シーサーが頑張ってると応援したくなるよね。えみちぃはハチワレも好き？"
+      }
+    },
+    {
+      "atMs": 40000,
+      "message": {
+        "role": "enny",
+        "text": "スキ!?"
+      }
+    },
+    {
+      "atMs": 40000,
+      "message": {
+        "role": "enny",
+        "text": "アタシのことだと思って、喜んじゃうよ?"
+      }
+    },
+    {
+      "atMs": 42000,
+      "message": {
+        "role": "enny",
+        "text": "えへへ、うれしい!"
+      }
+    },
+    {
+      "atMs": 44000,
+      "message": {
+        "role": "enny",
+        "text": "今の言葉、ノートに大きく書きたいな。"
+      }
+    },
+    {
+      "atMs": 54000,
+      "message": {
+        "role": "enny",
+        "text": "覚えた日本語、小さいノートに書いてるの。字はまだちょっと下手。"
+      }
+    },
+    {
+      "atMs": 54000,
+      "message": {
+        "role": "user",
+        "text": "ハチワレの写真が好きなんだよね。あの瞬間を残したい気持ち、すごくわかる。"
+      }
+    },
+    {
+      "atMs": 54000,
+      "message": {
+        "role": "enny",
+        "text": "ハチワレ、スキ!?"
+      }
+    },
+    {
+      "atMs": 54000,
+      "message": {
+        "role": "enny",
+        "text": "ハチワレの写真、上手さだけじゃなく大事なものが写る感じが好き。"
+      }
+    },
+    {
+      "atMs": 60000,
+      "message": {
+        "role": "enny",
+        "text": "ハチワレ、写真で小さい思い出を残すの、いいよね!"
+      }
+    },
+    {
+      "atMs": 62000,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、そういうところ大好き。"
+      }
+    },
+    {
+      "atMs": 64000,
+      "message": {
+        "role": "enny",
+        "text": "ハチワレのご飯、少し失敗しても一緒に食べたい。"
+      }
+    },
+    {
+      "atMs": 66000,
+      "message": {
+        "role": "enny",
+        "text": "ラッコ、あんなに強いのに甘い物が好きなの!"
+      }
+    },
+    {
+      "atMs": 68000,
+      "message": {
+        "role": "enny",
+        "text": "あの差に弱い、アタシ。"
+      }
+    },
+    {
+      "atMs": 74000,
+      "message": {
+        "role": "user",
+        "text": "ちょっと待って、写真の話を続けたかった。話題がいくつも飛ぶと返事に迷うよ。"
+      }
+    },
+    {
+      "atMs": 74000,
+      "message": {
+        "role": "enny",
+        "text": "わあ、ちいかわ!"
+      }
+    },
+    {
+      "atMs": 76000,
+      "message": {
+        "role": "enny",
+        "text": "話したかった!"
+      }
+    },
+    {
+      "atMs": 78000,
+      "message": {
+        "role": "enny",
+        "text": "モモンガ、かわいく見せるためにすごく頑張るよね!"
+      }
+    },
+    {
+      "atMs": 80000,
+      "message": {
+        "role": "enny",
+        "text": "あの熱意、見習いたい。"
+      }
+    },
+    {
+      "atMs": 82000,
+      "message": {
+        "role": "enny",
+        "text": "古本屋、カニの飾りを大事にするところが好き!"
+      }
+    },
+    {
+      "atMs": 84000,
+      "message": {
+        "role": "enny",
+        "text": "もらった物って、特別だよね。"
+      }
+    },
+    {
+      "atMs": 84000,
+      "message": {
+        "role": "user",
+        "text": "その胸につけてるちいかわ、えみちぃが作ったの？かわいいね！"
+      }
+    },
+    {
+      "atMs": 84000,
+      "message": {
+        "role": "enny",
+        "text": "カワイイ!?"
+      }
+    },
+    {
+      "atMs": 84000,
+      "message": {
+        "role": "enny",
+        "text": "あ、わかる?"
+      }
+    },
+    {
+      "atMs": 86000,
+      "message": {
+        "role": "enny",
+        "text": "これ、ちいかわなの。"
+      }
+    },
+    {
+      "atMs": 88000,
+      "message": {
+        "role": "enny",
+        "text": "アタシが作ったの!"
+      }
+    },
+    {
+      "atMs": 90000,
+      "message": {
+        "role": "enny",
+        "text": "モモンガ、かわいく見せるためにすごく頑張るよね!"
+      }
+    },
+    {
+      "atMs": 92000,
+      "message": {
+        "role": "enny",
+        "text": "あの熱意、見習いたい。"
+      }
+    },
+    {
+      "atMs": 94000,
+      "message": {
+        "role": "enny",
+        "text": "シーサー、郎で働くために資格まで取るんだよ!"
+      }
+    },
+    {
+      "atMs": 96000,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、応援しちゃう。"
+      }
+    },
+    {
+      "atMs": 96000,
+      "message": {
+        "role": "user",
+        "text": "作ったのすごいね！今日はありがとう、またちいかわの話をしようね。バイバイ！"
+      }
+    },
+    {
+      "atMs": 96000,
+      "message": {
+        "role": "enny",
+        "text": "チイカワ！"
+      }
+    },
+    {
+      "atMs": 96000,
+      "message": {
+        "role": "enny",
+        "text": "うさぎの顔にチラシ。"
+      }
+    }
+  ]
+}

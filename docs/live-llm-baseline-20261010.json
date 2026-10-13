@@ -1,0 +1,107 @@
+{
+  "mode": "actual app and live relay (max3 calls, stop429); simulated DOM/virtual pauses; compressed typing; real request wallMs; no browser/audio",
+  "actions": [
+    {
+      "action": {
+        "type": "start"
+      },
+      "result": {
+        "atSeconds": 0,
+        "messages": [
+          {
+            "atMs": 0,
+            "role": "enny",
+            "text": "はじめまして！",
+            "screen": "ハジメマシテ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0,
+        "liveCalls": [
+          {
+            "input": "今日は散歩で小さいパン屋を見つけたよ",
+            "wallMs": 250,
+            "status": 403
+          }
+        ]
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "今日は散歩で小さいパン屋を見つけたよ"
+      },
+      "result": {
+        "atSeconds": 0,
+        "messages": [
+          {
+            "atMs": 0,
+            "role": "user",
+            "text": "今日は散歩で小さいパン屋を見つけたよ",
+            "screen": "キョウ ハ サンポ デ チイサイ パンヤ ヲ ミツケタヨ"
+          },
+          {
+            "atMs": 0,
+            "role": "enny",
+            "text": "キョウハ散歩デ小サイパン屋ヲ ... ソコダケ キコエタワ",
+            "screen": "キョウハ サンポ デ ショウサイパンヤ ヲ ... ソコダケ キコエタワ"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1,
+        "dialogueUse": {
+          "ai": 0,
+          "bank": 0
+        },
+        "chatHealth": {
+          "attempts": 1,
+          "accepted": 0,
+          "rejected": 0,
+          "failed": 1,
+          "lastOutcome": "error",
+          "rateLimited": false,
+          "retryAt": 1791601260000
+        },
+        "liveCalls": [
+          {
+            "input": "今日は散歩で小さいパン屋を見つけたよ",
+            "wallMs": 250,
+            "status": 403
+          }
+        ]
+      }
+    }
+  ],
+  "transcript": [
+    {
+      "atMs": 0,
+      "message": {
+        "role": "enny",
+        "text": "はじめまして！"
+      }
+    },
+    {
+      "atMs": 0,
+      "message": {
+        "role": "user",
+        "text": "今日は散歩で小さいパン屋を見つけたよ"
+      }
+    },
+    {
+      "atMs": 0,
+      "message": {
+        "role": "enny",
+        "text": "キョウハ散歩デ小サイパン屋ヲ ... ソコダケ キコエタワ"
+      }
+    }
+  ],
+  "liveCalls": [
+    {
+      "input": "今日は散歩で小さいパン屋を見つけたよ",
+      "wallMs": 250,
+      "status": 403
+    }
+  ]
+}

@@ -11,6 +11,8 @@
 
 専門版全体は未完成。次は草むしり検定など深い場面の根拠補強→grounding/fanRecoveryの全置換削減→6〜8往復の試遊。全文一致以外の既出事実はIDの完全検出を保証せず、実会話履歴もモデルに渡して反復を避ける。Claude/Geminiへ渡せる追加依頼書research/chiikawa/scene-research-request.mdを作成（まだ外部へ送っていない）。公開実装LangGraph.js/TinyTroupeも調査したが移植/依存追加0。有料追加/新Work/Relayなし。
 
+specialist1公開確認：フロントPR47/main5ffde8b（候補91da0c6）、中継PR20/main3eedf6c（最終候補b26acad）へ統合。Cloudflare38419001331/38418989699とも成功。公開変更26ファイルが候補と完全一致。記録docs/public-specialist1-20261014.json。完成候補としての人間試遊依頼はまだ出さず、上記の残る大改修を続ける。
+
 SNS/Webニュースの話題収集を追加。X（Twitter）/Threads/Instagram/Webニュースを対象に、公式根拠とファン反応・考察を分離し、日付・反響の根拠・会話接点を保存する。初回は公式商品と公式パーク告知の2候補を本文確認、INSIDEの「話題」報道を別記。X元投稿は403、Threads/Instagramは公開検索で本文・反応数を取得できず、実測バズ0件。research/chiikawa/topics/README.mdとsnapshot-20261013.json、依頼書の追補へ保存。これは調査/設計の更新のみ。自動監視・実行DBへの投入・生成通信なし。次は専門会話の根拠検索と連続対話を実装し、その経路へ検証済み話題を接続する。
 
 ユーザーが「正確なちいかわ専門botを先に作り、その上へ日本語の拙さ・日本のオタク性・北欧女性としての個性を加える」設計を採用。SPEC先頭とdocs/chiikawa-specialist-direction-20261013.mdへ記録した。知識/会話/人格を分離して評価し、同じ根拠と質問で人格追加後も精度が落ちないか比較する。短い文や言い直しで日本語勉強中を表し、基本語理解・事実・固有名詞は壊さない。本人の固定設定は維持。毎ターン2生成・新有料API・新Relayは追加しない。この更新はdocsのみで、公開runtimeはintegrity1のまま。専門botの実装は未完、次は既存調査の検証と深い場面単位の知識/連続対話の土台を作る。

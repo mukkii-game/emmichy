@@ -1,0 +1,155 @@
+{
+  "date": "2026-10-14",
+  "runtime": "20261013-specialist1",
+  "candidate": "91da0c6",
+  "main": "5ffde8b76f85e01a8aed0c816483e01f84549324",
+  "backendCandidate": "b26acad",
+  "backendMain": "3eedf6c1ec556d44065c7d0826c48e6d9f6d427d",
+  "frontendDeploy": 38419001331,
+  "backendDeploy": 38418989699,
+  "frontendTests": 218,
+  "backendTests": 56,
+  "realProviderAttempts": 3,
+  "realReplies": 2,
+  "stoppedOn429": true,
+  "finalPromptLiveRechecked": false,
+  "results": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/app.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/balance.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/chat.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/chiikawa-relations.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/chiikawa-reminder.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/chiikawa-theme.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/context.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/conversation-repair.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/dialogue-director.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/dialogue-grounding.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/engine.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/fallback.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/fandom.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/filler.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/font.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/moves.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/names.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/performance.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/player-memory.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/profile.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/readable.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/repertoire.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/routing.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/session.js",
+      "status": 200,
+      "exact": true
+    },
+    {
+      "path": "src/specialist.js",
+      "status": 200,
+      "exact": true
+    }
+  ],
+  "allExact": true,
+  "limitations": [
+    "specialist redesign incomplete",
+    "paraphrased fact delivery IDs are not fully detected",
+    "deep examination sources missing",
+    "no physical mobile keyboard test or new human enjoyment evaluation"
+  ]
+}

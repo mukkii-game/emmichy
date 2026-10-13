@@ -51,6 +51,8 @@ test('actual screen requests AI for its first ordinary bank turn, retries failur
   // Cancel the old continuation with an ordinary turn, then let it finish.
   await send('あなたは何歳？');
   for(let i=0;i<6;i++){now+=6000;await idle();}
+  await send('ハチワレ'); // Answer the activity before allowing another topic.
+  for(let i=0;i<4;i++){now+=6000;await idle();}
   const count=()=>JSON.parse(storage.get('enny-memory-v1')).history.length;
   now=session().startedAt+(session().lastChiikawaElapsed||0)+120000;
   elements.get('entry').value='途中の入力';await elements.get('entry').emit('input');

@@ -16,9 +16,9 @@ function boundaries(text){
  }
  return cuts;
 }
-export function speechChunks(value,{display=s=>s,tokenizer=null}={}){
+export function speechChunks(value,{display=s=>s,tokenizer=null,maxUnits=60}={}){
  const text=String(value).trim(),size=s=>fold(display(s)).length;
- if(size(text)<=60)return [text].filter(Boolean);
+ if(size(text)<=maxUnits)return [text].filter(Boolean);
  const cuts=boundaries(text);
  if(tokenizer){
   let end=0;
@@ -30,9 +30,9 @@ export function speechChunks(value,{display=s=>s,tokenizer=null}={}){
   }
  }
  const parts=[];let start=0;
- while(size(text.slice(start))>60){
+ while(size(text.slice(start))>maxUnits){
   const candidates=cuts.filter(c=>c.end>start&&size(text.slice(start,c.end))>=14&&size(text.slice(c.end))>=12);
-  const fitting=candidates.filter(c=>size(text.slice(start,c.end))<=60);
+  const fitting=candidates.filter(c=>size(text.slice(start,c.end))<=maxUnits);
   // Prefer a comma or a connective; word boundaries are a last resort.
   fitting.sort((a,b)=>b.rank-a.rank||Math.abs(size(text.slice(start,a.end))-36)-Math.abs(size(text.slice(start,b.end))-36)||b.end-a.end);
   const cut=fitting[0]||candidates.sort((a,b)=>a.end-b.end)[0];

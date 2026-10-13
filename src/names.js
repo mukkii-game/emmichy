@@ -1,7 +1,7 @@
-import {nameData} from './name-data.js?v=20261012-memory2';
-import {placeNames} from './places.js?v=20261012-memory2';
-import {gameNames} from './game-names.js?v=20261012-memory2';
-import {requestsChiikawa} from './topic-intent.js?v=20261012-memory2';
+import {nameData} from './name-data.js?v=20261013-talk1';
+import {placeNames} from './places.js?v=20261013-talk1';
+import {gameNames} from './game-names.js?v=20261013-talk1';
+import {requestsChiikawa} from './topic-intent.js?v=20261013-talk1';
 export const foldName=s=>String(s||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).toLowerCase().replace(/[\s・×＝=\-:：'’"「」]/g,'');
 export const NAME_REACTION_MS=750;
 const trie=new Map(),exact=[];
@@ -15,6 +15,7 @@ export const nameFromId=id=>ownedNames.get(id)||null;
 function scan(value){const input=foldName(value),found=[];for(let i=0;i<input.length;i++){let node=trie;for(let j=i;j<input.length;j++){node=node.get(input[j]);if(!node)break;for(const m of node.get('')||[]){
  if(/^[a-z0-9]+$/.test(m.key)&&m.key.length<=5&&!new RegExp(`\\b${m.key}\\b`,'i').test(String(value)))continue;
  if(m.row.work==='japan'&&m.key.length<4&&!String(value).includes(m.row.name)&&input!==m.key&&!/旅行|観光|温泉|空港|地名|県|市/.test(value))continue;
+ if(m.row.category==='context-item'&&m.key.length<=3&&input!==m.key&&!String(value).normalize('NFKC').includes(m.alias))continue;
  if(/^[ァ-ヶー]{2,3}$/.test(m.alias)&&/\.html$/.test(m.row.source)&&!String(value).normalize('NFKC').includes(m.alias)&&foldName(value)!==m.key)continue;
  found.push({...m,length:j-i+1});
  }}}return found;}
@@ -40,7 +41,10 @@ export function recognizeName(input,{reading='',state={}}={}){
  if(/(?:ももが|桃が|モモガ)/.test(input))return {...nameData.find(n=>n.name==='モモンガ'),soft:true};
  const candidates=exact.filter(m=>/^[ァ-ヶー]{3,14}$/.test(m.alias)&&(m.row.work===work||m.row.work==='chiikawa')&&(!m.row.contextOnly||m.row.work===work)&&!(m.alias.length<=3&&/\.html$/.test(m.row.source))&&(m.row.work!=='chiikawa'||work==='chiikawa'||!['term','item','food','brand'].includes(m.row.category)));
  const near=[];
- for(const value of values){const t=foldName(value);for(const m of candidates){if(m.key.length<4&&m.row.work!==work)continue;for(let size=m.key.length-1;size<=m.key.length+1;size++)for(let at=0;at+size<=t.length;at++){const word=t.slice(at,at+size);if(!common.some(c=>c.key.includes(word)||word.includes(c.key))&&oneEdit(word,m.key))near.push({...m,length:m.key.length});}}}
+ const fragments=String(input).normalize('NFKC').match(/[ァ-ヶー]{3,16}/g)||[];
+ if(/^[ぁ-ゖー]{3,16}[!！?？。]*$/.test(String(input).trim()))fragments.push(input);
+ if(reading)fragments.push(...reading.split(/\s+/).filter(word=>/^[ァ-ヶー]{3,16}$/.test(word)));
+ for(const value of fragments){const t=foldName(value);for(const m of candidates){if(m.key.length<4&&m.row.work!==work)continue;if(!common.some(c=>c.key.includes(t)||t.includes(c.key))&&oneEdit(t,m.key))near.push({...m,length:m.key.length});}}
  near.sort((a,b)=>(b.row.work==='chiikawa'?1:0)-(a.row.work==='chiikawa'?1:0)||b.length-a.length);
  const nearChii=near.find(m=>m.row.work==='chiikawa');
  if(nearChii)return {...nearChii.row,soft:true};

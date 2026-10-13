@@ -1,3 +1,15 @@
+# 2026-10-13: human conversation failure → two repair iterations
+
+Human supplied transcript: own運行 joke was repeated at least five times, questions about it received「そこはまだよく知らない」, unrelated word activity capturedウンコウ as a preference,「許す」triggered another question, criticism was followed by more unsolicited biography/fandom and an unverified「みんながヤハ」scene. This is human-reported failure with unreported origin/provider, not a newly recorded provider test.
+
+Two Luna medium subagents selected six inputs each (fan; ordinary TV/internet person), then eight each including fresh follow-ups. Root implemented two loops and replayed their exact inputs mechanically; root also supplied a six-send otaku persona and thirteen human-failure inputs with labelled supplied-history seed. Own「雨の匂い」clarification and「応援するの好き」initially still failed and were repaired in the second loop. Existing fixed inputs are regression evidence, not independent proof of general conversation quality. All simulations run the actual app offline with simulated DOM/virtual pauses; no provider calls, browser or human taste rating. IME/draft pauses prevent unsolicited speech.201 frontend and53 backend tests pass.
+
+Bounded real GPT OSS probe:2 successful generations609/685ms, third429; stopped at3 calls. Useful reasons survived but broad trailing questions and repeatedヤハ were problematic. Local director now keeps the reasons and drops those tails for focused personal questions; final prompt tone refinement is untested live after429. Raw generation, local simulation and human evidence are kept separate in docs/conversation-repair-20261013.md and linked JSON files. Root model unchanged; subagent model/effort explicitly selected to save cost.
+
+Human should verify affection, natural pacing and whether answers build on their words at the new Cloudflare candidate. Free-quota availability and arbitrary offline conversations remain limits. New optional diagnostic download records per-turn routes and outcomes; no automatic server accumulation.
+
+---
+
 # 2026-10-13: main and Cloudflare integration verified
 
 Initial Cloudflare main50fa6b0 served the old20261012-chii1. Restored latest previously tested phone chat space, browser memory, curated research and nickname display while preserving the new Wrangler/deploy workflow. PR41 mergedmain asd8ffc9f4; candidatecc8275d.186 local tests pass. Cloudflare deployment38376537979 completed with the actual Deploy step successful. All28 changed public HTML/CSS/JS files match the candidate byte-for-byte. New-origin relay OPTIONS returns204 and Access-Control-Allow-Origin=https://emmichy.mucky-totoro.workers.dev using a browser User-Agent. Evidence docs/public-cloudflare-main-20261013.json. No new LLM generation, physical handset check or human evaluation. Browser data is origin-specific; old Pages memories are not automatically transferred.

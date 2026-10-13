@@ -12,9 +12,10 @@ test('requested sexual terms get a prepared surprised topic change',()=>{
  }
  for(const raw of ['ピエロの絵','エッチングの絵','ジョジョのセックスピストルズ'])assert.equal(topicDeflection(raw),null);
 });
-test('quiet moments vary concrete Japanese difficulties',()=>{
- const examples=new Set();for(let i=0;i<japaneseExamples.length;i++)examples.add(idleAside(Array.from({length:i},()=>({role:'user',text:'今日は晴れ'})),1));
- assert.equal(examples.size,japaneseExamples.length);assert.ok([...examples].some(t=>/運行.*うんこ/.test(t)));assert.ok([...examples].some(t=>/おばさん.*おばあさん/.test(t)));
+test('quiet moments do not repeat the long-vowel gag outside a language topic',()=>{
+ const history=[{role:'user',text:'今日は晴れ'}],examples=new Set();
+ for(let i=0;i<4;i++){const line=idleAside(history,0);examples.add(line);history.push({role:'enny',text:line});}
+ assert.equal(examples.size,4);assert.ok([...examples].every(t=>t.length<=24&&!/運行|うんこ|おばさん/.test(t)));
 });
 
 test('an explicit Usagi cue keeps a previous-work joke from replacing its own reply',()=>{

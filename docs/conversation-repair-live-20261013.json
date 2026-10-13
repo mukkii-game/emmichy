@@ -1,0 +1,95 @@
+{
+  "mode": "real provider generation with candidate server prompt; synthetic inputs; no browser or human evaluation",
+  "commit": "24904f51bdf5e29b80a791098de4642c2c5cb752",
+  "at": "2026-10-13T10:30:45.155Z",
+  "limit": 3,
+  "turns": [
+    {
+      "input": "シーサーって頑張り屋なところが好き。えみちぃはどこが好き？",
+      "systemCharacters": 3397,
+      "history": [],
+      "wallMs": 609,
+      "result": {
+        "text": "シーサーが「働きたい場所のために諦めずに資格を取る」姿勢、すごくかっこいいと思う。頑張る姿に、私も応援したくなるし、ちいかわの「がんばる」精神と重なるから好きです。ヤハ！もっと聞きたいことある？",
+        "provider": "groq",
+        "source": "llm"
+      },
+      "attempts": [
+        {
+          "provider": "groq",
+          "source": "llm",
+          "ok": true,
+          "reason": "",
+          "ms": 605
+        }
+      ]
+    },
+    {
+      "input": "さっき好きなところを話してたけど、どうしてシーサーを読み返したくなるの？",
+      "systemCharacters": 3402,
+      "history": [
+        {
+          "role": "user",
+          "content": "シーサーって頑張り屋なところが好き。えみちぃはどこが好き？"
+        },
+        {
+          "role": "assistant",
+          "content": "シーサーが「働きたい場所のために諦めずに資格を取る」姿勢、すごくかっこいいと思う。頑張る姿に、私も応援したくなるし、ちいかわの「がんばる」精神と重なるから好きです。ヤハ！もっと聞きたいことある？"
+        }
+      ],
+      "wallMs": 685,
+      "result": {
+        "text": "シーサーが「諦めずに挑戦し続ける」姿が、私がちいかわのハチワレに勇気をもらう瞬間と重なるからです。読んでいると自分も少し頑張ろうって気持ちになるし、温かい気持ちが戻ってくるんです。ヤハ！他に気になるキャラはいますか？",
+        "provider": "groq",
+        "source": "llm"
+      },
+      "attempts": [
+        {
+          "provider": "groq",
+          "source": "llm",
+          "ok": true,
+          "reason": "",
+          "ms": 685
+        }
+      ]
+    },
+    {
+      "input": "今回はちいかわ以外。雨の日に家で過ごすなら、テレビ以外だと何する？",
+      "systemCharacters": 3363,
+      "history": [
+        {
+          "role": "user",
+          "content": "シーサーって頑張り屋なところが好き。えみちぃはどこが好き？"
+        },
+        {
+          "role": "assistant",
+          "content": "シーサーが「働きたい場所のために諦めずに資格を取る」姿勢、すごくかっこいいと思う。頑張る姿に、私も応援したくなるし、ちいかわの「がんばる」精神と重なるから好きです。ヤハ！もっと聞きたいことある？"
+        },
+        {
+          "role": "user",
+          "content": "さっき好きなところを話してたけど、どうしてシーサーを読み返したくなるの？"
+        },
+        {
+          "role": "assistant",
+          "content": "シーサーが「諦めずに挑戦し続ける」姿が、私がちいかわのハチワレに勇気をもらう瞬間と重なるからです。読んでいると自分も少し頑張ろうって気持ちになるし、温かい気持ちが戻ってくるんです。ヤハ！他に気になるキャラはいますか？"
+        }
+      ],
+      "wallMs": 158,
+      "result": {
+        "error": "rate-limited",
+        "provider": "groq"
+      },
+      "attempts": [
+        {
+          "provider": "groq",
+          "source": "llm",
+          "ok": false,
+          "reason": "http-429",
+          "ms": 158
+        }
+      ]
+    }
+  ],
+  "calls": 3,
+  "rateLimited": true
+}

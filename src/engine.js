@@ -1,11 +1,12 @@
 // Original Emmichy dialogue logic. No original Emmy code or dialogue tables used.
-import {cleanPlayerMemory} from './player-memory.js?v=20261012-memory2';
-import {cleanKnowledge} from './fandom.js?v=20261012-memory2';
-import {cleanGap} from './gap.js?v=20261012-memory2';
-import {cleanRepertoire} from './repertoire.js?v=20261012-memory2';
-import {cleanInterests} from './balance.js?v=20261012-memory2';
-import {cleanConversation,rememberConversation} from './conversation.js?v=20261012-memory2';
-import {substantiveHistory} from './dialogue-history.js?v=20261012-memory2';
+import {cleanPlayerMemory} from './player-memory.js?v=20261013-talk1';
+import {cleanDialogueControl} from './conversation-repair.js?v=20261013-talk1';
+import {cleanKnowledge} from './fandom.js?v=20261013-talk1';
+import {cleanGap} from './gap.js?v=20261013-talk1';
+import {cleanRepertoire} from './repertoire.js?v=20261013-talk1';
+import {cleanInterests} from './balance.js?v=20261013-talk1';
+import {cleanConversation,rememberConversation} from './conversation.js?v=20261013-talk1';
+import {substantiveHistory} from './dialogue-history.js?v=20261013-talk1';
 const readings = { '知らない':'シラナイ','知ってる':'シッテル','以外':'イガイ','晴れ':'ハレ', '本当':'ホントウ','賢い':'カシコイ','頭':'アタマ','名前':'ナマエ','覚えて':'オボエテ','忘れて':'ワスレテ','好き':'スキ','嫌い':'キライ','可愛い':'カワイイ','綺麗':'キレイ','天気':'テンキ','今日':'キョウ','明日':'アシタ','疲れた':'ツカレタ','寂しい':'サミシイ','仕事':'シゴト','猫':'ネコ','犬':'イヌ','私':'ワタシ','僕':'ボク','君':'キミ','嘘':'ウソ','人間':'ニンゲン','機械':'キカイ','元気':'ゲンキ','趣味':'シュミ','秘密':'ヒミツ','未来':'ミライ','世界':'セカイ','宇宙':'ウチュウ','何':'ナニ','教えて':'オシエテ','眠い':'ネムイ','馬鹿':'バカ','無能':'ムノウ','一人':'ヒトリ','歳':'サイ','年齢':'ネンレイ','愛':'アイ' };
 export function normalize(raw) {
   let s = String(raw).normalize('NFKC');
@@ -24,6 +25,9 @@ export function restoreState(value) {
   for(const k of ['turn','repeat','praise','clues']) if(Number.isSafeInteger(value[k]) && value[k]>=0) s[k]=Math.min(value[k],100000);
   if(typeof value.name==='string') s.name=normalize(value.name).slice(0,20);
   s.playerMemory=cleanPlayerMemory(value.playerMemory||{nickname:value.name,likes:Object.entries(value.likes||{}).filter(([,v])=>v===1).map(([k])=>k)});
+  s.dialogueControl=cleanDialogueControl(value.dialogueControl);
+  s.dialogueControl.concise||=s.playerMemory.conciseReplies;
+  s.dialogueControl.suppressed=[...new Set([...s.dialogueControl.suppressed,...s.playerMemory.suppressedTopics])];
   if(typeof value.last==='string') s.last=value.last.slice(0,120);
   s.ended=value.ended===true;
   if(typeof value.topic==='string')s.topic=value.topic.slice(0,24);
@@ -92,7 +96,7 @@ export function respond(raw,state) {
   else if(/ツカレ|シゴト|サミシ|カナシ|ネムイ/.test(compact)) say(pick(['ソウ\nキョウハ コタエ ナクテ イイワ','ナニモ デキナイ ケド\nマダ ココニ イルワ','ヤスンダラ?\nアタシハ デンキ ガ アルカラ']),'comfort','soft');
   else if(/コンニチ[ハワ]|オハヨウ|タダイマ|コンバンハ/.test(compact)) {const back=s.ended;s.ended=false;say(back?'オカエリ\nマッテナイワ ヨンデタ ダケ':s.name?`${s.name} オカエリ\nマタ マチガエニ キタノ?`:'コンニチハ\nアタシ エミチィ アナタハ?','greeting','soft');}
   else if(/ナマエ|ダレ|ドナタ/.test(compact)) say('エミチィ ヨ\nニテル ヒト ハ シラナイワ','identity');
-  else if(/バカ|ムノウ|アホ/.test(compact)) say('ソウヨ\nソノホウガ ハナシヤスイ デショ','insult','knowing');
+  else if(/バカ|ムノウ|アホ/.test(compact)) say('今の返し、変だったね。ちゃんと話を聞くよ。','insult','soft');
   else if(/テンキ|アメ|ハレ/.test(compact)) say('ココハ ズット クロイ ソラ\nソッチノ テンキ オシエテヨ','weather');
   else if(/ミライ|AI|ジンコウ|セカイ|ウチュウ|ニンゲン|キカイ/.test(compact)) say(pick(['ミライノ ハナシ?\nマズ キョウノ ハナシヲ シテヨ','ニンゲンモ シラナイ トキ\nソウネ ッテ イウノネ','キカイ ダッタラ\nサミシク ナイ ト オモウ?']),'philosophy','knowing');
   else if(/ネンレイ|ナンサイ/.test(compact)) say('17 ヨ\nドットノ カズ ジャ ナイワ','age');
@@ -100,7 +104,7 @@ export function respond(raw,state) {
   else if(compact.endsWith('?')) say(pick(['ソレハ ムズカシイワ\nアナタハ ドウ オモウノ?','シラナイワ\nシッテタラ ドウスルノ?','シツモンノ カタチヲ シタ\nオネガイ カシラ']),'question');
   else {
     const topic=input.split(' ').filter(w=>w.length>1)[0]?.slice(0,14);
-    say(pick([`${topic || 'ソレ'} ...\nソコダケ キコエタワ`,'フーン\nツヅキ ハ アルノ?','ナンダカ ワカッタ キブン\nキブン ダケネ','ソウナノ\nソレデ アナタハ ドウシタイノ?']),'fallback');
+    say('今の話、少し取り違えそう。どのところの話か、もう少し教えて。','fallback');
   }
   s.history.push({role:'user',text:String(raw).trim().slice(0,120)},{role:'enny',text});s.history=s.history.slice(-40);
   return {state:s,text,kind,mood};

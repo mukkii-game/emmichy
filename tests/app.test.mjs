@@ -135,8 +135,8 @@ test('screen remains playable after dictionary failure and IME composition does 
   entry.value='チイカワ イガイ ノ ハナシ ヲ シヨウ カ';await talk.emit('submit');
   const declined=JSON.parse(storage.get('enny-memory-v1')).history;
   const declineAt=declined.findLastIndex(h=>h.role==='user');
-  assert.equal(declined[declineAt+1].text,'チイカワ、ね。');
-  assert.equal(declined[declineAt+2].text,'うん、別の話にしよう。');
+  assert.equal(declined[declineAt+1].text,'うん、別の話にしよう。');
+  assert.doesNotMatch(declined.slice(declineAt+1).map(h=>h.text).join(' '),/チイカワ！/);
   entry.value='2+2';await talk.emit('submit');
   pacedCount=JSON.parse(storage.get('enny-memory-v1')).history.length;
   time+=6000;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,pacedCount,'new turn cancels old continuation');
@@ -149,9 +149,14 @@ test('screen remains playable after dictionary failure and IME composition does 
   await entry.emit('compositionend');time+=10000;await idleTick();
   assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,count);
   entry.value='';await entry.emit('input');time+=10000;await idleTick();
-  const firstIdle=JSON.parse(storage.get('enny-memory-v1')).history.at(-1).text;assert.match(firstIdle,/アタシ|ノート|髪|弟/);
-  time+=10000;await idleTick();assert.notEqual(JSON.parse(storage.get('enny-memory-v1')).history.at(-1).text,firstIdle);
-  time+=10000;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).ended,false);
+  assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,count,'no new self-aside after only ten seconds');
+  time+=10000;await idleTick();
+  const idleHistory=JSON.parse(storage.get('enny-memory-v1')).history;
+  assert.ok(idleHistory.length<=count+1,'at most one spontaneous statement');
+  if(idleHistory.length>count)assert.ok(idleHistory.at(-1).text.length<=24);
+  const afterIdle=idleHistory.length;
+  time+=10000;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,afterIdle,'no second unrelated self-introduction');
+  assert.equal(JSON.parse(storage.get('enny-memory-v1')).ended,false);
   const waitingCount=JSON.parse(storage.get('enny-memory-v1')).history.length;
   entry.value='途中の下書き';
   time=startedAt+299999;await idleTick();assert.equal(JSON.parse(storage.get('enny-memory-v1')).history.length,waitingCount);
@@ -189,8 +194,8 @@ test('screen remains playable after dictionary failure and IME composition does 
   let birthplace=JSON.parse(storage.get('enny-memory-v1')).history;const birthplaceAt=birthplace.findLastIndex(h=>h.role==='user');
   assert.match(birthplace[birthplaceAt+1].text,/スウェーデン.*アタシの国/);assert.match(birthplace[birthplaceAt+2].text,/ヨーテボリ.*生まれ育った/);
   time+=5000;await idleTick();time+=10000;await idleTick();
-  // A personal wish about her favourite work also counts as a short self-aside.
-  birthplace=JSON.parse(storage.get('enny-memory-v1')).history;assert.match(birthplace.at(-1).text,/アタシ|弟|ノート|髪|したく|読み返したく/);assert.doesNotMatch(birthplace.at(-1).text,/急がなくて|別の話/);
+  // The profile continuation stays on her actual home/family instead of a random aside.
+  birthplace=JSON.parse(storage.get('enny-memory-v1')).history;assert.match(birthplace.at(-1).text,/家族|ヨーテボリ|生まれ育/);assert.doesNotMatch(birthplace.at(-1).text,/急がなくて|別の話/);
   entry.value='バイバイ';await talk.emit('submit');
   assert.equal(farewellPauses.length,2,'manual goodbye uses the same two-beat ending');
   const manual=JSON.parse(storage.get('enny-memory-v1'));assert.equal(manual.ended,true);

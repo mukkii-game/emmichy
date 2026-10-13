@@ -1,8 +1,8 @@
-import {unwantedFanRedirect} from './chat.js?v=20261012-memory2';
-import {japaneseExamples,complimentReaction,profileAside} from './profile.js?v=20261012-memory2';
-import {waitingReply} from './waiting-db.js?v=20261012-memory2';
-import {recognizeName,namedGesture,namedFollowup} from './names.js?v=20261012-memory2';
-import {selectKnowledge,waterPlayCorrection} from './fandom.js?v=20261012-memory2';
+import {unwantedFanRedirect} from './chat.js?v=20261013-talk1';
+import {japaneseExamples,complimentReaction,profileAside} from './profile.js?v=20261013-talk1';
+import {waitingReply} from './waiting-db.js?v=20261013-talk1';
+import {recognizeName,namedGesture,namedFollowup} from './names.js?v=20261013-talk1';
+import {selectKnowledge,waterPlayCorrection} from './fandom.js?v=20261013-talk1';
 // Listening gestures are dialogue, retained alongside the eventual answer.
 export function retainAside(history,line,{pendingReply=false}={}){
  const next=[...history];
@@ -49,14 +49,15 @@ export function longFiller(input,recent=[],state={}){
  if(!unwantedFanRedirect('ちいかわ',input,state)&&selectKnowledge(input,state).work==='chiikawa'&&!/嫌い|キライ|苦手|ヤメ|やめ|以外|イガイ|相談|病気|事故|亡く|死に/.test(input))return waterPlayCorrection(input,state)?'さっきの話、言い方を混ぜちゃったね。島二郎の話に戻すね。':'ちいかわの話、好きなところが多くて迷っちゃう。あなたと話せてうれしい！';
  return waitingReply(input,recent);
 }
-export function idleAside(history=[],index=0){
+export function idleAside(history=[],index=0,{memory={},control={}}={}){
  const lastUser=history.filter(h=>h.role==='user').at(-1)?.text||'';
  if(/つらい|ツライ|苦しい|クルシイ|相談|病気|いじめ|イジメ/.test(lastUser))return ['急がなくて大丈夫。ここにいるよ。','アタシ、少しここで待ってるね。'][index%2];
- const fanThought='好きなところを話すと、またちいかわを読み返したくなっちゃう。';
- if(index===0&&!unwantedFanRedirect('ちいかわ',lastUser,{history})&&history.slice(-6).some(h=>/ちいかわ|ハチワレ|モモンガ|シーサー/.test(h.text))&&!history.some(h=>h.text===fanThought))return fanThought;
+ const recent=history.filter(h=>h.role==='enny').map(h=>h.text).concat(memory.recentReplies||[]);
+ const fanThought='好きな場面、もう一回読みたくなっちゃう。';
+ if(index===0&&!unwantedFanRedirect('ちいかわ',lastUser,{history,dialogueControl:control})&&history.slice(-6).some(h=>/ちいかわ|ハチワレ|モモンガ|シーサー/.test(h.text))&&!recent.some(t=>/読み返|読みたく/.test(t)))return fanThought;
  const food=/ご飯|ごはん|ゴハン|牛丼|ギュウドン|丼|ドンブリ|吉野家|ヨシノヤ|チーズ|プリン|そば|ソバ|食べ|タベ/.test(lastUser);
- const pool=['さっきのご飯の話、思い出したらお腹すいてきちゃった。','アタシ、食べ物の話になると急に元気なの。フフ。','おいしい物の話、まだ聞いていたいな。'];
- return food?pool[index%pool.length]:profileAside(history,index);
+ const pool=['さっきのご飯の話、お腹すいてきちゃった。','食べ物の話だと、アタシ元気なの。','おいしい物の話、いいね。'];
+ return food?(pool.filter(line=>!recent.includes(line))[index%3]||null):profileAside(history,index,{recentReplies:memory.recentReplies,suppressed:[...(memory.suppressedTopics||[]),...(control.suppressed||[])]});
 }
 export function startFiller(show,{schedule=setTimeout,cancel=clearTimeout,now=Date.now,later,initialDelay=2000}={}){
  let active=true,timer,lastShown=null,count=0;

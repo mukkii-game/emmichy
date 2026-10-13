@@ -1,0 +1,52 @@
+{
+  "provenance": "Selected assistant lines supplied by the human; seeded state for local regression, not newly generated",
+  "state": {
+    "name": "ムッキー",
+    "history": [
+      {
+        "role": "enny",
+        "text": "シーサー、郎で働くために資格まで取るんだよ！"
+      },
+      {
+        "role": "enny",
+        "text": "長い音、まだ難しいの。運行って言うつもりが、うんこになっちゃった。"
+      },
+      {
+        "role": "enny",
+        "text": "弟は14歳なの。ゲームで負けると、アタシ言い訳しちゃう。"
+      },
+      {
+        "role": "enny",
+        "text": "キセイ！"
+      }
+    ],
+    "playerMemory": {
+      "nickname": "ムッキー"
+    },
+    "dialogue": [
+      {
+        "role": "enny",
+        "text": "シーサー、郎で働くために資格まで取るんだよ！"
+      },
+      {
+        "role": "enny",
+        "text": "長い音、まだ難しいの。運行って言うつもりが、うんこになっちゃった。"
+      },
+      {
+        "role": "enny",
+        "text": "弟は14歳なの。ゲームで負けると、アタシ言い訳しちゃう。"
+      },
+      {
+        "role": "enny",
+        "text": "キセイ！"
+      }
+    ],
+    "version": 1
+  },
+  "session": {
+    "startedAt": 1791601200000,
+    "lastSavedAt": 1791601200000,
+    "turns": 4,
+    "finished": false
+  }
+}

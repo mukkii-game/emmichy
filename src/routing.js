@@ -1,15 +1,16 @@
-import {topicDeflection} from './deflection.js?v=20261012-memory2';
-import {everydayReply} from './everyday.js?v=20261012-memory2';
-import {contextualReply} from './context.js?v=20261012-memory2';
-import {curatedReply} from './curated.js?v=20261012-memory2';
-import {balanceRoute} from './balance.js?v=20261012-memory2';
-import {profileReply} from './profile.js?v=20261012-memory2';
-import {recognizeName,exactNames} from './names.js?v=20261012-memory2';
-import {chiikawaNotes} from './chiikawa-db.js?v=20261012-memory2';
-import {unwantedFanRedirect} from './chat.js?v=20261012-memory2';
-import {placeReply} from './places.js?v=20261012-memory2';
-import {complimentReaction} from './profile.js?v=20261012-memory2';
-import {learnerReply} from './japanese-learner.js?v=20261012-memory2';
+import {topicDeflection} from './deflection.js?v=20261013-talk1';
+import {everydayReply} from './everyday.js?v=20261013-talk1';
+import {contextualReply} from './context.js?v=20261013-talk1';
+import {curatedReply} from './curated.js?v=20261013-talk1';
+import {balanceRoute} from './balance.js?v=20261013-talk1';
+import {profileReply} from './profile.js?v=20261013-talk1';
+import {recognizeName,exactNames} from './names.js?v=20261013-talk1';
+import {chiikawaNotes} from './chiikawa-db.js?v=20261013-talk1';
+import {unwantedFanRedirect} from './chat.js?v=20261013-talk1';
+import {placeReply} from './places.js?v=20261013-talk1';
+import {complimentReaction} from './profile.js?v=20261013-talk1';
+import {learnerReply} from './japanese-learner.js?v=20261013-talk1';
+import {conversationRepair} from './conversation-repair.js?v=20261013-talk1';
 
 function chiikawaReply(raw,state){
  if(/つらい|苦しい|病気|事故|亡く|死に|相談|やめ|以外|苦手|嫌い/.test(raw)||unwantedFanRedirect('ちいかわ',raw,state))return null;
@@ -28,13 +29,17 @@ function chiikawaReply(raw,state){
 // Shared by the screen and offline through-play checks.
 export function preparedReply(raw,state,session,{gap=null,culture=null,repertoire={},modelEnabled=false,kind=null}={}){
  if(['bye','asleep'].includes(kind))return null;
+ const repair=conversationRepair(raw,state);if(repair)return repair;
  const deflect=topicDeflection(raw,state);if(deflect)return deflect;
  if(['name','arithmetic'].includes(kind))return null;
  const praised=complimentReaction(raw,state);if(praised?.text)return {topic:'compliment',text:praised.text};
  const own=profileReply(raw);if(own)return own;
  if(kind==='memory')return null;
  const named=recognizeName(raw,{state});
- if(named?.decline&&named.work==='chiikawa'&&!/つらい|苦しい|相談|病気|いじめ|亡く|死に|事故/.test(raw)&&!exactNames(raw,state).some(n=>n.work!=='chiikawa'))return {topic:'fandom-decline',text:'うん、別の話にしよう。'};
+ if(named?.decline&&named.work==='chiikawa'&&!/つらい|苦しい|相談|病気|いじめ|亡く|死に|事故/.test(raw)&&!exactNames(raw,state).some(n=>n.work!=='chiikawa')){
+  if(/ありがとう/.test(raw))return {topic:'conversation-move',text:/雨/.test(raw)?'うん、雨の日はゆっくりしよう。':'うん、あなたの今の話を続けよう。'};
+  return {topic:'fandom-decline',text:/雨.*(?:何|なに)|テレビ以外/.test(raw)?'うん、今日は別の話にしよう。雨の日なら、ココアを飲んで小さいドット絵を描きたいな。':'うん、別の話にしよう。'};
+ }
  const chii=chiikawaReply(raw,state);if(chii)return chii;
  const place=placeReply(named,raw,state);if(place)return place;
  const learner=learnerReply(raw);if(learner)return learner;

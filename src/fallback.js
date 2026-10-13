@@ -1,3 +1,5 @@
+import {exactNames} from './names.js?v=20261013-talk1';
+import {foldRepair} from './conversation-repair.js?v=20261013-talk1';
 // Used only after the AI path is unavailable, never to preempt a live answer.
 const scenes=[
  {match:/プリン.*(?:買|カッタ|食|タベ)|(?:写真|シャシン).*(?:撮|トッタ)/,lines:[
@@ -20,10 +22,26 @@ const scenes=[
   '描いてたのね。アタシ、できた絵を見る時は少し離して見る。近くで見るのと違うから。'
  ]}
 ];
+// These follow-ups belong to an actual authored utterance, never to inferred canon.
+export function ownedFollowup(raw,state={}){
+ const input=foldRepair(raw),prior=(state.dialogue||state.history||[]).filter(h=>h.role==='enny').slice(-8).map(h=>foldRepair(h.text)).join('');
+ if(!/[?？]|ドンナ|ドウシテ|何|ナニ|説明/.test(input))return null;
+ if(/雨.{0,6}匂イ|雨ノニオイ/.test(input)&&/雨ノ匂イ|雨ノニオイ/.test(prior))return {topic:'owned-followup',text:'濡れた土や、道の匂いを思い浮かべたの。雨がやんで窓を開けると、空気が変わった気がして好き。アタシが好きな匂いの話だよ。'};
+ if(/足音/.test(input)&&/足音/.test(prior))return {topic:'owned-followup',text:'濡れた道だと、靴がぺたぺたって鳴るでしょ。いつもの道でも違って聞こえて、アタシつい耳を澄ませちゃう。'};
+ return null;
+}
 export function offlineFallback(raw,state={},kind='fallback'){
  if(!['fallback','question','weather','philosophy','smalltalk'].includes(kind))return null;
+ const owned=ownedFollowup(raw,state);if(owned)return owned;
  const input=String(raw).normalize('NFKC').trim();
+ const name=exactNames(input,state).find(n=>n.work!=='chiikawa');
+ const detail=input.match(/特に([^。!?！？]{1,35})ところ/);
+ if(name&&detail&&/口|言|台詞|セリフ|話/.test(detail[1])&&/(?:えみち[いぃ]|エミチ[イィ]|あなた|君)は[?？]$/.test(input))return {topic:'offline-fallback',text:`${detail[1]}ところの話ね。アタシも、そこに目が行く！ 言い方一つで相手の反応が変わるの、会話の駆け引きみたいで好き。`};
  const last=(state.history||[]).filter(h=>h.role==='enny').at(-1)?.text||'';
+ if(/テレビ|番組|ニュース/.test(input)){
+  if(/何の番組|どの番組|見てるの|見てたの/.test(input))return {topic:'offline-fallback',text:'テレビを見てるって言ってたね。どの番組かは、まだ聞いてないよ。'};
+  return {topic:'offline-fallback',text:'家でテレビを見てたんだね。どんな番組だった？'};
+ }
  if(/^(?:わかった|了解|なるほど)[。!！]*$/.test(input)&&/わかったふりで答えたくない/.test(last))
   return {text:'うん。わからないところは、そのままにしておくね。',topic:'offline-fallback'};
  // Questions get an honest knowledge boundary, not an invented factual answer.

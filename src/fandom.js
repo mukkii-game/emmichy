@@ -1,8 +1,8 @@
 // Curated short factual notes, not scraped articles or dialogue reproductions.
 // Canonical copy: emmichy/src/fandom.js; sync unchanged to game-llm/games/emmichy-fandom.js.
-import {recognizeName,exactNames,nameFromId} from './names.js?v=20261013-integrity1';
-import {accessoryCue,accessoryReply} from './profile.js?v=20261013-integrity1';
-import {fanLines} from './fan-lines.js?v=20261013-integrity1';
+import {recognizeName,exactNames,nameFromId} from './names.js?v=20261013-specialist1';
+import {accessoryCue,accessoryReply} from './profile.js?v=20261013-specialist1';
+import {fanLines} from './fan-lines.js?v=20261013-specialist1';
 export const checkedAt='2026-10-06';
 const wiki=title=>`https://en.wikipedia.org/wiki/${encodeURIComponent(title)}`;
 export const sources={

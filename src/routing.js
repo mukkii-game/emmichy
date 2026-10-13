@@ -1,16 +1,16 @@
-import {topicDeflection} from './deflection.js?v=20261013-integrity1';
-import {everydayReply} from './everyday.js?v=20261013-integrity1';
-import {contextualReply} from './context.js?v=20261013-integrity1';
-import {curatedReply} from './curated.js?v=20261013-integrity1';
-import {balanceRoute} from './balance.js?v=20261013-integrity1';
-import {profileReply} from './profile.js?v=20261013-integrity1';
-import {recognizeName,exactNames} from './names.js?v=20261013-integrity1';
-import {chiikawaNotes} from './chiikawa-db.js?v=20261013-integrity1';
-import {unwantedFanRedirect} from './chat.js?v=20261013-integrity1';
-import {placeReply} from './places.js?v=20261013-integrity1';
-import {complimentReaction} from './profile.js?v=20261013-integrity1';
-import {learnerReply} from './japanese-learner.js?v=20261013-integrity1';
-import {conversationRepair} from './conversation-repair.js?v=20261013-integrity1';
+import {topicDeflection} from './deflection.js?v=20261013-specialist1';
+import {everydayReply} from './everyday.js?v=20261013-specialist1';
+import {contextualReply} from './context.js?v=20261013-specialist1';
+import {curatedReply} from './curated.js?v=20261013-specialist1';
+import {balanceRoute} from './balance.js?v=20261013-specialist1';
+import {profileReply} from './profile.js?v=20261013-specialist1';
+import {recognizeName,exactNames} from './names.js?v=20261013-specialist1';
+import {chiikawaNotes} from './chiikawa-db.js?v=20261013-specialist1';
+import {unwantedFanRedirect} from './chat.js?v=20261013-specialist1';
+import {placeReply} from './places.js?v=20261013-specialist1';
+import {complimentReaction} from './profile.js?v=20261013-specialist1';
+import {learnerReply} from './japanese-learner.js?v=20261013-specialist1';
+import {conversationRepair} from './conversation-repair.js?v=20261013-specialist1';
 
 function chiikawaReply(raw,state){
  if(/つらい|苦しい|病気|事故|亡く|死に|相談|やめ|以外|苦手|嫌い/.test(raw)||unwantedFanRedirect('ちいかわ',raw,state))return null;

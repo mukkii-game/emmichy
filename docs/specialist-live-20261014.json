@@ -1,0 +1,95 @@
+{
+  "mode": "real provider generation with candidate server prompt; synthetic inputs; no browser or human evaluation",
+  "commit": "9ef1e8cf3f6de00587a289e6363b2a9fa79a2f1a",
+  "at": "2026-10-13T15:00:17.079Z",
+  "limit": 3,
+  "turns": [
+    {
+      "input": "シーサーって頑張り屋なところが好き。えみちぃはどこが好き？",
+      "systemCharacters": 4013,
+      "history": [],
+      "wallMs": 732,
+      "result": {
+        "text": "シーサーの、資格取るまであきらめずに頑張るところが大好き。応援したくなる熱意が、ちいかわのハチワレみたいにキラキラしてて、見てると元気もらえるんだ。ヤハ！",
+        "provider": "groq",
+        "source": "llm"
+      },
+      "attempts": [
+        {
+          "provider": "groq",
+          "source": "llm",
+          "ok": true,
+          "reason": "",
+          "ms": 729
+        }
+      ]
+    },
+    {
+      "input": "さっき好きなところを話してたけど、どうしてシーサーを読み返したくなるの？",
+      "systemCharacters": 4097,
+      "history": [
+        {
+          "role": "user",
+          "content": "シーサーって頑張り屋なところが好き。えみちぃはどこが好き？"
+        },
+        {
+          "role": "assistant",
+          "content": "シーサーの、資格取るまであきらめずに頑張るところが大好き。応援したくなる熱意が、ちいかわのハチワレみたいにキラキラしてて、見てると元気もらえるんだ。ヤハ！"
+        }
+      ],
+      "wallMs": 1025,
+      "result": {
+        "text": "シーサーが諦めずに挑戦し続ける姿を見ると、アタシも頑張ろうって気持ちになるから。あの熱意がちいかわのハチワレの笑顔と重なって、元気がチャージできるんだ。ヤハ！",
+        "provider": "groq",
+        "source": "llm"
+      },
+      "attempts": [
+        {
+          "provider": "groq",
+          "source": "llm",
+          "ok": true,
+          "reason": "",
+          "ms": 1024
+        }
+      ]
+    },
+    {
+      "input": "今回はちいかわ以外。雨の日に家で過ごすなら、テレビ以外だと何する？",
+      "systemCharacters": 3434,
+      "history": [
+        {
+          "role": "user",
+          "content": "シーサーって頑張り屋なところが好き。えみちぃはどこが好き？"
+        },
+        {
+          "role": "assistant",
+          "content": "シーサーの、資格取るまであきらめずに頑張るところが大好き。応援したくなる熱意が、ちいかわのハチワレみたいにキラキラしてて、見てると元気もらえるんだ。ヤハ！"
+        },
+        {
+          "role": "user",
+          "content": "さっき好きなところを話してたけど、どうしてシーサーを読み返したくなるの？"
+        },
+        {
+          "role": "assistant",
+          "content": "シーサーが諦めずに挑戦し続ける姿を見ると、アタシも頑張ろうって気持ちになるから。あの熱意がちいかわのハチワレの笑顔と重なって、元気がチャージできるんだ。ヤハ！"
+        }
+      ],
+      "wallMs": 48,
+      "result": {
+        "error": "rate-limited",
+        "provider": "groq"
+      },
+      "attempts": [
+        {
+          "provider": "groq",
+          "source": "llm",
+          "ok": false,
+          "reason": "http-429",
+          "ms": 47
+        }
+      ]
+    }
+  ],
+  "calls": 3,
+  "rateLimited": true
+}

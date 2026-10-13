@@ -1,0 +1,7 @@
+// Cloudflare Workers + Static Assets で静的に配る(Worker のコードは無し。配信は回数無制限・無料)。
+// GitHub を非公開にしても、ここで遊べる: https://emmichy.mucky-totoro.workers.dev
+{
+  "name": "emmichy",
+  "compatibility_date": "2026-10-01",
+  "assets": { "directory": "./dist", "not_found_handling": "single-page-application" }
+}

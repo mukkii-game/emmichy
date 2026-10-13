@@ -1,0 +1,42 @@
+name: Deploy to Cloudflare
+
+# pilot-audio-readable-retro(今の遊べる版のブランチ)に push すると、遊ぶのに要るファイルだけを dist/ に集めて Cloudflare Workers(静的配信)へ出す。
+# 鍵(CLOUDFLARE_API_TOKEN・CLOUDFLARE_ACCOUNT_ID)は ai-ops の「Enable Claude」が配る。無ければ何もせず終わる。
+on:
+  push:
+    branches: [pilot-audio-readable-retro]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-cloudflare
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Collect files to serve
+        run: |
+          mkdir -p dist
+          cp -r index.html style.css src assets dist/
+          [ -f .nojekyll ] && cp .nojekyll dist/ || true
+          du -sh dist
+      - name: Check keys
+        id: keys
+        env:
+          HAS_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN != '' && secrets.CLOUDFLARE_ACCOUNT_ID != '' }}
+        run: |
+          echo "ok=${HAS_TOKEN}" >> "$GITHUB_OUTPUT"
+          [ "${HAS_TOKEN}" = "true" ] || echo "::notice::Cloudflare の鍵がまだ無いので公開を飛ばしました(ai-ops の Enable Claude で配られます)"
+      - name: Deploy
+        if: steps.keys.outputs.ok == 'true'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          wranglerVersion: "4.36.0"
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy

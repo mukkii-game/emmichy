@@ -1,0 +1,37 @@
+{
+  "candidate": "50dee312060730786018624e92f2b2165a7b98a5",
+  "runtime": "20261013-phone1",
+  "checkedAt": "2026-10-13T11:20:58.177766+00:00",
+  "files": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "18b9f44824623bc6cfc465711c3e1dc48680ede156e073f6e2c75d81a54b20fa"
+    },
+    {
+      "path": "style.css",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "cbe0eb872d7961753a26c98f7d823bebe599d4ffbba4dc12f80267008c59b8af"
+    },
+    {
+      "path": "src/app.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "28bab26a33def1ffbdd85eef641f2e65e976e3085ff2bd60a882a28ed9fcdd56"
+    },
+    {
+      "path": "src/mobile-viewport.js",
+      "status": 200,
+      "matchesCandidate": true,
+      "sha256": "c1932563c3fb5b613f2949b3eed35202c7a891b906885941f29c001e918e65f6"
+    }
+  ],
+  "llmCalls": 0,
+  "frontendTests": 204,
+  "physicalPhoneKeyboardTested": false,
+  "deploymentRun": 38389487798,
+  "deploymentConclusion": "success",
+  "pullRequest": 44
+}

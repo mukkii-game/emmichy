@@ -12,3 +12,5 @@ Actual local Chromium browser observations (no external LLM calls):
 -Viewport tests cover keyboard vs browser chrome, resize/focus/pan anchoring, orientation reset, pinch-zoom preservation and listener cleanup.204 local tests pass.
 
 Evidence: docs/mobile-keyboard-browser-20261013.json. These are browser viewport simulations, not tests on a physical iPhone/Android keyboard. Safari/OS keyboard pan and safe-area behaviour should be checked by the human. Backend/model behaviour is unchanged.
+
+公開済み: PR44はmainへ統合（64c58f6）、最終コード50dee31。Cloudflare38389487798成功、4個の変更対象HTML/CSS/JSが候補と完全一致。追加生成0回。docs/public-mobile-keyboard-20261013.json。

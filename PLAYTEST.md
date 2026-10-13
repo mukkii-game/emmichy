@@ -700,3 +700,5 @@ Representative review: 「アタシ、漫画で覚えた敬語を確認するか
 - 公開確認: PR #21 / Pages run37870731048 success、release20261009-talk1、配信16ファイル一致。中継PR #10 / Deploy run37870725942 success。実LLM追加通信・公開保存データ操作なし。
 
 公開確認: フロントPR42/43はmainへ統合済み（最終5d5ed4d6、コード候補40c37e1）。Cloudflare38385295165成功、変更対象27ファイルが候補と完全一致。中継PR18/main09751fc5の38384588766もテスト・公開成功。新URLのCORS204一致。公開確認の追加LLM生成0回。記録docs/public-conversation-repair-20261013.json。
+
+公開済み: PR44はmainへ統合（64c58f6）、最終コード50dee31。Cloudflare38389487798成功、4個の変更対象HTML/CSS/JSが候補と完全一致。追加生成0回。docs/public-mobile-keyboard-20261013.json。

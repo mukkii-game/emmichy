@@ -1,8 +1,8 @@
 // Reading conversion stays on the device; the original input goes to the AI.
-import {nameData} from './name-data.js?v=20261013-talk2';
-import {placeNames} from './places.js?v=20261013-talk2';
-import {spokenAliases} from './chiikawa-db.js?v=20261013-talk2';
-import {identityReadings} from './profile.js?v=20261013-talk2';
+import {nameData} from './name-data.js?v=20261013-integrity1';
+import {placeNames} from './places.js?v=20261013-integrity1';
+import {spokenAliases} from './chiikawa-db.js?v=20261013-integrity1';
+import {identityReadings} from './profile.js?v=20261013-integrity1';
 const katakana = value => String(value).normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96));
 const names=new Map([['ちいかわ','チイカワ'],['chiikawa','Chiikawa'],['えみちぃ','エミチィ'],['エミチィ','エミチィ'],['ハチワレ','ハチワレ'],['ドラクエ','ドラクエ']]);
 for(const [name,reading] of Object.entries(identityReadings)){names.set(name.toLowerCase(),reading);names.set(name.replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-96)),reading);}

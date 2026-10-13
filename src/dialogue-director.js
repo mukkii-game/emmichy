@@ -1,13 +1,13 @@
-import {ownedFollowup} from './fallback.js?v=20261013-talk2';
-import {fanRecovery} from './fandom.js?v=20261013-talk2';
-import {polishReply} from './repertoire.js?v=20261013-talk2';
-import {unwantedFanRedirect} from './chat.js?v=20261013-talk2';
-import {selectChiikawaBridge,personalFanReply} from './chiikawa-theme.js?v=20261013-talk2';
-import {groundModelReply} from './dialogue-grounding.js?v=20261013-talk2';
-import {asksCurrentSerial} from './chiikawa-relations.js?v=20261013-talk2';
-import {attributionRepair} from './chiikawa-attribution.js?v=20261013-talk2';
-import {learnerReply} from './japanese-learner.js?v=20261013-talk2';
-import {conversationRepair} from './conversation-repair.js?v=20261013-talk2';
+import {ownedFollowup} from './fallback.js?v=20261013-integrity1';
+import {fanRecovery} from './fandom.js?v=20261013-integrity1';
+import {polishReply} from './repertoire.js?v=20261013-integrity1';
+import {unwantedFanRedirect} from './chat.js?v=20261013-integrity1';
+import {selectChiikawaBridge,personalFanReply} from './chiikawa-theme.js?v=20261013-integrity1';
+import {groundModelReply} from './dialogue-grounding.js?v=20261013-integrity1';
+import {asksCurrentSerial} from './chiikawa-relations.js?v=20261013-integrity1';
+import {attributionRepair} from './chiikawa-attribution.js?v=20261013-integrity1';
+import {learnerReply} from './japanese-learner.js?v=20261013-integrity1';
+import {conversationRepair} from './conversation-repair.js?v=20261013-integrity1';
 
 // The screen owns final content selection. The relay validates transport/output
 // shape; it does not silently substitute a different authored conversation.

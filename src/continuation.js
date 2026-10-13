@@ -53,7 +53,8 @@ export function planContinuation(text,input='',state={},options={}){
  if(source.slice(start).trim())sentences.push(source.slice(start).trim());
  const hadInvitation=sentences.length>1&&invitation(sentences.at(-1));
  if(hadInvitation)sentences.pop();
- const parts=sentences.flatMap(sentence=>speechChunks(sentence,options).map((text,i)=>({text,continues:i>0})));
+ const uniqueSentences=[...new Map(sentences.map(sentence=>[fold(sentence).replace(/[。!?！？「」]/g,''),sentence])).values()];
+ const parts=uniqueSentences.flatMap(sentence=>speechChunks(sentence,options).map((text,i)=>({text,continues:i>0})));
  if(!parts.length)return {first:String(text),later:[]};
  if(parts.length>1&&parts[0].text.length<14&&/^(?:.+、[なねよ]|ウン|うん|そっか|ソッカ|エッ|えっ)[!！。…]*$/.test(parts[0].text)&&fold((options.display||String)(parts[0].text+parts[1].text)).length<=60)parts.splice(0,2,{text:parts.slice(0,2).map(p=>p.text).join(' '),continues:false});
  const first=parts.shift().text,later=parts.map(p=>p.text),delays=parts.map((p,i)=>p.continues?1500:options.enthusiastic?2000:i===0?4000:5000);

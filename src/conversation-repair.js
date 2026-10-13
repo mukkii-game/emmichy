@@ -1,3 +1,4 @@
+import {requestsChiikawa} from './topic-intent.js?v=20261013-integrity1';
 // Conversation acts are handled before lexical fandom cues. A player's complaint
 // is not a food preference, a name, or an invitation to another monologue.
 export const foldRepair=s=>String(s||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');
@@ -19,7 +20,7 @@ export function cleanDialogueControl(value){
 export function feedbackIntent(input){
  const t=foldRepair(input);
  if(/(?:話|ハナシ|会話|カイワ|返事|ヘンジ|文|ブン|一言|ヒトコト).{0,25}(?:長スギ|ナガスギ|長イノ.{0,6}苦手|ナガイノ.{0,6}苦手)|短ク|ミジカク|短メ|ミジカメ/.test(t))return 'length';
- if(/ワンパターン|同ジ話|オナジ話|同ジネタ|オナジネタ|何度モ|ナンドモ|何回モ|ナンカイモ|[0-9０-９一二三四五六七八九十]+回目|サッキモ聞|サッキモキ|モウ聞イタ|モウキイタ/.test(t))return 'repeat';
+ if(/(?:同ジ|オナジ)(?:コト|事|ノ|言葉|コトバ|文|ブン).{0,25}(?:繰リ返|クリカエ|何度|ナンド|[0-9一二三四五六七八九十]+(?:度|ド|回|カイ))|(?:繰リ返|クリカエ).{0,20}(?:[0-9一二三四五六七八九十]+(?:度|ド|回|カイ))|[0-9一二三四五六七八九十]+(?:度|ド|回|カイ).{0,16}(?:繰リ返|クリカエ)|ワンパターン|同ジ話|オナジ話|同ジネタ|オナジネタ|何度モ|ナンドモ|何回モ|ナンカイモ|[0-9０-９一二三四五六七八九十]+回目|サッキモ聞|サッキモキ|モウ聞イタ|モウキイタ/.test(t))return 'repeat';
  if(/独リ言|ヒトリゴト|会話.{0,16}(?:成立|成リ立|ニナッテナイ|ニナッテイナイ|ダメ|ヒド)|噛ミ合|カミアワ|話.{0,16}(?:ズレ|逸レ|通ジ)|質問ニ答エ|聞イテナイ|キイテナイ|馬鹿スギ|バカスギ|意味不明/.test(t))return 'coherence';
  if(/(?:チイカワ|地位側|地位回).{0,20}(?:強引|ゴウイン|挟ミスギ|入レスギ|無理)|話題.{0,12}(?:強引|ゴウイン|変エスギ)/.test(t))return 'redirect';
  if(/^(?:ウン、?|モウ大丈夫。?|大丈夫。?)?(?:許ス|ユルス)(?:ヨ|ネ|カラ|!|。)*$/.test(t))return 'forgive';
@@ -29,12 +30,12 @@ export function feedbackIntent(input){
 function topicId(t){return /運行|ウンコウ|長音|長イ音/.test(t)?'jp:long-vowel':/橋|箸|ハシ/.test(t)?'jp:accent':/弟|オトウト/.test(t)?'profile:family':/ノート/.test(t)?'profile:notebook':/スウェーデン|ヨーテボリ/.test(t)?'profile:home':null;}
 export function updateDialogueControl(value,input){
  const c=cleanDialogueControl(value),t=foldRepair(input),intent=feedbackIntent(input);
- const explicitResume=(/^(?:ハチワレ|シーサー|ウサギ|モモンガ)[!?？。]*$/.test(t)||/(?:チイカワ|ハチワレ|シーサー|ウサギ|モモンガ).{0,24}(?:話シタイ|話シテ|話ソウ|ハナシテ|ハナソウ|話シヨ|話シナイ|話ニ戻|ハナシタイ|続ケ|ツヅケ|ドコガ好キ|ドコガスキ)/.test(t))&&!intent;
+ const explicitResume=(requestsChiikawa(input)||/^(?:ハチワレ|シーサー|ウサギ|モモンガ)[!?？。]*$/.test(t)||/(?:チイカワ|ハチワレ|シーサー|ウサギ|モモンガ).{0,24}(?:話シタイ|話シテ|話ソウ|ハナシテ|ハナソウ|話シヨ|話シナイ|話ニ戻|ハナシタイ|続ケ|ツヅケ|ドコガ好キ|ドコガスキ)/.test(t))&&!intent;
  if(explicitResume)c.avoidFandom=false;
  if(/(?:チイカワ|漫画|マンガ|ソノ話).{0,16}(?:以外|イガイ|ヤメ|モウイイ)|別ノ話|ベツノ話/.test(t))c.avoidFandom=true;
  c.quiet=Boolean(intent);if(intent)c.lastIntent=intent;else if(!/^(?:本当|ホントウ|ホント)/.test(t))c.lastIntent='';
  if(intent==='length')c.concise=true;
- if(['repeat','coherence','redirect'].includes(intent))c.avoidFandom=true;
+ if(['coherence','redirect'].includes(intent))c.avoidFandom=true;
  if(intent==='repeat'){const id=topicId(t);if(id)c.suppressed=[...new Set([...c.suppressed,id])];}
  return c;
 }

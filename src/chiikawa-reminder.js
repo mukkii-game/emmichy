@@ -1,4 +1,4 @@
-import {exactNames} from './names.js?v=20261013-talk2';
+import {exactNames} from './names.js?v=20261013-integrity1';
 export const CHII_REMINDER_MS=120000;
 export function mentionsChiikawa(text){return exactNames(text,{knowledge:{work:'chiikawa'}}).some(row=>row.work==='chiikawa');}
 export function noteChiikawa(session,text,now=Date.now()){

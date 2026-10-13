@@ -1,8 +1,8 @@
 // Reject the observed nonfan failure without another provider request.
-import {rejectedJoke} from './humor.js?v=20261013-talk2';
-import {substantiveHistory} from './dialogue-history.js?v=20261013-talk2';
-import {requestsChiikawa} from './topic-intent.js?v=20261013-talk2';
-import {cleanDialogueControl,feedbackIntent} from './conversation-repair.js?v=20261013-talk2';
+import {rejectedJoke} from './humor.js?v=20261013-integrity1';
+import {substantiveHistory} from './dialogue-history.js?v=20261013-integrity1';
+import {requestsChiikawa} from './topic-intent.js?v=20261013-integrity1';
+import {cleanDialogueControl,feedbackIntent} from './conversation-repair.js?v=20261013-integrity1';
 const fanNames=/ちいかわ|チイカワ|chiikawa|ハチワレ|ジョジョ|バキ|刃牙/i;
 export const CHAT_REPLY_BUDGET_MS=8000;
 const decline=/(?:漫画|マンガ|アニメ|ちいかわ|チイカワ).{0,16}(?:詳しくない|興味ない|興味がない|苦手|以外|イガイ|いがい|やめ|ヤメ|じゃなく|ジャナク)|(?:別|他|ほか)の話/;

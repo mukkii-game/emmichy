@@ -1,10 +1,14 @@
-# Proposed specialist direction and immediate integrity fixes — 2026-10-13
+# Adopted knowledge-first specialist direction — 2026-10-13
 
-The human proposes committing the pilot to an unusually knowledgeable Chiikawa fan: manga/anime/movie, goods, foods, park/events and sourced fan analysis, with small excursions into other otaku topics, Japanese learning and current Japan, and an affinity for returning to the movie. Codex recommends this direction. This document is the design proposal and gap list, not a claim that the specialist runtime is finished or its factual coverage complete.
+The human proposes committing the pilot to an unusually knowledgeable Chiikawa fan: manga/anime/movie, goods, foods, park/events and sourced fan analysis, with small excursions into other otaku topics, Japanese learning and current Japan, and an affinity for returning to the movie. The user subsequently adopted the knowledge-first design: build a precise specialist bot, then add limited-Japanese expression, otaku interests and the owned Nordic identity without reducing knowledge or dialogue accuracy. SPEC.md records this as the current design authority. This is an adopted design and gap list, not a claim that the specialist runtime or factual coverage is complete.
 
 ## Product
 
 A friend who has lots to say about one world, not a generic chatbot or an official-sounding FAQ voice. Knowledge should be precise, reactions personal and lively. Remain on the player's current character/scene until their question/correction is resolved. The movie is her favourite destination; do not force that pivot midway through a grass-weeding examination discussion. Side topics need a real connection and must not become random biography/news announcements. Preserve her fixed Swedish/Japanese-learning identity, 半額王 rejection, free browser access and player refusal boundaries.
+
+## Development and evaluation order
+
+First test a neutral specialist conversation using the same verified evidence, then add Emmichy personality and compare the same questions/corrections. Knowledge, conversation state and personality are separately evaluated responsibilities; this does not require two model generations per player turn. Her limited Japanese affects wording, never basic comprehension or canon facts. Nordic individuality comes from the owned Swedish biography and concrete tastes, not assumptions about nationality/gender.
 
 ## Replace the conversation architecture
 

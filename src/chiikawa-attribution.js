@@ -6,7 +6,7 @@ export const attributionFacts=[
 export function attributionRepair(text){
  const t=fold(text);if(!/ヤハ/.test(t)||/もし|想像|だったら/.test(text))return null;
  const song=/(?:オープニング|OP|主題歌|曲名|歌ノタイトル|挿入歌|エンディング).{0,22}ヤハ|ヤハ.{0,22}(?:オープニング|OP|主題歌|曲名|挿入歌|エンディング)/i.test(t);
- const wrongSpeaker=!/ウサギ/.test(t)&&/(?:チイカワ|ハチワレ).{0,22}ヤハ/.test(t)&&/口癖|クチグセ|掛ケ声|言|イウ|叫|セリフ|台詞/.test(t);
+ const wrongSpeaker=!/ウサギ/.test(t)&&/(?:チイカワ|ハチワレ|ミンナ).{0,32}ヤハ/.test(t)&&/口癖|クチグセ|掛ケ声|言|イウ|叫|セリフ|台詞|笑|シーン|場面/.test(t);
  if(song)return {reason:'yaha-song',text:'「ヤハ！」はうさぎの掛け声。曲名と混ぜちゃったね。TVアニメの確認済みのEDは「ひとりごつ」で、ハチワレが歌うよ。'};
  return wrongSpeaker?{reason:'yaha-speaker',text:'「ヤハ！」はうさぎの掛け声だよ！ あの勢いを真似すると、アタシまで元気になるの。'}:null;
 }

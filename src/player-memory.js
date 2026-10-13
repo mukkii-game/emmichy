@@ -1,4 +1,5 @@
 import {rejectedJoke} from './humor.js';
+import {cleanDialogueControl,feedbackIntent,updateDialogueControl} from './conversation-repair.js?v=20261013-talk1';
 const text=(s,n=160)=>typeof s==='string'?s.normalize('NFKC').replace(/[\x00-\x1f]/g,' ').trim().slice(0,n):'';
 const fold=s=>text(s,600).replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');
 const privateText=s=>/@|https?:|\d{3}[-ー]\d{4}|\d{10,}|住所|電話番号|メールアドレス/.test(s);
@@ -7,7 +8,7 @@ const unique=(items,n)=>[...new Set(items)].slice(-n);
 export function cleanPlayerMemory(value){
  const v=value&&typeof value==='object'?value:{};
  const strings=(key,n)=>unique((Array.isArray(v[key])?v[key]:[]).map(clean).filter(Boolean),n);
- return {version:1,nickname:clean(text(v.nickname,20)),
+ return {version:1,nickname:clean(text(v.nickname,20)),conciseReplies:v.conciseReplies===true,suppressedTopics:cleanDialogueControl({suppressed:v.suppressedTopics}).suppressed,
   likes:strings('likes',24),dislikes:strings('dislikes',24),creations:strings('creations',12),topics:strings('topics',24),recentReplies:strings('recentReplies',64),
   questionSeen:unique((Array.isArray(v.questionSeen)?v.questionSeen:[]).filter(id=>questions.some(q=>q.id===id)),6),
   answers:(Array.isArray(v.answers)?v.answers:[]).filter(a=>a&&questions.some(q=>q.id===a.id)&&clean(a.value)).slice(-12).map(a=>({id:a.id,value:clean(a.value)})),
@@ -15,9 +16,9 @@ export function cleanPlayerMemory(value){
 }
 export const nameQuestion='あなた、なんて呼べばいい？ ニックネームでいいよ。';
 export const questions=[
- {id:'lookalike',type:'choice',choices:['ハチワレ','ちいかわ','うさぎ','シーサー'],text:'ハチワレ、ちいかわ、うさぎ、シーサーなら、誰がアタシに一番似てると思う？ 一人、教えて！'},
+ {id:'lookalike',type:'choice',choices:['ハチワレ','ちいかわ','うさぎ','シーサー'],text:'ハチワレ、ちいかわ、うさぎ、シーサー。アタシに似てるのは誰？'},
  {id:'favourite',type:'choice',choices:['ちいかわ','ハチワレ','うさぎ','シーサー'],text:'ちいかわ、ハチワレ、うさぎ、シーサー。いちばん好きな子、誰？'},
- {id:'snack',type:'word',text:'小さいごほうびに、何を食べたい？ プリン、ケーキ、おせんべい。ほかの食べ物でも、一つ教えて！'},
+ {id:'snack',type:'word',text:'プリン、ケーキ、おせんべい。今なら何を食べたい？'},
  {id:'more-chiikawa',type:'yes-no',text:'アタシと、もう少しちいかわの話したい？ はいでも、いいえでも、大丈夫だよ。'}
 ];
 export function notePlayerQuestion(line,session){
@@ -32,6 +33,7 @@ export function choosePlayerQuestion(memory,session,{allowChiikawa=true}={}){
 }
 export function learnPlayerMessage(value,raw){
  const m=cleanPlayerMemory(value),t=text(raw),f=fold(t);
+ const control=updateDialogueControl({concise:m.conciseReplies,suppressed:m.suppressedTopics},raw);m.conciseReplies=control.concise;m.suppressedTopics=control.suppressed;
  const disliked=t.match(/^([^。!?！？]{1,30}?)(?:が|は)?(?:嫌い|キライ|好きじゃない|好きではない|スキジャナイ)(?:です|だ|ダ|よ|ヨ|。|！|!|$)/);
  if(disliked&&clean(disliked[1])){const item=disliked[1].trim();m.likes=m.likes.filter(x=>fold(x)!==fold(item));m.dislikes=unique([...m.dislikes,item],24);}
  if(!/[?？]/.test(t)&&!/(?:友達|彼女|彼氏).*(?:好き|スキ)/.test(t)){
@@ -53,6 +55,7 @@ export function notePlayerReply(value,line){const m=cleanPlayerMemory(value);if(
 export function answerPlayerQuestion(value,session,raw){
  const memory=learnPlayerMessage(value,raw),q=session?.pendingQuestion,t=text(raw,120),f=fold(t);
  if(!q)return {memory};
+ if(feedbackIntent(raw)||/^(?:許す|ユルス|ありがとう|アリガト|運行|ウンコウ)[。!！ヨ]*$/.test(t)){session.pendingQuestion=null;return {memory};}
  if(memory.creations.at(-1)!==cleanPlayerMemory(value).creations.at(-1)){session.pendingQuestion=null;return {memory};}
  if(/^(?:バイバイ|サヨウナラ|サヨナラ|ジャアネ|マタネ|オヤスミ|寝ルネ)/.test(f)){session.pendingQuestion=null;return {memory};}
  if(['choice','word'].includes(q.type)&&/以外|イガイ|やめ|ヤメ|嫌い|キライ|苦手|話したくない|別の話|ベツノハナシ/.test(t)){session.pendingQuestion=null;return {memory};}
@@ -63,13 +66,15 @@ export function answerPlayerQuestion(value,session,raw){
   const otherIntent=!explicit&&(/^(?:コンニチハ|コンバンハ|オハヨウ|ハロー|ハジメマシテ|チイカワ|ハチワレ|ウサギ|シーサー|モモンガ|エミチ[イィー]|EMMICHY|EMMY|ハイ|イイエ|ウン|アリガト|エロイ?|エッチ|セックス|オッパイ)[!！。ー]*$/i.test(f)||/^(?:スキ|好キ|カワイイ|可愛イ|キレイ|綺麗|キュート|若イ|ワカイ|タノシイ|楽シイ|愛シテル|アイシテル)(?:ダ|デス|ダヨ|ナノ|ネ|ヨ|ナー|！|!|。)*$/.test(f));
   if(ignore||otherIntent){q.ignored=(q.ignored||0)+1;if(q.ignored>=2)session.pendingQuestion=null;return {memory};}
   if(/言いたくない|匿名|秘密|名乗らない|名前なし/.test(t)){session.pendingQuestion=null;memory.nickname='';return {memory,reply:'うん、呼び名は決めなくても大丈夫。一緒に話せるの、嬉しいよ！',name:''};}
-  const name=t.replace(/^(?:名前は|私の名前は|僕の名前は|俺の名前は|私は|僕は|俺は|ワタシハ|ボクハ|オレハ)/,'').replace(/(?:って呼んで|と呼んで|です|デス|だよ|ダヨ|といいます)[。！!]*$/,'').replace(/[「」『』。！!]/g,'').trim();
+  const first=t.split(/[。!！]/)[0];
+  const nameText=/(?:って呼んで|と呼んで|です|デス|といいます)$/.test(first)?first:t;
+  const name=nameText.replace(/^(?:名前は|私の名前は|僕の名前は|俺の名前は|私は|僕は|俺は|ワタシハ|ボクハ|オレハ)/,'').replace(/(?:って呼んで|と呼んで|です|デス|だよ|ダヨ|といいます)[。！!]*$/,'').replace(/[「」『』。！!]/g,'').trim();
   if(!ignore&&name.length>0&&name.length<=20&&clean(name)&&!/日本語|ちいかわの|ハチワレの/.test(name)){memory.nickname=name;session.pendingQuestion=null;return {memory,reply:`${name}って呼ぶね。覚えた！ こうして話せて、嬉しいよ。`,name};}
   if(!ignore&&q.attempts++<1)return {memory,reply:'呼び名だけで大丈夫だよ。なんて呼べばいい？'};
   if(q.attempts>1)session.pendingQuestion=null;
   return {memory};
  }
- if(ignore)return {memory};
+ if(ignore){session.pendingQuestion=null;return {memory};}
  const def=questions.find(x=>x.id===q.id);let answer='';
  if(q.type==='choice')answer=def.choices.find(c=>f.includes(fold(c)))||'';
  else if(q.type==='yes-no')answer=/^(?:イイエ|イヤ|今ハ|ヤメ|苦手|話シタクナイ|NO)/i.test(f)?'いいえ':/^(?:ハイ|ウン|エエ|イイヨ|話シタイ|モット|YES|オネガイ)/i.test(f)?'はい':'';

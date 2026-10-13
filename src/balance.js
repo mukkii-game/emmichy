@@ -1,4 +1,4 @@
-import {works} from './fandom.js?v=20261012-memory2';
+import {works} from './fandom.js?v=20261013-talk1';
 const fold=s=>String(s).normalize('NFKC').toLowerCase().replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');
 export function cleanInterests(value){
  return Object.fromEntries(Object.keys(works).filter(k=>Number.isFinite(value?.[k])).map(k=>[k,Math.max(-10,Math.min(10,Math.trunc(value[k])))]));
@@ -22,12 +22,12 @@ export function balanceRoute(prepared,choice,session,enabled){
 export function needsFirstModelReply(session,{enabled=false,kind='',topic='',restart=false,fixedIdentity=false}={}){
  return enabled&&!restart&&!fixedIdentity&&!session?.finished&&!(session?.dialogueUse?.ai>0)
   &&!['bye','asleep','name','memory','arithmetic'].includes(kind)
-  &&!['deflection','fandom-decline','greeting'].includes(topic);
+  &&!['deflection','fandom-decline','greeting','conversation-repair'].includes(topic);
 }
 export function shouldRequestModel(session,options={}){
  if(needsFirstModelReply(session,options))return true;
  const {enabled=false,kind='',topic='',restart=false}=options;
- if(!enabled||restart||session?.finished||['bye','asleep','name','memory','arithmetic'].includes(kind)||['profile','deflection','fandom-decline','greeting'].includes(topic))return false;
+ if(!enabled||restart||session?.finished||['bye','asleep','name','memory','arithmetic'].includes(kind)||['profile','deflection','fandom-decline','greeting','conversation-repair'].includes(topic))return false;
  // Prefer a good model continuation. The mix is observed, never a quota:
  // authored material supports waiting, failed replies and fandom enthusiasm.
  return true;

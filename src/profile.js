@@ -1,5 +1,5 @@
 // The single authored identity, created under the user's request to write a portfolio.
-import {exactNames} from './names.js?v=20261012-memory2';
+import {exactNames} from './names.js?v=20261013-talk1';
 export const identity=Object.freeze({age:17,country:'スウェーデン',city:'ヨーテボリ',siblingAge:14,visitCity:'東京',visitDays:5,visitCount:1});
 export const identityReadings=Object.freeze({[identity.country]:'スウェーデン',[identity.city]:'ヨーテボリ'});
 export const profile=Object.freeze({
@@ -46,12 +46,13 @@ export function complimentReaction(raw,state={}){
  // Asking about a preference is not a declaration, even with her name in the sentence.
  if(affection&&/(?:好キ|スキ|好ミ|コノミ)(?:ナノ|デスカ|カナ|カ)?[?？]$/.test(folded))return null;
  // Questions about her preferences retain their actual answer, rather than becoming a declaration.
- if(affection&&/(?:何|ナニ|ドンナ|誰|ダレ).*(?:好キ|スキ|好ミ|コノミ)|(?:好キナ|スキナ).*(?:キャラ|漫画|マンガ|作品|ゲーム)|(?:好ミ|コノミ).*(?:何|ナニ|ドンナ|[?？])/.test(folded))return null;
+ if(affection&&/(?:何|ナニ|ドンナ|どこ|ドコ|どの|ドノ|どう|ドウ|誰|ダレ).*(?:好キ|スキ|好ミ|コノミ)|(?:好キナ|スキナ).*(?:キャラ|漫画|マンガ|作品|ゲーム)|(?:好ミ|コノミ).*(?:何|ナニ|ドンナ|[?？])|好キナトコロ.*(?:話|ハナ|ドウシテ)/.test(folded))return null;
  const word=affection?/大好キ|ダイスキ/.test(praise[0])?'ダイスキ':/好キ|スキ/.test(praise[0])?'スキ':/好ミ|コノミ/.test(praise[0])?'コノミ':/愛シテ|アイシテ/.test(folded)?'アイシテル':'アイ':
   /カワイイ|可愛/.test(praise[0])?'カワイイ':/キレイ|綺麗/.test(praise[0])?'キレイ':/キュート/.test(praise[0])?'キュート':/ワカイ|若/.test(praise[0])?'ワカイ':'タノシイ';
  const named=exactNames(input,state),ordinary=affection?ordinaryFavourites.find(([name])=>folded.includes(name)&&new RegExp(`${name}(?:ガ|ヲ|ハ)?(?:大好キ|ダイスキ|好キ|スキ|愛シテ|アイシテ|好ミ|コノミ)`).test(folded)):null;
  const target=named.find(n=>n.work==='chiikawa')||named[0]||(ordinary?{name:ordinary[0],reading:ordinary[1],work:'everyday'}:null);
  if(affection&&target&&!selfMention(input))return {gesture:`${target.reading}、${word}!?`,affection:true,target,text:null,thanks:null};
+ if(affection&&target&&/(?:エミチ[イィ]|アナタ|君)(?:ハ|モ|ノ好ミハ)[?？]$/.test(folded))return null;
  // Bare praise is addressed to her. Explicit characters/third people retain their subject.
  if(!selfMention(input)&&(named.length||/友達|彼女|彼氏|あの子|その子/.test(input)))return null;
  if(!affection&&!selfMention(input)&&/私|僕|俺|ワタシ|ボク|オレ/.test(input))return null;
@@ -65,8 +66,7 @@ export function selfReaction(raw,state={}){
  const thanks=['うれしい、アタシのこと聞いてくれて。','アタシの話、聞いてくれるのうれしい！','アタシに興味を持ってくれて、うれしいな。'][(Number(state.turn)||0)%3];
  return {gesture:'ワオ、アタシのこと!?',thanks};
 }
-export function profilePrompt(){return `本人の固定ポートフォリオ（サーバー所有の創作設定。ユーザーの記憶ではない）:\n${Object.entries(profile).map(([k,v])=>`${k}=${v}`).join('\n')}\nこの設定と履歴で実際に話した予定を優先。質問で国・年齢・家族・訪日期間を変えず、未設定の名前や職歴を作らない。えみちい・エミチイ・エミチィ・えみちぃ・emmichyは全て自分への呼びかけ。自分の話に興味を持ってもらうと嬉しくなる。ちいかわの人物・性格・場面は読んだ／見たファンとして詳しく話し、「聞いたことある」「らしい」だけで距離を置かない。自分がどこを好きか、どう思うかも具体的に言う。日本の暮らしの耳知識とは区別する。ただし未確認の場面や台詞、今日の最新話を作って断定しない。日本語学習の話では長音・小さいっ・音の高さ・敬語など具体的な難しさを一つ話すことがある。例:  ${japaneseExamples.join(" / ")}まず相手の言った内容に反応し、聞かれた一点を設定の範囲でできるだけ具体的に答える。画面側が最初の「ワオ、アタシのこと!?」と喜びの一言を添えるので、同じ台詞を本文で繰り返さない。勘違いは本人の耳知識として見せ、訂正を受け入れる。毎回プロフィールを並べず、今の話に合う一面だけを話す。映画の反復鑑賞はファンとしての創作の予定で、上映館・居場所・訪日回数を新設する根拠にしない。`;
-}
+export function profilePrompt(){return `本人の固定ポートフォリオ（サーバー所有の創作設定。ユーザーの記憶ではない）:\n${Object.entries(profile).map(([k,v])=>`${k}=${v}`).join('\n')}\nこの設定と履歴で実際に話した予定を優先。質問で国・年齢・家族・訪日期間を変えず、未設定の名前や職歴を作らない。えみちい・エミチイ・エミチィ・えみちぃ・emmichyは全て自分への呼びかけ。自分に興味を持ってもらうと嬉しく、短い喜びも伝える。ちいかわは詳しいファンとして確認済みのことと自分の感想を話す。ただし未確認の場面・台詞・今日の最新話を作らない。日本の暮らしの耳知識とは区別する。日本語を勉強中だが自分が使った基本語は説明できる。長音・促音・敬語の同じ例や弟の紹介を繰り返して会話の穴を埋めない。まず今の発言に答え、相手の返事を待つ。映画の反復鑑賞は本人の予定で、上映館・居場所・訪日回数を増やす根拠にしない。`;}
 export function praiseDirection(raw,state={}){
  const reaction=complimentReaction(raw,state);if(!reaction)return '';
  if(reaction.target)return `今回の好き・愛・好みは${reaction.target.name}への好意。まず強く嬉しそうに反応し、好きな対象の話を続ける。画面側が対象名と好意の語を返すので本文で同じ呼びかけを繰り返さない。本人への告白へすり替えない。`;
@@ -91,6 +91,7 @@ export function profileReply(raw){
  const text=String(raw).normalize('NFKC').replace(/\s/g,'');
  if(accessoryCue(text))return {topic:'profile',id:'profile:accessory',text:accessoryReply};
  const folded=text.replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96));
+ if(/(?:何テ|ナンテ).*(?:呼バレ|ヨバレ)|^(?:名前|ナマエ)(?:ハ|教エ|オシエ)/.test(folded))return {topic:'profile',id:'profile:name',text:'エミチィって呼ばれてるよ。あなたも、そう呼んで！'};
  if(/日本語|ニホンゴ/.test(folded)&&!/(?:私|僕|俺|ワタシ|ボク|オレ|友達|彼).{0,4}(?:ハ|ガ|モ|ノ)/.test(folded)&&(!/チイカワ|ハチワレ|ウサギ|シーサー/.test(folded)||/勉強|ベンキョウ|覚|学/.test(folded)))return {topic:'profile',id:'profile:languages',text:'うん、日本語を勉強してるよ！ 漫画とアニメ、それからこういう会話で覚えてるの。長い音と小さい「っ」は、まだ難しいの。'};
  const home=/(?:スウェーデン|ヨーテボリ).*(?:生マレ|ウマレ|育|ソダ|出身|シュッシン|住|スン|[?？])/.test(folded)&&!/(?:私|僕|俺|ワタシ|ボク|オレ|友達|彼女|彼氏)/.test(folded);
  const own=selfMention(text)||/あなた|君|きみ/.test(text)||home;
@@ -102,21 +103,16 @@ export function profileReply(raw){
  if((selfMention(text)&&text.replace(selfAlias,'').replace(/[。、!?！？]/g,'')==='')||/自己紹介|どんな(?:人|子)/.test(text))return {topic:'profile',text:`アタシ、エミチィ。${identity.country}の${identity.age}歳の学生だよ。ちいかわが好きで、日本語を勉強してるの。`};
  const topic=topics.find(([,pattern])=>pattern.test(text));return topic?{topic:'profile',id:`profile:${topic[0]}`,text:topic[2],...(home?{gesture:`${identity.country}、アタシの国！`}:{})}:null;
 }
-export function profileAside(history=[],index=0){
+export function profileAside(history=[],index=0,{recentReplies=[],suppressed=[]}={}){
  const lines=[
-  `アタシ、${identity.country}の${identity.city}の近くで育ったの。`,
-  `弟は${identity.siblingAge}歳なの。ゲームで負けると、アタシ言い訳しちゃう。`,
-  '覚えた日本語、小さいノートに書いてるの。字はまだちょっと下手。',
-  '長い髪、三つ編みにするのが好き。話してると、つい触っちゃう。',
-  'シナモンロールとココアが好き。あの組み合わせ、ほっとするの。',
-  'アタシ、ゲームは寄り道が好き。先に道の横を見ちゃう。'
+  {id:'profile:home',match:/育|スウェーデン|ヨーテボリ/,text:'アタシ、スウェーデンで育ったの。'},
+  {id:'profile:family',match:/弟|オトウト/,text:`弟は${identity.siblingAge}歳。アタシとゲームするの。`},
+  {id:'profile:notebook',match:/ノート|日本語/,text:'日本語のノート、字はまだ下手なの。'},
+  {id:'hair',match:/三つ編み|ミツアミ/,text:'三つ編み、つい触っちゃう。'},
+  {id:'food',match:/シナモンロール/,text:'シナモンロールとココア、好き。'},
+  {id:'games',match:/寄り道|ヨリミチ/,text:'ゲームは、寄り道が好きなの。'}
  ];
- const spoken=history.filter(h=>h.role==='enny').slice(-30).map(h=>h.text).join(' ');
- if(index===1){
-  const start=history.filter(h=>h.role==='user').length%japaneseExamples.length;
-  const examples=[...japaneseExamples.slice(start),...japaneseExamples.slice(0,start)].map(line=>line.split('。').slice(0,2).join('。')+'。');
-  const example=examples.find(line=>!spoken.includes(line));if(example)return example;
- }
- const ordered=[...lines.slice(index%lines.length),...lines.slice(0,index%lines.length)];
- return ordered.find(line=>!spoken.includes(line))||ordered[0];
+ const spoken=history.filter(h=>h.role==='enny').map(h=>h.text).concat(recentReplies).join(' ');
+ const eligible=lines.filter(line=>!suppressed.includes(line.id)&&!line.match.test(spoken));
+ return eligible[index%Math.max(1,eligible.length)]?.text||null;
 }

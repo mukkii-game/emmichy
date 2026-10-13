@@ -1,0 +1,1735 @@
+{
+  "mode": "actual app; offline rule/bank; simulated DOM and virtual pauses; compressed typing animation; no live LLM or audio",
+  "actions": [
+    {
+      "action": {
+        "type": "start"
+      },
+      "result": {
+        "atSeconds": 0,
+        "messages": [
+          {
+            "atMs": 0,
+            "role": "enny",
+            "text": "はじめまして！",
+            "screen": "ハジメマシテ!"
+          }
+        ],
+        "visibleMessages": [
+          {
+            "role": "system",
+            "screen": "エミチィ / THE ALMOST CLEVER GAME"
+          },
+          {
+            "role": "enny",
+            "screen": "ハジメマシテ!"
+          },
+          {
+            "role": "system",
+            "screen": "ニホンゴ デ フツウニ ハナシテネ"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 20
+      },
+      "result": {
+        "atSeconds": 20,
+        "messages": [
+          {
+            "atMs": 1500,
+            "role": "enny",
+            "text": "アタシ、エミチィ。日本語を勉強してるの。ちいかわが大好き！",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "atMs": 3000,
+            "role": "enny",
+            "text": "あなた、なんて呼べばいい？ ニックネームでいいよ。",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "atMs": 13000,
+            "role": "enny",
+            "text": "好きなところを話すと、またちいかわを読み返したくなっちゃう。",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          }
+        ],
+        "visibleMessages": [
+          {
+            "role": "system",
+            "screen": "エミチィ / THE ALMOST CLEVER GAME"
+          },
+          {
+            "role": "enny",
+            "screen": "ハジメマシテ!"
+          },
+          {
+            "role": "system",
+            "screen": "ニホンゴ デ フツウニ ハナシテネ"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "role": "enny",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 0
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "みんなには何て呼ばれてるの？"
+      },
+      "result": {
+        "atSeconds": 20,
+        "messages": [
+          {
+            "atMs": 20000,
+            "role": "user",
+            "text": "みんなには何て呼ばれてるの？",
+            "screen": "ミンナ ニ ハ ナニテ ヨバレテル ノ?"
+          },
+          {
+            "atMs": 20000,
+            "role": "enny",
+            "text": "そこはまだよく知らないの。",
+            "screen": "ソコ ハ マダ ヨク シラナイノ。"
+          }
+        ],
+        "visibleMessages": [
+          {
+            "role": "system",
+            "screen": "エミチィ / THE ALMOST CLEVER GAME"
+          },
+          {
+            "role": "enny",
+            "screen": "ハジメマシテ!"
+          },
+          {
+            "role": "system",
+            "screen": "ニホンゴ デ フツウニ ハナシテネ"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "role": "enny",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          },
+          {
+            "role": "user",
+            "screen": "ミンナ ニ ハ ナニテ ヨバレテル ノ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ソコ ハ マダ ヨク シラナイノ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 8
+      },
+      "result": {
+        "atSeconds": 28,
+        "messages": [
+          {
+            "atMs": 24000,
+            "role": "enny",
+            "text": "わかったふりで答えたくないな。",
+            "screen": "ワカッタ フリ デ コタエタクナイナ。"
+          }
+        ],
+        "visibleMessages": [
+          {
+            "role": "system",
+            "screen": "エミチィ / THE ALMOST CLEVER GAME"
+          },
+          {
+            "role": "enny",
+            "screen": "ハジメマシテ!"
+          },
+          {
+            "role": "system",
+            "screen": "ニホンゴ デ フツウニ ハナシテネ"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "role": "enny",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          },
+          {
+            "role": "user",
+            "screen": "ミンナ ニ ハ ナニテ ヨバレテル ノ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ソコ ハ マダ ヨク シラナイノ。"
+          },
+          {
+            "role": "enny",
+            "screen": "ワカッタ フリ デ コタエタクナイナ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 1
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "シーサーって、明るくて頑張り屋なところが好き。えみちぃはどこが好き？"
+      },
+      "result": {
+        "atSeconds": 28,
+        "messages": [
+          {
+            "atMs": 28000,
+            "role": "user",
+            "text": "シーサーって、明るくて頑張り屋なところが好き。えみちぃはどこが好き？",
+            "screen": "シーサーッテ、 アカルクテ ガンバリヤナ トコロ ガ スキ。 エミチィ ハ ドコ ガ スキ?"
+          },
+          {
+            "atMs": 28000,
+            "role": "enny",
+            "text": "ワオ、アタシのこと!?",
+            "screen": "ワオ、 アタシ ノ コト !?"
+          },
+          {
+            "atMs": 28000,
+            "role": "enny",
+            "text": "シーサー ノ ツヅキ ガ シンパイ...。",
+            "screen": "シーサー ノ ツヅキ ガ シンパイ...。"
+          }
+        ],
+        "visibleMessages": [
+          {
+            "role": "system",
+            "screen": "エミチィ / THE ALMOST CLEVER GAME"
+          },
+          {
+            "role": "enny",
+            "screen": "ハジメマシテ!"
+          },
+          {
+            "role": "system",
+            "screen": "ニホンゴ デ フツウニ ハナシテネ"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "role": "enny",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          },
+          {
+            "role": "user",
+            "screen": "ミンナ ニ ハ ナニテ ヨバレテル ノ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ソコ ハ マダ ヨク シラナイノ。"
+          },
+          {
+            "role": "enny",
+            "screen": "ワカッタ フリ デ コタエタクナイナ。"
+          },
+          {
+            "role": "user",
+            "screen": "シーサーッテ、 アカルクテ ガンバリヤナ トコロ ガ スキ。 エミチィ ハ ドコ ガ スキ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ワオ、 アタシ ノ コト !?"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー ノ ツヅキ ガ シンパイ...。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 2
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 10
+      },
+      "result": {
+        "atSeconds": 38,
+        "messages": [
+          {
+            "atMs": 30000,
+            "role": "enny",
+            "text": "ミタイノニ ミルノ コワイ。",
+            "screen": "ミタイノニ ミルノ コワイ。"
+          },
+          {
+            "atMs": 32000,
+            "role": "enny",
+            "text": "アナタモ?",
+            "screen": "アナタモ?"
+          },
+          {
+            "atMs": 34000,
+            "role": "enny",
+            "text": "アタシの話、聞いてくれるのうれしい！",
+            "screen": "アタシ ノ ハナシ、 キイテ クレル ノ ウレシイ!"
+          }
+        ],
+        "visibleMessages": [
+          {
+            "role": "system",
+            "screen": "エミチィ / THE ALMOST CLEVER GAME"
+          },
+          {
+            "role": "enny",
+            "screen": "ハジメマシテ!"
+          },
+          {
+            "role": "system",
+            "screen": "ニホンゴ デ フツウニ ハナシテネ"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "role": "enny",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          },
+          {
+            "role": "user",
+            "screen": "ミンナ ニ ハ ナニテ ヨバレテル ノ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ソコ ハ マダ ヨク シラナイノ。"
+          },
+          {
+            "role": "enny",
+            "screen": "ワカッタ フリ デ コタエタクナイナ。"
+          },
+          {
+            "role": "user",
+            "screen": "シーサーッテ、 アカルクテ ガンバリヤナ トコロ ガ スキ。 エミチィ ハ ドコ ガ スキ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ワオ、 アタシ ノ コト !?"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー ノ ツヅキ ガ シンパイ...。"
+          },
+          {
+            "role": "enny",
+            "screen": "ミタイノニ ミルノ コワイ。"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタモ?"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ ノ ハナシ、 キイテ クレル ノ ウレシイ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 2
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "シーサーはラーメン屋さんで働いてるんだよね。えみちぃ、さっき好きなところ話してたけど、どうして読み返したくなるの？"
+      },
+      "result": {
+        "atSeconds": 38,
+        "messages": [
+          {
+            "atMs": 38000,
+            "role": "user",
+            "text": "シーサーはラーメン屋さんで働いてるんだよね。えみちぃ、さっき好きなところ話してたけど、どうして読み返したくなるの？",
+            "screen": "シーサー ハ ラーメンヤサン デ ハタライテル ンダヨネ。 エミチィ 、 サッキ スキナ トコロ ハナシテタ ケド、 ドウシテ ヨミカエシタク ナル ノ?"
+          },
+          {
+            "atMs": 38000,
+            "role": "enny",
+            "text": "スキ!?",
+            "screen": "スキ!?"
+          },
+          {
+            "atMs": 38000,
+            "role": "enny",
+            "text": "アタシのことだと思って、喜んじゃうよ?",
+            "screen": "アタシ ノ コト ダト オモッテ、 ヨロコン ジャウヨ?"
+          }
+        ],
+        "visibleMessages": [
+          {
+            "role": "system",
+            "screen": "エミチィ / THE ALMOST CLEVER GAME"
+          },
+          {
+            "role": "enny",
+            "screen": "ハジメマシテ!"
+          },
+          {
+            "role": "system",
+            "screen": "ニホンゴ デ フツウニ ハナシテネ"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "role": "enny",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          },
+          {
+            "role": "user",
+            "screen": "ミンナ ニ ハ ナニテ ヨバレテル ノ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ソコ ハ マダ ヨク シラナイノ。"
+          },
+          {
+            "role": "enny",
+            "screen": "ワカッタ フリ デ コタエタクナイナ。"
+          },
+          {
+            "role": "user",
+            "screen": "シーサーッテ、 アカルクテ ガンバリヤナ トコロ ガ スキ。 エミチィ ハ ドコ ガ スキ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ワオ、 アタシ ノ コト !?"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー ノ ツヅキ ガ シンパイ...。"
+          },
+          {
+            "role": "enny",
+            "screen": "ミタイノニ ミルノ コワイ。"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタモ?"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ ノ ハナシ、 キイテ クレル ノ ウレシイ!"
+          },
+          {
+            "role": "user",
+            "screen": "シーサー ハ ラーメンヤサン デ ハタライテル ンダヨネ。 エミチィ 、 サッキ スキナ トコロ ハナシテタ ケド、 ドウシテ ヨミカエシタク ナル ノ?"
+          },
+          {
+            "role": "enny",
+            "screen": "スキ!?"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ ノ コト ダト オモッテ、 ヨロコン ジャウヨ?"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 3
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 7
+      },
+      "result": {
+        "atSeconds": 45,
+        "messages": [
+          {
+            "atMs": 40000,
+            "role": "enny",
+            "text": "えへへ、うれしい!",
+            "screen": "エ ヘ ヘ、 ウレシイ!"
+          },
+          {
+            "atMs": 42000,
+            "role": "enny",
+            "text": "今の言葉、ノートに大きく書きたいな。",
+            "screen": "イマ ノ コトバ、 ノート ニ オオキク カキタイナ。"
+          },
+          {
+            "atMs": 44000,
+            "role": "enny",
+            "text": "ご飯の話で、もうハチワレ思い出しちゃった。",
+            "screen": "ゴハン ノ ハナシ デ、 モウ ハチワレ オモイダシチャッタ。"
+          }
+        ],
+        "visibleMessages": [
+          {
+            "role": "system",
+            "screen": "エミチィ / THE ALMOST CLEVER GAME"
+          },
+          {
+            "role": "enny",
+            "screen": "ハジメマシテ!"
+          },
+          {
+            "role": "system",
+            "screen": "ニホンゴ デ フツウニ ハナシテネ"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "role": "enny",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          },
+          {
+            "role": "user",
+            "screen": "ミンナ ニ ハ ナニテ ヨバレテル ノ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ソコ ハ マダ ヨク シラナイノ。"
+          },
+          {
+            "role": "enny",
+            "screen": "ワカッタ フリ デ コタエタクナイナ。"
+          },
+          {
+            "role": "user",
+            "screen": "シーサーッテ、 アカルクテ ガンバリヤナ トコロ ガ スキ。 エミチィ ハ ドコ ガ スキ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ワオ、 アタシ ノ コト !?"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー ノ ツヅキ ガ シンパイ...。"
+          },
+          {
+            "role": "enny",
+            "screen": "ミタイノニ ミルノ コワイ。"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタモ?"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ ノ ハナシ、 キイテ クレル ノ ウレシイ!"
+          },
+          {
+            "role": "user",
+            "screen": "シーサー ハ ラーメンヤサン デ ハタライテル ンダヨネ。 エミチィ 、 サッキ スキナ トコロ ハナシテタ ケド、 ドウシテ ヨミカエシタク ナル ノ?"
+          },
+          {
+            "role": "enny",
+            "screen": "スキ!?"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ ノ コト ダト オモッテ、 ヨロコン ジャウヨ?"
+          },
+          {
+            "role": "enny",
+            "screen": "エ ヘ ヘ、 ウレシイ!"
+          },
+          {
+            "role": "enny",
+            "screen": "イマ ノ コトバ、 ノート ニ オオキク カキタイナ。"
+          },
+          {
+            "role": "enny",
+            "screen": "ゴハン ノ ハナシ デ、 モウ ハチワレ オモイダシチャッタ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 3
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "えっ、またシーサーの話？さっきも聞いたよ。何度も同じ話されるとちょっと困るな。"
+      },
+      "result": {
+        "atSeconds": 45,
+        "messages": [
+          {
+            "atMs": 45000,
+            "role": "user",
+            "text": "えっ、またシーサーの話？さっきも聞いたよ。何度も同じ話されるとちょっと困るな。",
+            "screen": "エッ、 マタ シーサー ノ ハナシ? サッキ モ キイタヨ。 ナンド モ オナジ ハナサレル ト チョット コマルナ。"
+          },
+          {
+            "atMs": 45000,
+            "role": "enny",
+            "text": "シーサー！",
+            "screen": "シーサー !"
+          },
+          {
+            "atMs": 45000,
+            "role": "enny",
+            "text": "シーサー ノ ツヅキ ガ シンパイ...。",
+            "screen": "シーサー ノ ツヅキ ガ シンパイ...。"
+          }
+        ],
+        "visibleMessages": [
+          {
+            "role": "system",
+            "screen": "エミチィ / THE ALMOST CLEVER GAME"
+          },
+          {
+            "role": "enny",
+            "screen": "ハジメマシテ!"
+          },
+          {
+            "role": "system",
+            "screen": "ニホンゴ デ フツウニ ハナシテネ"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "role": "enny",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          },
+          {
+            "role": "user",
+            "screen": "ミンナ ニ ハ ナニテ ヨバレテル ノ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ソコ ハ マダ ヨク シラナイノ。"
+          },
+          {
+            "role": "enny",
+            "screen": "ワカッタ フリ デ コタエタクナイナ。"
+          },
+          {
+            "role": "user",
+            "screen": "シーサーッテ、 アカルクテ ガンバリヤナ トコロ ガ スキ。 エミチィ ハ ドコ ガ スキ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ワオ、 アタシ ノ コト !?"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー ノ ツヅキ ガ シンパイ...。"
+          },
+          {
+            "role": "enny",
+            "screen": "ミタイノニ ミルノ コワイ。"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタモ?"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ ノ ハナシ、 キイテ クレル ノ ウレシイ!"
+          },
+          {
+            "role": "user",
+            "screen": "シーサー ハ ラーメンヤサン デ ハタライテル ンダヨネ。 エミチィ 、 サッキ スキナ トコロ ハナシテタ ケド、 ドウシテ ヨミカエシタク ナル ノ?"
+          },
+          {
+            "role": "enny",
+            "screen": "スキ!?"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ ノ コト ダト オモッテ、 ヨロコン ジャウヨ?"
+          },
+          {
+            "role": "enny",
+            "screen": "エ ヘ ヘ、 ウレシイ!"
+          },
+          {
+            "role": "enny",
+            "screen": "イマ ノ コトバ、 ノート ニ オオキク カキタイナ。"
+          },
+          {
+            "role": "enny",
+            "screen": "ゴハン ノ ハナシ デ、 モウ ハチワレ オモイダシチャッタ。"
+          },
+          {
+            "role": "user",
+            "screen": "エッ、 マタ シーサー ノ ハナシ? サッキ モ キイタヨ。 ナンド モ オナジ ハナサレル ト チョット コマルナ。"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー !"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー ノ ツヅキ ガ シンパイ...。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 4
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 6
+      },
+      "result": {
+        "atSeconds": 51,
+        "messages": [
+          {
+            "atMs": 47000,
+            "role": "enny",
+            "text": "ミタイノニ ミルノ コワイ。",
+            "screen": "ミタイノニ ミルノ コワイ。"
+          },
+          {
+            "atMs": 49000,
+            "role": "enny",
+            "text": "アナタモ?",
+            "screen": "アナタモ?"
+          }
+        ],
+        "visibleMessages": [
+          {
+            "role": "system",
+            "screen": "エミチィ / THE ALMOST CLEVER GAME"
+          },
+          {
+            "role": "enny",
+            "screen": "ハジメマシテ!"
+          },
+          {
+            "role": "system",
+            "screen": "ニホンゴ デ フツウニ ハナシテネ"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "role": "enny",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          },
+          {
+            "role": "user",
+            "screen": "ミンナ ニ ハ ナニテ ヨバレテル ノ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ソコ ハ マダ ヨク シラナイノ。"
+          },
+          {
+            "role": "enny",
+            "screen": "ワカッタ フリ デ コタエタクナイナ。"
+          },
+          {
+            "role": "user",
+            "screen": "シーサーッテ、 アカルクテ ガンバリヤナ トコロ ガ スキ。 エミチィ ハ ドコ ガ スキ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ワオ、 アタシ ノ コト !?"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー ノ ツヅキ ガ シンパイ...。"
+          },
+          {
+            "role": "enny",
+            "screen": "ミタイノニ ミルノ コワイ。"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタモ?"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ ノ ハナシ、 キイテ クレル ノ ウレシイ!"
+          },
+          {
+            "role": "user",
+            "screen": "シーサー ハ ラーメンヤサン デ ハタライテル ンダヨネ。 エミチィ 、 サッキ スキナ トコロ ハナシテタ ケド、 ドウシテ ヨミカエシタク ナル ノ?"
+          },
+          {
+            "role": "enny",
+            "screen": "スキ!?"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ ノ コト ダト オモッテ、 ヨロコン ジャウヨ?"
+          },
+          {
+            "role": "enny",
+            "screen": "エ ヘ ヘ、 ウレシイ!"
+          },
+          {
+            "role": "enny",
+            "screen": "イマ ノ コトバ、 ノート ニ オオキク カキタイナ。"
+          },
+          {
+            "role": "enny",
+            "screen": "ゴハン ノ ハナシ デ、 モウ ハチワレ オモイダシチャッタ。"
+          },
+          {
+            "role": "user",
+            "screen": "エッ、 マタ シーサー ノ ハナシ? サッキ モ キイタヨ。 ナンド モ オナジ ハナサレル ト チョット コマルナ。"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー !"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー ノ ツヅキ ガ シンパイ...。"
+          },
+          {
+            "role": "enny",
+            "screen": "ミタイノニ ミルノ コワイ。"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタモ?"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 4
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "今は別の話がしたいな。シーサーの話はもういいよ。"
+      },
+      "result": {
+        "atSeconds": 51,
+        "messages": [
+          {
+            "atMs": 51000,
+            "role": "user",
+            "text": "今は別の話がしたいな。シーサーの話はもういいよ。",
+            "screen": "イマ ハ ベツ ノ ハナシ ガ シタイナ。 シーサー ノ ハナシ ハ モウ イイヨ。"
+          },
+          {
+            "atMs": 51000,
+            "role": "enny",
+            "text": "シーサー、ね。",
+            "screen": "シーサー 、ネ。"
+          },
+          {
+            "atMs": 51000,
+            "role": "enny",
+            "text": "うん、別の話にしよう。",
+            "screen": "ウン、 ベツ ノ ハナシ ニ シヨウ。"
+          }
+        ],
+        "visibleMessages": [
+          {
+            "role": "system",
+            "screen": "エミチィ / THE ALMOST CLEVER GAME"
+          },
+          {
+            "role": "enny",
+            "screen": "ハジメマシテ!"
+          },
+          {
+            "role": "system",
+            "screen": "ニホンゴ デ フツウニ ハナシテネ"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "role": "enny",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          },
+          {
+            "role": "user",
+            "screen": "ミンナ ニ ハ ナニテ ヨバレテル ノ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ソコ ハ マダ ヨク シラナイノ。"
+          },
+          {
+            "role": "enny",
+            "screen": "ワカッタ フリ デ コタエタクナイナ。"
+          },
+          {
+            "role": "user",
+            "screen": "シーサーッテ、 アカルクテ ガンバリヤナ トコロ ガ スキ。 エミチィ ハ ドコ ガ スキ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ワオ、 アタシ ノ コト !?"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー ノ ツヅキ ガ シンパイ...。"
+          },
+          {
+            "role": "enny",
+            "screen": "ミタイノニ ミルノ コワイ。"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタモ?"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ ノ ハナシ、 キイテ クレル ノ ウレシイ!"
+          },
+          {
+            "role": "user",
+            "screen": "シーサー ハ ラーメンヤサン デ ハタライテル ンダヨネ。 エミチィ 、 サッキ スキナ トコロ ハナシテタ ケド、 ドウシテ ヨミカエシタク ナル ノ?"
+          },
+          {
+            "role": "enny",
+            "screen": "スキ!?"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ ノ コト ダト オモッテ、 ヨロコン ジャウヨ?"
+          },
+          {
+            "role": "enny",
+            "screen": "エ ヘ ヘ、 ウレシイ!"
+          },
+          {
+            "role": "enny",
+            "screen": "イマ ノ コトバ、 ノート ニ オオキク カキタイナ。"
+          },
+          {
+            "role": "enny",
+            "screen": "ゴハン ノ ハナシ デ、 モウ ハチワレ オモイダシチャッタ。"
+          },
+          {
+            "role": "user",
+            "screen": "エッ、 マタ シーサー ノ ハナシ? サッキ モ キイタヨ。 ナンド モ オナジ ハナサレル ト チョット コマルナ。"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー !"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー ノ ツヅキ ガ シンパイ...。"
+          },
+          {
+            "role": "enny",
+            "screen": "ミタイノニ ミルノ コワイ。"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタモ?"
+          },
+          {
+            "role": "user",
+            "screen": "イマ ハ ベツ ノ ハナシ ガ シタイナ。 シーサー ノ ハナシ ハ モウ イイヨ。"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー 、ネ。"
+          },
+          {
+            "role": "enny",
+            "screen": "ウン、 ベツ ノ ハナシ ニ シヨウ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 5
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 9
+      },
+      "result": {
+        "atSeconds": 60,
+        "messages": [
+          {
+            "atMs": 57000,
+            "role": "enny",
+            "text": "小さいごほうびに、何を食べたい？ プリン、ケーキ、おせんべい。ほかの食べ物でも、一つ教えて！",
+            "screen": "チイサイ ゴホウビ ニ、 ナニ ヲ タベタイ? プリン、 ケーキ、 オセンベイ。 ホカ ノ タベモノ デ モ、 ヒトツ オシエテ!"
+          }
+        ],
+        "visibleMessages": [
+          {
+            "role": "system",
+            "screen": "エミチィ / THE ALMOST CLEVER GAME"
+          },
+          {
+            "role": "enny",
+            "screen": "ハジメマシテ!"
+          },
+          {
+            "role": "system",
+            "screen": "ニホンゴ デ フツウニ ハナシテネ"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "role": "enny",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          },
+          {
+            "role": "user",
+            "screen": "ミンナ ニ ハ ナニテ ヨバレテル ノ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ソコ ハ マダ ヨク シラナイノ。"
+          },
+          {
+            "role": "enny",
+            "screen": "ワカッタ フリ デ コタエタクナイナ。"
+          },
+          {
+            "role": "user",
+            "screen": "シーサーッテ、 アカルクテ ガンバリヤナ トコロ ガ スキ。 エミチィ ハ ドコ ガ スキ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ワオ、 アタシ ノ コト !?"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー ノ ツヅキ ガ シンパイ...。"
+          },
+          {
+            "role": "enny",
+            "screen": "ミタイノニ ミルノ コワイ。"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタモ?"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ ノ ハナシ、 キイテ クレル ノ ウレシイ!"
+          },
+          {
+            "role": "user",
+            "screen": "シーサー ハ ラーメンヤサン デ ハタライテル ンダヨネ。 エミチィ 、 サッキ スキナ トコロ ハナシテタ ケド、 ドウシテ ヨミカエシタク ナル ノ?"
+          },
+          {
+            "role": "enny",
+            "screen": "スキ!?"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ ノ コト ダト オモッテ、 ヨロコン ジャウヨ?"
+          },
+          {
+            "role": "enny",
+            "screen": "エ ヘ ヘ、 ウレシイ!"
+          },
+          {
+            "role": "enny",
+            "screen": "イマ ノ コトバ、 ノート ニ オオキク カキタイナ。"
+          },
+          {
+            "role": "enny",
+            "screen": "ゴハン ノ ハナシ デ、 モウ ハチワレ オモイダシチャッタ。"
+          },
+          {
+            "role": "user",
+            "screen": "エッ、 マタ シーサー ノ ハナシ? サッキ モ キイタヨ。 ナンド モ オナジ ハナサレル ト チョット コマルナ。"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー !"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー ノ ツヅキ ガ シンパイ...。"
+          },
+          {
+            "role": "enny",
+            "screen": "ミタイノニ ミルノ コワイ。"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタモ?"
+          },
+          {
+            "role": "user",
+            "screen": "イマ ハ ベツ ノ ハナシ ガ シタイナ。 シーサー ノ ハナシ ハ モウ イイヨ。"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー 、ネ。"
+          },
+          {
+            "role": "enny",
+            "screen": "ウン、 ベツ ノ ハナシ ニ シヨウ。"
+          },
+          {
+            "role": "enny",
+            "screen": "チイサイ ゴホウビ ニ、 ナニ ヲ タベタイ? プリン、 ケーキ、 オセンベイ。 ホカ ノ タベモノ デ モ、 ヒトツ オシエテ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 5
+      }
+    },
+    {
+      "action": {
+        "type": "say",
+        "text": "うん、もう大丈夫。許すよ。次はハチワレの話しない？"
+      },
+      "result": {
+        "atSeconds": 60,
+        "messages": [
+          {
+            "atMs": 60000,
+            "role": "user",
+            "text": "うん、もう大丈夫。許すよ。次はハチワレの話しない？",
+            "screen": "ウン、 モウ ダイジョウブ。 ユルスヨ。 ツギ ハ ハチワレ ノ ハナシ シナイ?"
+          },
+          {
+            "atMs": 60000,
+            "role": "enny",
+            "text": "ハチワレ！",
+            "screen": "ハチワレ !"
+          },
+          {
+            "atMs": 60000,
+            "role": "enny",
+            "text": "わあ、その話うれしい!",
+            "screen": "ワア、 ソノ ハナシ ウレシイ!"
+          }
+        ],
+        "visibleMessages": [
+          {
+            "role": "system",
+            "screen": "エミチィ / THE ALMOST CLEVER GAME"
+          },
+          {
+            "role": "enny",
+            "screen": "ハジメマシテ!"
+          },
+          {
+            "role": "system",
+            "screen": "ニホンゴ デ フツウニ ハナシテネ"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "role": "enny",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          },
+          {
+            "role": "user",
+            "screen": "ミンナ ニ ハ ナニテ ヨバレテル ノ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ソコ ハ マダ ヨク シラナイノ。"
+          },
+          {
+            "role": "enny",
+            "screen": "ワカッタ フリ デ コタエタクナイナ。"
+          },
+          {
+            "role": "user",
+            "screen": "シーサーッテ、 アカルクテ ガンバリヤナ トコロ ガ スキ。 エミチィ ハ ドコ ガ スキ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ワオ、 アタシ ノ コト !?"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー ノ ツヅキ ガ シンパイ...。"
+          },
+          {
+            "role": "enny",
+            "screen": "ミタイノニ ミルノ コワイ。"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタモ?"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ ノ ハナシ、 キイテ クレル ノ ウレシイ!"
+          },
+          {
+            "role": "user",
+            "screen": "シーサー ハ ラーメンヤサン デ ハタライテル ンダヨネ。 エミチィ 、 サッキ スキナ トコロ ハナシテタ ケド、 ドウシテ ヨミカエシタク ナル ノ?"
+          },
+          {
+            "role": "enny",
+            "screen": "スキ!?"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ ノ コト ダト オモッテ、 ヨロコン ジャウヨ?"
+          },
+          {
+            "role": "enny",
+            "screen": "エ ヘ ヘ、 ウレシイ!"
+          },
+          {
+            "role": "enny",
+            "screen": "イマ ノ コトバ、 ノート ニ オオキク カキタイナ。"
+          },
+          {
+            "role": "enny",
+            "screen": "ゴハン ノ ハナシ デ、 モウ ハチワレ オモイダシチャッタ。"
+          },
+          {
+            "role": "user",
+            "screen": "エッ、 マタ シーサー ノ ハナシ? サッキ モ キイタヨ。 ナンド モ オナジ ハナサレル ト チョット コマルナ。"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー !"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー ノ ツヅキ ガ シンパイ...。"
+          },
+          {
+            "role": "enny",
+            "screen": "ミタイノニ ミルノ コワイ。"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタモ?"
+          },
+          {
+            "role": "user",
+            "screen": "イマ ハ ベツ ノ ハナシ ガ シタイナ。 シーサー ノ ハナシ ハ モウ イイヨ。"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー 、ネ。"
+          },
+          {
+            "role": "enny",
+            "screen": "ウン、 ベツ ノ ハナシ ニ シヨウ。"
+          },
+          {
+            "role": "enny",
+            "screen": "チイサイ ゴホウビ ニ、 ナニ ヲ タベタイ? プリン、 ケーキ、 オセンベイ。 ホカ ノ タベモノ デ モ、 ヒトツ オシエテ!"
+          },
+          {
+            "role": "user",
+            "screen": "ウン、 モウ ダイジョウブ。 ユルスヨ。 ツギ ハ ハチワレ ノ ハナシ シナイ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ハチワレ !"
+          },
+          {
+            "role": "enny",
+            "screen": "ワア、 ソノ ハナシ ウレシイ!"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 6
+      }
+    },
+    {
+      "action": {
+        "type": "wait",
+        "seconds": 12
+      },
+      "result": {
+        "atSeconds": 72,
+        "messages": [
+          {
+            "atMs": 62000,
+            "role": "enny",
+            "text": "ハチワレのご飯、少し失敗しても一緒に食べたい。",
+            "screen": "ハチワレ ノ ゴハン、 スコシ シッパイ シテ モ イッショ ニ タベタイ。"
+          },
+          {
+            "atMs": 72000,
+            "role": "enny",
+            "text": "アタシ、スウェーデンのヨーテボリの近くで育ったの。",
+            "screen": "アタシ、 スウェーデン ノ ヨーテボリ ノ チカク デ ソダッタノ。"
+          }
+        ],
+        "visibleMessages": [
+          {
+            "role": "system",
+            "screen": "エミチィ / THE ALMOST CLEVER GAME"
+          },
+          {
+            "role": "enny",
+            "screen": "ハジメマシテ!"
+          },
+          {
+            "role": "system",
+            "screen": "ニホンゴ デ フツウニ ハナシテネ"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。"
+          },
+          {
+            "role": "enny",
+            "screen": "スキナ トコロ ヲ ハナス ト、 マタ チイカワ ヲ ヨミカエシタク ナッチャウ。"
+          },
+          {
+            "role": "user",
+            "screen": "ミンナ ニ ハ ナニテ ヨバレテル ノ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ソコ ハ マダ ヨク シラナイノ。"
+          },
+          {
+            "role": "enny",
+            "screen": "ワカッタ フリ デ コタエタクナイナ。"
+          },
+          {
+            "role": "user",
+            "screen": "シーサーッテ、 アカルクテ ガンバリヤナ トコロ ガ スキ。 エミチィ ハ ドコ ガ スキ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ワオ、 アタシ ノ コト !?"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー ノ ツヅキ ガ シンパイ...。"
+          },
+          {
+            "role": "enny",
+            "screen": "ミタイノニ ミルノ コワイ。"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタモ?"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ ノ ハナシ、 キイテ クレル ノ ウレシイ!"
+          },
+          {
+            "role": "user",
+            "screen": "シーサー ハ ラーメンヤサン デ ハタライテル ンダヨネ。 エミチィ 、 サッキ スキナ トコロ ハナシテタ ケド、 ドウシテ ヨミカエシタク ナル ノ?"
+          },
+          {
+            "role": "enny",
+            "screen": "スキ!?"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ ノ コト ダト オモッテ、 ヨロコン ジャウヨ?"
+          },
+          {
+            "role": "enny",
+            "screen": "エ ヘ ヘ、 ウレシイ!"
+          },
+          {
+            "role": "enny",
+            "screen": "イマ ノ コトバ、 ノート ニ オオキク カキタイナ。"
+          },
+          {
+            "role": "enny",
+            "screen": "ゴハン ノ ハナシ デ、 モウ ハチワレ オモイダシチャッタ。"
+          },
+          {
+            "role": "user",
+            "screen": "エッ、 マタ シーサー ノ ハナシ? サッキ モ キイタヨ。 ナンド モ オナジ ハナサレル ト チョット コマルナ。"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー !"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー ノ ツヅキ ガ シンパイ...。"
+          },
+          {
+            "role": "enny",
+            "screen": "ミタイノニ ミルノ コワイ。"
+          },
+          {
+            "role": "enny",
+            "screen": "アナタモ?"
+          },
+          {
+            "role": "user",
+            "screen": "イマ ハ ベツ ノ ハナシ ガ シタイナ。 シーサー ノ ハナシ ハ モウ イイヨ。"
+          },
+          {
+            "role": "enny",
+            "screen": "シーサー 、ネ。"
+          },
+          {
+            "role": "enny",
+            "screen": "ウン、 ベツ ノ ハナシ ニ シヨウ。"
+          },
+          {
+            "role": "enny",
+            "screen": "チイサイ ゴホウビ ニ、 ナニ ヲ タベタイ? プリン、 ケーキ、 オセンベイ。 ホカ ノ タベモノ デ モ、 ヒトツ オシエテ!"
+          },
+          {
+            "role": "user",
+            "screen": "ウン、 モウ ダイジョウブ。 ユルスヨ。 ツギ ハ ハチワレ ノ ハナシ シナイ?"
+          },
+          {
+            "role": "enny",
+            "screen": "ハチワレ !"
+          },
+          {
+            "role": "enny",
+            "screen": "ワア、 ソノ ハナシ ウレシイ!"
+          },
+          {
+            "role": "enny",
+            "screen": "ハチワレ ノ ゴハン、 スコシ シッパイ シテ モ イッショ ニ タベタイ。"
+          },
+          {
+            "role": "enny",
+            "screen": "アタシ、 スウェーデン ノ ヨーテボリ ノ チカク デ ソダッタノ。"
+          }
+        ],
+        "draft": "",
+        "finished": false,
+        "turns": 6
+      }
+    }
+  ],
+  "transcript": [
+    {
+      "atMs": 0,
+      "message": {
+        "role": "enny",
+        "text": "はじめまして！"
+      }
+    },
+    {
+      "atMs": 1500,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、エミチィ。日本語を勉強してるの。ちいかわが大好き！"
+      }
+    },
+    {
+      "atMs": 3000,
+      "message": {
+        "role": "enny",
+        "text": "あなた、なんて呼べばいい？ ニックネームでいいよ。"
+      }
+    },
+    {
+      "atMs": 13000,
+      "message": {
+        "role": "enny",
+        "text": "好きなところを話すと、またちいかわを読み返したくなっちゃう。"
+      }
+    },
+    {
+      "atMs": 20000,
+      "message": {
+        "role": "user",
+        "text": "みんなには何て呼ばれてるの？"
+      }
+    },
+    {
+      "atMs": 20000,
+      "message": {
+        "role": "enny",
+        "text": "そこはまだよく知らないの。"
+      }
+    },
+    {
+      "atMs": 24000,
+      "message": {
+        "role": "enny",
+        "text": "わかったふりで答えたくないな。"
+      }
+    },
+    {
+      "atMs": 28000,
+      "message": {
+        "role": "user",
+        "text": "シーサーって、明るくて頑張り屋なところが好き。えみちぃはどこが好き？"
+      }
+    },
+    {
+      "atMs": 28000,
+      "message": {
+        "role": "enny",
+        "text": "ワオ、アタシのこと!?"
+      }
+    },
+    {
+      "atMs": 28000,
+      "message": {
+        "role": "enny",
+        "text": "シーサー ノ ツヅキ ガ シンパイ...。"
+      }
+    },
+    {
+      "atMs": 30000,
+      "message": {
+        "role": "enny",
+        "text": "ミタイノニ ミルノ コワイ。"
+      }
+    },
+    {
+      "atMs": 32000,
+      "message": {
+        "role": "enny",
+        "text": "アナタモ?"
+      }
+    },
+    {
+      "atMs": 34000,
+      "message": {
+        "role": "enny",
+        "text": "アタシの話、聞いてくれるのうれしい！"
+      }
+    },
+    {
+      "atMs": 38000,
+      "message": {
+        "role": "user",
+        "text": "シーサーはラーメン屋さんで働いてるんだよね。えみちぃ、さっき好きなところ話してたけど、どうして読み返したくなるの？"
+      }
+    },
+    {
+      "atMs": 38000,
+      "message": {
+        "role": "enny",
+        "text": "スキ!?"
+      }
+    },
+    {
+      "atMs": 38000,
+      "message": {
+        "role": "enny",
+        "text": "アタシのことだと思って、喜んじゃうよ?"
+      }
+    },
+    {
+      "atMs": 40000,
+      "message": {
+        "role": "enny",
+        "text": "えへへ、うれしい!"
+      }
+    },
+    {
+      "atMs": 42000,
+      "message": {
+        "role": "enny",
+        "text": "今の言葉、ノートに大きく書きたいな。"
+      }
+    },
+    {
+      "atMs": 44000,
+      "message": {
+        "role": "enny",
+        "text": "ご飯の話で、もうハチワレ思い出しちゃった。"
+      }
+    },
+    {
+      "atMs": 45000,
+      "message": {
+        "role": "user",
+        "text": "えっ、またシーサーの話？さっきも聞いたよ。何度も同じ話されるとちょっと困るな。"
+      }
+    },
+    {
+      "atMs": 45000,
+      "message": {
+        "role": "enny",
+        "text": "シーサー！"
+      }
+    },
+    {
+      "atMs": 45000,
+      "message": {
+        "role": "enny",
+        "text": "シーサー ノ ツヅキ ガ シンパイ...。"
+      }
+    },
+    {
+      "atMs": 47000,
+      "message": {
+        "role": "enny",
+        "text": "ミタイノニ ミルノ コワイ。"
+      }
+    },
+    {
+      "atMs": 49000,
+      "message": {
+        "role": "enny",
+        "text": "アナタモ?"
+      }
+    },
+    {
+      "atMs": 51000,
+      "message": {
+        "role": "user",
+        "text": "今は別の話がしたいな。シーサーの話はもういいよ。"
+      }
+    },
+    {
+      "atMs": 51000,
+      "message": {
+        "role": "enny",
+        "text": "シーサー、ね。"
+      }
+    },
+    {
+      "atMs": 51000,
+      "message": {
+        "role": "enny",
+        "text": "うん、別の話にしよう。"
+      }
+    },
+    {
+      "atMs": 57000,
+      "message": {
+        "role": "enny",
+        "text": "小さいごほうびに、何を食べたい？ プリン、ケーキ、おせんべい。ほかの食べ物でも、一つ教えて！"
+      }
+    },
+    {
+      "atMs": 60000,
+      "message": {
+        "role": "user",
+        "text": "うん、もう大丈夫。許すよ。次はハチワレの話しない？"
+      }
+    },
+    {
+      "atMs": 60000,
+      "message": {
+        "role": "enny",
+        "text": "ハチワレ！"
+      }
+    },
+    {
+      "atMs": 60000,
+      "message": {
+        "role": "enny",
+        "text": "わあ、その話うれしい!"
+      }
+    },
+    {
+      "atMs": 62000,
+      "message": {
+        "role": "enny",
+        "text": "ハチワレのご飯、少し失敗しても一緒に食べたい。"
+      }
+    },
+    {
+      "atMs": 72000,
+      "message": {
+        "role": "enny",
+        "text": "アタシ、スウェーデンのヨーテボリの近くで育ったの。"
+      }
+    }
+  ]
+}

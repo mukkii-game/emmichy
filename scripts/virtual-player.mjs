@@ -59,6 +59,8 @@ globalThis.fetch=liveMode?async(url,options)=>{
  record.wallMs=Math.round(performance.now()-started);record.status=result.status;
  return {ok:result.status>=200&&result.status<300,status:result.status,json:async()=>{const body=JSON.parse(result.body);record.provider=body.provider;record.text=body.text;return body;}};
 }:()=>{throw new Error('Network disabled in virtual-player harness');};
+const seedIndex=process.argv.indexOf('--state');
+if(seedIndex>=0){const seed=JSON.parse(await fs.readFile(process.argv[seedIndex+1],'utf8'));store.setItem('enny-memory-v1',JSON.stringify(seed.state));if(seed.session)store.setItem('emmichy-session',JSON.stringify(seed.session));}
 await import('../src/app.js');
 for(let i=0;i<100;i++)await Promise.resolve();
 const {readableText}=await import('../src/readable.js');
@@ -90,6 +92,7 @@ for await(const line of input){
   }else if(action.type==='wait')await wait(action.seconds);
   else if(action.type==='draft'){get('entry').value=String(action.text||'');await get('entry').emit('input');}
   else if(action.type==='composition')await get('entry').emit(action.active?'compositionstart':'compositionend');
+  else if(action.type==='continue')get('continue').onclick();
   else if(action.type==='reset'){get('restart-chat').onclick();get('new-chat').onclick();}
   else if(action.type==='quit')break;
   else throw new Error('Use say, wait, draft, composition, reset or quit');

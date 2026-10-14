@@ -1,0 +1,69 @@
+{
+  "mode": "real provider generation with candidate server prompt; synthetic inputs; no browser or human evaluation",
+  "commit": "91811f398b0dc1b974008dad8d5decfd89d653dd",
+  "at": "2026-10-14T03:42:28.018Z",
+  "limit": 3,
+  "turns": [
+    {
+      "input": "草むしり検定の最初の結果は？",
+      "systemCharacters": 5100,
+      "history": [],
+      "wallMs": 626,
+      "result": {
+        "text": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。",
+        "provider": "groq",
+        "source": "authored"
+      },
+      "attempts": [
+        {
+          "provider": "groq",
+          "source": "authored",
+          "ok": true,
+          "reason": "specialist-plan",
+          "ms": 622
+        }
+      ]
+    },
+    {
+      "input": "ハチワレの気持ち、えみちいはどう思う？",
+      "systemCharacters": 4933,
+      "history": [
+        {
+          "role": "user",
+          "content": "草むしり検定の最初の結果は？"
+        },
+        {
+          "role": "assistant",
+          "content": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。"
+        }
+      ],
+      "wallMs": 4158,
+      "result": null,
+      "attempts": [
+        {
+          "provider": "groq",
+          "source": "llm",
+          "ok": false,
+          "reason": "rejected",
+          "ms": 649
+        },
+        {
+          "provider": "gemini",
+          "source": "llm",
+          "ok": false,
+          "reason": "The operation was aborted due to timeout",
+          "ms": 3502
+        },
+        {
+          "provider": "workers-ai",
+          "source": "llm",
+          "ok": false,
+          "reason": "probe-budget",
+          "ms": 0
+        }
+      ]
+    }
+  ],
+  "calls": 3,
+  "rateLimited": false
+}

@@ -11,6 +11,7 @@ export const familiarJapanese=[
 export function learnerReply(raw,{force=false}={}){
  const t=fold(raw),jp=/日本語|ニホンゴ/.test(t);
  const others=/(?:私|僕|俺|ワタシ|ボク|オレ|友達|彼).{0,4}(?:ハ|ガ|モ|ノ)/.test(t);
+ if(jp&&/ドウヤッテ|方法|練習/.test(t))return {topic:'profile',id:'profile:study-method',text:'教わった言い方を小さいノートに書いて、こういう会話で試すの。漫画とアニメも読むよ。使えた言葉が増えると、嬉しい！'};
  if(jp&&(!/チイカワ|ハチワレ|ウサギ|シーサー/.test(t)||/勉強|ベンキョウ|覚|学/.test(t)))return {topic:'profile',id:'profile:languages',text:others?'アタシも日本語を勉強中！ 漫画とアニメ、それからこういう会話で覚えてるの。':'うん、日本語を勉強してるよ！ 漫画とアニメ、それからこういう会話で覚えてるの。長い音と小さい「っ」は、まだ難しいの。'};
  const entry=familiarJapanese.find(e=>t.includes(e.key)&&e.key.length>=3);
  if(!entry||/チイカワ|ハチワレ|ウサギ|シーサー|ジョジョ|ハンター/.test(t))return null;

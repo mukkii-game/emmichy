@@ -1,7 +1,7 @@
-import {nameData} from './name-data.js?v=20261013-specialist1';
-import {placeNames} from './places.js?v=20261013-specialist1';
-import {gameNames} from './game-names.js?v=20261013-specialist1';
-import {requestsChiikawa} from './topic-intent.js?v=20261013-specialist1';
+import {nameData} from './name-data.js?v=20261014-dialogue1';
+import {placeNames} from './places.js?v=20261014-dialogue1';
+import {gameNames} from './game-names.js?v=20261014-dialogue1';
+import {requestsChiikawa} from './topic-intent.js?v=20261014-dialogue1';
 export const foldName=s=>String(s||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).toLowerCase().replace(/[\s・×＝=\-:：'’"「」]/g,'');
 export const NAME_REACTION_MS=750;
 const trie=new Map(),exact=[];
@@ -28,14 +28,21 @@ function inContext(row,input,work){
  return row.work==='chiikawa'&&row.name==='うさぎ'&&(!/飼|ペット|動物|野生|エサ|餌|牧場/.test(input))&&(foldName(input)==='ウサギ'||/かっこ|カッコ|好き|スキ|かわいい|カワイイ|キャラ|ちいかわ|チイカワ/.test(input));
 }
 export function exactNames(input,state={}){const work=workIn(state);return distinct(scan(input)).filter(m=>inContext(m.row,input,work)).map(m=>m.row);}
+// A work title provides context; a named character in the question owns the answer.
+export function focusName(input,state={}){
+ const names=exactNames(input,state),chii=names.filter(n=>n.work==='chiikawa');
+ const specific=chii.filter(n=>n.name!=='ちいかわ'),pool=specific.length?specific:chii;
+ const t=foldName(input);
+ return pool.sort((a,b)=>Math.max(...b.aliases.map(s=>t.lastIndexOf(foldName(s))))-Math.max(...a.aliases.map(s=>t.lastIndexOf(foldName(s)))))[0]||null;
+}
 export function recognizeName(input,{reading='',state={}}={}){
  const work=workIn(state),values=[input,reading].filter(Boolean);
  const decline=!requestsChiikawa(input)&&/(?:漫画|マンガ).*(?:ヤメ|以外|イガイ|苦手)|別ノ話|ベツノハナシ|ソノ話.*ヤメ|チイカワ.*(?:ヤメ|以外|イガイ|嫌イ|キライ|苦手)/.test(foldName(input));
  const matches=distinct(values.flatMap(scan)).filter(m=>inContext(m.row,input,work));
  const common=values.flatMap(scan).filter(m=>m.row.work==='chiikawa'&&m.row.contextOnly&&work!=='chiikawa');
  matches.sort((a,b)=>b.length-a.length||(b.row.work===work?1:0)-(a.row.work===work?1:0));
- const chii=matches.find(m=>m.row.work==='chiikawa');
- if(chii)return {...chii.row,soft:false,decline};
+ const chii=focusName(input,state)||matches.find(m=>m.row.work==='chiikawa')?.row;
+ if(chii)return {...chii,soft:false,decline};
  const direct=matches[0];
  if(decline||/つらい|苦しい|病気|事故|亡く|死に|相談/.test(input))return direct?{...direct.row,soft:false,decline}:null;
  // User-requested playful mishearing. It never rewrites the player's input.

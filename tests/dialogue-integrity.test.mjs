@@ -22,6 +22,7 @@ test('her own catchphrase imitation is not attributed to a previously mentioned 
  assert.equal(attributionRepair('ハチワレの話をしよう。私が「ヤハ！」って言っても、真似しているだけ。'),null);
  assert.ok(attributionRepair('ハチワレが「ヤハ！」と叫ぶ場面が好き。'));
  assert.ok(attributionRepair('うさぎは元気だね。ハチワレの口癖は「ヤハ！」だよ。'),'another sentence mentioning Usagi must not whitelist a wrong attribution');
+ assert.ok(attributionRepair('ハチワレの口癖は「ヤハ！」だよ。もしアタシだったら真似したい。'),'a later imagined sentence does not excuse a false speaker attribution');
 });
 test('quoted exclamations remain intact and character fantasies are not her own imagination',()=>{
  const valid='アタシも「ヤハ！」って言ってみると、気持ちが軽くなる気がする。';

@@ -1,4 +1,4 @@
-import {requestsChiikawa} from './topic-intent.js?v=20261013-specialist1';
+import {requestsChiikawa} from './topic-intent.js?v=20261014-dialogue1';
 // Conversation acts are handled before lexical fandom cues. A player's complaint
 // is not a food preference, a name, or an invitation to another monologue.
 export const foldRepair=s=>String(s||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');
@@ -19,6 +19,7 @@ export function cleanDialogueControl(value){
 }
 export function feedbackIntent(input){
  const t=foldRepair(input);
+ if(/同ジ(?:コト|事|言葉|コトバ)バカリ.*(?:言|イッ)/.test(t))return 'repeat';
  if(/(?:話|ハナシ|会話|カイワ|返事|ヘンジ|文|ブン|一言|ヒトコト).{0,25}(?:長スギ|ナガスギ|長イノ.{0,6}苦手|ナガイノ.{0,6}苦手)|短ク|ミジカク|短メ|ミジカメ/.test(t))return 'length';
  if(/(?:同ジ|オナジ)(?:コト|事|ノ|言葉|コトバ|文|ブン).{0,25}(?:繰リ返|クリカエ|何度|ナンド|[0-9一二三四五六七八九十]+(?:度|ド|回|カイ))|(?:繰リ返|クリカエ).{0,20}(?:[0-9一二三四五六七八九十]+(?:度|ド|回|カイ))|[0-9一二三四五六七八九十]+(?:度|ド|回|カイ).{0,16}(?:繰リ返|クリカエ)|ワンパターン|同ジ話|オナジ話|同ジネタ|オナジネタ|何度モ|ナンドモ|何回モ|ナンカイモ|[0-9０-９一二三四五六七八九十]+回目|サッキモ聞|サッキモキ|モウ聞イタ|モウキイタ/.test(t))return 'repeat';
  if(/独リ言|ヒトリゴト|会話.{0,16}(?:成立|成リ立|ニナッテナイ|ニナッテイナイ|ダメ|ヒド)|噛ミ合|カミアワ|話.{0,16}(?:ズレ|逸レ|通ジ)|質問ニ答エ|聞イテナイ|キイテナイ|馬鹿スギ|バカスギ|意味不明/.test(t))return 'coherence';

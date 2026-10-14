@@ -1,0 +1,149 @@
+{
+  "mode": "actual app handlers in offline DOM fixture; virtual timing; no browser/human/live-model evaluation",
+  "providerCalls": 0,
+  "rows": [
+    {
+      "input": "島二郎の水流って何？",
+      "replies": [
+        "シマジロウ！",
+        "島二郎は手を回して水流を起こすの。",
+        "普段はお店にいる人なのに、水の中でもあんなに頼れるの、ずるいよ。",
+        "アタシ、次にお店の場面を見ても、あの水流を思い出しちゃいそう。"
+      ],
+      "specialist": {
+        "subject": "島二郎",
+        "scene": "water",
+        "focus": "relation:chiikawa-23",
+        "said": [
+          "relation:chiikawa-23"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "ちいかわたちがそこで遊んでたの？",
+      "replies": [
+        "チイカワ！",
+        "遊んでいた、とは言わないよ。",
+        "島二郎が手を回して水流を起こす話。",
+        "アタシ、その頼もしさが好きなの。"
+      ],
+      "specialist": {
+        "subject": "島二郎",
+        "scene": "water",
+        "focus": "relation:chiikawa-23",
+        "said": [
+          "relation:chiikawa-23"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "誰が水流を起こすんだっけ？",
+      "replies": [
+        "島二郎は手を回して水流を起こすの。"
+      ],
+      "specialist": {
+        "subject": "島二郎",
+        "scene": "water",
+        "focus": "relation:chiikawa-23",
+        "said": [
+          "relation:chiikawa-23"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "島二郎のお店では何を出すの？",
+      "replies": [
+        "島二郎の店はカツカレーと貝汁を出す。",
+        "フルーツパフェは島の別の食べ物。"
+      ],
+      "specialist": {
+        "subject": "島二郎",
+        "scene": "island-menu",
+        "focus": "relation:chiikawa-25",
+        "said": [
+          "relation:chiikawa-23",
+          "relation:chiikawa-25"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "フルーツパフェもそこで作るの？",
+      "replies": [
+        "島二郎の店のメニューは、カツカレーと貝汁。",
+        "パフェは島の別の食べ物だよ。",
+        "作り手までは、この資料では確かめられないの。"
+      ],
+      "specialist": {
+        "subject": "島二郎",
+        "scene": "island-menu",
+        "focus": "relation:chiikawa-25",
+        "said": [
+          "relation:chiikawa-23",
+          "relation:chiikawa-25"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "映画でモモンガがちいかわの耳を引っ張るところは？",
+      "replies": [
+        "モモンガ！",
+        "映画では、崖から落ちそうなちいかわを、モモンガが耳を引っ張って助けるの。",
+        "助けようとして耳を引っ張っちゃうモモンガ!",
+        "かわいいけど、アタシは見てて力が入っちゃう。"
+      ],
+      "specialist": {
+        "subject": "モモンガ",
+        "scene": "ear",
+        "focus": "reviewed:momonga:ear",
+        "said": [
+          "relation:chiikawa-23",
+          "relation:chiikawa-25",
+          "reviewed:momonga:ear"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "その場面のどこが好き？",
+      "replies": [
+        "アタシ、可愛さだけじゃなくて、助けようとする勢いに力が入っちゃう。",
+        "もしそばで見てたら、自分の手まで伸びそう。"
+      ],
+      "specialist": {
+        "subject": "モモンガ",
+        "scene": "ear",
+        "focus": "reviewed:momonga:ear",
+        "said": [
+          "relation:chiikawa-23",
+          "relation:chiikawa-25",
+          "reviewed:momonga:ear"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "ここから先はネタバレしないでね",
+      "replies": [
+        "うん、ここから先の展開は話さないね。",
+        "見たところの感想だけ、一緒に話そう。"
+      ],
+      "specialist": {
+        "subject": "モモンガ",
+        "scene": "ear",
+        "focus": "",
+        "said": [
+          "relation:chiikawa-23",
+          "relation:chiikawa-25",
+          "reviewed:momonga:ear"
+        ],
+        "spoilers": false
+      },
+      "pendingQuestion": null
+    }
+  ]
+}

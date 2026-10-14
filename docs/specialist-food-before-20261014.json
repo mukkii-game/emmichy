@@ -1,0 +1,163 @@
+{
+  "mode": "actual app handlers in offline DOM fixture; virtual timing; no browser/human/live-model evaluation",
+  "providerCalls": 0,
+  "rows": [
+    {
+      "input": "ハチワレはどんな食べ物が好き？",
+      "replies": [
+        "ハチワレ！",
+        "ハチワレは料理と食事が好き。",
+        "ハチワレが料理してくれたら、おかわりする速さにだけは自信あるよ。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "",
+        "focus": "relation:chiikawa-10",
+        "said": [
+          "relation:chiikawa-10"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "料理が好きなんだね。えみちいはどう思う？",
+      "replies": [
+        "スキ!?",
+        "わあ!",
+        "アタシ、今すごくうれしい!",
+        "そんなこと言われたら、三つ編みまで跳ねちゃいそう。"
+      ],
+      "specialist": {
+        "subject": "",
+        "scene": "",
+        "focus": "",
+        "said": [
+          "relation:chiikawa-10"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "ハチワレの写真の話も聞きたい",
+      "replies": [
+        "ハチワレ！",
+        "ハチワレは写真撮影が好き。",
+        "ハチワレの写真好きなところ、いいよね。",
+        "小さい思い出も残したくなる。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "",
+        "focus": "relation:chiikawa-9",
+        "said": [
+          "relation:chiikawa-10",
+          "relation:chiikawa-9"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "その好きなところをもう少し話して",
+      "replies": [
+        "ハチワレは、友達のことを気にかけるところが好き。",
+        "嬉しい時も相手を見てる感じ、アタシ弱いの。",
+        "自分だけじゃない、って大事だよね。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "",
+        "focus": "relation:chiikawa-9",
+        "said": [
+          "relation:chiikawa-10",
+          "relation:chiikawa-9"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "ラッコって甘党なの？",
+      "replies": [
+        "ラッコ！",
+        "ラッコは強い討伐者で甘党。",
+        "強いラッコが甘党なの、好き。",
+        "甘い物を一緒に選ぶところ、想像しちゃう。"
+      ],
+      "specialist": {
+        "subject": "ラッコ",
+        "scene": "",
+        "focus": "relation:chiikawa-14",
+        "said": [
+          "relation:chiikawa-10",
+          "relation:chiikawa-9",
+          "relation:chiikawa-14"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "強いのに甘いもの好きっていいよね",
+      "replies": [
+        "スキ!?",
+        "アタシのことだと思って、喜んじゃうよ?",
+        "えへへ、うれしい!",
+        "今の言葉、ノートに大きく書きたいな。"
+      ],
+      "specialist": {
+        "subject": "ラッコ",
+        "scene": "",
+        "focus": "relation:chiikawa-14",
+        "said": [
+          "relation:chiikawa-10",
+          "relation:chiikawa-9",
+          "relation:chiikawa-14"
+        ]
+      },
+      "pendingQuestion": {
+        "id": "conversation",
+        "type": "conversation",
+        "prompt": "アタシのことだと思って、喜んじゃうよ?",
+        "attempts": 0
+      }
+    },
+    {
+      "input": "シーサーはどこで働いてるの？",
+      "replies": [
+        "シーサー！",
+        "シーサーは郎で働く資格を得た助手。",
+        "シーサーの頑張りを思うと、アタシも日本語のノート、もう一行書きたくなる。"
+      ],
+      "specialist": {
+        "subject": "シーサー",
+        "scene": "",
+        "focus": "relation:chiikawa-16",
+        "said": [
+          "relation:chiikawa-10",
+          "relation:chiikawa-9",
+          "relation:chiikawa-14",
+          "relation:chiikawa-16"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "資格まで取るところのどこが好き？",
+      "replies": [
+        "そこはまだよく知らないの。",
+        "わかったふりで答えたくないな。",
+        "勉強って聞くと、シーサー応援したくなる！"
+      ],
+      "specialist": {
+        "subject": "シーサー",
+        "scene": "",
+        "focus": "relation:chiikawa-16",
+        "said": [
+          "relation:chiikawa-10",
+          "relation:chiikawa-9",
+          "relation:chiikawa-14",
+          "relation:chiikawa-16"
+        ]
+      },
+      "pendingQuestion": null
+    }
+  ]
+}

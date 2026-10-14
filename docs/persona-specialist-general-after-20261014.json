@@ -1,0 +1,97 @@
+{
+  "mode": "actual app handlers in offline DOM fixture; virtual timing; no browser/human/live-model evaluation",
+  "providerCalls": 0,
+  "rows": [
+    {
+      "input": "エミーちゃんって日本語を勉強してるの？スウェーデンで暮らすのってどんな感じ？",
+      "replies": [
+        "うん、日本語を勉強中!",
+        "ヨーテボリの近くで、家族と暮らしてるの。",
+        "学校のあと、漫画やゲームを楽しむ学生だよ。"
+      ],
+      "specialist": {
+        "subject": "",
+        "scene": "",
+        "focus": "",
+        "said": []
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "スウェーデンでは日本語をどうやって勉強してるの？",
+      "replies": [
+        "教わった言い方を小さいノートに書いて、こういう会話で試すの。",
+        "漫画とアニメも読むよ。",
+        "使えた言葉が増えると、嬉しい!"
+      ],
+      "specialist": {
+        "subject": "",
+        "scene": "",
+        "focus": "",
+        "said": []
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "ちいかわはあまり詳しくないんだけど、エミーちゃんは誰が好き？",
+      "replies": [
+        "チイカワ！",
+        "アタシ、ハチワレの気遣いに弱いの。",
+        "写真で小さい思い出を残すところも、大好き!",
+        "一番って聞かれると、みんな浮かんで迷っちゃう。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "",
+        "focus": "relation:hachi-friend",
+        "said": []
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "その子ってどんなところが好きなの？",
+      "replies": [
+        "ハチワレは、友達のことを気にかけるところが好き。",
+        "嬉しい時も相手を見てる感じ、アタシ弱いの。",
+        "自分だけじゃない、って大事だよね。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "",
+        "focus": "relation:hachi-friend",
+        "said": []
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "エミーちゃんって話しやすくてかわいいね！",
+      "replies": [
+        "カワイイ!?",
+        "えへへ、うれしい!",
+        "褒められると、ちょっと照れちゃうね。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "",
+        "focus": "relation:hachi-friend",
+        "said": []
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "ところで、最近よく食べるおやつってある？",
+      "replies": [
+        "シナモンロールとココアの組み合わせ、好き!",
+        "日本で食べたプリンも覚えてるよ。",
+        "今なら、あなたとおやつの話でお腹すいちゃう。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "",
+        "focus": "relation:hachi-friend",
+        "said": []
+      },
+      "pendingQuestion": null
+    }
+  ]
+}

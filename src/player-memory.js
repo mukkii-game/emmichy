@@ -1,5 +1,5 @@
 import {rejectedJoke} from './humor.js';
-import {cleanDialogueControl,feedbackIntent,updateDialogueControl} from './conversation-repair.js?v=20261013-specialist1';
+import {cleanDialogueControl,feedbackIntent,updateDialogueControl} from './conversation-repair.js?v=20261014-dialogue1';
 const text=(s,n=160)=>typeof s==='string'?s.normalize('NFKC').replace(/[\x00-\x1f]/g,' ').trim().slice(0,n):'';
 const fold=s=>text(s,600).replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');
 const privateText=s=>/@|https?:|\d{3}[-ー]\d{4}|\d{10,}|住所|電話番号|メールアドレス/.test(s);
@@ -24,7 +24,8 @@ export const questions=[
 export function notePlayerQuestion(line,session){
  if(!session)return;
  if(line===nameQuestion){session.pendingQuestion={id:'name',type:'name',attempts:0};session.namePromptDone=true;return;}
- const q=questions.find(q=>q.text===line);if(q){session.pendingQuestion={id:q.id,type:q.type,attempts:0};session.wordQuestionAsked=true;}
+ const q=questions.find(q=>q.text===line);if(q){session.pendingQuestion={id:q.id,type:q.type,attempts:0};session.wordQuestionAsked=true;return;}
+ if(/[?？]$/.test(line)&&!/[!！][?？]$/.test(line)&&(line.length>=9||/誰|だれ|ダレ|どっち|どちら/.test(line))){session.pendingQuestion={id:'conversation',type:'conversation',prompt:line.slice(0,180),attempts:0};if(/誰|だれ|ダレ|どっち|どちら|何が好き|好きな/.test(line))session.wordQuestionAsked=true;}
 }
 export function choosePlayerQuestion(memory,session,{allowChiikawa=true}={}){
  if(!session||session.wordQuestionAsked||session.pendingQuestion||session.turns<2)return null;
@@ -55,6 +56,11 @@ export function notePlayerReply(value,line){const m=cleanPlayerMemory(value);if(
 export function answerPlayerQuestion(value,session,raw){
  const memory=learnPlayerMessage(value,raw),q=session?.pendingQuestion,t=text(raw,120),f=fold(t);
  if(!q)return {memory};
+ if(q.type==='conversation'){
+  session.pendingQuestion=null;
+  if(/好き/.test(q.prompt||'')&&t.length<=24&&!/[?？]|わから|知らな|ワカラ|シラナ/.test(t)&&!feedbackIntent(raw)&&clean(t))memory.likes=unique([...memory.likes,t.replace(/(?:が好き|がいい|かな)[。！!]*$/,'')],24);
+  return {memory};
+ }
  if(feedbackIntent(raw)||/^(?:許す|ユルス|ありがとう|アリガト|運行|ウンコウ)[。!！ヨ]*$/.test(t)){session.pendingQuestion=null;return {memory};}
  if(memory.creations.at(-1)!==cleanPlayerMemory(value).creations.at(-1)){session.pendingQuestion=null;return {memory};}
  if(/^(?:バイバイ|サヨウナラ|サヨナラ|ジャアネ|マタネ|オヤスミ|寝ルネ)/.test(f)){session.pendingQuestion=null;return {memory};}

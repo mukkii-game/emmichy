@@ -1,0 +1,32 @@
+{
+  "checkedAt": "2026-10-14",
+  "scope": "草むしり検定の初回受験・合否・ちいかわとハチワレの反応。漫画本文・動画本編は未視聴。作品公式の直接本文、正規配信の紹介文、二次記事を区別する。",
+  "records": [
+    {"id":"exam:range:57-63","sceneId":"scene:anime:ep057-063:grass-exam","subject":"アニメ第57〜63話","predicate":"扱う","object":"ちいかわとハチワレの草むしり検定受験","media":"anime","fact":"フジテレビの制作者インタビューは、第57〜63話を二人が草むしり検定を受ける話と説明する。","sourceUrl":"https://www.fujitv.co.jp/company/fujitvwork/vol25.html","location":"『一番好きなエピソード』への回答、括弧内の話数注記（Invoke-WebRequestでHTML本文確認）","status":"primary-text-verified","limits":"制作者自身の不合格経験は作中の合否の直接説明ではない。誰が受かったかをこの回答から推定しない。","spoiler":"minor"},
+    {"id":"exam:day:59","sceneId":"scene:anime:ep059:exam-day","subject":"第59話","predicate":"描く","object":"草むしり検定の試験当日","media":"anime","fact":"第59話『夜食／試験当日』の正規配信あらすじは、草むしり検定の試験当日を紹介する。","sourceUrl":"https://www.hulu.jp/watch/100172374","location":"Hulu『あらすじ』検索索引本文","status":"licensed-synopsis-verified","limits":"本編未視聴。試験内容・回答・夜食の種類は確認できない。","spoiler":"none"},
+    {"id":"exam:announcement:61","sceneId":"scene:anime:ep061:results","subject":"ちいかわとハチワレ","predicate":"結果が出る","object":"第61話『合格発表』","media":"anime","fact":"正規配信の第61話紹介文は、ちいかわとハチワレの合格発表を扱う。","sourceUrl":"https://tv.apple.com/jp/episode/合格発表/umc.cmc.a031zz2krfb012exlchi9qr7?showId=umc.cmc.1k421gwoasltbn5w9wxmkno4f","location":"シーズン1、エピソード61の紹介文","status":"licensed-synopsis-verified","limits":"この紹介文だけでは二人の合否はわからない。","spoiler":"minor"},
+    {"id":"exam:chiikawa:failed","sceneId":"scene:anime:ep062:different-feelings","subject":"ちいかわ","predicate":"不合格になる","object":"初回草むしり検定","media":"anime","fact":"第62話の正規配信紹介文は、ちいかわだけが不合格になったと明記する。","sourceUrl":"https://www.hulu.jp/watch/100172377","location":"Hulu『あらすじ』検索索引本文。Apple TV第62話にも同じ紹介文あり","status":"licensed-synopsis-verified","limits":"本文が明記するのはちいかわの不合格。初回・5級という識別は第57〜63話の文脈とABEMA TIMES記事で照合。失敗理由・得点は記載なし。","spoiler":"minor"},
+    {"id":"exam:morning:visit","sceneId":"scene:anime:ep063:celebration","subject":"ちいかわ","predicate":"翌朝訪ねる","object":"ハチワレの家","media":"anime","fact":"第63話の正規配信紹介文は、翌朝ちいかわがハチワレの家へ来ると説明する。","sourceUrl":"https://www.hulu.jp/watch/100172378","location":"Hulu『あらすじ』検索索引本文。Apple TV第63話の紹介文とも一致","status":"licensed-synopsis-verified","limits":"紹介文は手に持った物を伏せている。贈り物の内容をこの資料から補わない。","spoiler":"minor"},
+    {"id":"exam:hachiware:joined","sceneId":"scene:anime:ep057:grass-exam","subject":"ハチワレ","predicate":"受験を決める","object":"草むしり検定5級","media":"anime","fact":"ABEMA TIMES記事は、ちいかわの5級挑戦を知ったハチワレも受験することにしたと説明する。","sourceUrl":"https://times.abema.tv/articles/-/10171076","location":"2025-03-30記事、第57話からの経緯を説明する冒頭段落","status":"secondary-only","limits":"正規配信会社の編集記事だが公式あらすじ・本編の直接確認ではない。原作の正確な台詞・動機の細分化は未確認。","spoiler":"minor"},
+    {"id":"exam:hachiware:passed5","sceneId":"scene:anime:ep061:results","subject":"ハチワレ","predicate":"合格する","object":"草むしり検定5級","media":"anime","fact":"ABEMA TIMESは初回の結果をハチワレのみ合格と説明し、GAME Watch第63話記事も5級合格を明記する。","sourceUrl":"https://times.abema.tv/articles/-/10171076","location":"冒頭段落。独立照合：https://game.watch.impress.co.jp/docs/news/1498859.html 本文・副見出し","status":"secondary-only","limits":"ちいかわ不合格は正規配信紹介文で確認できるが、ハチワレの級と合格はこの調査では二次記事まで。","spoiler":"minor"},
+    {"id":"exam:hachiware:conflicted","sceneId":"scene:anime:ep061-062:reaction","subject":"ハチワレ","predicate":"素直に喜べず悩む","object":"自分だけの合格","media":"anime","fact":"ABEMA TIMESはハチワレが合格を素直に喜べず悩むと説明し、2023年のアニギャラ記事も声をかけあぐねる様子を述べる。","sourceUrl":"https://times.abema.tv/articles/-/10171076","location":"冒頭段落。独立照合：https://anigala-rew.jp/?p=113056 導入段落","status":"secondary-only","limits":"編集者による感情説明。本編未視聴のため心理を断定する追加説明や台詞引用はしない。","spoiler":"minor"},
+    {"id":"exam:chiikawa:celebrates","sceneId":"scene:anime:ep063:celebration","subject":"ちいかわ","predicate":"合格祝いを贈る","object":"ハチワレに似た形のクッキー","media":"anime","fact":"ABEMA TIMESは、ちいかわがハチワレに似た形のラッピングされたクッキーを5級合格のお祝いとして手渡すと説明する。","sourceUrl":"https://times.abema.tv/articles/-/10171076","location":"第63話を説明する冒頭段落後半。祝い行為の独立照合：https://game.watch.impress.co.jp/docs/news/1498859.html","status":"secondary-only","limits":"クッキーの形・包装は二次記事まで。作ったか購入したか、青いリボンの後日譚、翌朝完全に悲しみが消えたかは本記録から断定しない。","spoiler":"minor"},
+    {"id":"exam:chiikawa:still-at-board","sceneId":"scene:anime:ep061:results","subject":"ちいかわ","predicate":"見つめる","object":"合格者掲示板","media":"anime","fact":"2023年のアニギャラレビューは、ちいかわが掲示板を見つめて動かない様子を記述する。","sourceUrl":"https://anigala-rew.jp/?p=113056","location":"『ちいかわの涙を我慢するシーン』節の冒頭","status":"secondary-only","limits":"実際の映像・原作画像未確認。涙の我慢、嫉妬がない、現実を受け止められない等は記事の推測なので事実に混ぜない。","spoiler":"minor"}
+  ],
+  "gaps": [
+    "作品公式・作者Xの漫画画像は403等で本文未確認。正確な台詞、受験番号、選択問題、鉛筆、帰路の泣き方、免許証の表情は採用しない。",
+    "FODの第57〜63話ページは取得不能または空。anime-chiikawa.jp/localdata/youtube.jsonは直接取得できたが該当話の項目は見つからなかった。",
+    "フジテレビ制作者インタビューの草むしり検定段落はWebツール抽出から欠落していたが、公開HTMLを直接取得して確認。",
+    "初回5級不合格の原因・点数・合格基準は今回の確認資料にない。努力不足や本番に弱いなどと推定しない。",
+    "反応の細部と祝いのクッキーは二次記事止まり。主要二次記事は正規配信会社ABEMA TIMESだが、本編の直接視聴と区別する。",
+    "既存claude-scenes.csvとclaude-handoff.mdにこの検定の直接場面記録は見つからず、新規調査として扱う。"
+  ],
+  "proposedQuestions": [
+    {"question":"草むしり検定の話、受験前と結果が出てからだと、どっちが印象に残ってる？","basedOn":["exam:range:57-63","exam:announcement:61"],"type":"personal-reaction","limits":"初回の話に限定する。"},
+    {"question":"ちいかわだけ不合格になる第62話、見たときどんな気持ちだった？","basedOn":["exam:chiikawa:failed"],"type":"personal-reaction","limits":"相手が合否ネタバレを知っている時。"},
+    {"question":"自分と友達で結果が違ったとき、ハチワレ側の気持ちもわかる？","basedOn":["exam:chiikawa:failed","exam:hachiware:conflicted"],"type":"personal-reaction","limits":"ハチワレの細かい台詞を作らない。"},
+    {"question":"第63話で翌朝ちいかわが訪ねてくるところ、前の日からの流れが印象に残る？","basedOn":["exam:morning:visit"],"type":"scene-follow-up","limits":"訪問目的や持ち物は紹介文では未確認と区別。"},
+    {"question":"ちいかわがハチワレをお祝いする場面、ちいかわとハチワレのどちらに気持ちが寄る？","basedOn":["exam:chiikawa:celebrates"],"type":"personal-reaction","limits":"二次記事による場面要約。直接本文の検証前に台詞・演技の細部を断定しない。"},
+    {"question":"二人が一緒に頑張る話と、二人の気持ちが違ってしまう話、どちらが好き？","basedOn":["exam:range:57-63","exam:chiikawa:failed"],"type":"preference","limits":"作品の唯一の正解・教訓を決めつけない。"}
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "mode": "actual app handlers in offline DOM fixture; virtual timing; no browser/human/live-model evaluation",
+  "providerCalls": 0,
+  "rows": [
+    {
+      "input": "エミーちゃんって日本語を勉強してるの？スウェーデンで暮らすのってどんな感じ？",
+      "replies": [
+        "うん、日本語を勉強してるよ!",
+        "漫画とアニメ、それからこういう会話で覚えてるの。",
+        "長い音と小さい「っ」は、まだ難しいの。"
+      ],
+      "specialist": {
+        "subject": "",
+        "scene": "",
+        "focus": "",
+        "said": []
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "スウェーデンでは日本語をどうやって勉強してるの？",
+      "replies": [
+        "同じ言い方を続けちゃったね。",
+        "いまの話、あなたはどう思った?"
+      ],
+      "specialist": {
+        "subject": "",
+        "scene": "",
+        "focus": "",
+        "said": []
+      },
+      "pendingQuestion": {
+        "id": "conversation",
+        "type": "conversation",
+        "prompt": "いまの話、あなたはどう思った?",
+        "attempts": 0
+      }
+    },
+    {
+      "input": "ちいかわはあまり詳しくないんだけど、エミーちゃんは誰が好き？",
+      "replies": [
+        "ア、今の聞き方、答えることを増やしちゃったね。",
+        "引っ込める。"
+      ],
+      "specialist": {
+        "subject": "ちいかわ",
+        "scene": "",
+        "focus": "relation:chiikawa-effort",
+        "said": []
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "その子ってどんなところが好きなの？",
+      "replies": [
+        "そこはまだよく知らないの。",
+        "わかったふりで答えたくないな。"
+      ],
+      "specialist": {
+        "subject": "ちいかわ",
+        "scene": "",
+        "focus": "relation:chiikawa-effort",
+        "said": []
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "エミーちゃんって話しやすくてかわいいね！",
+      "replies": [
+        "カワイイ!?",
+        "えへへ、うれしい!",
+        "褒められると、ちょっと照れちゃうね。"
+      ],
+      "specialist": {
+        "subject": "ちいかわ",
+        "scene": "",
+        "focus": "relation:chiikawa-effort",
+        "said": []
+      },
+      "pendingQuestion": {
+        "id": "conversation",
+        "type": "conversation",
+        "prompt": "カワイイ!?",
+        "attempts": 0
+      }
+    },
+    {
+      "input": "ところで、最近よく食べるおやつってある？",
+      "replies": [
+        "同じ言い方を続けちゃったね。",
+        "いまの話、あなたはどう思った?"
+      ],
+      "specialist": {
+        "subject": "ちいかわ",
+        "scene": "",
+        "focus": "relation:chiikawa-effort",
+        "said": []
+      },
+      "pendingQuestion": {
+        "id": "conversation",
+        "type": "conversation",
+        "prompt": "いまの話、あなたはどう思った?",
+        "attempts": 0
+      }
+    }
+  ]
+}

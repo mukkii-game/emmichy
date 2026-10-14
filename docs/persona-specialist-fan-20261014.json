@@ -1,0 +1,138 @@
+{
+  "mode": "actual app handlers in offline DOM fixture; virtual timing; no browser/human/live-model evaluation",
+  "providerCalls": 0,
+  "rows": [
+    {
+      "input": "ちいかわの世界で、ハチワレってどんなところが魅力だと思う？",
+      "replies": [
+        "チイカワ！",
+        "ちいかわ本人の、泣いても一生懸命なところが好き。",
+        "怖い気持ちがあるから、頑張る姿にぎゅっとなるの。",
+        "アタシ、見てると応援しちゃう。"
+      ],
+      "specialist": {
+        "subject": "ちいかわ",
+        "scene": "",
+        "focus": "relation:chiikawa-effort",
+        "said": []
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "わかる、前向きなのいいよね。ちいかわと一緒にいる時はどんな感じ？",
+      "replies": [
+        "ちいかわは不器用ながら頑張る子で、驚いたり嫌なことがあると泣く。",
+        "怖い時にも頑張るちいかわを見ると、アタシも応援したくなるの。"
+      ],
+      "specialist": {
+        "subject": "ちいかわ",
+        "scene": "",
+        "focus": "relation:chiikawa-effort",
+        "said": [
+          "relation:chiikawa-effort"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "具体的に印象に残る場面ある？",
+      "replies": [
+        "そこはまだよく知らないの。",
+        "わかったふりで答えたくないな。"
+      ],
+      "specialist": {
+        "subject": "ちいかわ",
+        "scene": "",
+        "focus": "relation:chiikawa-effort",
+        "said": [
+          "relation:chiikawa-effort"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "あ、ごめん。私が聞きたかったのは、ハチワレの性格の話だよ。",
+      "replies": [
+        "ハチワレ！",
+        "ハチワレは料理と食事が好き。",
+        "ハチワレが料理してくれたら、おかわりする速さにだけは自信あるよ。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "",
+        "focus": "relation:chiikawa-10",
+        "said": [
+          "relation:chiikawa-effort",
+          "relation:chiikawa-10"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "さっきから「前向き」って同じことばかり言ってない？",
+      "replies": [
+        "同じ説明はもうしないね。",
+        "アタシの好きな気持ちと、あなたが気になったところ、一緒に話したい。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "",
+        "focus": "relation:chiikawa-10",
+        "said": [
+          "relation:chiikawa-effort",
+          "relation:chiikawa-10"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "うん、じゃあ今度はうさぎの好きなところも聞かせて。",
+      "replies": [
+        "ウサギ、スキ!?",
+        "うさぎの住まいは知られていない。",
+        "うさぎの家、知らないからこそ想像しちゃう。",
+        "アタシの想像と本当は分けなきゃね。"
+      ],
+      "specialist": {
+        "subject": "うさぎ",
+        "scene": "",
+        "focus": "relation:chiikawa-11",
+        "said": [
+          "relation:chiikawa-effort",
+          "relation:chiikawa-10",
+          "relation:chiikawa-11"
+        ]
+      },
+      "pendingQuestion": {
+        "id": "conversation",
+        "type": "conversation",
+        "prompt": "ウサギ、スキ!?",
+        "attempts": 0
+      }
+    },
+    {
+      "input": "ところで、ちいかわ好きな人ってどんなグッズ集めがち？",
+      "replies": [
+        "チイカワ、スキ!?",
+        "同じ説明はもうしないね。",
+        "アタシの好きな気持ちと、あなたが気になったところ、一緒に話したい。"
+      ],
+      "specialist": {
+        "subject": "うさぎ",
+        "scene": "",
+        "focus": "relation:chiikawa-effort",
+        "said": [
+          "relation:chiikawa-effort",
+          "relation:chiikawa-10",
+          "relation:chiikawa-11"
+        ]
+      },
+      "pendingQuestion": {
+        "id": "conversation",
+        "type": "conversation",
+        "prompt": "チイカワ、スキ!?",
+        "attempts": 0
+      }
+    }
+  ]
+}

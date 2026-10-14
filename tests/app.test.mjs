@@ -184,7 +184,7 @@ test('screen remains playable after dictionary failure and IME composition does 
   let fan=JSON.parse(storage.get('enny-memory-v1')),fanAt=fan.history.findLastIndex(h=>h.role==='user');
   for(let i=0;i<7;i++){time+=6000;await idleTick();}
   fan=JSON.parse(storage.get('enny-memory-v1'));const excited=fan.history.slice(fanAt+1).map(h=>h.text).join(' ');
-  assert.match(excited,/ハチワレ/);assert.match(excited,/ラッコ/);assert.match(excited,/シーサー/);assert.doesNotMatch(excited,/細かいところ|よく知らない/);
+  assert.match(excited,/島二郎.*頼もしい/);assert.match(excited,/アタシ.*力/);assert.doesNotMatch(excited,/細かいところ|よく知らない|腹や口|虎のしまじろう|草むしり検定/);
   entry.value='胸のそれ何？';await talk.emit('submit');
   let ornament=JSON.parse(storage.get('enny-memory-v1')),ornamentAt=ornament.history.findLastIndex(h=>h.role==='user');
   for(let i=0;i<8;i++){time+=6000;await idleTick();}

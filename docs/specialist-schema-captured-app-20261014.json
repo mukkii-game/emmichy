@@ -1,0 +1,143 @@
+{
+  "mode": "actual app handlers with captured raw provider responses revalidated against actual request state; virtual timing; no browser/human/new-generation evaluation",
+  "providerCalls": 0,
+  "capturedCommit": "2b4403fceb0878068e32c2a8987b57d360cd20cf",
+  "fixtureResponses": [
+    {
+      "input": "草むしり検定の最初の結果は？",
+      "history": [
+        {
+          "role": "enny",
+          "text": "こんにちは。"
+        }
+      ],
+      "specialist": {
+        "subject": "ちいかわとハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": []
+      },
+      "validated": {
+        "text": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。 ちょっとショックだけど、ハチワレの頑張りが嬉しい！",
+        "source": "mixed",
+        "reason": "specialist-plan"
+      }
+    },
+    {
+      "input": "ハチワレの気持ち、えみちいはどう思う？",
+      "history": [
+        {
+          "role": "enny",
+          "text": "こんにちは。"
+        },
+        {
+          "role": "user",
+          "text": "草むしり検定の最初の結果は？"
+        },
+        {
+          "role": "enny",
+          "text": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。 ちょっとショックだけど、ハチワレの頑張りが嬉しい!"
+        }
+      ],
+      "status": 429
+    }
+  ],
+  "rows": [
+    {
+      "input": "草むしり検定の最初の結果は？",
+      "replies": [
+        "クサムシリ！",
+        "あの話、アタシも考えてる。",
+        "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。",
+        "ちょっとショックだけど、ハチワレの頑張りが嬉しい!"
+      ],
+      "specialist": {
+        "subject": "ちいかわとハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": [
+          "exam:result"
+        ]
+      },
+      "pendingQuestion": null,
+      "chatHealth": {
+        "attempts": 1,
+        "accepted": 1,
+        "rejected": 0,
+        "failed": 0,
+        "lastOutcome": "accepted",
+        "rateLimited": false,
+        "retryAt": 0
+      },
+      "dialogueUse": {
+        "ai": 1,
+        "bank": 0
+      },
+      "inputEnabled": true,
+      "sendEnabled": true
+    },
+    {
+      "input": "ハチワレの気持ち、えみちいはどう思う？",
+      "replies": [
+        "ワオ、アタシのこと!?",
+        "あの話、アタシも考えてる。",
+        "アタシなら、自分だけ受かった時、友達になんて声をかけるか迷っちゃう。",
+        "嬉しさと気遣い、両方ありそう。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": [
+          "exam:result"
+        ]
+      },
+      "pendingQuestion": null,
+      "chatHealth": {
+        "attempts": 2,
+        "accepted": 1,
+        "rejected": 0,
+        "failed": 1,
+        "lastOutcome": "rate-limit",
+        "rateLimited": true,
+        "retryAt": 0
+      },
+      "dialogueUse": {
+        "ai": 1,
+        "bank": 1
+      },
+      "inputEnabled": true,
+      "sendEnabled": true
+    },
+    {
+      "input": "そのお祝いのクッキーって、手作りなの？",
+      "replies": [
+        "手作りか買ったものかまでは、確かめられないの。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:cookie",
+        "said": [
+          "exam:result"
+        ]
+      },
+      "pendingQuestion": null,
+      "chatHealth": {
+        "attempts": 2,
+        "accepted": 1,
+        "rejected": 0,
+        "failed": 1,
+        "lastOutcome": "rate-limit",
+        "rateLimited": true,
+        "retryAt": 0
+      },
+      "dialogueUse": {
+        "ai": 1,
+        "bank": 2
+      },
+      "inputEnabled": true,
+      "sendEnabled": true
+    }
+  ]
+}

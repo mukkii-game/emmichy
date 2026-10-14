@@ -1,0 +1,150 @@
+{
+  "mode": "actual app handlers in offline DOM fixture; virtual timing; no browser/human/live-model evaluation",
+  "providerCalls": 0,
+  "rows": [
+    {
+      "input": "草むしり検定の5級の結果は？",
+      "replies": [
+        "クサムシリ！",
+        "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。",
+        "アタシなら、友達のお祝いもしたいけど、自分の悔しさも消えないと思う。",
+        "どっちの気持ちも大事にしたい。"
+      ],
+      "specialist": {
+        "subject": "ちいかわとハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": [
+          "exam:result"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "ハチワレの気持ち、どう思う？",
+      "replies": [
+        "ハチワレ！",
+        "アタシなら、自分だけ受かった時、友達になんて声をかけるか迷っちゃう。",
+        "嬉しさと気遣い、両方ありそう。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": [
+          "exam:result"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "ちいかわがその後お祝いしたんだよね",
+      "replies": [
+        "チイカワ！",
+        "第63話で、ちいかわがハチワレの5級合格をお祝いするの。",
+        "アタシなら、悔しさとお祝いしたい気持ち、両方ありそう。",
+        "そこを考えると胸がぎゅっとなる。"
+      ],
+      "specialist": {
+        "subject": "ちいかわ",
+        "scene": "examination",
+        "focus": "exam:celebrate",
+        "said": [
+          "exam:result",
+          "exam:celebrate"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "どんなクッキーだった？",
+      "replies": [
+        "お祝いに渡すのは、ハチワレに似た形の、ラッピングされたクッキーだよ。",
+        "アタシなら、そんなお祝いもらったら、食べる前にずっと眺めちゃう。"
+      ],
+      "specialist": {
+        "subject": "ちいかわ",
+        "scene": "examination",
+        "focus": "exam:cookie",
+        "said": [
+          "exam:result",
+          "exam:celebrate",
+          "exam:cookie"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "手作りしたの？",
+      "replies": [
+        "手作りか買ったものかまでは、確かめられないの。"
+      ],
+      "specialist": {
+        "subject": "ちいかわ",
+        "scene": "examination",
+        "focus": "exam:cookie",
+        "said": [
+          "exam:result",
+          "exam:celebrate",
+          "exam:cookie"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "同じ話を繰り返さないで",
+      "replies": [
+        "同じ話をまた始めちゃったね。",
+        "一度話したことを、初めてみたいに繰り返さないようにする。"
+      ],
+      "specialist": {
+        "subject": "ちいかわ",
+        "scene": "examination",
+        "focus": "exam:cookie",
+        "said": [
+          "exam:result",
+          "exam:celebrate",
+          "exam:cookie"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "もうちょっとその話をして",
+      "replies": [
+        "自分に似てる形だと、食べるのを少しためらいそう。",
+        "アタシなら先に写真を撮りたい。"
+      ],
+      "specialist": {
+        "subject": "ちいかわ",
+        "scene": "examination",
+        "focus": "exam:cookie",
+        "said": [
+          "exam:result",
+          "exam:celebrate",
+          "exam:cookie"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "日本語を勉強してるの？",
+      "replies": [
+        "うん、日本語を勉強してるよ!",
+        "漫画とアニメ、それからこういう会話で覚えてるの。",
+        "長い音と小さい「っ」は、まだ難しいの。"
+      ],
+      "specialist": {
+        "subject": "",
+        "scene": "",
+        "focus": "",
+        "said": [
+          "exam:result",
+          "exam:celebrate",
+          "exam:cookie"
+        ]
+      },
+      "pendingQuestion": null
+    }
+  ]
+}

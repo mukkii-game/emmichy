@@ -24,11 +24,22 @@ export function renderSpecialistReply(value,{messages=[]}={}){
  if(value.length>4000)return null;
  let plan;try{plan=JSON.parse(value.trim().replace(/^```(?:json)?\s*/,'').replace(/\s*```$/,''));}catch{return null;}
  if(!Array.isArray(plan.beats)||plan.beats.length<1||plan.beats.length>4)return null;
+ // Some providers combine the three allowed fields in a single beat. Accept
+ // that equivalent shape, but never arbitrary fact text or extra fields.
+ const beats=[];
+ for(const beat of plan.beats){
+  if(!beat||typeof beat!=='object'||Array.isArray(beat)||!Object.keys(beat).length||Object.keys(beat).some(k=>!['fact','say','ask'].includes(k)))return null;
+  for(const key of ['fact','say','ask']){
+   if(!Object.hasOwn(beat,key)||beat[key]===null||beat[key]==='')continue;
+   beats.push({[key]:beat[key]});
+  }
+ }
+ if(!beats.length||beats.length>5)return null;
  const allowed=new Map(envelope.evidence.filter(r=>facts.has(r.id)).map(r=>[r.id,r]));
  const input=messages.filter(m=>m.role==='user').at(-1)?.content||'';
  const askingFact=/何|ナニ|誰|ダレ|何話|何級|名前|ナマエ|曲名|キョクメイ|メニュー|結果|合否|もう一度|モウイチド|もう一回/.test(input)&&!/どうして|なぜ|ドウシテ|ナゼ|どこが好き/.test(input);
  const parts=[],used=new Set();let asks=0,says=0,generated=0;
- for(const beat of plan.beats){
+ for(const beat of beats){
   if(!beat||typeof beat!=='object'||Array.isArray(beat)||Object.keys(beat).length!==1)return null;
   if(Object.hasOwn(beat,'fact')){
    const entry=allowed.get(beat.fact);if(!entry||used.size)return null;

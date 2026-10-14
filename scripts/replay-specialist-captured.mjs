@@ -18,6 +18,6 @@ const turns=captured.turns.map(turn=>{
  state={...state,specialist:noteSpecialistDelivery(packet.memory,reply.text,state.history),history:[...state.history,{role:'user',text:turn.input},{role:'enny',text:reply.text}]};
  return {input:turn.input,raw,original:turn.result,validated,reply};
 });
-assert.match(turns[1].reply.text,/思う|気持ち|気遣い|声をかけ/);
-fs.writeFileSync('docs/specialist-captured-replay-20261014.json',JSON.stringify({mode:'offline replay of captured real outputs; revised validator and director; all chunks assumed delivered; no new provider calls',capturedCommit:captured.commit,capturedAt:captured.at,providerCalls:0,turns},null,2)+'\n');
+if(turns[1])assert.match(turns[1].reply.text,/思う|気持ち|気遣い|声をかけ/);
+fs.writeFileSync(process.argv[3]||'docs/specialist-captured-replay-20261014.json',JSON.stringify({mode:'offline replay of captured real outputs; revised validator and director; all chunks assumed delivered; no new provider calls',capturedCommit:captured.commit,capturedAt:captured.at,providerCalls:0,turns},null,2)+'\n');
 console.log(JSON.stringify(turns.map(t=>({input:t.input,reply:t.reply}))));

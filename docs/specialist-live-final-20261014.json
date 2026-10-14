@@ -1,0 +1,46 @@
+{
+  "mode": "real provider generation with candidate server prompt; synthetic inputs; no browser or human evaluation",
+  "commit": "c1a442319c0a221345ca906041002f8b922767a8",
+  "at": "2026-10-14T04:31:18.281Z",
+  "limit": 2,
+  "turns": [
+    {
+      "input": "草むしり検定の最初の結果は？",
+      "systemCharacters": 5127,
+      "history": [],
+      "wallMs": 1356,
+      "result": null,
+      "attempts": [
+        {
+          "provider": "groq",
+          "source": "llm",
+          "ok": false,
+          "reason": "rejected",
+          "ms": 807
+        },
+        {
+          "provider": "gemini",
+          "source": "llm",
+          "ok": false,
+          "reason": "http-503",
+          "ms": 544
+        },
+        {
+          "provider": "workers-ai",
+          "source": "llm",
+          "ok": false,
+          "reason": "probe-budget",
+          "ms": 0
+        }
+      ],
+      "rawOutputs": [
+        {
+          "provider": "groq",
+          "raw": "{\"beats\":[{\"fact\":\"exam:result\",\"say\":\"ハチワレが合格して、ちいかわは不合格だったの。\",\"ask\":null}]}"
+        }
+      ]
+    }
+  ],
+  "calls": 2,
+  "rateLimited": false
+}

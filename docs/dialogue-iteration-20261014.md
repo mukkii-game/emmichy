@@ -31,3 +31,9 @@
 検証済み候補runtime20261014-dialogue1：フロント234件、中継57件合格。入力中停止／意味単位分割／待ち時間／終了・再開は既存actual-app回帰試験を含む。新規実ブラウザ・実OSキーボード試験は実施していない。
 
 公開済み：フロントPR48/mainaa463fc（候補1a6f47f）、中継PR21/mainc1a4423（候補0cdeb01）。両Cloudflare公開成功（38511578214/38511569522）。変更33公開ファイルが候補Git blobと完全一致。docs/public-dialogue1-20261014.json。追加生成0。
+
+## 最終公開候補の実生成で見つかった形式不一致
+
+CI38511801995、公開中継mainc1a4423を使い2呼出しで終了。Groq807msは正しいexam:resultを選択したが、fact/say/askを1項目にまとめ、ask:nullとしたため旧rendererが全拒否。Geminiは544msで503。会話結果nullで2ターン目へ進んでいない。429なし。docs/specialist-live-final-20261014.json。
+
+等価な複合項目を内部のfact/say/askへ展開し、nullの省略欄を無視する修正。任意のtext欄・未知のID・過剰な事実数は従来どおり拒否。保存した生出力を新版renderer→画面Directorへ通すと正しい合否と本人の感想になった（docs/specialist-format-replay-20261014.json）。感想はローカル補助、LLM生成とは報告しない。追加生成0。235フロント／57中継テスト合格。修正後の新しい実生成・人間の面白さは未確認。

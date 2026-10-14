@@ -1,0 +1,181 @@
+{
+  "at": "2026-10-14T04:29:36.118972+00:00",
+  "url": "https://emmichy.mucky-totoro.workers.dev/",
+  "runtime": "20261014-dialogue1",
+  "frontendCandidate": "1a6f47ffb19a29e411f1de0d32a15acf35e4ada2",
+  "frontendMain": "aa463fc6c15124505185e6978badc6b026aee947",
+  "frontendPR": 48,
+  "frontendDeployment": 38511578214,
+  "backendCandidate": "0cdeb01134d38d87d917826a606edf5f841c997f",
+  "backendMain": "c1a442319c0a221345ca906041002f8b922767a8",
+  "backendPR": 21,
+  "backendDeployment": 38511569522,
+  "providerCalls": 0,
+  "files": [
+    {
+      "path": "index.html",
+      "matches": true,
+      "sha256": "016f17746ca5e8d74b262b5a9ce56cadf91797b6cbd849c688fa99bc30164b9e"
+    },
+    {
+      "path": "src/app.js",
+      "matches": true,
+      "sha256": "eb6dbc317db6d9bebdb7c14eddc9ca9b2d881ba0bdc5d779a8330850c8f4ca2a"
+    },
+    {
+      "path": "src/balance.js",
+      "matches": true,
+      "sha256": "44a44dfe8e3de17dea408abdd5beba0c080ce3dbf94c5e5945ac9743dff30154"
+    },
+    {
+      "path": "src/chat.js",
+      "matches": true,
+      "sha256": "21d2e0d7e30afa26d85a05bc0bd48f0ab13e315f442ac190048220a9a2949158"
+    },
+    {
+      "path": "src/chiikawa-attribution.js",
+      "matches": true,
+      "sha256": "c1c79dc67d7051f4f4811805077dc30c07875c017443a11c30455929681bc926"
+    },
+    {
+      "path": "src/chiikawa-news.js",
+      "matches": true,
+      "sha256": "6d51b886beb21749ce27138b2ec3b4ce13bd6c891ca40dae137e8f00e022d875"
+    },
+    {
+      "path": "src/chiikawa-relations.js",
+      "matches": true,
+      "sha256": "a899c0765348e52df3f544ce419dfd196eebb1ad8031da048e2a909a93163761"
+    },
+    {
+      "path": "src/chiikawa-reminder.js",
+      "matches": true,
+      "sha256": "ab7ae2a0928c04aff5b5de586c17f37c49a1b7a1336b924cb95d347c28643854"
+    },
+    {
+      "path": "src/chiikawa-scenes.js",
+      "matches": true,
+      "sha256": "0d940a6e32281d2eeaebcdf8e156735928987fd057b88728dd251d6269c43213"
+    },
+    {
+      "path": "src/chiikawa-theme.js",
+      "matches": true,
+      "sha256": "b808890fa0eb0ac800928f3ad259f4f89d55b7d3507a8d23d02ca8fffce0b1d9"
+    },
+    {
+      "path": "src/context.js",
+      "matches": true,
+      "sha256": "3ff6f42d2af000ef9a3a5b5270acdb5188c2a5ab8b3173b22cf2ddfcd17aa364"
+    },
+    {
+      "path": "src/conversation-repair.js",
+      "matches": true,
+      "sha256": "a21458a8fa9d5604c334fd9456456abdc08198ff6f0aeb264c6073d77393de1f"
+    },
+    {
+      "path": "src/dialogue-director.js",
+      "matches": true,
+      "sha256": "57ef54c893210fa96aa8776e1af6dda39fc7a9bb4ff49047cd954e25ac98f991"
+    },
+    {
+      "path": "src/dialogue-grounding.js",
+      "matches": true,
+      "sha256": "d39e3ca399141cd94faad08aacda0544fb37292f0b44eae9c95160556621ad57"
+    },
+    {
+      "path": "src/engine.js",
+      "matches": true,
+      "sha256": "fe928fc2d53a2373a972b3e1d327009ff6392d22fed7b3efbff5f3e4d630920e"
+    },
+    {
+      "path": "src/fallback.js",
+      "matches": true,
+      "sha256": "1caeb7b5be2e606b46297d5f25199a7f9cc9c02d33d3361721d15bcd6e031246"
+    },
+    {
+      "path": "src/fandom.js",
+      "matches": true,
+      "sha256": "3475e0563c1293b0e12b1e5ce3bcab12efde6847daf486b45a1b1067c8bc49e4"
+    },
+    {
+      "path": "src/filler.js",
+      "matches": true,
+      "sha256": "35d36ae1b323be86b5d8ebeb9b7cff233f96c222f71040eee4a313459053a569"
+    },
+    {
+      "path": "src/font.js",
+      "matches": true,
+      "sha256": "4c903f5f52f2baf1d05c0c814c1f3247741b8200a069dcd91776b15bd004de5c"
+    },
+    {
+      "path": "src/japanese-learner.js",
+      "matches": true,
+      "sha256": "52be2ce7fb40b199053e8293f9bb5936e2f41258978a8f5066446a1919084514"
+    },
+    {
+      "path": "src/moves.js",
+      "matches": true,
+      "sha256": "3b685459d58c954b8b6fe752e4f545384008ea55be28d49f8b9daa7f590304e6"
+    },
+    {
+      "path": "src/names.js",
+      "matches": true,
+      "sha256": "6c43ae18f697e89160f626b0e661152fb8cd025d7971dc0517dd562b22d60d79"
+    },
+    {
+      "path": "src/performance.js",
+      "matches": true,
+      "sha256": "ebab180f5e2a777849a28e681dfb2d385b31c27855de098ce585778ec6961a9f"
+    },
+    {
+      "path": "src/player-memory.js",
+      "matches": true,
+      "sha256": "f6e53f608e939d20f62730aab69ac0242485a9068756902873173f56d15f36e8"
+    },
+    {
+      "path": "src/profile.js",
+      "matches": true,
+      "sha256": "22f629a1a8bce288ccd2ae0795e8d0a3ce6076de805b739b96299b22f555cf07"
+    },
+    {
+      "path": "src/readable.js",
+      "matches": true,
+      "sha256": "72afcb8c1975e248d96edcfc54937f81df0c59c5168ee3f677be3c89f5812375"
+    },
+    {
+      "path": "src/repertoire.js",
+      "matches": true,
+      "sha256": "536c45161647bc1024283c38078ff5ce1621af14d481e1074863015f5c5b6904"
+    },
+    {
+      "path": "src/reply-repetition.js",
+      "matches": true,
+      "sha256": "855c2955a6127a72960f607d20c7ccb179629bfa16e7c5085b91460a8ccfb0dd"
+    },
+    {
+      "path": "src/routing.js",
+      "matches": true,
+      "sha256": "64d7cbc297e232dbc465d191ed7a6b2e7b3c24be569104c04b04f1fd114b5c0c"
+    },
+    {
+      "path": "src/session.js",
+      "matches": true,
+      "sha256": "a42014206566a354c6123d7a3abe4e0a106f63992d727ea83cf7db7ea76a0052"
+    },
+    {
+      "path": "src/specialist-reply.js",
+      "matches": true,
+      "sha256": "92afb00a2988b3fbf42869a39ec6520c5fe28a6a165a8c5041e64ebd3647100b"
+    },
+    {
+      "path": "src/specialist.js",
+      "matches": true,
+      "sha256": "700e2d7607add8eced358359d363d3edb835164e32a22698ed09e6d84f3f5ed8"
+    },
+    {
+      "path": "src/topic-intent.js",
+      "matches": true,
+      "sha256": "39898086c9cc04a62daf7ac47276f15678ee82c663117841ae655aec18a41b5e"
+    }
+  ]
+}

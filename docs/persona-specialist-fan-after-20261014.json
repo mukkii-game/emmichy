@@ -1,0 +1,130 @@
+{
+  "mode": "actual app handlers in offline DOM fixture; virtual timing; no browser/human/live-model evaluation",
+  "providerCalls": 0,
+  "rows": [
+    {
+      "input": "ちいかわの世界で、ハチワレってどんなところが魅力だと思う？",
+      "replies": [
+        "ハチワレ！",
+        "ハチワレは、友達のことを気にかけるところが好き。",
+        "嬉しい時も相手を見てる感じ、アタシ弱いの。",
+        "自分だけじゃない、って大事だよね。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "",
+        "focus": "relation:hachi-friend",
+        "said": []
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "わかる、前向きなのいいよね。ちいかわと一緒にいる時はどんな感じ？",
+      "replies": [
+        "チイカワ！",
+        "アタシは、ハチワレとちいかわの近さが好き。",
+        "言葉がうまく出ない時も、友達がそばにいてくれたら嬉しいなって思う。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "",
+        "focus": "relation:hachi-friend",
+        "said": []
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "具体的に印象に残る場面ある？",
+      "replies": [
+        "第63話で、ちいかわがハチワレの5級合格をお祝いするの。",
+        "アタシなら、悔しさとお祝いしたい気持ち、両方ありそう。",
+        "そこを考えると胸がぎゅっとなる。"
+      ],
+      "specialist": {
+        "subject": "ちいかわ",
+        "scene": "examination",
+        "focus": "exam:celebrate",
+        "said": [
+          "exam:celebrate"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "あ、ごめん。私が聞きたかったのは、ハチワレの性格の話だよ。",
+      "replies": [
+        "ハチワレ！",
+        "ハチワレはちいかわの大切な友達。",
+        "友達の話になると、ちいかわとハチワレを思い出しちゃう。",
+        "あの近さ、いいよね。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "",
+        "focus": "relation:hachi-friend",
+        "said": [
+          "exam:celebrate",
+          "relation:hachi-friend"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "さっきから「前向き」って同じことばかり言ってない？",
+      "replies": [
+        "同じ話をまた始めちゃったね。",
+        "一度話したことを、初めてみたいに繰り返さないようにする。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "",
+        "focus": "relation:hachi-friend",
+        "said": [
+          "exam:celebrate",
+          "relation:hachi-friend"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "うん、じゃあ今度はうさぎの好きなところも聞かせて。",
+      "replies": [
+        "ウサギ！",
+        "うさぎの「ヤハ!」って勢い、好き!",
+        "アタシまで元気になっちゃう。",
+        "何を考えてるのかな、って見ていたくなるの。"
+      ],
+      "specialist": {
+        "subject": "うさぎ",
+        "scene": "",
+        "focus": "relation:chiikawa-11",
+        "said": [
+          "exam:celebrate",
+          "relation:hachi-friend"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "ところで、ちいかわ好きな人ってどんなグッズ集めがち？",
+      "replies": [
+        "チイカワ！",
+        "ファン全体で何が一番多いかは、今の資料ではわからないの。",
+        "一つ例を挙げるね。",
+        "強くなったハチワレのマスコットもあるの。",
+        "掲載された受注期間は、10月13日のお昼までだったよ。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "strong-hachiware-goods",
+        "focus": "topic:goods:strong-hachiware",
+        "said": [
+          "exam:celebrate",
+          "relation:hachi-friend",
+          "topic:goods:strong-hachiware"
+        ]
+      },
+      "pendingQuestion": null
+    }
+  ]
+}

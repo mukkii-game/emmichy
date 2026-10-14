@@ -1,5 +1,5 @@
 // The single authored identity, created under the user's request to write a portfolio.
-import {exactNames} from './names.js?v=20261013-specialist1';
+import {exactNames} from './names.js?v=20261014-dialogue1';
 export const identity=Object.freeze({age:17,country:'スウェーデン',city:'ヨーテボリ',siblingAge:14,visitCity:'東京',visitDays:5,visitCount:1});
 export const identityReadings=Object.freeze({[identity.country]:'スウェーデン',[identity.city]:'ヨーテボリ'});
 export const profile=Object.freeze({
@@ -43,6 +43,8 @@ export function complimentReaction(raw,state={}){
   ||folded.match(/^アイ(?:$|[!！?？。、])/);
  if(!praise||/嫌イ|苦手|ツマラ|ヤメ|ナイ|無イ|ジャナ|デハナ|相談|病気|事故|亡ク|死ニ/.test(folded))return null;
  const affection=/好キ|スキ|好ミ|コノミ|愛|アイ|ラブ/.test(praise[0]);
+ if(affection&&state.specialist?.subject&&!/(?:アナタ|エミチ[イィ]|emmichy)(?:ガ|ヲ|ト).*好キ|^(?:好キ|スキ)(?:ダヨ|ヨ|デス)?[!！。]*$/i.test(folded)&&/ドウ思|ドウオモ|料理|甘イモノ|強イノニ|資格/.test(folded))return null;
+ if(/(?:好キ|スキ)ナトコロ.*(?:聞カセ|教エ)|誰.*(?:好キ|スキ)|ドンナグッズ/.test(folded))return null;
  // Asking about a preference is not a declaration, even with her name in the sentence.
  if(affection&&/(?:好キ|スキ|好ミ|コノミ)(?:ナノ|デスカ|カナ|カ)?[?？]$/.test(folded))return null;
  // Questions about her preferences retain their actual answer, rather than becoming a declaration.
@@ -91,6 +93,9 @@ export function profileReply(raw){
  const text=String(raw).normalize('NFKC').replace(/\s/g,'');
  if(accessoryCue(text))return {topic:'profile',id:'profile:accessory',text:accessoryReply};
  const folded=text.replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96));
+ if(/日本語|ニホンゴ/.test(folded)&&/ドウヤッテ|方法|練習/.test(folded))return {topic:'profile',id:'profile:study-method',text:'教わった言い方を小さいノートに書いて、こういう会話で試すの。漫画とアニメも読むよ。使えた言葉が増えると、嬉しい！'};
+ if(/日本語|ニホンゴ/.test(folded)&&/スウェーデン.*(?:暮ラ|住|ドンナ感ジ)/.test(folded))return {topic:'profile',id:'profile:home-study',text:'うん、日本語を勉強中！ ヨーテボリの近くで、家族と暮らしてるの。学校のあと、漫画やゲームを楽しむ学生だよ。'};
+ if(/(?:オヤツ|おやつ|オ菓子).*(?:何|ナニ|アル|好キ|スキ|食ベ)|(?:何|ナニ).*(?:オヤツ|おやつ)/.test(folded))return {topic:'profile',id:'profile:snack',text:'シナモンロールとココアの組み合わせ、好き！ 日本で食べたプリンも覚えてるよ。今なら、あなたとおやつの話でお腹すいちゃう。'};
  if(/(?:何テ|ナンテ).*(?:呼バレ|ヨバレ)|^(?:名前|ナマエ)(?:ハ|教エ|オシエ)/.test(folded))return {topic:'profile',id:'profile:name',text:'エミチィって呼ばれてるよ。あなたも、そう呼んで！'};
  if(/日本語|ニホンゴ/.test(folded)&&!/(?:私|僕|俺|ワタシ|ボク|オレ|友達|彼).{0,4}(?:ハ|ガ|モ|ノ)/.test(folded)&&(!/チイカワ|ハチワレ|ウサギ|シーサー/.test(folded)||/勉強|ベンキョウ|覚|学/.test(folded)))return {topic:'profile',id:'profile:languages',text:'うん、日本語を勉強してるよ！ 漫画とアニメ、それからこういう会話で覚えてるの。長い音と小さい「っ」は、まだ難しいの。'};
  const home=/(?:スウェーデン|ヨーテボリ).*(?:生マレ|ウマレ|育|ソダ|出身|シュッシン|住|スン|[?？])/.test(folded)&&!/(?:私|僕|俺|ワタシ|ボク|オレ|友達|彼女|彼氏)/.test(folded);

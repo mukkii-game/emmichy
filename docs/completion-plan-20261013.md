@@ -26,3 +26,7 @@ stage1の最初の実装：src/specialist.jsに根拠パケット、場面継続
 Luna mediumの限定レビュー1人を使用。外部Claude/Geminiにはresearch/chiikawa/scene-research-request.mdの狭い場面調査を渡せる。人間が同ファイルを読んで作業するよう一度伝えればよい。現時点では外部への依頼を送信しておらず、実行中ではない。Director/実装/統合はこのWorkに残す。
 
 公開実装の候補：LangGraph.js（https://github.com/langchain-ai/langgraphjs、MIT）とMicrosoft TinyTroupe（https://github.com/microsoft/TinyTroupe、公式README）を確認。前者の状態と記憶を分ける構造、後者のペルソナ評価は参考になる。ただし公開中の軽いWebゲームの会話・音・入力をそのまま完成させるものではなく、現段階で移植はしない。今回は外部コードの転載や依存追加は0。必要な部分を採用する時に、具体的なコード/ライセンス/運営費を確認する。
+
+## 2026-10-14の進行
+
+stage1–4を横断して改善中。根拠IDと感想の専門生成、検定5根拠、公式話題2件、表示した事実の記憶、問いと歓声の分離を実装。仮想プレイヤー2人の13送信から破綻を発見して同入力で修正確認。実LLM5呼出しの失敗も保存出力で再検証。docs/dialogue-iteration-20261014.md。全stage通過とはしない。島/映画・人物/食べ物も8送信ずつのオフライン検証と修正を追加。全般の言い換え反復、最終候補の実生成、実スマホと面白さの人間評価が残る。追加AI依頼は現在必要なく、既存資料の確認と実装を優先する。

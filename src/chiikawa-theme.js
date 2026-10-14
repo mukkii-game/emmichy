@@ -1,6 +1,7 @@
 // Original everyday connections, grounded in the existing owned factual cards.
-import {cards,sources} from './fandom.js?v=20261013-specialist1';
-import {relatedChiikawa} from './chiikawa-relations.js?v=20261013-specialist1';
+import {cards,sources} from './fandom.js?v=20261014-dialogue1';
+import {relatedChiikawa} from './chiikawa-relations.js?v=20261014-dialogue1';
+import {focusName} from './names.js?v=20261014-dialogue1';
 const fold=value=>String(value||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');
 const bridges=[
  {id:'sweet',card:'chiikawa-14',match:/甘イ|アマイ|ケーキ|プリン|チョコ|スイーツ|シナモンロール/,lines:['甘い物って聞くと、ラッコを思い出しちゃう！ あんなに強いのに甘党なの、好き。','ラッコにも甘い物、選んであげたいな。アタシ、こういう時すぐちいかわのこと考えちゃう。']},
@@ -15,6 +16,14 @@ export function personalFanReply(input,state={}){
  const t=fold(input),chii=/チイカワ|ハチワレ|シーサー|ウサギ|モモンガ/.test(t)||state.knowledge?.work==='chiikawa';
  if(!chii||/嫌イ|キライ|病気|相談|事故|死ニ|亡ク/.test(t))return null;
  const question=t.split(/[。!！]/).filter(Boolean).at(-1)||t;
+ const focused=/^(?:ソノ|アノ)子/.test(question)?state.specialist?.subject:focusName(input,state)?.name||state.specialist?.subject;
+ if(focused==='ハチワレ'&&state.specialist?.focus==='relation:chiikawa-9'&&/ソノ|モウ少シ/.test(question))return {subject:'hachiware-photo',text:'小さい思い出を残したい気持ちに、アタシもなるの。すごい景色だけじゃなくて、一緒にいた時間も忘れたくないな。これはアタシの気持ちね。'};
+ if(focused==='ハチワレ'&&/料理.*ドウ思|料理.*ドウオモ/.test(t))return {subject:'hachiware-food',text:'料理って、作った人の気持ちも一緒にもらう感じがして好き。もしハチワレと一緒に食べられたら、次はアタシも作りたいな。'};
+ if(focused==='ラッコ'&&/甘イモノ|甘党/.test(t)&&/イイヨネ/.test(t))return {subject:'rakko',text:'うん、その組み合わせ、好き！ アタシなら、強さに憧れながら、おやつの好みは仲間だって喜んじゃう。'};
+ if(focused==='シーサー'&&/資格|ドコガ好キ|ドコガスキ/.test(question))return {subject:'shisa',text:'シーサーは、働きたい場所のために頑張るところが好き。アタシも勉強が進まない時、思い出すともう一行書きたくなる。'};
+ if(focused==='ハチワレ'&&/魅力|性格|ドンナトコロ|好キナトコロ/.test(question))return {subject:'hachiware',text:'ハチワレは、友達のことを気にかけるところが好き。嬉しい時も相手を見てる感じ、アタシ弱いの。自分だけじゃない、って大事だよね。'};
+ if(focused==='うさぎ'&&/好キナトコロ|魅力|性格/.test(question))return {subject:'usagi',text:'うさぎの「ヤハ！」って勢い、好き！ アタシまで元気になっちゃう。何を考えてるのかな、って見ていたくなるの。'};
+ if(state.specialist?.subject==='ハチワレ'&&/チイカワト一緒|友達ト一緒/.test(question))return {subject:'hachiware-friend',text:'アタシは、ハチワレとちいかわの近さが好き。言葉がうまく出ない時も、友達がそばにいてくれたら嬉しいなって思う。'};
  if(/(?:応援|オウエン).*(?:好キ|スキ)|(?:好キ|スキ).*(?:応援|オウエン)/.test(question))return {subject:'supporting',text:'うん、好き！ 頑張ってる人を見ると、あと少しって一緒に力が入っちゃう。シーサーにも、そういう気持ちになるの。'};
  if(/シーサー/.test(t)&&/読ミ返|読み返|読ミ直/.test(question))return {subject:'shisa-reread',text:'シーサーが頑張るところを見ると、アタシも少し頑張ろってなるの。もう一回、その気持ちになりたくて読み返すの。'};
  if(/シーサー/.test(t)&&/ドコガ好キ|ドコガスキ|好キナトコロ|ガンバリ屋/.test(question))return {subject:'shisa',text:'シーサーは、働きたい場所のために頑張るところが好き。資格を取るまであきらめないところ、アタシも応援したくなる。'};
@@ -24,7 +33,7 @@ export function personalFanReply(input,state={}){
   return {subject:'favourite',text:'アタシ、ハチワレの気遣いに弱いの。写真で小さい思い出を残すところも、大好き！ 一番って聞かれると、みんな浮かんで迷っちゃう。'};
  if(/(?:エミチ[ィイー]|アナタ|君).{0,16}プリン.{0,6}(?:好キ|スキ)/.test(t))
   return {subject:'pudding',text:'アタシもプリン好き！ 一緒に食べながらちいかわの話、したいな。小さいうれしいこと、二つになるね。'};
- if(/チイカワ.*(?:本人|ドンナトコ|ドコガ好キ|ドコガスキ|怖クテモ|コワクテモ|小サナ幸セ|ガンバル|頑張ル)/.test(t)){
+ if(focused==='ちいかわ'&&/チイカワ.*(?:本人|ドンナトコ|ドコガ好キ|ドコガスキ|怖クテモ|コワクテモ|小サナ幸セ|ガンバル|頑張ル)/.test(t)){
   const previous=state.history?.filter(h=>h.role==='enny').at(-1)?.text||'';
   const correction=/ジャナ|変エナイ|カエナイ/.test(t)&&/島|うさぎ|ハチワレ/.test(previous);
   const lines=/幸セ/.test(t)?['ちいかわの小さな幸せの話、しよう！ うれしそうな顔を見ると、アタシまで顔がゆるむの。ああいう時間、長く続いてほしくなる。']:

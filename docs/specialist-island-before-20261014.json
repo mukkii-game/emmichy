@@ -1,0 +1,150 @@
+{
+  "mode": "actual app handlers in offline DOM fixture; virtual timing; no browser/human/live-model evaluation",
+  "providerCalls": 0,
+  "rows": [
+    {
+      "input": "島二郎の水流って何？",
+      "replies": [
+        "シマジロウ！",
+        "島二郎は手を回して水流を起こすの。",
+        "手を回して水流を起こす島二郎、頼もしい。",
+        "アタシ、思い出すと力が入っちゃう。"
+      ],
+      "specialist": {
+        "subject": "島二郎",
+        "scene": "water",
+        "focus": "relation:chiikawa-23",
+        "said": [
+          "relation:chiikawa-23"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "ちいかわたちがそこで遊んでたの？",
+      "replies": [
+        "チイカワ！",
+        "ちいかわは不器用ながら頑張る子で、驚いたり嫌なことがあると泣く。",
+        "怖い時にも頑張るちいかわを見ると、アタシも応援したくなるの。"
+      ],
+      "specialist": {
+        "subject": "島二郎",
+        "scene": "",
+        "focus": "relation:chiikawa-effort",
+        "said": [
+          "relation:chiikawa-23",
+          "relation:chiikawa-effort"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "誰が水流を起こすんだっけ？",
+      "replies": [
+        "同じ説明はもうしないね。",
+        "アタシの好きな気持ちと、あなたが気になったところ、一緒に話したい。"
+      ],
+      "specialist": {
+        "subject": "島二郎",
+        "scene": "water",
+        "focus": "relation:chiikawa-23",
+        "said": [
+          "relation:chiikawa-23",
+          "relation:chiikawa-effort"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "島二郎のお店では何を出すの？",
+      "replies": [
+        "同じ説明はもうしないね。",
+        "アタシの好きな気持ちと、あなたが気になったところ、一緒に話したい。"
+      ],
+      "specialist": {
+        "subject": "島二郎",
+        "scene": "water",
+        "focus": "relation:chiikawa-23",
+        "said": [
+          "relation:chiikawa-23",
+          "relation:chiikawa-effort"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "フルーツパフェもそこで作るの？",
+      "replies": [
+        "わあ、その話うれしい!",
+        "うさぎの家、気になる。",
+        "でも案内してくれるかは別の話ね。"
+      ],
+      "specialist": {
+        "subject": "島二郎",
+        "scene": "water",
+        "focus": "relation:chiikawa-23",
+        "said": [
+          "relation:chiikawa-23",
+          "relation:chiikawa-effort"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "映画でモモンガがちいかわの耳を引っ張るところは？",
+      "replies": [
+        "モモンガ！",
+        "映画では、崖から落ちそうなちいかわを、モモンガが耳を引っ張って助けるの。",
+        "助けようとして耳を引っ張っちゃうモモンガ!",
+        "かわいいけど、アタシは見てて力が入っちゃう。"
+      ],
+      "specialist": {
+        "subject": "モモンガ",
+        "scene": "ear",
+        "focus": "reviewed:momonga:ear",
+        "said": [
+          "relation:chiikawa-23",
+          "relation:chiikawa-effort",
+          "reviewed:momonga:ear"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "その場面のどこが好き？",
+      "replies": [
+        "同じ説明はもうしないね。",
+        "アタシの好きな気持ちと、あなたが気になったところ、一緒に話したい。"
+      ],
+      "specialist": {
+        "subject": "モモンガ",
+        "scene": "ear",
+        "focus": "reviewed:momonga:ear",
+        "said": [
+          "relation:chiikawa-23",
+          "relation:chiikawa-effort",
+          "reviewed:momonga:ear"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "ここから先はネタバレしないでね",
+      "replies": [
+        "今の話、少し取り違えそう。",
+        "どのところの話か、もう少し教えて。"
+      ],
+      "specialist": {
+        "subject": "モモンガ",
+        "scene": "ear",
+        "focus": "reviewed:momonga:ear",
+        "said": [
+          "relation:chiikawa-23",
+          "relation:chiikawa-effort",
+          "reviewed:momonga:ear"
+        ]
+      },
+      "pendingQuestion": null
+    }
+  ]
+}

@@ -1,3 +1,9 @@
+# 2026-10-14: specialist dialogue iteration
+
+Two Luna medium personas (7 fan / 6 general inputs) used the offline actual-app DOM fixture, not real LLM/browser/human play. Failures: title stole Hachiware question, personality became cooking, novice invitation was refused, reaction!? became an unanswered question. Root corrected selection/intent/memory and replayed the same inputs mechanically; before/after JSONs preserve evidence. Exam8 inputs retain result, feelings, celebration, cookie and unknown handmade detail, then accept topic change.5 live provider attempts exposed discarded feelings and an unrelated next-challenge question; final parser changes replay captured responses with zero new generation. Human fun and physical-phone validation remain outstanding. Full evidence/limits:docs/dialogue-iteration-20261014.md.
+
+---
+
 # 2026-10-13: new human failure exposes patching mistakes
 
 Human reports草むしり検定5級→キュウ, repeatedヤハ explanation despite repeated complaints, an orphan closing quote, inventedプリンが降るごっこ and an unrelated breathing-training answer. Selected exact fragments:docs/human-chiikawa-failure-20261013.json. Source/provider unavailable; not all assigned to the LLM. Local reconstructed tests show own catchphrase imitation after mentioning Hachiware is incorrectly replaced by attributionRepair. Numeric grade matches Hunter Kyuu, katakana feedback misses, and quote splitting loses the subject of a sentence. These deterministic mechanisms are repaired; character-attributed fantasies no longer count as her own hypothetical.209 frontend/54 relay checks pass, no new live generation or persona subagent. Full-turn/semantic repetition and expert fact/interpretation coverage remain unresolved; this is an integrity repair, not evidence of a fun specialist game. Proposed redesign and official-source pointers:docs/chiikawa-specialist-direction-20261013.md. Earlier narrow test success was overinterpreted as overall conversation improvement.

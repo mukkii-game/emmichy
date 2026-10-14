@@ -4,16 +4,16 @@ import {specialistPacket,specialistPrompt,cleanSpecialist,noteSpecialistDelivery
 import {restoreState} from '../src/engine.js';
 import {startConversation} from '../src/session.js';
 
-test('a scene persists through a short grade and correction without unrelated catchphrase evidence',()=>{
+test('the verified examination scene persists through a grade and correction without unrelated evidence',()=>{
  let state={};
  for(const input of ['草むしり検定の話をしよう','5キュウ オチタ トキ','ソノトキ、ハチワレは？']){
   const p=specialistPacket(input,state);state={...state,specialist:p.memory};
-  assert.equal(p.active,true);assert.equal(p.memory.scene,'examination');assert.equal(p.evidence.length,0);
-  assert.match(p.gap,/草むしり検定/);
+  assert.equal(p.active,true);assert.equal(p.memory.scene,'examination');assert.ok(p.evidence.length>0);
+  assert.ok(p.evidence.every(r=>r.id.startsWith('exam:')));assert.equal(p.gap,'');
  }
  const prompt=specialistPrompt('5キュウ オチタ トキ',state);
  assert.doesNotMatch(prompt,/ヤハ|写真撮影|セイレーン/);
- assert.match(prompt,/プレイヤーの説明/);
+ assert.match(prompt,/ハチワレ.*合格.*ちいかわ.*不合格/);
 });
 test('scene evidence is scoped and a new character leaves the scene',()=>{
  const first=specialistPacket('島二郎の水流の話をしよう');
@@ -78,4 +78,28 @@ test('recent catchphrases and unrelated character comparisons are not an enthusi
  const prompt=specialistPrompt('どうして好き？',{specialist:{subject:'シーサー'},history:[{role:'enny',text:'シーサーを応援したい。ヤハ！'}]});
  assert.match(prompt,/今の対象はシーサー/);assert.match(prompt,/別キャラの例えを足さない/);
  assert.match(prompt,/今回はこの口癖を使わない/);assert.match(prompt,/ヤハ/);
+});
+test('time-sensitive news is available only within its verified snapshot window',()=>{
+ const input='ちいかわパークのクリスマスの話';
+ const fresh=specialistPacket(input,{},new Date('2026-10-14T00:00:00Z'));
+ assert.equal(fresh.evidence[0].id,'topic:park:christmas-2026');assert.match(fresh.evidence[0].spoken,/予定/);
+ const expired=specialistPacket(input,{},new Date('2026-10-21T00:00:00Z'));
+ assert.equal(expired.evidence.length,0);assert.match(expired.gap,/最新案内/);
+ const old=specialistPacket('強くなったハチワレ',{},new Date('2026-10-14T00:00:00Z'));
+ assert.match(old.evidence[0].spoken,/お昼までだった/);
+});
+test('new character requests leave the scene, while a general invitation deepens it',()=>{
+ const first=specialistPacket('島二郎の水流');
+ assert.equal(specialistPacket('ちいかわの話して',{specialist:first.memory}).memory.scene,'water');
+ const changed=specialistPacket('ハチワレの話して',{specialist:first.memory});
+ assert.equal(changed.memory.scene,'');assert.equal(changed.memory.subject,'ハチワレ');
+ assert.ok(changed.evidence.every(r=>r.id!=='relation:chiikawa-23'&&!r.id.startsWith('exam:')));
+});
+test('asking about another participant retains the examination scene and its evidence',()=>{
+ const p=specialistPacket('草むしり検定の最初の結果は？');
+ const next=specialistPacket('ハチワレの気持ち、えみちいはどう思う？',{specialist:p.memory});
+ assert.equal(next.memory.scene,'examination');assert.equal(next.memory.subject,'ハチワレ');
+ assert.ok(next.evidence.every(r=>r.id.startsWith('exam:')));
+ const profile=specialistPacket('ハチワレ本人の好きなところは？',{specialist:next.memory});
+ assert.equal(profile.memory.scene,'');
 });

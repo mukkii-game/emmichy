@@ -1,0 +1,52 @@
+{
+  "mode": "offline replay of captured real outputs; revised validator and director; all chunks assumed delivered; no new provider calls",
+  "capturedCommit": "628909630dff3ae0708aa68844e694c8f84eedf4",
+  "capturedAt": "2026-10-14T03:47:21.168Z",
+  "providerCalls": 0,
+  "turns": [
+    {
+      "input": "草むしり検定の最初の結果は？",
+      "raw": "{\"beats\":[{\"fact\":\"exam:result\"},{\"say\":\"最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。ちいかわのがっかりした顔が可愛くて、でもハチワレの喜びがすごく嬉しかった！\"},{\"ask\":\"ハチワレの合格祝いのシーン、好きですか？\"}]}",
+      "original": {
+        "text": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。",
+        "provider": "groq",
+        "source": "authored"
+      },
+      "validated": {
+        "text": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。 ハチワレの合格祝いのシーン、好きですか？",
+        "source": "mixed",
+        "reason": "specialist-plan"
+      },
+      "reply": {
+        "text": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。 ハチワレの合格祝いのシーン、好きですか?",
+        "source": "mixed",
+        "reason": "",
+        "id": null,
+        "replaced": false,
+        "recovered": false
+      }
+    },
+    {
+      "input": "ハチワレの気持ち、えみちいはどう思う？",
+      "raw": "{\"beats\":[{\"fact\":\"exam:result\"},{\"say\":\"ハチワレは合格できて嬉しそうだけど、ちいかわが不合格でちょっと申し訳ない気持ちもあるんだろうなって思う。アタシもハチワレのがんばりに胸がキュンとした！\"},{\"ask\":\"ハチワレの次の挑戦、何だと思う？\"}]}",
+      "original": {
+        "text": "ハチワレの次の挑戦、何だと思う？",
+        "provider": "groq",
+        "source": "llm"
+      },
+      "validated": {
+        "text": "アタシの見方だけど、ハチワレは合格できて嬉しそうだけど、ちいかわが不合格でちょっと申し訳ない気持ちもあるんだろうなって思う。 アタシもハチワレのがんばりに胸がキュンとした！",
+        "source": "llm",
+        "reason": "specialist-plan"
+      },
+      "reply": {
+        "text": "アタシの見方だけど、ハチワレは合格できて嬉しそうだけど、ちいかわが不合格でちょっと申し訳ない気持ちもあるんだろうなって思う。 アタシもハチワレのがんばりに胸がキュンとした!",
+        "source": "llm",
+        "reason": "",
+        "id": null,
+        "replaced": false,
+        "recovered": false
+      }
+    }
+  ]
+}

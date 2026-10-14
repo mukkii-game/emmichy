@@ -1,5 +1,5 @@
 // One grounded move per authored reply. No new persistent memory.
-import {rejectedJoke} from './humor.js?v=20261013-specialist1';
+import {rejectedJoke} from './humor.js?v=20261014-dialogue1';
 export const MOVES=Object.freeze(['SELF_CORRECT','NOTICE_WORDING','LIGHT_TEASE','SHARED_FRAME','SMALL_SELF_DISCLOSURE']);
 export function conversationMove(input,state={}){
  const raw=String(input||'').normalize('NFKC').trim();
@@ -9,7 +9,7 @@ export function conversationMove(input,state={}){
  const prior=history.filter(h=>h.role==='enny').map(h=>h.text);
  const serious=/疲れ|つかれ|ミス|失敗|つら|苦し|病気|相談|怖|いじめ|悲し/.test(raw);
  const answer=(move,text)=>prior.includes(text)?null:{move,text,topic:'conversation-move'};
- if(/[?？]|教えて|聞かせて/.test(lastReply)&&/知らない|詳しくない|わからない|質問ばかり|質問ばっかり|聞かないで/.test(raw))
+ if(/[?？]|教えて|聞かせて/.test(lastReply)&&/知らない|詳しくない|わからない|質問ばかり|質問ばっかり|聞かないで/.test(raw)&&!/[?？]|誰が好き|教えて|聞かせて/.test(raw))
   return answer('SELF_CORRECT','ア、今の聞き方、答えることを増やしちゃったね。引っ込める。');
  if(/質問ばかり|質問ばっかり|聞かないで/.test(raw))
   return answer('SELF_CORRECT','ウン。質問を続けないね。アタシからも話す。');

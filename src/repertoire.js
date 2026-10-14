@@ -1,8 +1,8 @@
-import {unwantedFanRedirect} from './chat.js?v=20261014-dialogue1';
-import {rejectedJoke} from './humor.js?v=20261014-dialogue1';
-import {everydayReplies} from './everyday.js?v=20261014-dialogue1';
-import {cards,selectKnowledge,works,islandMenuCorrection} from './fandom.js?v=20261014-dialogue1';
-import {fanLines} from './fan-lines.js?v=20261014-dialogue1';
+import {unwantedFanRedirect} from './chat.js?v=20261014-view1';
+import {rejectedJoke} from './humor.js?v=20261014-view1';
+import {everydayReplies} from './everyday.js?v=20261014-view1';
+import {cards,selectKnowledge,works,islandMenuCorrection} from './fandom.js?v=20261014-view1';
+import {fanLines} from './fan-lines.js?v=20261014-view1';
 // 600 individually authored reactions + 600 factual-answer combinations.
 // Counts describe reply candidates, not 1,200 distinct canon facts.
 export const replies=Object.freeze(cards.flatMap(card=>{

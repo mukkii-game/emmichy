@@ -1,11 +1,12 @@
 // Small owned evidence packets. The browser sends IDs/state, never new canon.
-import {chiikawaRelations} from './chiikawa-relations.js?v=20261014-dialogue1';
-import {waterPlayCorrection} from './fandom.js?v=20261014-dialogue1';
-import {exactNames,focusName} from './names.js?v=20261014-dialogue1';
-import {substantiveHistory} from './dialogue-history.js?v=20261014-dialogue1';
-import {feedbackIntent} from './conversation-repair.js?v=20261014-dialogue1';
-import {sceneFacts} from './chiikawa-scenes.js?v=20261014-dialogue1';
-import {topicFacts} from './chiikawa-news.js?v=20261014-dialogue1';
+import {chiikawaRelations} from './chiikawa-relations.js?v=20261014-view1';
+import {waterPlayCorrection} from './fandom.js?v=20261014-view1';
+import {exactNames,focusName} from './names.js?v=20261014-view1';
+import {substantiveHistory} from './dialogue-history.js?v=20261014-view1';
+import {feedbackIntent} from './conversation-repair.js?v=20261014-view1';
+import {sceneFacts} from './chiikawa-scenes.js?v=20261014-view1';
+import {topicFacts} from './chiikawa-news.js?v=20261014-view1';
+import {fanConversation} from './fan-conversation.js?v=20261014-view1';
 const fold=s=>String(s||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/[\s。、!?！？「」]/g,'').toLowerCase();
 const spoken={
  'reviewed:usagi:yaha':'「ヤハ！」はうさぎの掛け声だよ。',
@@ -48,11 +49,12 @@ export function specialistPacket(input,state={},now=new Date()){
  const names=exactNames(input,recognition);
  const chii=focusName(input,recognition),other=names.find(n=>n.work!=='chiikawa');
  const previousScene=scenes.find(s=>s.id===memory.scene);
- const selfTopic=!chii&&(/日本語|ニホンゴ|スウェーデン|ヨーテボリ|家族|カゾク/.test(t)||/エミチ|emmichy/.test(t)&&!/ドウ思|ドウオモ/.test(t));
+ const conversation=fanConversation(input,{...state,specialist:memory});
+ const selfTopic=!chii&&(/日本語|ニホンゴ|スウェーデン|ヨーテボリ|家族|カゾク/.test(t)||/エミチ|emmichy/.test(t)&&!/ドウ思|ドウオモ/.test(t)&&!conversation);
  const matches=c=>['OP','ED'].includes(c)?new RegExp(`\\b${c}\\b`,'i').test(String(input)):t.includes(fold(c));
  let explicit=scenes.find(s=>s.cues.some(matches));
  if(explicit?.id==='opening'&&/アニメ|テレビ|tv/.test(t)&&!/映画|エイガ|くつずれ|クツズレ/.test(t))explicit=scenes.find(s=>s.id==='tv-opening');
- const follow=/^(ソレ|ソノ|アレ|アノ|モット|続キ|ツヅキ|ドウ|ナゼ|何|ナニ|誰|ダレ|ソウ|違|チガ|オナジ)/.test(t)||/(?:ソノ|アノ|サッキノ)(?:話|ハナシ|場面|シーン|子)|ソコデ|ドコガ好キ|ドウ思|ドウオモ|落チ|オチ|合格|ゴウカク|曲名|キョクメイ|モウ一度|モウイチド|サッキ|面白イ|オモシロイ|話シテ|話ヲシテ|ハナシテ|続ケ|ツヅケ|印象ニ残ル場面/.test(t);
+ const follow=Boolean(conversation)||/^(ソレ|ソノ|アレ|アノ|モット|続キ|ツヅキ|ドウ|ナゼ|何|ナニ|誰|ダレ|ソウ|違|チガ|オナジ)/.test(t)||/(?:ソノ|アノ|サッキノ)(?:話|ハナシ|場面|シーン|子)|ソコデ|ドコガ好キ|ドウ思|ドウオモ|落チ|オチ|合格|ゴウカク|曲名|キョクメイ|モウ一度|モウイチド|サッキ|面白イ|オモシロイ|話シテ|話ヲシテ|ハナシテ|続ケ|ツヅケ|印象ニ残ル場面/.test(t);
  const facet=previousScene&&(/^(ドンナ|ドノ|ドレ)|手作リ|作ッタ|買ッタ|点数|得点|ドウヤッテ/.test(t)||previousScene.ids.some(id=>byId.get(id)?.cues.some(c=>fold(c).length>=2&&t.includes(fold(c)))));
  const mixedQuestion=other&&!['japan','games'].includes(other.work)&&/[?？]|何|ナニ|ナゼ|なぜ|どう|教えて/.test(input);
  const spoilerRequest=/ネタバレ/.test(t);
@@ -86,6 +88,7 @@ export function specialistPacket(input,state={},now=new Date()){
   if(follow&&!chii&&memory.focus&&byId.get(memory.focus).subject===subject)selected=[byId.get(memory.focus),...selected.filter(r=>r.id!==memory.focus)].slice(0,3);
  }
  if(scene&&follow&&!examIntent&&!explicit&&byId.has(memory.focus)&&scene.ids.includes(memory.focus))selected=[byId.get(memory.focus),...selected.filter(r=>r.id!==memory.focus)].slice(0,3);
+ if(conversation&&byId.has(memory.focus)&&selected.some(r=>r.id===memory.focus))selected=[byId.get(memory.focus),...selected.filter(r=>r.id!==memory.focus)].slice(0,3);
  const allowSpoilers=/ネタバレ.{0,8}(?:イイ|大丈夫|アリ)/.test(t);
  const noSpoilers=!allowSpoilers&&(memory.spoilers===false||/ネタバレ.{0,4}(?:ナシ|なし|イヤ|嫌|禁止)|ネタバレシナイ/.test(t));
  const specificScene=Boolean(scene&&scene.id!=='examination');
@@ -143,6 +146,7 @@ export function specialistPrompt(input,state={}){
  const phrases=['ヤハ','なんとかなれ','ってコト'].filter(p=>heard.some(h=>fold(h).includes(fold(p))));
  return `\n専門会話の根拠（サーバー所有資料だけ）: ${JSON.stringify({subject:packet.memory.subject,scene:packet.memory.scene,names,evidence:packet.evidence})}
 今の質問へ先に答え、その人物・場面の感想を続ける。口癖の話者説明や映画紹介を毎回やり直さない。既出=trueの事実は前提にし、聞き直された時以外は再説明せず別の理由・感想へ進む。
+${fanConversation(input,state)?`今の会話行為: ${JSON.stringify(fanConversation(input,state))}。相手が自分の気持ちや選択を話したら、それを先に受け止める。「えみちいなら？」は今の場面での本人の仮定の意見を尋ねている。自己紹介へ戻らない。プレイヤーの説明や好みを原作の事実へ変えない。`:''}
 ${packet.memory.subject?`今の対象は${packet.memory.subject}。相手から比較を求められた時以外、別キャラの例えを足さない。`:'場面を深める時も、関係の薄い別キャラの話を足さない。'}
 ${phrases.length?`直近で使った口癖=${JSON.stringify(phrases)}。今回はこの口癖を使わない。嬉しさは今の話への感想で表す。`:''}
 ${waterPlayCorrection(input,state)?'水流で遊ぶと言った内容を撤回する。自分の誤りを撤回し、手を回して水流を起こす話と混同しない。':''}

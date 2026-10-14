@@ -1,7 +1,8 @@
 // Original everyday connections, grounded in the existing owned factual cards.
-import {cards,sources} from './fandom.js?v=20261014-dialogue1';
-import {relatedChiikawa} from './chiikawa-relations.js?v=20261014-dialogue1';
-import {focusName} from './names.js?v=20261014-dialogue1';
+import {cards,sources} from './fandom.js?v=20261014-view1';
+import {relatedChiikawa} from './chiikawa-relations.js?v=20261014-view1';
+import {focusName} from './names.js?v=20261014-view1';
+import {fanConversationReply} from './fan-conversation.js?v=20261014-view1';
 const fold=value=>String(value||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');
 const bridges=[
  {id:'sweet',card:'chiikawa-14',match:/甘イ|アマイ|ケーキ|プリン|チョコ|スイーツ|シナモンロール/,lines:['甘い物って聞くと、ラッコを思い出しちゃう！ あんなに強いのに甘党なの、好き。','ラッコにも甘い物、選んであげたいな。アタシ、こういう時すぐちいかわのこと考えちゃう。']},
@@ -13,8 +14,9 @@ const bridges=[
 // Personal opinions, not additional canon scenes. Basic character framing:
 // https://apps.apple.com/jp/iphone/story/id1776526436
 export function personalFanReply(input,state={}){
- const t=fold(input),chii=/チイカワ|ハチワレ|シーサー|ウサギ|モモンガ/.test(t)||state.knowledge?.work==='chiikawa';
+ const t=fold(input),chii=/チイカワ|ハチワレ|シーサー|ウサギ|モモンガ/.test(t)||state.knowledge?.work==='chiikawa'||Boolean(state.specialist?.focus);
  if(!chii||/嫌イ|キライ|病気|相談|事故|死ニ|亡ク/.test(t))return null;
+ const conversation=fanConversationReply(input,state);if(conversation)return conversation;
  const question=t.split(/[。!！]/).filter(Boolean).at(-1)||t;
  const focused=/^(?:ソノ|アノ)子/.test(question)?state.specialist?.subject:focusName(input,state)?.name||state.specialist?.subject;
  if(focused==='ハチワレ'&&state.specialist?.focus==='relation:chiikawa-9'&&/ソノ|モウ少シ/.test(question))return {subject:'hachiware-photo',text:'小さい思い出を残したい気持ちに、アタシもなるの。すごい景色だけじゃなくて、一緒にいた時間も忘れたくないな。これはアタシの気持ちね。'};

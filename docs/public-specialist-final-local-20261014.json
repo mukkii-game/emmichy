@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-14T04:54:50.401390+00:00",
+  "frontendCandidate": "113bcf3bf6239a2916288260a680765a852e5c41",
+  "frontendMain": "461e300b14577afb189c9f8953a69a81eb2c275f",
+  "frontendPR": 51,
+  "backendCandidate": "9676ee07d442f0d5ca82008b89f1866a104c5d32",
+  "backendMain": "eccd1510e6d2cf57f68fe89d2eab038a1c32f4ec",
+  "backendPR": 24,
+  "providerCalls": 0,
+  "files": [
+    {
+      "path": "src/specialist.js",
+      "matches": true,
+      "sha256": "aa09435776ca3b8a819bc418bb40fafe3d1bc3f7f5663aad0b629b5a7a872028"
+    }
+  ],
+  "frontendDeployment": 38513801402,
+  "backendDeployment": 38513796958
+}

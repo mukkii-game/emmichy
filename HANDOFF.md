@@ -1,4 +1,4 @@
-# 現状(2026-10-13 更新・これが最優先)
+# 現状(2026-10-14 更新・これが最優先)
 
 - **ブランチは main 1本に集約した。** 旧公開ブランチ pilot-audio-readable-retro は main に合流済み。今後の作業・PR はすべて main 向け(旧ブランチ向けの PR は作らない)。
 - 公開先: Cloudflare Workers https://emmichy.mucky-totoro.workers.dev (main に push すると deploy-cloudflare.yml が出す)。GitHub Pages は旧ブランチ配信のまま、repo 非公開化で止まる予定。
@@ -7,7 +7,7 @@
 
 ## 人間試遊前の確認（2026-10-14）
 
-中継2b4403fの新Schemaで実返答800ms/mixed成功（CI38513112282）。次は55msで429、追加生成なし。今後の自動品質再試行は止め、未評価の心情ターンは人間試遊／枠回復の情報待ち。保存実応答を実appへ流し429後の3送信目は通信せず入力可能・場面を守るローカル返答と確認。クッキーの手作り追質問で同じ眺める感想を追加しない修正、236/59合格。docs/completion-audit-20261014.md、specialist-live-schema-20261014.json、specialist-schema-captured-app-20261014.json、specialist-exam-final-offline-20261014.json。完成は未確認、人間の楽しさと実OSキーボードが必要。最終公開結果は統合後に追記。
+中継2b4403fの新Schemaで実返答800ms/mixed成功（CI38513112282）。次は55msで429、追加生成なし。今後の自動品質再試行は止め、未評価の心情ターンは人間試遊／枠回復の情報待ち。保存実応答を実appへ流し429後の3送信目は通信せず入力可能・場面を守るローカル返答と確認。クッキーの手作り追質問で同じ眺める感想を追加しない修正、236/59合格。docs/completion-audit-20261014.md、specialist-live-schema-20261014.json、specialist-schema-captured-app-20261014.json、specialist-exam-final-offline-20261014.json。完成は未確認、人間の楽しさと実OSキーボードが必要。HUMAN PLAYTEST READY: YES（完成確認はNO）。PR51/main461e300（候補113bcf3）と中継PR24/maineccd151（候補9676ee0）へ統合。公開38513801402/38513796958成功、変更公開モジュールが候補と完全一致。docs/public-specialist-final-local-20261014.json。人間の試遊と実スマホ結果を質問済み、返信は未受領。残る判断は人間の面白さ・実OS入力と音。429後に品質確認を自動再開しない。
 
 ## 専門会話のAPI形式指定（2026-10-14）
 

@@ -1,3 +1,9 @@
+# 2026-10-14: schema live success,429 stop and human-play candidate
+
+CI38513112282 at relay2b4403f:800ms mixed success with owned exam result and retained model feeling. Second request hit429 in55ms; all further real generation stopped. Captured actual-app replay retains the generated feeling, handles429, and sends no request for third input while keeping input usable and the exam topic. Handmade clarification no longer appends the repeated viewing wish.236frontend/59relay tests pass; final8-send offline exam record and sources saved. PR51/24 published and the changed module matches its candidate. HUMAN PLAYTEST READY:YES; human fun and actual OS keyboard/audio remain unverified. No human result yet; no automatic quality retry after429.
+
+---
+
 # 2026-10-14: provider transport addresses malformed JSON
 
 CI38512386796 at relay6782d00:2 Groq calls,790ms mixed success then571ms malformed closing quote rejection. No429, no further calls this turn. Add owned-ID strict schema for supported Groq models, JSON object fallback for other Groq and JSON MIME for Gemini. Preserve text transport for ordinary turns.236frontend/59relay tests include captured HTTP payloads and scope. PR50/23 published; final new transport has no live result yet. Evidence:docs/specialist-transport-20261014.md and specialist-live-formatcheck-20261014.json.

@@ -118,7 +118,7 @@ export function specialistFallback(input,state={}){
  if(packet.memory.scene==='ear'&&/好き|スキ/.test(input))return 'アタシ、可愛さだけじゃなくて、助けようとする勢いに力が入っちゃう。もしそばで見てたら、自分の手まで伸びそう。';
  if(packet.memory.scene==='strong-hachiware-goods'&&/集メ|アツメ|ガチ/.test(fold(input)))return `ファン全体で何が一番多いかは、今の資料ではわからないの。一つ例を挙げるね。${record.spoken} ${record.feeling}`;
  if(packet.memory.scene==='examination'&&/(?:なぜ|どうして|ナゼ|ドウシテ|理由).{0,18}(?:落|不合格|オチ)|(?:落|不合格|オチ).{0,18}(?:なぜ|どうして|ナゼ|ドウシテ|理由)/.test(input))return '落ちた理由や点数までは、確認した紹介には書いてないの。結果が違っても友達を大事にしたい、その気持ちはアタシも考えちゃう。';
- if(packet.memory.scene==='examination'&&/手作り|作った|買った|テヅクリ|ツクッタ|カッタ/.test(input))return '作ったか買ったかまでは、確認した紹介には書いてないの。アタシなら、似てる形のお祝いって、食べる前に眺めちゃうな。';
+ if(packet.memory.scene==='examination'&&/手作り|作った|買った|テヅクリ|ツクッタ|カッタ/.test(input))return '手作りか買ったものかまでは、確かめられないの。';
  if(packet.memory.scene==='examination'&&/気持ち|どう思|キモチ|ドウオモ/.test(input)){
   const angles=packet.memory.subject==='ハチワレ'?['アタシなら、自分だけ受かった時、友達になんて声をかけるか迷っちゃう。嬉しさと気遣い、両方ありそう。','喜んでいいのかな、って考えちゃうかも。アタシは、友達の前でその嬉しさをどう伝えるかが気になる。']:['アタシなら、悔しさはすぐ消えないと思う。でも友達のお祝いはしたい。両方の気持ちでもいいよね。','笑ってお祝いしても、心がすぐ元気になるとは限らないよね。アタシ、その二つを分けて考えたい。'];
   return angles.find(line=>!recent.includes(fold(line)))||'アタシ、そこは一言で決めたくないな。どちらかだけが正しい気持ちじゃないと思う。';

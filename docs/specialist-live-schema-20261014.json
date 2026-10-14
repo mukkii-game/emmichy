@@ -1,0 +1,65 @@
+{
+  "mode": "real provider generation with candidate server prompt; synthetic inputs; no browser or human evaluation",
+  "commit": "2b4403fceb0878068e32c2a8987b57d360cd20cf",
+  "at": "2026-10-14T04:46:26.264Z",
+  "limit": 2,
+  "turns": [
+    {
+      "input": "草むしり検定の最初の結果は？",
+      "systemCharacters": 5127,
+      "history": [],
+      "wallMs": 800,
+      "result": {
+        "text": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。 ちょっとショックだけど、ハチワレの頑張りが嬉しい！",
+        "provider": "groq",
+        "source": "mixed"
+      },
+      "attempts": [
+        {
+          "provider": "groq",
+          "source": "mixed",
+          "ok": true,
+          "reason": "specialist-plan",
+          "ms": 794
+        }
+      ],
+      "rawOutputs": [
+        {
+          "provider": "groq",
+          "raw": "{\n  \"beats\": [\n    {\n      \"fact\": \"exam:result\",\n      \"say\": \"最初の草むしり検定5級では、ハチワレが合格してちいかわは不合格だったの。ちょっとショックだけど、ハチワレの頑張りが嬉しい！\",\n      \"ask\": null\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "input": "ハチワレの気持ち、えみちいはどう思う？",
+      "systemCharacters": 5165,
+      "history": [
+        {
+          "role": "user",
+          "content": "草むしり検定の最初の結果は？"
+        },
+        {
+          "role": "assistant",
+          "content": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。 ちょっとショックだけど、ハチワレの頑張りが嬉しい！"
+        }
+      ],
+      "wallMs": 55,
+      "result": {
+        "error": "rate-limited",
+        "provider": "groq"
+      },
+      "attempts": [
+        {
+          "provider": "groq",
+          "source": "llm",
+          "ok": false,
+          "reason": "http-429",
+          "ms": 52
+        }
+      ],
+      "rawOutputs": []
+    }
+  ],
+  "calls": 2,
+  "rateLimited": true
+}

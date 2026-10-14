@@ -23,6 +23,10 @@ globalThis.setTimeout=(fn,ms)=>{time+=ms;queueMicrotask(fn);return 0;};globalThi
 globalThis.fetch=async(url,options)=>{
  if(captured&&String(url).includes('/api/chat/emmichy')){
   const data=JSON.parse(options.body),record=captured.turns.find(t=>t.input===data.input),raw=record?.rawOutputs?.[0]?.raw;
+  if(record?.result?.error==='rate-limited'){
+   fixtureResponses.push({input:data.input,history:data.state.history,status:429});
+   return new Response('',{status:429});
+  }
   if(!raw)throw Error('No captured response for this fixture input');
   const messages=replayGame.buildMessages(data);
   if(!Array.isArray(messages))throw Error('Network lookup forbidden in replay');
@@ -41,7 +45,8 @@ for(const input of inputs){
  entry.value=input;await entry.emit('input');await form.emit('submit');
  for(let i=0;i<3;i++){time+=4000;await tick();}
  const state=JSON.parse(storage.get('enny-memory-v1')),at=state.history.findLastIndex(h=>h.role==='user');
- rows.push({input,replies:state.history.slice(at+1).filter(h=>h.role==='enny').map(h=>h.text),specialist:state.specialist,pendingQuestion:JSON.parse(storage.get('emmichy-session')||'{}').pendingQuestion||null});
+ const session=JSON.parse(storage.get('emmichy-session')||'{}');
+ rows.push({input,replies:state.history.slice(at+1).filter(h=>h.role==='enny').map(h=>h.text),specialist:state.specialist,pendingQuestion:session.pendingQuestion||null,...(captured?{chatHealth:session.chatHealth,dialogueUse:session.dialogueUse,inputEnabled:!entry.disabled,sendEnabled:!elements.get('send').disabled}:{})});
 }
 const result={mode:captured?'actual app handlers with captured raw provider responses revalidated against actual request state; virtual timing; no browser/human/new-generation evaluation':'actual app handlers in offline DOM fixture; virtual timing; no browser/human/live-model evaluation',providerCalls,...(captured?{capturedCommit:captured.commit,fixtureResponses}:{}),rows};
 fs.writeFileSync(process.argv[3],JSON.stringify(result,null,2)+'\n');

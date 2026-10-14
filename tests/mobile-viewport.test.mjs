@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {viewportFrame,bindMobileViewport} from '../src/mobile-viewport.js';
+import {viewportFrame,bindMobileViewport,bindChatViewport} from '../src/mobile-viewport.js';
 
 test('keyboard height loss keeps the phone baseline and follows visual panning',()=>{
  const full=viewportFrame({width:390,height:844,scale:1});
@@ -13,6 +13,16 @@ test('keyboard height loss keeps the phone baseline and follows visual panning',
  assert.equal(viewportFrame({width:390,height:430,scale:1},full,false).keyboard,false,'ordinary window resize without editing');
  assert.equal(viewportFrame({width:320,height:600,scale:1},keyboard).fullHeight,600,'actual width/orientation changes reset the baseline');
  assert.equal(viewportFrame({width:200,height:300,scale:2},keyboard,true),null,'do not chase or misclassify a pinch zoom');
+ assert.equal(viewportFrame({width:386,height:430,scale:1},full,true).width,390,'IME chrome jitter does not rescale the face');
+});
+
+test('keyboard resize follows new messages but keeps intentional reading of earlier messages',()=>{
+ let resize,scroll,disconnected=false;
+ const log={clientHeight:500,scrollHeight:450,scrollTop:0,addEventListener:(event,fn)=>{scroll=fn;},removeEventListener:()=>{scroll=null;}};
+ const stop=bindChatViewport(log,{ResizeObserver:class{constructor(fn){resize=fn;}observe(){}disconnect(){disconnected=true;}}});
+ log.clientHeight=80;resize();assert.equal(log.scrollTop,450);
+ log.scrollTop=30;scroll();log.clientHeight=60;resize();assert.equal(log.scrollTop,30);
+ stop();assert.equal(disconnected,true);assert.equal(scroll,null);
 });
 
 test('resize, pan and focus events anchor the visible phone screen and can be unbound',()=>{

@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-visual">
   <title>Emmichy — THE ALMOST CLEVER GAME</title>
   <meta name="description" content="えみちぃと約5分のおしゃべり。ちいかわと日本のオタク文化が大好きな、ちょっと賢いレトロ会話ゲーム。ブラウザですぐ遊べます。">
   <link rel="canonical" href="https://emmichy.mucky-totoro.workers.dev/">
@@ -20,7 +20,7 @@
   <meta name="twitter:title" content="えみちぃ / Emmichy — レトロ会話ゲーム">
   <meta name="twitter:description" content="ちいかわと日本のオタク文化が大好きなえみちぃと、約5分のおしゃべり。">
   <meta name="twitter:image" content="https://emmichy.mucky-totoro.workers.dev/assets/emmichy-nordic-muted-bust-20261008.png">
-  <link rel="stylesheet" href="style.css?v=20261013-phone1">
+  <link rel="stylesheet" href="style.css?v=20261014-face1">
 </head>
 <body>
   <main>
@@ -44,7 +44,7 @@
     <p id="input-hint" class="small"><span class="desktop-hint">カタカナに直さず、ふつうの漢字・かな交じりで書いてね。</span><span class="mobile-hint">ふつうの漢字・かな交じりでどうぞ。</span></p>
     <div class="toolbar">
       <span id="status">日本語入力OK / ENTER で送信</span>
-      <div><button id="restart-chat">最初から</button><button id="sound" aria-pressed="true">BGM + SE ON</button><button id="fullscreen">全画面</button><button id="help">アソビカタ</button></div>
+      <div><button id="restart-chat">最初から</button><button id="sound" aria-pressed="true">BGM + SE ON</button><button id="fullscreen">全画面</button><button id="help">アソビカタ</button><button id="browser-launch" class="browser-launch" type="button" hidden>ブラウザで開く</button></div>
     </div>
     <p class="small session-hint">終わるときは「さようなら」「バイバイ」。目安5分。自動のお別れは5分経ってから。</p>
     <section id="instructions" hidden>
@@ -62,8 +62,24 @@
     </div>
     <footer><span>THE ALMOST CLEVER GAME</span><span>EMMICHY / PILOT</span></footer>
   </main>
+  <div id="browser-guide" class="browser-guide" role="dialog" aria-modal="true" aria-labelledby="browser-guide-title" hidden>
+    <div class="browser-guide-card">
+      <h2 id="browser-guide-title">えみちぃとゆっくり話すには</h2>
+      <p>SNSの中では、キーボードや音の動きが変わることがあります。SafariやChromeで開くのがおすすめです。</p>
+      <button id="browser-open" type="button">ブラウザで開く（おすすめ）</button>
+      <button id="browser-stay" type="button">このまま遊ぶ</button>
+      <div id="browser-open-help" hidden>
+        <p id="browser-menu-help"></p>
+        <label for="browser-url" class="sr-only">ゲームのURL</label>
+        <input id="browser-url" readonly aria-label="ゲームのURL">
+        <button id="browser-copy" type="button">URLをコピー</button>
+        <span id="browser-copy-status" role="status"></span>
+        <p class="small">開くブラウザを変えると、呼び名や会話の保存は別になります。</p>
+      </div>
+    </div>
+  </div>
   <script src="assets/vendor/kuromoji.js"></script>
-  <script type="module" src="src/app.js?v=20261014-view1"></script>
+  <script type="module" src="src/app.js?v=20261014-face1"></script>
 </body>
 </html>
 

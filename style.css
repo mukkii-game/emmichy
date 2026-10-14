@@ -82,13 +82,13 @@ canvas { width:100%; aspect-ratio:248/336; }
 @media(max-width:680px){
  html,body { height:100%; overflow:hidden; overscroll-behavior:none; }
  body { padding:0; min-height:0; display:block; }
- main { position:fixed; top:var(--visual-top,0px); left:var(--visual-left,0px); width:var(--visual-width,100%); height:var(--visual-height,100dvh); max-width:none; min-height:0; padding:max(6px,env(safe-area-inset-top,0px)) max(6px,env(safe-area-inset-right,0px)) 6px max(6px,env(safe-area-inset-left,0px)); display:flex; flex-direction:column; overflow:hidden; }
+ main { position:fixed; top:var(--visual-top,0px); left:var(--visual-left,0px); width:var(--visual-width,100%); height:var(--visual-height,100dvh); max-width:none; min-height:0; padding:max(4px,env(safe-area-inset-top,0px)) max(4px,env(safe-area-inset-right,0px)) 4px max(4px,env(safe-area-inset-left,0px)); display:flex; flex-direction:column; overflow:hidden; }
  header, footer, .game-tagline, .terminal-heading, #terminal-note,
  .toolbar #status, .session-hint, #start-choice .small, .desktop-hint { display:none; }
  .mobile-hint { display:inline; }
- .screen-wrap { flex:1; min-height:0; padding:6px; gap:8px; grid-template-rows:auto minmax(0,1fr); }
- .portrait-panel { position:relative; display:block; width:100%; height:min(calc(var(--visual-height,100dvh) * .50),434px); overflow:hidden; }
- .portrait-panel canvas { width:min(100%,320px); height:auto; margin-inline:auto; }
+ .screen-wrap { flex:1; min-height:0; padding:4px; gap:4px; grid-template-rows:auto minmax(0,1fr); }
+ .portrait-panel { --portrait-width:min(320px,calc(var(--visual-width,100vw) - 20px)); position:relative; display:block; width:100%; height:clamp(min(calc(var(--portrait-width) * .73),calc(var(--visual-height,100dvh) - 118px)),calc(var(--visual-height,100dvh) - 164px),260px); overflow:hidden; }
+ .portrait-panel canvas { width:min(100%,var(--portrait-width)); height:auto; margin-inline:auto; }
  .game-logo { display:none; position:absolute; right:8px; bottom:6px; margin:0; font-size:24px; letter-spacing:1px; line-height:1; text-shadow:2px 2px #000,-1px -1px #000,0 0 8px #000; }
  .conversation-panel { height:auto; min-height:0; }
  #conversation { padding-right:4px; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; }
@@ -109,9 +109,24 @@ canvas { width:100%; aspect-ratio:248/336; }
  #settings-panel[data-open="true"] { display:block; }
  .mobile-settings-heading { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
  .mobile-settings-heading button { min-height:44px; }
- :root[data-keyboard="true"] .portrait-panel { --portrait-space:min(calc(var(--visual-height,100dvh) * .44),220px); height:var(--portrait-space); }
- :root[data-keyboard="true"] .portrait-panel canvas { transform:translateY(calc(var(--portrait-space) / 2 - 42%)); }
+ /* Crop the lower body only. The face keeps the same width and top position,
+    including when focus/keyboard classification differs in an SNS webview. */
+ .portrait-panel canvas { transform:none; }
  :root[data-keyboard="true"] .input-slot { padding-bottom:0; }
  .screen-wrap:fullscreen { padding:6px; gap:8px; align-content:start; height:100%; }
  .screen-wrap:fullscreen .conversation-panel { height:auto; }
 }
+/* Choose a steady scale before typing on compact phones, rather than shrink
+   the face when their keyboard leaves only one line of conversation. */
+@media(max-width:360px){ .portrait-panel { --portrait-width:min(280px,calc(var(--visual-width,100vw) - 20px)); } }
+@media(max-width:330px){ .portrait-panel { --portrait-width:min(260px,calc(var(--visual-width,100vw) - 20px)); } }
+.browser-guide[hidden],.browser-launch[hidden],#browser-open-help[hidden] { display:none; }
+.browser-guide { position:fixed; inset:0; z-index:20; margin:0; padding:18px; display:grid; place-items:center; background:#000b; }
+.browser-guide-card { width:min(100%,440px); max-height:calc(100dvh - 36px); overflow:auto; padding:22px; border:1px solid #78916d; background:#111610; box-shadow:0 12px 40px #000c; }
+.browser-guide h2 { margin:0 0 12px; font-size:19px; color:#edf4e8; }
+.browser-guide p { line-height:1.7; }
+.browser-guide button { min-height:44px; font-size:15px; margin:4px 4px 4px 0; }
+#browser-open { background:#294332; border-color:#8da57f; }
+#browser-open-help { border-top:1px solid #525b4e; margin-top:12px; padding-top:12px; }
+#browser-url { display:block; width:100%; margin:8px 0; padding:8px; font:16px/1.4 monospace; background:#080b08; }
+#browser-copy-status { display:block; font-size:13px; line-height:1.6; }

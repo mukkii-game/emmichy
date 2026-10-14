@@ -1,0 +1,42 @@
+{
+  "runtime": "20261014-face1",
+  "candidate": "a874012160a4c8effddbd49fa2356ea029f6d5dc",
+  "main": "0c3d366844b5d17d82a52cbed5e17d3b53d5861a",
+  "PR": 55,
+  "deployment": 38561288125,
+  "frontendTests": 245,
+  "backendChanged": false,
+  "providerCalls": 0,
+  "files": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/app.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/browser-launcher.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/mobile-viewport.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "style.css",
+      "status": 200,
+      "matches": true
+    }
+  ],
+  "limitations": [
+    "Physical OS keyboard and actual SNS launch are unverified",
+    "UA identical to regular browser may need Settings > browser launcher",
+    "Extremely short viewports can still crop the edge of the chin"
+  ]
+}

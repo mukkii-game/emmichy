@@ -34,3 +34,5 @@ Androidはユーザークリック時のintentとfallback URL、iOSはmetoponと
 全組でpageScroll0、transformなし、入力欄は表示範囲内。1280×900は既存2列配置。手動のブラウザ案内を開いて3:56のまま停止し、閉じると入力可能・同じ残り時間から再開。会話末尾のgapは0.15px未満。Console error0。初回SNS案内はUAを渡した単体検証であり、実SNS起動の確認とは区別する。
 
 記録：mobile-face-browser-20261014.json。画像：mobile-face-normal/typing/small-20261014.jpgとmobile-browser-guide-20261014.jpg。実機のOSキーボード・SNS固有の画面調整は人間の再確認が必要。
+
+公開確認：PR55/main0c3d366（候補a874012）、Cloudflare38561288125成功。変更5配信ファイルがGit blobと完全一致。public-mobile-face-20261014.json。検証用viewport reset、タブclose、作成した1984/1985サーバー終了。

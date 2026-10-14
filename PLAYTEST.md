@@ -1,3 +1,9 @@
+# 2026-10-14: published browser exposes restart and draft defects
+
+Actual IAB with?nollm=1 verifies first meeting, test-name answer, Hachiware personality,5-minute ending and390×844/430 layout. Settings Start over opened another picker and retained the draft. PR52 repairs direct first-meeting reset and empty input.236 checks pass; backend unchanged. Published browser verifies first meeting/empty input/5:00/hidden picker in one click and reload continuation. docs/browser-smoke-20261014.md and screenshots. Viewport reset; temporary tab closed. Zero LLM calls after earlier429. Human enjoyment and physical OS keyboard remain unverified.
+
+---
+
 # 2026-10-14: schema live success,429 stop and human-play candidate
 
 CI38513112282 at relay2b4403f:800ms mixed success with owned exam result and retained model feeling. Second request hit429 in55ms; all further real generation stopped. Captured actual-app replay retains the generated feeling, handles429, and sends no request for third input while keeping input usable and the exam topic. Handmade clarification no longer appends the repeated viewing wish.236frontend/59relay tests pass; final8-send offline exam record and sources saved. PR51/24 published and the changed module matches its candidate. HUMAN PLAYTEST READY:YES; human fun and actual OS keyboard/audio remain unverified. No human result yet; no automatic quality retry after429.

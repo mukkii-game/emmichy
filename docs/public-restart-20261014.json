@@ -1,0 +1,11 @@
+{
+  "runtime": "20261014-restart1",
+  "candidate": "37d77b41185a63836a249db0776878357215224b",
+  "main": "c60dc57823b71d74b8d5878e48db6e9b35247981",
+  "PR": 52,
+  "deployment": 38515513223,
+  "providerCalls": 0,
+  "files": [{"path": "index.html", "matches": true}, {"path": "src/app.js", "matches": true}],
+  "browser": {"oneClickFirstMeeting": true, "draftCleared": true, "startChoiceHidden": true, "timerAfterClick": "5:00", "consoleErrors": 0},
+  "limitations": ["No physical OS keyboard or human enjoyment evaluation", "Viewport override reset and temporary tab closed"]
+}

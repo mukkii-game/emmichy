@@ -1,0 +1,44 @@
+{
+  "mode": "real published browser with LLM disabled; viewport emulation, not physical OS keyboard or human fun evaluation",
+  "providerCalls": 0,
+  "timerImmediatelyAfterRestart": "5:00",
+  "choiceHidden": true,
+  "conversation": "EMMICHY >\nハジメマシテ!\n\nアタシ、 エミチィ 。 ニホンゴ ヲ ベンキョウ シテルノ。 チイカワ ガ ダイスキ!\n\nアナタ、 ナンテ ヨベ バ イイ? ニックネームデ イイヨ。",
+  "entry": {
+    "bottom": 412.25002670288086,
+    "height": 26.79464340209961,
+    "left": 14.571429252624512,
+    "right": 251.4910764694214,
+    "top": 385.4553833007813,
+    "width": 236.91964721679688,
+    "x": 14.571429252624512,
+    "y": 385.4553833007813
+  },
+  "entryValue": "",
+  "portrait": {
+    "bottom": 446.1160764694214,
+    "height": 433.5446472167969,
+    "left": 35,
+    "right": 355,
+    "top": 12.571429252624512,
+    "width": 320,
+    "x": 35,
+    "y": 12.571429252624512
+  },
+  "portraitWindow": {
+    "bottom": 227.57144451141355,
+    "height": 215.00001525878903,
+    "left": 12.571429252624512,
+    "right": 377.4285764694214,
+    "top": 12.571429252624512,
+    "width": 364.8571472167969,
+    "x": 12.571429252624512,
+    "y": 12.571429252624512
+  },
+  "script": "src/app.js?v=20261014-restart1",
+  "url": "https://emmichy.mucky-totoro.workers.dev/?nollm=1",
+  "viewport": {
+    "height": 430,
+    "width": 390
+  }
+}

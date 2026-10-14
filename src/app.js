@@ -1,4 +1,5 @@
-import {bindMobileViewport} from './mobile-viewport.js?v=20261014-view1';
+import {bindMobileViewport,bindChatViewport} from './mobile-viewport.js?v=20261014-face1';
+import {bindBrowserLauncher} from './browser-launcher.js?v=20261014-face1';
 import {selfReaction,complimentReaction} from './profile.js?v=20261014-view1';
 import {freshState,restoreState,respond,normalize} from './engine.js?v=20261014-view1';
 import {chiikawaReply,checkedAt} from './topics.js?v=20261014-view1';
@@ -39,6 +40,7 @@ let readingsSettled=false;
 const $=id=>document.getElementById(id),canvas=$('screen'),ctx=canvas.getContext('2d',{willReadFrequently:true});
 // Keep the mobile game anchored to the visible area above the keyboard.
 bindMobileViewport();
+bindChatViewport($('conversation'));
 ctx.imageSmoothingEnabled=false;
 const key='enny-memory-v1';
 const isLocal=['127.0.0.1','localhost','[::1]'].includes(location.hostname);
@@ -299,7 +301,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&settingsOpen){setSe
 document.addEventListener('click',e=>{if(settingsOpen&&!e.target?.closest?.('#settings-panel,#settings-toggle'))setSettings(false);});
 $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.querySelector('.screen-wrap').requestFullscreen();}catch{$('status').textContent='このブラウザでは全画面にできません。';}};
 $('export').onclick=()=>{const body=state.history.map(h=>`${h.role==='user'?'YOU':'EMMICHY'}: ${h.text}`).join('\r\n\r\n');const url=URL.createObjectURL(new Blob(['\ufeff'+body],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='enny-conversation.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
-$('export-debug').onclick=()=>{const body=JSON.stringify({version:'20261014-view1',mode:modelEnabled?'online':'offline',state,session},null,2);const url=URL.createObjectURL(new Blob([body],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='emmichy-playtest.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+$('export-debug').onclick=()=>{const body=JSON.stringify({version:'20261014-face1',mode:modelEnabled?'online':'offline',state,session},null,2);const url=URL.createObjectURL(new Blob([body],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='emmichy-playtest.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
 let resetArmed=false,resetTimer;
 $('reset').onclick=()=>{if(!resetArmed){resetArmed=true;$('reset-note').textContent=' もう一度押すと記憶が消えます。';resetTimer=setTimeout(()=>{resetArmed=false;$('reset-note').textContent='';},5000);return;}
  stopContinuation(true);clearTimeout(resetTimer);resetArmed=false;$('reset-note').textContent=' 初期化しました。';state=freshState();session=readingsSettled?{startedAt:Date.now(),turns:0,finished:false}:null;saveSession();lines=[];live='';mood='idle';addOpening();$('transcript').replaceChildren();save();draw();};
@@ -323,6 +325,15 @@ function startFreshConversation(){
 $('new-chat').onclick=startFreshConversation;
 $('restart-chat').onclick=()=>{if(busy)return;setSettings(false);startFreshConversation();};
 if(hadSavedDialogue){ready=false;showStartChoice();}
+let readyBeforeBrowserGuide=false;
+bindBrowserLauncher({onOpen:()=>{
+ if(busy)return false;
+ readyBeforeBrowserGuide=ready;if(ready)saveSession();ready=false;
+ stopContinuation();setSettings(false);$('entry').disabled=true;$('send').disabled=true;
+},onClose:()=>{
+ ready=readyBeforeBrowserGuide;
+ if(ready){resumeCurrentSession();if(!session&&readingsSettled)session={startedAt:Date.now(),turns:0,finished:false};$('entry').disabled=false;$('send').disabled=!readingsSettled;continuation.typed(Date.now());noteActivity();saveSession();}
+}});
 document.addEventListener('visibilitychange',()=>{if(!ready)return;stopContinuation();if(document.hidden)saveSession();else{resumeCurrentSession();continuation.typed(Date.now());noteActivity();saveSession();}});
 setInterval(()=>{if(ready&&!document.hidden)saveSession();},5000);
 window.addEventListener('pagehide',saveSession);

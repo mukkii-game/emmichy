@@ -1,3 +1,9 @@
+# 2026-10-14: player views and scene continuity
+
+再開後の8送信で、自分の気持ちを事実説明で返す・クッキーでの写真派を取り違える・「えみちいなら？」を未知扱いする失敗を再現。4範囲の感想/選択/本人意見を分け、場面保持と表示済み角度の回避を実装。良いLLM文は維持、所有根拠とプレイヤーの好みは区別。241フロント/60中継合格、新8送信前後と既存3組各8送信を確認。Luna medium1人の限定レビュー。docs/player-perspective-20261014.md/.json。実生成0、429後の自動品質再試行なし。公開候補runtime20261014-view1、main/Cloudflareへ反映予定。人間の面白さと実OS確認は未受領。
+
+---
+
 # 2026-10-14: published browser exposes restart and draft defects
 
 Actual IAB with?nollm=1 verifies first meeting, test-name answer, Hachiware personality,5-minute ending and390×844/430 layout. Settings Start over opened another picker and retained the draft. PR52 repairs direct first-meeting reset and empty input.236 checks pass; backend unchanged. Published browser verifies first meeting/empty input/5:00/hidden picker in one click and reload continuation. docs/browser-smoke-20261014.md and screenshots. Viewport reset; temporary tab closed. Zero LLM calls after earlier429. Human enjoyment and physical OS keyboard remain unverified.

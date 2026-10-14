@@ -1,4 +1,4 @@
-import {requestsChiikawa} from './topic-intent.js?v=20261014-dialogue1';
+import {requestsChiikawa} from './topic-intent.js?v=20261014-view1';
 // Conversation acts are handled before lexical fandom cues. A player's complaint
 // is not a food preference, a name, or an invitation to another monologue.
 export const foldRepair=s=>String(s||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');

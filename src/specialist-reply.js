@@ -1,7 +1,7 @@
-import {specialistFacts} from './specialist.js?v=20261014-dialogue1';
-import {attributionRepair} from './chiikawa-attribution.js?v=20261014-dialogue1';
-import {rejectedJoke} from './humor.js?v=20261014-dialogue1';
-import {dialogueSentences} from './dialogue-sentences.js?v=20261014-dialogue1';
+import {specialistFacts} from './specialist.js?v=20261014-view1';
+import {attributionRepair} from './chiikawa-attribution.js?v=20261014-view1';
+import {rejectedJoke} from './humor.js?v=20261014-view1';
+import {dialogueSentences} from './dialogue-sentences.js?v=20261014-view1';
 export const SPECIALIST_MARKER='専門会話の根拠（サーバー所有資料だけ）: ';
 const facts=new Map(specialistFacts.map(r=>[r.id,r]));
 const fold=s=>String(s).normalize('NFKC').replace(/[\s。!?！？、]/g,'');

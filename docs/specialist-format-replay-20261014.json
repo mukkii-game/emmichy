@@ -1,0 +1,26 @@
+{
+  "mode": "offline replay of captured real outputs; revised validator and director; all chunks assumed delivered; no new provider calls",
+  "capturedCommit": "c1a442319c0a221345ca906041002f8b922767a8",
+  "capturedAt": "2026-10-14T04:31:18.281Z",
+  "providerCalls": 0,
+  "turns": [
+    {
+      "input": "草むしり検定の最初の結果は？",
+      "raw": "{\"beats\":[{\"fact\":\"exam:result\",\"say\":\"ハチワレが合格して、ちいかわは不合格だったの。\",\"ask\":null}]}",
+      "original": null,
+      "validated": {
+        "text": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。",
+        "source": "authored",
+        "reason": "specialist-plan"
+      },
+      "reply": {
+        "text": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。 アタシなら、友達のお祝いもしたいけど、自分の悔しさも消えないと思う。どっちの気持ちも大事にしたい。",
+        "source": "authored",
+        "reason": "fan-recovery",
+        "id": null,
+        "replaced": false,
+        "recovered": true
+      }
+    }
+  ]
+}

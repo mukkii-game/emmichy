@@ -14,6 +14,15 @@ test('the model selects a sourced fact; invented fact text and unknown IDs canno
  assert.equal(renderSpecialistReply(JSON.stringify({beats:[{fact:'exam:result',text:'二人とも不合格'}]}),{messages:m}),null);
  assert.equal(renderSpecialistReply(JSON.stringify({beats:[{fact:'reviewed:usagi:yaha'}]}),{messages:m}),null);
 });
+test('equivalent combined fields and nullable optional fields preserve a grounded provider reply',()=>{
+ const m=messages('草むしり検定の最初の結果は？');
+ const combined=renderSpecialistReply(JSON.stringify({beats:[{fact:'exam:result',say:'ハチワレが合格して、ちいかわは不合格だったの。',ask:null}]}),{messages:m});
+ assert.match(combined.text,/ハチワレ.*合格.*ちいかわ.*不合格/);assert.equal(combined.source,'authored');
+ const feelings=renderSpecialistReply(JSON.stringify({beats:[{fact:'exam:result',say:'アタシなら、友達のお祝いもしたいな。',ask:'あなたなら、何を贈りたい？'}]}),{messages:m});
+ assert.match(feelings.text,/アタシなら/);assert.match(feelings.text,/何を贈りたい/);assert.equal(feelings.source,'mixed');
+ assert.equal(renderSpecialistReply(JSON.stringify({beats:[{fact:'exam:result',text:'好きな事実に上書き'}]}),{messages:m}),null);
+ assert.equal(renderSpecialistReply(JSON.stringify({beats:[{fact:'unknown',say:'アタシ嬉しい。'}]}),{messages:m}),null);
+});
 test('unsupported story assertions are omitted while personal reactions and specific questions survive',()=>{
  const m=messages('草むしり検定5級の結果は？');
  const out=renderSpecialistReply(JSON.stringify({beats:[{fact:'exam:result'},{say:'ハチワレは不合格だった。'},{say:'アタシ、友達にはおめでとうって言いたい。'},{ask:'二人のうち、どちらの気持ちに近い？'}]}),{messages:m});

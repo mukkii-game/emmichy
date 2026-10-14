@@ -166,10 +166,10 @@ test('screen remains playable after dictionary failure and IME composition does 
   assert.notEqual(ended.history.at(-1).text,'ア、そろそろ帰るね。バイバイ！');
   assert.equal(entry.value,'途中の下書き');
   const savedEnding=JSON.parse(storage.get('enny-memory-v1')).history;
-  elements.get('restart-chat').onclick();assert.equal(talk.hidden,true);assert.equal(elements.get('start-choice').hidden,false);
   elements.get('continue').onclick();assert.deepEqual(JSON.parse(storage.get('enny-memory-v1')).history,savedEnding,'continue keeps existing dialogue without starting a first meeting');
   elements.get('restart-chat').onclick();
-  elements.get('new-chat').onclick();assert.equal(talk.hidden,false);assert.equal(elements.get('start-choice').hidden,true);
+  assert.equal(talk.hidden,false);assert.equal(elements.get('start-choice').hidden,true,'settings restart goes directly to the new first meeting');
+  assert.equal(entry.value,'','a new first meeting cannot accidentally submit the previous draft as a name');
   assert.equal(JSON.parse(storage.get('enny-memory-v1')).ended,false);
   assert.deepEqual(JSON.parse(storage.get('enny-memory-v1')).history,[{role:'enny',text:'はじめまして！'}],'start over replaces old dialogue with a first meeting');
   entry.value='スイリュウ ハ チイカワ タチ ハ アソンデ ナイヨ?';await talk.emit('submit');

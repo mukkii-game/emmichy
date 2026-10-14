@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {specialistPrompt,specialistPacket,noteSpecialistDelivery} from '../src/specialist.js';
-import {renderSpecialistReply} from '../src/specialist-reply.js';
+import {renderSpecialistReply,specialistOutputSchema} from '../src/specialist-reply.js';
 import {directReply} from '../src/dialogue-director.js';
 import {planContinuation} from '../src/continuation.js';
 const messages=(input,state={})=>[{role:'system',content:specialistPrompt(input,state)},{role:'user',content:input}];
@@ -22,6 +22,14 @@ test('equivalent combined fields and nullable optional fields preserve a grounde
  assert.match(feelings.text,/アタシなら/);assert.match(feelings.text,/何を贈りたい/);assert.equal(feelings.source,'mixed');
  assert.equal(renderSpecialistReply(JSON.stringify({beats:[{fact:'exam:result',text:'好きな事実に上書き'}]}),{messages:m}),null);
  assert.equal(renderSpecialistReply(JSON.stringify({beats:[{fact:'unknown',say:'アタシ嬉しい。'}]}),{messages:m}),null);
+});
+test('provider schema exposes only selected owned IDs and rejects unsupported future-topic questions',()=>{
+ const m=messages('草むしり検定の最初の結果は？'),schema=specialistOutputSchema(m);
+ assert.ok(schema.properties.beats.items.properties.fact.enum.includes('exam:result'));
+ assert.ok(!schema.properties.beats.items.properties.fact.enum.includes('reviewed:usagi:yaha'));
+ assert.equal(specialistOutputSchema([{role:'system',content:'ordinary conversation'},{role:'user',content:m[0].content}]),null);
+ const out=renderSpecialistReply(JSON.stringify({beats:[{say:'アタシ、友達の嬉しさも大事にしたいな。'},{ask:'その後のちいかわの挑戦、見たことある？'}]}),{messages:m});
+ assert.match(out.text,/友達/);assert.doesNotMatch(out.text,/その後/);
 });
 test('unsupported story assertions are omitted while personal reactions and specific questions survive',()=>{
  const m=messages('草むしり検定5級の結果は？');

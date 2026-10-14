@@ -15,6 +15,13 @@ export function readSpecialistEvidence(messages=[]){
  if(!line)return null;
  try{const data=JSON.parse(line.slice(SPECIALIST_MARKER.length));return Array.isArray(data.evidence)?data:null;}catch{return null;}
 }
+export function specialistOutputSchema(messages=[]){
+ const envelope=readSpecialistEvidence(messages);if(!envelope)return null;
+ const ids=[...new Set(envelope.evidence.map(r=>r.id).filter(id=>facts.has(id)))];
+ return {type:'object',properties:{beats:{type:'array',minItems:1,maxItems:4,items:{type:'object',properties:{
+  fact:{type:['string','null'],enum:[null,...ids]},say:{type:['string','null']},ask:{type:['string','null']}
+ },required:['fact','say','ask'],additionalProperties:false}}},required:['beats'],additionalProperties:false};
+}
 
 // A model chooses the fact and writes personal reactions. It cannot manufacture
 // a new canonical statement by placing arbitrary text in a fact beat.
@@ -49,7 +56,7 @@ export function renderSpecialistReply(value,{messages=[]}={}){
   const question=Object.hasOwn(beat,'ask'),key=question?'ask':'say',text=beat[key];
   if(typeof text!=='string'||!text.trim()||text.length>100||rejectedJoke(text))return null;
   if(question&&(!/[?？]$/.test(text)||++asks>1)||!question&&++says>3)return null;
-  if(question&&/次の|次ノ|次.{0,4}挑戦|別の|ほかの|他の/.test(text))continue;
+  if(question&&/次の|次ノ|次.{0,4}挑戦|その後|この後|以降|続編|別の|ほかの|他の/.test(text))continue;
   // Concrete story assertions belong to a fact beat. Pure feelings and explicit
   // self-imagination remain free prose; unsupported fragments are omitted.
   const accepted=dialogueSentences(text).filter(sentence=>{

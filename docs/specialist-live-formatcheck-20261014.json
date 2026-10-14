@@ -1,0 +1,81 @@
+{
+  "mode": "real provider generation with candidate server prompt; synthetic inputs; no browser or human evaluation",
+  "commit": "6782d0002b89d5ecc13de59442e4ff6eab976491",
+  "at": "2026-10-14T04:38:01.798Z",
+  "limit": 2,
+  "turns": [
+    {
+      "input": "草むしり検定の最初の結果は？",
+      "systemCharacters": 5127,
+      "history": [],
+      "wallMs": 790,
+      "result": {
+        "text": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。 ちょっと残念だけど、ハチワレの頑張りにヤハ！ って思った！ その後のちいかわの挑戦、見たことある？",
+        "provider": "groq",
+        "source": "mixed"
+      },
+      "attempts": [
+        {
+          "provider": "groq",
+          "source": "mixed",
+          "ok": true,
+          "reason": "specialist-plan",
+          "ms": 786
+        }
+      ],
+      "rawOutputs": [
+        {
+          "provider": "groq",
+          "raw": "{\"beats\":[{\"fact\":\"exam:result\"},{\"say\":\"最初はハチワレが合格で、ちいかわは不合格だったんだ。ちょっと残念だけど、ハチワレの頑張りにヤハ！って思った！\"},{\"ask\":\"その後のちいかわの挑戦、見たことある？\"}]}"
+        }
+      ]
+    },
+    {
+      "input": "ハチワレの気持ち、えみちいはどう思う？",
+      "systemCharacters": 5233,
+      "history": [
+        {
+          "role": "user",
+          "content": "草むしり検定の最初の結果は？"
+        },
+        {
+          "role": "assistant",
+          "content": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。 ちょっと残念だけど、ハチワレの頑張りにヤハ！ って思った！ その後のちいかわの挑戦、見たことある？"
+        }
+      ],
+      "wallMs": 571,
+      "result": null,
+      "attempts": [
+        {
+          "provider": "groq",
+          "source": "llm",
+          "ok": false,
+          "reason": "rejected",
+          "ms": 570
+        },
+        {
+          "provider": "gemini",
+          "source": "llm",
+          "ok": false,
+          "reason": "probe-budget",
+          "ms": 0
+        },
+        {
+          "provider": "workers-ai",
+          "source": "llm",
+          "ok": false,
+          "reason": "probe-budget",
+          "ms": 0
+        }
+      ],
+      "rawOutputs": [
+        {
+          "provider": "groq",
+          "raw": "{\"beats\":[{\"fact\":\"exam:result\"},{\"say\":\"ハチワレは合格できてすごく嬉しかったんだろうなって思う。ちいかわのことも応援したくて、ちょっと複雑な気持ちだったんじゃないかな。\"},{\"ask\":\"ハチワレの次の挑戦、気になる？」}]}"
+        }
+      ]
+    }
+  ],
+  "calls": 2,
+  "rateLimited": false
+}

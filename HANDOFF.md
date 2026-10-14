@@ -5,6 +5,10 @@
 - 中継(game-llm)は *.mucky-totoro.workers.dev からの呼び出しを許可済み。
 - 以下の英文の記録は合流前のもの(「main は触らない」等の記述は無効)。
 
+## 専門会話のAPI形式指定（2026-10-14）
+
+実LLM2回（CI38512386796）：合否790ms成功、心情571msはJSON閉じ文字崩れで拒否。対応Groqへサーバー所有IDのstrict Schema、その他GroqのJSON形式、GeminiのJSON MIMEを専門ターンだけ追加。通常会話への影響なしをPOST試験で確認。フロント236/中継59合格。新API設定の実生成・人間の面白さは未検証。docs/specialist-transport-20261014.md。公開結果は統合後に追記。
+
 ## 専門返答の形式修正（2026-10-14）
 
 公開中継c1a4423で実LLMを2呼出し確認（CI38511801995）。Groqは正しい根拠IDを返したがfact/say/ask複合項目で全拒否、Gemini503。等価項目を展開してnullの任意欄を省略する修正を実装。未知ID／任意の事実文は拒否を維持。保存生出力で修正確認、追加生成0。フロント235／中継57合格。修正後の新生成と人間の面白さ確認は未了。docs/dialogue-iteration-20261014.mdとspecialist-format-replay-20261014.json。PR49/maince68fd3（候補99332ca）と中継PR22/main6782d00（候補914ffb0）へ統合、公開38512123882/38512119018成功。変更公開モジュールが候補と完全一致。docs/public-specialist-format-20261014.json。保存した2応答を実app処理へ流すオフライン再生で、前の実質回答が次リクエストへ渡り、待ち合いの手は除外され、心情の返答が画面へ出ることを確認（specialist-captured-app-20261014.json）。修正後の新生成／実ブラウザ／人間評価とは区別する。

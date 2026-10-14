@@ -1,0 +1,203 @@
+{
+  "runtime": "20261014-view1",
+  "candidate": "9e92b3609a7ffca73fb8bf318574fc7984c43397",
+  "main": "0716165ab7d9441c422bb77cdacd6df7ed472bd9",
+  "PR": 54,
+  "deployment": 38554438332,
+  "relay": {
+    "candidate": "bcda17eefd8d95c939c30a05d3fc79558df93529",
+    "main": "27e5924c5be4afe9958b09747a4123d9d3fa7e90",
+    "PR": 25,
+    "deployment": 38554427726
+  },
+  "providerCalls": 0,
+  "tests": {
+    "frontend": 241,
+    "relay": 60
+  },
+  "files": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/app.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/balance.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/chat.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/chiikawa-attribution.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/chiikawa-relations.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/chiikawa-reminder.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/chiikawa-theme.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/context.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/conversation-repair.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/dialogue-director.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/dialogue-grounding.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/engine.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/fallback.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/fan-conversation.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/fandom.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/filler.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/font.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/moves.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/names.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/performance.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/player-memory.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/profile.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/readable.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/repertoire.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/reply-repetition.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/routing.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/session.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/specialist-reply.js",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "path": "src/specialist.js",
+      "status": 200,
+      "matches": true
+    }
+  ],
+  "limitations": [
+    "Offline app fixture and read-only persona review are not human or new live-model evaluation",
+    "No new generation after earlier429",
+    "Physical OS keyboard and human enjoyment remain unverified"
+  ],
+  "firstCheckMismatches": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "matches": false
+    },
+    {
+      "path": "src/dialogue-grounding.js",
+      "status": 200,
+      "matches": false
+    },
+    {
+      "path": "src/font.js",
+      "status": 200,
+      "matches": false
+    },
+    {
+      "path": "src/moves.js",
+      "status": 200,
+      "matches": false
+    },
+    {
+      "path": "src/routing.js",
+      "status": 200,
+      "matches": false
+    }
+  ],
+  "note": "Initial check immediately after deployment differed in five files; a follow-up after propagation matched every Git blob byte-for-byte."
+}

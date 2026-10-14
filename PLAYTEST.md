@@ -1,3 +1,9 @@
+# 2026-10-14: provider transport addresses malformed JSON
+
+CI38512386796 at relay6782d00:2 Groq calls,790ms mixed success then571ms malformed closing quote rejection. No429, no further calls this turn. Add owned-ID strict schema for supported Groq models, JSON object fallback for other Groq and JSON MIME for Gemini. Preserve text transport for ordinary turns.236frontend/59relay tests include captured HTTP payloads and scope. PR50/23 published; final new transport has no live result yet. Evidence:docs/specialist-transport-20261014.md and specialist-live-formatcheck-20261014.json.
+
+---
+
 # 2026-10-14: live structured-format failure and screen replay
 
 Public relayc1a4423, CI38511801995, max2 calls: Groq807ms selected the correct fact but combined fact/say/ask and null ask was rejected; Gemini503 in544ms. No answer, no429. Renderer now accepts equivalent fields, preserves strict owned IDs and rejects arbitrary fact text. Exact raw replay passes; two older captured replies also pass the actual app handlers with prior answer retained and waiting gestures excluded.235/57 tests pass. PR49/22 published. New generation after this fix and human fun remain unverified. Evidence:docs/dialogue-iteration-20261014.md.

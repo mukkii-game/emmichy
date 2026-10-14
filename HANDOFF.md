@@ -7,7 +7,7 @@
 
 ## 専門会話のAPI形式指定（2026-10-14）
 
-実LLM2回（CI38512386796）：合否790ms成功、心情571msはJSON閉じ文字崩れで拒否。対応Groqへサーバー所有IDのstrict Schema、その他GroqのJSON形式、GeminiのJSON MIMEを専門ターンだけ追加。通常会話への影響なしをPOST試験で確認。フロント236/中継59合格。新API設定の実生成・人間の面白さは未検証。docs/specialist-transport-20261014.md。公開結果は統合後に追記。
+実LLM2回（CI38512386796）：合否790ms成功、心情571msはJSON閉じ文字崩れで拒否。対応Groqへサーバー所有IDのstrict Schema、その他GroqのJSON形式、GeminiのJSON MIMEを専門ターンだけ追加。通常会話への影響なしをPOST試験で確認。フロント236/中継59合格。新API設定の実生成・人間の面白さは未検証。docs/specialist-transport-20261014.md。PR50/main9ee26ae（候補42b8c8c）と中継PR23/main2b4403f（候補ea962c5）へ統合、公開38512882810/38512877931成功。変更公開モジュールが候補と完全一致。docs/public-specialist-json-20261014.json。次は新通信設定の最大2呼出しの実確認。その後は人間の5分試遊と実スマホの確認を受ける。
 
 ## 専門返答の形式修正（2026-10-14）
 

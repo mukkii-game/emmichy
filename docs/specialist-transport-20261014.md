@@ -16,3 +16,5 @@
 - Gemini https://ai.google.dev/api/generate-content （generationConfig.responseMimeType、application/json。Schema設定は最新APIの移行差があるため今回Geminiへは送らない）
 
 フロント236件／中継59件合格。実POSTを捕まえるローカル試験で、専門ターンに許されたIDだけのSchemaを付け、通常会話へは付かないことを確認。対応Groq/他Groq/Geminiの送信形式も確認。API設定変更後の実生成は未確認。このターンの追加実生成は上記2回で打ち切り。新しいAPI設定の実通信と人間の試遊は残る。
+
+公開済み：PR50/main9ee26ae（候補42b8c8c）と中継PR23/main2b4403f（候補ea962c5）。Cloudflare38512882810/38512877931成功。変更公開モジュールの完全一致を確認、生成0回。docs/public-specialist-json-20261014.json。

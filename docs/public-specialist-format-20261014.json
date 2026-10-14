@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-14T04:36:37.028111+00:00",
+  "frontendPR": 49,
+  "frontendCandidate": "99332cadc548fd55c925971f6ba4958bc6a6dc7f",
+  "frontendMain": "ce68fd3ccee3ba5d3e252ac9ec453bab76e0094c",
+  "frontendDeployment": 38512123882,
+  "backendPR": 22,
+  "backendCandidate": "914ffb0a91eec92d2ef56041114e7e4e5dfce097",
+  "backendMain": "6782d0002b89d5ecc13de59442e4ff6eab976491",
+  "backendDeployment": 38512119018,
+  "providerCalls": 0,
+  "files": [
+    {
+      "path": "src/specialist-reply.js",
+      "matches": true,
+      "sha256": "4948eecafa0d5ad051be791e1880c43807fd95b3d065dd03b7e96e6f8e83eaef"
+    }
+  ]
+}

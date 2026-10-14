@@ -37,3 +37,5 @@
 CI38511801995、公開中継mainc1a4423を使い2呼出しで終了。Groq807msは正しいexam:resultを選択したが、fact/say/askを1項目にまとめ、ask:nullとしたため旧rendererが全拒否。Geminiは544msで503。会話結果nullで2ターン目へ進んでいない。429なし。docs/specialist-live-final-20261014.json。
 
 等価な複合項目を内部のfact/say/askへ展開し、nullの省略欄を無視する修正。任意のtext欄・未知のID・過剰な事実数は従来どおり拒否。保存した生出力を新版renderer→画面Directorへ通すと正しい合否と本人の感想になった（docs/specialist-format-replay-20261014.json）。感想はローカル補助、LLM生成とは報告しない。追加生成0。235フロント／57中継テスト合格。修正後の新しい実生成・人間の面白さは未確認。
+
+公開確認：PR49/maince68fd3と中継PR22/main6782d00、公開38512123882/38512119018成功。変更モジュールが候補Git blobと一致。docs/public-specialist-format-20261014.json。specialist-captured-app-20261014.jsonは保存実応答2件を実appイベント処理・actual request stateで再検証し、話した合否が次リクエストの履歴に入り、短い反応と待ち合いの手は除かれることを確認。仮想時計によりこのfixtureでは待ち合いの手も発火するが、実遅延計測ではない。実生成・ブラウザ描画・人間試遊の代替としない。

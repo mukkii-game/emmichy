@@ -1,3 +1,9 @@
+# 2026-10-14: live structured-format failure and screen replay
+
+Public relayc1a4423, CI38511801995, max2 calls: Groq807ms selected the correct fact but combined fact/say/ask and null ask was rejected; Gemini503 in544ms. No answer, no429. Renderer now accepts equivalent fields, preserves strict owned IDs and rejects arbitrary fact text. Exact raw replay passes; two older captured replies also pass the actual app handlers with prior answer retained and waiting gestures excluded.235/57 tests pass. PR49/22 published. New generation after this fix and human fun remain unverified. Evidence:docs/dialogue-iteration-20261014.md.
+
+---
+
 # 2026-10-14: specialist dialogue iteration
 
 Two Luna medium personas (7 fan / 6 general inputs) used the offline actual-app DOM fixture, not real LLM/browser/human play. Failures: title stole Hachiware question, personality became cooking, novice invitation was refused, reaction!? became an unanswered question. Root corrected selection/intent/memory and replayed the same inputs mechanically; before/after JSONs preserve evidence. Exam8 inputs retain result, feelings, celebration, cookie and unknown handmade detail, then accept topic change.5 live provider attempts exposed discarded feelings and an unrelated next-challenge question; final parser changes replay captured responses with zero new generation. Human fun and physical-phone validation remain outstanding. Full evidence/limits:docs/dialogue-iteration-20261014.md.

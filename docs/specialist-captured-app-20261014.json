@@ -1,0 +1,101 @@
+{
+  "mode": "actual app handlers with captured raw provider responses revalidated against actual request state; virtual timing; no browser/human/new-generation evaluation",
+  "providerCalls": 0,
+  "capturedCommit": "628909630dff3ae0708aa68844e694c8f84eedf4",
+  "fixtureResponses": [
+    {
+      "input": "草むしり検定の最初の結果は？",
+      "history": [
+        {
+          "role": "enny",
+          "text": "こんにちは。"
+        }
+      ],
+      "specialist": {
+        "subject": "ちいかわとハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": []
+      },
+      "validated": {
+        "text": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。 ハチワレの合格祝いのシーン、好きですか？",
+        "source": "mixed",
+        "reason": "specialist-plan"
+      }
+    },
+    {
+      "input": "ハチワレの気持ち、えみちいはどう思う？",
+      "history": [
+        {
+          "role": "enny",
+          "text": "こんにちは。"
+        },
+        {
+          "role": "user",
+          "text": "草むしり検定の最初の結果は？"
+        },
+        {
+          "role": "enny",
+          "text": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。 ハチワレの合格祝いのシーン、好きですか?"
+        }
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": [
+          "exam:result"
+        ]
+      },
+      "validated": {
+        "text": "アタシの見方だけど、ハチワレは合格できて嬉しそうだけど、ちいかわが不合格でちょっと申し訳ない気持ちもあるんだろうなって思う。 アタシもハチワレのがんばりに胸がキュンとした！",
+        "source": "llm",
+        "reason": "specialist-plan"
+      }
+    }
+  ],
+  "rows": [
+    {
+      "input": "草むしり検定の最初の結果は？",
+      "replies": [
+        "クサムシリ！",
+        "あの話、アタシも考えてる。",
+        "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。",
+        "ハチワレの合格祝いのシーン、好きですか?"
+      ],
+      "specialist": {
+        "subject": "ちいかわとハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": [
+          "exam:result"
+        ]
+      },
+      "pendingQuestion": {
+        "id": "conversation",
+        "type": "conversation",
+        "prompt": "ハチワレの合格祝いのシーン、好きですか?",
+        "attempts": 0
+      }
+    },
+    {
+      "input": "ハチワレの気持ち、えみちいはどう思う？",
+      "replies": [
+        "ワオ、アタシのこと!?",
+        "あの話、アタシも考えてる。",
+        "アタシの見方だけど、ハチワレは合格できて嬉しそうだけど、",
+        "ちいかわが不合格でちょっと申し訳ない気持ちもあるんだろうなって思う。",
+        "アタシもハチワレのがんばりに胸がキュンとした!"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": [
+          "exam:result"
+        ]
+      },
+      "pendingQuestion": null
+    }
+  ]
+}

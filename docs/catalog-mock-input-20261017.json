@@ -1,0 +1,62 @@
+{
+  "mode": "mock-provider",
+  "turns": [
+    {
+      "input": "今日は雨上がりに散歩したよ",
+      "rawOutputs": [
+        {
+          "provider": "groq",
+          "raw": "雨上がりって、道の匂いが少し変わるよね。アタシ、ついゆっくり歩いちゃう。"
+        }
+      ]
+    },
+    {
+      "input": "あなたは何歳？"
+    },
+    {
+      "input": "草むしり検定の最初の結果は？",
+      "rawOutputs": [
+        {
+          "provider": "groq",
+          "raw": "{\"beats\":[{\"fact\":\"exam:result\"}]}"
+        }
+      ]
+    },
+    {
+      "input": "ハチワレの気持ち、えみちいはどう思う？",
+      "rawOutputs": [
+        {
+          "provider": "groq",
+          "raw": "{\"beats\":[{\"say\":\"アタシなら、嬉しさも大事にしながら、友達にどう声をかけるか迷っちゃうな。\"}]}"
+        }
+      ]
+    },
+    {
+      "input": "その気持ち、もう少し聞きたい",
+      "rawOutputs": [
+        {
+          "provider": "groq",
+          "raw": "{\"beats\":[{\"say\":\"黙って一緒にいる時間も、アタシは大事にしたい。すぐ言葉が見つからなくてもね。\"}]}"
+        }
+      ]
+    },
+    {
+      "input": "クッキーのお祝いの話にして",
+      "rawOutputs": [
+        {
+          "provider": "groq",
+          "raw": "{\"beats\":[{\"fact\":\"exam:cookie\"}]}"
+        }
+      ]
+    },
+    {
+      "input": "手作りなの？",
+      "result": {
+        "error": "rate-limited"
+      }
+    },
+    {
+      "input": "その話は、あとで続けたいな"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "mode": "local comparison of the existing runtime fact records; no new facts or source re-verification",
+  "beforeSha256": "3329f64562288e1753a23ebc9892ca58783f7941592074e6296fe7f37c85b384",
+  "afterSha256": "3329f64562288e1753a23ebc9892ca58783f7941592074e6296fe7f37c85b384",
+  "unchanged": true,
+  "facts": 40
+}

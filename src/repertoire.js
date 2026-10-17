@@ -1,4 +1,4 @@
-import {unwantedFanRedirect} from './chat.js?v=20261017-link1';
+import {unwantedFanRedirect} from './chat.js?v=20261017-catalog1';
 import {rejectedJoke} from './humor.js?v=20261014-view1';
 import {everydayReplies} from './everyday.js?v=20261014-view1';
 import {cards,selectKnowledge,works,islandMenuCorrection} from './fandom.js?v=20261017-link1';

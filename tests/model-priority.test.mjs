@@ -40,6 +40,9 @@ test('actual screen requests AI for its first ordinary bank turn, retries failur
   assert.ok(!requests[1].state.history.some(h=>h.text==='アキハバラ！'),'name gestures do not crowd out substantive context');
   assert.equal(session().replyOrigins.mixed,1,'a local connection added to model text is counted as mixed');
   assert.equal(session().dialogueUse.ai,2);assert.match(JSON.parse(storage.get('enny-memory-v1')).history.at(-1).text,/ひと口ずつ/);
+  assert.equal(session().replyTrace.at(-1).policy,'request');assert.equal(session().replyTrace.at(-1).serverSource,'llm');
+  assert.deepEqual(session().replyTrace.at(-1).deliveredBeats,[JSON.parse(storage.get('enny-memory-v1')).history.at(-1).text]);
+  assert.ok(!session().replyTrace.at(-1).deliveredBeats.join('').includes('我慢できなく'),'a selected but unspoken model tail is not delivered history');
   elements.get('restart-chat').onclick();elements.get('new-chat').onclick();
   assert.equal(session().dialogueUse,undefined);
   fail=true;await send('アキハバラ');assert.equal(requests.length,3);assert.equal(session().dialogueUse.ai,0);
@@ -70,7 +73,9 @@ test('actual screen requests AI for its first ordinary bank turn, retries failur
   intervals.find(timer=>timer.ms===5000).fn();
   settle(new Response('',{status:429}));await pending;deferred=false;
   assert.equal(session().chatHealth.rateLimited,true,'waiting dialogue and autosave must not detach the request session');
+  assert.equal(session().replyTrace.at(-1).provider,null,'a failed request must not inherit the last successful provider');
   const attempts=requests.length;await send('プリンを食べたよ');assert.equal(requests.length,attempts,'a slow 429 prevents the next request too');
+  assert.equal(session().replyTrace.at(-1).policy,'cooldown');
   now+=60001;await send('今日は散歩の話を続けよう');assert.equal(requests.length,attempts+1,'a later player turn can use AI again after cooldown');
   assert.equal(session().chatHealth.rateLimited,false);assert.equal(session().chatHealth.lastOutcome,'accepted');
  }finally{Date.now=realNow;for(const key of keys)if(saved[key]===undefined)delete globalThis[key];else globalThis[key]=saved[key];}

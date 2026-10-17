@@ -1,0 +1,278 @@
+{
+  "mode": "local catalog and question retrieval audit; no new facts, provider calls or human evaluation",
+  "factCount": 40,
+  "questionCount": 14,
+  "connectionCount": 9,
+  "errors": [],
+  "results": [
+    {
+      "question": "exam-result",
+      "kind": "fact",
+      "input": "草むしり検定5級の最初の結果は？",
+      "context": null,
+      "required": [
+        "exam:result"
+      ],
+      "selected": [
+        "exam:result"
+      ],
+      "answerSelected": true
+    },
+    {
+      "question": "exam-gift",
+      "kind": "fact",
+      "input": "草むしり検定のお祝いに何を渡すの？",
+      "context": null,
+      "required": [
+        "exam:cookie",
+        "exam:celebrate"
+      ],
+      "selected": [
+        "exam:cookie",
+        "exam:celebrate"
+      ],
+      "answerSelected": true
+    },
+    {
+      "question": "exam-gift",
+      "kind": "fact",
+      "input": "クサムシリ ケンテイ ノ オイワイ ニ ナニヲ ワタスノ?",
+      "context": null,
+      "required": [
+        "exam:cookie",
+        "exam:celebrate"
+      ],
+      "selected": [
+        "exam:cookie",
+        "exam:celebrate"
+      ],
+      "answerSelected": true
+    },
+    {
+      "question": "exam-episodes",
+      "kind": "fact",
+      "input": "草むしり検定ってアニメ何話？",
+      "context": null,
+      "required": [
+        "exam:episodes"
+      ],
+      "selected": [
+        "exam:episodes"
+      ],
+      "answerSelected": true
+    },
+    {
+      "question": "exam-cookie-origin",
+      "kind": "boundary",
+      "input": "そのクッキーは手作り？",
+      "context": "草むしり検定のお祝いのクッキー",
+      "required": [
+        "exam:cookie"
+      ],
+      "selected": [
+        "exam:cookie",
+        "exam:attempt",
+        "exam:result"
+      ],
+      "answerSelected": true
+    },
+    {
+      "question": "hachi-feeling",
+      "kind": "opinion",
+      "input": "ハチワレの気持ちをどう思う？",
+      "context": "草むしり検定の最初の結果は？",
+      "required": [
+        "exam:result",
+        "relation:hachi-friend"
+      ],
+      "selected": [
+        "exam:result",
+        "exam:attempt",
+        "exam:episodes"
+      ],
+      "answerSelected": true
+    },
+    {
+      "question": "hachi-friend",
+      "kind": "fact",
+      "input": "ハチワレの大切な友達は？",
+      "context": null,
+      "required": [
+        "relation:hachi-friend"
+      ],
+      "selected": [
+        "relation:hachi-friend"
+      ],
+      "answerSelected": true
+    },
+    {
+      "question": "hachi-photo",
+      "kind": "fact",
+      "input": "ハチワレって写真が好き？",
+      "context": null,
+      "required": [
+        "relation:chiikawa-9"
+      ],
+      "selected": [
+        "relation:chiikawa-9"
+      ],
+      "answerSelected": true
+    },
+    {
+      "question": "anime-ending",
+      "kind": "fact",
+      "input": "ひとりごつって何の曲？",
+      "context": null,
+      "required": [
+        "reviewed:hachi:ending"
+      ],
+      "selected": [
+        "reviewed:hachi:ending"
+      ],
+      "answerSelected": true
+    },
+    {
+      "question": "film-opening",
+      "kind": "fact",
+      "input": "映画ちいかわのオープニング曲は？",
+      "context": null,
+      "required": [
+        "reviewed:hachi:opening"
+      ],
+      "selected": [
+        "reviewed:hachi:opening"
+      ],
+      "answerSelected": true
+    },
+    {
+      "question": "usagi-call",
+      "kind": "fact",
+      "input": "ヤハって誰の掛け声？",
+      "context": null,
+      "required": [
+        "reviewed:usagi:yaha"
+      ],
+      "selected": [
+        "reviewed:usagi:yaha"
+      ],
+      "answerSelected": true
+    },
+    {
+      "question": "island-menu",
+      "kind": "fact",
+      "input": "島二郎の店のメニューは？",
+      "context": null,
+      "required": [
+        "relation:chiikawa-25"
+      ],
+      "selected": [
+        "relation:chiikawa-25"
+      ],
+      "answerSelected": true
+    },
+    {
+      "question": "shisa-work",
+      "kind": "fact",
+      "input": "シーサーはどこで働いている？",
+      "context": null,
+      "required": [
+        "relation:chiikawa-16"
+      ],
+      "selected": [
+        "relation:chiikawa-16"
+      ],
+      "answerSelected": true
+    },
+    {
+      "question": "kaniko-gift",
+      "kind": "fact",
+      "input": "古本屋のカニの飾りの話をして",
+      "context": null,
+      "required": [
+        "relation:chiikawa-17"
+      ],
+      "selected": [
+        "relation:chiikawa-17"
+      ],
+      "answerSelected": true
+    },
+    {
+      "question": "creator",
+      "kind": "fact",
+      "input": "ちいかわの作者は誰？",
+      "context": null,
+      "required": [
+        "relation:chiikawa-5"
+      ],
+      "selected": [
+        "relation:chiikawa-5"
+      ],
+      "answerSelected": true
+    }
+  ],
+  "connections": [
+    {
+      "from": "relation:hachi-friend",
+      "to": "exam:result",
+      "contact": "友達と結果が違った時の気持ち",
+      "kind": "association",
+      "canonClaim": false
+    },
+    {
+      "from": "exam:result",
+      "to": "exam:celebrate",
+      "contact": "悔しさと、お祝いしたい気持ち",
+      "kind": "association",
+      "canonClaim": false
+    },
+    {
+      "from": "exam:celebrate",
+      "to": "exam:cookie",
+      "contact": "相手に合う贈り物を選ぶ",
+      "kind": "association",
+      "canonClaim": false
+    },
+    {
+      "from": "exam:cookie",
+      "to": "relation:chiikawa-9",
+      "contact": "食べる前の記念写真という本人の想像",
+      "kind": "association",
+      "canonClaim": false
+    },
+    {
+      "from": "relation:chiikawa-9",
+      "to": "relation:hachi-treasure",
+      "contact": "小さい思い出や、大切に残す物",
+      "kind": "association",
+      "canonClaim": false
+    },
+    {
+      "from": "relation:chiikawa-10",
+      "to": "relation:hachi-friend",
+      "contact": "料理だけでなく、一緒に過ごす楽しさ",
+      "kind": "association",
+      "canonClaim": false
+    },
+    {
+      "from": "relation:chiikawa-16",
+      "to": "exam:attempt",
+      "contact": "勉強して目標へ向かう気持ち",
+      "kind": "association",
+      "canonClaim": false
+    },
+    {
+      "from": "relation:chiikawa-14",
+      "to": "relation:chiikawa-10",
+      "contact": "好きな食べ物の話",
+      "kind": "association",
+      "canonClaim": false
+    },
+    {
+      "from": "relation:chiikawa-17",
+      "to": "exam:cookie",
+      "contact": "もらった物に込められた気持ち",
+      "kind": "association",
+      "canonClaim": false
+    }
+  ]
+}

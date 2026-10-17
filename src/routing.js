@@ -6,11 +6,11 @@ import {balanceRoute} from './balance.js?v=20261017-link1';
 import {profileReply} from './profile.js?v=20261017-link1';
 import {recognizeName,exactNames} from './names.js?v=20261017-link1';
 import {chiikawaNotes} from './chiikawa-db.js?v=20261014-view1';
-import {unwantedFanRedirect} from './chat.js?v=20261017-link1';
+import {unwantedFanRedirect} from './chat.js?v=20261017-catalog1';
 import {placeReply} from './places.js?v=20261014-view1';
 import {complimentReaction} from './profile.js?v=20261017-link1';
 import {learnerReply} from './japanese-learner.js?v=20261014-view1';
-import {conversationRepair} from './conversation-repair.js?v=20261017-link1';
+import {conversationRepair} from './conversation-repair.js?v=20261017-catalog1';
 
 function chiikawaReply(raw,state){
  if(/つらい|苦しい|病気|事故|亡く|死に|相談|やめ|以外|苦手|嫌い/.test(raw)||unwantedFanRedirect('ちいかわ',raw,state))return null;

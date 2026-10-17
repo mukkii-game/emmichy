@@ -2,7 +2,7 @@ import {dialogueSentences} from './dialogue-sentences.js?v=20261017-quota1';
 import {cards,selectKnowledge} from './fandom.js?v=20261017-link1';
 import {fanLines} from './fan-lines.js?v=20261014-view1';
 import {reviewedChiikawa} from './chiikawa-reviewed.js?v=20261014-view1';
-import {specialistFacts,specialistPacket} from './specialist.js?v=20261017-link1';
+import {specialistFacts,specialistPacket} from './specialist.js?v=20261017-catalog1';
 const compact=s=>String(s).normalize('NFKC').replace(/[\s。、!?！？]/g,'');
 
 // A lightweight guard, not a semantic fact checker. Specific scene/quotation

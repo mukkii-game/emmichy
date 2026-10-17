@@ -8,6 +8,13 @@ import {unwantedFanRedirect} from '../src/chat.js';
 import {recognizeName} from '../src/names.js';
 import fs from 'node:fs';
 
+test('deferring a topic is acknowledged instead of extending the current factual card',()=>{
+ const state={knowledge:{work:'chiikawa'},specialist:{subject:'ちいかわ',scene:'examination',focus:'exam:cookie',said:['exam:cookie']}};
+ for(const input of ['その話は、あとで続けたいな','ソノ ハナシハ アトデ ツヅケタイナ']){
+  const out=directReply('クッキーは写真を撮りたい。',input,state);assert.equal(out.reason,'repair:defer');assert.match(out.text,/あとにしよう/);assert.doesNotMatch(out.text,/クッキー|写真/);
+ }
+});
+
 test('character preference questions answer her view instead of a random character fact',()=>{
  for(const input of ['ハチワレのどういうところが好き？','ハチワレのどんなところが好き？','ハチワレって、どんなところが優しいの？']){
   const out=directReply('ハチワレは料理が好き。',input,{knowledge:{work:'chiikawa'}});

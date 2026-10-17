@@ -1,0 +1,397 @@
+{
+  "mode": "actual app handlers in offline DOM fixture; virtual timing; no browser/human/live-model evaluation",
+  "providerCalls": 0,
+  "audit": {
+    "turns": 8,
+    "requested": 0,
+    "accepted": 0,
+    "failed": 0,
+    "rejected": 0,
+    "modelRetained": 0,
+    "modelReplaced": 0,
+    "serverAuthored": 0,
+    "displayedBeats": 14,
+    "unspokenBeats": 1,
+    "sources": {
+      "authored": 8
+    },
+    "policies": {
+      "offline": 8
+    },
+    "reasons": {
+      "fan-recovery": 6
+    },
+    "providers": {}
+  },
+  "rows": [
+    {
+      "input": "ちいかわの作者は誰？",
+      "replies": [
+        "チイカワ！",
+        "映画はナガノが原作と脚本を担当。"
+      ],
+      "specialist": {
+        "subject": "ちいかわ",
+        "scene": "",
+        "focus": "relation:chiikawa-5",
+        "said": [
+          "relation:chiikawa-5"
+        ]
+      },
+      "pendingQuestion": null,
+      "trace": {
+        "turn": 1,
+        "input": "ちいかわの作者は誰？",
+        "reply": "映画はナガノが原作と脚本を担当。",
+        "plannedBeats": [
+          "映画はナガノが原作と脚本を担当。"
+        ],
+        "deliveredBeats": [
+          "映画はナガノが原作と脚本を担当。"
+        ],
+        "topic": "question",
+        "source": "authored",
+        "policy": "offline",
+        "serverSource": null,
+        "reason": "fan-recovery",
+        "modelRequested": false,
+        "outcome": "local",
+        "provider": null,
+        "repair": null
+      },
+      "dialogueUse": {
+        "ai": 0,
+        "bank": 1
+      },
+      "inputEnabled": true,
+      "sendEnabled": true
+    },
+    {
+      "input": "古本屋のカニの飾りの話をして",
+      "replies": [
+        "フルホンヤ！",
+        "古本屋はモモンガにもらったカニ飾りを着ける。",
+        "もらった物を大事にする古本屋、好き。",
+        "アタシも見るたび相手のことを思い出すの。"
+      ],
+      "specialist": {
+        "subject": "古本屋",
+        "scene": "",
+        "focus": "relation:chiikawa-17",
+        "said": [
+          "relation:chiikawa-5",
+          "relation:chiikawa-17"
+        ]
+      },
+      "pendingQuestion": null,
+      "trace": {
+        "turn": 2,
+        "input": "古本屋のカニの飾りの話をして",
+        "reply": "古本屋はモモンガにもらったカニ飾りを着ける。 もらった物を大事にする古本屋、好き。 アタシも見るたび相手のことを思い出すの。",
+        "plannedBeats": [
+          "古本屋はモモンガにもらったカニ飾りを着ける。",
+          "もらった物を大事にする古本屋、好き。",
+          "アタシも見るたび相手のことを思い出すの。"
+        ],
+        "deliveredBeats": [
+          "古本屋はモモンガにもらったカニ飾りを着ける。",
+          "もらった物を大事にする古本屋、好き。",
+          "アタシも見るたび相手のことを思い出すの。"
+        ],
+        "topic": "fallback",
+        "source": "authored",
+        "policy": "offline",
+        "serverSource": null,
+        "reason": "fan-recovery",
+        "modelRequested": false,
+        "outcome": "local",
+        "provider": null,
+        "repair": null
+      },
+      "dialogueUse": {
+        "ai": 0,
+        "bank": 2
+      },
+      "inputEnabled": true,
+      "sendEnabled": true
+    },
+    {
+      "input": "草むしり検定のお祝いに何を渡すの？",
+      "replies": [
+        "クサムシリケンテイ！",
+        "お祝いに渡すのは、ハチワレに似た形の、ラッピングされたクッキーだよ。"
+      ],
+      "specialist": {
+        "subject": "ちいかわ",
+        "scene": "examination",
+        "focus": "exam:cookie",
+        "said": [
+          "relation:chiikawa-5",
+          "relation:chiikawa-17",
+          "exam:cookie"
+        ]
+      },
+      "pendingQuestion": null,
+      "trace": {
+        "turn": 3,
+        "input": "草むしり検定のお祝いに何を渡すの？",
+        "reply": "お祝いに渡すのは、ハチワレに似た形の、ラッピングされたクッキーだよ。",
+        "plannedBeats": [
+          "お祝いに渡すのは、ハチワレに似た形の、ラッピングされたクッキーだよ。"
+        ],
+        "deliveredBeats": [
+          "お祝いに渡すのは、ハチワレに似た形の、ラッピングされたクッキーだよ。"
+        ],
+        "topic": "question",
+        "source": "authored",
+        "policy": "offline",
+        "serverSource": null,
+        "reason": "fan-recovery",
+        "modelRequested": false,
+        "outcome": "local",
+        "provider": null,
+        "repair": null
+      },
+      "dialogueUse": {
+        "ai": 0,
+        "bank": 3
+      },
+      "inputEnabled": true,
+      "sendEnabled": true
+    },
+    {
+      "input": "そのクッキーは手作りなの？",
+      "replies": [
+        "手作りか買ったものかまでは、確かめられないの。"
+      ],
+      "specialist": {
+        "subject": "ちいかわ",
+        "scene": "examination",
+        "focus": "exam:cookie",
+        "said": [
+          "relation:chiikawa-5",
+          "relation:chiikawa-17",
+          "exam:cookie"
+        ]
+      },
+      "pendingQuestion": null,
+      "trace": {
+        "turn": 4,
+        "input": "そのクッキーは手作りなの？",
+        "reply": "手作りか買ったものかまでは、確かめられないの。",
+        "plannedBeats": [
+          "手作りか買ったものかまでは、確かめられないの。"
+        ],
+        "deliveredBeats": [
+          "手作りか買ったものかまでは、確かめられないの。"
+        ],
+        "topic": "question",
+        "source": "authored",
+        "policy": "offline",
+        "serverSource": null,
+        "reason": "fan-recovery",
+        "modelRequested": false,
+        "outcome": "local",
+        "provider": null,
+        "repair": null
+      },
+      "dialogueUse": {
+        "ai": 0,
+        "bank": 4
+      },
+      "inputEnabled": true,
+      "sendEnabled": true
+    },
+    {
+      "input": "ハチワレのひとりごつって何の曲？",
+      "replies": [
+        "ヒトリゴツ！",
+        "TVアニメのEDは「ひとりごつ」。",
+        "ハチワレが歌うの。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "ending",
+        "focus": "reviewed:hachi:ending",
+        "said": [
+          "relation:chiikawa-5",
+          "relation:chiikawa-17",
+          "exam:cookie",
+          "reviewed:hachi:ending"
+        ]
+      },
+      "pendingQuestion": null,
+      "trace": {
+        "turn": 5,
+        "input": "ハチワレのひとりごつって何の曲？",
+        "reply": "TVアニメのEDは「ひとりごつ」。 ハチワレが歌うの。",
+        "plannedBeats": [
+          "TVアニメのEDは「ひとりごつ」。",
+          "ハチワレが歌うの。"
+        ],
+        "deliveredBeats": [
+          "TVアニメのEDは「ひとりごつ」。",
+          "ハチワレが歌うの。"
+        ],
+        "topic": "chiikawa-name",
+        "source": "authored",
+        "policy": "offline",
+        "serverSource": null,
+        "reason": "fan-recovery",
+        "modelRequested": false,
+        "outcome": "local",
+        "provider": null,
+        "repair": null
+      },
+      "dialogueUse": {
+        "ai": 0,
+        "bank": 5
+      },
+      "inputEnabled": true,
+      "sendEnabled": true
+    },
+    {
+      "input": "映画じゃなくテレビアニメのオープニング曲は？",
+      "replies": [
+        "TVアニメのオープニング曲は、この資料では確かめられないの。",
+        "「くつずれ」は映画のOPだから、分けて話すね。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "tv-opening",
+        "focus": "",
+        "said": [
+          "relation:chiikawa-5",
+          "relation:chiikawa-17",
+          "exam:cookie",
+          "reviewed:hachi:ending"
+        ]
+      },
+      "pendingQuestion": null,
+      "trace": {
+        "turn": 6,
+        "input": "映画じゃなくテレビアニメのオープニング曲は？",
+        "reply": "TVアニメのオープニング曲は、この資料では確かめられないの。 「くつずれ」は映画のOPだから、分けて話すね。",
+        "plannedBeats": [
+          "TVアニメのオープニング曲は、この資料では確かめられないの。",
+          "「くつずれ」は映画のOPだから、分けて話すね。"
+        ],
+        "deliveredBeats": [
+          "TVアニメのオープニング曲は、この資料では確かめられないの。",
+          "「くつずれ」は映画のOPだから、分けて話すね。"
+        ],
+        "topic": "question",
+        "source": "authored",
+        "policy": "offline",
+        "serverSource": null,
+        "reason": "fan-recovery",
+        "modelRequested": false,
+        "outcome": "local",
+        "provider": null,
+        "repair": null
+      },
+      "dialogueUse": {
+        "ai": 0,
+        "bank": 6
+      },
+      "inputEnabled": true,
+      "sendEnabled": true
+    },
+    {
+      "input": "えみちぃは日本語を勉強してるの？",
+      "replies": [
+        "ワオ、アタシのこと!?",
+        "うん、日本語を勉強してるよ!",
+        "漫画とアニメ、それからこういう会話で覚えてるの。",
+        "長い音と小さい「っ」は、まだ難しいの。"
+      ],
+      "specialist": {
+        "subject": "",
+        "scene": "",
+        "focus": "",
+        "said": [
+          "relation:chiikawa-5",
+          "relation:chiikawa-17",
+          "exam:cookie",
+          "reviewed:hachi:ending"
+        ]
+      },
+      "pendingQuestion": null,
+      "trace": {
+        "turn": 7,
+        "input": "えみちぃは日本語を勉強してるの？",
+        "reply": "うん、日本語を勉強してるよ! 漫画とアニメ、それからこういう会話で覚えてるの。 長い音と小さい「っ」は、まだ難しいの。 うれしい、アタシのこと聞いてくれて。",
+        "plannedBeats": [
+          "うん、日本語を勉強してるよ!",
+          "漫画とアニメ、それからこういう会話で覚えてるの。",
+          "長い音と小さい「っ」は、まだ難しいの。",
+          "うれしい、アタシのこと聞いてくれて。"
+        ],
+        "deliveredBeats": [
+          "うん、日本語を勉強してるよ!",
+          "漫画とアニメ、それからこういう会話で覚えてるの。",
+          "長い音と小さい「っ」は、まだ難しいの。"
+        ],
+        "topic": "profile",
+        "source": "authored",
+        "policy": "offline",
+        "serverSource": null,
+        "reason": "",
+        "modelRequested": false,
+        "outcome": "local",
+        "provider": null,
+        "repair": null
+      },
+      "dialogueUse": {
+        "ai": 0,
+        "bank": 7
+      },
+      "inputEnabled": true,
+      "sendEnabled": true
+    },
+    {
+      "input": "ちいかわ以外の話をしよう",
+      "replies": [
+        "うん、別の話にしよう。"
+      ],
+      "specialist": {
+        "subject": "ちいかわ",
+        "scene": "",
+        "focus": "relation:chiikawa-effort",
+        "said": [
+          "relation:chiikawa-5",
+          "relation:chiikawa-17",
+          "exam:cookie",
+          "reviewed:hachi:ending"
+        ]
+      },
+      "pendingQuestion": null,
+      "trace": {
+        "turn": 8,
+        "input": "ちいかわ以外の話をしよう",
+        "reply": "うん、別の話にしよう。",
+        "plannedBeats": [
+          "うん、別の話にしよう。"
+        ],
+        "deliveredBeats": [
+          "うん、別の話にしよう。"
+        ],
+        "topic": "fandom-decline",
+        "source": "authored",
+        "policy": "offline",
+        "serverSource": null,
+        "reason": "",
+        "modelRequested": false,
+        "outcome": "local",
+        "provider": null,
+        "repair": null
+      },
+      "dialogueUse": {
+        "ai": 0,
+        "bank": 8
+      },
+      "inputEnabled": true,
+      "sendEnabled": true
+    }
+  ]
+}

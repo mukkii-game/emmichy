@@ -6,6 +6,20 @@ import {directReply} from '../src/dialogue-director.js';
 import {planContinuation} from '../src/continuation.js';
 const messages=(input,state={})=>[{role:'system',content:specialistPrompt(input,state)},{role:'user',content:input}];
 
+test('a captured live catchphrase reaction stays grammatical through filtering and pacing',()=>{
+ const input='草むしり検定の最初の結果は？',m=messages(input);
+ const say='ハチワレが合格して、ちいかわは不合格だったんだ。ちょっとショックだけど、ハチワレの頑張りにヤハ！って思う。';
+ const result=renderSpecialistReply(JSON.stringify({beats:[{fact:'exam:result',say,ask:null}]}),{messages:m});
+ assert.equal(result.source,'mixed');
+ assert.match(result.text,/ちょっとショックだけど、ハチワレの頑張りにヤハ！って思う。/);
+ assert.equal(result.text.match(/ハチワレが合格/g).length,1,'do not repeat the model fact over the owned fact');
+ assert.doesNotMatch(result.text,/見方だけど/);
+ const p=planContinuation(result.text,input);
+ assert.ok(p.later.some(s=>s.includes('ヤハ！って思う。')));assert.ok(!p.later.some(s=>/^(?:って|ッテ)/.test(s)));
+ const fragment=renderSpecialistReply(JSON.stringify({beats:[{fact:'exam:result'},{say:'って思う。'}]}),{messages:m});
+ assert.equal(fragment.source,'authored');assert.doesNotMatch(fragment.text,/って思う/);
+});
+
 test('the model selects a sourced fact; invented fact text and unknown IDs cannot enter the reply',()=>{
  const m=messages('草むしり検定5級の結果は？');
  const result=renderSpecialistReply(JSON.stringify({beats:[{fact:'exam:result'},{say:'アタシ、どっちの気持ちも考えちゃう。'}]}),{messages:m});

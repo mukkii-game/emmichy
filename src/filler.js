@@ -1,4 +1,4 @@
-import {unwantedFanRedirect} from './chat.js?v=20261014-view1';
+import {unwantedFanRedirect} from './chat.js?v=20261017-quota1';
 import {japaneseExamples,complimentReaction,profileAside} from './profile.js?v=20261014-view1';
 import {waitingReply} from './waiting-db.js?v=20261014-view1';
 import {recognizeName,namedGesture,namedFollowup} from './names.js?v=20261014-view1';

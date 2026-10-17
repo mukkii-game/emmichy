@@ -1,0 +1,137 @@
+{
+  "mode": "actual app handlers in offline DOM fixture; virtual timing; no browser/human/live-model evaluation",
+  "providerCalls": 0,
+  "rows": [
+    {
+      "input": "草むしり検定の最初の結果は？",
+      "replies": [
+        "クサムシリ！",
+        "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。",
+        "アタシなら、友達のお祝いもしたいけど、自分の悔しさも消えないと思う。",
+        "どっちの気持ちも大事にしたい。"
+      ],
+      "specialist": {
+        "subject": "ちいかわとハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": [
+          "exam:result"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "ハチワレの気持ち、えみちいはどう思う？",
+      "replies": [
+        "ハチワレ！",
+        "アタシなら、まず「おめでとう」だけ言うかな。",
+        "自分の結果の話は、そのあとでもいいし。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": [
+          "exam:result"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "私は自分だけ受かったら言いづらいな",
+      "replies": [
+        "言いづらくなるんだね。",
+        "すぐ明るい顔になれなくても、一緒にいてほしいな。",
+        "アタシなら、少し待ってくれるだけで助かる。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": [
+          "exam:result"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "えみちいならどうする？",
+      "replies": [
+        "嬉しい時も、悔しい時も、どっちかの役だけにならなくていいと思うの。",
+        "アタシは、言葉にならない時間も大事にしたい。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": [
+          "exam:result"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "お祝いのクッキーは手作りなの？",
+      "replies": [
+        "手作りか買ったものかまでは、確かめられないの。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:cookie",
+        "said": [
+          "exam:result"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "食べずに写真で残したいな",
+      "replies": [
+        "食べずに写真で残したいんだね。",
+        "アタシなら、一枚撮ってから食べる!",
+        "写真を見返す楽しみも、おやつの時間も、両方ほしいの。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:cookie",
+        "said": [
+          "exam:result"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "同じ話は繰り返さないで",
+      "replies": [
+        "同じ話をまた始めちゃったね。",
+        "一度話したことを、初めてみたいに繰り返さないようにする。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:cookie",
+        "said": [
+          "exam:result"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "ちいかわ以外の話をしよう",
+      "replies": [
+        "うん、別の話にしよう。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:attempt",
+        "said": [
+          "exam:result"
+        ]
+      },
+      "pendingQuestion": null
+    }
+  ]
+}

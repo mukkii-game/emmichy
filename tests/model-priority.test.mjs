@@ -71,5 +71,7 @@ test('actual screen requests AI for its first ordinary bank turn, retries failur
   settle(new Response('',{status:429}));await pending;deferred=false;
   assert.equal(session().chatHealth.rateLimited,true,'waiting dialogue and autosave must not detach the request session');
   const attempts=requests.length;await send('プリンを食べたよ');assert.equal(requests.length,attempts,'a slow 429 prevents the next request too');
+  now+=60001;await send('今日は散歩の話を続けよう');assert.equal(requests.length,attempts+1,'a later player turn can use AI again after cooldown');
+  assert.equal(session().chatHealth.rateLimited,false);assert.equal(session().chatHealth.lastOutcome,'accepted');
  }finally{Date.now=realNow;for(const key of keys)if(saved[key]===undefined)delete globalThis[key];else globalThis[key]=saved[key];}
 });

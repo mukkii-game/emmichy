@@ -1,15 +1,15 @@
 import {ownedFollowup} from './fallback.js?v=20261014-view1';
 import {fanRecovery} from './fandom.js?v=20261014-view1';
-import {polishReply} from './repertoire.js?v=20261014-view1';
-import {unwantedFanRedirect} from './chat.js?v=20261014-view1';
-import {selectChiikawaBridge,personalFanReply} from './chiikawa-theme.js?v=20261014-view1';
-import {groundModelReply} from './dialogue-grounding.js?v=20261014-view1';
+import {polishReply} from './repertoire.js?v=20261017-quota1';
+import {unwantedFanRedirect} from './chat.js?v=20261017-quota1';
+import {selectChiikawaBridge,personalFanReply} from './chiikawa-theme.js?v=20261017-quota1';
+import {groundModelReply} from './dialogue-grounding.js?v=20261017-quota1';
 import {asksCurrentSerial} from './chiikawa-relations.js?v=20261014-view1';
-import {attributionRepair} from './chiikawa-attribution.js?v=20261014-view1';
+import {attributionRepair} from './chiikawa-attribution.js?v=20261017-quota1';
 import {learnerReply} from './japanese-learner.js?v=20261014-view1';
 import {conversationRepair} from './conversation-repair.js?v=20261014-view1';
-import {specialistPacket,specialistFallback} from './specialist.js?v=20261014-view1';
-import {freshReplySentences} from './reply-repetition.js?v=20261014-view1';
+import {specialistPacket,specialistFallback} from './specialist.js?v=20261017-quota1';
+import {freshReplySentences} from './reply-repetition.js?v=20261017-quota1';
 
 // The screen owns final content selection. The relay validates transport/output
 // shape; it does not silently substitute a different authored conversation.

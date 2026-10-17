@@ -1,4 +1,4 @@
-import {dialogueSentences} from './dialogue-sentences.js?v=20261014-view1';
+import {dialogueSentences} from './dialogue-sentences.js?v=20261017-quota1';
 const fold=s=>String(s||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');
 export const attributionFacts=[
  {id:'expression:usagi:yaha',fact:'「ヤハ！」はうさぎの掛け声。',source:'https://chiikawamarket.jp/collections/goods/products/4570085463114',checkedAt:'2026-10-12'},

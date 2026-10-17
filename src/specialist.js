@@ -1,28 +1,16 @@
 // Small owned evidence packets. The browser sends IDs/state, never new canon.
-import {chiikawaRelations} from './chiikawa-relations.js?v=20261017-link1';
 import {waterPlayCorrection} from './fandom.js?v=20261017-link1';
 import {exactNames,focusName} from './names.js?v=20261017-link1';
 import {substantiveHistory} from './dialogue-history.js?v=20261014-view1';
-import {feedbackIntent} from './conversation-repair.js?v=20261017-link1';
+import {feedbackIntent} from './conversation-repair.js?v=20261017-catalog1';
 import {sceneFacts} from './chiikawa-scenes.js?v=20261014-view1';
 import {topicFacts} from './chiikawa-news.js?v=20261014-view1';
 import {fanConversation} from './fan-conversation.js?v=20261017-link1';
 const fold=s=>String(s||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/[\s。、!?！？「」]/g,'').toLowerCase();
-const spoken={
- 'reviewed:usagi:yaha':'「ヤハ！」はうさぎの掛け声だよ。',
- 'reviewed:hachi:nantoka':'「なんとかなれーッ！」はハチワレのセリフだよ。',
- 'reviewed:hachi:ending':'TVアニメのEDは「ひとりごつ」。ハチワレが歌うの。',
- 'reviewed:hachi:opening':'映画のOPは「くつずれ」。ハチワレが歌うの。',
- 'reviewed:chiikawa:pochette':'アニメ第28話で、ちいかわは買ったお気に入りのポシェットをさげて出かけるの。',
- 'reviewed:trio:log':'映画の冒頭では、ちいかわ・ハチワレ・うさぎが丸太の周りで掛け合いをするの。',
- 'reviewed:trio:prepare':'映画では、セイレーン討伐に向けて、みんなで協力して準備するの。',
- 'reviewed:momonga:ear':'映画では、崖から落ちそうなちいかわを、モモンガが耳を引っ張って助けるの。'
-};
-export const specialistFacts=Object.freeze([...chiikawaRelations.filter(r=>r.evidence==='official'||r.id==='relation:chiikawa-23'),...sceneFacts,...topicFacts].map(r=>Object.freeze({...r,
- ...(r.id==='relation:chiikawa-23'?{fact:'島二郎は手を回して水流を起こす。',spoken:'島二郎は手を回して水流を起こすの。',limits:[...r.limits,'虎のしまじろうとは別人'],deliveredVariants:['島二郎が手を回して起こす水流','手を回して水流を起こす島二郎']}:{}),
- spoken:r.id==='relation:chiikawa-23'?'島二郎は手を回して水流を起こすの。':r.spoken||spoken[r.id]||r.fact})));
+import {knowledgeFacts,knowledgeById,matchingKnowledgeQuestions} from './knowledge-catalog.js?v=20261017-catalog1';
+export const specialistFacts=knowledgeFacts;
 const records=specialistFacts;
-const byId=new Map(records.map(r=>[r.id,r]));
+const byId=knowledgeById;
 const scenes=[
  {id:'examination',cues:['草むしり検定','クサムシリケンテイ','5級','5キュウ','五級'],ids:sceneFacts.map(r=>r.id),participants:['ちいかわ','ハチワレ'],label:'草むしり検定の具体的な場面'},
  {id:'dated-topics',cues:['ちいかわのニュース','チイカワノニュース','最近のちいかわ','サイキンノチイカワ','最新ニュース'],ids:topicFacts.map(r=>r.id),label:'ちいかわの最新案内'},
@@ -53,12 +41,14 @@ export function specialistPacket(input,state={},now=new Date()){
  const selfTopic=!chii&&(/日本語|ニホンゴ|スウェーデン|ヨーテボリ|家族|カゾク/.test(t)||/エミチ|emmichy/.test(t)&&!/ドウ思|ドウオモ/.test(t)&&!conversation);
  const matches=c=>['OP','ED'].includes(c)?new RegExp(`\\b${c}\\b`,'i').test(String(input)):t.includes(fold(c));
  let explicit=scenes.find(s=>s.cues.some(matches));
- if(explicit?.id==='opening'&&/アニメ|テレビ|tv/.test(t)&&!/映画|エイガ|くつずれ|クツズレ/.test(t))explicit=scenes.find(s=>s.id==='tv-opening');
+ const tvRequested=/アニメ|テレビ|tv/.test(t)&&(!/映画|エイガ/.test(t)||/(?:映画|エイガ)(?:デハナク|ジャナク|ジャナイ|以外|イガイ)/.test(t));
+ if(explicit?.id==='opening'&&tvRequested)explicit=scenes.find(s=>s.id==='tv-opening');
+ const supportedQuestion=matchingKnowledgeQuestions(input,{scene:explicit?.id||previousScene?.id}).find(q=>q.kind==='fact');
  const follow=Boolean(conversation)||/^(ソレ|ソノ|アレ|アノ|モット|続キ|ツヅキ|ドウ|ナゼ|何|ナニ|誰|ダレ|ソウ|違|チガ|オナジ)/.test(t)||/(?:ソノ|アノ|サッキノ)(?:話|ハナシ|場面|シーン|子)|ソコデ|ドコガ好キ|ドウ思|ドウオモ|落チ|オチ|合格|ゴウカク|曲名|キョクメイ|モウ一度|モウイチド|サッキ|面白イ|オモシロイ|話シテ|話ヲシテ|ハナシテ|続ケ|ツヅケ|印象ニ残ル場面/.test(t);
  const facet=previousScene&&(/^(ドンナ|ドノ|ドレ)|手作リ|作ッタ|買ッタ|点数|得点|ドウヤッテ/.test(t)||previousScene.ids.some(id=>byId.get(id)?.cues.some(c=>fold(c).length>=2&&t.includes(fold(c)))));
  const mixedQuestion=other&&!['japan','games'].includes(other.work)&&/[?？]|何|ナニ|ナゼ|なぜ|どう|教えて/.test(input);
  const spoilerRequest=/ネタバレ/.test(t);
- const active=!selfTopic&&!mixedQuestion&&Boolean(chii||!other&&(explicit||(follow||facet||spoilerRequest)&&(memory.subject||memory.scene)));
+ const active=!selfTopic&&!mixedQuestion&&Boolean(chii||!other&&(explicit||supportedQuestion&&( /[?？]|何|誰|どこ|話して|話をして|ハナシテ/.test(input))||(follow||facet||spoilerRequest)&&(memory.subject||memory.scene)));
  if(!active){
   const changed=other||selfTopic||/別ノ話|他ノ話|ホカノ話|以外|イガイ|話題.{0,6}変|話ヲ変/.test(t);
   return {active:false,memory:changed?{...memory,subject:'',scene:'',focus:''}:memory,evidence:[],gap:''};
@@ -89,6 +79,13 @@ export function specialistPacket(input,state={},now=new Date()){
  }
  if(scene&&follow&&!examIntent&&!explicit&&byId.has(memory.focus)&&scene.ids.includes(memory.focus))selected=[byId.get(memory.focus),...selected.filter(r=>r.id!==memory.focus)].slice(0,3);
  if(conversation&&byId.has(memory.focus)&&selected.some(r=>r.id===memory.focus))selected=[byId.get(memory.focus),...selected.filter(r=>r.id!==memory.focus)].slice(0,3);
+ // A supported factual question owns the first answer. Never use an opinion
+ // or a knowledge boundary as permission to assert a new fact.
+ if(supportedQuestion){
+  const answers=supportedQuestion.factIds.map(id=>byId.get(id)).filter(Boolean);
+  selected=answers.slice(0,3);
+  if(!subject)subject=answers[0]?.subject||'';
+ }
  const allowSpoilers=/ネタバレ.{0,8}(?:イイ|大丈夫|アリ)/.test(t);
  const noSpoilers=!allowSpoilers&&(memory.spoilers===false||/ネタバレ.{0,4}(?:ナシ|なし|イヤ|嫌|禁止)|ネタバレシナイ/.test(t));
  const specificScene=Boolean(scene&&scene.id!=='examination');
@@ -115,6 +112,7 @@ export function specialistFallback(input,state={}){
  const direct=packet.evidence[0],record=direct&&byId.get(direct.id);
  if(packet.memory.scene==='water'&&/遊|アソ/.test(input))return '遊んでいた、とは言わないよ。島二郎が手を回して水流を起こす話。アタシ、その頼もしさが好きなの。';
  if(/ネタバレ.{0,8}(?:しない|なし|ナシ)|ネタバレシナイ/.test(input))return 'うん、ここから先の展開は話さないね。見たところの感想だけ、一緒に話そう。';
+ if(!record&&packet.memory.scene==='tv-opening')return 'TVアニメのオープニング曲は、この資料では確かめられないの。「くつずれ」は映画のOPだから、分けて話すね。';
  if(!record)return 'その場面の細部は、今の資料では確かめきれないの。どこが気になったか、あなたの言葉で聞きたいな。';
  if(/誰|ダレ|何|ナニ|だっけ|ダッケ/.test(input)&&!/どうして|なぜ|ドウシテ|ナゼ/.test(input))return record.spoken;
  if(packet.memory.scene==='island-menu'&&/パフェ/.test(input))return '島二郎の店のメニューは、カツカレーと貝汁。パフェは島の別の食べ物だよ。作り手までは、この資料では確かめられないの。';

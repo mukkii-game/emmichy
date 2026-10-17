@@ -1,0 +1,736 @@
+{
+  "mode": "actual app handlers with mock provider replies revalidated by relay; zero live generation; virtual timing; no browser/human evaluation",
+  "providerCalls": 0,
+  "audit": {
+    "turns": 8,
+    "requested": 6,
+    "accepted": 5,
+    "failed": 1,
+    "rejected": 0,
+    "modelRetained": 3,
+    "modelReplaced": 0,
+    "serverAuthored": 2,
+    "displayedBeats": 15,
+    "unspokenBeats": 0,
+    "sources": {
+      "llm": 3,
+      "authored": 5
+    },
+    "policies": {
+      "request": 6,
+      "fixed-rule": 2
+    },
+    "reasons": {
+      "fan-recovery": 3,
+      "repair:defer": 1
+    },
+    "providers": {
+      "groq": 5
+    }
+  },
+  "fixtureResponses": [
+    {
+      "input": "今日は雨上がりに散歩したよ",
+      "history": [
+        {
+          "role": "enny",
+          "text": "こんにちは。"
+        }
+      ],
+      "specialist": {
+        "subject": "",
+        "scene": "",
+        "focus": "",
+        "said": []
+      },
+      "validated": "雨上がりって、道の匂いが少し変わるよね。アタシ、ついゆっくり歩いちゃう。"
+    },
+    {
+      "input": "草むしり検定の最初の結果は？",
+      "history": [
+        {
+          "role": "enny",
+          "text": "こんにちは。"
+        },
+        {
+          "role": "user",
+          "text": "今日は雨上がりに散歩したよ"
+        },
+        {
+          "role": "enny",
+          "text": "散歩してると、看板の日本語まで読んじゃう。 雨上がりって、道の匂いが少し変わるよね。 アタシ、ついゆっくり歩いちゃう。"
+        },
+        {
+          "role": "user",
+          "text": "あなたは何歳？"
+        },
+        {
+          "role": "enny",
+          "text": "17歳だよ。 今は地元の高校に通ってるの。"
+        }
+      ],
+      "specialist": {
+        "subject": "ちいかわとハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": []
+      },
+      "validated": {
+        "text": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。",
+        "source": "authored",
+        "reason": "specialist-plan"
+      }
+    },
+    {
+      "input": "ハチワレの気持ち、えみちいはどう思う？",
+      "history": [
+        {
+          "role": "enny",
+          "text": "こんにちは。"
+        },
+        {
+          "role": "user",
+          "text": "今日は雨上がりに散歩したよ"
+        },
+        {
+          "role": "enny",
+          "text": "散歩してると、看板の日本語まで読んじゃう。 雨上がりって、道の匂いが少し変わるよね。 アタシ、ついゆっくり歩いちゃう。"
+        },
+        {
+          "role": "user",
+          "text": "あなたは何歳？"
+        },
+        {
+          "role": "enny",
+          "text": "17歳だよ。 今は地元の高校に通ってるの。"
+        },
+        {
+          "role": "user",
+          "text": "草むしり検定の最初の結果は？"
+        },
+        {
+          "role": "enny",
+          "text": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。 アタシなら、友達のお祝いもしたいけど、自分の悔しさも消えないと思う。 どっちの気持ちも大事にしたい。"
+        }
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": [
+          "exam:result"
+        ]
+      },
+      "validated": {
+        "text": "アタシなら、嬉しさも大事にしながら、友達にどう声をかけるか迷っちゃうな。",
+        "source": "llm",
+        "reason": "specialist-plan"
+      }
+    },
+    {
+      "input": "その気持ち、もう少し聞きたい",
+      "history": [
+        {
+          "role": "enny",
+          "text": "こんにちは。"
+        },
+        {
+          "role": "user",
+          "text": "今日は雨上がりに散歩したよ"
+        },
+        {
+          "role": "enny",
+          "text": "散歩してると、看板の日本語まで読んじゃう。 雨上がりって、道の匂いが少し変わるよね。 アタシ、ついゆっくり歩いちゃう。"
+        },
+        {
+          "role": "user",
+          "text": "あなたは何歳？"
+        },
+        {
+          "role": "enny",
+          "text": "17歳だよ。 今は地元の高校に通ってるの。"
+        },
+        {
+          "role": "user",
+          "text": "草むしり検定の最初の結果は？"
+        },
+        {
+          "role": "enny",
+          "text": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。 アタシなら、友達のお祝いもしたいけど、自分の悔しさも消えないと思う。 どっちの気持ちも大事にしたい。"
+        },
+        {
+          "role": "user",
+          "text": "ハチワレの気持ち、えみちいはどう思う？"
+        },
+        {
+          "role": "enny",
+          "text": "アタシなら、嬉しさも大事にしながら、友達にどう声をかけるか迷っちゃうな。"
+        }
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": [
+          "exam:result"
+        ]
+      },
+      "validated": {
+        "text": "黙って一緒にいる時間も、アタシは大事にしたい。 すぐ言葉が見つからなくてもね。",
+        "source": "llm",
+        "reason": "specialist-plan"
+      }
+    },
+    {
+      "input": "クッキーのお祝いの話にして",
+      "history": [
+        {
+          "role": "enny",
+          "text": "こんにちは。"
+        },
+        {
+          "role": "user",
+          "text": "今日は雨上がりに散歩したよ"
+        },
+        {
+          "role": "enny",
+          "text": "散歩してると、看板の日本語まで読んじゃう。 雨上がりって、道の匂いが少し変わるよね。 アタシ、ついゆっくり歩いちゃう。"
+        },
+        {
+          "role": "user",
+          "text": "あなたは何歳？"
+        },
+        {
+          "role": "enny",
+          "text": "17歳だよ。 今は地元の高校に通ってるの。"
+        },
+        {
+          "role": "user",
+          "text": "草むしり検定の最初の結果は？"
+        },
+        {
+          "role": "enny",
+          "text": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。 アタシなら、友達のお祝いもしたいけど、自分の悔しさも消えないと思う。 どっちの気持ちも大事にしたい。"
+        },
+        {
+          "role": "user",
+          "text": "ハチワレの気持ち、えみちいはどう思う？"
+        },
+        {
+          "role": "enny",
+          "text": "アタシなら、嬉しさも大事にしながら、友達にどう声をかけるか迷っちゃうな。"
+        },
+        {
+          "role": "user",
+          "text": "その気持ち、もう少し聞きたい"
+        },
+        {
+          "role": "enny",
+          "text": "黙って一緒にいる時間も、アタシは大事にしたい。 すぐ言葉が見つからなくてもね。"
+        }
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:cookie",
+        "said": [
+          "exam:result"
+        ]
+      },
+      "validated": {
+        "text": "お祝いに渡すのは、ハチワレに似た形の、ラッピングされたクッキーだよ。",
+        "source": "authored",
+        "reason": "specialist-plan"
+      }
+    },
+    {
+      "input": "手作りなの？",
+      "history": [
+        {
+          "role": "enny",
+          "text": "こんにちは。"
+        },
+        {
+          "role": "user",
+          "text": "今日は雨上がりに散歩したよ"
+        },
+        {
+          "role": "enny",
+          "text": "散歩してると、看板の日本語まで読んじゃう。 雨上がりって、道の匂いが少し変わるよね。 アタシ、ついゆっくり歩いちゃう。"
+        },
+        {
+          "role": "user",
+          "text": "あなたは何歳？"
+        },
+        {
+          "role": "enny",
+          "text": "17歳だよ。 今は地元の高校に通ってるの。"
+        },
+        {
+          "role": "user",
+          "text": "草むしり検定の最初の結果は？"
+        },
+        {
+          "role": "enny",
+          "text": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。 アタシなら、友達のお祝いもしたいけど、自分の悔しさも消えないと思う。 どっちの気持ちも大事にしたい。"
+        },
+        {
+          "role": "user",
+          "text": "ハチワレの気持ち、えみちいはどう思う？"
+        },
+        {
+          "role": "enny",
+          "text": "アタシなら、嬉しさも大事にしながら、友達にどう声をかけるか迷っちゃうな。"
+        },
+        {
+          "role": "user",
+          "text": "その気持ち、もう少し聞きたい"
+        },
+        {
+          "role": "enny",
+          "text": "黙って一緒にいる時間も、アタシは大事にしたい。 すぐ言葉が見つからなくてもね。"
+        },
+        {
+          "role": "user",
+          "text": "クッキーのお祝いの話にして"
+        },
+        {
+          "role": "enny",
+          "text": "お祝いに渡すのは、ハチワレに似た形の、ラッピングされたクッキーだよ。 アタシなら、そんなお祝いもらったら、食べる前にずっと眺めちゃう。"
+        }
+      ],
+      "status": 429
+    }
+  ],
+  "rows": [
+    {
+      "input": "今日は雨上がりに散歩したよ",
+      "replies": [
+        "ウンウン…。",
+        "散歩してると、看板の日本語まで読んじゃう。",
+        "雨上がりって、道の匂いが少し変わるよね。",
+        "アタシ、ついゆっくり歩いちゃう。"
+      ],
+      "specialist": {
+        "subject": "",
+        "scene": "",
+        "focus": "",
+        "said": []
+      },
+      "pendingQuestion": null,
+      "trace": {
+        "turn": 1,
+        "input": "今日は雨上がりに散歩したよ",
+        "reply": "雨上がりって、道の匂いが少し変わるよね。 アタシ、ついゆっくり歩いちゃう。",
+        "plannedBeats": [
+          "雨上がりって、道の匂いが少し変わるよね。",
+          "アタシ、ついゆっくり歩いちゃう。"
+        ],
+        "deliveredBeats": [
+          "雨上がりって、道の匂いが少し変わるよね。",
+          "アタシ、ついゆっくり歩いちゃう。"
+        ],
+        "topic": "fallback",
+        "source": "llm",
+        "policy": "request",
+        "serverSource": "llm",
+        "reason": "",
+        "modelRequested": true,
+        "outcome": "accepted",
+        "provider": "groq",
+        "repair": null
+      },
+      "chatHealth": {
+        "attempts": 1,
+        "accepted": 1,
+        "rejected": 0,
+        "failed": 0,
+        "lastOutcome": "accepted",
+        "rateLimited": false,
+        "retryAt": 0
+      },
+      "dialogueUse": {
+        "ai": 1,
+        "bank": 0
+      },
+      "inputEnabled": true,
+      "sendEnabled": true
+    },
+    {
+      "input": "あなたは何歳？",
+      "replies": [
+        "17歳だよ。",
+        "今は地元の高校に通ってるの。"
+      ],
+      "specialist": {
+        "subject": "",
+        "scene": "",
+        "focus": "",
+        "said": []
+      },
+      "pendingQuestion": null,
+      "trace": {
+        "turn": 2,
+        "input": "あなたは何歳？",
+        "reply": "17歳だよ。 今は地元の高校に通ってるの。",
+        "plannedBeats": [
+          "17歳だよ。",
+          "今は地元の高校に通ってるの。"
+        ],
+        "deliveredBeats": [
+          "17歳だよ。",
+          "今は地元の高校に通ってるの。"
+        ],
+        "topic": "profile",
+        "source": "authored",
+        "policy": "fixed-rule",
+        "serverSource": null,
+        "reason": "",
+        "modelRequested": false,
+        "outcome": "local",
+        "provider": null,
+        "repair": null
+      },
+      "chatHealth": {
+        "attempts": 1,
+        "accepted": 1,
+        "rejected": 0,
+        "failed": 0,
+        "lastOutcome": "accepted",
+        "rateLimited": false,
+        "retryAt": 0
+      },
+      "dialogueUse": {
+        "ai": 1,
+        "bank": 1
+      },
+      "inputEnabled": true,
+      "sendEnabled": true
+    },
+    {
+      "input": "草むしり検定の最初の結果は？",
+      "replies": [
+        "クサムシリケンテイ！",
+        "あの話、アタシも考えてる。",
+        "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。",
+        "アタシなら、友達のお祝いもしたいけど、自分の悔しさも消えないと思う。",
+        "どっちの気持ちも大事にしたい。"
+      ],
+      "specialist": {
+        "subject": "ちいかわとハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": [
+          "exam:result"
+        ]
+      },
+      "pendingQuestion": null,
+      "trace": {
+        "turn": 3,
+        "input": "草むしり検定の最初の結果は？",
+        "reply": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。 アタシなら、友達のお祝いもしたいけど、自分の悔しさも消えないと思う。 どっちの気持ちも大事にしたい。",
+        "plannedBeats": [
+          "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。",
+          "アタシなら、友達のお祝いもしたいけど、自分の悔しさも消えないと思う。",
+          "どっちの気持ちも大事にしたい。"
+        ],
+        "deliveredBeats": [
+          "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。",
+          "アタシなら、友達のお祝いもしたいけど、自分の悔しさも消えないと思う。",
+          "どっちの気持ちも大事にしたい。"
+        ],
+        "topic": "question",
+        "source": "authored",
+        "policy": "request",
+        "serverSource": "authored",
+        "reason": "fan-recovery",
+        "modelRequested": true,
+        "outcome": "accepted",
+        "provider": "groq",
+        "repair": null
+      },
+      "chatHealth": {
+        "attempts": 2,
+        "accepted": 2,
+        "rejected": 0,
+        "failed": 0,
+        "lastOutcome": "accepted",
+        "rateLimited": false,
+        "retryAt": 0
+      },
+      "dialogueUse": {
+        "ai": 1,
+        "bank": 2
+      },
+      "inputEnabled": true,
+      "sendEnabled": true
+    },
+    {
+      "input": "ハチワレの気持ち、えみちいはどう思う？",
+      "replies": [
+        "ハチワレ！",
+        "あの話、アタシも考えてる。",
+        "アタシなら、嬉しさも大事にしながら、友達にどう声をかけるか迷っちゃうな。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": [
+          "exam:result"
+        ]
+      },
+      "pendingQuestion": null,
+      "trace": {
+        "turn": 4,
+        "input": "ハチワレの気持ち、えみちいはどう思う？",
+        "reply": "アタシなら、嬉しさも大事にしながら、友達にどう声をかけるか迷っちゃうな。",
+        "plannedBeats": [
+          "アタシなら、嬉しさも大事にしながら、友達にどう声をかけるか迷っちゃうな。"
+        ],
+        "deliveredBeats": [
+          "アタシなら、嬉しさも大事にしながら、友達にどう声をかけるか迷っちゃうな。"
+        ],
+        "topic": "question",
+        "source": "llm",
+        "policy": "request",
+        "serverSource": "llm",
+        "reason": "",
+        "modelRequested": true,
+        "outcome": "accepted",
+        "provider": "groq",
+        "repair": null
+      },
+      "chatHealth": {
+        "attempts": 3,
+        "accepted": 3,
+        "rejected": 0,
+        "failed": 0,
+        "lastOutcome": "accepted",
+        "rateLimited": false,
+        "retryAt": 0
+      },
+      "dialogueUse": {
+        "ai": 2,
+        "bank": 2
+      },
+      "inputEnabled": true,
+      "sendEnabled": true
+    },
+    {
+      "input": "その気持ち、もう少し聞きたい",
+      "replies": [
+        "あの話、アタシも考えてる。",
+        "黙って一緒にいる時間も、アタシは大事にしたい。",
+        "すぐ言葉が見つからなくてもね。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": [
+          "exam:result"
+        ]
+      },
+      "pendingQuestion": null,
+      "trace": {
+        "turn": 5,
+        "input": "その気持ち、もう少し聞きたい",
+        "reply": "黙って一緒にいる時間も、アタシは大事にしたい。 すぐ言葉が見つからなくてもね。",
+        "plannedBeats": [
+          "黙って一緒にいる時間も、アタシは大事にしたい。",
+          "すぐ言葉が見つからなくてもね。"
+        ],
+        "deliveredBeats": [
+          "黙って一緒にいる時間も、アタシは大事にしたい。",
+          "すぐ言葉が見つからなくてもね。"
+        ],
+        "topic": "fallback",
+        "source": "llm",
+        "policy": "request",
+        "serverSource": "llm",
+        "reason": "",
+        "modelRequested": true,
+        "outcome": "accepted",
+        "provider": "groq",
+        "repair": null
+      },
+      "chatHealth": {
+        "attempts": 4,
+        "accepted": 4,
+        "rejected": 0,
+        "failed": 0,
+        "lastOutcome": "accepted",
+        "rateLimited": false,
+        "retryAt": 0
+      },
+      "dialogueUse": {
+        "ai": 3,
+        "bank": 2
+      },
+      "inputEnabled": true,
+      "sendEnabled": true
+    },
+    {
+      "input": "クッキーのお祝いの話にして",
+      "replies": [
+        "あの話、アタシも考えてる。",
+        "お祝いに渡すのは、ハチワレに似た形の、ラッピングされたクッキーだよ。",
+        "アタシなら、そんなお祝いもらったら、食べる前にずっと眺めちゃう。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:cookie",
+        "said": [
+          "exam:result",
+          "exam:cookie"
+        ]
+      },
+      "pendingQuestion": null,
+      "trace": {
+        "turn": 6,
+        "input": "クッキーのお祝いの話にして",
+        "reply": "お祝いに渡すのは、ハチワレに似た形の、ラッピングされたクッキーだよ。 アタシなら、そんなお祝いもらったら、食べる前にずっと眺めちゃう。",
+        "plannedBeats": [
+          "お祝いに渡すのは、ハチワレに似た形の、ラッピングされたクッキーだよ。",
+          "アタシなら、そんなお祝いもらったら、食べる前にずっと眺めちゃう。"
+        ],
+        "deliveredBeats": [
+          "お祝いに渡すのは、ハチワレに似た形の、ラッピングされたクッキーだよ。",
+          "アタシなら、そんなお祝いもらったら、食べる前にずっと眺めちゃう。"
+        ],
+        "topic": "fallback",
+        "source": "authored",
+        "policy": "request",
+        "serverSource": "authored",
+        "reason": "fan-recovery",
+        "modelRequested": true,
+        "outcome": "accepted",
+        "provider": "groq",
+        "repair": null
+      },
+      "chatHealth": {
+        "attempts": 5,
+        "accepted": 5,
+        "rejected": 0,
+        "failed": 0,
+        "lastOutcome": "accepted",
+        "rateLimited": false,
+        "retryAt": 0
+      },
+      "dialogueUse": {
+        "ai": 3,
+        "bank": 3
+      },
+      "inputEnabled": true,
+      "sendEnabled": true
+    },
+    {
+      "input": "手作りなの？",
+      "replies": [
+        "あの話、アタシも考えてる。",
+        "手作りか買ったものかまでは、確かめられないの。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:cookie",
+        "said": [
+          "exam:result",
+          "exam:cookie"
+        ]
+      },
+      "pendingQuestion": null,
+      "trace": {
+        "turn": 7,
+        "input": "手作りなの？",
+        "reply": "手作りか買ったものかまでは、確かめられないの。",
+        "plannedBeats": [
+          "手作りか買ったものかまでは、確かめられないの。"
+        ],
+        "deliveredBeats": [
+          "手作りか買ったものかまでは、確かめられないの。"
+        ],
+        "topic": "question",
+        "source": "authored",
+        "policy": "request",
+        "serverSource": null,
+        "reason": "fan-recovery",
+        "modelRequested": true,
+        "outcome": "rate-limit",
+        "provider": null,
+        "repair": null
+      },
+      "chatHealth": {
+        "attempts": 6,
+        "accepted": 5,
+        "rejected": 0,
+        "failed": 1,
+        "lastOutcome": "rate-limit",
+        "rateLimited": true,
+        "retryAt": 1792223782719
+      },
+      "dialogueUse": {
+        "ai": 3,
+        "bank": 4
+      },
+      "inputEnabled": true,
+      "sendEnabled": true
+    },
+    {
+      "input": "その話は、あとで続けたいな",
+      "replies": [
+        "うん、その話はあとにしよう。",
+        "今は急がなくて大丈夫。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:cookie",
+        "said": [
+          "exam:result",
+          "exam:cookie"
+        ]
+      },
+      "pendingQuestion": null,
+      "trace": {
+        "turn": 8,
+        "input": "その話は、あとで続けたいな",
+        "reply": "うん、その話はあとにしよう。 今は急がなくて大丈夫。",
+        "plannedBeats": [
+          "うん、その話はあとにしよう。",
+          "今は急がなくて大丈夫。"
+        ],
+        "deliveredBeats": [
+          "うん、その話はあとにしよう。",
+          "今は急がなくて大丈夫。"
+        ],
+        "topic": "conversation-repair",
+        "source": "authored",
+        "policy": "fixed-rule",
+        "serverSource": null,
+        "reason": "repair:defer",
+        "modelRequested": false,
+        "outcome": "local",
+        "provider": null,
+        "repair": "repair:defer"
+      },
+      "chatHealth": {
+        "attempts": 6,
+        "accepted": 5,
+        "rejected": 0,
+        "failed": 1,
+        "lastOutcome": "rate-limit",
+        "rateLimited": true,
+        "retryAt": 1792223782719
+      },
+      "dialogueUse": {
+        "ai": 3,
+        "bank": 5
+      },
+      "inputEnabled": true,
+      "sendEnabled": true
+    }
+  ]
+}

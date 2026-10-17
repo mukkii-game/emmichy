@@ -1,3 +1,9 @@
+# 2026-10-17: catalog capabilities and truthful route diagnostics
+
+新ゴールの基盤。40事実は内容不変、14質問型15例で回答根拠を検査。作者／祝いの贈り物／古本屋飾りが別の事実へ逸れる問題を修正し、TVと映画のOP区別を維持。新8送信の実app機械試遊、旧ファン/日常各8送信は表示文不変。合成provider8送信で通信6/受理5/模擬4291/生成文保持3/サーバーDB文2/固定ルール2を区別。比率は仕様ではない。実生成0。予定の返答と完全に表示した拍を別記録。あとで続けたい→今の説明継続も修正。261front/72relay合格、新主観AIレビュー0。docs/knowledge-dialogue-audit-20261017.md、catalog-offline/migration/mock-input/mock-mix、knowledge-catalog-auditの各JSON。任意質問の精度・全知識・人間の楽しさは未確認。
+
+---
+
 # 2026-10-17: accepting Chiikawa questions and explaining a connection
 
 合格基準を「知識・ワード・質問／訂正／感想を受ける」「直前の話と接点を保つ」として、同じ各8送信の機械試遊を前後比較。好み質問→料理逸脱、共感→受験再紹介、友達話→写真反復を再現し改善。気遣いがいい内のイガイ、チイカワ内のイカ、作ったよ末尾のよを拾う誤りも修正。写真の否定／友達話の希望／連想の理由へ応じ、友達の実話を原作に変えない。255front/71relay合格。Luna medium1人の保存ログ限定レビューで主要3破綻改善。実LLM0、429後の再試行なし。docs/conversation-connections-20261017.mdとconnection-fan/bridge-before/afterの各JSON。全知識網羅・実生成の自然さ・人間評価は未確認。

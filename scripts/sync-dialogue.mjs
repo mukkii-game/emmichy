@@ -11,11 +11,11 @@ for(const name of modules){
  fs.writeFileSync(path.join(target,'games',`emmichy-${name}.js`),content);
 }
 let specialist=fs.readFileSync(path.join(root,'src','specialist.js'),'utf8');
-specialist=specialist.replace(/'\.\/(chiikawa-relations|chiikawa-scenes|chiikawa-news|fandom|names|dialogue-history|conversation-repair|fan-conversation)\.js(?:\?v=[^']+)?'/g,(_,module)=>`'./emmichy-${module}.js'`);
+specialist=specialist.replace(/'\.\/(knowledge-catalog|chiikawa-relations|chiikawa-scenes|chiikawa-news|fandom|names|dialogue-history|conversation-repair|fan-conversation)\.js(?:\?v=[^']+)?'/g,(_,module)=>`'./emmichy-${module}.js'`);
 fs.writeFileSync(path.join(target,'games','emmichy-specialist.js'),specialist);
-for(const name of ['chiikawa-scenes','chiikawa-news','specialist-reply','dialogue-sentences','fan-conversation']){
+for(const name of ['knowledge-catalog','chiikawa-scenes','chiikawa-news','specialist-reply','dialogue-sentences','fan-conversation']){
  let content=fs.readFileSync(path.join(root,'src',`${name}.js`),'utf8');
- content=content.replace(/'\.\/(specialist|dialogue-sentences|chiikawa-attribution|humor|names|dialogue-history)\.js(?:\?v=[^']+)?'/g,(_,module)=>`'./emmichy-${module}.js'`);
+ content=content.replace(/'\.\/(specialist|chiikawa-relations|chiikawa-scenes|chiikawa-news|dialogue-sentences|chiikawa-attribution|humor|names|dialogue-history)\.js(?:\?v=[^']+)?'/g,(_,module)=>`'./emmichy-${module}.js'`);
  fs.writeFileSync(path.join(target,'games',`emmichy-${name}.js`),content);
 }
 console.log('Synced Emmichy dialogue data and selection logic. Server prompts stay in games/emmichy.js.');

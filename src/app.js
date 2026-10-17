@@ -1,38 +1,39 @@
 import {bindMobileViewport,bindChatViewport} from './mobile-viewport.js?v=20261014-face1';
 import {bindBrowserLauncher} from './browser-launcher.js?v=20261014-face1';
 import {selfReaction,complimentReaction} from './profile.js?v=20261017-link1';
-import {freshState,restoreState,respond,normalize} from './engine.js?v=20261017-link1';
+import {freshState,restoreState,respond,normalize} from './engine.js?v=20261017-catalog1';
 import {chiikawaReply,checkedAt} from './topics.js?v=20261014-view1';
-import {text,kana} from './font.js?v=20261017-link1';
+import {text,kana} from './font.js?v=20261017-catalog1';
 import {shouldEnd,finishSession,checkpointSession,resumeSession,startConversation,remainingTime} from './session.js?v=20261014-view1';
 import {noteChiikawa,chiikawaReminder} from './chiikawa-reminder.js?v=20261017-link1';
 import {createAudioDirector,bindAudioLifecycle} from './audio.js?v=20261014-view1';
 import {CHAT_API_URL} from './config.js?v=20261014-view1';
 import {advancePerformance} from './performance.js?v=20261014-view1';
-import {requestChat,chatAvailable,unwantedFanRedirect} from './chat.js?v=20261017-link1';
+import {requestChat,chatAvailable,unwantedFanRedirect} from './chat.js?v=20261017-catalog1';
+import {modelRequestPolicy,auditDialogueTrace} from './dialogue-audit.js?v=20261017-catalog1';
 import {readableText,loadReadings} from './readable.js?v=20261017-link1';
 import {selectKnowledge,rememberKnowledge} from './fandom.js?v=20261017-link1';
 import {selectGap} from './gap.js?v=20261014-view1';
-import {chooseRepertoire,rememberReply} from './repertoire.js?v=20261017-link1';
+import {chooseRepertoire,rememberReply} from './repertoire.js?v=20261017-catalog1';
 import {cultureReply} from './culture.js?v=20261014-view1';
-import {chooseFiller,startFiller,longFiller,retainAside,idleAside,createIdleSequence} from './filler.js?v=20261017-link1';
+import {chooseFiller,startFiller,longFiller,retainAside,idleAside,createIdleSequence} from './filler.js?v=20261017-catalog1';
 import {learnInterests,shouldRequestModel,noteDialogueMix} from './balance.js?v=20261017-link1';
 import {selectOpening,planOpening,openingTiming} from './openings.js?v=20261014-view1';
-import {preparedReply} from './routing.js?v=20261017-link1';
+import {preparedReply} from './routing.js?v=20261017-catalog1';
 import {cleanConversation,noteConversationReply} from './conversation.js?v=20261014-view1';
-import {offlineFallback} from './fallback.js?v=20261017-link1';
+import {offlineFallback} from './fallback.js?v=20261017-catalog1';
 import {portraitColors} from './portrait-palette.js?v=20261014-view1';
 import {planContinuation,createContinuation} from './continuation.js?v=20261017-quota1';
 import {recognizeName,namedGesture,NAME_REACTION_MS} from './names.js?v=20261017-link1';
 import {substantiveHistory,appendDialogue} from './dialogue-history.js?v=20261014-view1';
-import {directReply} from './dialogue-director.js?v=20261017-link1';
-import {cleanPlayerMemory,nameQuestion,notePlayerQuestion,choosePlayerQuestion,answerPlayerQuestion,playerRecall,playerCreationReply,notePlayerReply} from './player-memory.js?v=20261017-link1';
-import {conversationRepair,updateDialogueControl,waitForPlayer} from './conversation-repair.js?v=20261017-link1';
+import {directReply} from './dialogue-director.js?v=20261017-catalog1';
+import {cleanPlayerMemory,nameQuestion,notePlayerQuestion,choosePlayerQuestion,answerPlayerQuestion,playerRecall,playerCreationReply,notePlayerReply} from './player-memory.js?v=20261017-catalog1';
+import {conversationRepair,updateDialogueControl,waitForPlayer} from './conversation-repair.js?v=20261017-catalog1';
 import {personalFanReply} from './chiikawa-theme.js?v=20261017-link1';
-import {specialistPacket,noteSpecialistDelivery} from './specialist.js?v=20261017-link1';
+import {specialistPacket,noteSpecialistDelivery} from './specialist.js?v=20261017-catalog1';
 const continuation=createContinuation();
-let continuationVersion=0,continuing=false,hadContinuation=false,awaitingOpening=[];
-function stopContinuation(clear=false){continuationVersion++;if(clear){continuation.clear();hadContinuation=false;awaitingOpening=[];}if(continuing){live='';draw();}}
+let continuationVersion=0,continuing=false,hadContinuation=false,awaitingOpening=[],continuationOwner=null;
+function stopContinuation(clear=false){continuationVersion++;if(clear){continuation.clear();hadContinuation=false;awaitingOpening=[];continuationOwner=null;}if(continuing){live='';draw();}}
 let recentFillers=[];
 const idleSequence=createIdleSequence();
 let tokenizer=null;
@@ -191,7 +192,7 @@ $('talk').addEventListener('submit',async e=>{
    result.text=fandomReply;result.state.history.at(-1).text=result.text;
   }
  }
- let usedModel=false,locallyReplaced=false,fillerGap=0,replySource='authored';
+ let usedModel=false,locallyReplaced=false,fillerGap=0,replySource='authored',serverSource=null,finalReason='',responseProvider=null;
  const gap=!isRestart&&!state.ended&&selectGap(raw,state);
  let prepared=isRestart||state.ended?null:preparedReply(raw,state,session,{gap,culture,repertoire,modelEnabled,kind:result.kind});
  if(repair&&!isRestart&&result.kind!=='bye'){
@@ -213,7 +214,8 @@ $('talk').addEventListener('submit',async e=>{
  if(self||prepared?.topic==='deflection')heard=null;
  if(self?.affection){result.mood='excited';mood='excited';}
  // Generation overlaps the human pause before the first named reaction.
- const modelTask=modelEnabled&&!ruleOnly&&chatAvailable(session)?requestChat(chatEndpoint,raw,before,session,{offline}):null;
+ const modelPolicy=modelRequestPolicy({offline,enabled:modelEnabled,allowed:!ruleOnly,available:chatAvailable(session)});
+ const modelTask=modelPolicy==='request'?requestChat(chatEndpoint,raw,before,session,{offline}):null;
  if(prepared?.gesture){await wait(NAME_REACTION_MS);recordAside(prepared.gesture,result.state);draw();}
  if(self){await wait(NAME_REACTION_MS);recordAside(self.gesture,result.state);draw();}
  if(heard?.decline)heard=null;
@@ -232,13 +234,14 @@ $('talk').addEventListener('submit',async e=>{
   let data;
   try{data=await modelTask;}
   finally{fillerGap=stopFiller();live='';draw();}
-  if(data){result.text=data.text;result.state.history.at(-1).text=data.text;replySource=data.source;usedModel=data.source!=='authored';modelProvider=data.provider;}
+  if(data){result.text=data.text;result.state.history.at(-1).text=data.text;replySource=data.source;serverSource=data.source;responseProvider=data.provider;usedModel=data.source!=='authored';modelProvider=data.provider;}
  }
  if(!isRestart&&!['bye','asleep','name','memory','arithmetic'].includes(result.kind)&&!(!usedModel&&prepared?.topic==='player-creation')){
   const fallback=!usedModel&&!prepared&&!fandomReply?offlineFallback(raw,before,result.kind):null;
   if(fallback){result.text=fallback.text;locallyReplaced=true;}
   const polished=directReply(result.text,raw,before,{source:replySource,choice:greetingPlan||['profile','compliment','japan-place','chiikawa-name'].includes(prepared?.topic)?null:repertoire,allowBridge:!greetingPlan&&!['profile','compliment','deflection','fandom-decline'].includes(prepared?.topic)});
   result.text=polished.text;replySource=polished.source;
+  finalReason=polished.reason||'';
   if(polished.recovered){locallyReplaced=true;result.mood='excited';}
   result.state.history.at(-1).text=result.text;
   const replyId=polished.id||prepared?.id||(prepared?.topic==='repertoire'||(!usedModel&&repertoire.candidate&&result.text===repertoire.candidate.text)?repertoire.candidate?.id:null);
@@ -264,7 +267,8 @@ $('talk').addEventListener('submit',async e=>{
   add('enny',result.text);live='';
  }
  if(pendingReply)state.history.push(pendingReply);appendDialogue(state,'enny',result.text);
- session.replyTrace=[...(Array.isArray(session.replyTrace)?session.replyTrace:[]),{turn:session.turns,input:raw,reply:[result.text,...paced.later].join(' '),topic:prepared?.topic||result.kind,source:replySource,modelRequested:Boolean(modelTask),outcome:modelTask?session.chatHealth?.lastOutcome:'local',provider:modelTask?modelProvider:null,repair:repair?.id||null}].slice(-24);
+ session.replyTrace=[...(Array.isArray(session.replyTrace)?session.replyTrace:[]),{turn:session.turns,input:raw,reply:[result.text,...paced.later].join(' '),plannedBeats:[result.text,...paced.later],deliveredBeats:[result.text],topic:prepared?.topic||result.kind,source:replySource,policy:modelPolicy,serverSource,reason:finalReason,modelRequested:Boolean(modelTask),outcome:modelTask?session.chatHealth?.lastOutcome:'local',provider:responseProvider,repair:repair?.id||null}].slice(-24);
+ continuationOwner=session.turns;
  session.replyOrigins={...session.replyOrigins,[replySource]:(session.replyOrigins?.[replySource]||0)+1};
  session.dialogueUse={ai:(session.dialogueUse?.ai||0)+(usedModel?1:0),bank:(session.dialogueUse?.bank||0)+(!usedModel&&(prepared||locallyReplaced)?1:0)};
  noteDialogueMix(session,{usedModel,usedBank:Boolean(!usedModel&&(prepared||locallyReplaced)),topic:prepared?.topic,kind:result.kind,restart:isRestart});
@@ -301,7 +305,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&settingsOpen){setSe
 document.addEventListener('click',e=>{if(settingsOpen&&!e.target?.closest?.('#settings-panel,#settings-toggle'))setSettings(false);});
 $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.querySelector('.screen-wrap').requestFullscreen();}catch{$('status').textContent='このブラウザでは全画面にできません。';}};
 $('export').onclick=()=>{const body=state.history.map(h=>`${h.role==='user'?'YOU':'EMMICHY'}: ${h.text}`).join('\r\n\r\n');const url=URL.createObjectURL(new Blob(['\ufeff'+body],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='enny-conversation.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
-$('export-debug').onclick=()=>{const body=JSON.stringify({version:'20261017-link1',mode:modelEnabled?'online':'offline',state,session},null,2);const url=URL.createObjectURL(new Blob([body],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='emmichy-playtest.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+$('export-debug').onclick=()=>{const body=JSON.stringify({version:'20261017-catalog1',mode:modelEnabled?'online':'offline',state,session,audit:auditDialogueTrace(session?.replyTrace)},null,2);const url=URL.createObjectURL(new Blob([body],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='emmichy-playtest.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
 let resetArmed=false,resetTimer;
 $('reset').onclick=()=>{if(!resetArmed){resetArmed=true;$('reset-note').textContent=' もう一度押すと記憶が消えます。';resetTimer=setTimeout(()=>{resetArmed=false;$('reset-note').textContent='';},5000);return;}
  stopContinuation(true);clearTimeout(resetTimer);resetArmed=false;$('reset-note').textContent=' 初期化しました。';state=freshState();session=readingsSettled?{startedAt:Date.now(),turns:0,finished:false}:null;saveSession();lines=[];live='';mood='idle';addOpening();$('transcript').replaceChildren();save();draw();};
@@ -355,7 +359,12 @@ setInterval(draw,160);setInterval(async()=>{
     if(version!==continuationVersion||busy||document.hidden||!ready||composing||$('entry').value.trim()){continuing=false;draw();return;}
     live+=c;draw();await wait(22);
    }
-   if(version===continuationVersion&&!busy&&!document.hidden&&ready&&!composing){recordAside(line);continuation.spoken(Date.now());noteActivity();}
+   if(version===continuationVersion&&!busy&&!document.hidden&&ready&&!composing){
+    recordAside(line);continuation.spoken(Date.now());
+    const trace=session?.replyTrace?.at(-1);
+    if(continuationOwner===session?.turns&&trace?.turn===continuationOwner&&trace.plannedBeats?.[trace.deliveredBeats.length]===line){trace.deliveredBeats.push(line);saveSession();}
+    noteActivity();
+   }
    live='';continuing=false;draw();return;
   }
  const holding=Boolean(session.pendingQuestion)||waitForPlayer(state);
@@ -367,7 +376,7 @@ setInterval(draw,160);setInterval(async()=>{
   if(reminder){
    const plan=planContinuation(reminder,'',state,{display:s=>readable(s),tokenizer});
    session.chiikawaReminders=(session.chiikawaReminders||0)+1;
-   recordAside(plan.first);continuation.start(plan.later,Date.now(),plan.timing);hadContinuation=plan.later.length>0;noteActivity();draw();return;
+   continuationOwner=null;recordAside(plan.first);continuation.start(plan.later,Date.now(),plan.timing);hadContinuation=plan.later.length>0;noteActivity();draw();return;
   }
   const stage=idleSequence.poll(Date.now(),{allowFinish:Boolean(session)&&Date.now()-session.startedAt>=5*60*1000&&!(session.feedbackUntil>Date.now())});
   if(stage===3)await endSession('idle');

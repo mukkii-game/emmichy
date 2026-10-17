@@ -4,6 +4,7 @@ import fs from 'node:fs';
 const inputs=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));
 const captured=process.argv[4]?JSON.parse(fs.readFileSync(process.argv[4],'utf8')):null;
 const replayGame=captured?(await import('../../game-llm/games/emmichy.js')).default:null;
+const synthetic=captured?.mode==='mock-provider';
 if(!Array.isArray(inputs)||inputs.length>8||inputs.some(s=>typeof s!=='string'||s.length>180))throw Error('Use at most eight short synthetic inputs.');
 class Element{
  constructor(){this.children=[];this.listeners={};this.value='';this.textContent='';this.disabled=false;this.hidden=false;this.scrollHeight=0;}
@@ -46,8 +47,9 @@ for(const input of inputs){
  for(let i=0;i<3;i++){time+=4000;await tick();}
  const state=JSON.parse(storage.get('enny-memory-v1')),at=state.history.findLastIndex(h=>h.role==='user');
  const session=JSON.parse(storage.get('emmichy-session')||'{}');
- rows.push({input,replies:state.history.slice(at+1).filter(h=>h.role==='enny').map(h=>h.text),specialist:state.specialist,pendingQuestion:session.pendingQuestion||null,...(captured?{chatHealth:session.chatHealth,dialogueUse:session.dialogueUse,inputEnabled:!entry.disabled,sendEnabled:!elements.get('send').disabled}:{})});
+ rows.push({input,replies:state.history.slice(at+1).filter(h=>h.role==='enny').map(h=>h.text),specialist:state.specialist,pendingQuestion:session.pendingQuestion||null,trace:session.replyTrace?.at(-1)||null,chatHealth:session.chatHealth,dialogueUse:session.dialogueUse,inputEnabled:!entry.disabled,sendEnabled:!elements.get('send').disabled});
 }
-const result={mode:captured?'actual app handlers with captured raw provider responses revalidated against actual request state; virtual timing; no browser/human/new-generation evaluation':'actual app handlers in offline DOM fixture; virtual timing; no browser/human/live-model evaluation',providerCalls,...(captured?{capturedCommit:captured.commit,fixtureResponses}:{}),rows};
+const {auditDialogueTrace}=await import('../src/dialogue-audit.js');
+const result={mode:synthetic?'actual app handlers with mock provider replies revalidated by relay; zero live generation; virtual timing; no browser/human evaluation':captured?'actual app handlers with captured raw provider responses revalidated against actual request state; virtual timing; no browser/human/new-generation evaluation':'actual app handlers in offline DOM fixture; virtual timing; no browser/human/live-model evaluation',providerCalls,audit:auditDialogueTrace(rows.map(r=>r.trace).filter(Boolean)),...(captured?{capturedCommit:captured.commit,fixtureResponses}:{}),rows};
 fs.writeFileSync(process.argv[3],JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify({providerCalls,rows:rows.map(r=>({input:r.input,replies:r.replies}))}));

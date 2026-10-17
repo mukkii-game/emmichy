@@ -3,7 +3,7 @@ import {requestsChiikawa} from './topic-intent.js?v=20261017-link1';
 // is not a food preference, a name, or an invitation to another monologue.
 export const foldRepair=s=>String(s||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');
 const ids=new Set(['jp:long-vowel','jp:accent','jp:small-tsu','profile:family','profile:home','profile:notebook']);
-const intents=new Set(['length','repeat','coherence','redirect','forgive','commit','confirm','meaning','recall','reassure']);
+const intents=new Set(['length','repeat','coherence','redirect','forgive','commit','confirm','meaning','recall','reassure','defer']);
 const words=[
  {word:'運行',match:/運行|ウンコウ/,meaning:'電車やバスが、決まった道を走ること。',example:'「電車の運行状況」なら、今ちゃんと走ってるか、ってことだよ。',id:'jp:long-vowel'},
  {word:'許す',match:/許ス|ユルス/,meaning:'相手を責めるのをやめて、受け入れること。',example:'「許すよ」は、もう怒ってないよ、って気持ちなんだね。'},
@@ -19,6 +19,7 @@ export function cleanDialogueControl(value){
 }
 export function feedbackIntent(input){
  const t=foldRepair(input);
+ if(/(?:話|ハナシ).{0,10}(?:アトデ|後デ|マタ今度|マタコンド)/.test(t))return 'defer';
  if(/同ジ(?:コト|事|言葉|コトバ)バカリ.*(?:言|イッ)/.test(t))return 'repeat';
  if(/(?:話|ハナシ|会話|カイワ|返事|ヘンジ|文|ブン|一言|ヒトコト).{0,25}(?:長スギ|ナガスギ|長イノ.{0,6}苦手|ナガイノ.{0,6}苦手)|短ク|ミジカク|短メ|ミジカメ/.test(t))return 'length';
  if(/(?:同ジ|オナジ)(?:コト|事|ノ|言葉|コトバ|文|ブン).{0,25}(?:繰リ返|クリカエ|何度|ナンド|[0-9一二三四五六七八九十]+(?:度|ド|回|カイ))|(?:繰リ返|クリカエ).{0,20}(?:[0-9一二三四五六七八九十]+(?:度|ド|回|カイ))|[0-9一二三四五六七八九十]+(?:度|ド|回|カイ).{0,16}(?:繰リ返|クリカエ)|ワンパターン|同ジ話|オナジ話|同ジネタ|オナジネタ|何度モ|ナンドモ|何回モ|ナンカイモ|[0-9０-９一二三四五六七八九十]+回目|サッキモ聞|サッキモキ|モウ聞イタ|モウキイタ/.test(t))return 'repeat';
@@ -48,6 +49,7 @@ export function conversationRepair(input,state={}){
  const asksMeaning=entry&&(/意味|イミ|知ラナイ|シラナイ|知ッテル|シッテル|ッテ何|ッテナニ|トハ何|トハナニ/.test(clause)||clause.replace(/[?？]/g,'')===foldRepair(entry.word)||!clause.replace(entry.match,'').replace(/[?？]/g,''));
  const contradiction=/アナタ|エミチ|自分|ジブン|サッキ|言ッタ|イッタ/.test(t)&&/知ラナイ|シラナイ|忘|ワスレ/.test(t);
  const reply=(id,text,word='')=>({topic:'conversation-repair',id:`repair:${id}`,text,word,intent:id});
+ if(intent==='defer')return reply(intent,'うん、その話はあとにしよう。今は急がなくて大丈夫。');
  if(asksMeaning&&intent!=='repeat')return reply('meaning',`「${entry.word}」は、${entry.meaning}${contradiction?' アタシが出した言葉なのに、知らないって返したのは変だったね。':entry.example?' '+entry.example:''}`,entry.word);
  if(/キセイ|寄生|奇声/.test(t)&&/[?？]|何|ナニ|意味|イミ/.test(t)&&/キセイ|寄生|奇声/.test(prior))return reply('recall','「キセイ」だけじゃ、何のことかわからないね。急に単語だけ言って、話を飛ばしちゃった。');
  if(/ラッコ/.test(t)&&/[?？]|何|ナニ|どうして|ドウシテ/.test(t)&&/ラッコ/.test(prior)&&/テレビ|雨|番組/.test(prior))return reply('recall','テレビの話なのに、甘い物からラッコを連想して飛んじゃった。今はあなたのテレビの話を続けたい。');

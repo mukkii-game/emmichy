@@ -1,10 +1,10 @@
-import {exactNames} from './names.js?v=20261014-view1';
+import {exactNames} from './names.js?v=20261017-link1';
 import {substantiveHistory} from './dialogue-history.js?v=20261014-view1';
 const fold=s=>String(s||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');
 // Conversational moves over an already established subject. These are authored
 // personal views, never additional canon or a general semantic classifier.
 const topics={
- exam:{focus:['exam:attempt','exam:result','exam:celebrate'],cues:/受カ|ウカ|合格|不合格|落チ|オチ|結果|喜|嬉|ウレシ|悔|クヤシ|友達|気持チ|キモチ|言イ|イイ|祝|オメデトウ/,
+ exam:{focus:['exam:attempt','exam:result','exam:celebrate'],cues:/受カ|ウカ|合格|不合格|落チ|オチ|結果|喜|嬉|ウレシ|悔|クヤシ|友達|気持チ|キモチ|気遣|キヅカ|優シ|ヤサシ|言イ|イイ|祝|オメデトウ/,
   angles:[
    {text:'アタシなら、まず「おめでとう」だけ言うかな。自分の結果の話は、そのあとでもいいし。',seen:/マズ「?オメデトウ|先ニ.{0,8}オ祝/},
    {text:'すぐ明るい顔になれなくても、一緒にいてほしいな。アタシなら、少し待ってくれるだけで助かる。',seen:/待ッテクレル|一緒ニイテホシイ/},
@@ -31,7 +31,7 @@ export function fanConversation(input,state={}){
  const memory=state.specialist||{},topic=Object.keys(topics).find(k=>topics[k].focus.includes(memory.focus));
  if(!topic||state.dialogueControl?.avoidFandom)return null;
  const t=fold(input);
- if(/別ノ話|他ノ話|ホカノ話|以外|イガイ|ヤメ|繰リ返|クリカエ|相談|病気|事故|亡ク|死ニ|ツライ|苦シ/.test(t))return null;
+ if(/別ノ話|他ノ話|ホカノ話|以外|イガイ(?!イ)|ヤメ|繰リ返|クリカエ|相談|病気|事故|亡ク|死ニ|ツライ|苦シ/.test(t))return null;
  const names=exactNames(input,{...state,knowledge:{...state.knowledge,work:'chiikawa'}});
  if(names.some(n=>n.work!=='chiikawa'||n.name!=='ちいかわ'&&!memory.subject?.includes(n.name)&&!(memory.scene==='examination'&&n.name==='ハチワレ')))return null;
  // An explicit fact question must retain its answer, not become a feeling.

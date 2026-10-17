@@ -1,7 +1,7 @@
 import {nameData} from './name-data.js?v=20261014-view1';
 import {placeNames} from './places.js?v=20261014-view1';
 import {gameNames} from './game-names.js?v=20261014-view1';
-import {requestsChiikawa} from './topic-intent.js?v=20261014-view1';
+import {requestsChiikawa} from './topic-intent.js?v=20261017-link1';
 export const foldName=s=>String(s||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).toLowerCase().replace(/[\s・×＝=\-:：'’"「」]/g,'');
 export const NAME_REACTION_MS=750;
 const trie=new Map(),exact=[];
@@ -18,8 +18,8 @@ function scan(value){const input=foldName(value),found=[];for(let i=0;i<input.le
  if(m.row.work==='japan'&&m.key.length<4&&!String(value).includes(m.row.name)&&input!==m.key&&!/旅行|観光|温泉|空港|地名|県|市/.test(value))continue;
  if(m.row.category==='context-item'&&m.key.length<=3&&input!==m.key&&!String(value).normalize('NFKC').includes(m.alias))continue;
  if(/^[ァ-ヶー]{2,3}$/.test(m.alias)&&/\.html$/.test(m.row.source)&&!String(value).normalize('NFKC').includes(m.alias)&&foldName(value)!==m.key)continue;
- found.push({...m,length:j-i+1});
- }}}return found;}
+ found.push({...m,length:j-i+1,start:i,end:j+1});
+ }}}return found.filter(m=>!found.some(longer=>longer.row.work===m.row.work&&longer.length>m.length&&longer.start<=m.start&&longer.end>=m.end));}
 function workIn(state){if(state.knowledge?.work)return state.knowledge.work;for(const h of (Array.isArray(state.history)?state.history:[]).slice(-8).toReversed()){const matches=scan(h?.text).filter(m=>m.row.work!=='games');if(matches.length)return matches.sort((a,b)=>b.length-a.length)[0].row.work;}return '';}
 export function oneEdit(a,b){if(a===b)return false;if(Math.abs(a.length-b.length)>1)return false;let i=0,j=0,edits=0;while(i<a.length&&j<b.length){if(a[i]===b[j]){i++;j++;continue;}if(++edits>1)return false;if(a.length>b.length)i++;else if(b.length>a.length)j++;else if(a[i]===b[j+1]&&a[i+1]===b[j]){i+=2;j+=2;}else{i++;j++;}}return edits+(i<a.length||j<b.length?1:0)===1;}
 function inContext(row,input,work){
@@ -37,7 +37,7 @@ export function focusName(input,state={}){
 }
 export function recognizeName(input,{reading='',state={}}={}){
  const work=workIn(state),values=[input,reading].filter(Boolean);
- const decline=!requestsChiikawa(input)&&/(?:漫画|マンガ).*(?:ヤメ|以外|イガイ|苦手)|別ノ話|ベツノハナシ|ソノ話.*ヤメ|チイカワ.*(?:ヤメ|以外|イガイ|嫌イ|キライ|苦手)/.test(foldName(input));
+ const decline=!requestsChiikawa(input)&&/(?:漫画|マンガ).*(?:ヤメ|以外|イガイ(?!イ)|苦手)|別ノ話|ベツノハナシ|ソノ話.*ヤメ|チイカワ.*(?:ヤメ|以外|イガイ(?!イ)|嫌イ|キライ|苦手)/.test(foldName(input));
  const matches=distinct(values.flatMap(scan)).filter(m=>inContext(m.row,input,work));
  const common=values.flatMap(scan).filter(m=>m.row.work==='chiikawa'&&m.row.contextOnly&&work!=='chiikawa');
  matches.sort((a,b)=>b.length-a.length||(b.row.work===work?1:0)-(a.row.work===work?1:0));

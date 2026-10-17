@@ -1,10 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {recognizeName,namedGesture,namedFollowup,oneEdit} from '../src/names.js';
+import {recognizeName,namedGesture,namedFollowup,oneEdit,exactNames} from '../src/names.js';
 import {chooseFiller} from '../src/filler.js';
 import {nameData} from '../src/name-data.js';
 import {gameNames} from '../src/game-names.js';
 const hunter={knowledge:{work:'hunter'}},chii={knowledge:{work:'chiikawa'}};
+
+test('a contained short name is not another subject, but a separate mention survives',()=>{
+ assert.deepEqual(exactNames('チイカワ ノ キヅカイ ガ イイヨネ',chii).map(n=>n.name),['ちいかわ']);
+ assert.deepEqual(exactNames('チイカワ と イカ',chii).map(n=>n.name).sort(),['ちいかわ','イカ'].sort());
+ assert.equal(recognizeName('草むしり検定', {state:chii}).name,'草むしり検定');
+});
 test('proper nouns take priority over generic listening and retain the original input',()=>{
  for(const input of ['ヒソカ','ﾋｿｶ','ひそか']){const match=recognizeName(input,{state:hunter});assert.equal(match.name,'ヒソカ');assert.equal(chooseFiller(input,[],{match}),'ヒソカ！');}
  const raw='なんか今ハチワレみたいな言い方しちゃった';const match=recognizeName(raw,{state:hunter});assert.equal(namedGesture(match),'ハチワレ！');assert.match(namedFollowup(match,raw),/ハチワレみたい/);

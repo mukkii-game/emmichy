@@ -1,0 +1,142 @@
+{
+  "mode": "actual app handlers in offline DOM fixture; virtual timing; no browser/human/live-model evaluation",
+  "providerCalls": 0,
+  "rows": [
+    {
+      "input": "ちいかわが好きなんだけど、えみちぃは誰が好き？",
+      "replies": [
+        "チイカワ！",
+        "アタシ、ハチワレの気遣いに弱いの。",
+        "写真で小さい思い出を残すところも、大好き!",
+        "一番って聞かれると、みんな浮かんで迷っちゃう。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "",
+        "focus": "relation:hachi-friend",
+        "said": []
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "ハチワレのどういうところが好き？",
+      "replies": [
+        "ハチワレは、友達のことを気にかけるところが好き。",
+        "嬉しい時も相手を見てる感じ、アタシ弱いの。",
+        "自分だけじゃない、って大事だよね。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "",
+        "focus": "relation:chiikawa-10",
+        "said": []
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "ひとりごつってオープニング曲だっけ？",
+      "replies": [
+        "ヒトリゴツ！",
+        "TVアニメのEDは「ひとりごつ」。",
+        "ハチワレが歌うの。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "ending",
+        "focus": "reviewed:hachi:ending",
+        "said": [
+          "reviewed:hachi:ending"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "そう、エンディングだったね。どこが好き？",
+      "replies": [
+        "ひとりごつ、好き!",
+        "ハチワレの声を聞くと、もう少し一緒にいたくなるの。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "ending",
+        "focus": "reviewed:hachi:ending",
+        "said": [
+          "reviewed:hachi:ending"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "草むしり検定の5級の結果は二人で違ったよね",
+      "replies": [
+        "クサムシリケンテイ！",
+        "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。",
+        "アタシなら、友達のお祝いもしたいけど、自分の悔しさも消えないと思う。",
+        "どっちの気持ちも大事にしたい。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": [
+          "reviewed:hachi:ending",
+          "exam:result"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "ハチワレの気持ちはどうだったと思う？",
+      "replies": [
+        "アタシなら、自分だけ受かった時、友達になんて声をかけるか迷っちゃう。",
+        "嬉しさと気遣い、両方ありそう。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": [
+          "reviewed:hachi:ending",
+          "exam:result"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "私は自分だけ受かったら言いづらいな",
+      "replies": [
+        "言いづらくなるんだね。",
+        "アタシなら、まず「おめでとう」だけ言うかな。",
+        "自分の結果の話は、そのあとでもいいし。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": [
+          "reviewed:hachi:ending",
+          "exam:result"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "その気遣いがいいよね",
+      "replies": [
+        "うん、あなたの見方も聞けて嬉しい。",
+        "すぐ明るい顔になれなくても、一緒にいてほしいな。",
+        "アタシなら、少し待ってくれるだけで助かる。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "examination",
+        "focus": "exam:result",
+        "said": [
+          "reviewed:hachi:ending",
+          "exam:result"
+        ]
+      },
+      "pendingQuestion": null
+    }
+  ]
+}

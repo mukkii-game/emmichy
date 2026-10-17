@@ -1,0 +1,146 @@
+{
+  "mode": "actual app handlers in offline DOM fixture; virtual timing; no browser/human/live-model evaluation",
+  "providerCalls": 0,
+  "rows": [
+    {
+      "input": "今日は友達にあげるクッキーを作ったよ",
+      "replies": [
+        "「よ」！",
+        "あなたが考えたものなんだね。",
+        "覚えておくよ。"
+      ],
+      "specialist": {
+        "subject": "",
+        "scene": "",
+        "focus": "",
+        "said": []
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "少し焦げたけど、友達が一緒に食べてくれた",
+      "replies": [
+        "今の話、少し取り違えそう。",
+        "どのところの話か、もう少し教えて。",
+        "友達の話になると、ちいかわとハチワレを思い出しちゃう。"
+      ],
+      "specialist": {
+        "subject": "",
+        "scene": "",
+        "focus": "",
+        "said": []
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "そういうところ、ハチワレっぽいと思った",
+      "replies": [
+        "ハチワレ！",
+        "ハチワレは料理と食事が好き。",
+        "ハチワレが料理してくれたら、おかわりする速さにだけは自信あるよ。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "",
+        "focus": "relation:chiikawa-10",
+        "said": [
+          "relation:chiikawa-10"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "ハチワレって、どんなところが優しいの？",
+      "replies": [
+        "ハチワレは、友達のことを気にかけるところが好き。",
+        "嬉しい時も相手を見てる感じ、アタシ弱いの。",
+        "自分だけじゃない、って大事だよね。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "",
+        "focus": "relation:hachi-friend",
+        "said": [
+          "relation:chiikawa-10"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "クッキーの写真も撮ったんだ",
+      "replies": [
+        "小さいごほうび、うれしいね。",
+        "アタシも、そういう日のこと覚えていたいな。",
+        "写真の話で、ハチワレ思い出しちゃった！",
+        "小さい思い出を残すの、いいよね。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "",
+        "focus": "relation:hachi-friend",
+        "said": [
+          "relation:chiikawa-10"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "写真を撮るのは好きじゃないけど記念にね",
+      "replies": [
+        "同じ言い方を続けちゃったね。",
+        "いまの話、あなたはどう思った?"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "",
+        "focus": "relation:hachi-friend",
+        "said": [
+          "relation:chiikawa-10"
+        ]
+      },
+      "pendingQuestion": {
+        "id": "conversation",
+        "type": "conversation",
+        "prompt": "いまの話、あなたはどう思った?",
+        "attempts": 0
+      }
+    },
+    {
+      "input": "今日は写真より、友達の話をしたいな",
+      "replies": [
+        "わあ、ちいかわ!",
+        "話したかった!",
+        "ハチワレ、写真で小さい思い出を残すの、いいよね!",
+        "アタシ、そういうところ大好き。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "",
+        "focus": "relation:hachi-friend",
+        "said": [
+          "relation:chiikawa-10"
+        ]
+      },
+      "pendingQuestion": null
+    },
+    {
+      "input": "ちいかわの話につなげるなら、今のどのところから思い出したの？",
+      "replies": [
+        "チイカワ！",
+        "ハチワレは写真撮影が好き。",
+        "ハチワレの写真好きなところ、いいよね。",
+        "小さい思い出も残したくなる。"
+      ],
+      "specialist": {
+        "subject": "ハチワレ",
+        "scene": "",
+        "focus": "relation:chiikawa-9",
+        "said": [
+          "relation:chiikawa-10",
+          "relation:chiikawa-9"
+        ]
+      },
+      "pendingQuestion": null
+    }
+  ]
+}

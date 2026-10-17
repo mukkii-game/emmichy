@@ -1,7 +1,7 @@
 // Curated short factual notes, not scraped articles or dialogue reproductions.
 // Canonical copy: emmichy/src/fandom.js; sync unchanged to game-llm/games/emmichy-fandom.js.
-import {recognizeName,exactNames,nameFromId} from './names.js?v=20261014-view1';
-import {accessoryCue,accessoryReply} from './profile.js?v=20261014-view1';
+import {recognizeName,exactNames,nameFromId} from './names.js?v=20261017-link1';
+import {accessoryCue,accessoryReply} from './profile.js?v=20261017-link1';
 import {fanLines} from './fan-lines.js?v=20261014-view1';
 export const checkedAt='2026-10-06';
 const wiki=title=>`https://en.wikipedia.org/wiki/${encodeURIComponent(title)}`;
@@ -217,7 +217,7 @@ export function rememberKnowledge(value,input){
  const focus=found.toSorted((a,b)=>score(b)-score(a))[0]?.id||memory.focus;
  return {...memory,focus,mentions:append(memory.mentions,names.map(n=>n.id),64),facets:append(memory.facets,found.map(c=>c.id),32)};
 }
-const sensitive=input=>/ツライ|苦シ|病気|事故|亡ク|死ニ|相談|嫌イ|キライ|苦手|ヤメ|イガイ|以外|バカリ/.test(fold(input));
+const sensitive=input=>/ツライ|苦シ|病気|事故|亡ク|死ニ|相談|嫌イ|キライ|苦手|ヤメ|イガイ(?!イ)|以外|バカリ/.test(fold(input));
 function fanInvitation(input,state){
  const t=fold(input),names=exactNames(input,state);
  if(/最新|結末|何|ナニ|誰|ダレ|イツ|ドコ|ナゼ|ドウシテ|違|チガ|訂正|比較|ジャナ|デハナ|シナイ|シテナイ|ソウジャ/.test(t))return false;

@@ -1,9 +1,15 @@
-# 現状(2026-10-14 更新・これが最優先)
+# 現状(2026-10-17 更新・これが最優先)
 
 - **ブランチは main 1本に集約した。** 旧公開ブランチ pilot-audio-readable-retro は main に合流済み。今後の作業・PR はすべて main 向け(旧ブランチ向けの PR は作らない)。
 - 公開先: Cloudflare Workers https://emmichy.mucky-totoro.workers.dev (main に push すると deploy-cloudflare.yml が出す)。GitHub Pages は旧ブランチ配信のまま、repo 非公開化で止まる予定。
 - 中継(game-llm)は *.mucky-totoro.workers.dev からの呼び出しを許可済み。
 - 以下の英文の記録は合流前のもの(「main は触らない」等の記述は無効)。
+
+## LLM経路の復旧と返答の加工修正（2026-10-17）
+
+ユーザーが完成への進行と無料枠確認を指示。read-only healthでGroq/Gemini/Workers3者の設定を確認。通常プレイまで最初の429で全停止し、ブラウザがそのプレイのLLMを無期限に止める不具合を修正。provider毎Retry-After/default60秒cooldown、予備へ進む、ブラウザも期限後の次入力で復帰。全7.2秒/各3.5秒を維持。cooldownはenv/isolate内best effortで厳密な課金上限ではない。QAは最大2呼出し/429即停止を明示して維持。有料追加/設定変更なし。
+
+CI39011343101で実2呼出し：Groq765ms成功、3,807入力+120出力=3,927tokens。次は44ms429で停止。日回数残999、分8,000token制限が有力。Gemini/Workersの実生成は未確認。捕捉応答の「ヤハ！って思う」の切断と不要な前置き、8送信ローカル試遊での主語省略の写真派の取り逃しも修正。249フロント/70中継合格、保存応答の実app再生と8送信前後証拠。実生成後の修正は追加生成0。docs/llm-capacity-20261017.mdと関連JSON。runtime20261017-quota1。完成に必要な順序を同docに明記。人間の面白さ/実OS入力・音量、アカウント別正確な枠は未確認。過去の「429後にそのプレイ全部停止」はこの修正で置換。公開確認は後追記。
 
 ## 顔の固定とSNSブラウザ案内（2026-10-14）
 

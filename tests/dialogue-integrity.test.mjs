@@ -7,6 +7,15 @@ import {groundModelReply} from '../src/dialogue-grounding.js';
 import {dialogueSentences} from '../src/dialogue-sentences.js';
 import {planContinuation} from '../src/continuation.js';
 
+test('unquoted exclamations stay attached to the following thought or speech',()=>{
+ for(const reaction of ['ヤハ！って思う。','おめでとう！ って言いたい。','エッ！？って思った。','ヤハ！ッテ オモウノ。']){
+  assert.deepEqual(dialogueSentences(reaction),[reaction]);
+  assert.equal(planContinuation(reaction).first,reaction);
+ }
+ assert.deepEqual(dialogueSentences('ヤハ！ 今日は嬉しい。'),['ヤハ！','今日は嬉しい。']);
+ assert.ok(attributionRepair('ハチワレがヤハ！って言う場面が好き。'),'a missing quote must not hide a false attribution');
+});
+
 test('a grade is not Hunter character Kyuu, while the actual name still works',()=>{
  for(const input of ['5キュウ オチタ トキ','五キュウに落ちた','５キュウ オチタ'])assert.equal(recognizeName(input,{state:{knowledge:{work:'chiikawa'}}}),null);
  assert.equal(recognizeName('キュウ',{state:{knowledge:{work:'hunter'}}}).name,'キュウ');

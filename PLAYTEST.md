@@ -1,3 +1,11 @@
+# 2026-10-17: provider recovery and captured dialogue iteration
+
+実LLM2calls、CI39011343101、中継候補9c15a39。Groq765ms/3927tokens成功→次44ms429で停止。日回数残999で、分token制限が有力。Gemini/Workers実成功は未評価。正常プレイを全停止する旧設定と永続ブラウザフラグを修正。3者fallback/期限付き休止/後続入力復帰はローカルで確認。
+
+捕捉実出力「ヤハ！ アタシの見方だけど、って思う。」→「ちょっとショックだけど、ハチワレの頑張りにヤハ！って思う。」。事実の重複は除去し、根拠IDの事実を維持。保存応答のactual-app再生、追加生成0。8送信ローカルの「食べずに写真で残したいな」→取り違え/写真一般への飛躍も再現し、直前クッキーでの好みとして受けるよう改善。モデルの良い返答はそのまま。249frontend/70relay合格。docs/llm-capacity-20261017.md、llm-live-capacity/captured-app、llm-recovery-offline-before/after各JSON。新しい主観AIレビュー・人間評価なし。人間の5分試遊・実OS入力/音は未評価。
+
+---
+
 # 2026-10-14: phone face anchor and embedded-browser guide
 
 人間の追加報告を受け、keyboard時に絵を上下移動する切り取りを廃止。通常時から顔中心で、入力前後の倍率と上端を保つ。4組のスマホ寸法で絵幅/上端不変、入力欄が画面内、22px会話/16px入力維持。小さい端末は入力前から260/280px幅、通常320px。会話欄は末尾を読んでいた時だけ高さ変更後も末尾へ追従。metoponの流れを参考に初回SNS案内、外部起動/開けない時の説明とコピー、このまま遊ぶ、設定から再表示を追加。案内中の時計停止/復帰を実ブラウザで確認。245件合格、生成0、中継変更なし。runtime20261014-face1を公開。PR55/main0c3d366（候補a874012）、Cloudflare38561288125成功。公開の変更5ファイルが候補のGit blobと完全一致（docs/public-mobile-face-20261014.json）。viewport overrideをresetし、検証タブと自分で起動した1984/1985のサーバーを終了済み。docs/mobile-face-anchor-20261014.mdとmobile-face-browser-20261014.json/画像。実OS/SNSの確認はまだ。初回SNSの判定はUA単体検証、外部起動の実機成功を保証しない。

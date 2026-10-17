@@ -1,4 +1,5 @@
 // One bounded reply, paced on screen. No new model requests while waiting.
+import {reactionContinues} from './dialogue-sentences.js?v=20261017-quota1';
 const fold=s=>String(s).normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');
 const invitation=t=>/^(?:モット)?(?:ナニカ)?(?:ホカニ)?(?:キキタイコト|キキタイコトハ|シツモン)(?:アル|アルノ|アルカナ|アルカナァ|ハアル|ハアルノ)[?？。!！]*$/.test(fold(t));
 // Boundaries inside a quoted line or a proper name are not breath points.
@@ -9,7 +10,7 @@ function boundaries(text){
   if(stack.at(-1)===c){stack.pop();continue;}
   if(pairs[c]){stack.push(pairs[c]);continue;}
   if(stack.length)continue;
-  if(/[。!?！？\n]/.test(c)){if(!/[。!?！？\n]/.test(text[i+1]||''))cuts.push({end:i+1,kind:'sentence',rank:4});}
+  if(/[。!?！？\n]/.test(c)){if(!/[。!?！？\n]/.test(text[i+1]||'')&&!reactionContinues(text,i))cuts.push({end:i+1,kind:'sentence',rank:4});}
   else if(/[、,]/.test(c))cuts.push({end:i+1,kind:'clause',rank:3});
   else if(/\s/.test(c))cuts.push({end:i+1,kind:'word',rank:1});
   else if(/(?:んだけど|なんだけど|けれど|なので|だから|ンダケド|ナンダケド|ケレド|ナノデ|ダカラ)$/.test(text.slice(0,i+1)))cuts.push({end:i+1,kind:'clause',rank:2});

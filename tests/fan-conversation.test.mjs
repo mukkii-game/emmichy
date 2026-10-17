@@ -50,3 +50,18 @@ test('a useful generated personal response is retained rather than replaced by t
  const result=directReply(text,input,state,{source:'llm'});
  assert.equal(result.text,text);assert.equal(result.source,'llm');
 });
+
+test('a short implicit first-person preference stays on the cookie after an unanswered detail',()=>{
+ const state=sceneState('exam:result');
+ const question='お祝いのクッキーは手作りなの？',packet=specialistPacket(question,state);
+ state.specialist=packet.memory;
+ state.dialogue.push({role:'user',text:question},{role:'enny',text:'手作りか買ったものかまでは、確かめられないの。'});
+ for(const input of ['食べずに写真で残したいな','タベズニ シャシンデ ノコシタイナ']){
+  const result=directReply('今の話、少し取り違えそう。',input,state);
+  assert.match(result.text,/食べずに写真で残したいんだね/);assert.doesNotMatch(result.text,/取り違え|ハチワレ思い出/);
+  assert.equal(specialistPacket(input,state).memory.focus,'exam:cookie');
+ }
+ assert.equal(fanConversationReply('ハチワレは食べずに写真で残したいな',state),null,'do not make a named character wish into the player preference');
+ const text='写真で残したいんだね。アタシなら食べる前に、包みも並べて撮りたくなるな。';
+ assert.equal(directReply(text,'食べずに写真で残したいな',state,{source:'llm'}).text,text);
+});

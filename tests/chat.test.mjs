@@ -56,16 +56,27 @@ test('explicit nonfan topic switch rejects unsolicited fan redirection without a
  assert.ok(await requestChat('/chat','ギターも好き',{}, {},{fetcher}));
 });
 
-test('429 stops provider requests for this play and survives saved-session restore',async()=>{
+test('429 cools down across saved-session restore, then recovers on a later player turn',async()=>{
  const session={turns:4};let calls=0;
- const fetcher=async()=>{calls++;return new Response('',{status:429});};
+ const fetcher=async()=>{calls++;return new Response('',{status:429,headers:{'retry-after':'120'}});};
  await requestChat('/chat','自由な話',{},session,{fetcher,now:1000});
  const restored=JSON.parse(JSON.stringify(session));
- await requestChat('/chat','別の話',{},restored,{fetcher,now:999999});
+ await requestChat('/chat','別の話',{},restored,{fetcher,now:120999});
  assert.equal(calls,1);assert.equal(restored.chatHealth.failed,1);
  assert.equal(restored.chatHealth.lastOutcome,'rate-limit');
- const fresh={};await requestChat('/chat','新しいプレイ',{},fresh,{fetcher,now:999999});
+ assert.equal(restored.chatHealth.retryAt,121000);
+ assert.ok(await requestChat('/chat','もう一度話そう',{},restored,{now:121000,fetcher:async()=>{calls++;return Response.json({text:'うん、続きが聞きたいな。',provider:'gemini'});}}));
  assert.equal(calls,2);
+ assert.equal(restored.chatHealth.rateLimited,false);assert.equal(restored.chatHealth.retryAt,0);
+ assert.equal(restored.chatHealth.accepted,1);
+});
+test('legacy permanent 429 saves recover and missing or malformed Retry-After uses a minute',async()=>{
+ const session={chatHealth:{rateLimited:true,retryAt:0}};
+ assert.ok(await requestChat('/chat','こんにちは',{},session,{now:1000,fetcher:async()=>Response.json({text:'会えてうれしいな。',provider:'groq'})}));
+ for(const [value,expected] of [[null,61000],['invalid',61000],['99999999',86401000],[new Date(121000).toUTCString(),121000]]){
+  const retry={};await requestChat('/chat','もう一度',{},retry,{now:1000,fetcher:async()=>new Response('',{status:429,headers:value===null?{}:{'retry-after':value}})});
+  assert.equal(retry.chatHealth.retryAt,expected);
+ }
 });
 test('network failure cools down, then recovers with separate communication counters',async()=>{
  const session={};let calls=0;

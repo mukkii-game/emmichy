@@ -1,0 +1,76 @@
+{
+  "mode": "real provider generation with candidate server prompt; synthetic inputs; no browser or human evaluation",
+  "commit": "9c15a39b2afc6fb73afd58bd8d36c308f5e02ac9",
+  "at": "2026-10-17T06:49:50.623Z",
+  "limit": 2,
+  "turns": [
+    {
+      "input": "草むしり検定の最初の結果は？",
+      "systemCharacters": 5128,
+      "history": [],
+      "wallMs": 765,
+      "result": {
+        "text": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。 ちょっとショックだけど、ハチワレの頑張りにヤハ！ アタシの見方だけど、って思う。",
+        "provider": "groq",
+        "source": "mixed"
+      },
+      "attempts": [
+        {
+          "provider": "groq",
+          "source": "mixed",
+          "ok": true,
+          "reason": "specialist-plan",
+          "ms": 758,
+          "requestLimit": 1000,
+          "requestsRemaining": 999,
+          "tokenLimit": 8000,
+          "tokensRemaining": 3791,
+          "inputTokens": 3807,
+          "outputTokens": 120,
+          "totalTokens": 3927
+        }
+      ],
+      "rawOutputs": [
+        {
+          "provider": "groq",
+          "raw": "{\n  \"beats\": [\n    {\n      \"fact\": \"exam:result\",\n      \"say\": \"ハチワレが合格して、ちいかわは不合格だったんだ。ちょっとショックだけど、ハチワレの頑張りにヤハ！って思う。\",\n      \"ask\": null\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "input": "ハチワレの気持ち、えみちいはどう思う？",
+      "systemCharacters": 5462,
+      "history": [
+        {
+          "role": "user",
+          "content": "草むしり検定の最初の結果は？"
+        },
+        {
+          "role": "assistant",
+          "content": "最初の5級の結果は、ハチワレが合格して、ちいかわは不合格だったの。 ちょっとショックだけど、ハチワレの頑張りにヤハ！ アタシの見方だけど、って思う。"
+        }
+      ],
+      "wallMs": 44,
+      "result": {
+        "error": "rate-limited",
+        "provider": "groq"
+      },
+      "attempts": [
+        {
+          "provider": "groq",
+          "source": "llm",
+          "ok": false,
+          "reason": "http-429",
+          "ms": 42,
+          "requestLimit": 1000,
+          "requestsRemaining": 999,
+          "tokenLimit": 8000,
+          "tokensRemaining": 4159
+        }
+      ],
+      "rawOutputs": []
+    }
+  ],
+  "calls": 2,
+  "rateLimited": true
+}

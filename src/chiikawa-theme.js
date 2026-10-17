@@ -2,7 +2,7 @@
 import {cards,sources} from './fandom.js?v=20261014-view1';
 import {relatedChiikawa} from './chiikawa-relations.js?v=20261014-view1';
 import {focusName} from './names.js?v=20261014-view1';
-import {fanConversationReply} from './fan-conversation.js?v=20261014-view1';
+import {fanConversationReply} from './fan-conversation.js?v=20261017-quota1';
 const fold=value=>String(value||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');
 const bridges=[
  {id:'sweet',card:'chiikawa-14',match:/甘イ|アマイ|ケーキ|プリン|チョコ|スイーツ|シナモンロール/,lines:['甘い物って聞くと、ラッコを思い出しちゃう！ あんなに強いのに甘党なの、好き。','ラッコにも甘い物、選んであげたいな。アタシ、こういう時すぐちいかわのこと考えちゃう。']},

@@ -20,17 +20,24 @@ export function unwantedFanRedirect(text,input,state={}){
  return false;
 }
 export function chatAvailable(session,now=Date.now()){
- return !session?.chatHealth?.rateLimited && !(session?.chatHealth?.retryAt>now);
+ // Old saves may have rateLimited=true with no retryAt. Never latch forever.
+ return !(session?.chatHealth?.retryAt>now);
 }
-function noteAttempt(session,outcome,now){
+function noteAttempt(session,outcome,now,retrySeconds=60){
  if(!session)return;
  const health=session.chatHealth||{};
  session.chatHealth={...health,attempts:(health.attempts||0)+1,
   accepted:(health.accepted||0)+(outcome==='accepted'?1:0),
   rejected:(health.rejected||0)+(outcome==='rejected'?1:0),
   failed:(health.failed||0)+(['error','rate-limit'].includes(outcome)?1:0),
-  lastOutcome:outcome,rateLimited:outcome==='rate-limit'||Boolean(health.rateLimited),
-  retryAt:outcome==='error'?now+60000:0};
+  lastOutcome:outcome,rateLimited:outcome==='rate-limit',
+  retryAt:['error','rate-limit'].includes(outcome)?now+retrySeconds*1000:0};
+}
+function retryDelay(response,now){
+ const raw=response.headers.get('retry-after');
+ if(raw===null)return 60;
+ const seconds=Number(raw),delay=Number.isFinite(seconds)?seconds:(Date.parse(raw)-now)/1000;
+ return Number.isFinite(delay)?Math.max(1,Math.min(86400,Math.ceil(delay))):60;
 }
 export async function requestChat(url,input,state,session,{fetcher=fetch,offline=false,now=Date.now()}={}) {
  if(!url||offline)return null;
@@ -38,7 +45,7 @@ export async function requestChat(url,input,state,session,{fetcher=fetch,offline
  try {
   const r=await fetcher(url,{method:'POST',headers:{'Content-Type':'application/json'},
    body:JSON.stringify({input,state:{...state,history:substantiveHistory(state),dialogue:undefined,heardHistory:undefined},session}),signal:AbortSignal.timeout(CHAT_REPLY_BUDGET_MS)});
-  if(!r.ok){noteAttempt(session,r.status===429?'rate-limit':'error',now);return null;}
+  if(!r.ok){noteAttempt(session,r.status===429?'rate-limit':'error',now,retryDelay(r,now));return null;}
   const d=await r.json();
   if(typeof d.text!=='string'||!d.text.trim()||d.text.length>180||rejectedJoke(d.text)||unwantedFanRedirect(d.text,input,state)){noteAttempt(session,'rejected',now);return null;}
   noteAttempt(session,'accepted',now);

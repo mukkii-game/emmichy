@@ -37,7 +37,8 @@ export function fanConversation(input,state={}){
  // An explicit fact question must retain its answer, not become a feeling.
  if(/何話|ナンワ|何級|ナンキュウ|点数|得点|誰ガ|ダレガ|ドコデ|イツ|ナゼ落|ドウシテ落|ナゼオチ|ドウシテオチ/.test(t)||topic==='cookie'&&/手作リ|テヅクリ|買ッタ|カッタ/.test(t)||/[?？]/.test(t)&&!/(?:ドウ思|ドウオモ|ナラ|ドウスル)/.test(t))return null;
  const own=/(?:エミチ[ィイ]|emmichy|アナタ|君)(?:ナラ|ハドウ)|(?:エミチ[ィイ]|emmichy).{0,5}ドウスル/i.test(t);
- const view=/(?:私|僕|俺|ワタシ|ボク|オレ|自分).{0,60}(?:思ウ|オモウ|派|言|イウ|シタイ|シタク|好キ|スキ|食ベ|残|撮)|(?:イイヨネ|イイナ|言イタイ|イイタイ)|派(?:ダ|デス)?$/.test(t);
+ const implicitView=!names.length&&/(?:シタイ|食ベタイ|タベタイ|残シタイ|ノコシタイ|撮リタイ|トリタイ|言イタイ|イイタイ)(?:ナ|ヨ|デス|ケド)?$/.test(t);
+ const view=implicitView||/(?:私|僕|俺|ワタシ|ボク|オレ|自分).{0,60}(?:思ウ|オモウ|派|言|イウ|シタイ|シタク|好キ|スキ|食ベ|残|撮)|(?:イイヨネ|イイナ|言イタイ|イイタイ)|派(?:ダ|デス)?$/.test(t);
  if(!own&&!(view&&topics[topic].cues.test(t)))return null;
  const stance=topic==='cookie'?( /食ベ(?:ズ|ナイ)|タベ(?:ズ|ナイ)/.test(t)?'keep':/写真|シャシン|撮|トリ/.test(t)?/スグ食ベ|スグタベ/.test(t)?'eat':'photo':/食ベ|タベ/.test(t)?'eat':''):
   topic==='exam'?/言イヅラ|イイヅラ|言イニク|イイニク/.test(t)?'hesitate':/オメデトウ|祝/.test(t)?'celebrate':'':topic;

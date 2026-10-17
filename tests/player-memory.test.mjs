@@ -4,6 +4,12 @@ import {cleanPlayerMemory,learnPlayerMessage,answerPlayerQuestion,notePlayerQues
 import {learnerReply} from '../src/japanese-learner.js';
 import {profileReply} from '../src/profile.js';
 import {directReply} from '../src/dialogue-director.js';
+
+test('ordinary made-food reports do not turn a sentence ending into a named creation',()=>{
+ for(const input of ['今日は友達にあげるクッキーを作ったよ','料理を作ったんだ','昨日考えたんだけどね'])assert.deepEqual(learnPlayerMessage(null,input).creations,[]);
+ assert.deepEqual(learnPlayerMessage(null,'考えた技の名前は砂糖シールド').creations,['砂糖シールド']);
+ assert.deepEqual(learnPlayerMessage(null,'作った「砂糖シールド」').creations,['砂糖シールド']);
+});
 test('name elicitation accepts a nickname, keeps a real question first, and can be declined',()=>{
  const session={turns:0};notePlayerQuestion(nameQuestion,session);
  assert.equal(answerPlayerQuestion(null,session,'日本語勉強してるの？').reply,undefined);

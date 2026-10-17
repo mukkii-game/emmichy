@@ -4,12 +4,25 @@ import {specialistPacket,noteSpecialistDelivery,specialistPrompt} from '../src/s
 import {fanConversationReply} from '../src/fan-conversation.js';
 import {directReply} from '../src/dialogue-director.js';
 import {personalFanReply} from '../src/chiikawa-theme.js';
+import {updateDialogueControl} from '../src/conversation-repair.js';
+import {recognizeName} from '../src/names.js';
 
 const sceneState=focus=>{
  const packet=specialistPacket(focus==='exam:cookie'?'草むしり検定のお祝いのクッキー':'草むしり検定の結果');
  const fact=packet.evidence.find(r=>r.id===focus);
  return {knowledge:{work:'chiikawa'},specialist:noteSpecialistDelivery(packet.memory,fact.spoken),dialogue:[{role:'enny',text:fact.spoken}]};
 };
+
+test('care agreement is not misread as a katakana request for another topic',()=>{
+ const state=sceneState('exam:result');
+ for(const input of ['その気遣いがいいよね','チイカワ ノ キヅカイ ガ イイヨネ']){
+  assert.equal(updateDialogueControl(null,input).avoidFandom,false);
+  assert.ok(!recognizeName(input,{state})?.decline);
+  assert.ok(fanConversationReply(input,state));
+  assert.doesNotMatch(directReply('受験の話ね。',input,state).text,/受験|挑戦して/);
+ }
+ assert.equal(updateDialogueControl(null,'チイカワ イガイ ノ ハナシヲ シヨウ').avoidFandom,true);
+});
 test('player opinions continue the examination instead of rotating to another fact',()=>{
  const state=sceneState('exam:result'),input='私は自分だけ受かったら、言いづらくなると思う';
  const packet=specialistPacket(input,state);

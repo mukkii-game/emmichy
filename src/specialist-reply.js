@@ -1,4 +1,4 @@
-import {specialistFacts} from './specialist.js?v=20261017-quota1';
+import {specialistFacts} from './specialist.js?v=20261017-link1';
 import {attributionRepair} from './chiikawa-attribution.js?v=20261017-quota1';
 import {rejectedJoke} from './humor.js?v=20261014-view1';
 import {dialogueSentences} from './dialogue-sentences.js?v=20261017-quota1';

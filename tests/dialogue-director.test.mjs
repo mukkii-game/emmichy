@@ -1,12 +1,43 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {directReply} from '../src/dialogue-director.js';
-import {selectChiikawaBridge} from '../src/chiikawa-theme.js';
+import {selectChiikawaBridge,everydayFanConnection,chiikawaBridgePrompt} from '../src/chiikawa-theme.js';
 import {selectKnowledge} from '../src/fandom.js';
 import {requestsChiikawa} from '../src/topic-intent.js';
 import {unwantedFanRedirect} from '../src/chat.js';
 import {recognizeName} from '../src/names.js';
 import fs from 'node:fs';
+
+test('character preference questions answer her view instead of a random character fact',()=>{
+ for(const input of ['ハチワレのどういうところが好き？','ハチワレのどんなところが好き？','ハチワレって、どんなところが優しいの？']){
+  const out=directReply('ハチワレは料理が好き。',input,{knowledge:{work:'chiikawa'}});
+  assert.match(out.text,/友達のことを気にかける/);assert.doesNotMatch(out.text,/料理|おかわり/);
+ }
+});
+test('a reported shared meal provides an explainable connection, not an invented canon scene',()=>{
+ const state={dialogue:[{role:'user',text:'今日は友達にあげるクッキーを作ったよ'}]};
+ const input='少し焦げたけど、友達が一緒に食べてくれた';
+ const out=directReply('取り違えそう。',input,state);
+ assert.match(out.text,/一緒に食べてくれた/);assert.match(out.text,/気遣い.*ハチワレ/);assert.doesNotMatch(out.text,/ハチワレが.*食べ/);
+ state.dialogue.push({role:'user',text:input},{role:'enny',text:out.text});
+ const why=directReply('ハチワレは写真が好き。','どのところからちいかわを思い出したの？',state);
+ assert.match(why.text,/友達が、一緒に食べてくれたところ/);assert.doesNotMatch(why.text,/写真/);
+ assert.match(chiikawaBridgePrompt(input,state),/プレイヤー自身.*原作に同じ出来事があったとは言わない/);
+ const good='一緒に食べてくれたのが嬉しかったんだね。アタシも、作った人と食べる時間が好き。';
+ assert.equal(directReply(good,input,state,{source:'llm'}).text,good);
+ for(const other of ['友達がクッキーを作ったよ','友達にクッキーを作ったわけではない'])assert.equal(everydayFanConnection(other,{}),null);
+ assert.equal(everydayFanConnection('友達が一緒に食べてくれなかった', {dialogue:[{role:'user',text:'友達にクッキーを作ったよ'}]}),null);
+});
+test('photo dislikes and choosing another aspect do not trigger a photo-fan introduction',()=>{
+ const state={dialogue:[{role:'user',text:'友達にあげるクッキーを作ったよ'},{role:'user',text:'友達が一緒に食べてくれた'}]};
+ for(const input of ['写真を撮るのは好きじゃないけど記念にね','今日は写真より、友達の話をしたいな']){
+  const out=directReply('ハチワレは写真が好き。',input,state);
+  assert.equal(selectChiikawaBridge(input,state),null);
+  assert.doesNotMatch(out.text,/ハチワレは写真|写真で小さい思い出/);
+  assert.match(out.text,input.includes('好きじゃない')?/好きじゃない/:/友達の話/);
+ }
+ assert.equal(everydayFanConnection('友達の話をしたいな',{...state,dialogueControl:{avoidFandom:true}}),null);
+});
 
 test('captured real-provider scene inventions are repaired locally, without a new call',()=>{
  const evidence=JSON.parse(fs.readFileSync(new URL('../docs/pilot-chiikawa-20261011-live/emmichy-quality-check.json',import.meta.url)));

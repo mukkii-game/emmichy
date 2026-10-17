@@ -1,5 +1,5 @@
 import {rejectedJoke} from './humor.js';
-import {cleanDialogueControl,feedbackIntent,updateDialogueControl} from './conversation-repair.js?v=20261014-view1';
+import {cleanDialogueControl,feedbackIntent,updateDialogueControl} from './conversation-repair.js?v=20261017-link1';
 const text=(s,n=160)=>typeof s==='string'?s.normalize('NFKC').replace(/[\x00-\x1f]/g,' ').trim().slice(0,n):'';
 const fold=s=>text(s,600).replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/\s/g,'');
 const privateText=s=>/@|https?:|\d{3}[-ー]\d{4}|\d{10,}|住所|電話番号|メールアドレス/.test(s);
@@ -41,7 +41,8 @@ export function learnPlayerMessage(value,raw){
   const match=t.match(/(?:好きな(?:キャラ|食べ物|ゲーム|漫画|言葉)は|(?:私は|僕は|俺は)?)([^。!?！？]{1,30}?)(?:が|は|を)?(?:大好き|好き|スキ)(?:だ|です|なの|！|!|$)/);
   if(match&&clean(match[1])){const item=match[1].trim();m.likes=unique([...m.likes,item],24);m.dislikes=m.dislikes.filter(x=>fold(x)!==fold(item));}
  }
- const created=t.match(/(?:作った|考えた|発明した)(?:キャラ|能力|技|言葉|名前|ネタ|もの)?(?:の)?(?:名前)?(?:は|が|を)?[「『]?([^。!?！？」』]{1,120})/)
+ const created=t.match(/(?:作った|考えた|発明した)(?:キャラ|能力|技|言葉|名前|ネタ|もの)(?:の名前)?(?:は|が|を)[「『]?([^。!?！？」』]{1,120})/)
+  ||t.match(/(?:作った|考えた|発明した)(?:の)?(?:名前)?(?:は|が|を)?[「『]([^。!?！？」』]{1,120})/)
   ||t.match(/(?:私の|僕の|俺の|オレの)?(?:念能力|オリジナルキャラ|作ったキャラ|技の名前)(?:は|を)[「『]?([^。!?！？」』]{1,120})/);
  if(created&&!/[?？]|覚えて|オボエテ|なんだっけ|何だっけ/.test(t)&&clean(created[1]))m.creations=unique([...m.creations,created[1].trim()],12);
  const topics=[['チイカワ','ちいかわ'],['ハチワレ','ハチワレ'],['ウサギ','うさぎ'],['シーサー','シーサー'],['日本語','日本語'],['プリン','プリン'],['写真','写真'],['ジョジョ','ジョジョ']].filter(([key])=>f.includes(key)).map(([,label])=>label);

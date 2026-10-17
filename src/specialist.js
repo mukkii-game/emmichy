@@ -1,12 +1,12 @@
 // Small owned evidence packets. The browser sends IDs/state, never new canon.
-import {chiikawaRelations} from './chiikawa-relations.js?v=20261014-view1';
-import {waterPlayCorrection} from './fandom.js?v=20261014-view1';
-import {exactNames,focusName} from './names.js?v=20261014-view1';
+import {chiikawaRelations} from './chiikawa-relations.js?v=20261017-link1';
+import {waterPlayCorrection} from './fandom.js?v=20261017-link1';
+import {exactNames,focusName} from './names.js?v=20261017-link1';
 import {substantiveHistory} from './dialogue-history.js?v=20261014-view1';
-import {feedbackIntent} from './conversation-repair.js?v=20261014-view1';
+import {feedbackIntent} from './conversation-repair.js?v=20261017-link1';
 import {sceneFacts} from './chiikawa-scenes.js?v=20261014-view1';
 import {topicFacts} from './chiikawa-news.js?v=20261014-view1';
-import {fanConversation} from './fan-conversation.js?v=20261017-quota1';
+import {fanConversation} from './fan-conversation.js?v=20261017-link1';
 const fold=s=>String(s||'').normalize('NFKC').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96)).replace(/[\s。、!?！？「」]/g,'').toLowerCase();
 const spoken={
  'reviewed:usagi:yaha':'「ヤハ！」はうさぎの掛け声だよ。',

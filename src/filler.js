@@ -1,8 +1,8 @@
-import {unwantedFanRedirect} from './chat.js?v=20261017-quota1';
-import {japaneseExamples,complimentReaction,profileAside} from './profile.js?v=20261014-view1';
+import {unwantedFanRedirect} from './chat.js?v=20261017-link1';
+import {japaneseExamples,complimentReaction,profileAside} from './profile.js?v=20261017-link1';
 import {waitingReply} from './waiting-db.js?v=20261014-view1';
-import {recognizeName,namedGesture,namedFollowup} from './names.js?v=20261014-view1';
-import {selectKnowledge,waterPlayCorrection} from './fandom.js?v=20261014-view1';
+import {recognizeName,namedGesture,namedFollowup} from './names.js?v=20261017-link1';
+import {selectKnowledge,waterPlayCorrection} from './fandom.js?v=20261017-link1';
 // Listening gestures are dialogue, retained alongside the eventual answer.
 export function retainAside(history,line,{pendingReply=false}={}){
  const next=[...history];

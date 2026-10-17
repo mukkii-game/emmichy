@@ -4,6 +4,8 @@
 
 ---
 
+catalog1公開：PR58/main39fd398・PR28/main74b5cff。Cloudflare39015397117/39015397976成功。17変更公開ファイルが候補と一致。追加生成0。public-knowledge-catalog-20261017.json。
+
 # 2026-10-17: accepting Chiikawa questions and explaining a connection
 
 合格基準を「知識・ワード・質問／訂正／感想を受ける」「直前の話と接点を保つ」として、同じ各8送信の機械試遊を前後比較。好み質問→料理逸脱、共感→受験再紹介、友達話→写真反復を再現し改善。気遣いがいい内のイガイ、チイカワ内のイカ、作ったよ末尾のよを拾う誤りも修正。写真の否定／友達話の希望／連想の理由へ応じ、友達の実話を原作に変えない。255front/71relay合格。Luna medium1人の保存ログ限定レビューで主要3破綻改善。実LLM0、429後の再試行なし。docs/conversation-connections-20261017.mdとconnection-fan/bridge-before/afterの各JSON。全知識網羅・実生成の自然さ・人間評価は未確認。

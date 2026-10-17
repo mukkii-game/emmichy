@@ -21,3 +21,7 @@
 `catalog-mock-input-20261017.json`と`catalog-mock-mix-20261017.json`は**合成したprovider応答**を実appと中継validatorへ渡した8送信。6通信、5受理、1回429の模擬。生成文採用3／サーバーのDB文2／固定ルール2。固定比率を設けた結果ではなく、試験入力で各経路を通した集計。実際のprovider通信・費用は0。仮想タイマーは待ち相づちを強制的に出すため、実際の速度や待ち時間の測定には使わない。既存のactual-app回帰でcooldownと復帰も確認。
 
 直前の実429以降、新しい実LLM試験はしていない。次の段階は既存調査からの根拠追加、質問／追質問の範囲拡大、短い主観試遊、必要な少数の実LLM。人間の面白さと実端末確認は最後の完成条件に残す。完全なファンbot／全3providerの連続生成成功／全知識の収録は未達。
+
+## 公開確認
+
+フロントPR58/main39fd398（候補2dcef90）、中継PR28/main74b5cff（候補fd44912）へ統合。Cloudflare39015397117／39015397976成功。公開された変更HTML/JS17個が候補のGit blobと一致。追加生成0。docs/public-knowledge-catalog-20261017.json。runtime20261017-catalog1。次はCOMPLETION_PLANの第2段階であり、ゴール全体の完了ではない。

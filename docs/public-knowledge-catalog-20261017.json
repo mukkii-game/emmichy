@@ -1,0 +1,131 @@
+{
+  "at": "2026-10-17T07:55:27.490Z",
+  "mode": "read-only public source verification; zero model calls",
+  "candidate": "2dcef90a56d347edf91fb52ff6ddcad43fd13c3e",
+  "frontendMain": "39fd398e0d77f60fe1e716004f687847419690c9",
+  "frontendDeploy": 39015397117,
+  "backendCandidate": "fd4491262e9750e1421d853b27f54117724dec73",
+  "backendMain": "74b5cffda4e8b8e11982d1d7c5beee45c4b095a3",
+  "backendDeploy": 39015397976,
+  "checks": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "3a42a84f100bae73a9f318ebab036a490161dfe9e888bd977143c6b6acea9186",
+      "publicSha256": "3a42a84f100bae73a9f318ebab036a490161dfe9e888bd977143c6b6acea9186"
+    },
+    {
+      "file": "src/app.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "f038581f63588415f2841eca5892a15befa8c97940034e8a4c838b0b424bd411",
+      "publicSha256": "f038581f63588415f2841eca5892a15befa8c97940034e8a4c838b0b424bd411"
+    },
+    {
+      "file": "src/chat.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "994f4dedd5b940b52e8230a257149645ca9523f90e3b5764d03a6b5fee785e8c",
+      "publicSha256": "994f4dedd5b940b52e8230a257149645ca9523f90e3b5764d03a6b5fee785e8c"
+    },
+    {
+      "file": "src/conversation-repair.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "f65c6369aa6cff0a07985324be914e3b02ca7064421eb7b8e1a410ff02af32df",
+      "publicSha256": "f65c6369aa6cff0a07985324be914e3b02ca7064421eb7b8e1a410ff02af32df"
+    },
+    {
+      "file": "src/dialogue-audit.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "f5dad4be4c3de5a2f86c4a036a90e512001b8e04ae2fb790300d62090b175d0a",
+      "publicSha256": "f5dad4be4c3de5a2f86c4a036a90e512001b8e04ae2fb790300d62090b175d0a"
+    },
+    {
+      "file": "src/dialogue-director.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "a67325ebe8f96d8c2d2cd4f57b8949d481371303857e2da789bd062a80852c60",
+      "publicSha256": "a67325ebe8f96d8c2d2cd4f57b8949d481371303857e2da789bd062a80852c60"
+    },
+    {
+      "file": "src/dialogue-grounding.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "2f53eddb8f0cbd5608df08ba4b423d8b69bbb2891230e219b7620a327b58514a",
+      "publicSha256": "2f53eddb8f0cbd5608df08ba4b423d8b69bbb2891230e219b7620a327b58514a"
+    },
+    {
+      "file": "src/engine.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "d0c85f515bc1f5bef8315e5c779c638b265c9cbbce53b5389c324b595a10d472",
+      "publicSha256": "d0c85f515bc1f5bef8315e5c779c638b265c9cbbce53b5389c324b595a10d472"
+    },
+    {
+      "file": "src/fallback.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "a323dffbb7c500225042c55b53a2483a15b8ab75e00b10afabe6d6f9ebf0d49d",
+      "publicSha256": "a323dffbb7c500225042c55b53a2483a15b8ab75e00b10afabe6d6f9ebf0d49d"
+    },
+    {
+      "file": "src/filler.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "a70da37c297ca14b12aeabd7843224e75306c5f5a3e0d733cad2a6a6dc071192",
+      "publicSha256": "a70da37c297ca14b12aeabd7843224e75306c5f5a3e0d733cad2a6a6dc071192"
+    },
+    {
+      "file": "src/font.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "b4752eec3ea078c4fa0bba174bd9f90ea7a91f9ec6f2b2acf27509080be6bf47",
+      "publicSha256": "b4752eec3ea078c4fa0bba174bd9f90ea7a91f9ec6f2b2acf27509080be6bf47"
+    },
+    {
+      "file": "src/knowledge-catalog.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "51e41f3a86e0e7d041aa2b19211e5e96ff0d4b00d26c66416ad479e3a82c8d28",
+      "publicSha256": "51e41f3a86e0e7d041aa2b19211e5e96ff0d4b00d26c66416ad479e3a82c8d28"
+    },
+    {
+      "file": "src/player-memory.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "b96b406456af6d25a90d94c5a09443b3259f7cefa6ca5e9bd6943c2bbe8cb299",
+      "publicSha256": "b96b406456af6d25a90d94c5a09443b3259f7cefa6ca5e9bd6943c2bbe8cb299"
+    },
+    {
+      "file": "src/repertoire.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "3baebfda5c1afb021a642964a6c193541c099fd4a8b6e64aa7a2c09cf622cf31",
+      "publicSha256": "3baebfda5c1afb021a642964a6c193541c099fd4a8b6e64aa7a2c09cf622cf31"
+    },
+    {
+      "file": "src/routing.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "9d428c56400409acd3ab378b20cb94f5797cfaa2a897d0a6649c2a969d282bc0",
+      "publicSha256": "9d428c56400409acd3ab378b20cb94f5797cfaa2a897d0a6649c2a969d282bc0"
+    },
+    {
+      "file": "src/specialist-reply.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "c3b07c496160ca28253ad519dc32dd34002b57aa59578de49e63c9807005c84a",
+      "publicSha256": "c3b07c496160ca28253ad519dc32dd34002b57aa59578de49e63c9807005c84a"
+    },
+    {
+      "file": "src/specialist.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "f52e939b2db520209fb3a4b33eb0f4b316e1a631fc294e2dcc97bce98d3773d4",
+      "publicSha256": "f52e939b2db520209fb3a4b33eb0f4b316e1a631fc294e2dcc97bce98d3773d4"
+    }
+  ]
+}

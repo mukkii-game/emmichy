@@ -1,0 +1,194 @@
+{
+  "at": "2026-10-17T07:04:24.946Z",
+  "mode": "read-only public source verification; zero generation calls",
+  "candidate": "398d9b99d2dba0f27e8b3ec5d60a476e820517ae",
+  "frontendMain": "a092ea228a6d6436a7d0634cb1a5ac1fd8b5d401",
+  "frontendDeploy": 39012229429,
+  "backendCandidate": "4679b65dcac7b661d5356b868a97b16f29f49d4c",
+  "backendMain": "86d9f7be0324e0aee64653e38b0b3efcf970d081",
+  "backendDeploy": 39012229342,
+  "checks": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "4e6e7d8a484a95cbdde69f5286270885e7527c475e98d821035ab000bc1ad50f",
+      "publicSha256": "4e6e7d8a484a95cbdde69f5286270885e7527c475e98d821035ab000bc1ad50f"
+    },
+    {
+      "file": "src/app.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "f07c9d0e836598f4474dd6ab86353499d0d010115407075f8c89a0e118ef1b89",
+      "publicSha256": "f07c9d0e836598f4474dd6ab86353499d0d010115407075f8c89a0e118ef1b89"
+    },
+    {
+      "file": "src/balance.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "14b1031c10299989acc75796193254da949123ad703838439a0d7cab2772ad77",
+      "publicSha256": "14b1031c10299989acc75796193254da949123ad703838439a0d7cab2772ad77"
+    },
+    {
+      "file": "src/chat.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "2513f7f7690a03addbd087353986b2c42ffacace18af6e3905ab02886eca5cab",
+      "publicSha256": "2513f7f7690a03addbd087353986b2c42ffacace18af6e3905ab02886eca5cab"
+    },
+    {
+      "file": "src/chiikawa-relations.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "54b43c91221707707f339e531eb39deaad1962213ee359cb652c4180269ab21d",
+      "publicSha256": "54b43c91221707707f339e531eb39deaad1962213ee359cb652c4180269ab21d"
+    },
+    {
+      "file": "src/chiikawa-reminder.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "e21b69655e02815f6437ee9bb3deb18a59a34776b526e617c00e95f15d360a8f",
+      "publicSha256": "e21b69655e02815f6437ee9bb3deb18a59a34776b526e617c00e95f15d360a8f"
+    },
+    {
+      "file": "src/chiikawa-theme.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "ee2079ab7e5ee7f6df99a9d998cf9ba46b8e008321e0f4eeaaad852fd72a8113",
+      "publicSha256": "ee2079ab7e5ee7f6df99a9d998cf9ba46b8e008321e0f4eeaaad852fd72a8113"
+    },
+    {
+      "file": "src/context.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "8ed0e2e6b7a4cb60cca95445ffe435f52419e8907dc19310b5f220dd897dd0a3",
+      "publicSha256": "8ed0e2e6b7a4cb60cca95445ffe435f52419e8907dc19310b5f220dd897dd0a3"
+    },
+    {
+      "file": "src/conversation-repair.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "500c02a4aceccd567e5ea5398895209a6621b47c04e5a542ca2e1211677994e0",
+      "publicSha256": "500c02a4aceccd567e5ea5398895209a6621b47c04e5a542ca2e1211677994e0"
+    },
+    {
+      "file": "src/dialogue-director.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "d9dc864cdc37d6b496e52248f6fc013f29bf1badd209d4fe4165c006e9b0a19d",
+      "publicSha256": "d9dc864cdc37d6b496e52248f6fc013f29bf1badd209d4fe4165c006e9b0a19d"
+    },
+    {
+      "file": "src/dialogue-grounding.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "71d583e0b984347c8bad414603c216499cee13832f7076fed56fc5d43615da21",
+      "publicSha256": "71d583e0b984347c8bad414603c216499cee13832f7076fed56fc5d43615da21"
+    },
+    {
+      "file": "src/engine.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "638f9ea91bdda01c0af78de171de5f2e12bfb546c3130e801e59876c009e80e0",
+      "publicSha256": "638f9ea91bdda01c0af78de171de5f2e12bfb546c3130e801e59876c009e80e0"
+    },
+    {
+      "file": "src/fallback.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "f3caf53ec8f67269e8b68aac346649b620277472bc93384fd1d92a5869960815",
+      "publicSha256": "f3caf53ec8f67269e8b68aac346649b620277472bc93384fd1d92a5869960815"
+    },
+    {
+      "file": "src/fan-conversation.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "4fab93715cea9d51415717d262da9afecbf2b4923d20e85507e5fd6b6aef0af2",
+      "publicSha256": "4fab93715cea9d51415717d262da9afecbf2b4923d20e85507e5fd6b6aef0af2"
+    },
+    {
+      "file": "src/fandom.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "592bee0705405e4a275a2f23fc0ea397c181422c8c944f0da8bfd456c5a6d89c",
+      "publicSha256": "592bee0705405e4a275a2f23fc0ea397c181422c8c944f0da8bfd456c5a6d89c"
+    },
+    {
+      "file": "src/filler.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "c2f480021f20044ef78385ae014f01fce62c7460bfb560c3be77044f5a8d4f88",
+      "publicSha256": "c2f480021f20044ef78385ae014f01fce62c7460bfb560c3be77044f5a8d4f88"
+    },
+    {
+      "file": "src/font.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "3451c6a1282e3045274f5283365be9372c0be66ef08480b7596d183d5a8ff465",
+      "publicSha256": "3451c6a1282e3045274f5283365be9372c0be66ef08480b7596d183d5a8ff465"
+    },
+    {
+      "file": "src/names.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "6eca8328df1d5efa1693f2f7d5d91d2d41370217690ab973d69679182c6345f4",
+      "publicSha256": "6eca8328df1d5efa1693f2f7d5d91d2d41370217690ab973d69679182c6345f4"
+    },
+    {
+      "file": "src/player-memory.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "6e3874328e8f27af55ebb01918b5b7ecc1321729ad1e953ba489d43ab2be5c77",
+      "publicSha256": "6e3874328e8f27af55ebb01918b5b7ecc1321729ad1e953ba489d43ab2be5c77"
+    },
+    {
+      "file": "src/profile.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "6fffde7df5ad04c43411078bef583a567c1f13cc998a9005540e06a104c62596",
+      "publicSha256": "6fffde7df5ad04c43411078bef583a567c1f13cc998a9005540e06a104c62596"
+    },
+    {
+      "file": "src/readable.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "098176bd7ad4fb7cc2ce2715729c01b10531d4f039aeb62d0898a169abc1cedf",
+      "publicSha256": "098176bd7ad4fb7cc2ce2715729c01b10531d4f039aeb62d0898a169abc1cedf"
+    },
+    {
+      "file": "src/repertoire.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "0f4e886e2449cd318b1133272fb770c7f25afc54f19acb6551afbb36c72a486e",
+      "publicSha256": "0f4e886e2449cd318b1133272fb770c7f25afc54f19acb6551afbb36c72a486e"
+    },
+    {
+      "file": "src/routing.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "e7c3df79f96e6f00c32947933156ab9b6e5a9d83d73431ed4a5131b439b96c62",
+      "publicSha256": "e7c3df79f96e6f00c32947933156ab9b6e5a9d83d73431ed4a5131b439b96c62"
+    },
+    {
+      "file": "src/specialist-reply.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "6ae6226625cce2b87231e7fbbcd69489740bee62cb572440b8c607e965da2255",
+      "publicSha256": "6ae6226625cce2b87231e7fbbcd69489740bee62cb572440b8c607e965da2255"
+    },
+    {
+      "file": "src/specialist.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "5d02ac42ee8a64ef4f48ab7e4a498c5c7bbc4710fae8e17cae76bea64417491c",
+      "publicSha256": "5d02ac42ee8a64ef4f48ab7e4a498c5c7bbc4710fae8e17cae76bea64417491c"
+    },
+    {
+      "file": "src/topic-intent.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "a5835781814bac457b748981399a621a4026b0f27c3d29ed5d108a5af488cb8f",
+      "publicSha256": "a5835781814bac457b748981399a621a4026b0f27c3d29ed5d108a5af488cb8f"
+    }
+  ]
+}

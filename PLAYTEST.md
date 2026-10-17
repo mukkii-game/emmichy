@@ -4,6 +4,8 @@
 
 ---
 
+link1公開：PR57/main a092ea2、PR27/main86d9f7b、Cloudflare39012229429/39012229342成功。26変更公開ファイルが候補と一致。生成0。public-conversation-connections-20261017.json。
+
 # 2026-10-17: provider recovery and captured dialogue iteration
 
 実LLM2calls、CI39011343101、中継候補9c15a39。Groq765ms/3927tokens成功→次44ms429で停止。日回数残999で、分token制限が有力。Gemini/Workers実成功は未評価。正常プレイを全停止する旧設定と永続ブラウザフラグを修正。3者fallback/期限付き休止/後続入力復帰はローカルで確認。

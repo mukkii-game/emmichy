@@ -38,3 +38,7 @@ Groqが1返答計4,000tokensなら約50返答/日、10返答のプレイ約5回�
 実出力の加工で「ヤハ！ アタシの見方だけど、って思う。」という崩れを発見。括弧なし感嘆符の直後の「って思う」を一文に保ち、本人の感想に不要な解釈前置きを加えない修正。所有根拠文とモデルの重複事実除去は維持。追加実生成0で保存応答を再検証し、実appへ流して正常表示を確認。`llm-capacity-captured-app-20261017.json`。
 
 8送信のオフライン実appで、クッキーの手作り質問の後「食べずに写真で残したいな」を好みとして拾えない例も発見。主語を省略した短い希望を、直前の対象内だけで拾う修正。キャラの希望と取り違えず、良いモデル文は保持する。`llm-recovery-offline-before-20261017.json`と`llm-recovery-offline-20261017.json`。これは模擬の機械実行で、人間や新しいLLMの評価ではない。未確認は実OS入力・音量・人間が感じる面白さ、Gemini/Workersの連続実生成と正確なアカウント枠。
+
+## 公開確認
+
+フロントPR56候補598dbe6/main e285090、Cloudflare39011619309成功。中継PR26候補1b68e40/main6b6ca46、Cloudflare39011611922成功。公開された変更HTML/JS18ファイルが候補のGit blobと完全一致。healthの3providerと新公開originのOPTIONS204を確認。`public-llm-recovery-20261017.json`。公開確認の追加生成0。runtime20261017-quota1、試遊URL：https://emmichy.mucky-totoro.workers.dev/ 。

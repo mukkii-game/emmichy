@@ -1,0 +1,158 @@
+{
+  "at": "2026-10-17T06:54:50.965Z",
+  "candidate": "598dbe66731a9774fe6ca594de9f0a8fc98566ef",
+  "frontendMain": "e285090972edb0b57059ca447b1ead71a9115376",
+  "frontendDeploy": 39011619309,
+  "backendCandidate": "1b68e40a4bd15dcf96f8254b876edd1e0a13fa2d",
+  "backendMain": "6b6ca46bfb5f7dc7cbc686b82a2ab54544e0bc5d",
+  "backendDeploy": 39011611922,
+  "mode": "read-only public source comparison, health and OPTIONS; zero new generation requests",
+  "checks": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "80b17ad0aa2cefc1cd167014a923e2d7e7e38424d16cc39217c0e1e51aa29d02",
+      "publicSha256": "80b17ad0aa2cefc1cd167014a923e2d7e7e38424d16cc39217c0e1e51aa29d02"
+    },
+    {
+      "file": "src/app.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "b5df796a6bf348feddd319a23b4c536ae93d51ca2fdb7c8faf8e1410ee67fc23",
+      "publicSha256": "b5df796a6bf348feddd319a23b4c536ae93d51ca2fdb7c8faf8e1410ee67fc23"
+    },
+    {
+      "file": "src/chat.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "e0c228516a45ff2a92abd1e5c2fa42c40349d21fe019be344be3ff67478b1865",
+      "publicSha256": "e0c228516a45ff2a92abd1e5c2fa42c40349d21fe019be344be3ff67478b1865"
+    },
+    {
+      "file": "src/chiikawa-attribution.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "b36414c64703f2bfee172a2dcaa8c8788946925f4d67929099cb914ddd9b80c8",
+      "publicSha256": "b36414c64703f2bfee172a2dcaa8c8788946925f4d67929099cb914ddd9b80c8"
+    },
+    {
+      "file": "src/chiikawa-theme.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "bdec2bc297e01b153617dfd36d8037e7e82b5c08379036da48423f602826bf32",
+      "publicSha256": "bdec2bc297e01b153617dfd36d8037e7e82b5c08379036da48423f602826bf32"
+    },
+    {
+      "file": "src/continuation.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "0af2b95409cad5ed0a3072c4c269b0e05e69a1095d8b86f171f86aec6af1136a",
+      "publicSha256": "0af2b95409cad5ed0a3072c4c269b0e05e69a1095d8b86f171f86aec6af1136a"
+    },
+    {
+      "file": "src/dialogue-director.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "e4ba20c75fb4b91bb7908b28be454e5ba09b1328832bd6e9ea50709c2f7abd3a",
+      "publicSha256": "e4ba20c75fb4b91bb7908b28be454e5ba09b1328832bd6e9ea50709c2f7abd3a"
+    },
+    {
+      "file": "src/dialogue-grounding.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "c9adf7d5bee175339a5bea437fba447467dc2e8008c0082a0f97e05e6f5b8421",
+      "publicSha256": "c9adf7d5bee175339a5bea437fba447467dc2e8008c0082a0f97e05e6f5b8421"
+    },
+    {
+      "file": "src/dialogue-sentences.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "cb984ea97203520c528ae607c0109293458f3e9734c6b6883764b06ed57659c6",
+      "publicSha256": "cb984ea97203520c528ae607c0109293458f3e9734c6b6883764b06ed57659c6"
+    },
+    {
+      "file": "src/engine.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "7d30a43ca2ab07243d77cd5c5c67ec387d0c5b8f508d78e59e229766888555f4",
+      "publicSha256": "7d30a43ca2ab07243d77cd5c5c67ec387d0c5b8f508d78e59e229766888555f4"
+    },
+    {
+      "file": "src/fan-conversation.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "943e0ede30f54ea112cd804852e2f2faaed6f9c761684b4bdeb701cbfbe014c8",
+      "publicSha256": "943e0ede30f54ea112cd804852e2f2faaed6f9c761684b4bdeb701cbfbe014c8"
+    },
+    {
+      "file": "src/filler.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "cbf2585a57d80a8f5c80797248c4ccb21479301457fdaf0c340ad6b93ca63e2b",
+      "publicSha256": "cbf2585a57d80a8f5c80797248c4ccb21479301457fdaf0c340ad6b93ca63e2b"
+    },
+    {
+      "file": "src/font.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "1162361b962ffb7f54e09cec5168046054c928b7766af6df2340c6192486eb59",
+      "publicSha256": "1162361b962ffb7f54e09cec5168046054c928b7766af6df2340c6192486eb59"
+    },
+    {
+      "file": "src/repertoire.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "031b48d517018e5e6451221ed1f63c7405778084e78bf700e782994de7b378d5",
+      "publicSha256": "031b48d517018e5e6451221ed1f63c7405778084e78bf700e782994de7b378d5"
+    },
+    {
+      "file": "src/reply-repetition.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "ec0e19a38e6937546dd6142ab6e85db80d76b6f85bf25aef89051a630a2a1fc7",
+      "publicSha256": "ec0e19a38e6937546dd6142ab6e85db80d76b6f85bf25aef89051a630a2a1fc7"
+    },
+    {
+      "file": "src/routing.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "06048738b1b8e132c3b85d7d19f401c02bfb18b38946e21ca8e6e31fa343524d",
+      "publicSha256": "06048738b1b8e132c3b85d7d19f401c02bfb18b38946e21ca8e6e31fa343524d"
+    },
+    {
+      "file": "src/specialist-reply.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "ccfb0e402592f6197024aff2a3643d999eab4d212ea8b5b9dc6b396a7b97ab33",
+      "publicSha256": "ccfb0e402592f6197024aff2a3643d999eab4d212ea8b5b9dc6b396a7b97ab33"
+    },
+    {
+      "file": "src/specialist.js",
+      "status": 200,
+      "match": true,
+      "expectedSha256": "58ec89e78e070bc054a2d0870e58b5bbc922a3f59e4547985b711935ccc70594",
+      "publicSha256": "58ec89e78e070bc054a2d0870e58b5bbc922a3f59e4547985b711935ccc70594"
+    }
+  ],
+  "health": {
+    "ok": true,
+    "games": [
+      "emmichy"
+    ],
+    "decisions": {
+      "emmichy": [
+        "talk"
+      ]
+    },
+    "providers": [
+      "groq",
+      "gemini",
+      "workers-ai"
+    ]
+  },
+  "preflight": {
+    "status": 204,
+    "origin": "https://emmichy.mucky-totoro.workers.dev"
+  }
+}
